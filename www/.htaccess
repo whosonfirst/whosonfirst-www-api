@@ -143,3 +143,11 @@ RewriteRule  ^api/oauth2/tokens/([a-zA-Z0-9]+)/?$			api_oauth2_token.php?api_key
 
 RewriteRule  ^api/rest/?$						api_rest.php?%{QUERY_STRING}  [L]
 
+
+# START OF flamework-mapzen-sso stuff
+
+# RewriteRule  ^signin/?$		/signin_mapzen_oauth.php	[L]
+# RewriteRule  ^auth/?$			/auth_callback_mapzen_oauth.php?%{QUERY_STRING} [L]
+
+# END OF flamework-mapzen-sso stuff
+
