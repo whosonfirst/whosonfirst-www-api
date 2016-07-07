@@ -19,8 +19,8 @@
 
 	$GLOBALS['cfg']['db_main'] = array(
 		'host'	=> 'localhost',
-		'name'	=> 'flamework',		# database name
-		'user'	=> 'root',		# database username
+		'name'	=> 'wof_api',		# database name
+		'user'	=> 'wof_api',		# database username
 		'auto_connect' => 0,
 	);
 
