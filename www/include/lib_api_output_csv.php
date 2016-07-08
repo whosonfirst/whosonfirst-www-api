@@ -46,7 +46,7 @@
 			# AND NOT JUST $rsp['results'] EITHER (20160708/thisisaaronland)
 
 			header("X-whosonfirst-pagination-total: " . htmlspecialchars($rsp['total']));
-			header("X-whosonfirst-pagination-per-Page: " . htmlspecialchars($rsp['per_page']));
+			header("X-whosonfirst-pagination-per-page: " . htmlspecialchars($rsp['per_page']));
 			header("X-whosonfirst-pagination-pages: " . htmlspecialchars($rsp['pages']));
 			header("X-whosonfirst-pagination-page: " . htmlspecialchars($rsp['page']));
 
@@ -62,7 +62,7 @@
 			sort($header);
 
 			$str_header = implode(",", $header);
-			header("X-Whosonfirst-csv-header: " . htmlspecialchars($str_header));
+			header("X-whosonfirst-csv-header: " . htmlspecialchars($str_header));
 			
 			if ($rsp['page'] == 1){
 				$out = array_values($header);
