@@ -560,9 +560,18 @@
 
 		$escaped = array();
 
-		$chars = mb_split($str, "");
-		$count = count($chars);
+		# $chars = preg_split('/(?<!^)(?!$)/u', $str);
 
+		$chars = array();
+		$strlen = mb_strlen($str); 
+
+		while ($strlen) { 
+			$chars[] = mb_substr($str, 0, 1, "UTF-8"); 
+			$str = mb_substr($str, 1, $strlen, "UTF-8"); 
+			$strlen = mb_strlen($str); 
+		}
+
+		$count = count($chars);
 		$i = 0;
 		
 		foreach ($chars as $char){

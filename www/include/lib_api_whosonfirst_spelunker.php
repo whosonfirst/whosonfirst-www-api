@@ -9,24 +9,33 @@
 
 		$q = request_str("q");
 
-		if (! $q){
-			api_output_error(400, "Missing query");
+		if ($q == ""){
+
+			$esc_q = "*";
+
+			$query = array('match_all' => array());
 		}
 
-		$esc_q = elasticsearch_escape($q);
+		else {
+			$esc_q = elasticsearch_escape($q);
 		
-		$query = array(
-			'match' => array( '_all' => array(
-				'operator' => 'and',
-				'query' => $esc_q,
-			))
-		);
+			$query = array(
+				'match' => array( '_all' => array(
+					'operator' => 'and',
+					'query' => $esc_q,
+				))
+			);
+		}
 
-		$filter = api_whosonfirst_spelunker_search_filters();
+		$filters = api_whosonfirst_spelunker_search_filters();
+
+		if (($q == "") && (! count($filters))){
+			api_output_error(400, "E_INSUFFICIENT_QUERY");
+		}
 
 		$filter_query = array('filtered' => array(
 			'query' => $query,
-			'filter' => $filter,
+			'filter' => $filters,
 		));
 
 		$functions = array(
@@ -71,7 +80,7 @@
 		$rows = $rsp['rows'];
 		$pagination = $rsp['pagination'];
 
-		$out = array('results' => $rows);
+		$out = array('query' => $es_query, 'results' => $rows);
 		api_utils_ensure_pagination_results($out, $pagination);
 
 		api_output_ok($out);
