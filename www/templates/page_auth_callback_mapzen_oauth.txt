@@ -1,5 +1,7 @@
 {include file="inc_head.txt"}
 
+<div class="container">
+
 {if $error|@count}
 
 <p class="error">
@@ -33,5 +35,7 @@ Ack! The INVISIBLE ERROR CAT hisses at you...
 {* you should never get here *}
 <!-- something is very wrong -->
 {/if}
+
+</div>
 
 {include file="inc_foot.txt"}
