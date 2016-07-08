@@ -8,6 +8,7 @@
 			"description" => "",
 			"documented" => 1,
 			"enabled" => 1,
+			"paginated" => 1,
 			"library" => "api_whosonfirst_spelunker",
                         "parameters" => array(
                                 array("name" => "q", "description" => "", "documented" => 1, "required" => 0),
