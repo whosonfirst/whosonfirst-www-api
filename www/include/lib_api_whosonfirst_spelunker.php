@@ -21,20 +21,49 @@
 
 		$filter = array();
 
-		$req = array('query' => array(
-			'filtered' => array(
-				'query' => $query,
-				'filter' => $filter,
-			)
+		$filter_query = array('filtered' => array(
+			'query' => $query,
+			'filter' => $filter,
 		));
+
+		$functions = array(
+			array(
+				'filter' => array('not' => array('term' => array('wof:placetype' => 'venue'))),
+				'weight' => 2.0
+			),
+			array(
+				'filter' => array('exists' => array('field' => 'wk:population')),
+				'weight' => 1.25
+			),
+		);
+
+		$sort = array(
+			array('geom:area' =>  array('mode' => 'max', 'order' => 'desc')),
+			array('wof:scale' => array('mode' => 'max', 'order' => 'desc')),
+			array('wof:megacity' => array('mode' => 'max', 'order' => 'desc')),
+			array('gn:population' => array('mode' => 'max', 'order' => 'desc')),
+		);
+
+		$es_query = array('function_score' => array(
+			'query' => $filter_query,
+			'functions' => $functions,
+			'boost_mode' => 'multiply',
+			'score_mode' => 'multiply',
+		));
+
+		$req = array(
+			'query' => $es_query,
+			'sort' => $sort,
+		);
 
 		$args = array();
 		api_utils_ensure_pagination_args($args);
 
 		$rsp = whosonfirst_spelunker_search($req, $args);
 
+
 		if (! $rsp['ok']){
-			api_output_error(500, "OH NO");
+			api_output_error(500, $rsp['error']);
 		}
 
 		$rows = $rsp['rows'];
