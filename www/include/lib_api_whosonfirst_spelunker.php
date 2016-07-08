@@ -22,7 +22,7 @@
 			))
 		);
 
-		$filter = api_whosonfirst_search_filters();
+		$filter = api_whosonfirst_spelunker_search_filters();
 
 		$filter_query = array('filtered' => array(
 			'query' => $query,
@@ -181,7 +181,7 @@
 				'match' => array($field => array(
 					'query' => $esc_term, 'operator' => 'and'
 				)
-			));
+			)));
 		}
 
 		$must = array();
@@ -194,7 +194,7 @@
 				'match' => array($field => array(
 					'query' => $esc_term, 'operator' => 'and'
 				)
-			));
+			)));
 		}
 
 		return array('bool' => array(

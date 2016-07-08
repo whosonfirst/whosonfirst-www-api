@@ -571,7 +571,7 @@
 				$char = "\{$char}";
 			}
 
-			else if (in_array($char, array("&", "|")){
+			else if (in_array($char, array("&", "|"))){
 
 				if ((($i + 1) < $count) && ($chars[ $i + 1 ] == $char)){
 					$char = "\{$char}";
