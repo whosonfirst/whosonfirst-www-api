@@ -1,0 +1,25 @@
+<p>CSV (Comma Separated Value)</p>
+
+<h4>Example request</h4>
+<pre class="api-example-request">curl -X GET '{$cfg.api_abs_root_url}rest/?method=whosonfirst.spelunker.search&access_token=****&q=paris&page=1&per_page=5&format=csv''</pre>
+
+<h4>Example response</h4>
+{literal}
+<pre class="api-example-response">< HTTP/1.1 200 OK
+< X-whosonfirst-pagination-total: 192
+< X-whosonfirst-pagination-per-Page: 5
+< X-whosonfirst-pagination-pages: 39
+< X-whosonfirst-pagination-page: 1
+< X-Whosonfirst-csv-header: id,name,placetype
+< Content-Length: 164
+< Content-Type: text/csv
+< 
+id,name,placetype
+101711949,"St. Paris",locality
+85874021,"Buttes Chaumont",neighbourhood
+85971971,Paris,locality
+101720303,Paris,locality
+101722715,Paris,locality</pre>
+{/literal}
+
+<small>The CSV header is only written for the first page of CSV responses.</small>
