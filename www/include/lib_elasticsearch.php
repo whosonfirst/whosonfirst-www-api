@@ -531,4 +531,64 @@
 
 	########################################################################
 
+	function elasticsearch_escape($str){
+
+	        # If you need to use any of the characters which function as operators in
+        	# your query itself (and not as operators), then you should escape them
+	        # with a leading backslash. For instance, to search for (1+1)=2, you would
+        	# need to write your query as \(1\+1\)\=2.
+	        #
+        	# The reserved characters are: + - = && || > < ! ( ) { } [ ] ^ " ~ * ? : \ /
+	        #
+        	# Failing to escape these special characters correctly could lead to a
+	        # syntax error which prevents your query from running.
+		#
+		# A space may also be a reserved character. For instance, if you have a
+		# synonym list which converts "wi fi" to "wifi", a query_string search for
+		# "wi fi" would fail. The query string parser would interpret your query
+		# as a search for "wi OR fi", while the token stored in your index is
+		# actually "wifi". Escaping the space will protect it from being touched
+		# by the query string parser: "wi\ fi"
+		#
+		# https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
+
+		# note the absence of "&" and "|" which are handled separately
+
+		$to_escape = array(
+			"+", "-", "=", ">", "<", "!", "(", ")", "{", "}", "[", "]", "^", '"', "~", "*", "?", ":", "\\", "/"
+		);
+
+		$escaped = array();
+
+		$chars = mb_split($str, "");
+		$count = count($chars);
+
+		$i = 0;
+		
+		foreach ($chars as $char){
+
+			if (in_array($char, $to_escape)){
+				$char = "\{$char}";
+			}
+
+			else if (in_array($char, array("&", "|")){
+
+				if ((($i + 1) < $count) && ($chars[ $i + 1 ] == $char)){
+					$char = "\{$char}";
+				}
+			}
+			
+			else {
+				# pass
+			}
+
+			$escaped[] = $char;
+			$i++;
+		}
+
+		return implode("", $escaped);
+	}
+	
+	########################################################################
+	
 	# the end

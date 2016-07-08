@@ -4,7 +4,7 @@
 
 	########################################################################
 
-	function whosonfirst_spelunker_search($query, $more){
+	function elasticsearch_spelunker_search($query, $more){
 
 		$defaults = array(
 			'host' => 'http://localhost',
