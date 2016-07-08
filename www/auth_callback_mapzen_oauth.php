@@ -40,7 +40,31 @@
 	$mapzen_data = null;
 
 	if (($mapzen_user) && ($user_id = $mapzen_user['user_id'])){
-		$user = users_get_by_id($user_id);
+
+		# $user = users_get_by_id($user_id);
+
+		if (! $mapzen_user['is_admin']){
+
+			$args = array(
+				'access_token' => $oauth_token,
+			);
+
+			if (features_is_enabled("mapzen_require_admin")){
+
+				$rsp = mapzen_api_call("current_developer", $args);
+
+				if ((! $rsp['ok']) || (! boolval($rsp['data']['admin']))){
+					$GLOBALS['smarty']->display("page_signin_disabled.txt");
+					exit();
+				}
+
+				$update = array('is_admin' => 1);
+
+				$rsp = mapzen_users_update_user($mapzen_user, $update);
+				$mapzen_user = $rsp['mapzen_user'];
+			}
+		}
+
 	}
 
 	# If we don't ensure that new users are allowed to create
@@ -71,8 +95,22 @@
 
 		$mapzen_data = $rsp['data'];
 
+		if ((features_is_enabled("mapzen_require_admin")) && (! boolval($mapzen_data['admin']))){
+
+			$GLOBALS['smarty']->display("page_signin_disabled.txt");
+			exit();
+		}
+
+		# we don't get back a numeric ID yet
+		# https://github.com/mapzen/operations-engineering/issues/229
+		
 		$mapzen_id = $mapzen_data['id'];
 		$mapzen_user = mapzen_users_get_by_mapzen_id($mapzen_id);
+
+		$update = array('is_admin' => 1);
+
+		$rsp = mapzen_users_update_user($mapzen_user, $update);
+		$mapzen_user = $rsp['mapzen_user'];
 	}
 
 	if ($mapzen_user){
@@ -105,6 +143,7 @@
 			"username" => $username,
 			"email" => $email,
 			"password" => $password,
+			"is_admin" => 1,
 		));
 
 		if (! $rsp['ok']){
