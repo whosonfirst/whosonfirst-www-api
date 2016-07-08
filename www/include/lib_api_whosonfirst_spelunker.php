@@ -39,15 +39,34 @@
 			'filter' => array('and' => $filters),
 		));
 
-		$functions = array(
-			array(
-				'filter' => array('not' => array('term' => array('wof:placetype' => 'venue'))),
-				'weight' => 2.0
-			),
-			array(
-				'filter' => array('exists' => array('field' => 'wk:population')),
-				'weight' => 1.25
-			),
+		$functions = array();
+
+		if ($q != ""){
+
+			$functions = array(
+				array(
+					'filter' => array('term' => array('names_preferred' => $esc_q)),
+					'weight' => 3.0
+				),
+				array(
+					'filter' => array('term' => array('names_alt' => $esc_q)),
+					'weight' => 1.0
+				),
+				array(
+					'filter' => array('term' => array('wof:name' => $esc_q)),
+					'weight' => 1.5
+				),
+			);
+		}
+
+		$functions[] = array(
+			'filter' => array('not' => array('term' => array('wof:placetype' => 'venue'))),
+			'weight' => 2.0
+		);
+
+		$functions[] = 	array(
+			'filter' => array('exists' => array('field' => 'wk:population')),
+			'weight' => 1.25
 		);
 
 		$sort = array(
