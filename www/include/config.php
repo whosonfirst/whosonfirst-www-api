@@ -309,6 +309,7 @@
 
 	$GLOBALS['cfg']['api_method_definitions'] = array(
 		'methods',
+		'methods_whosonfirst',
 	);
 
 	# START OF flamework-mapzen-sso stuff
