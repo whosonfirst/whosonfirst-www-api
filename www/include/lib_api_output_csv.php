@@ -42,7 +42,8 @@
 
 		if (! $more['is_error']){
 
-			$pagination = $rsp['pagination'];
+			# PLEASE MAKE ME MORE FLEXIBLE TO ACCOMODATE THINGS THAT AREN'T PAGINATED
+			# AND NOT JUST $rsp['results'] EITHER (20160708/thisisaaronland)
 
 			header("X-whosonfirst-pagination-total: " . htmlspecialchars($rsp['total']));
 			header("X-whosonfirst-pagination-per-Page: " . htmlspecialchars($rsp['per_page']));
@@ -67,9 +68,6 @@
 				$out = array_values($header);
 				fputcsv($fh, $out);
 			}
-
-			# PLEASE MAKE ME MORE FLEXIBLE THAT JUST $rsp['results'] ...
-			# (20160708/thisisaaronland)
 
 			foreach ($rsp['results'] as $row){
 
