@@ -13,7 +13,8 @@
 
 			$esc_q = "*";
 
-			$query = array('match_all' => array());
+			$empty = new stdClass;
+			$query = array('match_all' => $empty);
 		}
 
 		else {
@@ -35,7 +36,7 @@
 
 		$filter_query = array('filtered' => array(
 			'query' => $query,
-			'filter' => $filters,
+			'filter' => array('and' => $filters),
 		));
 
 		$functions = array(

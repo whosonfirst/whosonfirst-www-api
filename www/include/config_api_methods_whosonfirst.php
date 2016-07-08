@@ -12,6 +12,11 @@
 			"library" => "api_whosonfirst_spelunker",
                         "parameters" => array(
                                 array("name" => "q", "description" => "", "documented" => 1, "required" => 0),
+                                array("name" => "name", "description" => "", "documented" => 1, "required" => 0),
+                                array("name" => "names", "description" => "", "documented" => 1, "required" => 0),
+                                array("name" => "alt", "description" => "", "documented" => 1, "required" => 0),
+                                array("name" => "preferred", "description" => "", "documented" => 1, "required" => 0),
+                                array("name" => "variant", "description" => "", "documented" => 1, "required" => 0),
                         ),
 		),
 
