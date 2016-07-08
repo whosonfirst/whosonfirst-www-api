@@ -319,4 +319,6 @@
 	$GLOBALS['cfg']['crypto_oauth_cookie_secret'] = 'READ-FROM-SECRETS';	# (see notes in www/sign_oauth.php)
 	$GLOBALS['cfg']['mapzen_api_perms'] = 'read';
 
+	$GLOBALS['cfg']['enable_feature_mapzen_require_admin'] = 1;
+
 	# START OF flamework-mapzen-sso stuff
