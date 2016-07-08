@@ -1,4 +1,7 @@
 {include file='inc_head.txt' nav_tab='home'}
+<div class="container">
 
+<p>This page left intentionally blank.</p>
 
+</div>
 {include file='inc_foot.txt'}
