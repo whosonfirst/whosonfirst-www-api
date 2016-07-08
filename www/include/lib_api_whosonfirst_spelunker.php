@@ -12,7 +12,8 @@
 			api_output_error(400, "Missing query");
 		}
 
-		api_output_ok();		
+		$out = array("query" => $q);		
+		api_output_ok($out);		
 	}
 
 	########################################################################

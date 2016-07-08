@@ -14,6 +14,8 @@
     <script src="{$cfg.abs_root_url}javascript/jquery-2.1.0.min.js"></script>
     <script src="{$cfg.abs_root_url}javascript/bootstrap.min.js"></script>
 
+    <script src="{$cfg.abs_root_url}javascript/htmlspecialchars.min.js"></script>
+
     <script src="{$cfg.abs_root_url}javascript/flamework.api.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.js"></script>
 
