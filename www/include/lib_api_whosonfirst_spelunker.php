@@ -2,7 +2,9 @@
 
 	loadlib("elasticsearch");
 	loadlib("elasticsearch_spelunker");
-	# loadlib("machinetags");
+
+	loadlib("machinetags");
+	loadlib("machinetags_elasticsearch");
 
 	########################################################################
 
@@ -216,14 +218,34 @@
 		# TO DO: handle plain-old-tags and machinetags in one place (like here)
 		# (20160708/thisisaaronland)
 
+		$plaintags = array();
+		$machinetags = array();
+
 		if ($tags){
 
 			$tags = api_whosonfirst_spelunker_ensure_array($tags);
-			$count = count($tags);
 
-			if ($count == 1){
+			foreach ($tags as $t){
 
-				$tag = $tags[0];
+				$rsp = machinetags_parse_machinetag($t);
+
+				if ($rsp['ok']){
+					$machinetags[] = $rsp;
+					continue;
+				}
+
+				$plaintags[] = $t;
+			}
+		}
+
+		$count_plaintags = count($plaintags);
+		$count_machinetags = count($plain_machinetags);
+
+		if ($count_plaintags){
+
+			if ($count_plaintags == 1){
+
+				$tag = $plaintags[0];
 				$esc_tag = elasticsearch_escape($tag);
 
 				$filters[] = array('term' => array(
@@ -235,12 +257,30 @@
 
 				$must = array();
 
-				foreach ($tags as $t){
+				foreach ($plaintags as $t){
 					$esc_t = elasticsearch_escape($t);
 					$must[] = array('term' => array('tags_all' => $esc_t));
 				}
 
 				$filters[] = array('bool' => array('must' => $must));
+			}
+		}
+
+		if ($count_machinetags){
+
+			if ($count_machinetags == 1){
+
+				$mt = $machinetags[0];
+
+				$mt_filter = machinetags_elasticsearch_query_filter_from_machinetag($mt);
+
+				$filters[] = array('regexp' => array(
+					'machinetags_all' => $mt_filter
+				));
+			}
+
+			else {
+				# PLEASE WRITE ME
 			}
 		}
 

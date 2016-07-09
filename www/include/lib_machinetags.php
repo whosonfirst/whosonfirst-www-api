@@ -52,15 +52,15 @@
 
 			return array(
 				'ok' => 1,
-				'ns' => $ns,
-				'pred' => $pred,
+				'namespace' => $ns,
+				'predicate' => $pred,
 				'value' => $value,
 				'machinetag' => $tag,
 				'is_wildcard' => $is_wildcard,
 			);
 		}
 
-		# TO DO: wildcard matching... (20160708/thisisaaronland)
+		# fully qualified machinetags
 
 		if (! preg_match("/^([a-z](?:[a-z_\-]+))\:([a-z](?:[a-z_\-]+))=(.+)$/", $tag, $m)){
 			return array('ok' => 0, 'error' => 'invalid machinetag', 'machinetag' => $tag);
