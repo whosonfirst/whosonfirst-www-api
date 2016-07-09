@@ -2,6 +2,7 @@
 
 	loadlib("elasticsearch");
 	loadlib("elasticsearch_spelunker");
+	# loadlib("machinetags");
 
 	########################################################################
 
