@@ -18,20 +18,66 @@
 
 		$more = array_merge($defaults, $more);
 
-		# TO DO: wildcard matching... (20160708/thisisaaronland)
+		if ($more['allow_wildcards']){
 
-		if (preg_match("/^([a-z_\-]+)\:([a-z_\-]+)=(.*)$/", $tag, $m)){
+			if (! preg_match("/^((?:[a-z](?:[a-z_\-]+))|\*)\:((?:[a-z](?:[a-z_\-]+))|\*)=(.*)$/", $tag, $m)){
+				return array('ok' => 0, 'error' => 'invalid machinetag', 'machinetag' => $tag);
+			}
+
+			$is_wildcard = 0;
+
+			$ns = $m[1];
+			$pred = $m[2];
+			$value = $m[3];
+
+			if ($ns == '*'){
+				$ns = null;
+			}
+
+			if ($pred == '*'){
+				$pred = null;
+			}
+
+			if (($value == '*') || ($value == '')){
+				$value = null;
+			}
+
+			if ((! $ns) && (! $pred) && (! $value)){
+				return array('ok' => 0, 'error' => 'invalid wildcard machinetag', 'machinetag' => $tag);
+			}
+
+			if ((! $ns) || (! $pred) || (! $value)){
+				$is_wildcard = 1;
+			}
 
 			return array(
 				'ok' => 1,
-				'namespace' => $m[1],
-				'predicate' => $m[2],
-				'value' => $m[3],
-				'is_wildcard' => 0,
+				'ns' => $ns,
+				'pred' => $pred,
+				'value' => $value,
+				'machinetag' => $tag,
+				'is_wildcard' => $is_wildcard,
 			);
 		}
 
-		return array('ok' => 0);
+		# TO DO: wildcard matching... (20160708/thisisaaronland)
+
+		if (! preg_match("/^([a-z](?:[a-z_\-]+))\:([a-z](?:[a-z_\-]+))=(.+)$/", $tag, $m)){
+			return array('ok' => 0, 'error' => 'invalid machinetag', 'machinetag' => $tag);
+		}
+
+		$ns = $m[1];
+		$pred = $m[2];
+		$value = $m[3];
+
+		return array(
+			'ok' => 1,
+			'namespace' => $ns,
+			'predicate' => $pred,
+			'value' => $value,
+			'machinetag' => $tag,
+			'is_wildcard' => 0,
+		);
 	}
 
 	########################################################################
