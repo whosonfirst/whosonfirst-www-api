@@ -37,12 +37,11 @@
 <a name="{$class|@escape}"></a>
 <h3>{$class|escape}{if 0} {$smarty.foreach.classes.index+1} / {$count_split}{/if}</h3>
 
-<ul class="api-list-o-things">
+<ul class="list api-list-o-things">
 {foreach from=$class_details.methods item="method"}
 	<li class="api-method{if !$method.documented} api-method-undocumented{/if}{if !$method.enabled} api-method-disabled{/if}">
 
-	<a name="{$method.name|escape}"></a>
-	<h4><a href="{$cfg.abs_root_url}api/methods/{$method.name|escape:'uri'}">{$method.name|escape}</a></h4>
+	<h4 id="{$method.name|escape}"><a href="{$cfg.abs_root_url}api/methods/{$method.name|escape:'uri'}">{$method.name|escape}</a></h4>
 
 	<small>
 	{if $method.description}{$method.description|escape}{/if}
@@ -67,6 +66,7 @@
 
 {/foreach}
 
+</div>
 </div>
 </div>
 
