@@ -83,6 +83,8 @@
 			'score_mode' => 'multiply',
 		));
 
+		# dumper($filter_query);
+
 		$req = array(
 			'query' => $es_query,
 			'sort' => $sort,
@@ -100,9 +102,12 @@
 		$rows = $rsp['rows'];
 		$pagination = $rsp['pagination'];
 
-		$out = array('query' => $es_query, 'results' => $rows);
-		api_utils_ensure_pagination_results($out, $pagination);
+		$out = array(
+			# 'query' => $es_query,
+			'results' => $rows
+		);
 
+		api_utils_ensure_pagination_results($out, $pagination);
 		api_output_ok($out);
 	}
 
@@ -113,8 +118,10 @@
 		$placetype = request_str("placetype");
 		$iso = request_str("iso");
 
-		$tag = request_str("tag");		     
-		$machinetag = request_str("mt");
+		$tags = request_str("tags");
+
+		# $machinetag = request_str("mt");
+		# $category = request_str("category");
 
 		$name = request_str("name");			# wof:name
 		$names = request_str("names");			# names_all
@@ -141,6 +148,24 @@
 		$filters = array();
 		$must_not = array();
 
+		if ($exclude){
+
+			$exclude = api_whosonfirst_spelunker_ensure_array($exclude);
+
+			if (in_array("nullisland", $exclude)){
+				$nullisland = false;
+			}
+		}
+
+		if ($include){
+
+			$include = api_whosonfirst_spelunker_ensure_array($include);
+
+			if (in_array("deprecated", $include)){
+				$deprecated = true;
+			}
+		}
+
 		if (! $nullisland){
 
 			$must_not[] = array('term' => array('geom:latitude' => 0.0));
@@ -152,17 +177,73 @@
 			$must_not[] = array('exists' => array('field' => 'edtf:deprecated'));
 		}
 
-		if ($placetype){
+		if ($iso){
 
-			$esc_placetype = elasticsearch_escape($placetype);
-			$filters[] = array('term' => array('wof:placetype' => $esc_placetype));
+			$iso = api_whosonfirst_spelunker_ensure_array($iso);
+			$iso = api_whosonfirst_spelunker_ensure_lower($iso);
+
+			# this gets handled below
 		}
 
-		# tag here
+		# TO DO: lib_whosonfirst_placetypes - and validate
 
-		# categories here
+		if ($placetype){
 
-		# machine tags here
+			$placetype = api_whosonfirst_spelunker_ensure_array($placetype);
+			$count = count($placetype);
+
+			if ($count == 1){
+
+				$placetype = $placetype[0];
+				$esc_placetype = elasticsearch_escape($placetype);
+
+				$filters[] = array('term' => array('wof:placetype' => $esc_placetype));
+			}
+
+			else {
+
+				$esc_placetypes = array();
+
+				foreach ($placetypes as $p){
+					$esc_placetypes[] = elasticsearch_escape($p);
+				}
+
+				$filters[] = array('terms' => array('wof:placetype' => $esc_placetypes));
+			}
+		}
+
+		# TO DO: handle plain-old-tags and machinetags in one place (like here)
+		# (20160708/thisisaaronland)
+
+		if ($tags){
+
+			$tags = api_whosonfirst_spelunker_ensure_array($tags);
+			$count = count($tags);
+
+			if ($count == 1){
+
+				$tag = $tags[0];
+				$esc_tag = elasticsearch_escape($tag);
+
+				$filters[] = array('term' => array(
+					'tags_all' => $esc_tag,
+				));
+			}
+
+			else {
+
+				$must = array();
+
+				foreach ($tags as $t){
+					$esc_t = elasticsearch_escape($t);
+					$must[] = array('term' => array('tags_all' => $esc_t));
+				}
+
+				$filters[] = array('bool' => array('must' => $must));
+			}
+		}
+
+		# TO DO: categories (20160708/thisisaaronland)
 
 		$simple = array(
 			"iso:country" => $iso,
@@ -182,6 +263,7 @@
 		foreach ($simple as $field => $input){
 
 			if ($input){
+				$input = api_whosonfirst_spelunker_ensure_array($input);
 				$filters[] = api_whosonfirst_spelunker_enfilterify_simple($field, $input);
 			}
 		}
@@ -197,10 +279,6 @@
 
 	function api_whosonfirst_spelunker_enfilterify_simple($field, $terms){
 
-		if (! is_array($terms)){
-			$terms = array($terms);
-		}
-		
 		if (count($terms) == 1){
 
 			$term = $terms[0];
@@ -233,4 +311,32 @@
 	
 	########################################################################
 	
+	function api_whosonfirst_spelunker_ensure_array($thing){
+
+		$thing = mb_split(";", $thing);		# maybe ?
+
+		/*
+		if (! is_array($thing)){
+			$thing = array($thing);
+		}
+		*/
+
+		return $thing;
+	}
+
+	########################################################################
+
+	function api_whosonfirst_spelunker_ensure_lower($things){
+
+		$count = count($things);
+
+		for ($i = 0; $i < $count; $i++){
+			$things[$i] = strtolower($things[$i]);
+		}
+
+		return $things;
+	}
+
+	########################################################################
+
 	# the end

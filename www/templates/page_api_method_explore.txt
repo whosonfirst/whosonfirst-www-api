@@ -17,8 +17,8 @@
 {if $param.documented}
 
 <div class="form-group">
-<label for="{$param.name|escape}">{$param.name|escape} {if $param.required} <span class="text-danger">(required)</span>{/if}</label>
-<input type="text" name="{$param.name|escape}" class="form-control" placeholder="{$param.description|truncate:80:"..."|escape}" />
+<label for="{$param.name|escape}" title="{$param.description|@escape}">{$param.name|escape} {if $param.required} <span class="text-danger">(required)</span>{/if}</label>
+<input type="text" name="{$param.name|escape}" class="form-control" placeholder="{$param.description|truncate:100:"..."|escape}" />
 </div>
 
 {/if}
