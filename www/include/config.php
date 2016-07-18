@@ -166,8 +166,8 @@
 	$GLOBALS['cfg']['enable_feature_signup'] = 1;
 	$GLOBALS['cfg']['enable_feature_signin'] = 1;
 	$GLOBALS['cfg']['enable_feature_persistent_login'] = 1;
-	$GLOBALS['cfg']['enable_feature_account_delete'] = 1;
-	$GLOBALS['cfg']['enable_feature_password_retrieval'] = 1;
+	$GLOBALS['cfg']['enable_feature_account_delete'] = 0;
+	$GLOBALS['cfg']['enable_feature_password_retrieval'] = 0;
 
 	# Enable this flag to show a full call chain (instead of just the
 	# immediate caller) in database query log messages and embedded in
@@ -322,4 +322,12 @@
 
 	$GLOBALS['cfg']['enable_feature_mapzen_require_admin'] = 1;
 
-	# START OF flamework-mapzen-sso stuff
+	# END OF flamework-mapzen-sso stuff
+
+	# START OF elasticsearch-spelunker stuff
+
+	$GLOBALS['cfg']['elasticsearch_spelunker_host'] = 'http://localhost';
+	$GLOBALS['cfg']['elasticsearch_spelunker_port'] = '9200';
+	$GLOBALS['cfg']['elasticsearch_spelunker_index'] = 'whosonfirst';
+
+	# END OF elasticsearch-spelunker stuff

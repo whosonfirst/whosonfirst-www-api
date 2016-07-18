@@ -40,7 +40,7 @@ php_flag display_errors on
 php_value error_reporting 2147483639
 
 # Some basic pointers to php files
-DirectoryIndex index.php
+DirectoryIndex api.php index.php
 ErrorDocument 404 /404.php
 ErrorDocument 403 /403.php
 
@@ -69,12 +69,6 @@ RewriteRule  ^account/delete/?$		account_delete.php	[L]
 
 RewriteRule ^about/?$			about.php 		[L,QSA]
 RewriteRule ^contact/?$			contact.php 		[L,QSA]
-
-
-# Test pages
-
-RewriteRule ^paging/?$			paging.php		[L]
-RewriteRule ^paging/page(\d+)/?$	paging.php?page=$1	[L,QSA]
 
 # See all this stuff that's been commented out? It's a lot of hoop-jumping
 # to separate API calls (api.example.com/rest) from all the other user-level
@@ -117,31 +111,57 @@ RewriteRule ^paging/page(\d+)/?$	paging.php?page=$1	[L,QSA]
 # This all (especially the oauth2 auth/token stuff) relies on the
 # HTTPS rules for logged in users (20121024/straup)
 
-RewriteRule  ^api/?$				api.php		[L]
-RewriteRule  ^api/methods/?$			api_methods.php	[L]
-RewriteRule  ^api/methods/print/?$		api_methods.php?print=1	[L]
-RewriteRule  ^api/methods/explore/?$		api_methods.php	[L]
-RewriteRule  ^api/methods/(.*)/explore/?$	api_method_explore.php?method=$1&%{QUERY_STRING}	[L]
-RewriteRule  ^api/methods/(.*)/?$		api_method.php?method=$1&%{QUERY_STRING}		[L]
+# RewriteRule  ^api/?$				api.php		[L]
+# RewriteRule  ^api/methods/?$			api_methods.php	[L]
+# RewriteRule  ^api/methods/print/?$		api_methods.php?print=1	[L]
+# RewriteRule  ^api/methods/explore/?$		api_methods.php	[L]
+# RewriteRule  ^api/methods/(.*)/explore/?$	api_method_explore.php?method=$1&%{QUERY_STRING}	[L]
+# RewriteRule  ^api/methods/(.*)/?$		api_method.php?method=$1&%{QUERY_STRING}		[L]
 
-RewriteRule  ^api/formats/?$			api_formats.php	[L]
-RewriteRule  ^api/formats/(.*)/?$		api_format.php?format=$1	[L]
+# RewriteRule  ^api/formats/?$			api_formats.php	[L]
+# RewriteRule  ^api/formats/(.*)/?$		api_format.php?format=$1	[L]
 
-RewriteRule  ^api/keys/?$						api_keys.php?%{QUERY_STRING} [L]
-RewriteRule  ^api/keys/register/?$					api_keys_register.php?%{QUERY_STRING} [L]
-RewriteRule  ^api/keys/([a-zA-Z0-9]+)/?$				api_key.php?api_key=$1&%{QUERY_STRING} [L]
-RewriteRule  ^api/keys/([a-zA-Z0-9]+)/tokens(/page([0-9]+))?/?$		api_key_tokens.php?api_key=$1&page=$3&%{QUERY_STRING} [L]
+# RewriteRule  ^api/keys/?$						api_keys.php?%{QUERY_STRING} [L]
+# RewriteRule  ^api/keys/register/?$					api_keys_register.php?%{QUERY_STRING} [L]
+# RewriteRule  ^api/keys/([a-zA-Z0-9]+)/?$				api_key.php?api_key=$1&%{QUERY_STRING} [L]
+# RewriteRule  ^api/keys/([a-zA-Z0-9]+)/tokens(/page([0-9]+))?/?$		api_key_tokens.php?api_key=$1&page=$3&%{QUERY_STRING} [L]
 
-RewriteRule  ^api/oauth2/?$						api_oauth2.php?%{QUERY_STRING} [L]
-RewriteRule  ^api/oauth2/howto/?$						api_oauth2_howto.php?%{QUERY_STRING} [L]
-RewriteRule  ^api/oauth2/authenticate/?$				api_oauth2_authenticate.php?%{QUERY_STRING} [L]
-RewriteRule  ^api/oauth2/authenticate/like-magic/?$			api_oauth2_authenticate_like_magic.php?%{QUERY_STRING} [L]
-RewriteRule  ^api/oauth2/access_token/?$				api_oauth2_access_token.php?%{QUERY_STRING} [L]
+# RewriteRule  ^api/oauth2/?$						api_oauth2.php?%{QUERY_STRING} [L]
+# RewriteRule  ^api/oauth2/howto/?$						api_oauth2_howto.php?%{QUERY_STRING} [L]
+# RewriteRule  ^api/oauth2/authenticate/?$				api_oauth2_authenticate.php?%{QUERY_STRING} [L]
+# RewriteRule  ^api/oauth2/authenticate/like-magic/?$			api_oauth2_authenticate_like_magic.php?%{QUERY_STRING} [L]
+# RewriteRule  ^api/oauth2/access_token/?$				api_oauth2_access_token.php?%{QUERY_STRING} [L]
 
-RewriteRule  ^api/oauth2/tokens(/page([0-9]+))?/?$			api_oauth2_tokens.php?page=$2&%{QUERY_STRING} [L]
-RewriteRule  ^api/oauth2/tokens/([a-zA-Z0-9]+)/?$			api_oauth2_token.php?api_key=$1&%{QUERY_STRING} [L]
+# RewriteRule  ^api/oauth2/tokens(/page([0-9]+))?/?$			api_oauth2_tokens.php?page=$2&%{QUERY_STRING} [L]
+# RewriteRule  ^api/oauth2/tokens/([a-zA-Z0-9]+)/?$			api_oauth2_token.php?api_key=$1&%{QUERY_STRING} [L]
 
-RewriteRule  ^api/rest/?$						api_rest.php?%{QUERY_STRING}  [L]
+# RewriteRule  ^api/rest/?$						api_rest.php?%{QUERY_STRING}  [L]
+
+RewriteRule  ^/?$				api_index.php		[L]
+RewriteRule  ^methods/?$			api_methods.php	[L]
+RewriteRule  ^methods/print/?$		api_methods.php?print=1	[L]
+RewriteRule  ^methods/explore/?$		api_methods.php	[L]
+RewriteRule  ^methods/(.*)/explore/?$	api_method_explore.php?method=$1&%{QUERY_STRING}	[L]
+RewriteRule  ^methods/(.*)/?$		api_method.php?method=$1&%{QUERY_STRING}		[L]
+
+RewriteRule  ^formats/?$			api_formats.php	[L]
+RewriteRule  ^formats/(.*)/?$		api_format.php?format=$1	[L]
+
+RewriteRule  ^keys/?$						api_keys.php?%{QUERY_STRING} [L]
+RewriteRule  ^keys/register/?$					api_keys_register.php?%{QUERY_STRING} [L]
+RewriteRule  ^keys/([a-zA-Z0-9]+)/?$				api_key.php?api_key=$1&%{QUERY_STRING} [L]
+RewriteRule  ^keys/([a-zA-Z0-9]+)/tokens(/page([0-9]+))?/?$		api_key_tokens.php?api_key=$1&page=$3&%{QUERY_STRING} [L]
+
+RewriteRule  ^oauth2/?$						api_oauth2.php?%{QUERY_STRING} [L]
+RewriteRule  ^oauth2/howto/?$						api_oauth2_howto.php?%{QUERY_STRING} [L]
+RewriteRule  ^oauth2/authenticate/?$				api_oauth2_authenticate.php?%{QUERY_STRING} [L]
+RewriteRule  ^oauth2/authenticate/like-magic/?$			api_oauth2_authenticate_like_magic.php?%{QUERY_STRING} [L]
+RewriteRule  ^oauth2/access_token/?$				api_oauth2_access_token.php?%{QUERY_STRING} [L]
+
+RewriteRule  ^oauth2/tokens(/page([0-9]+))?/?$			api_oauth2_tokens.php?page=$2&%{QUERY_STRING} [L]
+RewriteRule  ^oauth2/tokens/([a-zA-Z0-9]+)/?$			api_oauth2_token.php?api_key=$1&%{QUERY_STRING} [L]
+
+RewriteRule  ^rest/?$						api_rest.php?%{QUERY_STRING}  [L]
 
 
 # START OF flamework-mapzen-sso stuff

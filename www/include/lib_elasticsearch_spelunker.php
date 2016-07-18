@@ -7,9 +7,9 @@
 	function elasticsearch_spelunker_search($query, $more=array()){
 
 		$defaults = array(
-			'host' => 'http://localhost',
-			'port' => 9200,
-			'index' => 'whosonfirst'
+			'host' => $GLOBALS['cfg']['elasticsearch_spelunker_host'],
+			'port' => $GLOBALS['cfg']['elasticsearch_spelunker_port'],
+			'index' => $GLOBALS['cfg']['elasticsearch_spelunker_index']
 		);
 
 		$more = array_merge($defaults, $more);
