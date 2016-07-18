@@ -37,6 +37,6 @@
 
 <div class="row api-sect">
 
-<p>When you authorize an access token you may also give it a <q>time to live</q> (one hour, one day and so on). By default access tokens <strong>do not</strong> have an expiry date. If you choose to authenticate an application don't forget that you can <a href="{$cfg.abs_root_url}api/oauth2/tokens/">change (or revoke) its permissions at any time</a>.</p>
+<p>When you authorize an access token you may also give it a <q>time to live</q> (one hour, one day and so on). By default access tokens <strong>do not</strong> have an expiry date. If you choose to authenticate an application don't forget that you can <a href="{$cfg.abs_root_url}oauth2/tokens/">change (or revoke) its permissions at any time</a>.</p>
 
 </div>

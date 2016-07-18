@@ -18,15 +18,15 @@
 {else}
 
 <div class="api-sect row">
-<form method="POST" action="{$cfg.abs_root_url}api/keys/{$key.api_key|escape}/" class="form" role="form">
+<form method="POST" action="{$cfg.abs_root_url}keys/{$key.api_key|escape}/" class="form" role="form">
 	{$crumb_key|crumb_input}
 	<input type="hidden" name="delete" value="1" />
 
 	<p class="lead">
 	{if $token_count>1}
-	Are you sure you want to delete this API key? There are <a href="{$cfg.abs_root_url}api/keys/{$key.api_key|escape}/tokens/">{$token_count|escape} users</a> who have created authentication tokens for it.
+	Are you sure you want to delete this API key? There are <a href="{$cfg.abs_root_url}keys/{$key.api_key|escape}/tokens/">{$token_count|escape} users</a> who have created authentication tokens for it.
 	{elseif $token_count}
-	Are you sure you want to delete this API key? There is <a href="{$cfg.abs_root_url}api/keys/{$key.api_key|escape}/tokens/">one user</a> who has created an authentication token for it.
+	Are you sure you want to delete this API key? There is <a href="{$cfg.abs_root_url}keys/{$key.api_key|escape}/tokens/">one user</a> who has created an authentication token for it.
 	{else}
 	Are you sure you want to delete this API key?
 	{/if}
@@ -50,7 +50,7 @@
 
 </form>
 
-<p class="text-center">Actually, no <a href="{$cfg.abs_root_url}api/keys/{$key.api_key|escape}/">I don't want to do that</a>.</p>
+<p class="text-center">Actually, no <a href="{$cfg.abs_root_url}keys/{$key.api_key|escape}/">I don't want to do that</a>.</p>
 
 </div>
 

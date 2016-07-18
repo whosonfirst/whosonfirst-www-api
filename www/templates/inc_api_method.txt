@@ -33,7 +33,7 @@
 
 {if $details.parameters|@count or $cfg.api_auth_type=='oauth2' or $cfg.paginated}
 <ul class="api-list-o-things">
-<li><strong>access_token <span class="text-danger">(required)</span></strong> &#8212; A valid <a href="{$cfg.abs_root_url}api/oauth2/">OAuth2 access token</a></li>
+<li><strong>access_token <span class="text-danger">(required)</span></strong> &#8212; A valid <a href="{$cfg.abs_root_url}oauth2/">OAuth2 access token</a></li>
 <li><strong>format</strong> &#8212; The format in which to return the data. Supported formats are {', '|implode:$response_formats}. The default format is {$default_format}.</a></li>
 
 {if $details.parameters|@count}
@@ -76,7 +76,7 @@
 
 <div class="row api-sect">
 
-<h3>Example request {if "api_explorer"|@features_is_enabled}<small style="display:inline !important;"> {if $details.requires_blessing} This method requires extra-special permissions so it's easiest just to image that it will work with the API explorer{else}&#8212; <a href="{$cfg.abs_root_url}api/methods/{$method|escape}/explore/" style="color:#FF5700">or take this API method for a spin</a>{/if}</small>{/if}</h3>
+<h3>Example request {if "api_explorer"|@features_is_enabled}<small style="display:inline !important;"> {if $details.requires_blessing} This method requires extra-special permissions so it's easiest just to image that it will work with the API explorer{else}&#8212; <a href="{$cfg.abs_root_url}methods/{$method|escape}/explore/" style="color:#FF5700">or take this API method for a spin</a>{/if}</small>{/if}</h3>
 
 {if $api_request_method=='GET' and ($cfg.api_auth_type!='oauth2' or $cfg.api_oauth2_allow_get_parameters)}
 <pre class="api-example-request">curl -X <strong>{$api_request_method|escape}</strong> '{$cfg.api_abs_root_url}<strong>{$cfg.api_endpoint}</strong>?method=<strong class="api-param-required">{$method|escape}</strong>{if $cfg.api_auth_type=='oauth2'}&access_token=<strong class="api-param-required">&lt;TOKEN&gt;</strong>{/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;</strong>{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}'</pre>
@@ -100,7 +100,7 @@
 
 <h3>Important</h3>
 
-<p>This API method uses <a href="{$cfg.abs_root_url}api/oauth2/">OAuth2</a> and allows you to pass parameters as part of the URL (or as <code>GET</code> requests). One of those parameters is your <a href="{$cfg.abs_root_url}api/oauth2/tokens/">access token</a> which is extra special and has super-powers. Requests to and from the API are done over an encrypted channel so no one can see what's going on <strong>BUT</strong> that also means there are a couple things you need to be conscious of:</p>
+<p>This API method uses <a href="{$cfg.abs_root_url}oauth2/">OAuth2</a> and allows you to pass parameters as part of the URL (or as <code>GET</code> requests). One of those parameters is your <a href="{$cfg.abs_root_url}oauth2/tokens/">access token</a> which is extra special and has super-powers. Requests to and from the API are done over an encrypted channel so no one can see what's going on <strong>BUT</strong> that also means there are a couple things you need to be conscious of:</p>
 
 <ol class="api-list-o-things">
 <li>That the request URL always starts with <code>https://</code> and not just <code>http://</code> &#8212; that little <strong>s</strong> is what tells your browser to use an encrypted connection.</li>

@@ -8,7 +8,7 @@
 {if $step==3}
 
 <div class="row api-sect">
-<p class="alert alert-success">Hooray! We've created your new access token. It is <strong>{$token.access_token|escape}</strong> and you can see all <a href="{$cfg.abs_root_url}api/oauth2/tokens/{$api_key.api_key|escape}/">the details over here.</a></p>
+<p class="alert alert-success">Hooray! We've created your new access token. It is <strong>{$token.access_token|escape}</strong> and you can see all <a href="{$cfg.abs_root_url}oauth2/tokens/{$api_key.api_key|escape}/">the details over here.</a></p>
 {if $key_rsp=='ok'}
 <p class="alert alert-danger">Argh! There was a problem creating your token. This is what we know so far: {$error|escape}</p>
 {else}
@@ -20,7 +20,7 @@
 
 <div class="row api-sect">
 
-<form method="POST" action="{$cfg.abs_root_url}api/oauth2/authenticate/like-magic/" accept-encoding="UTF-8" class="form" role="form">
+<form method="POST" action="{$cfg.abs_root_url}oauth2/authenticate/like-magic/" accept-encoding="UTF-8" class="form" role="form">
 	{$crumb_key|crumb_input}
 	<input type="hidden" name="done" value="1" />
 	<input type="hidden" name="title" value="{$title|escape}" />
@@ -43,7 +43,7 @@
 
 <div class="row api-sect">
 
-<form method="POST" action="{$cfg.abs_root_url}api/oauth2/authenticate/like-magic/" accept-encoding="UTF-8" class="form" role="form">
+<form method="POST" action="{$cfg.abs_root_url}oauth2/authenticate/like-magic/" accept-encoding="UTF-8" class="form" role="form">
 	{$crumb_key|crumb_input}
 	<input type="hidden" name="done" value="1" />
 

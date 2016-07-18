@@ -15,7 +15,7 @@
 
 <div class="api-sect row">
 {if $key_rsp=='ok'}
-<p class="alert alert-success">Hooray! We've created your new API key. <a href="{$cfg.abs_root_url}api/keys/{$key_rsp.key.api_key|escape}/i">Details are over here.</a></p>
+<p class="alert alert-success">Hooray! We've created your new API key. <a href="{$cfg.abs_root_url}keys/{$key_rsp.key.api_key|escape}/i">Details are over here.</a></p>
 {else}
 <p class="alert alert-danger">Argh! There was a problem creating your API key. This is what we know so far: {$key_rsp.error|escape}</p>
 {/if}
@@ -24,7 +24,7 @@
 {elseif $step==2}
 
 <div class="row api-sect">
-<form method="POST" action="{$cfg.abs_root_url}api/keys/register/" accept-encoding="UTF-8" class="form" role="form">
+<form method="POST" action="{$cfg.abs_root_url}keys/register/" accept-encoding="UTF-8" class="form" role="form">
 	{$crumb_key|crumb_input}
 	<input type="hidden" name="done" value="1" />
 	<input type="hidden" name="title" value="{$title|escape}" />
@@ -46,7 +46,7 @@
 {else}
 
 <div class="row api-sect">
-<form method="POST" action="{$cfg.abs_root_url}api/keys/register/" accept-encoding="UTF-8" class="form" role="form">
+<form method="POST" action="{$cfg.abs_root_url}keys/register/" accept-encoding="UTF-8" class="form" role="form">
 	{$crumb_key|crumb_input}
 	<input type="hidden" name="done" value="1" />
 

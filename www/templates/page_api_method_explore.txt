@@ -5,7 +5,7 @@
 
 {include file="inc_api_header.txt" title=$method}
 
-<div style="margin-top:2em;text-align:right;"><a href="{$cfg.abs_root_url}api/methods/{$method|escape}">return to method documentation</a></div>
+<div style="margin-top:2em;text-align:right;"><a href="{$cfg.abs_root_url}methods/{$method|escape}">return to method documentation</a></div>
 
 <div id="query">
 <form class="form" id="explore-form" x-data-method="{$method|escape}" x-http-method="{if $cfg.api_auth_type=='oauth2' and !$cfg.api_oauth2_allow_get_parameters}POST{elseif $details.request_method}{$details.request_method|escape}{else}GET{/if}">
@@ -76,7 +76,7 @@
 <pre id="api-req"></pre>
 
 <small style="display:block; margin-top:1em; margin-bottom:1em;">
-<span class="caveat" id="caveat-write" style="display:none;">See the <code>access token</code> in the request above and see the way it's called <code>S33KR3T</code>? First, that is <em>not</em> a real access token. Second, it's called that because this API method requires permissions to write or modify data and so it is using the a special time-sensitive token that it will expire. The request is included as a reference but if you are going to copy-paste it you should make sure to use <a href="{$cfg.abs_root_url}api/oauth2/tokens/">one of your own access tokens</a> when calling it.</span>
+<span class="caveat" id="caveat-write" style="display:none;">See the <code>access token</code> in the request above and see the way it's called <code>S33KR3T</code>? First, that is <em>not</em> a real access token. Second, it's called that because this API method requires permissions to write or modify data and so it is using the a special time-sensitive token that it will expire. The request is included as a reference but if you are going to copy-paste it you should make sure to use <a href="{$cfg.abs_root_url}oauth2/tokens/">one of your own access tokens</a> when calling it.</span>
 <span class="caveat" id="caveat-code" style="display:none;">See the <code>access token</code> in the request above? It is a time-sensitive token for the purposes of the API Explorer and for copy-pasting example requests <em>in the moment</em> but be aware that it will expire.</span>
 </small>
 

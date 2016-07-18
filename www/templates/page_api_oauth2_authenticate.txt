@@ -37,7 +37,7 @@ Okay, that's just weird. If you're seeing this it means that something very wron
 </div>
 
 <div class="row api-sect">
-<form method="POST" action="{$cfg.abs_root_url}api/oauth2/authenticate/" class="form" role="form">
+<form method="POST" action="{$cfg.abs_root_url}oauth2/authenticate/" class="form" role="form">
 	{$crumb_key|crumb_input}
 	<input type="hidden" name="done" value="1" />
 	<input type="hidden" name="client_id" value="{$key.api_key|escape}" />

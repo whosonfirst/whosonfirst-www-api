@@ -27,7 +27,7 @@
 	<div class="api-details">
 
 	{if $row.user.id == $cfg.user.id}
-	<a href="{$cfg.abs_root_url}api/oauth2/tokens/{$key.api_key|escape}/">This access token</a> was created on {$row.created|date_format} and was granted <strong>{$permissions.$perms|escape}</strong> permissions.
+	<a href="{$cfg.abs_root_url}oauth2/tokens/{$key.api_key|escape}/">This access token</a> was created on {$row.created|date_format} and was granted <strong>{$permissions.$perms|escape}</strong> permissions.
 	{else}
 	This token was created on {$row.created|date_format} and was granted <strong>{$permissions.$perms|escape}</strong> permissions.
 	{/if}

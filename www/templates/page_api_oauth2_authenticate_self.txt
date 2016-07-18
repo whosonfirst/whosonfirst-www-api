@@ -8,13 +8,13 @@
 {if $has_token}
 <div class="api-sect row">
 
-<p class="alert alert-info">Hey, guess what? You've already created <a href="{$cfg.abs_root_url}api/oauth2/tokens/{$key.api_key|escape}/">an authentication token</a> for yourself and this API key!</p>
+<p class="alert alert-info">Hey, guess what? You've already created <a href="{$cfg.abs_root_url}oauth2/tokens/{$key.api_key|escape}/">an authentication token</a> for yourself and this API key!</p>
 
 <table class="api-key-or-token table">
 
 	<tr>
 		<td><label>Authentication Token</label></td>
-		<td class="api-credential"><a href="{$cfg.abs_root_url}api/oauth2/tokens/{$key.api_key|escape}/">{$token_row.access_token|escape}</a></td>
+		<td class="api-credential"><a href="{$cfg.abs_root_url}oauth2/tokens/{$key.api_key|escape}/">{$token_row.access_token|escape}</a></td>
 	</tr>
 
 	<tr>
@@ -38,7 +38,7 @@
 <table class="api-key-or-token table">
 
 	<tr>
-		<td><label>Access Token</label></td><td class="api-credential"><a href="{$cfg.abs_root_url}api/oauth2/tokens/{$key.api_key|escape}/">{$token_rsp.token.access_token|escape}</a></td>
+		<td><label>Access Token</label></td><td class="api-credential"><a href="{$cfg.abs_root_url}oauth2/tokens/{$key.api_key|escape}/">{$token_rsp.token.access_token|escape}</a></td>
 	</tr>
 
 	<tr>
@@ -66,9 +66,9 @@ Hrmph. There was a problem creating your auth token. The robots know this so far
 {/if}
 
 <div class="row api-sect">
-<p>Create a new authentication token for your <a href="{$cfg.abs_root_url}api/keys/{$key.api_key|escape}/">{$key.app_title|escape} API key</a>?</p>
+<p>Create a new authentication token for your <a href="{$cfg.abs_root_url}keys/{$key.api_key|escape}/">{$key.app_title|escape} API key</a>?</p>
 
-<form method="POST" action="{$cfg.abs_root_url}api/oauth2/authenticate/" class="form" role="form">
+<form method="POST" action="{$cfg.abs_root_url}oauth2/authenticate/" class="form" role="form">
 	{$crumb_key|crumb_input}
 	<input type="hidden" name="api_key" value="{$key.api_key|escape}" />
 	<input type="hidden" name="self" value="1" />

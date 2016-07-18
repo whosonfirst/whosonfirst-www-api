@@ -28,7 +28,7 @@ OH NO! INVISIBLE ERROR CAT HISSES AT YOU...
 
 <div class="row api-sect">
 
-<form method="POST" action="{$cfg.abs_root_url}api/oauth2/tokens/{$token.app.api_key|escape}/" class="form" role="form">
+<form method="POST" action="{$cfg.abs_root_url}oauth2/tokens/{$token.app.api_key|escape}/" class="form" role="form">
 	{$crumb_key|crumb_input}
 	<input type="hidden" name="done" value="1" />
 
@@ -39,7 +39,7 @@ OH NO! INVISIBLE ERROR CAT HISSES AT YOU...
 	{if $token.app.user_id==$cfg.user.id}
 	<tr>
 		<td><label>Application</label></td>
-		<td><a href="{$cfg.abs_root_url}api/keys/{$token.app.api_key|escape}/">{$token.app.app_title|escape}</a> <span class="api-thisisyou"> ⇽ you made this</span></td>
+		<td><a href="{$cfg.abs_root_url}keys/{$token.app.api_key|escape}/">{$token.app.app_title|escape}</a> <span class="api-thisisyou"> ⇽ you made this</span></td>
 	</tr>
 
 	{else}

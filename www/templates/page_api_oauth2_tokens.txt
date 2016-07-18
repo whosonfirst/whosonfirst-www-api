@@ -21,7 +21,7 @@
 
 <li>
 
-	<a href="{$cfg.abs_root_url}api/oauth2/tokens/{$row.app.api_key|escape}/">{$row.app.app_title|escape}</a>
+	<a href="{$cfg.abs_root_url}oauth2/tokens/{$row.app.api_key|escape}/">{$row.app.app_title|escape}</a>
 
 	<span class="count-objects">
 
@@ -33,7 +33,7 @@
 
 </li>
 {/foreach}
-	<li><a href="{$cfg.abs_root_url}api/oauth2/authenticate/like-magic/">Create a new access token for yourself</li>
+	<li><a href="{$cfg.abs_root_url}oauth2/authenticate/like-magic/">Create a new access token for yourself</li>
 </ul>
 
 </div>

@@ -5,7 +5,7 @@
 {include file="inc_api_header.txt" title="API response formats" subtitle=$subtitle subtitle_isescaped=1}
 
 <div class="row">
-<p class="lead">The default API response format is <span class="hey-look"><a href="{$cfg.abs_root_url}api/formats/{$default|escape}/">{$default|escape}</a>.</p>
+<p class="lead">The default API response format is <span class="hey-look"><a href="{$cfg.abs_root_url}formats/{$default|escape}/">{$default|escape}</a>.</p>
 </div>
 </div>
 

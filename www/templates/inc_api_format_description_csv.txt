@@ -1,7 +1,7 @@
 <p>CSV (Comma Separated Value)</p>
 
 <h4>Example request</h4>
-<pre class="api-example-request">curl -X GET '{$cfg.api_abs_root_url}rest/?method=whosonfirst.spelunker.search&access_token=****&q=paris&page=1&per_page=5&format=csv''</pre>
+<pre class="api-example-request">curl -X GET '{$cfg.abs_root_url}rest/?method=whosonfirst.spelunker.search&access_token=****&q=paris&page=1&per_page=5&format=csv''</pre>
 
 <h4>Example response</h4>
 {literal}

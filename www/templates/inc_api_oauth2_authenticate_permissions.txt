@@ -31,6 +31,6 @@
 <p class="error">You should not be seeing this. If you are then something is very wrong!</p>
 {/if}
 
-<p>If you choose to authenticate this application don't forget that you can <a href="{$cfg.abs_root_url}api/oauth2/tokens/">revoke those permissions at any time</a>.</p>
+<p>If you choose to authenticate this application don't forget that you can <a href="{$cfg.abs_root_url}oauth2/tokens/">revoke those permissions at any time</a>.</p>
 
 </div>
