@@ -58,6 +58,7 @@
         Header add Strict-Transport-Security "max-age=15768000"
 
         DocumentRoot __PROJECT_ROOT__/www
+	# Alias /api __PROJECT_ROOT__/www
 
         <Directory />
                 Options FollowSymLinks
