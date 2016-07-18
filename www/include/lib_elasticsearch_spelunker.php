@@ -4,7 +4,7 @@
 
 	########################################################################
 
-	function elasticsearch_spelunker_search($query, $more){
+	function elasticsearch_spelunker_search($query, $more=array()){
 
 		$defaults = array(
 			'host' => 'http://localhost',

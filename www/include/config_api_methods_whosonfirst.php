@@ -15,12 +15,12 @@
 			),
 		),
 
-		'whosonfirst.search' => array(
+		'whosonfirst.spelunker.search' => array(
 			"description" => "Query for Who's On First records.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
-			"library" => "api_whosonfirst_search",
+			"library" => "api_whosonfirst_spelunker",
                         "parameters" => array(
                                 array("name" => "q", "description" => "query for this value across all fields", "documented" => 1, "required" => 0),
                                 array("name" => "name", "description" => "query for this value in the wof:name field", "documented" => 1, "required" => 0),
