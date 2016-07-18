@@ -5,13 +5,14 @@
 	$GLOBALS['cfg']['api']['methods'] = array_merge(array(
 
 		'whosonfirst.concordances.getById' => array(
-			"description" => "",
+			"description" => "Lookup a Who's On First record (and all its concordances) by another source identifier",
 			"documented" => 1,
 			"enabled" => 1,
+			"paginated" => 1,
 			"library" => "api_whosonfirst_concordances",
                         "parameters" => array(
 				array("name" => "id", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "source", "description" => "", "documented" => 1, "required" => 0, "default" => "wof"),
+				array("name" => "source", "description" => "", "documented" => 1, "required" => 1),
 			),
 		),
 
