@@ -8,7 +8,7 @@
 
 	########################################################################
 
-	function api_whosonfirst_spelunker_search(){
+	function api_whosonfirst_search_search(){
 
 		$q = request_str("q");
 

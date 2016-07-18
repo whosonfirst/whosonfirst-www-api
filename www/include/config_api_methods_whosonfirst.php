@@ -4,12 +4,23 @@
 
 	$GLOBALS['cfg']['api']['methods'] = array_merge(array(
 
-		'whosonfirst.spelunker.search' => array(
+		'whosonfirst.concordances.getById' => array(
 			"description" => "",
 			"documented" => 1,
 			"enabled" => 1,
+			"library" => "api_whosonfirst_concordances",
+                        "parameters" => array(
+				array("name" => "id", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "source", "description" => "", "documented" => 1, "required" => 0, "default" => "wof"),
+			),
+		),
+
+		'whosonfirst.search' => array(
+			"description" => "Query for Who's On First records.",
+			"documented" => 1,
+			"enabled" => 1,
 			"paginated" => 1,
-			"library" => "api_whosonfirst_spelunker",
+			"library" => "api_whosonfirst_search",
                         "parameters" => array(
                                 array("name" => "q", "description" => "query for this value across all fields", "documented" => 1, "required" => 0),
                                 array("name" => "name", "description" => "query for this value in the wof:name field", "documented" => 1, "required" => 0),
