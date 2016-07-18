@@ -8,6 +8,8 @@
 
 	########################################################################
 
+	# TO DO - move all this in to a not-api library (20160718/thisisaaronland)
+
 	function api_whosonfirst_spelunker_search(){
 
 		$q = request_str("q");
