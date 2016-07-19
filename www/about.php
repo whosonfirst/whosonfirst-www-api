@@ -1,9 +1,6 @@
 <?php
 	include('include/init.php');
-
-
-	#
-	# output
-	#
+	error_404();
 
 	$smarty->display('page_about.txt');
+	exit();
