@@ -356,13 +356,10 @@
 	
 	function api_whosonfirst_spelunker_ensure_array($thing){
 
-		$thing = mb_split(";", $thing);		# maybe ?
-
-		/*
 		if (! is_array($thing)){
-			$thing = array($thing);
+
+			$thing = mb_split(";", $thing);		# maybe ?
 		}
-		*/
 
 		return $thing;
 	}

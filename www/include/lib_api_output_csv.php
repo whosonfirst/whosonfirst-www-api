@@ -56,6 +56,8 @@
 				"id" => "wof:id",
 				"name" => "wof:name",
 				"placetype" => "wof:placetype",
+				"iso_country" => "iso:country",
+				"wof_country" => "wof:country",
 			);
 
 			$header = array_keys($lookup);

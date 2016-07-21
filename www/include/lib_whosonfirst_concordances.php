@@ -11,6 +11,10 @@
 
 		$concordance = "wof:concordances.{$source}";
 
+		if ($source == "wof"){
+			$concordance = "wof:id";
+		}
+
 		$query = array(
 			'match' => array( $concordance => $esc_id )
 		);
