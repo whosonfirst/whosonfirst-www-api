@@ -16,6 +16,28 @@
 			),
 		),
 
+		'whosonfirst.places.getInfo' => array(
+			"description" => "Lookup a Who's On First record",
+			"documented" => 1,
+			"enabled" => 0,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array(
+				array("name" => "id", "description" => "", "documented" => 1, "required" => 1),
+			),
+		),
+
+		'whosonfirst.places.getDescendants' => array(
+			"description" => "Lookup all the descendants Who's On First record",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array(
+				array("name" => "id", "description" => "", "documented" => 1, "required" => 1),
+			),
+		),
+
 		'whosonfirst.spelunker.search' => array(
 			"description" => "Query for Who's On First records.",
 			"documented" => 1,
