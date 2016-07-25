@@ -61,7 +61,7 @@
 			), $GLOBALS['api_methods_whosonfirst']['filter_parameters'])
 		),
 
-		'whosonfirst.spelunker.search' => array(
+		'whosonfirst.places.search' => array(
 			"description" => "Query for Who's On First records.",
 			"documented" => 1,
 			"enabled" => 1,
