@@ -1,5 +1,8 @@
 <?php
 
+	loadlib("machinetags");
+	loadlib("machinetags_elasticsearch");
+
 	########################################################################
 
 	function api_whosonfirst_utils_search_filters(){
