@@ -1,6 +1,7 @@
 <?php
 
 	loadlib("whosonfirst_places");
+	loadlib("api_whosonfirst_utils");
 
 	########################################################################
 
@@ -19,7 +20,7 @@
 			api_output_error(400, "Missing 'id' parameter");
 		}
 
-		$filters = array();	# TO DO...
+		$filters = api_whosonfirst_utils_search_filters();
 		$args = array();
 
 		api_utils_ensure_pagination_args($args);

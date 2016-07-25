@@ -13,7 +13,13 @@
 			'wof:belongsto' => $esc_id
 		));
 
-		# something something something filters
+		if (count(array_keys($filters))){
+
+			$query = array('filtered' => array(
+				'query' => $query,
+				'filter' => array('and' => $filters),
+			));
+		}
 
 		$req = array(
 			'query' => $query
