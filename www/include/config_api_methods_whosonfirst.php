@@ -66,7 +66,7 @@
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
-			"library" => "api_whosonfirst_spelunker",
+			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
                                	array("name" => "q", "description" => "query for this value across all fields", "documented" => 1, "required" => 0),
                        	), $GLOBALS['api_methods_whosonfirst']['filter_parameters']),

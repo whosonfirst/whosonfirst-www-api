@@ -1,6 +1,8 @@
 <?php
 
 	loadlib("whosonfirst_places");
+
+	loadlib("api_whosonfirst_output");
 	loadlib("api_whosonfirst_utils");
 
 	########################################################################
@@ -24,12 +26,11 @@
 			api_output_error(500, $rsp['error']);
 		}
 
-		$rows = $rsp['rows'];
+		api_whosonfirst_output_enpublicify($rsp['rows']);
 		$pagination = $rsp['pagination'];
 
 		$out = array(
-			# 'query' => $es_query,
-			'results' => $rows
+			'results' => $rsp['rows']
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
