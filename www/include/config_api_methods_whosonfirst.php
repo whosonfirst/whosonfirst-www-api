@@ -39,6 +39,40 @@
 			),
 		),
 
+		'whosonfirst.machinetags.getNamespaces' => array(
+			"description" => "",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_machinetags",
+                        "parameters" => array(
+				array("name" => "predicate", "description" => "", "documented" => 1, "required" => 0),
+			),
+		),
+
+		'whosonfirst.machinetags.getPredicates' => array(
+			"description" => "",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_machinetags",
+                        "parameters" => array(
+				array("name" => "namespace", "description" => "", "documented" => 1, "required" => 0),
+			),
+		),
+
+		'whosonfirst.machinetags.getValues' => array(
+			"description" => "",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_machinetags",
+                        "parameters" => array(
+				array("name" => "namespace", "description" => "", "documented" => 1, "required" => 0),
+				array("name" => "predicate", "description" => "", "documented" => 1, "required" => 0),
+			),
+		),
+
 		'whosonfirst.places.getInfo' => array(
 			"description" => "Lookup a Who's On First record",
 			"documented" => 1,
