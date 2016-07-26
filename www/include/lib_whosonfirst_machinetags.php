@@ -32,10 +32,10 @@
 	function whosonfirst_machinetags_hierarchies($args){
 
 		$aggrs = array('hierarchies' => array(
-			'terms' => 'field' => 'machinetags', 'size' => 0
+			'terms' => array('field' => 'machinetags', 'size' => 0)
 		));
 
-		list($include_filter, $exclude_filter) = machinetags_elasticsearch_hierarchy_query_filters($args);
+		list($include_filter, $exclude_filter) = machinetags_elasticsearch_query_filter_from_hierarchy($args);
 
 		if ($include_filter){
 			$aggrs['hierarchies']['terms']['include'] = $include_filter;
