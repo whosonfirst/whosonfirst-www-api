@@ -56,7 +56,29 @@
 			'search_type' => 'count'
 		);
 
+		# TO DO - update all the things so that we can use elasticsearch_facet
+
 		$rsp = elasticsearch_spelunker_search($req, $more);
+
+		if (! $rsp['ok']){
+			return $rsp;
+		}
+
+		$body = json_decode($rsp['body'], 'as hash');
+
+		$aggregations = $body['aggregations'];
+		$hierarchies = $aggregations['hierarchies'];
+		$buckets = $hierarchies['buckets'];
+
+		if ($rsp_filter){
+			$buckets = call_user_func($rsp_filter, $buckets);
+		}
+
+		return array(
+			'ok' => 1,
+			'rows' => $buckets,
+		);
+
 		return $rsp;
 	}
 

@@ -21,7 +21,7 @@
 
 		if ($args['filter'] == 'namespaces'){
 
-			$rsp_filter = 'query_filter_namespaces';	# fix me
+			$rsp_filter = 'machinetags_elasticsearch_hierarchies_query_filter_namespaces';
 
 			if ($args['predicate'] && $args['value']){
 
@@ -60,7 +60,7 @@
 
 	    	else if ($args['filter'] == 'predicates'){
 
-			$rsp_filter = 'query_filter_predicates';	# fix me
+			$rsp_filter = 'machinetags_elasticsearch_hierarchies_query_filter_predicates';
 
 			# all the predicates for a namespace and value
 
@@ -102,7 +102,7 @@
 
 		else if ($args['filter'] == 'values'){
 
-			$rsp_filter = 'query_filter_values';	# fix me
+			$rsp_filter = 'machinetags_elasticsearch_hierarchies_query_filter_values';
 
 			# all the values for namespace and predicate
 
@@ -165,6 +165,87 @@
 		}
 	    
 		return array($include_filter, $exclude_filter, $rsp_filter);
+	}
+
+	########################################################################
+
+	function machinetags_elasticsearch_hierarchies_query_filter_namespaces($unfiltered){
+
+		$filtered = array();
+		$tmp = array();
+
+		foreach ($unfiltered as $row){
+
+			$key = $row['key'];
+			$count = $row['doc_count'];
+
+			$key = explode("/", $key);
+			$ns = $key[0];
+
+			$tmp[$ns] += $count;
+		}
+
+		foreach ($tmp as $ns => $count){
+
+			$filtered[] = array(
+				'doc_count' => $count,
+				'key' => $ns,
+				'namespace' => $ns,
+				'predicate' => null,
+				'value' => null
+			);
+		}
+
+		return machinetags_elasticsearch_hierarchies_sort_filtered($filtered);
+	}	
+
+	########################################################################
+
+	function machinetags_elasticsearch_hierarchies_query_filter_predicates(){
+
+		$filtered = array();
+
+		return $filtered;
+	}	
+
+	########################################################################
+
+	function machinetags_elasticsearch_hierarchies_query_filter_values(){
+
+		$filtered = array();
+
+		return $filtered;
+	}	
+
+	########################################################################
+
+	function machinetags_elasticsearch_hierarchies_sort_filtered(&$unsorted){
+
+		$sorted = array();
+		$tmp = array();
+
+		foreach ($unsorted as $row){
+
+			$key = $row['key'];
+			$count = $row['doc_count'];
+
+			$bucket = (isset($tmp[$count])) ? $tmp[$count] : array();
+			$bucket[] = $row;
+
+			$tmp[$count] = $bucket;
+		}
+
+		krsort($tmp);
+
+		foreach ($tmp as $count => $buckets){
+
+			foreach ($buckets as $row){
+				$row['doc_count'] = $count;
+				$sorted[] = $row;
+			}
+		}
+
+		return $sorted;
 	}
 
 	########################################################################
