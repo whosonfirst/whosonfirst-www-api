@@ -2,19 +2,25 @@
 
 	########################################################################
 
-	function api_whosonfirst_output_enpublicify(&$rows){
+	function api_whosonfirst_output_enpublicify(&$rows, $more=array()){
 
 		$count = count($rows);
 
 		for ($i=0; $i < $count; $i++){
 
-			$rows[$i] = api_whosonfirst_output_enpublicify_single($rows[$i]);
+			$rows[$i] = api_whosonfirst_output_enpublicify_single($rows[$i], $more);
 		}
 	}
 
 	########################################################################
 
-	function api_whosonfirst_output_enpublicify_single($row){
+	function api_whosonfirst_output_enpublicify_single($row, $more=array()){
+
+		$defaults = array(
+			"extras" => ""
+		);
+
+		$more = array_merge($defaults, $more);
 
 		$public = array(
 			'wof:id' => $row['wof:id'],
@@ -24,6 +30,20 @@
 			'wof:country' => $row['wof:country'],
 			'wof:repo' => $row['wof:repo'],
 		);
+
+		if ($extras = $more["extras"]){
+
+			$extras = explode(",", $extras);
+
+			foreach ($extras as $k){
+
+				if (! isset($row[$k])){
+					continue;
+				}
+
+				$public[$k] = $row[$k];
+			}
+		}
 
 		return $public;
 	}
