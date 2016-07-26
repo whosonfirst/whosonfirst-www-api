@@ -37,6 +37,8 @@
 
 			foreach ($extras as $k){
 
+				$k = trim($k);
+
 				if (! isset($row[$k])){
 					continue;
 				}

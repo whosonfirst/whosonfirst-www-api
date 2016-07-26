@@ -14,8 +14,6 @@
 
 		$more = array_merge($defaults, $more);
 
-		# echo json_encode($query, JSON_PRETTY_PRINT);
-
 		$rsp = elasticsearch_search($query, $more);
 		return $rsp;
 	}

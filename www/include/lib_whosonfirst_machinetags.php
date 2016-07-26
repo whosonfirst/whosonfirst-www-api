@@ -45,17 +45,20 @@
 			$aggrs['hierarchies']['terms']['exclude'] = $exclude_filter;
 		}
 
+		# curl -XGET 'http://example.com:9200/whosonfirst/_search?search_type=count' \
+		# -d '{"aggregations": {"hierarchies": {"terms": {"exclude": ".*\\\\/.*", "field": "machinetags_all", "size": 0}}}}'
+
 		$req = array(
 			'aggegrations' => $aggrs,
 		);
 
 		# please use me...
 
-		$query_params = array(
-			'search_type' => 'count',
+		$more = array(
+			'search_type' => 'count'
 		);
 
-		$rsp = elasticsearch_spelunker_search($req);
+		$rsp = elasticsearch_spelunker_search($req, $more);
 		return $rsp;
 	}
 
