@@ -1,7 +1,7 @@
 <?php
 
 	loadlib("machinetags");
-	loadlib("machinetags_elasticsearch");
+	loadlib("machinetags_elasticsearch_wildcard");
 
 	########################################################################
 
@@ -161,7 +161,7 @@
 
 				$mt = $machinetags[0];
 
-				$mt_filter = machinetags_elasticsearch_query_filter_from_machinetag($mt);
+				$mt_filter = machinetags_elasticsearch_wildcard_query_filter_from_machinetag($mt);
 
 				$filters[] = array('regexp' => array(
 					'machinetags_all' => $mt_filter
