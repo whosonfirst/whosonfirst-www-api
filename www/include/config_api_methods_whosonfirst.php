@@ -58,6 +58,7 @@
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
 				array("name" => "id", "description" => "", "documented" => 1, "required" => 1),
+                               	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			), $GLOBALS['api_methods_whosonfirst']['filter_parameters'])
 		),
 
@@ -69,6 +70,7 @@
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
                                	array("name" => "q", "description" => "query for this value across all fields", "documented" => 1, "required" => 0),
+                               	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
                        	), $GLOBALS['api_methods_whosonfirst']['filter_parameters']),
 		),
 

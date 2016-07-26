@@ -71,11 +71,17 @@
 			api_output_error(500, $rsp['error']);
 		}
 
-		$rows = $rsp['rows'];
+		$more = array();
+
+		if ($extras = request_str("extras")){
+			$more["extras"] = $extras;
+		}
+
+		api_whosonfirst_output_enpublicify($rsp['rows'], $more);
 		$pagination = $rsp['pagination'];
 
 		$out = array(
-			'results' => $rows
+			'results' => $rsp['rows']
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
