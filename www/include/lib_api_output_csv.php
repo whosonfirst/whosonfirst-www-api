@@ -42,25 +42,24 @@
 
 		if (! $more['is_error']){
 
-			# PLEASE MAKE ME MORE FLEXIBLE TO ACCOMODATE THINGS THAT AREN'T PAGINATED
-			# AND NOT JUST $rsp['results'] EITHER (20160708/thisisaaronland)
-
 			header("X-whosonfirst-pagination-total: " . htmlspecialchars($rsp['total']));
 			header("X-whosonfirst-pagination-per-page: " . htmlspecialchars($rsp['per_page']));
 			header("X-whosonfirst-pagination-pages: " . htmlspecialchars($rsp['pages']));
 			header("X-whosonfirst-pagination-page: " . htmlspecialchars($rsp['page']));
 
 			$fh = fopen("php://memory", "w");
-	
-			$lookup = array(
-				"id" => "wof:id",
-				"name" => "wof:name",
-				"placetype" => "wof:placetype",
-				"iso_country" => "iso:country",
-				"wof_country" => "wof:country",
-			);
 
-			$header = array_keys($lookup);
+			$header = array();
+			$lookup = array();
+
+			foreach (array_keys($rsp['results'][0]) as $k){
+
+				$k_clean = api_output_csv_clean_header($k);
+
+				$header[] = $k_clean;
+				$lookup[$k_clean] = $k;
+			}
+
 			sort($header);
 
 			$str_header = implode(",", $header);
@@ -75,9 +74,16 @@
 
 				$out = array();
 
-				foreach ($header as $key){
-					$wof_key = $lookup[ $key ];
-					$out[] = $row[ $wof_key ];
+				foreach ($header as $k_clean){
+
+					$key = $lookup[$k_clean];
+					$value = $row[ $key ];
+
+					if (! is_scalar($value)){
+						$value = json_encode($value);
+					}
+
+					$out[] = $value;
 				}
 
 				fputcsv($fh, $out);
@@ -90,6 +96,14 @@
 		}
 
 		exit();
+	}
+
+	#################################################################
+
+	function api_output_csv_clean_header($header){
+
+		$clean = str_replace(":", "_", $header);
+		return $clean;
 	}
 
 	#################################################################

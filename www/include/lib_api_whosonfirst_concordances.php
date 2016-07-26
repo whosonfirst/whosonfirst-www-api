@@ -3,6 +3,8 @@
 	loadlib("whosonfirst_concordances");
 	loadlib("whosonfirst_sources");
 
+	loadlib("api_whosonfirst_output");
+
 	########################################################################
 
 	function api_whosonfirst_concordances_getById(){
