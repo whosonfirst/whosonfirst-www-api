@@ -49,10 +49,8 @@
 		# -d '{"aggregations": {"hierarchies": {"terms": {"exclude": ".*\\\\/.*", "field": "machinetags_all", "size": 0}}}}'
 
 		$req = array(
-			'aggegrations' => $aggrs,
+			'aggregations' => $aggrs,
 		);
-
-		# please use me...
 
 		$more = array(
 			'search_type' => 'count'
