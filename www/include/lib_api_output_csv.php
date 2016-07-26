@@ -52,6 +52,9 @@
 			$header = array();
 			$lookup = array();
 
+			# TO DO 1: how/where to check for key with rows ?
+			# TO DO 2: how/where to deal with singletons (things not paginated) ?
+
 			foreach (array_keys($rsp['results'][0]) as $k){
 
 				$k_clean = api_output_csv_clean_header($k);
