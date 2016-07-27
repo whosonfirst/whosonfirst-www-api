@@ -157,7 +157,7 @@
 	function users_is_email_taken($email){
 
 		$enc_email = AddSlashes($email);
-		$sq = "SELECT id FROM users WHERE email='{$enc_email}' AND deleted=0";
+		$sql = "SELECT id FROM users WHERE email='{$enc_email}' AND deleted=0";
 
 		$rsp = db_fetch_accounts($sql);
 		$row = db_single($rsp);
