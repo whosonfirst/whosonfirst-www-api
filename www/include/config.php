@@ -89,7 +89,7 @@
 	# available in the 'extras' directory
 
 	$GLOBALS['cfg']['auth_cookie_domain'] = parse_url($GLOBALS['cfg']['abs_root_url'], 1);
-	$GLOBALS['cfg']['auth_cookie_name'] = 'a';
+	$GLOBALS['cfg']['auth_cookie_name'] = 'ap';
 	$GLOBALS['cfg']['auth_cookie_require_https'] = 0;
 
 	$GLOBALS['cfg']['crumb_ttl_default'] = 300;	# seconds
