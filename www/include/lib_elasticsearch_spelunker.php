@@ -6,6 +6,16 @@
 
 	function elasticsearch_spelunker_search($query, $more=array()){
 
+		elasticsearch_spelunker_append_config($more);
+
+		$rsp = elasticsearch_search($query, $more);
+		return $rsp;
+	}
+
+	########################################################################
+
+	function elasticsearch_spelunker_append_config(&$more){
+
 		$defaults = array(
 			'host' => $GLOBALS['cfg']['elasticsearch_spelunker_host'],
 			'port' => $GLOBALS['cfg']['elasticsearch_spelunker_port'],
@@ -13,10 +23,9 @@
 		);
 
 		$more = array_merge($defaults, $more);
-
-		$rsp = elasticsearch_search($query, $more);
-		return $rsp;
-	}
+	
+		# pass by ref
+	}	
 
 	########################################################################
 

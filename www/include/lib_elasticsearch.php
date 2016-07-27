@@ -109,18 +109,31 @@
 		));
 
 		$defaults = array(
-			'query' => $query_all
+			'query' => $query_all,
+			'search_type' => 'count',
+			'include_filter' => null,
+			'exclude_filter' => null,
 		);
 
 		$more = array_merge($defaults, $more);
 
+		$aggrs = array(
+			'facet' => array(
+				'terms' => array('field' => $field, 'size' => 0)
+			)
+		);
+
+		if ($more['include_filter']){
+			$aggrs['facet']['terms']['include'] = $more['include_filter'];
+		}
+
+		if ($more['exlude_filter']){
+			$aggrs['facet']['terms']['exclude'] = $more['exclude_filter'];
+		}
+
 		$es_query = array(
 			'query' => $more['query'],
-			'aggregations' => array(
-				'facet' => array(
-					'terms' => array('field' => $field, 'size' => 0)
-				)
-			)
+			'aggregations' => $aggrs,
 		);
 
 		$rsp = elasticsearch_search($es_query, $more);
