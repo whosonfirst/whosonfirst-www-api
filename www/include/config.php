@@ -26,7 +26,7 @@
 
 	$GLOBALS['cfg']['db_accounts'] = array(
 		'host'	=> 'localhost',
-		'name'	=> 'accounts',		# database name
+		'name'	=> 'wof_api',		# database name
 		'user'	=> 'wof_api',		# database username
 		'auto_connect' => 0,
 	);
