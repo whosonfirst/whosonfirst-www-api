@@ -31,7 +31,7 @@
 			$hash[$k] = AddSlashes($v);
 		}
 
-		$ret = db_insert('users', $hash);
+		$ret = db_insert_accounts('users', $hash);
 
 		if (!$ret['ok']) return $ret;
 
@@ -60,11 +60,12 @@
 	function users_update_user(&$user, $update){
 
 		$hash = array();
+
 		foreach ($update as $k => $v){
 			$hash[$k] = AddSlashes($v);
 		}
 
-		$ret = db_update('users', $hash, "id={$user['id']}");
+		$ret = db_update_accounts('users', $hash, "id={$user['id']}");
 
 		if (!$ret['ok']) return $ret;
 
@@ -109,7 +110,10 @@
 
 	function users_get_by_id($id){
 
-		$user = db_single(db_fetch("SELECT * FROM users WHERE id=".intval($id)));
+		$sql = "SELECT * FROM users WHERE id=" . intval($id);
+
+		$rsp = db_fetch_accounts($sql);
+		$user = db_single($rsp);
 
 		cache_set("USER-{$user['id']}", $user);
 
@@ -121,8 +125,10 @@
 	function users_get_by_email($email){
 
 		$enc_email = AddSlashes($email);
+		$sql = "SELECT * FROM users WHERE email='{$enc_email}'";
 
-		return db_single(db_fetch("SELECT * FROM users WHERE email='{$enc_email}'"));
+		$rsp = db_fetch_accounts($sql);
+		return db_single($rsp);
 	}
 
 	#################################################################
@@ -151,8 +157,10 @@
 	function users_is_email_taken($email){
 
 		$enc_email = AddSlashes($email);
+		$sq = "SELECT id FROM users WHERE email='{$enc_email}' AND deleted=0";
 
-		$row = db_single(db_fetch("SELECT id FROM users WHERE email='{$enc_email}' AND deleted=0"));
+		$rsp = db_fetch_accounts($sql);
+		$row = db_single($rsp);
 
 		return $row['id'] ? 1 : 0;
 	}
@@ -163,7 +171,10 @@
 
 		$enc_username = AddSlashes($username);
 
-		$row = db_single(db_fetch("SELECT id FROM users WHERE username='{$enc_username}' AND deleted=0"));
+		$sql = "SELECT id FROM users WHERE username='{$enc_username}' AND deleted=0";
+		$rsp = db_fetch_accounts($sql);
+
+		$row = db_single($rsp);
 		return $row['id'] ? 1 : 0;
 	}
 
@@ -173,7 +184,10 @@
 
 		$enc_code = AddSlashes($code);
 
-		$row = db_single(db_fetch("SELECT * FROM users_password_reset WHERE reset_code='{$enc_code}'"));
+		$sql = "SELECT * FROM users_password_reset WHERE reset_code='{$enc_code}'";
+
+		$rsp = db_fetch_accounts($sql);
+		$row = db_single($rsp);
 
 		if (!$row){
 			return null;
@@ -186,7 +200,10 @@
 
 	function users_purge_password_reset_codes(&$user){
 
-		$rsp = db_write("DELETE FROM users_password_reset WHERE user_id=$user[id]");
+		$enc_user = intval($user[id]);
+		$sql = "DELETE FROM users_password_reset WHERE user_id=$enc_user";
+
+		$rsp = db_write_accounts($sql);
 
 		return $rsp['ok'];
 	}
@@ -223,14 +240,17 @@
 			$code = random_string(32);
 			$enc_code = AddSlashes($code);
 
-			if (db_single(db_fetch("SELECT 1 FROM users_password_reset WHERE reset_code='{$enc_code}'"))){
+			$sql = "SELECT 1 FROM users_password_reset WHERE reset_code='{$enc_code}'";
+			$rsp = db_fetch_accounts($sql);
+
+			if (db_single($rsp)){
 				$code = '';
 			}
 
 			break;
 		}
 
-		$rsp = db_insert('users_password_reset', array(
+		$rsp = db_insert_accounts('users_password_reset', array(
 			'user_id'	=> $user['id'],
 			'reset_code'	=> $enc_code,
 			'created'	=> time(),

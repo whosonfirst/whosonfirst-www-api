@@ -25,6 +25,7 @@ CREATE TABLE `users_password_reset` (
   KEY `by_user` (`user_id`),
   KEY `by_timestamp` (`created`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `ApiKeys`;
 
 CREATE TABLE `ApiKeys` (
