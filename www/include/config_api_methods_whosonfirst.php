@@ -40,7 +40,7 @@
 		),
 
 		'whosonfirst.machinetags.getNamespaces' => array(
-			"description" => "",
+			"description" => "Return the list of unique namespaces for all the machinetags in Who's On First",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
@@ -51,7 +51,7 @@
 		),
 
 		'whosonfirst.machinetags.getPredicates' => array(
-			"description" => "",
+			"description" => "Return the list of unique predicates for all the the machinetags in Who's On First",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
@@ -62,7 +62,7 @@
 		),
 
 		'whosonfirst.machinetags.getValues' => array(
-			"description" => "",
+			"description" => "Return the list of unique values for all the machinetags in Who's On First",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,

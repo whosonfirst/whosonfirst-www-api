@@ -201,20 +201,66 @@
 
 	########################################################################
 
-	function machinetags_elasticsearch_hierarchies_query_filter_predicates(){
+	function machinetags_elasticsearch_hierarchies_query_filter_predicates($unfiltered){
 
 		$filtered = array();
+		$tmp = array();
 
-		return $filtered;
+		foreach ($unfiltered as $row){
+
+			$key = $row['key'];
+			$count = $row['doc_count'];
+
+			$key = explode("/", $key);
+			$pred = $key[1];
+
+			$tmp[$pred] += $count;
+		}
+
+		foreach ($tmp as $pred => $count){
+
+			$filtered[] = array(
+				'doc_count' => $count,
+				'key' => $pred,
+				'namespace' => null,
+				'predicate' => $pred,
+				'value' => null
+			);
+		}
+
+		return machinetags_elasticsearch_hierarchies_sort_filtered($filtered);
 	}	
 
 	########################################################################
 
-	function machinetags_elasticsearch_hierarchies_query_filter_values(){
+	function machinetags_elasticsearch_hierarchies_query_filter_values($unfiltered){
 
 		$filtered = array();
+		$tmp = array();
 
-		return $filtered;
+		foreach ($unfiltered as $row){
+
+			$key = $row['key'];
+			$count = $row['doc_count'];
+
+			$key = explode("/", $key);
+			$value = $key[2];
+
+			$tmp[$value] += $count;
+		}
+
+		foreach ($tmp as $value => $count){
+
+			$filtered[] = array(
+				'doc_count' => $count,
+				'key' => $value,
+				'namespace' => null,
+				'predicate' => null,
+				'value' => $value,
+			);
+		}
+
+		return machinetags_elasticsearch_hierarchies_sort_filtered($filtered);
 	}	
 
 	########################################################################
