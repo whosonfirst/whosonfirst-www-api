@@ -522,6 +522,7 @@
 	########################################################################
 
 	function elasticsearch_paginate_aggregation_results($results, $more=array()) {
+
 		$page = isset($more['page']) ? max(1, $more['page']) : 1;
 		$per_page = isset($more['per_page']) ? max(1, $more['per_page']) : $GLOBALS['cfg']['pagination_per_page'];
 
