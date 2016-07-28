@@ -36,16 +36,28 @@
 
 		$rows = array();
 
-		foreach ($rsp['rows'] as $row){
+		if ($rsp['ok']){
+			$rsp['rows'] = whosonfirst_tags_format_results('tag', $rsp['rows']);
+		}
 
-			$rows[] = array(
-				'tag' => $row['key'],
+		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_tags_format_results($key, $unformatted){
+
+		$formatted = array();
+
+		foreach ($unformatted as $row){
+
+			$formatted[] = array(
 				'count' => $row['doc_count'],
+				$key => $row['key'],
 			);
 		}
 
-		$rsp['rows'] = $rows;
-		return $rsp;
+		return $formatted;
 	}
 
 	########################################################################

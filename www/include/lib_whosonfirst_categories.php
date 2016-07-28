@@ -28,7 +28,13 @@
 	function whosonfirst_categories_get_namespaces($field, $args=array()){
 
 		elasticsearch_spelunker_append_config($args);
-		return machinetags_elasticsearch_get_namespaces($field, $args);
+		$rsp = machinetags_elasticsearch_get_namespaces($field, $args);
+
+		if ($rsp['ok']){
+			$rsp['rows'] = whosonfirst_categories_format_results('namespace', $rsp['rows']);
+		}
+
+		return $rsp;
 	}
 
 	########################################################################
@@ -36,7 +42,13 @@
 	function whosonfirst_categories_get_predicates($field, $args=array()){
 
 		elasticsearch_spelunker_append_config($args);
-		return machinetags_elasticsearch_get_predicates($field, $args);
+		$rsp = machinetags_elasticsearch_get_predicates($field, $args);
+
+		if ($rsp['ok']){
+			$rsp['rows'] = whosonfirst_categories_format_results('namespace', $rsp['rows']);
+		}
+
+		return $rsp;
 	}
 
 	########################################################################
@@ -44,7 +56,31 @@
 	function whosonfirst_categories_get_values($field, $args=array()){
 
 		elasticsearch_spelunker_append_config($args);
-		return machinetags_elasticsearch_get_values($field, $args);
+		$rsp = machinetags_elasticsearch_get_values($field, $args);
+
+		if ($rsp['ok']){
+			$rsp['rows'] = whosonfirst_categories_format_results('namespace', $rsp['rows']);
+		}
+
+		return $rsp;
+	}
+
+	########################################################################
+
+
+	function whosonfirst_categories_format_results($key, $unformatted){
+
+		$formatted = array();
+
+		foreach ($unformatted as $row){
+
+			$formatted[] = array(
+				'count' => $row['doc_count'],
+				$key => $row['key'],
+			);
+		}
+
+		return $formatted;
 	}
 
 	########################################################################
