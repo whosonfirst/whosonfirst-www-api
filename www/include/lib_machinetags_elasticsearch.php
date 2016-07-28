@@ -42,8 +42,6 @@
 			$more['exclude_filter'] = $exclude_filter;
 		}
 
-		$more['search_type'] = 'count';
-
 		# TO DO: do not paginate here - see below, basically we want
 		# to paginate after the filtering (20160728/thisisaaronland)
 

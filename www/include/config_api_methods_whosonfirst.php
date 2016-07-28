@@ -159,6 +159,27 @@
                        	), $GLOBALS['api_methods_whosonfirst']['filter_parameters']),
 		),
 
+		'whosonfirst.tags.getTags' => array(
+			"description" => "Return the list of unique tags n Who's On First",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_tags",
+                        "parameters" => array(
+				array("name" => "source", "description" => "Limit results to categories from this source", "documented" => 1, "required" => 0),
+			),
+		),
+
+		'whosonfirst.tags.getSources' => array(
+			"description" => "Return the list of sources for all the tags in Who's On First",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_tags",
+                        "parameters" => array(
+			),
+		),
+
 	), $GLOBALS['cfg']['api']['methods']);
 
 	########################################################################
