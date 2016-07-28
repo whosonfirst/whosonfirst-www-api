@@ -5,29 +5,38 @@
 
 	########################################################################
 
-	function whosonfirst_categories_get_namespaces($args=array()){
+	function whosonfirst_categories_sources(){
 
-		elasticsearch_spelunker_append_config($args);
+		$sources = array(
+			"sg",
+			"wof"
+		);
 
-		return machinetags_elasticsearch_get_namespaces('wof:categories', $args);
+		return $sources;
 	}
 
 	########################################################################
 
-	function whosonfirst_categories_get_predicates($args=array()){
+	function whosonfirst_categories_get_namespaces($field, $args=array()){
 
 		elasticsearch_spelunker_append_config($args);
-
-		return machinetags_elasticsearch_get_predicates('wof:categories', $args);
+		return machinetags_elasticsearch_get_namespaces($field, $args);
 	}
 
 	########################################################################
 
-	function whosonfirst_categories_get_values($args=array()){
+	function whosonfirst_categories_get_predicates($field, $args=array()){
 
 		elasticsearch_spelunker_append_config($args);
+		return machinetags_elasticsearch_get_predicates($field, $args);
+	}
 
-		return machinetags_elasticsearch_get_values('wof:categories', $args);
+	########################################################################
+
+	function whosonfirst_categories_get_values($field, $args=array()){
+
+		elasticsearch_spelunker_append_config($args);
+		return machinetags_elasticsearch_get_values($field, $args);
 	}
 
 	########################################################################

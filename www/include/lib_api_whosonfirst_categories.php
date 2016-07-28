@@ -1,10 +1,10 @@
 <?php
 
-	loadlib("whosonfirst_machinetags");
+	loadlib("whosonfirst_categories");
 
 	########################################################################
 
-	function api_whosonfirst_machinetags_getNamespaces(){
+	function api_whosonfirst_categories_getNamespaces(){
 
 		$args = array();
 		api_utils_ensure_pagination_args($args);
@@ -17,7 +17,8 @@
 			$args['value'] = $value;
 		}
 
-		$rsp = whosonfirst_machinetags_get_namespaces($args);
+		$source = api_whosonfirst_categories_ensure_source();
+		$rsp = whosonfirst_categories_get_namespaces($source, $args);
 
 		if (! $rsp['ok']){
 			api_output_error(500, $rsp['error']);
@@ -35,7 +36,7 @@
 
 	########################################################################
 
-	function api_whosonfirst_machinetags_getPredicates(){
+	function api_whosonfirst_categories_getPredicates(){
 
 		$args = array();
 		api_utils_ensure_pagination_args($args);
@@ -48,7 +49,8 @@
 			$args['value'] = $value;
 		}
 
-		$rsp = whosonfirst_machinetags_get_predicates($args);
+		$source = api_whosonfirst_categories_ensure_source();
+		$rsp = whosonfirst_categories_get_predicates($source, $args);
 
 		if (! $rsp['ok']){
 			api_output_error(500, $rsp['error']);
@@ -66,7 +68,7 @@
 
 	########################################################################
 
-	function api_whosonfirst_machinetags_getValues(){
+	function api_whosonfirst_categories_getValues(){
 
 		$args = array();
 		api_utils_ensure_pagination_args($args);
@@ -79,7 +81,8 @@
 			$args['predicate'] = $pred;
 		}
 
-		$rsp = whosonfirst_machinetags_get_values($args);
+		$source = api_whosonfirst_categories_ensure_source();
+		$rsp = whosonfirst_categories_get_values($source, $args);
 
 		if (! $rsp['ok']){
 			api_output_error(500, $rsp['error']);
@@ -93,6 +96,34 @@
 
 		api_utils_ensure_pagination_results($out, $pagination);
 		api_output_ok($out);
+	}
+
+	########################################################################
+
+	function api_whosonfirst_categories_getSources(){
+
+		$sources = whosonfirst_categories_sources();
+		$out = array('sources' => $sources);
+		
+		api_output_ok($out);
+	}
+
+	########################################################################
+
+	function api_whosonfirst_categories_ensure_source(){
+	
+		if ($source = request_str("source")){
+
+			$sources = whosonfirst_categories_sources();
+
+			if (! in_array($source, array("wof", "sg"))){
+				api_output_error(400, "Invalid source");
+			}
+
+			return "{$source}:categories";
+		}
+
+		return "categories_all";
 	}
 
 	########################################################################

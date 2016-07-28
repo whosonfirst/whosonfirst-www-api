@@ -136,7 +136,12 @@
 			'aggregations' => $aggrs,
 		);
 
+		# $t1 = microtime_ms();
+
 		$rsp = elasticsearch_search($es_query, $more);
+
+		# $t2 = microtime_ms();
+		# dumper("search " . ($t2 - $t1));
 
 		if (! $rsp['ok']){
 			return $rsp;

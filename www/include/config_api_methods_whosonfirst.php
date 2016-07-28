@@ -27,6 +27,55 @@
 
 	$GLOBALS['cfg']['api']['methods'] = array_merge(array(
 
+		'whosonfirst.categories.getNamespaces' => array(
+			"description" => "Return the list of unique namespaces for all the categories in Who's On First",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_categories",
+                        "parameters" => array(
+				array("name" => "source", "description" => "Limit results to categories from this source", "documented" => 1, "required" => 0),
+				array("name" => "predicate", "description" => "Limit results to categories with this predicate", "documented" => 1, "required" => 0),
+				array("name" => "value", "description" => "Limit results to categories with this value", "documented" => 1, "required" => 0),
+			),
+		),
+
+		'whosonfirst.categories.getPredicates' => array(
+			"description" => "Return the list of unique predicates for all the the categories in Who's On First",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_categories",
+                        "parameters" => array(
+				array("name" => "source", "description" => "Limit results to categories from this source", "documented" => 1, "required" => 0),
+				array("name" => "namespace", "description" => "Limit results to categories with this namespace", "documented" => 1, "required" => 0),
+				array("name" => "value", "description" => "Limit results to categories with this value", "documented" => 1, "required" => 0),
+			),
+		),
+
+		'whosonfirst.categories.getValues' => array(
+			"description" => "Return the list of unique values for all the categories in Who's On First",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_categories",
+                        "parameters" => array(
+				array("name" => "source", "description" => "Limit results to categories from this source", "documented" => 1, "required" => 0),
+				array("name" => "namespace", "description" => "Limit results to categories with this namespace", "documented" => 1, "required" => 0),
+				array("name" => "predicate", "description" => "Limit results to categories with this predicate", "documented" => 1, "required" => 0),
+			),
+		),
+
+		'whosonfirst.categories.getSources' => array(
+			"description" => "Return the list of sources for all the categories in Who's On First",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_categories",
+                        "parameters" => array(
+			),
+		),
+
 		'whosonfirst.concordances.getById' => array(
 			"description" => "Lookup a Who's On First record (and all its concordances) by another source identifier",
 			"documented" => 1,
@@ -46,7 +95,8 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
-				array("name" => "predicate", "description" => "", "documented" => 1, "required" => 0),
+				array("name" => "predicate", "description" => "Limit results to machinetags with this predicate", "documented" => 1, "required" => 0),
+				array("name" => "value", "description" => "Limit results to machinetags with this value", "documented" => 1, "required" => 0),
 			),
 		),
 
@@ -57,7 +107,8 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
-				array("name" => "namespace", "description" => "", "documented" => 1, "required" => 0),
+				array("name" => "namespace", "description" => "Limit results to machinetags with this namespace", "documented" => 1, "required" => 0),
+				array("name" => "value", "description" => "Limit results to machinetags with this value", "documented" => 1, "required" => 0),
 			),
 		),
 
@@ -68,8 +119,8 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
-				array("name" => "namespace", "description" => "", "documented" => 1, "required" => 0),
-				array("name" => "predicate", "description" => "", "documented" => 1, "required" => 0),
+				array("name" => "namespace", "description" => "Limit results to machinetags with this namespace", "documented" => 1, "required" => 0),
+				array("name" => "predicate", "description" => "Limit results to machinetags with this predicate", "documented" => 1, "required" => 0),
 			),
 		),
 
