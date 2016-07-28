@@ -114,9 +114,7 @@
 	
 		if ($source = request_str("source")){
 
-			$sources = whosonfirst_categories_sources();
-
-			if (! in_array($source, array("wof", "sg"))){
+			if (! whosonfirst_categories_is_valid_source($source)){
 				api_output_error(400, "Invalid source");
 			}
 

@@ -17,6 +17,14 @@
 
 	########################################################################
 
+	function whosonfirst_categories_is_valid_source($source){
+
+		$sources = whosonfirst_categories_sources();
+		return (in_array($source, $sources)) ? 1 : 0;
+	}
+
+	########################################################################
+
 	function whosonfirst_categories_get_namespaces($field, $args=array()){
 
 		elasticsearch_spelunker_append_config($args);
