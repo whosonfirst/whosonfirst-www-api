@@ -335,6 +335,6 @@
 
 	$GLOBALS['cfg']['elasticsearch_spelunker_host'] = 'http://localhost';
 	$GLOBALS['cfg']['elasticsearch_spelunker_port'] = '9200';
-	$GLOBALS['cfg']['elasticsearch_spelunker_index'] = 'whosonfirst';
+	$GLOBALS['cfg']['elasticsearch_spelunker_index'] = 'whosonfirst_20160729';
 
 	# END OF elasticsearch-spelunker stuff

@@ -7,6 +7,20 @@
 
 	########################################################################
 
+	function api_whosonfirst_concordances_getSources(){
+
+		$rsp = whosonfirst_concordances_get_sources();
+
+		if (! $rsp['ok']){
+			api_output_error(500, $rsp['error']);
+		}
+
+		$out = array('results' => $rsp['rows']);
+		api_output_ok($out);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_concordances_getById(){
 
 		$id = request_str("id");

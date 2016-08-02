@@ -88,6 +88,16 @@
 			),
 		),
 
+		'whosonfirst.concordances.getSources' => array(
+			"description" => "List all the sources that Who's On First holds hands with",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_concordances",
+                        "parameters" => array(
+			),
+		),
+
 		'whosonfirst.machinetags.getNamespaces' => array(
 			"description" => "Return the list of unique namespaces for all the machinetags in Who's On First",
 			"documented" => 1,

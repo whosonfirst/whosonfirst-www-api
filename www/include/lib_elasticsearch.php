@@ -68,6 +68,8 @@
 
 		$rsp = http_post($url, $body, $headers, $http_more);
 
+		# dumper($rsp);
+
 		$end = microtime_ms();
 
 		$GLOBALS['timings']['es_queries_count']	+= 1;
@@ -138,7 +140,9 @@
 
 		# $t1 = microtime_ms();
 
+		# dumper($es_query);
 		$rsp = elasticsearch_search($es_query, $more);
+		# dumper($rsp);
 
 		# $t2 = microtime_ms();
 		# dumper("search " . ($t2 - $t1));

@@ -5,6 +5,27 @@
 
 	########################################################################
 
+	function whosonfirst_concordances_get_sources($args=array()){
+
+		elasticsearch_spelunker_append_config($args);
+		$rsp = elasticsearch_facet("wof:concordances_sources", $args);
+
+		if ($rsp['ok']){
+
+			$sources = array();
+
+			foreach ($rsp['rows'] as $row){
+				$sources[] = array('source' => $row['key'], 'concordances' => $row['doc_count']);
+			}
+
+			$rsp['rows'] = $sources;
+		}
+
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_concordances_get_by_id($source, $id, $more=array()){
 
 		$esc_id = elasticsearch_escape($id);
