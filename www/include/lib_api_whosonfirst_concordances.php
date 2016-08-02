@@ -9,13 +9,23 @@
 
 	function api_whosonfirst_concordances_getSources(){
 
-		$rsp = whosonfirst_concordances_get_sources();
+		$args = array();
+		api_utils_ensure_pagination_args($args);
+
+		$rsp = whosonfirst_concordances_get_sources($args);
 
 		if (! $rsp['ok']){
 			api_output_error(500, $rsp['error']);
 		}
 
-		$out = array('results' => $rsp['rows']);
+		$rows = $rsp['rows'];
+		$pagination = $rsp['pagination'];
+
+		$out = array(
+			'results' => $rows,
+		);
+
+		api_utils_ensure_pagination_results($out, $pagination);
 		api_output_ok($out);
 	}
 

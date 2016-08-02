@@ -92,7 +92,7 @@
 			"description" => "List all the sources that Who's On First holds hands with",
 			"documented" => 1,
 			"enabled" => 1,
-			"paginated" => 0,
+			"paginated" => 1,
 			"library" => "api_whosonfirst_concordances",
                         "parameters" => array(
 			),
