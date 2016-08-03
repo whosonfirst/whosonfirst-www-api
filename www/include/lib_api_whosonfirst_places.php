@@ -13,7 +13,7 @@
 
 		$filters = api_whosonfirst_utils_search_filters();
 
-		if (($q == "") && (! count($filters))){
+		if (($q == "") && (count($filters) <= 1)){
 			api_output_error(400, "E_INSUFFICIENT_QUERY");
 		}
 
