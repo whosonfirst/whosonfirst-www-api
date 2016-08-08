@@ -8,6 +8,8 @@
 	function whosonfirst_categories_sources(){
 
 		$sources = array(
+			"mz",
+			"osm",
 			"sg",
 			"wof"
 		);
