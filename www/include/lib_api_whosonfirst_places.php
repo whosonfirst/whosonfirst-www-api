@@ -1,9 +1,12 @@
 <?php
 
 	loadlib("whosonfirst_places");
+	loadlib("whosonfirst_spatial");
 
 	loadlib("api_whosonfirst_output");
 	loadlib("api_whosonfirst_utils");
+
+	loadlib("geo_utils");
 
 	########################################################################
 
@@ -48,6 +51,52 @@
 	function api_whosonfirst_places_getInfo(){
 
 		# please write me
+	}
+
+	########################################################################
+
+	function api_whosonfirst_places_getNearby(){
+
+		$lat = null;
+		$lon = null;
+
+		if ($wofid = request_int64("id")){
+		
+			api_output_error(400, "This has not been implemented yet");
+		}
+
+		else {
+
+			$lat = request_float("latitude");
+
+			if (! $lat){
+				api_output_error(400, "Missing latitude");
+			}
+
+			if (! geo_utils_is_valid_latitude($lat)){
+				api_output_error(400, "Invalid latitude");
+			}
+
+			$lon = request_float("longitude");
+
+			if (! $lon){
+				api_output_error(400, "Missing longitude");
+			}
+
+			if (! geo_utils_is_valid_longitude($lon)){
+				api_output_error(400, "Invalid longitude");
+			}
+		}
+
+		$r = 100;
+
+		$more = array(
+			'wof:placetype_id' => 102312325,	# venues
+		);
+
+		$rsp = whosponfirst_spatial_nearby_latlon($lat, $lon, $r, $more);
+
+		api_output_ok($rsp);
 	}
 
 	########################################################################

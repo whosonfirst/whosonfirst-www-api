@@ -338,3 +338,12 @@
 	$GLOBALS['cfg']['elasticsearch_spelunker_index'] = 'whosonfirst_20160729';
 
 	# END OF elasticsearch-spelunker stuff
+
+	# START of wof spatial stuff
+
+	$GLOBALS['cfg']['enable_feature_spatial'] = 1;
+	$GLOBALS['cfg']['spatial_tile38_host'] = 'localhost';
+	$GLOBALS['cfg']['spatial_tile38_port'] = '9851';
+	$GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst';
+
+	# END of wof spatial stuff
