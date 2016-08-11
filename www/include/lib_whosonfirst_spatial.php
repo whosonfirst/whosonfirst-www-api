@@ -4,7 +4,7 @@
 
 	########################################################################
 
-	function whosponfirst_spatial_index_feature(&$feature, $more=array()){
+	function whosonfirst_spatial_index_feature(&$feature, $more=array()){
 
 		$geom = $feature['geometry'];
 		$props = $feature['properties'];
@@ -28,7 +28,7 @@
 
 		$cmd = implode(" ", $cmd);
 
-		$rsp = whosponfirst_spatial_do($cmd, $more);
+		$rsp = whosonfirst_spatial_do($cmd, $more);
 
 		if (! $rsp['ok']){
 			return $rsp;
@@ -40,7 +40,7 @@
 		$cmd = array("SET", "__COLLECTION__", $name_key, "STRING", $name);
 		$cmd = implode(" ", $cmd);
 
-		$rsp2 = whosponfirst_spatial_do($cmd, $more);
+		$rsp2 = whosonfirst_spatial_do($cmd, $more);
 
 		# See this? We're ignoring the return value of $rsp2... for now
 		# (20160810/thisisaaronland)
@@ -50,7 +50,7 @@
 
 	########################################################################
 
-	function whosponfirst_spatial_nearby_feature(&$feature, $more=array()){
+	function whosonfirst_spatial_nearby_feature(&$feature, $more=array()){
 
 		$props = $feature['properties'];
 		
@@ -62,12 +62,12 @@
 
 		$r = 100;
 	
-		return whosponfirst_spatial_nearby_latlon($lat, $lon, $r, $more);
+		return whosonfirst_spatial_nearby_latlon($lat, $lon, $r, $more);
 	}
 
 	########################################################################
 
-	function whosponfirst_spatial_nearby_latlon($lat, $lon, $r, $more=array()){
+	function whosonfirst_spatial_nearby_latlon($lat, $lon, $r, $more=array()){
 
 		$where = array();
 
@@ -101,12 +101,57 @@
 
 		$cmd = implode(" ", $cmd);
 
-		return whosponfirst_spatial_do($cmd, $more);
+		return whosonfirst_spatial_do($cmd, $more);
 	}
 
 	########################################################################
 
-	function whosponfirst_spatial_do($cmd, $more=array()){
+	function whosonfirst_spatial_append_names(&$rsp, $more=array()){
+
+		$fields = $rsp['fields'];
+		$fields[] = "wof:name";
+
+		# What follows is written in a way that should make it easy to
+		# support a 'tile38_do_multi' command once it's been written
+		# (20160811/thisisaaronland)
+
+		$cmds = array();
+		$rsps = array();
+
+		$count_objects = count($rsp['objects']);
+
+		for ($i=0; $i < $count_objects; $i++){
+
+			$row = $rsp['objects'][$i];
+			list($id, $ignore) = explode("#", $row['id']);
+
+			$key = "{$id}:name";
+			$cmd = "GET __COLLECTION__ {$key}";
+
+			$cmds[] = $cmd;
+		}
+
+		foreach ($cmds as $cmd){
+
+			# Note the lack of error checking...
+			
+			$rsp2 = whosonfirst_spatial_do($cmd, $more);
+			$rsps[] = $rsp2;
+		}
+
+		for ($i=0; $i < $count_objects; $i++){
+
+			$rsp['objects'][$i]['fields'][] = $rsps[$i]['object'];
+		}
+	
+		$rsp['fields'] = $fields;
+
+		# pass-by-ref
+	}
+
+	########################################################################
+
+	function whosonfirst_spatial_do($cmd, $more=array()){
 
 		$defaults = array(
 			'host' => $GLOBALS['cfg']['spatial_tile38_host'],
