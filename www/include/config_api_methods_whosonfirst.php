@@ -161,14 +161,17 @@
 			"description" => "Lookup all the Who's On First records near a point",
 			"documented" => 1,
 			"enabled" => 1,
-			"paginated" => 1,
+			"paginated" => 0,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
 				array("name" => "latitude", "description" => "", "documented" => 1, "required" => 1),
 				array("name" => "longitude", "description" => "", "documented" => 1, "required" => 1),
-                               	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+                               	# array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			),
-		),
+			"notes" => array(
+				"Pagination for this method is not supported yet."
+			),
+		),	
 
 		'whosonfirst.places.search' => array(
 			"description" => "Query for Who's On First records.",

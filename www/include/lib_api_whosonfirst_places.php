@@ -98,7 +98,11 @@
 		else {
 			$r = 100;
 		}
-		
+
+		# IMPORTANT - WE AREN'T DEALING WITH TILE38 PAGINATION AT ALL YET BECAUSE TILE38
+		# USES 'cursors' AND ... YEAH, CURSORS. WE WILL NEED TO FIGURE SOMETHING OUT BUT
+		# NOT TODAY (20160811/thisisaaronland)
+
 		$more = array(
 			'wof:placetype_id' => 102312325,	# venues - PLEASE DO NOT HARDCODE ME
 		);
@@ -143,12 +147,11 @@
 				'wof:name' => $props['wof:name'],
 				'wof:id' => $props['wof:id'],
 				'wof:placetype' => "venue",	# PLEASE DO NOT HARDCODE ME
+				'wof:parent_id' => -1,		# PLEASE FIX ME
+				'wof:country' => "XY",		# PLEASE FIX ME
 				'wof:repo' => $repo,
 				'geom:latitude' => $coords[1],
 				'geom:longitude' => $coords[0],
-
-				# 'wof:parent_id' => -1,
-				# 'wof:country' => -1,
 			);
 		}
 
