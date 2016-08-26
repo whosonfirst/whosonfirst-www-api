@@ -50,7 +50,32 @@
 
 	function api_whosonfirst_places_getInfo(){
 
-		# please write me
+		$id = request_int64("id");
+
+		if (! $id){
+			api_output_error(400, "Missing 'id' parameter");
+		}
+
+		$rsp = whosonfirst_places_get_by_id($id);
+
+		if (! $rsp['ok']){
+			api_output_error(500, "Failed to retrieve ID");
+		}
+
+		$more = array();
+
+		if ($extras = request_str("extras")){
+			$more["extras"] = $extras;
+		}
+
+		$doc = $rsp['rows'][0];
+		$doc = api_whosonfirst_output_enpublicify_single($doc, $more);
+
+		$out = array(
+			'record' => $doc		     
+		);
+
+		api_output_ok($out);
 	}
 
 	########################################################################

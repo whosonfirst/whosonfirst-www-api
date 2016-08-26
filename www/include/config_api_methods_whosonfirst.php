@@ -137,7 +137,7 @@
 		'whosonfirst.places.getInfo' => array(
 			"description" => "Lookup a Who's On First record",
 			"documented" => 1,
-			"enabled" => 0,
+			"enabled" => 1,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(

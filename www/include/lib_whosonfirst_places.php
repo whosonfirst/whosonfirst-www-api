@@ -5,6 +5,22 @@
 
 	########################################################################
 
+	function whosonfirst_places_get_by_id($id, $more=array()){
+
+		$query = array('ids' => array(
+			'values' => array($id)
+		));
+
+		$req = array(
+			'query' => $query
+		);
+
+		$rsp = elasticsearch_spelunker_search($req, $more);
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_places_search($q, $filters, $more=array()){
 
 		if ($q == ""){
