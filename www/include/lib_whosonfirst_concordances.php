@@ -49,14 +49,19 @@
 			$doc = $rsp['rows'][0];
 			$concordances = $doc['wof:concordances'];
 
-			$results = array($concordances);
+			$results = array();
 
 			$pagination = array(
-				'total_count' => 1,
+				'total_count' => 0,
 				'page' => 1,
 				'per_page' => 1,
 				'page_count' => 1
 			);
+
+			if ($concordances){
+				$results[] = $concordances;
+				$pagination['total_count'] = 1;
+			}
 
 			return array(
 				'ok' => 1,
