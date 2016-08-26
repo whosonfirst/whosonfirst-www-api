@@ -3,6 +3,8 @@
 	loadlib("elasticsearch");
 	loadlib("elasticsearch_spelunker");
 
+	loadlib("whosonfirst_places");
+
 	########################################################################
 
 	function whosonfirst_concordances_get_sources($args=array()){
@@ -34,6 +36,33 @@
 
 		if ($source == "wof"){
 			$concordance = "wof:id";
+		}
+
+		if ($concordance == "wof:concordances.wof:id"){
+
+			$rsp = whosonfirst_places_get_by_id($id);
+
+			if (! $rsp['ok']){
+				return $rsp;
+			}
+
+			$doc = $rsp['rows'][0];
+			$concordances = $doc['wof:concordances'];
+
+			$results = array($concordances);
+
+			$pagination = array(
+				'total_count' => 1,
+				'page' => 1,
+				'per_page' => 1,
+				'page_count' => 1
+			);
+
+			return array(
+				'ok' => 1,
+				'rows' => $results,
+				'pagination' => $pagination
+			);			
 		}
 
 		$query = array(
