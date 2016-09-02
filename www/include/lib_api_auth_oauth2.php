@@ -8,22 +8,33 @@
 
 		# https://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-20#section-2.1
 
-		if ($GLOBALS['cfg']['api_oauth2_require_authentication_header']){
+		$require_header = $GLOBALS['cfg']['api_oauth2_require_authentication_header'];
+		$check_header = $GLOBALS['cfg']['api_oauth2_check_authentication_header'];
+
+		if (($require_header) || ($check_header)){
 
 			$headers = apache_request_headers();
+			$token = null;
 
 			if (! isset($headers['Authorization'])){
-				return null;
+
+				if ($require_header){
+					return null;
+				}
 			}
 
-			if (! preg_match("/Bearer\s+([a-zA-Z0-9\+\/]+)$/", $headers['Authorization'], $m)){
-				return null;
+			else {
+
+				if (preg_match("/Bearer\s+([a-zA-Z0-9\+\/]+)$/", $headers['Authorization'], $m)){
+
+					$token = $m[1];
+					$token = base64_decode($token);
+				}
 			}
 
-			$token = $m[1];
-			$token = base64_decode($token);
-
-			return $token;
+			if (($token) || ($require_header)){
+				return $token;
+			}
 		}
 
 		if ($GLOBALS['cfg']['api_oauth2_allow_get_parameters']){
