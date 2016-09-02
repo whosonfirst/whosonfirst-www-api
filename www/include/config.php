@@ -233,7 +233,7 @@
 
 	$GLOBALS['cfg']['api_auth_type'] = 'oauth2';
 	$GLOBALS['cfg']['api_oauth2_require_authentication_header'] = 0;
-	$GLOBALS['cfg']['api_oauth2_check_authentication_header'] = 0;
+	$GLOBALS['cfg']['api_oauth2_check_authentication_header'] = 1;
 	$GLOBALS['cfg']['api_oauth2_allow_get_parameters'] = 1;
 
 	# API site keys (TTL is measured in seconds)

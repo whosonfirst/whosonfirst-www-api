@@ -25,7 +25,9 @@
 
 			else {
 
-				if (preg_match("/Bearer\s+([a-zA-Z0-9\+\/]+)$/", $headers['Authorization'], $m)){
+				# please make me more base64-ish yeah...
+
+				if (preg_match("/Bearer\s+([a-zA-Z0-9\+\/\=]+)$/", $headers['Authorization'], $m)){
 
 					$token = $m[1];
 					$token = base64_decode($token);
