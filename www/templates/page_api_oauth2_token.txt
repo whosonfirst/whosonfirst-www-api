@@ -62,6 +62,13 @@ OH NO! INVISIBLE ERROR CAT HISSES AT YOU...
 	</tr>
 
 	<tr>
+		<td><label>Bearer Token</label></td>
+		<td class="api-credential">
+			<strong>{$token.access_token|@base64_encode|escape}</strong>
+		</td>
+	</tr>
+
+	<tr>
 		<td><label>Created</label></td>
 		<td>{$token.created|date_format|escape} at {$token.created|date_format:"%H:%M"|escape}</td>
 	</tr>
