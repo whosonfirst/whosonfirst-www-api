@@ -16,7 +16,7 @@
 			$headers = apache_request_headers();
 			$token = null;
 
-			if (! isset($headers['Authorization'])){
+			if (! isset($headers['authorization'])){
 
 				if ($require_header){
 					return null;
@@ -25,7 +25,7 @@
 
 			else {
 
-				if (preg_match("/Bearer\s+([a-zA-Z0-9\+\/\=]+)$/", $headers['Authorization'], $m)){
+				if (preg_match("/Bearer\s+([a-zA-Z0-9\+\/\=]+)$/", $headers['authorization'], $m)){
 
 					$token = $m[1];
 					$token = base64_decode($token);
