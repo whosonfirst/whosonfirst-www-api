@@ -6,7 +6,7 @@ PYTHON=`which python`
 WHOAMI=`${PYTHON} -c 'import os, sys; print os.path.realpath(sys.argv[1])' $0`
 
 BIN=`dirname $WHOAMI`
-PROJECT=`dirname $WHEREAMI`
+PROJECT=`dirname $BIN`
 
 WWW="${PROJECT}/www"
 INCLUDE="${WWW}/include"
