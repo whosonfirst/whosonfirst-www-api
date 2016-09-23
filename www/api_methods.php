@@ -1,7 +1,6 @@
 <?php
 
 	include("include/init.php");
-	login_ensure_loggedin();
 
 	loadlib("api");
 	loadlib("api_methods");
@@ -12,6 +11,10 @@
 
 	if (! $GLOBALS['cfg']['enable_feature_api_documentation']){
 		error_disabled();
+	}
+
+	if ($GLOBALS['cfg']['api_require_loggedin']){
+		login_ensure_loggedin();
 	}
 
 	$method_classes = array();

@@ -7,6 +7,10 @@
 		"api_documentation",
 	));
 
+	if ($GLOBALS['cfg']['api_require_loggedin']){
+		login_ensure_loggedin();
+	}
+
 	$default = $GLOBALS['cfg']['api']['default_format'];
 
 	$formats = $GLOBALS['cfg']['api']['formats'];

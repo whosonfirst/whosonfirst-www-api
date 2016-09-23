@@ -1,7 +1,6 @@
 <?php
 
 	include("include/init.php");
-	login_ensure_loggedin();
 
 	loadlib("api");
 	loadlib("api_spec");
@@ -11,6 +10,10 @@
 		"api",
 		"api_documentation",
 	));
+
+	if ($GLOBALS['cfg']['api_require_loggedin']){
+		login_ensure_loggedin();
+	}
 
 	$method = get_str("method");
 

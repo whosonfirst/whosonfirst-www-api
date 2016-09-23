@@ -40,7 +40,7 @@ php_flag display_errors on
 php_value error_reporting 2147483639
 
 # Some basic pointers to php files
-DirectoryIndex api.php index.php
+DirectoryIndex index.php
 ErrorDocument 404 /404.php
 ErrorDocument 403 /403.php
 

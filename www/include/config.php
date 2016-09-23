@@ -209,6 +209,7 @@
 	# API feature flags
 
 	$GLOBALS['cfg']['enable_feature_api'] = 1;
+	$GLOBALS['cfg']['api_require_loggedin'] = 1;
 
 	$GLOBALS['cfg']['enable_feature_api_documentation'] = 1;
 	$GLOBALS['cfg']['enable_feature_api_explorer'] = 1;
