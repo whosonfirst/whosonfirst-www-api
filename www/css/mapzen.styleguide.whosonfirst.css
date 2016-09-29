@@ -1,0 +1,15 @@
+/*
+
+  because these get hidden (and redrawn with images) by the default mapzen stylesheet
+  and that's a bad idea for default/common/basic HTML form elements
+  (20160929/thisisaaronland)
+
+*/
+
+input[type="checkbox"] {
+    opacity: 1 !important;
+}
+
+input[type="radio"] {
+    opacity: 1 !important;
+}
