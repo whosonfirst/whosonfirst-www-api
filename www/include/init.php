@@ -242,6 +242,11 @@
 	# set up to run out of user's public_html directory (if need be).
 
 	$server_url = $GLOBALS['cfg']['abs_root_url'];
+	$scheme = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https' : 'http';
+
+	if ($GLOBALS['cfg']['server_force_https']){
+		$scheme = "https";
+	}
 
 	if ($_SERVER['SERVER_PORT']) {
 		$server_port = null;
@@ -253,13 +258,15 @@
 		$server_port = $_SERVER['SERVER_PORT'];
 
 		if ($server_port) {
-			$scheme = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https' : 'http';
 			$server_url = "{$scheme}://{$_SERVER['SERVER_NAME']}:{$server_port}";
+		}
+
+		else {
+			$server_url = "{$scheme}://{$_SERVER['SERVER_NAME']}";
 		}
 	}
 	
 	if (! $server_url){
-		$scheme = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https' : 'http';
 		$server_url = "{$scheme}://{$_SERVER['SERVER_NAME']}";
 	}
 
