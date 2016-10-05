@@ -255,8 +255,6 @@
 			$server_port = $_SERVER['SERVER_PORT'];
 		}
 
-		$server_port = $_SERVER['SERVER_PORT'];
-
 		if ($server_port) {
 			$server_url = "{$scheme}://{$_SERVER['SERVER_NAME']}:{$server_port}";
 		}
