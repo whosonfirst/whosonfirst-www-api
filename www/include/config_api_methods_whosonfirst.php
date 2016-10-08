@@ -173,6 +173,26 @@
 			),
 		),	
 
+		'whosonfirst.places.getWithin' => array(
+			"description" => "Lookup all the Who's On First records within a bounding box",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array(
+				array("name" => "min_latitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "min_longitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "max_latitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "max_longitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "placetype_id", "description" => "", "documented" => 1, "required" => 0),								
+				array("name" => "cursor", "description" => "", "documented" => 1, "required" => 0),				
+                               	# array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+			),
+			"notes" => array(
+				"Pagination is a cursor (because we can't have nice things)"
+			),
+		),	
+
 		'whosonfirst.places.search' => array(
 			"description" => "Query for Who's On First records.",
 			"documented" => 1,

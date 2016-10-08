@@ -188,6 +188,13 @@
 
 	########################################################################
 
+	function api_whosonfirst_places_getWithin(){
+
+		
+	}
+	
+	########################################################################
+
 	function api_whosonfirst_places_getDescendants(){
 
 		$wofid = request_int64("id");
