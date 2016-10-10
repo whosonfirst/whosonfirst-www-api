@@ -166,7 +166,9 @@
                         "parameters" => array(
 				array("name" => "latitude", "description" => "", "documented" => 1, "required" => 1),
 				array("name" => "longitude", "description" => "", "documented" => 1, "required" => 1),
-                               	# array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+				array("name" => "placetype", "description" => "", "documented" => 1, "required" => 0),
+				array("name" => "cursor", "description" => "", "documented" => 1, "required" => 0),
+				# array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			),
 			"notes" => array(
 				"Pagination for this method is not supported yet."
@@ -184,8 +186,8 @@
 				array("name" => "min_longitude", "description" => "", "documented" => 1, "required" => 1),
 				array("name" => "max_latitude", "description" => "", "documented" => 1, "required" => 1),
 				array("name" => "max_longitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "placetype_id", "description" => "", "documented" => 1, "required" => 0),								
-				array("name" => "cursor", "description" => "", "documented" => 1, "required" => 0),				
+				array("name" => "placetype", "description" => "", "documented" => 1, "required" => 0),
+				array("name" => "cursor", "description" => "", "documented" => 1, "required" => 0),
                                	# array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			),
 			"notes" => array(

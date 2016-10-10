@@ -10,19 +10,22 @@
 		$props = $feature['properties'];
 
 		$wofid = $props['wof:id'];
-		$placetype = $props['wof:placetype'];
+		$parent_id = $props['wof:parent_id'];
 
-		$placetype_id = 102312325;	# I guess I finally need to finish this...
-						# (20160810/thisisaaronland)
+		$placetype = $props['wof:placetype'];
+		$placetype_id = whosonfirst_placetypes_name_to_id($placetype);
 						
 		$str_geom = json_encode($geom);
 
-		# Should we set flags for things being deprecated, superseded, current, etc?
-		
 		$cmd = array(
 			"SET", "__COLLECTION__", $wofid,
 			"FIELD", "wof:id", $wofid,
 			"FIELD", "wof:placetype_id", $placetype_id,
+			"FIELD", "wof:parent_id", $parent_id,
+			# PLEASE IMPLEMENT ME... (20161010/thisisaaronland)				 
+			# "FIELD", "wof:deprecated", $deprecated,
+			# "FIELD", "wof:superseded", $superseded,
+			# "FIELD", "wof:is_current", $current,			
 			"OBJECT", $str_geom
 		);
 
@@ -34,16 +37,11 @@
 			return $rsp;
 		}
 
-		$name = $props['wof:name'];
-		$name_key = "{$wofid}:name";
-		
-		$cmd = array("SET", "__COLLECTION__", $name_key, "STRING", $name);
-		$cmd = implode(" ", $cmd);
+		$rsp2 = whosonfirst_spatial_assign_meta($props, $more);
 
-		$rsp2 = whosonfirst_spatial_do($cmd, $more);
-
-		# See this? We're ignoring the return value of $rsp2... for now
-		# (20160810/thisisaaronland)
+		if (! $rsp2['ok']){
+			return $rsp2;
+		}
 		
 		return $rsp;
 	}
@@ -106,10 +104,75 @@
 
 	########################################################################
 
-	function whosonfirst_spatial_append_names(&$rsp, $more=array()){
+	function whosonfirst_spatial_within($swlat, $swlon, $nelat, $nelon, $more=array()){
 
+		$defauts = array(
+			'placetype_id' => null,			
+			'cursor' => null,
+		);
+
+		$more = array_merge($defaults, $more);
+
+		$cmd = array(
+			"INTERSECTS __COLLECTION__",
+		);
+		
+		if ($cursor = $more['cursor']){
+			$cmd[] = "CURSOR {$cursor}";
+		}
+
+		if ($pt = $more['placetype_id']){
+			$cmd[] = "WHERE {$pt} ${pt}";
+		}
+
+		$cmd[] = "BOUNDS {$swlat} {$swlon} {$nelat} {$nelon}";
+
+		$cmd = implode(" ", $cmd);
+
+		return whosonfirst_spatial_do($cmd, $more);
+	}
+
+	########################################################################
+
+	function whosonfirst_spatial_assign_meta(&$props, $more=array()){
+
+		$defaults = array(
+			'meta_fields' => array('wof:name', 'wof:country')
+		);
+
+		$more = array_merge($defaults, $more);
+
+		$meta = array();
+
+		foreach ($more['meta_fields'] as $f){
+			$meta[$f] = $props[$f];
+		}
+		
+		$meta = json_encode($meta);
+		
+		$meta_key = "{$wofid}:meta";
+		
+		$cmd = array("SET", "__COLLECTION__", $meta_key, "STRING", $meta);
+		$cmd = implode(" ", $cmd);
+
+		return whosonfirst_spatial_do($cmd, $more);
+	}
+	
+	########################################################################
+
+	function whosonfirst_spatial_append_meta(&$rsp, $more=array()){
+
+		$defaults = array(
+			'meta_fields' => array('wof:name', 'wof:country')
+		);
+
+		$more = array_merge($defaults, $more);
+		
 		$fields = $rsp['fields'];
-		$fields[] = "wof:name";
+
+		foreach ($more['meta_fields'] as $f){
+			$fields[] = $f;
+		}
 
 		# What follows is written in a way that should make it easy to
 		# support a 'tile38_do_multi' command once it's been written
@@ -120,17 +183,21 @@
 
 		$count_objects = count($rsp['objects']);
 
+		# first construct all the requests
+		
 		for ($i=0; $i < $count_objects; $i++){
 
 			$row = $rsp['objects'][$i];
 			list($id, $ignore) = explode("#", $row['id']);
 
-			$key = "{$id}:name";
+			$key = "{$id}:meta";
 			$cmd = "GET __COLLECTION__ {$key}";
 
 			$cmds[] = $cmd;
 		}
 
+		# execute all the requests (this is the do_multi bit)
+		
 		foreach ($cmds as $cmd){
 
 			# Note the lack of error checking...
@@ -139,16 +206,23 @@
 			$rsps[] = $rsp2;
 		}
 
+		# parse all the requests
+		
 		for ($i=0; $i < $count_objects; $i++){
 
-			$rsp['objects'][$i]['fields'][] = $rsps[$i]['object'];
+			# Note the lack of error checking...
+			$obj = json_decode($rsps[$i]['object'], "as hash");
+
+			foreach ($more['meta_fields'] as $f){
+				$rsp['objects'][$i]['fields'][] = $obj[$f];
+			}
 		}
 	
 		$rsp['fields'] = $fields;
 
 		# pass-by-ref
 	}
-
+	
 	########################################################################
 
 	function whosonfirst_spatial_do($cmd, $more=array()){
@@ -171,4 +245,54 @@
 
 	########################################################################
 
+	function whosonfirst_spatial_inflate_results($rsp){
+
+		# See this? It takes ~ 20-40 µs to fetch each name individually.
+		# Which isn't very much even when added up. There are two considerations
+		# here: 1) It's useful just to be able to append the name from the 
+		# tile38 index itself 2) It might be just as fast to look up the
+		# entire record from ES itself. Basically what I am trying to say is
+		# that it's too soon so we're just going to do this for now...
+		# (20160811/thisisaaronland)
+
+		whosonfirst_spatial_append_meta($rsp);
+
+		$results = array();
+		$cursor = null;			# PLEASE FIX ME
+		
+		$fields = $rsp['fields'];
+		$count_fields = count($fields);
+
+		foreach ($rsp['objects'] as $row){
+
+			$geom = $row['object'];
+			$coords = $geom['coordinates'];
+
+			$props = array();
+
+			for ($i=0; $i < $count_fields; $i++){
+				$props[ $fields[$i] ] = $row['fields'][$i];
+			}
+
+			list($id, $repo) = explode("#", $row['id']);
+
+			$placetype = whosonfirst_placetypes_id_to_name($props['wof:placetype_id']);
+			
+			$results[] = array(
+				'wof:name' => $props['wof:name'],
+				'wof:id' => $props['wof:id'],
+				'wof:placetype' => $placetype,
+				'wof:parent_id' => $props['wof:parent_id'],
+				'wof:country' => $props['wof:country'],
+				'wof:repo' => $repo,
+				'geom:latitude' => $coords[1],
+				'geom:longitude' => $coords[0],
+			);
+		}
+
+		return array($results, $cursor);
+	}
+
+	########################################################################
+	
 	# the end

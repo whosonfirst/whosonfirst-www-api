@@ -1,5 +1,7 @@
 <?php
 
+	loadlib("whosonfirst_placetypes");
+	
 	loadlib("whosonfirst_places");
 	loadlib("whosonfirst_spatial");
 
@@ -128,61 +130,29 @@
 		# USES 'cursors' AND ... YEAH, CURSORS. WE WILL NEED TO FIGURE SOMETHING OUT BUT
 		# NOT TODAY (20160811/thisisaaronland)
 
-		$more = array(
-			'wof:placetype_id' => 102312325,	# venues - PLEASE DO NOT HARDCODE ME
-		);
+		$more = array();
+
+		if ($placetype = request_str("placetype")){
+
+			api_whosonfirst_places_ensure_valid_placetype($placetype);
+			$more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
+		}
+		
+		if ($cursor = request_str("cursor")){
+
+			api_whosonfirst_places_ensure_valid_cursor($cursor);
+			$more['cursor'] = $cursor;
+		}
 
 		$rsp = whosonfirst_spatial_nearby_latlon($lat, $lon, $r, $more);
 
 		if (! $rsp['ok']){
 			api_output_error(500, $rsp['error']);
 		}
-		
-		# See this? It takes ~ 20-40 µs to fetch each name individually.
-		# Which isn't very much even when added up. There are two considerations
-		# here: 1) It's useful just to be able to append the name from the 
-		# tile38 index itself 2) It might be just as fast to look up the
-		# entire record from ES itself. Basically what I am trying to say is
-		# that it's too soon so we're just going to do this for now...
-		# (20160811/thisisaaronland)
 
-		whosonfirst_spatial_append_names($rsp);
+		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
 
-		$results = array();
-
-		# please put me in a function somewhere (20160811/thisisaaronland)
-
-		$fields = $rsp['fields'];
-		$count_fields = count($fields);
-
-		foreach ($rsp['objects'] as $row){
-
-			$geom = $row['object'];
-			$coords = $geom['coordinates'];
-
-			$props = array();
-
-			for ($i=0; $i < $count_fields; $i++){
-				$props[ $fields[$i] ] = $row['fields'][$i];
-			}
-
-			list($id, $repo) = explode("#", $row['id']);
-			
-			$results[] = array(
-				'wof:name' => $props['wof:name'],
-				'wof:id' => $props['wof:id'],
-				'wof:placetype' => "venue",	# PLEASE DO NOT HARDCODE ME
-				'wof:parent_id' => -1,		# PLEASE FIX ME
-				'wof:country' => "XY",		# PLEASE FIX ME
-				'wof:repo' => $repo,
-				'geom:latitude' => $coords[1],
-				'geom:longitude' => $coords[0],
-			);
-		}
-
-		# end of please put me in a function somewhere
-
-		$out = array('results' => $results);
+		$out = array('results' => $results, 'cursor' => $cursor);
 		api_output_ok($out);
 	}
 
@@ -190,7 +160,92 @@
 
 	function api_whosonfirst_places_getWithin(){
 
+		$swlat = null;
+		$swlon = null;
+
+		$nelat = null;
+		$nelon = null;
+
+		if ($wofid = request_int64("id")){
 		
+			api_output_error(400, "This has not been implemented yet");
+		}
+
+		else {
+
+			$swlat = request_float("min_latitude");
+
+			if (! $sw_lat){
+				api_output_error(400, "Missing min_latitude");
+			}
+
+			if (! geo_utils_is_valid_latitude($swlat)){
+				api_output_error(400, "Invalid min_latitude");
+			}
+
+			$swlon = request_float("min_longitude");
+
+			if (! $swlon){
+				api_output_error(400, "Missing min_longitude");
+			}
+
+			if (! geo_utils_is_valid_longitude($swlon)){
+				api_output_error(400, "Invalid min_longitude");
+			}
+			
+			$swlat = request_float("max_latitude");
+
+			if (! $nelat){
+				api_output_error(400, "Missing max_latitude");
+			}
+
+			if (! geo_utils_is_valid_latitude($nelat)){
+				api_output_error(400, "Invalid max_latitude");
+			}
+
+			$nelon = request_float("max_longitude");
+
+			if (! $nelon){
+				api_output_error(400, "Missing max_longitude");
+			}
+
+			if (! geo_utils_is_valid_longitude($nelon)){
+				api_output_error(400, "Invalid max_longitude");
+			}
+
+			if ($swlat > $nelat){
+				api_output_error(400, "Impossible min_latitude");
+			}
+
+			if ($swlon > $nelon){
+				api_output_error(400, "Impossible min_longitude");
+			}
+		}
+
+		$more = array();
+
+		if ($cursor = request_str("cursor")){
+
+			api_whosonfirst_places_ensure_valid_cursor($cursor);
+			$more['cursor'] = $cursor;
+		}
+
+		if ($placetype = request_str("placetype")){
+
+			api_whosonfirst_places_ensure_valid_placetype($placetype);
+			$more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
+		}
+
+		$rsp = whosonfirst_spatial_within($swlat, $swlon, $nelat, $nelon, $more);
+
+		if (! $rsp['ok']){
+			api_output_error(500, $rsp['error']);
+		}
+
+		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
+
+		$out = array('results' => $results, 'cursor' => $cursor);
+		api_output_ok($out);
 	}
 	
 	########################################################################
@@ -233,4 +288,26 @@
 
 	########################################################################
 
+	function api_whosonfirst_places_ensure_valid_placetypr($pt){
+
+		if (! whosonfirst_placetypes_is_valid_placetype($pt)){
+			api_output_error(400, "Invalid placetype");
+		}
+
+		return 1;
+	}
+
+	########################################################################
+
+	function api_whosonfirst_places_ensure_valid_cursor($cursor){
+
+		if (! preg_match("/^[a-fA-F\0-9]+$/", $cursor)){
+			api_output_error(400, "Invalid cursor");
+		}
+
+		return 1;
+	}
+	
+	########################################################################
+	
 	# the end
