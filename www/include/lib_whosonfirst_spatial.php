@@ -71,6 +71,12 @@
 
 	function whosonfirst_spatial_nearby_latlon($lat, $lon, $r, $more=array()){
 
+		$defaults = array(
+			'per_page' => $GLOBALS['cfg']['pagination_per_page'],
+		);
+
+		$more = array_merge($defaults, $more);
+
 		$where = array();
 
 		$possible = array(
@@ -93,9 +99,17 @@
 			"NEARBY", "__COLLECTION__",
 		);
 
+		if ($cursor = $more['cursor']){
+			$cmd[] = "CURSOR {$cursor}";
+		}
+
+		$cmd[] = "LIMIT {$more['per_page']}";
+
 		if (count($where)){
 			$cmd[] = implode(" ", $where);
 		}
+
+		$cmd[] = "POINTS";
 
 		$cmd = array_merge($cmd, array(
 			"POINT", $lat, $lon, $r
@@ -110,7 +124,8 @@
 
 	function whosonfirst_spatial_within($swlat, $swlon, $nelat, $nelon, $more=array()){
 
-		$defauts = array(
+		$defaults = array(
+			'per_page' => $GLOBALS['cfg']['pagination_per_page'],
 			'placetype_id' => null,			
 			'cursor' => null,
 		);
@@ -125,9 +140,13 @@
 			$cmd[] = "CURSOR {$cursor}";
 		}
 
+		$cmd[] = "LIMIT {$more['per_page']}";
+
 		if ($pt = $more['placetype_id']){
-			$cmd[] = "WHERE {$pt} ${pt}";
+			$cmd[] = "WHERE wof:placetype_id {$pt} ${pt}";
 		}
+
+		$cmd[] = "POINTS";
 
 		$cmd[] = "BOUNDS {$swlat} {$swlon} {$nelat} {$nelon}";
 
@@ -179,11 +198,11 @@
 		$cmds = array();
 		$rsps = array();
 
-		$count_objects = count($rsp['objects']);
+		$count_points = count($rsp['points']);
 
-		for ($i=0; $i < $count_objects; $i++){
+		for ($i=0; $i < $count_points; $i++){
 
-			$row = $rsp['objects'][$i];
+			$row = $rsp['points'][$i];
 			list($id, $ignore) = explode("#", $row['id']);
 
 			$key = "{$id}:name";
@@ -200,9 +219,8 @@
 			$rsps[] = $rsp2;
 		}
 
-		for ($i=0; $i < $count_objects; $i++){
-
-			$rsp['objects'][$i]['fields'][] = $rsps[$i]['object'];
+		for ($i=0; $i < $count_points; $i++){
+			$rsp['points'][$i]['fields'][] = $rsps[$i]['object'];
 		}
 	
 		$rsp['fields'] = $fields;
@@ -233,13 +251,13 @@
 		$cmds = array();
 		$rsps = array();
 
-		$count_objects = count($rsp['objects']);
+		$count_points = count($rsp['points']);
 
 		# first construct all the requests
 		
-		for ($i=0; $i < $count_objects; $i++){
+		for ($i=0; $i < $count_points; $i++){
 
-			$row = $rsp['objects'][$i];
+			$row = $rsp['points'][$i];
 			list($id, $ignore) = explode("#", $row['id']);
 
 			$key = "{$id}:meta";
@@ -260,13 +278,13 @@
 
 		# parse all the requests
 		
-		for ($i=0; $i < $count_objects; $i++){
+		for ($i=0; $i < $count_points; $i++){
 
 			# Note the lack of error checking...
 			$obj = json_decode($rsps[$i]['object'], "as hash");
 
 			foreach ($more['meta_fields'] as $f){
-				$rsp['objects'][$i]['fields'][] = $obj[$f];
+				$rsp['points'][$i]['fields'][] = $obj[$f];
 			}
 		}
 	
@@ -316,15 +334,17 @@
 		}
 
 		$results = array();
-		$cursor = null;			# PLEASE FIX ME
+		$cursor = $rsp['cursor'];
 		
 		$fields = $rsp['fields'];
 		$count_fields = count($fields);
 
-		foreach ($rsp['objects'] as $row){
+		foreach ($rsp['points'] as $row){
 
-			$geom = $row['object'];
-			$coords = $geom['coordinates'];
+			$pt = $row['point'];
+
+			# $geom = $row['object'];
+			# $coords = $geom['coordinates'];
 
 			$props = array();
 
@@ -351,8 +371,8 @@
 				'wof:parent_id' => $props['wof:parent_id'],
 				'wof:country' => $props['wof:country'],
 				'wof:repo' => $repo,
-				'geom:latitude' => $coords[1],
-				'geom:longitude' => $coords[0],
+				'geom:latitude' => $pt['lat'],
+				'geom:longitude' => $pt['lon'],
 			);
 		}
 

@@ -144,6 +144,8 @@
 			$more['cursor'] = $cursor;
 		}
 
+		api_utils_ensure_pagination_args($more);
+
 		$rsp = whosonfirst_spatial_nearby_latlon($lat, $lon, $r, $more);
 
 		if (! $rsp['ok']){
@@ -175,7 +177,7 @@
 
 			$swlat = request_float("min_latitude");
 
-			if (! $sw_lat){
+			if (! $swlat){
 				api_output_error(400, "Missing min_latitude");
 			}
 
@@ -193,7 +195,7 @@
 				api_output_error(400, "Invalid min_longitude");
 			}
 			
-			$swlat = request_float("max_latitude");
+			$nelat = request_float("max_latitude");
 
 			if (! $nelat){
 				api_output_error(400, "Missing max_latitude");
@@ -233,8 +235,10 @@
 		if ($placetype = request_str("placetype")){
 
 			api_whosonfirst_places_ensure_valid_placetype($placetype);
-			$more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
+			$more['placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
 		}
+
+		api_utils_ensure_pagination_args($more);
 
 		$rsp = whosonfirst_spatial_within($swlat, $swlon, $nelat, $nelon, $more);
 
