@@ -117,13 +117,13 @@
 
 		if ($r = request_int32("radius")){
 
-			if (($r < 0) || ($r > 100)){
+			if (($r < 0) || ($r > 500)){
 				api_output_error(400, "Invalid radius");
 			}
 		}
 
 		else {
-			$r = 100;
+			$r = 200;
 		}
 
 		# IMPORTANT - WE AREN'T DEALING WITH TILE38 PAGINATION AT ALL YET BECAUSE TILE38
@@ -288,7 +288,7 @@
 
 	########################################################################
 
-	function api_whosonfirst_places_ensure_valid_placetypr($pt){
+	function api_whosonfirst_places_ensure_valid_placetype($pt){
 
 		if (! whosonfirst_placetypes_is_valid_placetype($pt)){
 			api_output_error(400, "Invalid placetype");

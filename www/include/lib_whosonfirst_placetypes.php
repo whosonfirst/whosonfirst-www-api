@@ -33,7 +33,7 @@
 			$parents[] = $_parent['name'];
 		}
 
-		$names = (isarray($details['names'])) ? $details['names'] : array();
+		$names = (is_array($details['names'])) ? $details['names'] : array();
 		
 		$GLOBALS['whosonfirst_placetypes']['placetypes'][$name] = array(
 			'id' => $id,
