@@ -305,7 +305,7 @@
 
 	function api_whosonfirst_places_ensure_valid_cursor($cursor){
 
-		if (! preg_match("/^[a-fA-F\0-9]+$/", $cursor)){
+		if (! preg_match("/^[0-9]+$/", $cursor)){
 			api_output_error(400, "Invalid cursor");
 		}
 
