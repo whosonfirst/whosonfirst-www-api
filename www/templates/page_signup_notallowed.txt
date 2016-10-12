@@ -1,0 +1,9 @@
+{include file="inc_head.txt"}
+
+<div class="container">
+
+<p class="error">Hrm... You don't appear to have permission to create a new account.</p>
+
+</div>
+
+{include file="inc_foot.txt"}

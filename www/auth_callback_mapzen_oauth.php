@@ -21,7 +21,6 @@
 		exit();
 	}
 
-
 	if (! $GLOBALS['cfg']['enable_feature_signin']){
 		$GLOBALS['smarty']->display("page_signin_disabled.txt");
 		exit();
@@ -36,6 +35,7 @@
 	$rsp = mapzen_api_get_auth_token($code);
 
 	if (! $rsp['ok']){
+
 		$GLOBALS['error']['oauth_access_token'] = 1;
 		$GLOBALS['smarty']->display("page_auth_callback_mapzen_oauth.txt");
 		exit();
@@ -76,6 +76,7 @@
 	# an account (locally).
 
 	else if (! $GLOBALS['cfg']['enable_feature_signup']){
+
 		$GLOBALS['smarty']->display("page_signup_disabled.txt");
 		exit();
 	}
@@ -103,7 +104,8 @@
 
 		if ((features_is_enabled("mapzen_require_admin")) && (! $is_admin)){
 
-			$GLOBALS['smarty']->display("page_signin_disabled.txt");
+			error_log("[MAPZEN] '{$mapzen_data['nickname']}' is not admin");
+			$GLOBALS['smarty']->display("page_signin_notallowed.txt");
 			exit();
 		}
 
