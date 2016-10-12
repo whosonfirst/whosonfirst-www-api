@@ -40,6 +40,8 @@
 				$k = trim($k);
 
 				if (! isset($row[$k])){
+
+					$public[$k] = "";
 					continue;
 				}
 
