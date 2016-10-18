@@ -5,7 +5,8 @@
 	loadlib("api");
 	loadlib("api_spec");
 	loadlib("api_methods");
-
+	loadlib("api_oauth2_access_tokens");
+	
 	features_ensure_enabled(array(
 		"api",
 		"api_documentation",
