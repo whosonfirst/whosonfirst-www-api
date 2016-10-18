@@ -21,6 +21,35 @@
 
 	########################################################################
 
+	function whosonfirst_places_get_random($more=array()){
+
+		$seed = rand(0, time());
+
+		$empty = new stdClass;		# I hate you, PHP...
+
+		$query = array(
+			'function_score' => array(
+				'query' => array(
+					'match_all' => $empty
+				),
+				'functions' => array(
+					array('random_score' => array('seed' => $seed))
+				)
+			)
+		);
+
+		$req = array(
+			'query' => $query
+		);
+
+		$more['per_page'] = 1;
+
+		$rsp = elasticsearch_spelunker_search($req, $more);
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_places_search($q, $filters, $more=array()){
 
 		if ($q == ""){

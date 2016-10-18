@@ -176,6 +176,17 @@
 			),
 		),	
 
+		'whosonfirst.places.getRandom' => array(
+			"description" => "Return a random Who's On First record",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array(
+                               	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+			),
+		),
+
 		'whosonfirst.places.getWithin' => array(
 			"description" => "Lookup all the Who's On First records within a bounding box",
 			"documented" => 1,

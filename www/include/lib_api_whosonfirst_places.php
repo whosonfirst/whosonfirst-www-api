@@ -160,6 +160,32 @@
 
 	########################################################################
 
+	function api_whosonfirst_places_getRandom(){
+
+		$rsp = whosonfirst_places_get_random();
+
+		if (! $rsp['ok']){
+			api_output_error(500, "Failed to retrieve random Who's On First record");
+		}
+
+		$more = array();
+
+		if ($extras = request_str("extras")){
+			$more["extras"] = $extras;
+		}
+
+		$doc = $rsp['rows'][0];
+		$doc = api_whosonfirst_output_enpublicify_single($doc, $more);
+
+		$out = array(
+			'record' => $doc		     
+		);
+
+		api_output_ok($out);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_places_getWithin(){
 
 		$swlat = null;
