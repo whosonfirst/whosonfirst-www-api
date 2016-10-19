@@ -2,10 +2,6 @@
 
 	loadlib("tile38");
 
-	# Pending a proper refeed of the Tile38 data (20161011/thisisaaronland)
-
-	$GLOBALS['whosonfirst_spatial_properties_hack'] = 1;
-
 	########################################################################
 
 	function whosonfirst_spatial_index_feature(&$feature, $more=array()){
@@ -183,53 +179,6 @@
 	
 	########################################################################
 
-	# THIS IS DEPRECATED - WAITING ON A REFEED OF THE TILE38 DATA
-	# (20161011/thisisaaronland)
-
-	function whosonfirst_spatial_append_names(&$rsp, $more=array()){
-
-		$fields = $rsp['fields'];
-		$fields[] = "wof:name";
-
-		# What follows is written in a way that should make it easy to
-		# support a 'tile38_do_multi' command once it's been written
-		# (20160811/thisisaaronland)
-
-		$cmds = array();
-		$rsps = array();
-
-		$count_points = count($rsp['points']);
-
-		for ($i=0; $i < $count_points; $i++){
-
-			$row = $rsp['points'][$i];
-			list($id, $ignore) = explode("#", $row['id']);
-
-			$key = "{$id}:name";
-			$cmd = "GET __COLLECTION__ {$key}";
-
-			$cmds[] = $cmd;
-		}
-
-		foreach ($cmds as $cmd){
-
-			# Note the lack of error checking...
-			
-			$rsp2 = whosonfirst_spatial_do($cmd, $more);
-			$rsps[] = $rsp2;
-		}
-
-		for ($i=0; $i < $count_points; $i++){
-			$rsp['points'][$i]['fields'][] = $rsps[$i]['object'];
-		}
-	
-		$rsp['fields'] = $fields;
-
-		# pass-by-ref
-	}
-
-	########################################################################
-
 	function whosonfirst_spatial_append_meta(&$rsp, $more=array()){
 
 		$defaults = array(
@@ -260,7 +209,7 @@
 			$row = $rsp['points'][$i];
 			list($id, $ignore) = explode("#", $row['id']);
 
-			$key = "{$id}:meta";
+			$key = "{$id}#meta";
 			$cmd = "GET __COLLECTION__ {$key}";
 
 			$cmds[] = $cmd;
@@ -325,13 +274,7 @@
 		# that it's too soon so we're just going to do this for now...
 		# (20160811/thisisaaronland)
 
-		if ($GLOBALS['whosonfirst_spatial_properties_hack']){
-			whosonfirst_spatial_append_names($rsp);
-		}
-
-		else {
-			whosonfirst_spatial_append_meta($rsp);
-		}
+		whosonfirst_spatial_append_meta($rsp);
 
 		$results = array();
 		$cursor = $rsp['cursor'];
@@ -347,14 +290,6 @@
 			# $coords = $geom['coordinates'];
 
 			$props = array();
-
-			if ($GLOBALS['whosonfirst_spatial_properties_hack']){
-
-				$props = array(
-					'wof:parent_id' => -1,
-					'wof:country' => 'XN'
-				);
-			}
 
 			for ($i=0; $i < $count_fields; $i++){
 				$props[ $fields[$i] ] = $row['fields'][$i];
