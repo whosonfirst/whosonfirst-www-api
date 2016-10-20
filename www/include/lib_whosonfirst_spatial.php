@@ -153,8 +153,19 @@
 
 		$more = array_merge($defaults, $more);
 
+		# this does not seem to work as expected... specifically things that contain a bounding
+		# box are not returned... maybe becase we are checking POINTS rather than  OBJECTS...
+		# (20161020/thisisaaronland)
+
+		# INTERSECTS searches a collection for objects that intersect a specified bounding area.
+		# WITHIN and INTERSECTS have identical syntax. The only difference between the two is that
+		# WITHIN returns objects that are contained inside an area, and intersects returns objects
+		# that are contained or intersects an area.
+		# 
+		# http://tile38.com/commands/intersects/
+
 		$cmd = array(
-			"INTERSECTS __COLLECTION__",
+			"WITHIN __COLLECTION__",
 		);
 		
 		if ($cursor = $more['cursor']){
