@@ -346,7 +346,7 @@
 
 	$GLOBALS['cfg']['enable_feature_spatial'] = 1;
 	$GLOBALS['cfg']['enable_feature_spatial_nearby'] = 1;
-	$GLOBALS['cfg']['enable_feature_spatial_within'] = 1;
+	$GLOBALS['cfg']['enable_feature_spatial_within'] = 0;	# because this: https://github.com/tidwall/tile38/issues/70
 
 	$GLOBALS['cfg']['spatial_tile38_host'] = 'localhost';
 	$GLOBALS['cfg']['spatial_tile38_port'] = '9851';

@@ -155,6 +155,9 @@
 
 		# this does not seem to work as expected... specifically things that contain a bounding
 		# box are not returned... maybe becase we are checking POINTS rather than  OBJECTS...
+		# 
+		# https://github.com/tidwall/tile38/issues/70
+		# 
 		# (20161020/thisisaaronland)
 
 		# INTERSECTS searches a collection for objects that intersect a specified bounding area.

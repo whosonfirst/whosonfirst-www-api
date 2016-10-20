@@ -161,7 +161,7 @@
 		'whosonfirst.places.getNearby' => array(
 			"description" => "Lookup all the Who's On First records near a point",
 			"documented" => 1,
-			"enabled" => 1,
+			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_nearby'])),
 			"paginated" => 0,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
@@ -190,7 +190,7 @@
 		'whosonfirst.places.getWithin' => array(
 			"description" => "Lookup all the Who's On First records within a bounding box",
 			"documented" => 1,
-			"enabled" => 1,
+			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_within'])),
 			"paginated" => 0,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
