@@ -190,7 +190,7 @@
 		'whosonfirst.places.getWithin' => array(
 			"description" => "Lookup all the Who's On First records within a bounding box",
 			"documented" => 1,
-			"enabled" => 0,
+			"enabled" => 1,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(

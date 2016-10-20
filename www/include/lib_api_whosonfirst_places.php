@@ -85,7 +85,7 @@
 	function api_whosonfirst_places_getNearby(){
 
 		api_utils_features_ensure_enabled(array(
-			"spatial"
+			"spatial", "spatial_nearby"
 		));
 
 		$lat = null;
@@ -196,7 +196,7 @@
 	function api_whosonfirst_places_getWithin(){
 
 		api_utils_features_ensure_enabled(array(
-			"spatial"
+			"spatial", "spatial_within"
 		));
 
 		$swlat = null;

@@ -345,6 +345,9 @@
 	# START of wof spatial stuff
 
 	$GLOBALS['cfg']['enable_feature_spatial'] = 1;
+	$GLOBALS['cfg']['enable_feature_spatial_nearby'] = 1;
+	$GLOBALS['cfg']['enable_feature_spatial_within'] = 1;
+
 	$GLOBALS['cfg']['spatial_tile38_host'] = 'localhost';
 	$GLOBALS['cfg']['spatial_tile38_port'] = '9851';
 	$GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst';
