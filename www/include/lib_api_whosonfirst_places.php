@@ -154,6 +154,9 @@
 
 		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
 
+		# NOTE: WE HAVEN'T FIGURE OUT HOW TO GET EXTRAS YET BECAUSE THIS IS
+		# NOT ELASTICSEARCH... (20161020/thisisaaronland)
+
 		$out = array('results' => $results, 'cursor' => $cursor);
 		api_output_ok($out);
 	}

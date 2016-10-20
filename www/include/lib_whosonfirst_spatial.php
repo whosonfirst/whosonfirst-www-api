@@ -2,6 +2,31 @@
 
 	loadlib("tile38");
 
+	# A FEW IMPORTANT THINGS:
+	#
+	# 1. All of the requests here are using the Tile38 "POINTS" endpoint/hoohah. This
+	#    is so that we (read: PHP) can actually return data from Tile38 without timing
+	#    out. Go ahead, just try to return full geometries. I can wait 30 seconds...
+	#
+	# 2. The indexing logic is currently implemented in two places while the inflating
+	#    logic is currently implemented once. Indexing happens in this library and also
+	#    in the go-whosonfirst-tile38 package. Inflating happens in this library. It's
+	#    also still a moving target. Specifically: Which fields do we index with the 
+	#    geometry itself in Tile38 (these can only be numeric fields like wof:parent_id
+	#    or mz:is_current) and which fields do we store separately in a 'WOFID#meta'
+	#    entry in Tile38.
+	#
+	# 3. The entire practice of storing things in 'WOFID#meta' is open to debate since
+	#    from the perspective of this library we need to query ES anyway if we want to
+	#    support "?extras=foo,bar" (and we do). That said, the stuff in 'WOFID#meta' is
+	#    there to ensure we can always generate a "minimum viable WOF result" using only
+	#    Tile38 so maybe the practice just looks funny from this side of the fence but
+	#    is otherwise perfectly reasonable.
+	#
+  	# 4. More documentation (everywhere) please...
+	#
+	# (20161020/thisisaaronland)
+
 	########################################################################
 
 	function whosonfirst_spatial_index_feature(&$feature, $more=array()){
