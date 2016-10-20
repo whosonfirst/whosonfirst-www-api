@@ -23,7 +23,7 @@
 	#    Tile38 so maybe the practice just looks funny from this side of the fence but
 	#    is otherwise perfectly reasonable.
 	#
-  	# 4. More documentation (everywhere) please...
+	# 4. More documentation (everywhere) please...
 	#
 	# (20161020/thisisaaronland)
 
@@ -62,7 +62,7 @@
 			return $rsp;
 		}
 
-		$rsp2 = whosonfirst_spatial_assign_meta($props, $more);
+		$rsp2 = whosonfirst_spatial_index_meta($props, $more);
 
 		if (! $rsp2['ok']){
 			return $rsp2;
@@ -178,7 +178,7 @@
 
 	########################################################################
 
-	function whosonfirst_spatial_assign_meta(&$props, $more=array()){
+	function whosonfirst_spatial_index_meta(&$props, $more=array()){
 
 		$defaults = array(
 			'meta_fields' => array('wof:name', 'wof:country')
