@@ -84,6 +84,10 @@
 
 	function api_whosonfirst_places_getNearby(){
 
+		api_utils_features_ensure_enabled(array(
+			"spatial"
+		));
+
 		$lat = null;
 		$lon = null;
 
@@ -191,6 +195,10 @@
 
 	function api_whosonfirst_places_getWithin(){
 
+		api_utils_features_ensure_enabled(array(
+			"spatial"
+		));
+
 		$swlat = null;
 		$swlon = null;
 
@@ -276,6 +284,9 @@
 		}
 
 		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
+
+		# NOTE: WE HAVEN'T FIGURE OUT HOW TO GET EXTRAS YET BECAUSE THIS IS
+		# NOT ELASTICSEARCH... (20161020/thisisaaronland)
 
 		$out = array('results' => $results, 'cursor' => $cursor);
 		api_output_ok($out);
