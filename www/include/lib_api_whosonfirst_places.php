@@ -213,6 +213,7 @@
 		else {
 
 			$swlat = request_float("min_latitude");
+			$swlat = trim($swlat);
 
 			if (! $swlat){
 				api_output_error(400, "Missing min_latitude");
@@ -223,6 +224,7 @@
 			}
 
 			$swlon = request_float("min_longitude");
+			$swlon = trim($swlon);
 
 			if (! $swlon){
 				api_output_error(400, "Missing min_longitude");
@@ -233,6 +235,7 @@
 			}
 			
 			$nelat = request_float("max_latitude");
+			$nelat = trim($nelat);
 
 			if (! $nelat){
 				api_output_error(400, "Missing max_latitude");
@@ -243,6 +246,7 @@
 			}
 
 			$nelon = request_float("max_longitude");
+			$nelon = trim($nelon);
 
 			if (! $nelon){
 				api_output_error(400, "Missing max_longitude");

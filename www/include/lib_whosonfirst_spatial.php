@@ -164,8 +164,11 @@
 		# 
 		# http://tile38.com/commands/intersects/
 
+		# http://postgis.net/docs/ST_Intersects.html
+
 		$cmd = array(
-			"WITHIN __COLLECTION__",
+			# "WITHIN __COLLECTION__",
+			"INTERSECTS __COLLECTION__",
 		);
 		
 		if ($cursor = $more['cursor']){
