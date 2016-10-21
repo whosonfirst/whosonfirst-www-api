@@ -168,6 +168,10 @@
 			$more['placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
 		}
 
+		if ($extras = request_str("extras")){
+			$more["extras"] = $extras;
+		}
+
 		api_utils_ensure_pagination_args($more);
 
 		$rsp = whosonfirst_spatial_intersects($swlat, $swlon, $nelat, $nelon, $more);
@@ -178,8 +182,8 @@
 
 		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
 
-		# NOTE: WE HAVEN'T FIGURE OUT HOW TO GET EXTRAS YET BECAUSE THIS IS
-		# NOT ELASTICSEARCH... (20161020/thisisaaronland)
+		# HOW TO: signal that we need to fetch the ES row if we are doing extras?
+		api_whosonfirst_output_enpublicify($results, $more);
 
 		$out = array('results' => $results, 'cursor' => $cursor);
 		api_output_ok($out);
@@ -253,6 +257,10 @@
 			$more['cursor'] = $cursor;
 		}
 
+		if ($extras = request_str("extras")){
+			$more["extras"] = $extras;
+		}
+
 		api_utils_ensure_pagination_args($more);
 
 		$rsp = whosonfirst_spatial_nearby_latlon($lat, $lon, $r, $more);
@@ -263,8 +271,8 @@
 
 		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
 
-		# NOTE: WE HAVEN'T FIGURE OUT HOW TO GET EXTRAS YET BECAUSE THIS IS
-		# NOT ELASTICSEARCH... (20161020/thisisaaronland)
+		# HOW TO: signal that we need to fetch the ES row if we are doing extras?
+		api_whosonfirst_output_enpublicify($results, $more);
 
 		$out = array('results' => $results, 'cursor' => $cursor);
 		api_output_ok($out);

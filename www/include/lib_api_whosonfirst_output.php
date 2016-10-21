@@ -1,5 +1,7 @@
 <?php
 
+	loadlib("whosonfirst_uri");
+
 	########################################################################
 
 	function api_whosonfirst_output_enpublicify(&$rows, $more=array()){
@@ -32,24 +34,47 @@
 		);
 
 		if ($extras = $more["extras"]){
-
-			$extras = explode(",", $extras);
-
-			foreach ($extras as $k){
-
-				$k = trim($k);
-
-				if (! isset($row[$k])){
-
-					$public[$k] = "";
-					continue;
-				}
-
-				$public[$k] = $row[$k];
-			}
+			api_whosonfirst_output_add_extras($public, $row, $extras, $more);
 		}
 
 		return $public;
+	}
+
+	########################################################################
+
+	function api_whosonfirst_output_add_extras(&$out, &$raw, &$extras, $more=array()){
+
+		if (! is_array($extras)){
+			$extras = explode(",", $extras);
+		}
+
+		foreach ($extras as $k){
+
+			$k = trim($k);
+
+			if ($k == "wof:path"){
+
+				if (isset($raw[$k])){
+					$out[$k] = $raw[$k];
+				}
+
+				else {
+					$out[$k] = whosonfirst_uri_id2relpath($raw['wof:id']);
+				}
+
+				continue;
+			}
+
+			if (! isset($raw[$k])){
+
+				$out[$k] = "";
+				continue;
+			}
+
+			$out[$k] = $raw[$k];
+		}
+
+		# note the pass by ref
 	}
 
 	########################################################################
