@@ -143,7 +143,7 @@
 
 	########################################################################
 
-	function whosonfirst_spatial_within($swlat, $swlon, $nelat, $nelon, $more=array()){
+	function whosonfirst_spatial_intersects($swlat, $swlon, $nelat, $nelon, $more=array()){
 
 		$defaults = array(
 			'per_page' => $GLOBALS['cfg']['pagination_per_page'],
@@ -153,12 +153,8 @@
 
 		$more = array_merge($defaults, $more);
 
-		# this does not seem to work as expected... specifically things that contain a bounding
-		# box are not returned... maybe becase we are checking POINTS rather than  OBJECTS...
-		# 
+		# Basically make sure you are using Tile38 >= 1.5.2 because:
 		# https://github.com/tidwall/tile38/issues/70
-		# 
-		# (20161020/thisisaaronland)
 
 		# INTERSECTS searches a collection for objects that intersect a specified bounding area.
 		# WITHIN and INTERSECTS have identical syntax. The only difference between the two is that
@@ -167,10 +163,7 @@
 		# 
 		# http://tile38.com/commands/intersects/
 
-		# http://postgis.net/docs/ST_Intersects.html
-
 		$cmd = array(
-			# "WITHIN __COLLECTION__",
 			"INTERSECTS __COLLECTION__",
 		);
 		

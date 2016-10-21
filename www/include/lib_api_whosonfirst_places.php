@@ -82,6 +82,111 @@
 
 	########################################################################
 
+	function api_whosonfirst_places_getIntersects(){
+
+		api_utils_features_ensure_enabled(array(
+			"spatial", "spatial_intersects"
+		));
+
+		$swlat = null;
+		$swlon = null;
+
+		$nelat = null;
+		$nelon = null;
+
+		if ($wofid = request_int64("id")){
+		
+			api_output_error(400, "This has not been implemented yet");
+		}
+
+		else {
+
+			$swlat = request_float("min_latitude");
+			$swlat = trim($swlat);
+
+			if (! $swlat){
+				api_output_error(400, "Missing min_latitude");
+			}
+
+			if (! geo_utils_is_valid_latitude($swlat)){
+				api_output_error(400, "Invalid min_latitude");
+			}
+
+			$swlon = request_float("min_longitude");
+			$swlon = trim($swlon);
+
+			if (! $swlon){
+				api_output_error(400, "Missing min_longitude");
+			}
+
+			if (! geo_utils_is_valid_longitude($swlon)){
+				api_output_error(400, "Invalid min_longitude");
+			}
+			
+			$nelat = request_float("max_latitude");
+			$nelat = trim($nelat);
+
+			if (! $nelat){
+				api_output_error(400, "Missing max_latitude");
+			}
+
+			if (! geo_utils_is_valid_latitude($nelat)){
+				api_output_error(400, "Invalid max_latitude");
+			}
+
+			$nelon = request_float("max_longitude");
+			$nelon = trim($nelon);
+
+			if (! $nelon){
+				api_output_error(400, "Missing max_longitude");
+			}
+
+			if (! geo_utils_is_valid_longitude($nelon)){
+				api_output_error(400, "Invalid max_longitude");
+			}
+
+			if ($swlat > $nelat){
+				api_output_error(400, "Impossible min_latitude");
+			}
+
+			if ($swlon > $nelon){
+				api_output_error(400, "Impossible min_longitude");
+			}
+		}
+
+		$more = array();
+
+		if ($cursor = request_str("cursor")){
+
+			api_whosonfirst_places_ensure_valid_cursor($cursor);
+			$more['cursor'] = $cursor;
+		}
+
+		if ($placetype = request_str("placetype")){
+
+			api_whosonfirst_places_ensure_valid_placetype($placetype);
+			$more['placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
+		}
+
+		api_utils_ensure_pagination_args($more);
+
+		$rsp = whosonfirst_spatial_intersects($swlat, $swlon, $nelat, $nelon, $more);
+
+		if (! $rsp['ok']){
+			api_output_error(500, $rsp['error']);
+		}
+
+		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
+
+		# NOTE: WE HAVEN'T FIGURE OUT HOW TO GET EXTRAS YET BECAUSE THIS IS
+		# NOT ELASTICSEARCH... (20161020/thisisaaronland)
+
+		$out = array('results' => $results, 'cursor' => $cursor);
+		api_output_ok($out);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_places_getNearby(){
 
 		api_utils_features_ensure_enabled(array(
@@ -188,111 +293,6 @@
 			'record' => $doc		     
 		);
 
-		api_output_ok($out);
-	}
-
-	########################################################################
-
-	function api_whosonfirst_places_getWithin(){
-
-		api_utils_features_ensure_enabled(array(
-			"spatial", "spatial_within"
-		));
-
-		$swlat = null;
-		$swlon = null;
-
-		$nelat = null;
-		$nelon = null;
-
-		if ($wofid = request_int64("id")){
-		
-			api_output_error(400, "This has not been implemented yet");
-		}
-
-		else {
-
-			$swlat = request_float("min_latitude");
-			$swlat = trim($swlat);
-
-			if (! $swlat){
-				api_output_error(400, "Missing min_latitude");
-			}
-
-			if (! geo_utils_is_valid_latitude($swlat)){
-				api_output_error(400, "Invalid min_latitude");
-			}
-
-			$swlon = request_float("min_longitude");
-			$swlon = trim($swlon);
-
-			if (! $swlon){
-				api_output_error(400, "Missing min_longitude");
-			}
-
-			if (! geo_utils_is_valid_longitude($swlon)){
-				api_output_error(400, "Invalid min_longitude");
-			}
-			
-			$nelat = request_float("max_latitude");
-			$nelat = trim($nelat);
-
-			if (! $nelat){
-				api_output_error(400, "Missing max_latitude");
-			}
-
-			if (! geo_utils_is_valid_latitude($nelat)){
-				api_output_error(400, "Invalid max_latitude");
-			}
-
-			$nelon = request_float("max_longitude");
-			$nelon = trim($nelon);
-
-			if (! $nelon){
-				api_output_error(400, "Missing max_longitude");
-			}
-
-			if (! geo_utils_is_valid_longitude($nelon)){
-				api_output_error(400, "Invalid max_longitude");
-			}
-
-			if ($swlat > $nelat){
-				api_output_error(400, "Impossible min_latitude");
-			}
-
-			if ($swlon > $nelon){
-				api_output_error(400, "Impossible min_longitude");
-			}
-		}
-
-		$more = array();
-
-		if ($cursor = request_str("cursor")){
-
-			api_whosonfirst_places_ensure_valid_cursor($cursor);
-			$more['cursor'] = $cursor;
-		}
-
-		if ($placetype = request_str("placetype")){
-
-			api_whosonfirst_places_ensure_valid_placetype($placetype);
-			$more['placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
-		}
-
-		api_utils_ensure_pagination_args($more);
-
-		$rsp = whosonfirst_spatial_within($swlat, $swlon, $nelat, $nelon, $more);
-
-		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
-		}
-
-		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
-
-		# NOTE: WE HAVEN'T FIGURE OUT HOW TO GET EXTRAS YET BECAUSE THIS IS
-		# NOT ELASTICSEARCH... (20161020/thisisaaronland)
-
-		$out = array('results' => $results, 'cursor' => $cursor);
 		api_output_ok($out);
 	}
 	

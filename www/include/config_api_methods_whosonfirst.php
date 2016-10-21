@@ -158,6 +158,27 @@
 			), $GLOBALS['api_methods_whosonfirst']['filter_parameters'])
 		),
 
+		'whosonfirst.places.getIntersects' => array(
+			"description" => "Lookup all the Who's On First records intersecting a bounding box",
+			"documented" => 1,
+			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_intersects'])),
+			"paginated" => 0,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array(
+				array("name" => "min_latitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "min_longitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "max_latitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "max_longitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "placetype", "description" => "", "documented" => 1, "required" => 0),
+				array("name" => "cursor", "description" => "", "documented" => 1, "required" => 0),
+                               	# array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+			),
+			"notes" => array(
+				"Pagination is a cursor (because we can't have nice things).",
+				"Extras are not supported for this method yet."
+			),
+		),	
+
 		'whosonfirst.places.getNearby' => array(
 			"description" => "Lookup all the Who's On First records near a point",
 			"documented" => 1,
@@ -172,7 +193,8 @@
 				# array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			),
 			"notes" => array(
-				"Pagination for this method is not supported yet."
+				"Pagination for this method is not supported yet.",
+				"Extras are not supported for this method yet."
 			),
 		),	
 
@@ -186,26 +208,6 @@
                                	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			),
 		),
-
-		'whosonfirst.places.getWithin' => array(
-			"description" => "Lookup all the Who's On First records within a bounding box",
-			"documented" => 1,
-			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_within'])),
-			"paginated" => 0,
-			"library" => "api_whosonfirst_places",
-                        "parameters" => array(
-				array("name" => "min_latitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "min_longitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "max_latitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "max_longitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "placetype", "description" => "", "documented" => 1, "required" => 0),
-				array("name" => "cursor", "description" => "", "documented" => 1, "required" => 0),
-                               	# array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
-			),
-			"notes" => array(
-				"Pagination is a cursor (because we can't have nice things)"
-			),
-		),	
 
 		'whosonfirst.places.search' => array(
 			"description" => "Query for Who's On First records.",
