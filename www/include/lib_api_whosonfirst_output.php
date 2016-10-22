@@ -65,6 +65,25 @@
 				continue;
 			}
 
+			if ($k == "mz:uri"){
+
+				if (isset($raw['wof:path'])){
+					$path = $raw['wof:path'];
+				}
+
+				else {
+					$path = whosonfirst_uri_id2relpath($raw['wof:id']);
+				}
+
+				# Because it's our party so we can decide these things
+				# (20161021/thisisaaronland)
+
+				$uri = "https://whosonfirst.mapzen.com/data/" . $path;
+				$out['mz:uri'] = $uri;
+
+				continue;
+			}
+
 			if (! isset($raw[$k])){
 
 				$out[$k] = "";
