@@ -40,14 +40,13 @@
 
 		if ($concordance == "wof:concordances.wof:id"){
 
-			$rsp = whosonfirst_places_get_by_id($id);
+			$place = whosonfirst_places_get_by_id($id);
 
-			if (! $rsp['ok']){
-				return $rsp;
+			if (! $place){
+				return array('ok' => 0, 'error' => 'Invalid wof:id');
 			}
 
-			$doc = $rsp['rows'][0];
-			$concordances = $doc['wof:concordances'];
+			$concordances = $place['wof:concordances'];
 
 			$results = array();
 

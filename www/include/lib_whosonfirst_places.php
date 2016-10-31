@@ -18,6 +18,13 @@
 		);
 
 		$rsp = elasticsearch_spelunker_search($req, $more);
+
+		if (! $rsp['ok']){
+			return null;
+		}
+
+		return $rsp['rows'][0];
+
 		return $rsp;
 	}
 

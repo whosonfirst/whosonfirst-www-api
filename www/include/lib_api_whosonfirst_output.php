@@ -43,8 +43,10 @@
 
 			if ($more["is_tile38"]){
 
-				$rsp = whosonfirst_places_get_by_id($row['wof:id']);
-				$es_row = $rsp['rows'][0];
+				$es_row = whosonfirst_places_get_by_id($row['wof:id']);
+
+				# $rsp = whosonfirst_places_get_by_id($row['wof:id']);
+				# $es_row = $rsp['rows'][0];
 
 				$row = $es_row;
 			}

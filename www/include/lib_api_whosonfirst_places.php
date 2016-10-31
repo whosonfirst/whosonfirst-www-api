@@ -58,9 +58,9 @@
 			api_output_error(400, "Missing 'id' parameter");
 		}
 
-		$rsp = whosonfirst_places_get_by_id($id);
+		$place = whosonfirst_places_get_by_id($id);
 
-		if (! $rsp['ok']){
+		if (! $place){
 			api_output_error(500, "Failed to retrieve ID");
 		}
 
@@ -70,11 +70,10 @@
 			$more["extras"] = $extras;
 		}
 
-		$doc = $rsp['rows'][0];
-		$doc = api_whosonfirst_output_enpublicify_single($doc, $more);
+		$public = api_whosonfirst_output_enpublicify_single($place, $more);
 
 		$out = array(
-			'record' => $doc		     
+			'record' => $public 
 		);
 
 		api_output_ok($out);
