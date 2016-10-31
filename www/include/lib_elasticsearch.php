@@ -234,6 +234,10 @@
 		# dumper($url);
 		# dumper($query);
 
+		# the following requires a copy of lib_http >= this commit:
+		# https://github.com/whosonfirst/flamework/commit/1c552608169c3cebedbd333efe71a5928eaac60a
+		# (20161031/thisisaaronland)
+
 		$http_more = array(
 			'http_timeout' => $more['http_timeout'],
 			'body' => $query
