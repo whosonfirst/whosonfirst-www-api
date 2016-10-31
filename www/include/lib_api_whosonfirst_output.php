@@ -6,9 +6,55 @@
 
 	function api_whosonfirst_output_enpublicify(&$rows, $more=array()){
 
-		$count = count($rows);
+		$defaults = array(
+			"extras" => "",
+			"is_tile38" => 0,
+		);
 
-		# TO DO: https://github.com/whosonfirst/whosonfirst-www-api/issues/11
+		$more = array_merge($defaults, $more);
+
+		# because this: https://github.com/whosonfirst/whosonfirst-www-api/issues/11
+
+		if (($extras = $more["extras"]) && ($more["is_tile38"])){
+
+			if (! is_array($extras)){
+				$extras = explode(",", $extras);
+			}
+
+			$ids = array();
+
+			foreach ($rows as $row){
+				$ids[] = $row['wof:id'];
+			}
+
+			$fields = array_keys($rows[0]);
+			$has_extras = 0;
+
+			foreach ($extras as $f){
+
+				if (! in_array($f, $fields)){
+					$has_extras = 1;
+					$fields[] = $f;
+				}
+			}
+
+			if ($has_extras){
+
+				$es_more = array('fields' => $fields);
+
+				$rsp = whosonfirst_places_get_by_id_multi($ids, $es_more);
+
+				if (! $rsp['ok']){
+					return;
+				}
+
+				$rows = $rsp['rows'];
+			}
+		}
+
+		# okay, carry on...
+
+		$count = count($rows);
 
 		for ($i=0; $i < $count; $i++){
 
@@ -18,11 +64,14 @@
 
 	########################################################################
 
+	# Note: until necessary we have removed the is_tile38-and-fetch-from-es code
+	# from this function. It lives in api_whosonfirst_output_enpublicify for now
+	# (21061031/thisisaaronland)
+
 	function api_whosonfirst_output_enpublicify_single($row, $more=array()){
 
 		$defaults = array(
 			"extras" => "",
-			"is_tile38" => 0,
 		);
 
 		$more = array_merge($defaults, $more);
@@ -37,19 +86,6 @@
 		);
 
 		if ($extras = $more["extras"]){
-
-			# See above inre: issue #11 / translation: this should be happening further up the stack)
-			# (20161031/thisisaaronland)
-
-			if ($more["is_tile38"]){
-
-				$es_row = whosonfirst_places_get_by_id($row['wof:id']);
-
-				# $rsp = whosonfirst_places_get_by_id($row['wof:id']);
-				# $es_row = $rsp['rows'][0];
-
-				$row = $es_row;
-			}
 
 			api_whosonfirst_output_add_extras($public, $row, $extras, $more);
 		}

@@ -5,8 +5,6 @@
 
 	########################################################################
 
-	# TO DO: https://github.com/whosonfirst/whosonfirst-www-api/issues/12
-
 	function whosonfirst_places_get_by_id($id, $more=array()){
 
 		$query = array('ids' => array(
@@ -24,8 +22,13 @@
 		}
 
 		return $rsp['rows'][0];
+	}
 
-		return $rsp;
+	########################################################################
+
+	function whosonfirst_places_get_by_id_multi($ids, $more=array()){
+
+		return elasticsearch_spelunker_mget($ids, $more);
 	}
 
 	########################################################################

@@ -186,18 +186,36 @@
 		$defaults = array(
 			'host' => $GLOBALS['cfg']['elasticsearch_host'],
 			'port' => $GLOBALS['cfg']['elasticsearch_port'],
-			'search_type' => 'query_then_fetch',
 			'http_timeout' => $GLOBALS['cfg']['elasticsearch_http_timeout'],
-			'per_page' => $GLOBALS['cfg']['pagination_per_page'],
-			'page' => 1,
-			'index' => null,
-			'type' => null,
+			# 'per_page' => $GLOBALS['cfg']['pagination_per_page'],
+			# 'page' => 1,
+			# 'index' => null,
+			# 'type' => null,
+			'fields' => null,
 		);
 
 		$more = array_merge($defaults, $more);
 
-		$body = array( 'ids' => $ids );
-		$query = json_encode($body);
+		$query = array( 'ids' => $ids );
+
+		if ($fields = $more['fields']) {
+
+			$docs = array();
+
+			foreach ($ids as $id){
+
+				$docs[] = array(
+					'_id' => $id,
+					'_source' => $fields,
+				);
+			}
+
+			$query = array(
+				'docs' => $docs
+			);
+		}
+
+		$query = json_encode($query);
 
 		$url = implode(":", array($more['host'], $more['port']));
 
@@ -211,9 +229,7 @@
 
 		$url .= "/_mget";
 
-		$headers = array(
-			# "Content-Type" => "application/x-www-form-urlencoded",
-		);
+		$headers = array();
 
 		# dumper($url);
 		# dumper($query);
@@ -231,7 +247,7 @@
 
 		$end = microtime_ms();
 
-		$GLOBALS['timings']['es_mget_count']	+= 1;
+		$GLOBALS['timings']['es_mget_count'] += 1;
 		$GLOBALS['timings']['es_mget_time'] += $end-$start;
 
 		if (! $rsp['ok']){
