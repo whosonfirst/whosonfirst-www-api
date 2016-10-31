@@ -2,9 +2,13 @@
 
 	loadlib("http");
 
+	$GLOBALS['timing_keys']['es_queries'] = 'ElasticSearch Queries';
 	$GLOBALS['timings']['es_queries_count']	= 0;
 	$GLOBALS['timings']['es_queries_time']	= 0;
-	$GLOBALS['timing_keys']['es_queries'] = 'ElasticSearch Queries';
+
+	$GLOBALS['timing_keys']['es_mget'] = 'ElasticSearch Multi-GET requests';
+	$GLOBALS['timings']['es_mget_count']	= 0;
+	$GLOBALS['timings']['es_mget_time']	= 0;
 
 	########################################################################
 
@@ -43,12 +47,15 @@
 		$get_args = http_build_query($get_args);
 
 		$url = implode(":", array($more['host'], $more['port']));
-		if($more['index']) {
+
+		if ($more['index']){
 			$url .= "/{$more['index']}";
 		}
-		if($more['type']) {
+
+		if ($more['type']){
 			$url .= "/{$more['type']}";
 		}
+
 		$url .= "/_search?{$get_args}";
 
 		$body = json_encode($query);
@@ -172,6 +179,85 @@
 
 	########################################################################
 
+	# https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-multi-get.html
+
+	function elasticsearch_mget($ids, $more=array()){
+
+		$defaults = array(
+			'host' => $GLOBALS['cfg']['elasticsearch_host'],
+			'port' => $GLOBALS['cfg']['elasticsearch_port'],
+			'search_type' => 'query_then_fetch',
+			'http_timeout' => $GLOBALS['cfg']['elasticsearch_http_timeout'],
+			'per_page' => $GLOBALS['cfg']['pagination_per_page'],
+			'page' => 1,
+			'index' => null,
+			'type' => null,
+		);
+
+		$more = array_merge($defaults, $more);
+
+		$body = array( 'ids' => $ids );
+		$query = json_encode($body);
+
+		$url = implode(":", array($more['host'], $more['port']));
+
+		if ($more['index']){
+			$url .= "/{$more['index']}";
+		}
+
+		if ($more['type']){
+			$url .= "/{$more['type']}";
+		}
+
+		$url .= "/_mget";
+
+		$headers = array(
+			# "Content-Type" => "application/x-www-form-urlencoded",
+		);
+
+		# dumper($url);
+		# dumper($query);
+
+		$http_more = array(
+			'http_timeout' => $more['http_timeout'],
+			'body' => $query
+		);
+
+		$start = microtime_ms();
+
+		$rsp = http_get($url, $headers, $http_more);
+
+		# dumper($rsp);
+
+		$end = microtime_ms();
+
+		$GLOBALS['timings']['es_mget_count']	+= 1;
+		$GLOBALS['timings']['es_mget_time'] += $end-$start;
+
+		if (! $rsp['ok']){
+			return $rsp;
+		}
+
+		$data = json_decode($rsp['body'], 'as hash');
+
+		if (! $data){
+			return array('ok' => 0, 'error' => 'failed to decode JSON');
+		}
+
+		if ($data['error']){
+			return array('ok' => 0, 'error' => $data['error']);
+		}
+
+		$rows = elasticsearch_rowinate_mget_results($data);
+
+		return array(
+			'ok' => 1,
+			'rows' => $rows,
+		);
+	}
+
+	########################################################################
+
 	function elasticsearch_get_index_record($id, $more=array()) {
 
 		$defaults = array(
@@ -216,6 +302,19 @@
 		$rows = array();
 
 		foreach ($data['hits']['hits'] as $h){
+			$rows[] = $h['_source'];
+		}
+
+		return $rows;
+	}
+
+	########################################################################
+
+	function elasticsearch_rowinate_mget_results(&$data){
+
+		$rows = array();
+
+		foreach ($data['docs'] as $h){
 			$rows[] = $h['_source'];
 		}
 

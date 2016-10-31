@@ -35,6 +35,11 @@
 			return $ch;
 		}
 
+		if (isset($more['body'])){
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $more['body']);
+			curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+		}
+
 		return _http_request($ch, $url, $more);
 	}
 

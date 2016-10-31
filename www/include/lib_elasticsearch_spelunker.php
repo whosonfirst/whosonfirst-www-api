@@ -14,6 +14,16 @@
 
 	########################################################################
 
+	function elasticsearch_spelunker_mget($ids, $more=array()){
+
+		elasticsearch_spelunker_append_config($more);
+
+		$rsp = elasticsearch_mget($ids, $more);
+		return $rsp;
+	}
+
+	########################################################################
+
 	function elasticsearch_spelunker_append_config(&$more){
 
 		$defaults = array(
