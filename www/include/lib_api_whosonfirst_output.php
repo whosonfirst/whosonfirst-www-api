@@ -14,6 +14,7 @@
 		$more = array_merge($defaults, $more);
 
 		# because this: https://github.com/whosonfirst/whosonfirst-www-api/issues/11
+		# and this: https://github.com/whosonfirst/whosonfirst-www-api/issues/8
 
 		if (($extras = $more["extras"]) && ($more["is_tile38"])){
 
@@ -50,6 +51,10 @@
 				if (! $rsp['ok']){
 					return;
 				}
+
+				# remember: we are passing $rows by reference so the tile38 rows
+				# get clobbered here - we may live to regret that but today we don't
+				# (20161031/thisisaaronland)
 
 				$rows = $rsp['rows'];
 			}
