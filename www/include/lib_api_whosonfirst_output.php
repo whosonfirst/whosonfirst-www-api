@@ -21,14 +21,11 @@
 				$extras = explode(",", $extras);
 			}
 
-			$ids = array();
-
-			foreach ($rows as $row){
-				$ids[] = $row['wof:id'];
-			}
-
-			$fields = array_keys($rows[0]);
+			$fields = array_keys($rows[0]);		# don't forget to fetch the defaults
 			$has_extras = 0;
+
+			# just double check that there is actually something we need
+			# pull out of ES before we poke the network (20161031/thisisaaronland)
 
 			foreach ($extras as $f){
 
@@ -39,6 +36,12 @@
 			}
 
 			if ($has_extras){
+
+				$ids = array();
+
+				foreach ($rows as $row){
+					$ids[] = $row['wof:id'];
+				}
 
 				$es_more = array('fields' => $fields);
 
