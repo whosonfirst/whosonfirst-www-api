@@ -182,8 +182,7 @@
 
 		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
 
-		# HOW TO: signal that we need to fetch the ES row if we are doing extras?
-		# https://github.com/whosonfirst/whosonfirst-www-api/issues/8
+		$more['is_tile38'] = 1;	# because this: https://github.com/whosonfirst/whosonfirst-www-api/issues/8
 
 		api_whosonfirst_output_enpublicify($results, $more);
 
@@ -273,8 +272,7 @@
 
 		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
 
-		# HOW TO: signal that we need to fetch the ES row if we are doing extras?
-		# https://github.com/whosonfirst/whosonfirst-www-api/issues/8
+		$more['is_tile38'] = 1;	# because this: https://github.com/whosonfirst/whosonfirst-www-api/issues/8
 
 		api_whosonfirst_output_enpublicify($results, $more);
 

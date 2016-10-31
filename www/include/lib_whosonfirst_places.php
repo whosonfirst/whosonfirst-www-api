@@ -5,6 +5,8 @@
 
 	########################################################################
 
+	# TO DO: https://github.com/whosonfirst/whosonfirst-www-api/issues/12
+
 	function whosonfirst_places_get_by_id($id, $more=array()){
 
 		$query = array('ids' => array(

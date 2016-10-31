@@ -8,6 +8,8 @@
 
 		$count = count($rows);
 
+		# TO DO: https://github.com/whosonfirst/whosonfirst-www-api/issues/11
+
 		for ($i=0; $i < $count; $i++){
 
 			$rows[$i] = api_whosonfirst_output_enpublicify_single($rows[$i], $more);
@@ -19,7 +21,8 @@
 	function api_whosonfirst_output_enpublicify_single($row, $more=array()){
 
 		$defaults = array(
-			"extras" => ""
+			"extras" => "",
+			"is_tile38" => 0,
 		);
 
 		$more = array_merge($defaults, $more);
@@ -34,6 +37,18 @@
 		);
 
 		if ($extras = $more["extras"]){
+
+			# See above inre: issue #11 / translation: this should be happening further up the stack)
+			# (20161031/thisisaaronland)
+
+			if ($more["is_tile38"]){
+
+				$rsp = whosonfirst_places_get_by_id($row['wof:id']);
+				$es_row = $rsp['rows'][0];
+
+				$row = $es_row;
+			}
+
 			api_whosonfirst_output_add_extras($public, $row, $extras, $more);
 		}
 
