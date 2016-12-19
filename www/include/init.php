@@ -248,7 +248,7 @@
 		$scheme = "https";
 	}
 
-	if ($_SERVER['SERVER_PORT']) {
+	if (($_SERVER['SERVER_PORT']) && (! $GLOBALS['cfg']['server_ignore_port'])){
 		$server_port = null;
 
 		if ($_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443) {

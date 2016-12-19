@@ -52,6 +52,7 @@
 	$GLOBALS['cfg']['server_scheme'] = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https' : 'http';
 	$GLOBALS['cfg']['server_name'] = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'fake.com';
 	$GLOBALS['cfg']['server_force_https'] = 0;	# for example, when you're running a Flamework app on port 80 behind a proxy on port 443; it happens...
+	$GLOBALS['cfg']['server_ignore_port'] = 0;
 
 	$GLOBALS['cfg']['abs_root_url']		= "{$GLOBALS['cfg']['server_scheme']}://{$GLOBALS['cfg']['server_name']}/";
 	$GLOBALS['cfg']['safe_abs_root_url']	= $GLOBALS['cfg']['abs_root_url'];
