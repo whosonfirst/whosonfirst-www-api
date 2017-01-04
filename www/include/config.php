@@ -4,7 +4,7 @@
 	# Things you may want to change in a hurry
 
 	$GLOBALS['cfg']['site_name'] = 'Who\'s On First API';
-	$GLOBALS['cfg']['environment'] = 'dev';
+	$GLOBALS['cfg']['environment'] = 'prod';
 
 	$GLOBALS['cfg']['site_disabled'] = 0;
 	$GLOBALS['cfg']['site_disabled_retry_after'] = 0;	# seconds; if set will return HTTP Retry-After header
@@ -52,7 +52,6 @@
 	$GLOBALS['cfg']['server_scheme'] = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https' : 'http';
 	$GLOBALS['cfg']['server_name'] = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'fake.com';
 	$GLOBALS['cfg']['server_force_https'] = 0;	# for example, when you're running a Flamework app on port 80 behind a proxy on port 443; it happens...
-	$GLOBALS['cfg']['server_ignore_port'] = 0;
 
 	$GLOBALS['cfg']['abs_root_url']		= "{$GLOBALS['cfg']['server_scheme']}://{$GLOBALS['cfg']['server_name']}/";
 	$GLOBALS['cfg']['safe_abs_root_url']	= $GLOBALS['cfg']['abs_root_url'];
@@ -354,3 +353,36 @@
 	$GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst';
 
 	# END of wof spatial stuff
+
+	# START OF custom config stuff
+
+	$GLOBALS['cfg']['site_disabled'] = 0;
+	$GLOBALS['cfg']['server_force_https'] = 1;
+
+        # $GLOBALS['cfg']['enable_feature_signup'] = 0;
+	# $GLOBALS['cfg']['enable_feature_signin'] = 0;
+	# $GLOBALS['cfg']['enable_feature_persistent_login'] = 0;
+        # $GLOBALS['cfg']['enable_feature_api_site_keys'] = 0;
+        # $GLOBALS['cfg']['enable_feature_api_site_tokens'] = 0;
+
+        $GLOBALS['cfg']['db_main'] = array(
+                'host'  => 'whosonfirst-main-dev.chuawkltpek8.us-east-1.rds.amazonaws.com',
+                'name'  => 'main',			# database name
+                'user'  => 'whosonfirst_www',            # database username                                                                                                      
+                'auto_connect' => 0,
+        );
+
+        $GLOBALS['cfg']['db_accounts'] = array(
+                'host'  => 'whosonfirst-accounts-dev.chuawkltpek8.us-east-1.rds.amazonaws.com',
+                'name'  => 'accounts',			        # database name
+		'user'  => 'whosonfirst_www',                   # database username
+                'auto_connect' => 0,
+        );
+
+	$GLOBALS['cfg']['elasticsearch_spelunker_host'] = 'internal-whosonfirst-elasticsearch-dev-399376336.us-east-1.elb.amazonaws.com';
+	$GLOBALS['cfg']['elasticsearch_spelunker_index'] = 'spelunker';
+
+        $GLOBALS['cfg']['spatial_tile38_host'] = '192.168.27.141';
+        $GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst-geom';
+
+	# END OF custom config stuff
