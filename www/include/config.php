@@ -354,18 +354,9 @@
 
 	# END of wof spatial stuff
 
-	# START OF custom config stuff
+	# START OF pip stuff
 
-	$GLOBALS['cfg']['site_disabled'] = 0;
-	$GLOBALS['cfg']['server_force_https'] = 1;
-
-        # $GLOBALS['cfg']['enable_feature_signup'] = 0;
-	# $GLOBALS['cfg']['enable_feature_signin'] = 0;
-	# $GLOBALS['cfg']['enable_feature_persistent_login'] = 0;
-        # $GLOBALS['cfg']['enable_feature_api_site_keys'] = 0;
-        # $GLOBALS['cfg']['enable_feature_api_site_tokens'] = 0;
-
-	$GLOBALS['cfg']['enable_feature_pip'] = 0;
+	$GLOBALS['cfg']['enable_feature_pip'] = 1;
 	$GLOBALS['cfg']["whosonfirst_pip_endpoint"] = '';
 
-	# END OF custom config stuff
+	# END OF pip stuff
