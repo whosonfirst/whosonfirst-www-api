@@ -187,7 +187,7 @@
 
 	$config_files[] = $global_config;
 
-	$to_check = array($global_secrets, $local_config, $local_secrets, $dev_config, $dev_secrets);
+	$to_check = array($local_config, $dev_config, $global_secrets, $local_secrets, $dev_secrets);
 
 	foreach ($to_check as $path){
 
