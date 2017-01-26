@@ -137,7 +137,7 @@
 		'whosonfirst.places.getByLatLon' => array(
 			"description" => "Lookup Who's On First records for a latitude and longitude",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_spatial'],
+			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
 			"paginated" => 0,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
