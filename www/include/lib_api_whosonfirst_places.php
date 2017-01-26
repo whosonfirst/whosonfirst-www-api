@@ -57,9 +57,9 @@
 			"pip"
 		));
 
-		$lat = get_float("latitude");
-		$lon = get_float("longitude");
-		$pt = get_str("placetype");
+		$lat = request_float("latitude");
+		$lon = request_float("longitude");
+		$pt = request_str("placetype");
 
 		if (! $lat){
 			api_output_error(400, "Missing latitude");
@@ -88,13 +88,32 @@
 			$more["placetype"] = $pt;
 		}
 
-		$rsp = whosonfirst_pip_get_by_latlon($lat, lon, $more);
+		$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
 
 		if (! $rsp["ok"]){
 			api_output_error(500, $rsp["error"]);
 		}
 
-		$out = $rsp["rows"];
+		$more = array();
+
+		if ($extras = request_str("extras")){
+			$more["extras"] = $extras;
+		}
+
+		$results = array();
+
+		foreach ($rsp["rows"] as $pip_row){
+			
+			$row = whosonfirst_places_get_by_id($pip_row["Id"]);
+			$public = api_whosonfirst_output_enpublicify_single($row, $more);
+
+			$results[] = $public;
+		}
+
+		$out = array(
+			"results" => $results,
+		);
+
 		api_output_ok($out);
 	}
 

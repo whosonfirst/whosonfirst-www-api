@@ -23,9 +23,9 @@
 
 		 $query = http_build_query($query);
 
-		 $url = $GLOBALS["cfg"]["whosonfirst_pip_endpoint"] . "?{$query}"
+		 $url = $GLOBALS["cfg"]["whosonfirst_pip_endpoint"] . "?{$query}";
 
-		 $rsp = http_get($query);
+		 $rsp = http_get($url);
 
 		 if (! $rsp["ok"]){
 			 return $rsp;		    
