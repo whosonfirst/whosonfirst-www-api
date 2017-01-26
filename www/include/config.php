@@ -365,24 +365,7 @@
         # $GLOBALS['cfg']['enable_feature_api_site_keys'] = 0;
         # $GLOBALS['cfg']['enable_feature_api_site_tokens'] = 0;
 
-        $GLOBALS['cfg']['db_main'] = array(
-                'host'  => 'whosonfirst-main-dev.chuawkltpek8.us-east-1.rds.amazonaws.com',
-                'name'  => 'main',			# database name
-                'user'  => 'whosonfirst_www',            # database username                                                                                                      
-                'auto_connect' => 0,
-        );
-
-        $GLOBALS['cfg']['db_accounts'] = array(
-                'host'  => 'whosonfirst-accounts-dev.chuawkltpek8.us-east-1.rds.amazonaws.com',
-                'name'  => 'accounts',			        # database name
-		'user'  => 'whosonfirst_www',                   # database username
-                'auto_connect' => 0,
-        );
-
-	$GLOBALS['cfg']['elasticsearch_spelunker_host'] = 'internal-whosonfirst-elasticsearch-dev-399376336.us-east-1.elb.amazonaws.com';
-	$GLOBALS['cfg']['elasticsearch_spelunker_index'] = 'spelunker';
-
-        $GLOBALS['cfg']['spatial_tile38_host'] = '192.168.27.141';
-        $GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst-geom';
+	$GLOBALS['cfg']['enable_feature_pip'] = 0;
+	$GLOBALS['cfg']["whosonfirst_pip_endpoint"] = '';
 
 	# END OF custom config stuff

@@ -4,6 +4,7 @@
 	
 	loadlib("whosonfirst_places");
 	loadlib("whosonfirst_spatial");
+	loadlib("whosonfirst_pip");
 
 	loadlib("api_whosonfirst_output");
 	loadlib("api_whosonfirst_utils");
@@ -45,6 +46,55 @@
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
+		api_output_ok($out);
+	}
+
+	########################################################################
+
+	function api_whosonfirst_places_getByLatLon(){
+
+		api_utils_features_ensure_enabled(array(
+			"pip"
+		));
+
+		$lat = get_float("latitude");
+		$lon = get_float("longitude");
+		$pt = get_str("placetype");
+
+		if (! $lat){
+			api_output_error(400, "Missing latitude");
+		}
+
+		if (! $lon){
+			api_output_error(400, "Missing longitude");
+		}
+
+		if (! geo_utils_is_valid_latitude($lat)){
+			api_output_error(400, "Invalid latitude");
+		}
+
+		if (! geo_utils_is_valid_longitude($lon)){
+			api_output_error(400, "Invalid longitude");
+		}
+		
+		$more = array();
+		
+		if ($pt){
+
+			if (! whosonfirst_placetypes_is_valid_placetype($pt)){
+				api_output_error(400, "Invalid placetype");
+			}
+
+			$more["placetype"] = $pt;
+		}
+
+		$rsp = whosonfirst_pip_get_by_latlon($lat, lon, $more);
+
+		if (! $rsp["ok"]){
+			api_output_error(500, $rsp["error"]);
+		}
+
+		$out = $rsp["rows"];
 		api_output_ok($out);
 	}
 
@@ -323,6 +373,8 @@
 		$rsp = whosonfirst_places_get_descendants($wofid, $filters, $args);
 
 		if (! $rsp['ok']){
+			$details = print_r($rsp, true);
+			error_log($details);
 			api_output_error(500, $rsp['error']);
 		}
 

@@ -134,6 +134,19 @@
 			),
 		),
 
+		'whosonfirst.places.getByLatLon' => array(
+			"description" => "Lookup Who's On First records for a latitude and longitude",
+			"documented" => 0,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array(
+				array("name" => "latitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "longitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "placetype", "description" => "", "documented" => 1, "required" => 0),
+			),
+		),
+
 		'whosonfirst.places.getInfo' => array(
 			"description" => "Lookup a Who's On First record",
 			"documented" => 1,
