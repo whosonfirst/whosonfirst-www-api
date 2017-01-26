@@ -344,9 +344,9 @@
 
 	# START of wof spatial stuff
 
-	$GLOBALS['cfg']['enable_feature_spatial'] = 1;
-	$GLOBALS['cfg']['enable_feature_spatial_nearby'] = 1;
-	$GLOBALS['cfg']['enable_feature_spatial_intersects'] = 1;
+	$GLOBALS['cfg']['enable_feature_spatial'] = 0;
+	$GLOBALS['cfg']['enable_feature_spatial_nearby'] = 0;
+	$GLOBALS['cfg']['enable_feature_spatial_intersects'] = 0;
 
 	$GLOBALS['cfg']['spatial_tile38_host'] = 'localhost';
 	$GLOBALS['cfg']['spatial_tile38_port'] = '9851';
@@ -360,3 +360,11 @@
 	$GLOBALS['cfg']["whosonfirst_pip_endpoint"] = '';
 
 	# END OF pip stuff
+
+	# START OF machinetags/categories stuff
+
+	$GLOBALS['cfg']['enable_feature_machinetags'] = 0;
+	$GLOBALS['cfg']['enable_feature_categories'] = 0;
+
+	# END OF machinetags/categories stuff
+
