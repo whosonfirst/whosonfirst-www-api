@@ -6,12 +6,13 @@
 
 	function tile38_do($cmd, $more=array()){
 
-		# dumper($cmd);
-
 		$host = $more['host'];
 		$port = $more['port'];
 
 		$url = "http://{$host}:{$port}";
+
+		# dumper($url);
+		# dumper($cmd);
 
 		$headers = array();
 

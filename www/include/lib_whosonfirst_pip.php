@@ -33,7 +33,9 @@
 
 		 $data = json_decode($rsp["body"], "as hash");
 
-		 if (! $data){
+		 # because an empty array is "false" in php... (20170127/thisisaaronland)
+
+		 if ((! $data) && (! is_array($data))){
 		 	return array("ok" => 0, "error" => "Failed to parse response");			
 		 }
 
