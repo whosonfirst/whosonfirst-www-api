@@ -174,7 +174,7 @@
 
 		'whosonfirst.places.getIntersects' => array(
 			"description" => "Lookup all the Who's On First records intersecting a bounding box",
-			"documented" => 1,
+			"documented" => $GLOBALS['cfg']['enable_feature_spatial_api_docs'],
 			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_intersects'])),
 			"paginated" => 0,
 			"library" => "api_whosonfirst_places",
@@ -195,7 +195,7 @@
 
 		'whosonfirst.places.getNearby' => array(
 			"description" => "Lookup all the Who's On First records near a point",
-			"documented" => 1,
+			"documented" => $GLOBALS['cfg']['enable_feature_spatial_api_docs'],
 			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_nearby'])),
 			"paginated" => 0,
 			"library" => "api_whosonfirst_places",
