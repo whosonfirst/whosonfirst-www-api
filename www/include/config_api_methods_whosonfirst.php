@@ -1,25 +1,28 @@
 <?php
 
 	$GLOBALS['api_methods_whosonfirst'] = array(
+		'valid_extras' => array(
+			# please write me
+		),
 		'filter_parameters' => array(
-			array("name" => "name", "description" => "query for this value in the wof:name field", "documented" => 1, "required" => 0),
-				array("name" => "names", "description" => "query for this value across all name related fields", "documented" => 1, "required" => 0),
-				array("name" => "alt", "description" => "query for this value across all alternate name related fields (variant, colloquial, unknown)", "documented" => 1, "required" => 0),
-				array("name" => "preferred", "description" => "query for this value across all preferred name related fields", "documented" => 1, "required" => 0),
-				array("name" => "variant", "description" => "query for this value across all variant name related fields", "documented" => 1, "required" => 0),
-				array("name" => "placetype", "description" => "ensure records match this placetype", "documented" => 1, "required" => 0),
+			array("name" => "name", "description" => "Query for this value in the wof:name field", "documented" => 1, "required" => 0),
+				array("name" => "names", "description" => "Query for this value across all name related fields", "documented" => 1, "required" => 0),
+				array("name" => "alt", "description" => "Query for this value across all alternate name related fields (variant, colloquial, unknown)", "documented" => 1, "required" => 0),
+				array("name" => "preferred", "description" => "Query for this value across all preferred name related fields", "documented" => 1, "required" => 0),
+				array("name" => "variant", "description" => "Query for this value across all variant name related fields", "documented" => 1, "required" => 0),
+				array("name" => "placetype", "description" => "Ensure records match this placetype", "documented" => 1, "required" => 0),
 
-   				array("name" => "tags", "description" => "", "documented" => 1, "required" => 0),
-				# array("name" => "category", "description" => "", "documented" => 1, "required" => 0),
+   				array("name" => "tags", "description" => "Query for places with one or more of these tags", "documented" => 1, "required" => 0),
+				array("name" => "category", "description" => "Query for places with one or more of these categories", "documented" => $GLOBALS['cfg']['enable_feature_categories'], "required" => 0),
 
-				array("name" => "iso", "description" => "ensure records belong to this (ISO) country code", "documented" => 1, "required" => 0),
-				array("name" => "country_id", "description" => "ensure records belong to this country Who's On First ID", "documented" => 1, "required" => 0),
-				array("name" => "region_id", "description" => "ensure records belong to this region Who's On First ID", "documented" => 1, "required" => 0),
-				array("name" => "locality_id", "description" => "ensure records belong to this locality Who's On First ID", "documented" => 1, "required" => 0),
-				array("name" => "neighbourhood_id", "description" => "ensure records belong to this neighbourhood Who's On First ID", "documented" => 1, "required" => 0),
-				array("name" => "concordance", "description" => "query for records that have been concordified with this source", "documented" => 1, "required" => 0),
-				array("name" => "exclude", "description" => "exclude records matching these criteria", "documented" => 1, "required" => 0),
-				array("name" => "include", "description" => "include records matching these criteria", "documented" => 1, "required" => 0),
+				array("name" => "iso", "description" => "Ensure places belong to this (ISO) country code", "documented" => 1, "required" => 0),
+				array("name" => "country_id", "description" => "Ensure places belong to this country Who's On First ID", "documented" => 1, "required" => 0),
+				array("name" => "region_id", "description" => "Ensure places belong to this region Who's On First ID", "documented" => 1, "required" => 0),
+				array("name" => "locality_id", "description" => "Ensure places belong to this locality Who's On First ID", "documented" => 1, "required" => 0),
+				array("name" => "neighbourhood_id", "description" => "Ensure places belong to this neighbourhood Who's On First ID", "documented" => 1, "required" => 0),
+				array("name" => "concordance", "description" => "Query for places that have been concordified with this source", "documented" => 1, "required" => 0),
+				array("name" => "exclude", "description" => "Exclude places matching these criteria", "documented" => 1, "required" => 0),
+				array("name" => "include", "description" => "Include places matching these criteria", "documented" => 1, "required" => 0),
 		),
 	);
 
@@ -83,8 +86,8 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_concordances",
                         "parameters" => array(
-				array("name" => "id", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "source", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "id", "description" => "The ID of concordance you are looking for", "documented" => 1, "required" => 1),
+				array("name" => "source", "description" => "The source prefix of the concordance you are looking for", "documented" => 1, "required" => 1),
 			),
 		),
 
@@ -135,53 +138,54 @@
 		),
 
 		'whosonfirst.places.getByLatLon' => array(
-			"description" => "Lookup Who's On First records for a latitude and longitude",
+			"description" => "Lookup Who's On First places intersecting a latitude and longitude",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
 			"paginated" => 0,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "latitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "longitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "placetype", "description" => "", "documented" => 1, "required" => 0),
-                               	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+				array("name" => "latitude", "description" => "A valid latitude coordinate", "documented" => 1, "required" => 1),
+				array("name" => "longitude", "description" => "A valid longitude coordinate", "documented" => 1, "required" => 1),
+				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query to", "documented" => 1, "required" => 0),
+                               	array("name" => "extras", "description" => "A comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			),
 		),
 
 		'whosonfirst.places.getInfo' => array(
-			"description" => "Lookup a Who's On First record",
+			"description" => "Lookup a Who's On First record by ID",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "id", "description" => "", "documented" => 1, "required" => 1),
-                               	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+				array("name" => "id", "description" => "A valid Who's On First ID", "documented" => 1, "required" => 1),
+                               	array("name" => "extras", "description" => "A comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			),
 		),
 
 		'whosonfirst.places.getDescendants' => array(
-			"description" => "Lookup all the descendants Who's On First record",
+			"description" => "Lookup all the descendants for a Who's On First ID",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
-				array("name" => "id", "description" => "", "documented" => 1, "required" => 1),
-                               	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+				array("name" => "id", "description" => "A valid Who's On First ID", "documented" => 1, "required" => 1),
+                               	array("name" => "extras", "description" => "A comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			), $GLOBALS['api_methods_whosonfirst']['filter_parameters'])
 		),
 
 		'whosonfirst.places.getIntersects' => array(
-			"description" => "Lookup all the Who's On First records intersecting a bounding box",
+			"description" => "Lookup all the Who's On First places intersecting a bounding box",
 			"documented" => $GLOBALS['cfg']['enable_feature_spatial_api_docs'],
 			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_intersects'])),
 			"paginated" => 0,
+			# SOMETHING SOMETHING SOMETHING CURSORS...
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "min_latitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "min_longitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "max_latitude", "description" => "", "documented" => 1, "required" => 1),
+				array("name" => "min_latitude", "description" => "A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box", "documented" => 1, "required" => 1),
+				array("name" => "min_longitude", "description" => "A valid longitude coordinate, representing the left (Western) edge of the bounding box", "documented" => 1, "required" => 1),
+				array("name" => "max_latitude", "description" => "A valid latitude coordinate", "documented" => 1, "required" => 1),
 				array("name" => "max_longitude", "description" => "", "documented" => 1, "required" => 1),
 				array("name" => "placetype", "description" => "", "documented" => 1, "required" => 0),
 				array("name" => "cursor", "description" => "", "documented" => 1, "required" => 0),
