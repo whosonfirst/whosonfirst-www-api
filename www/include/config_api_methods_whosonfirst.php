@@ -5,24 +5,24 @@
 			# please write me
 		),
 		'filter_parameters' => array(
-			array("name" => "name", "description" => "Query for this value in the wof:name field", "documented" => 1, "required" => 0),
-				array("name" => "names", "description" => "Query for this value across all name related fields", "documented" => 1, "required" => 0),
-				array("name" => "alt", "description" => "Query for this value across all alternate name related fields (variant, colloquial, unknown)", "documented" => 1, "required" => 0),
-				array("name" => "preferred", "description" => "Query for this value across all preferred name related fields", "documented" => 1, "required" => 0),
-				array("name" => "variant", "description" => "Query for this value across all variant name related fields", "documented" => 1, "required" => 0),
-				array("name" => "placetype", "description" => "Ensure records match this placetype", "documented" => 1, "required" => 0),
+			array("name" => "name", "description" => "Query for this value in the wof:name field.", "documented" => 1, "required" => 0),
+				array("name" => "names", "description" => "Query for this value across all name related fields.", "documented" => 1, "required" => 0),
+				array("name" => "alt", "description" => "Query for this value across all alternate name related fields (variant, colloquial, unknown).", "documented" => 1, "required" => 0),
+				array("name" => "preferred", "description" => "Query for this value across all preferred name related fields.", "documented" => 1, "required" => 0),
+				array("name" => "variant", "description" => "Query for this value across all variant name related fields.", "documented" => 1, "required" => 0),
+				array("name" => "placetype", "description" => "Ensure records match this placetype.", "documented" => 1, "required" => 0),
 
-   				array("name" => "tags", "description" => "Query for places with one or more of these tags", "documented" => 1, "required" => 0),
-				array("name" => "category", "description" => "Query for places with one or more of these categories", "documented" => $GLOBALS['cfg']['enable_feature_categories'], "required" => 0),
+   				array("name" => "tags", "description" => "Query for places with one or more of these tags.", "documented" => 1, "required" => 0),
+				array("name" => "category", "description" => "Query for places with one or more of these categories.", "documented" => $GLOBALS['cfg']['enable_feature_categories'], "required" => 0),
 
-				array("name" => "iso", "description" => "Ensure places belong to this (ISO) country code", "documented" => 1, "required" => 0),
-				array("name" => "country_id", "description" => "Ensure places belong to this country Who's On First ID", "documented" => 1, "required" => 0),
-				array("name" => "region_id", "description" => "Ensure places belong to this region Who's On First ID", "documented" => 1, "required" => 0),
-				array("name" => "locality_id", "description" => "Ensure places belong to this locality Who's On First ID", "documented" => 1, "required" => 0),
-				array("name" => "neighbourhood_id", "description" => "Ensure places belong to this neighbourhood Who's On First ID", "documented" => 1, "required" => 0),
-				array("name" => "concordance", "description" => "Query for places that have been concordified with this source", "documented" => 1, "required" => 0),
-				array("name" => "exclude", "description" => "Exclude places matching these criteria", "documented" => 1, "required" => 0),
-				array("name" => "include", "description" => "Include places matching these criteria", "documented" => 1, "required" => 0),
+				array("name" => "iso", "description" => "Ensure places belong to this (ISO) country code.", "documented" => 1, "required" => 0),
+				array("name" => "country_id", "description" => "Ensure places belong to this country Who's On First ID.", "documented" => 1, "required" => 0),
+				array("name" => "region_id", "description" => "Ensure places belong to this region Who's On First ID.", "documented" => 1, "required" => 0),
+				array("name" => "locality_id", "description" => "Ensure places belong to this locality Who's On First ID.", "documented" => 1, "required" => 0),
+				array("name" => "neighbourhood_id", "description" => "Ensure places belong to this neighbourhood Who's On First ID.", "documented" => 1, "required" => 0),
+				array("name" => "concordance", "description" => "Query for places that have been concordified with this source.", "documented" => 1, "required" => 0),
+				array("name" => "exclude", "description" => "Exclude places matching these criteria.", "documented" => 1, "required" => 0),
+				array("name" => "include", "description" => "Include places matching these criteria.", "documented" => 1, "required" => 0),
 		),
 	);
 
@@ -31,41 +31,41 @@
 	$GLOBALS['cfg']['api']['methods'] = array_merge(array(
 
 		'whosonfirst.categories.getNamespaces' => array(
-			"description" => "Return the list of unique namespaces for all the categories in Who's On First",
+			"description" => "Return the list of unique namespaces for all the categories in Who's On First.",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_categories'],
 			"paginated" => 1,
 			"library" => "api_whosonfirst_categories",
                         "parameters" => array(
-				array("name" => "source", "description" => "Limit results to categories from this source", "documented" => 1, "required" => 0),
-				array("name" => "predicate", "description" => "Limit results to categories with this predicate", "documented" => 1, "required" => 0),
-				array("name" => "value", "description" => "Limit results to categories with this value", "documented" => 1, "required" => 0),
+				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0),
+				array("name" => "predicate", "description" => "Limit results to categories with this predicate.", "documented" => 1, "required" => 0),
+				array("name" => "value", "description" => "Limit results to categories with this value.", "documented" => 1, "required" => 0),
 			),
 		),
 
 		'whosonfirst.categories.getPredicates' => array(
-			"description" => "Return the list of unique predicates for all the the categories in Who's On First",
+			"description" => "Return the list of unique predicates for all the the categories in Who's On First.",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_categories'],
 			"paginated" => 1,
 			"library" => "api_whosonfirst_categories",
                         "parameters" => array(
-				array("name" => "source", "description" => "Limit results to categories from this source", "documented" => 1, "required" => 0),
-				array("name" => "namespace", "description" => "Limit results to categories with this namespace", "documented" => 1, "required" => 0),
-				array("name" => "value", "description" => "Limit results to categories with this value", "documented" => 1, "required" => 0),
+				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0),
+				array("name" => "namespace", "description" => "Limit results to categories with this namespace.", "documented" => 1, "required" => 0),
+				array("name" => "value", "description" => "Limit results to categories with this value.", "documented" => 1, "required" => 0),
 			),
 		),
 
 		'whosonfirst.categories.getValues' => array(
-			"description" => "Return the list of unique values for all the categories in Who's On First",
+			"description" => "Return the list of unique values for all the categories in Who's On First.",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_categories'],
 			"paginated" => 1,
 			"library" => "api_whosonfirst_categories",
                         "parameters" => array(
-				array("name" => "source", "description" => "Limit results to categories from this source", "documented" => 1, "required" => 0),
-				array("name" => "namespace", "description" => "Limit results to categories with this namespace", "documented" => 1, "required" => 0),
-				array("name" => "predicate", "description" => "Limit results to categories with this predicate", "documented" => 1, "required" => 0),
+				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0),
+				array("name" => "namespace", "description" => "Limit results to categories with this namespace.", "documented" => 1, "required" => 0),
+				array("name" => "predicate", "description" => "Limit results to categories with this predicate.", "documented" => 1, "required" => 0),
 			),
 		),
 
