@@ -235,6 +235,42 @@
                        	), $GLOBALS['api_methods_whosonfirst']['filter_parameters']),
 		),
 
+		'whosonfirst.placetypes.getInfo' => array(
+			"description" => "Return details for a Who's On First placetype.",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_placetypes",
+                        "parameters" => array(
+                               	array("name" => "id", "description" => "A valid Who's On First placetype ID.", "documented" => 1, "required" => 0),
+                               	array("name" => "name", "description" => "A valid Who's On First placetype name.", "documented" => 1, "required" => 0),
+			),
+			"notes" => array(
+				"Although the \"id\" and \"name\" parameters are each marked as optional, you need to pass at least one of them. The order of precedence is \"id\" followed by \"name\"."
+			),
+		),
+
+		'whosonfirst.placetypes.getList' => array(
+			"description" => "Return a list of Who's On First placetypes.",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_placetypes",
+                        "parameters" => array(
+                               	array("name" => "role", "description" => "Only return placetypes that are part of this role.", "documented" => 1, "required" => 0),
+			),
+		),
+
+		'whosonfirst.placetypes.getRoles' => array(
+			"description" => "Return a list of Who's On First placetype roles.",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_placetypes",
+                        "parameters" => array(
+			),
+		),
+
 		'whosonfirst.tags.getTags' => array(
 			"description" => "Return the list of unique tags n Who's On First.",
 			"documented" => 1,
