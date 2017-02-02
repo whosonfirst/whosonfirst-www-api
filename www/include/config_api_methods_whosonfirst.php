@@ -70,7 +70,7 @@
 		),
 
 		'whosonfirst.categories.getSources' => array(
-			"description" => "Return the list of sources for all the categories in Who's On First",
+			"description" => "Return the list of sources for all the categories in Who's On First.",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_categories'],
 			"paginated" => 0,
@@ -80,7 +80,7 @@
 		),
 
 		'whosonfirst.concordances.getById' => array(
-			"description" => "Lookup a Who's On First record (and all its concordances) by another source identifier",
+			"description" => "Lookup a Who's On First record (and all its concordances) by another source identifier.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
@@ -92,7 +92,7 @@
 		),
 
 		'whosonfirst.concordances.getSources' => array(
-			"description" => "List all the sources that Who's On First holds hands with",
+			"description" => "List all the sources that Who's On First holds hands with.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
@@ -102,14 +102,14 @@
 		),
 
 		'whosonfirst.machinetags.getNamespaces' => array(
-			"description" => "Return the list of unique namespaces for all the machinetags in Who's On First",
+			"description" => "Return the list of unique namespaces for all the machinetags in Who's On First.",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_machinetags'],
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
-				array("name" => "predicate", "description" => "Limit results to machinetags with this predicate", "documented" => 1, "required" => 0),
-				array("name" => "value", "description" => "Limit results to machinetags with this value", "documented" => 1, "required" => 0),
+				array("name" => "predicate", "description" => "Limit results to machinetags with this predicate.", "documented" => 1, "required" => 0),
+				array("name" => "value", "description" => "Limit results to machinetags with this value.", "documented" => 1, "required" => 0),
 			),
 		),
 
@@ -120,20 +120,20 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
-				array("name" => "namespace", "description" => "Limit results to machinetags with this namespace", "documented" => 1, "required" => 0),
-				array("name" => "value", "description" => "Limit results to machinetags with this value", "documented" => 1, "required" => 0),
+				array("name" => "namespace", "description" => "Limit results to machinetags with this namespace.", "documented" => 1, "required" => 0),
+				array("name" => "value", "description" => "Limit results to machinetags with this value.", "documented" => 1, "required" => 0),
 			),
 		),
 
 		'whosonfirst.machinetags.getValues' => array(
-			"description" => "Return the list of unique values for all the machinetags in Who's On First",
+			"description" => "Return the list of unique values for all the machinetags in Who's On First.",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_machinetags'],
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
-				array("name" => "namespace", "description" => "Limit results to machinetags with this namespace", "documented" => 1, "required" => 0),
-				array("name" => "predicate", "description" => "Limit results to machinetags with this predicate", "documented" => 1, "required" => 0),
+				array("name" => "namespace", "description" => "Limit results to machinetags with this namespace.", "documented" => 1, "required" => 0),
+				array("name" => "predicate", "description" => "Limit results to machinetags with this predicate.", "documented" => 1, "required" => 0),
 			),
 		),
 
@@ -142,88 +142,84 @@
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
 			"paginated" => 0,
+			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "latitude", "description" => "A valid latitude coordinate", "documented" => 1, "required" => 1),
-				array("name" => "longitude", "description" => "A valid longitude coordinate", "documented" => 1, "required" => 1),
-				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query to", "documented" => 1, "required" => 0),
-                               	array("name" => "extras", "description" => "A comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1),
+				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1),
+				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0),
 			),
 		),
 
 		'whosonfirst.places.getInfo' => array(
-			"description" => "Lookup a Who's On First record by ID",
+			"description" => "Lookup a Who's On First record by ID.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 0,
+			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "id", "description" => "A valid Who's On First ID", "documented" => 1, "required" => 1),
-                               	array("name" => "extras", "description" => "A comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+				array("name" => "id", "description" => "A valid Who's On First ID.", "documented" => 1, "required" => 1),
 			),
 		),
 
 		'whosonfirst.places.getDescendants' => array(
-			"description" => "Lookup all the descendants for a Who's On First ID",
+			"description" => "Lookup all the descendants for a Who's On First ID.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
+			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
 				array("name" => "id", "description" => "A valid Who's On First ID", "documented" => 1, "required" => 1),
-                               	array("name" => "extras", "description" => "A comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			), $GLOBALS['api_methods_whosonfirst']['filter_parameters'])
 		),
 
 		'whosonfirst.places.getIntersects' => array(
-			"description" => "Lookup all the Who's On First places intersecting a bounding box",
+			"description" => "Lookup all the Who's On First places intersecting a bounding box.",
 			"documented" => $GLOBALS['cfg']['enable_feature_spatial_api_docs'],
 			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_intersects'])),
-			"paginated" => 0,
-			# SOMETHING SOMETHING SOMETHING CURSORS...
+			"paginated" => 1,
+			"paginated_cursor" => 1,
+			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "min_latitude", "description" => "A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box", "documented" => 1, "required" => 1),
-				array("name" => "min_longitude", "description" => "A valid longitude coordinate, representing the left (Western) edge of the bounding box", "documented" => 1, "required" => 1),
-				array("name" => "max_latitude", "description" => "A valid latitude coordinate", "documented" => 1, "required" => 1),
-				array("name" => "max_longitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "placetype", "description" => "", "documented" => 1, "required" => 0),
-				array("name" => "cursor", "description" => "", "documented" => 1, "required" => 0),
-                               	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+				array("name" => "min_latitude", "description" => "A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box.", "documented" => 1, "required" => 1),
+				array("name" => "min_longitude", "description" => "A valid longitude coordinate, representing the left (Western) edge of the bounding box.", "documented" => 1, "required" => 1),
+				array("name" => "max_latitude", "description" => "A valid latitude coordinate, representing the top (Northern) edge of the bounding box.", "documented" => 1, "required" => 1),
+				array("name" => "max_longitude", "description" => "A valid longitude coordinate, representing the right (Eastern) edge of the bounding box.", "documented" => 1, "required" => 1),
+				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0),
 			),
 			"notes" => array(
-				"Pagination is a cursor (because we can't have nice things).",
-				"Extras are not fully supported for this method yet."
 			),
 		),	
 
 		'whosonfirst.places.getNearby' => array(
-			"description" => "Lookup all the Who's On First records near a point",
+			"description" => "Lookup all the Who's On First records near a point.",
 			"documented" => $GLOBALS['cfg']['enable_feature_spatial_api_docs'],
 			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_nearby'])),
-			"paginated" => 0,
+			"paginated" => 1,
+			"paginated_cursor" => 1,
+			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "latitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "longitude", "description" => "", "documented" => 1, "required" => 1),
-				array("name" => "placetype", "description" => "", "documented" => 1, "required" => 0),
-				array("name" => "cursor", "description" => "", "documented" => 1, "required" => 0),
-				array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1),
+				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1),
+				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0),
 			),
 			"notes" => array(
 				"Pagination for this method is not supported yet.",
-				"Extras are not fully supported for this method yet."
 			),
 		),	
 
 		'whosonfirst.places.getRandom' => array(
-			"description" => "Return a random Who's On First record",
+			"description" => "Return a random Who's On First record.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 0,
+			"extras" => 1,				    
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-                               	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
 			),
 		),
 
@@ -232,26 +228,26 @@
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
+			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
-                               	array("name" => "q", "description" => "query for this value across all fields", "documented" => 1, "required" => 0),
-                               	array("name" => "extras", "description" => "comma-separated list of additional fields to include in results", "documented" => 1, "required" => 0),
+                               	array("name" => "q", "description" => "Query for this value across all fields.", "documented" => 1, "required" => 0),
                        	), $GLOBALS['api_methods_whosonfirst']['filter_parameters']),
 		),
 
 		'whosonfirst.tags.getTags' => array(
-			"description" => "Return the list of unique tags n Who's On First",
+			"description" => "Return the list of unique tags n Who's On First.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_tags",
                         "parameters" => array(
-				array("name" => "source", "description" => "Limit results to categories from this source", "documented" => 1, "required" => 0),
+				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0),
 			),
 		),
 
 		'whosonfirst.tags.getSources' => array(
-			"description" => "Return the list of sources for all the tags in Who's On First",
+			"description" => "Return the list of sources for all the tags in Who's On First.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 0,

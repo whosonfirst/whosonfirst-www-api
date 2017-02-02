@@ -44,9 +44,17 @@
 {/foreach}
 {/if}
 
+{if $details.extras}
+<li><strong>extras</strong> &#8212; A comma-separated list of additional fields to include with each result</li>
+{/if}
+
 {if $details.paginated}
+{if $details.paginated_cursor}
+<li><strong>cursor</strong> &#8212; This method uses cursor-based pagination (because we can't have nice things) so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.</li>
+{else}
 <li><strong>page</strong> &#8212; The default is 1.</li>
 <li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.</li>
+{/if}
 {/if}
 
 </ul>
@@ -79,7 +87,7 @@
 <h3>Example request {if "api_explorer"|@features_is_enabled}<small style="display:inline !important;"> {if $details.requires_blessing} This method requires extra-special permissions so it's easiest just to image that it will work with the API explorer{else}&#8212; <a href="{$cfg.abs_root_url}methods/{$method|escape}/explore/" style="color:#FF5700">or take this API method for a spin</a>{/if}</small>{/if}</h3>
 
 {if $api_request_method=='GET' and ($cfg.api_auth_type!='oauth2' or $cfg.api_oauth2_allow_get_parameters)}
-<pre class="api-example-request">curl -X <strong>{$api_request_method|escape}</strong> '{$cfg.api_abs_root_url}<strong>{$cfg.api_endpoint}</strong>?method=<strong class="api-param-required">{$method|escape}</strong>{if $cfg.api_auth_type=='oauth2'}&access_token=<strong class="api-param-required">&lt;TOKEN&gt;</strong>{/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;</strong>{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}'</pre>
+<pre class="api-example-request">curl -X <strong>{$api_request_method|escape}</strong> '{$cfg.api_abs_root_url}<strong>{$cfg.api_endpoint}</strong>?method=<strong class="api-param-required">{$method|escape}</strong>{if $cfg.api_auth_type=='oauth2'}&access_token=<strong class="api-param-required">&lt;TOKEN&gt;</strong>{/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;</strong>{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'</pre>
 {else}
 <pre class="api-example-request">curl -X <strong>{$api_request_method|escape}</strong> {$cfg.api_abs_root_url}<strong>{$cfg.api_endpoint}</strong> -F "method=<strong class="api-param-required">{$method|escape}</strong>"{if $cfg.api_auth_type=='oauth2'} -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;</strong>" {/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented} -F "{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;</strong>"{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}</pre>
 {/if}
