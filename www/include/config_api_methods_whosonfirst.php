@@ -292,6 +292,41 @@
 			),
 		),
 
+		'whosonfirst.sources.getInfo' => array(
+			"description" => "Return details for a Who's On First source.",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_sources",
+                        "parameters" => array(
+                               	array("name" => "id", "description" => "A valid Who's On First source ID.", "documented" => 1, "required" => 0),
+                               	array("name" => "prefix", "description" => "A valid Who's On First source prefix.", "documented" => 1, "required" => 0),
+			),
+			"notes" => array(
+				"Although the \"id\" and \"prefix\" parameters are each marked as optional, you need to pass at least one of them. The order of precedence is \"id\" followed by \"prefix\"."
+			),
+		),
+
+		'whosonfirst.sources.getList' => array(
+			"description" => "Return the list of Who's On First sources.",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_sources",
+                        "parameters" => array(
+			),
+		),
+
+		'whosonfirst.sources.getPrefixes' => array(
+			"description" => "Return the list of prefixes for all Who's On First sources.",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_sources",
+                        "parameters" => array(
+			),
+		),
+
 	), $GLOBALS['cfg']['api']['methods']);
 
 	########################################################################
