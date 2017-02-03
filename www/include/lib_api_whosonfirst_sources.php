@@ -27,6 +27,7 @@
 		}
 
 		$source = $GLOBALS['whosonfirst_sources']['sources'][$prefix];
+		api_whosonfirst_sources_enpublicify_source($source);
 
 		$out = array("source" => $source);
 		api_output_ok($out);
@@ -38,8 +39,14 @@
 
 		ksort($GLOBALS['whosonfirst_sources']['sources']);
 
-		$sources = array_values($GLOBALS['whosonfirst_sources']['sources']);
+		$sources = array();
+
+		foreach ($GLOBALS['whosonfirst_sources']['sources'] as $ignore => $source){
  
+			api_whosonfirst_sources_enpublicify_source($source);
+			$sources[] = $source;
+ 		}
+
 		$out = array(
 			"sources" => $sources
 		);
@@ -60,6 +67,15 @@
 		);
 
 		api_output_ok($out);
+	}
+
+	########################################################################
+
+	function api_whosonfirst_sources_enpublicify_source(&$source){
+
+		ksort($source);
+
+		# pass-by-ref
 	}
 
 	########################################################################

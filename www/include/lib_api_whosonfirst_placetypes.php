@@ -87,6 +87,8 @@
 			$placetype["name"] = $name;
 		}
 
+		ksort($placetype);
+
 		# pass by ref
 	}
 
