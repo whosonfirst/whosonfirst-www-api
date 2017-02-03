@@ -1,5 +1,7 @@
 <?php
 
+	# this file was cloned from https://github.com/whosonfirst/flamework-whosonfirst/
+	
 	########################################################################
 
 	function whosonfirst_uri_id2relpath($id, $more=array()){

@@ -1,5 +1,9 @@
 <?php
 
+	# this file was cloned from https://github.com/whosonfirst/flamework-whosonfirst/
+	
+	########################################################################
+	
 	loadlib("whosonfirst_sources_spec");
 
 	########################################################################
