@@ -161,11 +161,18 @@
 			));
 		}
 
+		$sort = array(
+			array('wof:id' =>  array('mode' => 'max', 'order' => 'asc')),
+		);
+
 		$req = array(
-			'query' => $query
+			'query' => $query,
+			'sort' => $sort,
 		);
 
 		$rsp = elasticsearch_spelunker_search($req, $more);
+		# $rsp['query'] = $query;
+
 		return $rsp;
 	}
 

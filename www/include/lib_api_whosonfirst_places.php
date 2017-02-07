@@ -392,8 +392,8 @@
 		$rsp = whosonfirst_places_get_descendants($wofid, $filters, $args);
 
 		if (! $rsp['ok']){
-			$details = print_r($rsp, true);
-			error_log($details);
+			# $details = print_r($rsp, true);
+			# error_log($details);
 			api_output_error(500, $rsp['error']);
 		}
 
@@ -407,7 +407,8 @@
 		$pagination = $rsp['pagination'];
 
 		$out = array(
-			'results' => $rsp['rows']
+			'results' => $rsp['rows'],
+			# 'query' => $rsp['query'],
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
