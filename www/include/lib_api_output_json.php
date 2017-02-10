@@ -10,12 +10,19 @@
 
 	#################################################################
 
-	function api_output_error($code=999, $msg='', $more=array()){
+	function api_output_error($status=999, $msg='', $more=array()){
 
 		$more['is_error'] = 1;
 
+		$defaults = array(
+			'error_code' => $status,
+		);
+
+		$more = array_merge($defaults, $more);
+
 		$out = array('error' => array(
-			'code' => $code,
+			'status' => $status,
+			'code' => $more['error_code'],
 			'message' => $msg,
 		));
 
