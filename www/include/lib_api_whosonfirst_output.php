@@ -1,6 +1,7 @@
 <?php
 
 	loadlib("whosonfirst_uri");
+	loadlib("whosonfirst_sources");
 
 	########################################################################
 
@@ -113,45 +114,55 @@
 
 			$k = trim($k);
 
+			list($source, $ignore) = explode(":", $k, 2);
+
+			if (! whosonfirst_sources_is_valid_prefix($source)){
+				continue;
+			}
+
 			if ($k == "wof:path"){
 
-				if (isset($raw[$k])){
-					$out[$k] = $raw[$k];
-				}
-
-				else {
-					$out[$k] = whosonfirst_uri_id2relpath($raw['wof:id']);
-				}
-
-				continue;
+				api_whosonfirst_output_add_wof_path($out, $raw);
 			}
 
-			if ($k == "mz:uri"){
+			else if ($k == "mz:uri"){
 
-				if (isset($raw['wof:path'])){
-					$path = $raw['wof:path'];
-				}
-
-				else {
-					$path = whosonfirst_uri_id2relpath($raw['wof:id']);
-				}
-
-				# Because it's our party so we can decide these things
-				# (20161021/thisisaaronland)
-
-				$uri = "https://whosonfirst.mapzen.com/data/" . $path;
-				$out['mz:uri'] = $uri;
-
-				continue;
+				api_whosonfirst_output_add_mz_uri($out, $raw);
 			}
 
-			if (! isset($raw[$k])){
+			# remember, we 've established $source above in the main foreach loop
+
+			else if (preg_match("/^(?:.*)\:\*?$/", $k, $m)){
+
+				foreach ($raw as $raw_k => $v){
+
+					list($raw_prefix, $ignore) = explode(":", $raw_k, 2);
+
+					if ($raw_prefix == $source){
+						$out[$raw_k] = $v;
+					}
+				}
+
+				if ($source == "mz"){
+					api_whosonfirst_output_add_mz_uri($out, $raw);
+				}
+
+				else if ($source == "wof"){
+					api_whosonfirst_output_add_wof_path($out, $raw);
+				}
+
+				else {}
+			}
+
+			else if (! isset($raw[$k])){
 
 				$out[$k] = "";
-				continue;
 			}
 
-			$out[$k] = $raw[$k];
+			else {
+				$out[$k] = $raw[$k];
+			}
+
 		}
 
 		# note the pass by ref
@@ -159,4 +170,47 @@
 
 	########################################################################
 
+	# this is its own function so that we can return wof:path when extras=wof:path
+	# or extras=wof:
+
+	function api_whosonfirst_output_add_wof_path(&$out, &$raw){
+
+		$k = "wof:path";
+
+		if (isset($raw[$k])){
+			$out[$k] = $raw[$k];
+		}
+
+		else {
+			$out[$k] = whosonfirst_uri_id2relpath($raw['wof:id']);
+		}
+
+		# pass by ref
+	}
+
+	########################################################################
+
+	# this is its own function so that we can return mz:uri when extras=mz:uri
+	# or extras=mz:
+
+	function api_whosonfirst_output_add_mz_uri(&$out, &$raw){
+
+		if (isset($raw['wof:path'])){
+			$path = $raw['wof:path'];
+		}
+
+		else {
+			$path = whosonfirst_uri_id2relpath($raw['wof:id']);
+		}
+
+		# Because it's our party so we can decide these things
+		# (20161021/thisisaaronland)
+
+		$uri = "https://whosonfirst.mapzen.com/data/" . $path;
+		$out['mz:uri'] = $uri;
+
+		# pass by ref
+	}
+
+	########################################################################
 	# the end
