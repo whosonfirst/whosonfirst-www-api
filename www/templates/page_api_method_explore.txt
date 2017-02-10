@@ -12,7 +12,7 @@
 
 <h3>Parameters</h3>
 
-{if $details.parameters|@count or $details.paginated}
+{if $details.parameters|@count or $details.paginated or $details.extras}
 {foreach from=$details.parameters item="param"}
 {if $param.documented}
 
@@ -23,6 +23,15 @@
 
 {/if}
 {/foreach}
+
+{if $details.extras}
+
+<div class="form-group">
+<label for="page">Extras</label>
+<input type="text" name="extras" class="form-control" value="" placeholder="" />
+</div>
+
+{/if}
 
 {if $details.paginated}
 
