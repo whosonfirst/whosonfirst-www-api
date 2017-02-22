@@ -21,7 +21,7 @@
 {$param.name|escape} {if $param.required} <span class="text-danger">(required)</span>{/if}
 </label>
 <input type="text" name="{$param.name|escape}" class="form-control" placeholder="{$param.description|truncate:100:"..."|escape}" id="q-{$param.name|@escape}"/>
-{if $param.example}<div class="api-param-example"><span class="example" title="click to add {$param.example|@escape} to your query" data-q="{$param.name|@escape}">{$param.example|@escape}</span>{/if}
+{if $param.example}<div class="api-param-example"><span class="example" title="click to add {$param.example|@escape} to your query" data-q="{$param.name|@escape}">{$param.example|@escape}</span></div>{/if}
 </div>
 
 {/if}
@@ -236,7 +236,7 @@ $(document).ready(function(){
 			var html = htmlspecialchars(json);
 
 			$("#api-res").html(html);
-			
+
 			show_results();
 			show_caveat();
 		};
