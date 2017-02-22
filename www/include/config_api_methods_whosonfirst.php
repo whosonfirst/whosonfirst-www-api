@@ -1,9 +1,6 @@
 <?php
 
 	$GLOBALS['api_methods_whosonfirst'] = array(
-		'valid_extras' => array(
-			# please write me
-		),
 		'filter_parameters' => array(
 			array("name" => "name", "description" => "Query for this value in the wof:name field.", "documented" => 1, "required" => 0, "example" => "Gowanus Heights"),
 				array("name" => "names", "description" => "Query for this value across all name related fields.", "documented" => 1, "required" => 0, "example" => "SF"),

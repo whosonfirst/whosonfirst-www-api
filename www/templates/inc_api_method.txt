@@ -46,8 +46,8 @@
 {/foreach}
 {/if}
 
-{if $details.extras}
-<li><strong>extras</strong> &#8212; A comma-separated list of additional fields to include with each result</li>
+{if $cfg.api.extras.enabled and $details.extras}
+<li><strong>extras</strong> &#8212; {$cfg.api.extras.notes|@implode:" "|@escape}</li>
 {/if}
 
 {if $details.paginated}
