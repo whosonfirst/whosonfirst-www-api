@@ -17,8 +17,11 @@
 {if $param.documented}
 
 <div class="form-group">
-<label for="{$param.name|escape}" title="{$param.description|@escape}">{$param.name|escape} {if $param.required} <span class="text-danger">(required)</span>{/if}</label>
-<input type="text" name="{$param.name|escape}" class="form-control" placeholder="{$param.description|truncate:100:"..."|escape}" />
+<label for="{$param.name|escape}" title="{$param.description|@escape}">
+{$param.name|escape} {if $param.required} <span class="text-danger">(required)</span>{/if}
+</label>
+<input type="text" name="{$param.name|escape}" class="form-control" placeholder="{$param.description|truncate:100:"..."|escape}" id="q-{$param.name|@escape}"/>
+{if $param.example}<div class="api-param-example"><span class="example" title="click to add {$param.example|@escape} to your query" data-q="{$param.name|@escape}">{$param.example|@escape}</span>{/if}
 </div>
 
 {/if}
@@ -259,7 +262,23 @@ $(document).ready(function(){
 		return false;
 	});
 
+	// for pre-filling example params
 
+	var examples = document.getElementsByClassName("example");
+	var count = examples.length;
+
+	for (var i=0; i < count; i++){
+
+		var ex = examples[i];
+
+		ex.onclick = function(e){
+			var el = e.target;
+			var param = el.getAttribute("data-q");
+			var txt = el.innerText;
+			var input = document.getElementById("q-" + param);
+			input.value = txt;
+		};
+	}
 });
 
 {/literal}

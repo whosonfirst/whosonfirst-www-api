@@ -27,3 +27,14 @@ h2 .experimental {
 .experimental-verbose:before {
     content: "this method is ";
 }
+
+.api-param-example:before {
+    content: "for example: ";
+    font-weight:200;
+}
+
+.api-param-example {
+    text-align:right;
+    font-size: small !important;
+    font-weight:700;
+}

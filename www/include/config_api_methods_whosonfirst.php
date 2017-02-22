@@ -5,22 +5,22 @@
 			# please write me
 		),
 		'filter_parameters' => array(
-			array("name" => "name", "description" => "Query for this value in the wof:name field.", "documented" => 1, "required" => 0),
-				array("name" => "names", "description" => "Query for this value across all name related fields.", "documented" => 1, "required" => 0),
-				array("name" => "alt", "description" => "Query for this value across all alternate name related fields (variant, colloquial, unknown).", "documented" => 1, "required" => 0),
-				array("name" => "preferred", "description" => "Query for this value across all preferred name related fields.", "documented" => 1, "required" => 0),
-				array("name" => "variant", "description" => "Query for this value across all variant name related fields.", "documented" => 1, "required" => 0),
-				array("name" => "placetype", "description" => "Ensure records match this placetype.", "documented" => 1, "required" => 0),
+			array("name" => "name", "description" => "Query for this value in the wof:name field.", "documented" => 1, "required" => 0, "example" => "Gowanus Heights"),
+				array("name" => "names", "description" => "Query for this value across all name related fields.", "documented" => 1, "required" => 0, "example" => "SF"),
+				array("name" => "alt", "description" => "Query for this value across all alternate name related fields (variant, colloquial, unknown).", "documented" => 1, "required" => 0, "example" => "Paris"),
+				array("name" => "preferred", "description" => "Query for this value across all preferred name related fields.", "documented" => 1, "required" => 0, "example" => "বেইজিং"),
+				array("name" => "variant", "description" => "Query for this value across all variant name related fields.", "documented" => 1, "required" => 0, "example" => "💩"),
+				array("name" => "placetype", "description" => "Ensure records match this placetype.", "documented" => 1, "required" => 0, "exaple" => "microhood"),
 
-   				array("name" => "tags", "description" => "Query for places with one or more of these tags.", "documented" => 1, "required" => 0),
+   				array("name" => "tags", "description" => "Query for places with one or more of these tags.", "documented" => 1, "required" => 0, "example" => "diner"),
 				array("name" => "category", "description" => "Query for places with one or more of these categories.", "documented" => $GLOBALS['cfg']['enable_feature_categories'], "required" => 0),
 
-				array("name" => "iso", "description" => "Ensure places belong to this (ISO) country code.", "documented" => 1, "required" => 0),
-				array("name" => "country_id", "description" => "Ensure places belong to this country Who's On First ID.", "documented" => 1, "required" => 0),
-				array("name" => "region_id", "description" => "Ensure places belong to this region Who's On First ID.", "documented" => 1, "required" => 0),
-				array("name" => "locality_id", "description" => "Ensure places belong to this locality Who's On First ID.", "documented" => 1, "required" => 0),
+				array("name" => "iso", "description" => "Ensure places belong to this (ISO) country code.", "documented" => 1, "required" => 0, "example" => "CA"),
+				array("name" => "country_id", "description" => "Ensure places belong to this country Who's On First ID.", "documented" => 1, "required" => 0, "example" => "85633147"),
+				array("name" => "region_id", "description" => "Ensure places belong to this region Who's On First ID.", "documented" => 1, "required" => 0, "example" => "85669831"),
+				array("name" => "locality_id", "description" => "Ensure places belong to this locality Who's On First ID.", "documented" => 1, "required" => 0, "example" => "101736545"),
 				array("name" => "neighbourhood_id", "description" => "Ensure places belong to this neighbourhood Who's On First ID.", "documented" => 1, "required" => 0),
-				array("name" => "concordance", "description" => "Query for places that have been concordified with this source.", "documented" => 1, "required" => 0),
+				array("name" => "concordance", "description" => "Query for places that have been concordified with this source.", "documented" => 1, "required" => 0, "loc"),
 				array("name" => "exclude", "description" => "Exclude places matching these criteria.", "documented" => 1, "required" => 0),
 				array("name" => "include", "description" => "Include places matching these criteria.", "documented" => 1, "required" => 0),
 		),
@@ -231,7 +231,7 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
-                               	array("name" => "q", "description" => "Query for this value across all fields.", "documented" => 1, "required" => 0),
+                               	array("name" => "q", "description" => "Query for this value across all fields.", "documented" => 1, "required" => 0, "example" => "poutine"),
                        	), $GLOBALS['api_methods_whosonfirst']['filter_parameters']),
 		),
 
