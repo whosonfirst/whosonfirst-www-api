@@ -24,17 +24,65 @@
 			$args['per_page'] = $GLOBALS['cfg']['api_per_page_max'];
 		}
 
+		if ($cursor = request_str("cursor")){
+			$args['cursor'] = $cursor;
+		}
+
 		# note the pass by ref
 	}
 
 	##############################################################################
 
 	function api_utils_ensure_pagination_results(&$out, &$pagination){
+		 
+		$method = request_str("method");
+		$method_row = $GLOBALS['cfg']['api']['methods'][$method];
 
-		$out['total'] = $pagination['total_count'];
-		$out['page'] = $pagination['page'];
-		$out['per_page'] = $pagination['per_page'];
-		$out['pages'] = $pagination['page_count'];
+		$query = array(
+			"method" => $method,
+		);
+
+		foreach ($method_row["parameters"] as $p){
+			$k = $p["name"];
+			$v = request_str($k);
+			$query[$k] = $v;
+		}
+
+		if (isset($pagination['cursor'])){
+
+			$cursor = $pagination['cursor'];
+
+			if ($cursor == 0){
+				$cursor = null;
+			}
+
+			$out['cursor'] = $cursor;
+
+			if ($cursor){
+
+				if (isset($query["cursor"])){
+					unset($query["cursor"]);
+				}
+
+				$query["cursor"] = $cursor;
+				$out['next'] = http_build_query($query);
+			}
+
+		}
+
+		else {
+
+			$out['total'] = $pagination['total_count'];
+			$out['page'] = $pagination['page'];
+			$out['per_page'] = $pagination['per_page'];
+			$out['pages'] = $pagination['page_count'];
+
+			if (($out['page'] + 1) < $out['page_count']){
+
+				$query['page'] = $out['page'] + 1;
+				$out['next'] = http_build_query($query);
+			}
+		}
 
 		# note the pass by ref
 	}

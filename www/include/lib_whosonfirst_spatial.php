@@ -301,6 +301,8 @@
 
 	function whosonfirst_spatial_inflate_results($rsp){
 
+		$cursor = $rsp['cursor'];
+
 		# See this? It takes ~ 20-40 µs to fetch each name individually.
 		# Which isn't very much even when added up. There are two considerations
 		# here: 1) It's useful just to be able to append the name from the 
@@ -312,7 +314,6 @@
 		whosonfirst_spatial_append_meta($rsp);
 
 		$results = array();
-		$cursor = $rsp['cursor'];
 		
 		$fields = $rsp['fields'];
 		$count_fields = count($fields);
