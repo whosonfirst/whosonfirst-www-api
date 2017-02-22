@@ -45,16 +45,21 @@
 <input type="text" name="cursor" class="form-control" value="" placeholder="This method uses cursor-based pagination so this argument is the pointer returned by the last API response." />
 </div>
 
+<div class="form-group">
+<label for="per_page">per page</label>
+<input type="text" name="per_page" class="form-control" value="100" />
+</div>
+
 {else}
 
 <div class="form-group">
-<label for="page">Page</label>
+<label for="page">page</label>
 <input type="text" name="page" class="form-control" value="1" />
 </div>
 
 <div class="form-group">
-<label for="per_page">Per page</label>
-<input type="text" name="per_page" class="form-control" value="100" />
+<label for="per_page">per page</label>
+<input type="text" name="per_page" class="form-control" value="{$cfg.api_per_page_max|escape}" />
 </div>
 
 {/if}

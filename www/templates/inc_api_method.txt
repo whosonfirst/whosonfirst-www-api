@@ -53,6 +53,7 @@
 {if $details.paginated}
 {if $details.paginated_cursor}
 <li><strong>cursor</strong> &#8212; This method uses cursor-based pagination (because we can't have nice things) so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.</li>
+<li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.</li>
 {else}
 <li><strong>page</strong> &#8212; The default is 1.</li>
 <li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.</li>
