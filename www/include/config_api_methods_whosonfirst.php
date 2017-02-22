@@ -10,7 +10,7 @@
 				array("name" => "alt", "description" => "Query for this value across all alternate name related fields (variant, colloquial, unknown).", "documented" => 1, "required" => 0, "example" => "Paris"),
 				array("name" => "preferred", "description" => "Query for this value across all preferred name related fields.", "documented" => 1, "required" => 0, "example" => "বেইজিং"),
 				array("name" => "variant", "description" => "Query for this value across all variant name related fields.", "documented" => 1, "required" => 0, "example" => "💩"),
-				array("name" => "placetype", "description" => "Ensure records match this placetype.", "documented" => 1, "required" => 0, "exaple" => "microhood"),
+				array("name" => "placetype", "description" => "Ensure records match this placetype.", "documented" => 1, "required" => 0, "example" => "microhood"),
 
    				array("name" => "tags", "description" => "Query for places with one or more of these tags.", "documented" => 1, "required" => 0, "example" => "diner"),
 				array("name" => "category", "description" => "Query for places with one or more of these categories.", "documented" => $GLOBALS['cfg']['enable_feature_categories'], "required" => 0),
@@ -19,10 +19,10 @@
 				array("name" => "country_id", "description" => "Ensure places belong to this country Who's On First ID.", "documented" => 1, "required" => 0, "example" => "85633147"),
 				array("name" => "region_id", "description" => "Ensure places belong to this region Who's On First ID.", "documented" => 1, "required" => 0, "example" => "85669831"),
 				array("name" => "locality_id", "description" => "Ensure places belong to this locality Who's On First ID.", "documented" => 1, "required" => 0, "example" => "101736545"),
-				array("name" => "neighbourhood_id", "description" => "Ensure places belong to this neighbourhood Who's On First ID.", "documented" => 1, "required" => 0),
-				array("name" => "concordance", "description" => "Query for places that have been concordified with this source.", "documented" => 1, "required" => 0, "loc"),
-				array("name" => "exclude", "description" => "Exclude places matching these criteria.", "documented" => 1, "required" => 0),
-				array("name" => "include", "description" => "Include places matching these criteria.", "documented" => 1, "required" => 0),
+				array("name" => "neighbourhood_id", "description" => "Ensure places belong to this neighbourhood Who's On First ID.", "documented" => 1, "required" => 0, "example" => "102112179"),
+				array("name" => "concordance", "description" => "Query for places that have been concordified with this source.", "documented" => 1, "required" => 0, "example" => "loc:id"),
+				array("name" => "exclude", "description" => "Exclude places matching these criteria.", "documented" => 1, "required" => 0, "example" => "nullisland"),
+				array("name" => "include", "description" => "Include places matching these criteria.", "documented" => 1, "required" => 0, "example" => "deprecated"),
 		),
 	);
 
@@ -37,9 +37,9 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_categories",
                         "parameters" => array(
-				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0),
-				array("name" => "predicate", "description" => "Limit results to categories with this predicate.", "documented" => 1, "required" => 0),
-				array("name" => "value", "description" => "Limit results to categories with this value.", "documented" => 1, "required" => 0),
+				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0, "x-example" => ""),
+				array("name" => "predicate", "description" => "Limit results to categories with this predicate.", "documented" => 1, "required" => 0, "x-example" => ""),
+				array("name" => "value", "description" => "Limit results to categories with this value.", "documented" => 1, "required" => 0, "x-example" => ""),
 			),
 		),
 
@@ -50,9 +50,9 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_categories",
                         "parameters" => array(
-				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0),
-				array("name" => "namespace", "description" => "Limit results to categories with this namespace.", "documented" => 1, "required" => 0),
-				array("name" => "value", "description" => "Limit results to categories with this value.", "documented" => 1, "required" => 0),
+				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0, "x-example" => ""),
+				array("name" => "namespace", "description" => "Limit results to categories with this namespace.", "documented" => 1, "required" => 0, "x-example" => ""),
+				array("name" => "value", "description" => "Limit results to categories with this value.", "documented" => 1, "required" => 0, "x-example" => ""),
 			),
 		),
 
@@ -63,9 +63,9 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_categories",
                         "parameters" => array(
-				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0),
-				array("name" => "namespace", "description" => "Limit results to categories with this namespace.", "documented" => 1, "required" => 0),
-				array("name" => "predicate", "description" => "Limit results to categories with this predicate.", "documented" => 1, "required" => 0),
+				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0, "x-example" => ""),
+				array("name" => "namespace", "description" => "Limit results to categories with this namespace.", "documented" => 1, "required" => 0, "x-example" => ""),
+				array("name" => "predicate", "description" => "Limit results to categories with this predicate.", "documented" => 1, "required" => 0, "x-example" => ""),
 			),
 		),
 
@@ -86,8 +86,8 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_concordances",
                         "parameters" => array(
-				array("name" => "id", "description" => "The ID of concordance you are looking for", "documented" => 1, "required" => 1),
-				array("name" => "source", "description" => "The source prefix of the concordance you are looking for", "documented" => 1, "required" => 1),
+				array("name" => "id", "description" => "The ID of concordance you are looking for", "documented" => 1, "required" => 1, "example" => "3534"),
+				array("name" => "source", "description" => "The source prefix of the concordance you are looking for", "documented" => 1, "required" => 1, "example" => "gp"),
 			),
 		),
 
@@ -108,8 +108,8 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
-				array("name" => "predicate", "description" => "Limit results to machinetags with this predicate.", "documented" => 1, "required" => 0),
-				array("name" => "value", "description" => "Limit results to machinetags with this value.", "documented" => 1, "required" => 0),
+				array("name" => "predicate", "description" => "Limit results to machinetags with this predicate.", "documented" => 1, "required" => 0, "x-example" => ""),
+				array("name" => "value", "description" => "Limit results to machinetags with this value.", "documented" => 1, "required" => 0, "x-example" => ""),
 			),
 		),
 
@@ -120,8 +120,8 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
-				array("name" => "namespace", "description" => "Limit results to machinetags with this namespace.", "documented" => 1, "required" => 0),
-				array("name" => "value", "description" => "Limit results to machinetags with this value.", "documented" => 1, "required" => 0),
+				array("name" => "namespace", "description" => "Limit results to machinetags with this namespace.", "documented" => 1, "required" => 0, "x-example" => ""),
+				array("name" => "value", "description" => "Limit results to machinetags with this value.", "documented" => 1, "required" => 0, "x-example" => ""),
 			),
 		),
 
@@ -132,8 +132,8 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
-				array("name" => "namespace", "description" => "Limit results to machinetags with this namespace.", "documented" => 1, "required" => 0),
-				array("name" => "predicate", "description" => "Limit results to machinetags with this predicate.", "documented" => 1, "required" => 0),
+				array("name" => "namespace", "description" => "Limit results to machinetags with this namespace.", "documented" => 1, "required" => 0, "x-example" => ""),
+				array("name" => "predicate", "description" => "Limit results to machinetags with this predicate.", "documented" => 1, "required" => 0, "x-example" => ""),
 			),
 		),
 
@@ -145,9 +145,9 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1),
-				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1),
-				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0),
+				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.766633"),
+				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.417693"),
+				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0, "example" => "neighbourhood"),
 			),
 		),
 
@@ -159,7 +159,7 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "id", "description" => "A valid Who's On First ID.", "documented" => 1, "required" => 1),
+				array("name" => "id", "description" => "A valid Who's On First ID.", "documented" => 1, "required" => 1, "example" => "420561633"),
 			),
 		),
 
@@ -171,7 +171,7 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
-				array("name" => "id", "description" => "A valid Who's On First ID", "documented" => 1, "required" => 1),
+				array("name" => "id", "description" => "A valid Who's On First ID", "documented" => 1, "required" => 1, "example" => "420780703"),
 			), $GLOBALS['api_methods_whosonfirst']['filter_parameters'])
 		),
 
@@ -184,11 +184,11 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "min_latitude", "description" => "A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box.", "documented" => 1, "required" => 1),
-				array("name" => "min_longitude", "description" => "A valid longitude coordinate, representing the left (Western) edge of the bounding box.", "documented" => 1, "required" => 1),
-				array("name" => "max_latitude", "description" => "A valid latitude coordinate, representing the top (Northern) edge of the bounding box.", "documented" => 1, "required" => 1),
-				array("name" => "max_longitude", "description" => "A valid longitude coordinate, representing the right (Eastern) edge of the bounding box.", "documented" => 1, "required" => 1),
-				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0),
+				array("name" => "min_latitude", "description" => "A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box.", "documented" => 1, "required" => 1, "example" => "37.78807088"),
+				array("name" => "min_longitude", "description" => "A valid longitude coordinate, representing the left (Western) edge of the bounding box.", "documented" => 1, "required" => 1, "example" => "-122.34374508"),
+				array("name" => "max_latitude", "description" => "A valid latitude coordinate, representing the top (Northern) edge of the bounding box.", "documented" => 1, "required" => 1, "example" => "37.85749665"),
+				array("name" => "max_longitude", "description" => "A valid longitude coordinate, representing the right (Eastern) edge of the bounding box.", "documented" => 1, "required" => 1, "example" => "-122.25585446"),
+				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0, "example" => "locality"),
 			),
 			"notes" => array(
 			),
@@ -203,12 +203,11 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1),
-				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1),
-				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0),
+				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "40.784165"),
+				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-73.958110"),
+				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0, "example" => "venue"),
 			),
 			"notes" => array(
-				"Pagination for this method is not supported yet.",
 			),
 		),	
 
@@ -242,8 +241,8 @@
 			"paginated" => 0,
 			"library" => "api_whosonfirst_placetypes",
                         "parameters" => array(
-                               	array("name" => "id", "description" => "A valid Who's On First placetype ID.", "documented" => 1, "required" => 0),
-                               	array("name" => "name", "description" => "A valid Who's On First placetype name.", "documented" => 1, "required" => 0),
+                               	array("name" => "id", "description" => "A valid Who's On First placetype ID.", "documented" => 1, "required" => 0, "example" => "102322043"),
+                               	array("name" => "name", "description" => "A valid Who's On First placetype name.", "documented" => 1, "required" => 0, "example" => "disputed"),
 			),
 			"notes" => array(
 				"Although the \"id\" and \"name\" parameters are each marked as optional, you need to pass at least one of them. The order of precedence is \"id\" followed by \"name\"."
@@ -257,7 +256,7 @@
 			"paginated" => 0,
 			"library" => "api_whosonfirst_placetypes",
                         "parameters" => array(
-                               	array("name" => "role", "description" => "Only return placetypes that are part of this role.", "documented" => 1, "required" => 0),
+                               	array("name" => "role", "description" => "Only return placetypes that are part of this role.", "documented" => 1, "required" => 0, "example" => "common"),
 			),
 		),
 
@@ -278,7 +277,7 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_tags",
                         "parameters" => array(
-				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0),
+				array("name" => "source", "description" => "Limit results to categories from this source.", "documented" => 1, "required" => 0, "x-example" => ""),
 			),
 		),
 
@@ -299,8 +298,8 @@
 			"paginated" => 0,
 			"library" => "api_whosonfirst_sources",
                         "parameters" => array(
-                               	array("name" => "id", "description" => "A valid Who's On First source ID.", "documented" => 1, "required" => 0),
-                               	array("name" => "prefix", "description" => "A valid Who's On First source prefix.", "documented" => 1, "required" => 0),
+                               	array("name" => "id", "description" => "A valid Who's On First source ID.", "documented" => 1, "required" => 0, "example" => "840464301"),
+                               	array("name" => "prefix", "description" => "A valid Who's On First source prefix.", "documented" => 1, "required" => 0, "example" => "loc"),
 			),
 			"notes" => array(
 				"Although the \"id\" and \"prefix\" parameters are each marked as optional, you need to pass at least one of them. The order of precedence is \"id\" followed by \"prefix\"."
