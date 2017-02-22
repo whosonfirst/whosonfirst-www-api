@@ -30,7 +30,7 @@
 {if $cfg.api.extras.enabled && $details.extras}
 
 <div class="form-group">
-<label for="page">Extras</label>
+<label for="page">extras</label>
 <input type="text" name="extras" class="form-control" value="" placeholder="{$cfg.api.extras.notes.0|@escape}" id="q-extras"/>
 {if $cfg.api.extras.example}<div class="api-param-example"><span class="example" title="click to add {$param.example|@escape} to your query" data-q="extras">{$cfg.api.extras.example|@escape}</span></div>{/if}
 </div>
@@ -38,6 +38,14 @@
 {/if}
 
 {if $details.paginated}
+{if $details.paginated_cursor}
+
+<div class="form-group">
+<label for="page">cursor</label>
+<input type="text" name="cursor" class="form-control" value="" placeholder="This method uses cursor-based pagination so this argument is the pointer returned by the last API response." />
+</div>
+
+{else}
 
 <div class="form-group">
 <label for="page">Page</label>
@@ -48,6 +56,8 @@
 <label for="per_page">Per page</label>
 <input type="text" name="per_page" class="form-control" value="100" />
 </div>
+
+{/if}
 
 {/if}
 
