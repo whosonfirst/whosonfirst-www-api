@@ -13,3 +13,17 @@ input[type="checkbox"] {
 input[type="radio"] {
     opacity: 1 !important;
 }
+
+.experimental {
+    background-color:#6EA0A6;
+    color:#fff;
+    padding:.4em;
+}
+
+h2 .experimental {
+    font-size:.3em;
+}
+
+.experimental-verbose:before {
+    content: "this method is ";
+}

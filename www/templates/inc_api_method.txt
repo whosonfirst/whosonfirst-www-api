@@ -6,7 +6,9 @@
 <div class="api-method">
 
 <div class="row api-sect">
-<h2 class="api-method-name{if $details.requires_blessing} api-method-blessed{/if}{if !$details.documented} api-method-undocumented{/if}">{$method|escape}</h2>
+<h2 class="api-method-name{if $details.requires_blessing} api-method-blessed{/if}{if !$details.documented} api-method-undocumented{/if}">
+{$method|escape}{if $details.experimental} <small class="hey-look experimental experimental-verbose">experimental</small>{/if}
+</h2>
 
 <p>{$details.description|escape}</p>
 </div>

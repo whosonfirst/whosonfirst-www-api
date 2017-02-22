@@ -72,7 +72,8 @@
 </div>
 
 <h3>
-	<button id="explore" type="submit" class="btn btn-default"{if $details.requires_blessing} disabled="disabled"{/if}>Make it so</button>
+	<button id="explore" type="submit" class="btn btn-default"{if $details.requires_blessing} disabled="disabled"{/if}>Make it so {if $details.experimental} &#8212; but remember this method is experimental{/if}</button>
+
 	{if $details.requires_blessing} <small>This API method requires extra-special permissions and so it is easiest to imagine that it won't work in the API explorer</small>{/if}
 </h3>
 
