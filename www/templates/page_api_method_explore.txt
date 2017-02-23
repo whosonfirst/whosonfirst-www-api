@@ -27,12 +27,12 @@
 {/if}
 {/foreach}
 
-{if $cfg.api.extras.enabled && $details.extras}
+{if "api_extras"|@features_is_enabled && $details.extras}
 
 <div class="form-group">
 <label for="page">extras</label>
 <input type="text" name="extras" class="form-control" value="" placeholder="{$cfg.api.extras.notes.0|@escape}" id="q-extras"/>
-{if $cfg.api.extras.example}<div class="api-param-example"><span class="example" title="click to add {$param.example|@escape} to your query" data-q="extras">{$cfg.api.extras.example|@escape}</span></div>{/if}
+{if $cfg.api_extras.example}<div class="api-param-example"><span class="example" title="click to add {$param.example|@escape} to your query" data-q="extras">{$cfg.api_extras.example|@escape}</span></div>{/if}
 </div>
 
 {/if}

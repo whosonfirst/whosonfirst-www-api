@@ -45,9 +45,19 @@
 		);
 
 		foreach ($method_row["parameters"] as $p){
+
 			$k = $p["name"];
-			$v = request_str($k);
-			$query[$k] = $v;
+
+			if ($v = request_str($k)){
+				$query[$k] = $v;
+			}
+		}
+
+		if ((features_is_enabled("api_extras")) && ($method_row["extras"])){
+
+			if ($e = request_str("extras")){
+				$query["extras"] = $e;
+			}
 		}
 
 		if (isset($pagination['cursor'])){
@@ -68,8 +78,10 @@
 				$query["cursor"] = $cursor;
 				$query = http_build_query($query);
 
-				$next = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['api_endpoint'] . "?{$query}";
-				$out['next'] = $next;
+				# $next = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['api_endpoint'] . "?{$query}";
+				$next = $query;
+
+				$out['next_query'] = $next;
 			}
 		}
 
@@ -80,13 +92,15 @@
 			$out['per_page'] = $pagination['per_page'];
 			$out['pages'] = $pagination['page_count'];
 
-			if (($out['page'] + 1) < $out['page_count']){
+			if (($out['page'] + 1) < $out['pages']){
 
 				$query['page'] = $out['page'] + 1;
 				$query = http_build_query($query);
 
-				$next = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['api_endpoint'] . "?{$query}";
-				$out['next'] = $next;
+				# $next = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['api_endpoint'] . "?{$query}";
+				$next = $query;
+
+				$out['next_query'] = $next;
 			}
 		}
 

@@ -46,8 +46,8 @@
 {/foreach}
 {/if}
 
-{if $cfg.api.extras.enabled and $details.extras}
-<li><strong>extras</strong> &#8212; {$cfg.api.extras.notes|@implode:" "|@escape}</li>
+{if "api_extras"|@features_is_enabled and $details.extras}
+<li><strong>extras</strong> &#8212; {$cfg.api_extras.notes|@implode:" "|@escape}</li>
 {/if}
 
 {if $details.paginated}
