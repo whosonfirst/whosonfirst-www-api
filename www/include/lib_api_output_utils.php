@@ -35,7 +35,9 @@
 
 			else {
 
-				$status_code = 450;	# genetic OMGWTF error code defined in config_api_errors_common.php
+				# genetic OMGWTF error code defined in config_api_errors_common.php
+
+				$status_code = 450;
 				$status_msg = $GLOBALS['api_errors'][$code]['message'];
 			}
 		}

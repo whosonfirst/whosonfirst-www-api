@@ -32,7 +32,7 @@
 	function api_dispatch($method){
 
 		if (! $GLOBALS['cfg']['enable_feature_api']){
-			api_output_error(999, 'API disabled');
+			api_output_error(503, 'API disabled');
 		}
 
 		# Necessary? Also causes PHP 5.5 to freak out
@@ -63,7 +63,7 @@
 
 		if ((! $method) || (! isset($methods[$method]))){
 			$enc_method = htmlspecialchars($method);
-			api_output_error(499, "Method '{$enc_method}' not found");
+			api_output_error(499);
 		}
 
 
@@ -74,7 +74,7 @@
 
 		if (! $method_row['enabled']){
 			$enc_method = htmlspecialchars($method);
-			api_output_error(499, "Method '{$enc_method}' not found");
+			api_output_error(499);
 		}
 
 		$method_row['name'] = $method;
@@ -82,7 +82,7 @@
 		if ($GLOBALS['cfg']['api_auth_type'] == 'oauth2'){
 
 			if (($_SERVER['REQUEST_METHOD'] != 'POST') && (! $GLOBALS['cfg']['api_oauth2_allow_get_parameters'])){
-			 	api_output_error(405, 'Method not allowed');
+			 	api_output_error(405);
 			}
 		}
 
@@ -95,7 +95,7 @@
 			}
 
 			if (! in_array($_SERVER['REQUEST_METHOD'], $allowed)){
-				api_output_error(405, 'Method not allowed');
+				api_output_error(405);
 			}
 
 			
@@ -112,7 +112,7 @@
 		if (features_is_enabled("api_require_keys")){
 
 			if (! $api_key){
-				api_output_error(498, "Required API key is missing");
+				api_output_error(484);
 			}
 
 			$key_row = api_keys_get_by_key($api_key);
@@ -168,7 +168,7 @@
 		$func = "{$method_row['library']}_{$method}";
 
 		if (! function_exists($func)){
-			api_output_error(499, "Method not found");
+			api_output_error(499);
 		}
 
 		call_user_func($func);

@@ -12,17 +12,32 @@
 
 	# THIS IS INCOMPLETE AND WORK IN PROGRESS (20170222/thisisaaronland)
 
-	# API methods
-	# API keys
-	# Access tokens
-	# Users
-	# Query parameters (incl. crumbs)
+	# 432-449	reserved for individual API methods
+
+	# 450		general (OMGWTFBBQ)
+	# 452-459	query (parameters, crumbs)
+	# 460-469	users
+	# 475-484	API keys
+	# 485-494	Access tokens
+	# 495-499	API methods
+
+	# 509		our bad
 	
 	$GLOBALS['cfg']['api']['errors'] = array_merge(array(
+
+		# 400
+		# 403
+		# 404
+		# 500
+		# 503
+
+		# general
 
 		"450" => array(
 			"message" => "Unknown error",
 		),
+
+		# query
 
 		"452" => array(
 			"message" => "Insufficient parameters",
@@ -36,60 +51,98 @@
 			"message" => "Invalid parameter",
 		),
 
-		"487" => array(
-			"message" => "Insufficient permissions for this API key",
+		# uploads
+
+		"455" => array(
+			"message" => "Invalid upload response"
 		),
 
-		"488" => array(
-			"message" => "Invalid access token for this API key",
+		"456" => array(
+			"message" => "Missing upload body"
 		),
 
-		"489" => array(
-			"message" => "Unauthorized host for this API key",
+		"457" => array(
+			"message" => "Upload exceeded maximum filesize"
 		),
 
-		"490" => array(
-			"message" => "API key not configured for use with this method",
+		"458" => array(
+			"message" => "Invalid mime-type"
 		),
 
-		"491" => array(
-			"message" => "Missing or invalid crumb",		# accounted for by 453/454 ?
-		),
+		# users
 
-		"492" => array(
+		"460" => array(
 			"message" => "Invalid user",
 		),
 
-		"493" => array(
-			"message" => "Access token has insuffient permissions",
+		"461" => array(
+			"message" => "User is disabled",
 		),
 
-		"494" => array(
-			"message" => "Access token is expired",
+		"462" => array(
+			"message" => "User is deleted",
 		),
 
-		"495" => array(
-			"message" => "Access token is disabled",
+		# API keys
+
+		"478" => array(
+			"message" => "Insufficient permissions for this API key",
 		),
 
-		"496" => array(
-			"message" => "Invalid access token",
+		"479" => array(
+			"message" => "Invalid access token for this API key",
 		),
 
-		"497" => array(
-			"message" => "Access token missing",
+		"481" => array(
+			"message" => "Unauthorized host for this API key",
 		),
 
-		"498" => array(
+		"482" => array(
+			"message" => "API key not configured for use with this method",
+		),
+
+		"483" => array(
+			"message" => "Invalid API key",
+		),
+
+		"484" => array(
 			"message" => "API key missing",
 		),
 
-		"499" => array(
+		# access tokens
+
+		"490" => array(
+			"message" => "Access token has insuffient permissions",
+		),
+
+		"491" => array(
+			"message" => "Access token is expired",
+		),
+
+		"492" => array(
+			"message" => "Access token is disabled",
+		),
+
+		"493" => array(
+			"message" => "Invalid access token",
+		),
+
+		"494" => array(
+			"message" => "Access token missing",
+		),
+
+		# API methods
+
+		"498" => array(
 			"message" => "API method is disabled"
 		),
 
 		"499" => array(
 			"message" => "API method not found"
+		),
+
+		"512" => array(
+			"message" => "Something we tried to do didn't work. This is our fault, not yours."
 		),
 
 	), $GLOBALS['cfg']['api']['errors']);

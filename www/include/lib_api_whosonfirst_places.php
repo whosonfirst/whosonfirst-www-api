@@ -20,7 +20,7 @@
 		$filters = api_whosonfirst_utils_search_filters();
 
 		if (($q == "") && (count($filters) <= 1)){
-			api_output_error(452, "E_INSUFFICIENT_QUERY");	# maybe 453?
+			api_output_error(452);
 		}
 
 		$args = array();
@@ -29,7 +29,7 @@
 		$rsp = whosonfirst_places_search($q, $filters, $args);
 
 		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
+			api_output_error(512);
 		}
 
 		$more = array();
@@ -91,7 +91,7 @@
 		$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
 
 		if (! $rsp["ok"]){
-			api_output_error(500, $rsp["error"]);
+			api_output_error(512);
 		}
 
 		$more = array();

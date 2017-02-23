@@ -112,7 +112,7 @@
 	function api_utils_features_ensure_enabled($f){
 
 		if (! features_is_enabled($f)){
-			api_output_error(502, "This feature is disabled");
+			api_output_error(503, "This feature is disabled");
 		}
 	}
 
@@ -126,7 +126,9 @@
 		$rsp = api_utils_get_upload($param, $more);
 
 		if (! $rsp['ok']){
-			api_output_error(400, $rsp['error']);
+
+			$code = $rsp["code"] || 450;
+			api_output_error($code, $rsp['error']);
 		}
 
 		return $rsp;
@@ -143,42 +145,42 @@
 		$more = array_merge($defaults, $more);
 
 		if (! isset($_FILES[$param])){
-			return array('ok' => 0, 'error' => "Missing upload parameter");
+			return array('ok' => 0, 'error' => "Missing upload parameter", 'code' => 453);
 		}
 
 		if (! is_array($_FILES[$param])){
-			return array('ok' => 0, 'error' => "Invalid upload parameter");
+			return array('ok' => 0, 'error' => "Invalid upload parameter", "code" => 454);
 		}
 
 		$upload = $_FILES[$param];
 
 		if (! isset($upload['error'])){
-			return array('ok' => 0, 'error' => "Missing upload error response");
+			return array('ok' => 0, 'error' => "Missing upload error response", "code" => 455);
 		}
 
 		if (is_array($upload['error'])){
-			return array('ok' => 0, 'error' => "Invalid upload error response");
+			return array('ok' => 0, 'error' => "Invalid upload error response", "code" => 455);
 		}
 
 		switch ($upload['error']) {
 			case UPLOAD_ERR_OK:
 				break;
 			case UPLOAD_ERR_NO_FILE:
-				return array('ok' => 0, 'error' => "Missing body");
+				return array('ok' => 0, 'error' => "Missing body", "code" => 456);
 			case UPLOAD_ERR_INI_SIZE:
 				# pass
 			case UPLOAD_ERR_FORM_SIZE:
-				return array('ok' => 0, 'error' => "Exceeded filesize");
+				return array('ok' => 0, 'error' => "Exceeded filesize", "code" => 457);
 			default:
-				return array('ok' => 0, 'error' => "INVISIBLE ERROR CAT");
+				return array('ok' => 0, 'error' => "INVISIBLE ERROR CAT", "code" => 450);
 		}
 
 		if (! is_uploaded_file($upload['tmp_name'])){
-			return array('ok' => 0, 'error' => "Invalid upload file name");
+			return array('ok' => 0, 'error' => "Invalid upload file name", "code" => 454);
 		}
 
 		if ($upload['size'] == 0){
-			return array('ok' => 0, 'error' => "Invalid file size");
+			return array('ok' => 0, 'error' => "Invalid file size", "code" => 454);
 		}
 
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -187,7 +189,7 @@
 		if (count($more['ensure_mimetype'])){
 
 			if (! in_array($mime, $more['ensure_mimetype'])){
-				return array('ok' => 0, 'error' => "Invalid mime type");
+				return array('ok' => 0, 'error' => "Invalid mime type", "code" => 458);
 			}
 		}
 
