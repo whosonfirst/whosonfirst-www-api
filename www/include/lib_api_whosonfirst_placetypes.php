@@ -21,20 +21,20 @@
 		$name = request_str("name");
 		
 		if ((! $id) && (! $name)){
-			api_output_error(400, "Missing ID or name parameter");
+			api_output_error(453, "Missing ID or name parameter");
 		}
 
 		if ($id){
 
 			if (! isset($GLOBALS['whosonfirst_placetypes']['placetypes_by_id'][$id])){
-				api_output_error(400, "Invalid place ID");
+				api_output_error(454, "Invalid place ID");
 			}
 
 			$name = $GLOBALS['whosonfirst_placetypes']['placetypes_by_id'][$id];
 		} 
 
 		if (! isset($GLOBALS['whosonfirst_placetypes']['placetypes'][$name])){
-			api_output_error(400, "Invalid place name");
+			api_output_error(454, "Invalid place name");
 		}
 
 		$place = $GLOBALS['whosonfirst_placetypes']['placetypes'][$name];
@@ -51,7 +51,7 @@
 		$role = request_str("role");
 
 		if (($role) && (! whosonfirst_placetypes_is_valid_role($role))){
-			api_output_error(400, "Invalid role");
+			api_output_error(454, "Invalid role");
 		}
 
 		$placetypes = array();

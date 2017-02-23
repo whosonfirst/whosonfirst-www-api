@@ -36,13 +36,13 @@
 		$id = request_str("id");
 
 		if (! $id){
-			api_output_error(400, "Missing 'id' parameter");
+			api_output_error(453, "Missing 'id' parameter");
 		}
 
 		$source = request_str("source");
 
 		if (! $source){
-			api_output_error(400, "Missing 'source' parameter");
+			api_output_error(453, "Missing 'source' parameter");
 		}
 
 		# TO DO - ensure valid source here 

@@ -115,7 +115,7 @@
 		if ($source = request_str("source")){
 
 			if (! whosonfirst_categories_is_valid_source($source)){
-				api_output_error(400, "Invalid source");
+				api_output_error(454, "Invalid source");
 			}
 
 			return "{$source}:categories";

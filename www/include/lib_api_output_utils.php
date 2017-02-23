@@ -13,21 +13,41 @@
 		$more = array_merge($defaults, $more);
 
 		$codes = http_codes();
+
 		$status_code = 200;
+		$status_msg = $codes[ $status_code ];
 
 		if ((isset($more['is_error'])) && ($more['is_error'])){
 
-			$status = (isset($rsp['error']['status'])) ? $rsp['error']['status'] : null;
-			$status_code = (($status) && (isset($codes[$status]))) ? $status : 500;
+			$code = $rsp['error']['code'];
+
+			if (http_codes_is_assigned($code)){
+
+				$status_code = $code;
+				$status_msg = $codes[ $status_code ];
+			}
+
+			else if (isset($GLOBALS['api_errors'][$code])){
+
+				$status_code = $code;
+				$status_msg = $GLOBALS['api_errors'][$code]['message'];
+			}
+
+			else {
+
+				$status_code = 450;	# genetic OMGWTF error code defined in config_api_errors_common.php
+				$status_msg = $GLOBALS['api_errors'][$code]['message'];
+			}
 		}
 
 		else if (isset($more['created'])){
 			$status_code = 201;
+			$status_msg = $codes[ $status_code ];
 		}
 
 		else {}
 
-		$status = "{$status_code} {$codes[ $status_code ]}";
+		$status = "{$status_code} {$status_msg}";
 		$enc_status = htmlspecialchars($status);
 
 		utf8_headers();

@@ -3,12 +3,37 @@
 	# API errors that are common to all API method so things that are
 	# typically auth and dispatch related
 
+	# Don't conflict with this:
+	# https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+
+	# See also : lib_http_codes.php which this probably will conflict with...
+
 	########################################################################
 
+	# THIS IS INCOMPLETE AND WORK IN PROGRESS (20170222/thisisaaronland)
+
+	# API methods
+	# API keys
+	# Access tokens
+	# Users
+	# Query parameters (incl. crumbs)
+	
 	$GLOBALS['cfg']['api']['errors'] = array_merge(array(
 
-		"405" => array(
-			"message" => "Method not allowed",
+		"450" => array(
+			"message" => "Unknown error",
+		),
+
+		"452" => array(
+			"message" => "Insufficient parameters",
+		),
+
+		"453" => array(
+			"message" => "Missing parameter",
+		),
+
+		"454" => array(
+			"message" => "Invalid parameter",
 		),
 
 		"487" => array(
@@ -28,11 +53,11 @@
 		),
 
 		"491" => array(
-			"message" => "Missing or invalid crumb",
+			"message" => "Missing or invalid crumb",		# accounted for by 453/454 ?
 		),
 
 		"492" => array(
-			"message" => "Not a valid user",
+			"message" => "Invalid user",
 		),
 
 		"493" => array(
@@ -57,6 +82,10 @@
 
 		"498" => array(
 			"message" => "API key missing",
+		),
+
+		"499" => array(
+			"message" => "API method is disabled"
 		),
 
 		"499" => array(

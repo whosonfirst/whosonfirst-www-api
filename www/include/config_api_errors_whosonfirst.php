@@ -6,7 +6,6 @@
 
 	$GLOBALS['cfg']['api']['errors'] = array_merge(array(
 
-
 	), $GLOBALS['cfg']['api']['errors']);
 
 	########################################################################

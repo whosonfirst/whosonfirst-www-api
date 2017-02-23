@@ -10,20 +10,20 @@
 		$prefix = request_str("prefix");
 		
 		if ((! $id) && (! $prefix)){
-			api_output_error(400, "Missing ID or prefix parameter");
+			api_output_error(453, "Missing ID or prefix parameter");
 		}
 
 		if ($id){
 
 			if (! isset($GLOBALS['whosonfirst_sources']['sources_by_id'][$id])){
-				api_output_error(400, "Invalid source ID");
+				api_output_error(454, "Invalid source ID");
 			}
 
 			$prefix = $GLOBALS['whosonfirst_sources']['sources_by_id'][$id];
 		} 
 
 		if (! isset($GLOBALS['whosonfirst_sources']['sources'][$prefix])){
-			api_output_error(400, "Invalid source prefix");
+			api_output_error(454, "Invalid source prefix");
 		}
 
 		$source = $GLOBALS['whosonfirst_sources']['sources'][$prefix];

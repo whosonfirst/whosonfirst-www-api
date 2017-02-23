@@ -20,7 +20,7 @@
 		$filters = api_whosonfirst_utils_search_filters();
 
 		if (($q == "") && (count($filters) <= 1)){
-			api_output_error(400, "E_INSUFFICIENT_QUERY");
+			api_output_error(452, "E_INSUFFICIENT_QUERY");	# maybe 453?
 		}
 
 		$args = array();
@@ -62,19 +62,19 @@
 		$pt = request_str("placetype");
 
 		if (! $lat){
-			api_output_error(400, "Missing latitude");
+			api_output_error(453, "Missing latitude");
 		}
 
 		if (! $lon){
-			api_output_error(400, "Missing longitude");
+			api_output_error(453, "Missing longitude");
 		}
 
 		if (! geo_utils_is_valid_latitude($lat)){
-			api_output_error(400, "Invalid latitude");
+			api_output_error(454, "Invalid latitude");
 		}
 
 		if (! geo_utils_is_valid_longitude($lon)){
-			api_output_error(400, "Invalid longitude");
+			api_output_error(454, "Invalid longitude");
 		}
 		
 		$more = array();
@@ -82,7 +82,7 @@
 		if ($pt){
 
 			if (! whosonfirst_placetypes_is_valid_placetype($pt)){
-				api_output_error(400, "Invalid placetype");
+				api_output_error(454, "Invalid placetype");
 			}
 
 			$more["placetype"] = $pt;
@@ -124,7 +124,7 @@
 		$id = request_int64("id");
 
 		if (! $id){
-			api_output_error(400, "Missing 'id' parameter");
+			api_output_error(453, "Missing 'id' parameter");
 		}
 
 		$place = whosonfirst_places_get_by_id($id);
@@ -164,7 +164,7 @@
 
 		if ($wofid = request_int64("id")){
 		
-			api_output_error(400, "This has not been implemented yet");
+			api_output_error(501, "This has not been implemented yet");
 		}
 
 		else {
@@ -173,52 +173,52 @@
 			$swlat = trim($swlat);
 
 			if (! $swlat){
-				api_output_error(400, "Missing min_latitude");
+				api_output_error(453, "Missing min_latitude");
 			}
 
 			if (! geo_utils_is_valid_latitude($swlat)){
-				api_output_error(400, "Invalid min_latitude");
+				api_output_error(454, "Invalid min_latitude");
 			}
 
 			$swlon = request_float("min_longitude");
 			$swlon = trim($swlon);
 
 			if (! $swlon){
-				api_output_error(400, "Missing min_longitude");
+				api_output_error(453, "Missing min_longitude");
 			}
 
 			if (! geo_utils_is_valid_longitude($swlon)){
-				api_output_error(400, "Invalid min_longitude");
+				api_output_error(454, "Invalid min_longitude");
 			}
 			
 			$nelat = request_float("max_latitude");
 			$nelat = trim($nelat);
 
 			if (! $nelat){
-				api_output_error(400, "Missing max_latitude");
+				api_output_error(453, "Missing max_latitude");
 			}
 
 			if (! geo_utils_is_valid_latitude($nelat)){
-				api_output_error(400, "Invalid max_latitude");
+				api_output_error(454, "Invalid max_latitude");
 			}
 
 			$nelon = request_float("max_longitude");
 			$nelon = trim($nelon);
 
 			if (! $nelon){
-				api_output_error(400, "Missing max_longitude");
+				api_output_error(453, "Missing max_longitude");
 			}
 
 			if (! geo_utils_is_valid_longitude($nelon)){
-				api_output_error(400, "Invalid max_longitude");
+				api_output_error(454, "Invalid max_longitude");
 			}
 
 			if ($swlat > $nelat){
-				api_output_error(400, "Impossible min_latitude");
+				api_output_error(454, "Impossible min_latitude");
 			}
 
 			if ($swlon > $nelon){
-				api_output_error(400, "Impossible min_longitude");
+				api_output_error(454, "Impossible min_longitude");
 			}
 		}
 
@@ -276,7 +276,7 @@
 
 		if ($wofid = request_int64("id")){
 		
-			api_output_error(400, "This has not been implemented yet");
+			api_output_error(501, "This has not been implemented yet");
 		}
 
 		else {
@@ -284,28 +284,28 @@
 			$lat = request_float("latitude");
 
 			if (! $lat){
-				api_output_error(400, "Missing latitude");
+				api_output_error(453, "Missing latitude");
 			}
 
 			if (! geo_utils_is_valid_latitude($lat)){
-				api_output_error(400, "Invalid latitude");
+				api_output_error(454, "Invalid latitude");
 			}
 
 			$lon = request_float("longitude");
 
 			if (! $lon){
-				api_output_error(400, "Missing longitude");
+				api_output_error(453, "Missing longitude");
 			}
 
 			if (! geo_utils_is_valid_longitude($lon)){
-				api_output_error(400, "Invalid longitude");
+				api_output_error(454, "Invalid longitude");
 			}
 		}
 
 		if ($r = request_int32("radius")){
 
 			if (($r < 0) || ($r > 500)){
-				api_output_error(400, "Invalid radius");
+				api_output_error(454, "Invalid radius");
 			}
 		}
 
@@ -391,7 +391,7 @@
 		$wofid = request_int64("id");
 
 		if (! $wofid){
-			api_output_error(400, "Missing 'id' parameter");
+			api_output_error(453, "Missing 'id' parameter");
 		}
 
 		$filters = api_whosonfirst_utils_search_filters();
@@ -430,7 +430,7 @@
 	function api_whosonfirst_places_ensure_valid_placetype($pt){
 
 		if (! whosonfirst_placetypes_is_valid_placetype($pt)){
-			api_output_error(400, "Invalid placetype");
+			api_output_error(454, "Invalid placetype");
 		}
 
 		return 1;
@@ -441,7 +441,7 @@
 	function api_whosonfirst_places_ensure_valid_cursor($cursor){
 
 		if (! preg_match("/^[0-9]+$/", $cursor)){
-			api_output_error(400, "Invalid cursor");
+			api_output_error(454, "Invalid cursor");
 		}
 
 		return 1;
