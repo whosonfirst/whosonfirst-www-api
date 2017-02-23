@@ -298,6 +298,11 @@
                                	array("name" => "id", "description" => "A valid Who's On First source ID.", "documented" => 1, "required" => 0, "example" => "840464301"),
                                	array("name" => "prefix", "description" => "A valid Who's On First source prefix.", "documented" => 1, "required" => 0, "example" => "loc"),
 			),
+			"errors" => array(
+				"432" => array("message" => "Missing ID or prefix parameter"),
+				"433" => array("message" => "Invalid source ID"),
+				"434" => array("message" => "Invalid source prefix"),
+			),
 			"notes" => array(
 				"Although the \"id\" and \"prefix\" parameters are each marked as optional, you need to pass at least one of them. The order of precedence is \"id\" followed by \"prefix\"."
 			),

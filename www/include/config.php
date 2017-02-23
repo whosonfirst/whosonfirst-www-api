@@ -337,7 +337,6 @@
 
 	$GLOBALS['cfg']['api_errors_definitions'] = array(
 		'common',
-		# 'whosonfirst',
 	);
 
 	# START OF flamework-mapzen-sso stuff

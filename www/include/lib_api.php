@@ -22,6 +22,7 @@
 	loadlib("api_log");
 
 	loadlib("api_auth");
+	loadlib("api_errors");
 	loadlib("api_keys");
 	loadlib("api_keys_utils");
 	loadlib("api_throttle");

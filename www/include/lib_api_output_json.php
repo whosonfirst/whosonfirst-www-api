@@ -10,14 +10,12 @@
 
 	#################################################################
 
-	function api_output_error($status=450, $msg='', $more=array()){
+	function api_output_error($code=450, $msg='', $more=array()){
 
 		$more['is_error'] = 1;
 
-		$out = array('error' => array(
-			'code' => $status,
-			'message' => $msg,
-		));
+		$err = api_errors_build_error($code, $msg);
+		$out = array('error' => $err);
 
 		api_log($out);
 

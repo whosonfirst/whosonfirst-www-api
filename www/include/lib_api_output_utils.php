@@ -19,27 +19,8 @@
 
 		if ((isset($more['is_error'])) && ($more['is_error'])){
 
-			$code = $rsp['error']['code'];
-
-			if (http_codes_is_assigned($code)){
-
-				$status_code = $code;
-				$status_msg = $codes[ $status_code ];
-			}
-
-			else if (isset($GLOBALS['api_errors'][$code])){
-
-				$status_code = $code;
-				$status_msg = $GLOBALS['api_errors'][$code]['message'];
-			}
-
-			else {
-
-				# genetic OMGWTF error code defined in config_api_errors_common.php
-
-				$status_code = 450;
-				$status_msg = $GLOBALS['api_errors'][$code]['message'];
-			}
+			$status_code = $rsp['error']['code'];
+			$status_msg = $rsp['error']['message'];
 		}
 
 		else if (isset($more['created'])){

@@ -10,8 +10,6 @@
 
 	########################################################################
 
-	# THIS IS INCOMPLETE AND WORK IN PROGRESS (20170222/thisisaaronland)
-
 	# 432-449	reserved for individual API methods
 
 	# 450		general (OMGWTFBBQ)
@@ -22,14 +20,12 @@
 	# 495-499	API methods
 
 	# 509		our bad
-	
-	$GLOBALS['cfg']['api']['errors'] = array_merge(array(
 
-		# 400
-		# 403
-		# 404
-		# 500
-		# 503
+	# See this: we're using the "+" to merge these arrays because they have numeric
+	# keys and PHP's default array_merge does not do the right thing... because, 
+	# computers right... (20170223/thisisaaronland)
+	
+	$GLOBALS['cfg']['api']['errors'] = $GLOBALS['cfg']['api']['errors'] + array(
 
 		# general
 
@@ -145,7 +141,7 @@
 			"message" => "Something we tried to do didn't work. This is our fault, not yours."
 		),
 
-	), $GLOBALS['cfg']['api']['errors']);
+	);
 
 	########################################################################
 
