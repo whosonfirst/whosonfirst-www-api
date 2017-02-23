@@ -36,7 +36,6 @@
 	function api_output_send($rsp, $more=array()){
 
 		$rsp['stat'] = (isset($more['is_error'])) ? 'error' : 'ok';
-
 		api_log(array('stat' => $rsp['stat']), 'write');
 
 		api_output_utils_start_headers($rsp, $more);

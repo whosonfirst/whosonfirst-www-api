@@ -13,17 +13,15 @@
 		$more = array_merge($defaults, $more);
 
 		$codes = http_codes();
-
 		$status_code = 200;
 
 		if ((isset($more['is_error'])) && ($more['is_error'])){
 
-			$code = (! is_array($rsp['error']['code'])) ? $rsp['error']['code'] : 0;
-			$status_code = (($code) && (isset($codes[$code]))) ? $code : 500;
+			$status = (isset($rsp['error']['status'])) ? $rsp['error']['status'] : null;
+			$status_code = (($status) && (isset($codes[$status]))) ? $status : 500;
 		}
 
 		else if (isset($more['created'])){
-
 			$status_code = 201;
 		}
 
