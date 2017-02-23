@@ -298,6 +298,8 @@
 		# main config file, aka this one (20130308/straup)
 		'methods' => array(),
 
+		'errors' => array(),
+
 		# We are NOT doing the same for blessed API keys since
 		# it's expected that their number will be small and
 		# manageable (20130308/straup)
@@ -329,8 +331,13 @@
 	# memory in lib_api_config:api_config_init (20130308/straup)
 
 	$GLOBALS['cfg']['api_method_definitions'] = array(
-		'methods',
-		'methods_whosonfirst',
+		'common',
+		'whosonfirst',
+	);
+
+	$GLOBALS['cfg']['api_errors_definitions'] = array(
+		'common',
+		# 'whosonfirst',
 	);
 
 	# START OF flamework-mapzen-sso stuff

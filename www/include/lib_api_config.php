@@ -74,7 +74,7 @@
 		foreach ($GLOBALS['cfg']['api_method_definitions'] as $def){
 
 			try {
-				$path = FLAMEWORK_INCLUDE_DIR . "/config_api_{$def}.php";
+				$path = FLAMEWORK_INCLUDE_DIR . "/config_api_methods_{$def}.php";
 				include_once($path);
 
 				# $GLOBALS['timings']['api_config_methods_count'] += 1;
@@ -90,6 +90,21 @@
 		$time = $end - $start;
 
 		# $GLOBALS['timings']['api_config_methods_time'] = $time;
+
+		foreach ($GLOBALS['cfg']['api_errors_definitions'] as $def){
+
+			try {
+				$path = FLAMEWORK_INCLUDE_DIR . "/config_api_errors_{$def}.php";
+				include_once($path);
+
+				# $GLOBALS['timings']['api_config_methods_count'] += 1;
+			}
+
+			catch (Exception $e){
+				# $msg = $e->getMessage();
+				api_config_freakout_and_die();
+			}
+		}
 
 		api_config_init_blessings();
 
