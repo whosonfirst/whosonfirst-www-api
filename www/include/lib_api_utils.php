@@ -34,6 +34,8 @@
 	##############################################################################
 
 	function api_utils_ensure_pagination_results(&$out, &$pagination){
+
+		$out['next'] = null;
 		 
 		$method = request_str("method");
 		$method_row = $GLOBALS['cfg']['api']['methods'][$method];
@@ -50,24 +52,25 @@
 
 		if (isset($pagination['cursor'])){
 
-			$cursor = $pagination['cursor'];
+			# on the one hand it would be good and nice to include these for consistency's
+			# sake (with say null values) but I have a feeling their presence will just be
+			# confusing... we'll see, I guess (20170222/thisisaaronland)
 
-			if ($cursor == 0){
-				$cursor = null;
-			}
+			# $out['total'] = null;
+			# $out['page'] = null;
+			# $out['pages'] = null;
 
-			$out['cursor'] = $cursor;
+			$out['per_page'] = $pagination['per_page'];
+			$out['cursor'] = $pagination['cursor'];
 
-			if ($cursor){
-
-				if (isset($query["cursor"])){
-					unset($query["cursor"]);
-				}
+			if ($cursor = $out['cursor']){
 
 				$query["cursor"] = $cursor;
-				$out['next'] = http_build_query($query);
-			}
+				$query = http_build_query($query);
 
+				$next = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['api_endpoint'] . "?{$query}";
+				$out['next'] = $next;
+			}
 		}
 
 		else {
@@ -80,7 +83,10 @@
 			if (($out['page'] + 1) < $out['page_count']){
 
 				$query['page'] = $out['page'] + 1;
-				$out['next'] = http_build_query($query);
+				$query = http_build_query($query);
+
+				$next = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['api_endpoint'] . "?{$query}";
+				$out['next'] = $next;
 			}
 		}
 

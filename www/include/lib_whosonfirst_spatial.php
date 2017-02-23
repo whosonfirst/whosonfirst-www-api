@@ -138,7 +138,7 @@
 
 		$cmd = implode(" ", $cmd);
 
-		return whosonfirst_spatial_do($cmd, $more);
+		return whosonfirst_spatial_do_paginated($cmd, $more);
 	}
 
 	########################################################################
@@ -183,7 +183,7 @@
 
 		$cmd = implode(" ", $cmd);
 
-		return whosonfirst_spatial_do($cmd, $more);
+		return whosonfirst_spatial_do_paginated($cmd, $more);
 	}
 
 	########################################################################
@@ -299,9 +299,30 @@
 
 	########################################################################
 
-	function whosonfirst_spatial_inflate_results($rsp){
+	function whosonfirst_spatial_do_paginated($cmd, $more=array()){
 
-		$cursor = $rsp['cursor'];
+		$rsp = whosonfirst_spatial_do($cmd, $more);
+
+		if (! $rsp['ok']){
+			return $rsp;
+		}
+
+		$pagination = array(
+			'per_page' => $more['per_page'],
+			'cursor' => null,
+		);
+
+		if ($cursor = $rsp['cursor']){
+			$pagination['cursor'] = $cursor;
+		}
+
+		$rsp['pagination'] = $pagination;
+		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_spatial_inflate_results($rsp){
 
 		# See this? It takes ~ 20-40 µs to fetch each name individually.
 		# Which isn't very much even when added up. There are two considerations
@@ -347,7 +368,7 @@
 			);
 		}
 
-		return array($results, $cursor);
+		return $results;
 	}
 
 	########################################################################
