@@ -248,13 +248,18 @@
 			api_output_error(500, $rsp['error']);
 		}
 
-		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
+		$results = whosonfirst_spatial_inflate_results($rsp);
+
+		$pagination = $rsp['pagination'];
 
 		$more['is_tile38'] = 1;	# because this: https://github.com/whosonfirst/whosonfirst-www-api/issues/8
-
 		api_whosonfirst_output_enpublicify($results, $more);
 
-		$out = array('results' => $results, 'cursor' => $cursor);
+		$out = array(
+			'results' => $results
+		);
+
+		api_utils_ensure_pagination_results($out, $pagination);
 		api_output_ok($out);
 	}
 
@@ -338,13 +343,18 @@
 			api_output_error(500, $rsp['error']);
 		}
 
-		list($results, $cursor) = whosonfirst_spatial_inflate_results($rsp);
+		$results = whosonfirst_spatial_inflate_results($rsp);
+
+		$pagination = $rsp['pagination'];
 
 		$more['is_tile38'] = 1;	# because this: https://github.com/whosonfirst/whosonfirst-www-api/issues/8
-
 		api_whosonfirst_output_enpublicify($results, $more);
 
-		$out = array('results' => $results, 'cursor' => $cursor);
+		$out = array(
+			'results' => $results
+		);
+
+		api_utils_ensure_pagination_results($out, $pagination);
 		api_output_ok($out);
 	}
 

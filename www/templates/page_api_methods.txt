@@ -11,7 +11,7 @@
 <div style="font-size:small;">
 <h3>Table of Contents</h3>
 
-<div class="api-methods col-md-5" style="margin-bottom:em;">
+<div class="api-methods col-md-5" style="margin-bottom:em;">	
 
 <ul>
 {foreach from=$method_classes item="class_details" key="class" name="classes"}
@@ -44,7 +44,7 @@
 	<h4 id="{$method.name|escape}"><a href="{$cfg.abs_root_url}methods/{$method.name|escape:'uri'}">{$method.name|escape}</a></h4>
 
 	<small>
-	{if $method.description}{$method.description|escape}{/if}
+	{if $method.description}{$method.description|escape}{/if} {if $method.experimental} <small class="hey-look experimental experimental">experimental</small>{/if}
 	{if "api_explorer"|@features_is_enabled}<br />
 	{if $method.requires_blessing}
 	<span style="font-style:italic;">This method requires extra-special permissions so it's easiest to assume that it won't work with the API explorer</span>    

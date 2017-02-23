@@ -24,6 +24,10 @@
 			$args['per_page'] = $GLOBALS['cfg']['api_per_page_max'];
 		}
 
+		if ($cursor = request_str("cursor")){
+			$args['cursor'] = $cursor;
+		}
+
 		# note the pass by ref
 	}
 
@@ -31,10 +35,74 @@
 
 	function api_utils_ensure_pagination_results(&$out, &$pagination){
 
-		$out['total'] = $pagination['total_count'];
-		$out['page'] = $pagination['page'];
-		$out['per_page'] = $pagination['per_page'];
-		$out['pages'] = $pagination['page_count'];
+		$out['next'] = null;
+		 
+		$method = request_str("method");
+		$method_row = $GLOBALS['cfg']['api']['methods'][$method];
+
+		$query = array(
+			"method" => $method,
+		);
+
+		foreach ($method_row["parameters"] as $p){
+
+			$k = $p["name"];
+
+			if ($v = request_str($k)){
+				$query[$k] = $v;
+			}
+		}
+
+		if ((features_is_enabled("api_extras")) && ($method_row["extras"])){
+
+			if ($e = request_str("extras")){
+				$query["extras"] = $e;
+			}
+		}
+
+		if (isset($pagination['cursor'])){
+
+			# on the one hand it would be good and nice to include these for consistency's
+			# sake (with say null values) but I have a feeling their presence will just be
+			# confusing... we'll see, I guess (20170222/thisisaaronland)
+
+			# $out['total'] = null;
+			# $out['page'] = null;
+			# $out['pages'] = null;
+
+			$out['per_page'] = $pagination['per_page'];
+			$out['cursor'] = $pagination['cursor'];
+
+			if ($cursor = $out['cursor']){
+
+				$query["cursor"] = $cursor;
+				$query = http_build_query($query);
+
+				# $next = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['api_endpoint'] . "?{$query}";
+				$next = $query;
+
+				$out['next_query'] = $next;
+			}
+		}
+
+		else {
+
+			$out['total'] = $pagination['total_count'];
+			$out['page'] = $pagination['page'];
+			$out['per_page'] = $pagination['per_page'];
+			$out['pages'] = $pagination['page_count'];
+
+			if (($out['page'] + 1) < $out['pages']){
+
+				$query['page'] = $out['page'] + 1;
+				$query = http_build_query($query);
+
+				# $next = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['api_endpoint'] . "?{$query}";
+				$next = $query;
+
+				$out['next_query'] = $next;
+			}
+		}
 
 		# note the pass by ref
 	}

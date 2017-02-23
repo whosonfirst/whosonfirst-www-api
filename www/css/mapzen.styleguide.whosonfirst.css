@@ -13,3 +13,28 @@ input[type="checkbox"] {
 input[type="radio"] {
     opacity: 1 !important;
 }
+
+.experimental {
+    background-color:#6EA0A6;
+    color:#fff;
+    padding:.4em;
+}
+
+h2 .experimental {
+    font-size:.3em;
+}
+
+.experimental-verbose:before {
+    content: "this method is ";
+}
+
+.api-param-example:before {
+    content: "for example: ";
+    font-weight:200;
+}
+
+.api-param-example {
+    text-align:right;
+    font-size: small !important;
+    font-weight:700;
+}

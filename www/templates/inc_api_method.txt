@@ -6,7 +6,9 @@
 <div class="api-method">
 
 <div class="row api-sect">
-<h2 class="api-method-name{if $details.requires_blessing} api-method-blessed{/if}{if !$details.documented} api-method-undocumented{/if}">{$method|escape}</h2>
+<h2 class="api-method-name{if $details.requires_blessing} api-method-blessed{/if}{if !$details.documented} api-method-undocumented{/if}">
+{$method|escape}{if $details.experimental} <small class="hey-look experimental experimental-verbose">experimental</small>{/if}
+</h2>
 
 <p>{$details.description|escape}</p>
 </div>
@@ -44,13 +46,14 @@
 {/foreach}
 {/if}
 
-{if $details.extras}
-<li><strong>extras</strong> &#8212; A comma-separated list of additional fields to include with each result</li>
+{if "api_extras"|@features_is_enabled and $details.extras}
+<li><strong>extras</strong> &#8212; {$cfg.api_extras.notes|@implode:" "|@escape}</li>
 {/if}
 
 {if $details.paginated}
 {if $details.paginated_cursor}
 <li><strong>cursor</strong> &#8212; This method uses cursor-based pagination (because we can't have nice things) so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.</li>
+<li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.</li>
 {else}
 <li><strong>page</strong> &#8212; The default is 1.</li>
 <li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.</li>

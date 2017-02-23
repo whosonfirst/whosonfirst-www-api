@@ -39,6 +39,9 @@
 		$details['example_response'] = $rsp['example'];
 	}
 
+	$extras = $GLOBALS['cfg']['api_methods']['extras'];
+	$GLOBALS['smarty']->assign("extras", $extras);
+
 	$GLOBALS['smarty']->assign("method", $method);
 	$GLOBALS['smarty']->assign_by_ref("details", $details);
 

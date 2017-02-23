@@ -17,33 +17,52 @@
 {if $param.documented}
 
 <div class="form-group">
-<label for="{$param.name|escape}" title="{$param.description|@escape}">{$param.name|escape} {if $param.required} <span class="text-danger">(required)</span>{/if}</label>
-<input type="text" name="{$param.name|escape}" class="form-control" placeholder="{$param.description|truncate:100:"..."|escape}" />
+<label for="{$param.name|escape}" title="{$param.description|@escape}">
+{$param.name|escape} {if $param.required} <span class="text-danger">(required)</span>{/if}
+</label>
+<input type="text" name="{$param.name|escape}" class="form-control" placeholder="{$param.description|truncate:100:"..."|escape}" id="q-{$param.name|@escape}"/>
+{if $param.example}<div class="api-param-example"><span class="example" title="click to add {$param.example|@escape} to your query" data-q="{$param.name|@escape}">{$param.example|@escape}</span></div>{/if}
 </div>
 
 {/if}
 {/foreach}
 
-{if $details.extras}
+{if "api_extras"|@features_is_enabled && $details.extras}
 
 <div class="form-group">
-<label for="page">Extras</label>
-<input type="text" name="extras" class="form-control" value="" placeholder="" />
+<label for="page">extras</label>
+<input type="text" name="extras" class="form-control" value="" placeholder="{$cfg.api.extras.notes.0|@escape}" id="q-extras"/>
+{if $cfg.api_extras.example}<div class="api-param-example"><span class="example" title="click to add {$param.example|@escape} to your query" data-q="extras">{$cfg.api_extras.example|@escape}</span></div>{/if}
 </div>
 
 {/if}
 
 {if $details.paginated}
+{if $details.paginated_cursor}
 
 <div class="form-group">
-<label for="page">Page</label>
+<label for="page">cursor</label>
+<input type="text" name="cursor" class="form-control" value="" placeholder="This method uses cursor-based pagination so this argument is the pointer returned by the last API response." />
+</div>
+
+<div class="form-group">
+<label for="per_page">per page</label>
+<input type="text" name="per_page" class="form-control" value="100" />
+</div>
+
+{else}
+
+<div class="form-group">
+<label for="page">page</label>
 <input type="text" name="page" class="form-control" value="1" />
 </div>
 
 <div class="form-group">
-<label for="per_page">Per page</label>
-<input type="text" name="per_page" class="form-control" value="100" />
+<label for="per_page">per page</label>
+<input type="text" name="per_page" class="form-control" value="{$cfg.api_per_page_max|escape}" />
 </div>
+
+{/if}
 
 {/if}
 
@@ -72,7 +91,8 @@
 </div>
 
 <h3>
-	<button id="explore" type="submit" class="btn btn-default"{if $details.requires_blessing} disabled="disabled"{/if}>Make it so</button>
+	<button id="explore" type="submit" class="btn btn-default"{if $details.requires_blessing} disabled="disabled"{/if}>Make it so {if $details.experimental} &#8212; but remember this method is experimental{/if}</button>
+
 	{if $details.requires_blessing} <small>This API method requires extra-special permissions and so it is easiest to imagine that it won't work in the API explorer</small>{/if}
 </h3>
 
@@ -232,7 +252,7 @@ $(document).ready(function(){
 			var html = htmlspecialchars(json);
 
 			$("#api-res").html(html);
-			
+
 			show_results();
 			show_caveat();
 		};
@@ -258,7 +278,23 @@ $(document).ready(function(){
 		return false;
 	});
 
+	// for pre-filling example params
 
+	var examples = document.getElementsByClassName("example");
+	var count = examples.length;
+
+	for (var i=0; i < count; i++){
+
+		var ex = examples[i];
+
+		ex.onclick = function(e){
+			var el = e.target;
+			var param = el.getAttribute("data-q");
+			var txt = el.innerText;
+			var input = document.getElementById("q-" + param);
+			input.value = txt;
+		};
+	}
 });
 
 {/literal}

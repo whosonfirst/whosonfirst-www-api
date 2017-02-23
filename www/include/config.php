@@ -270,6 +270,17 @@
 	$GLOBALS['cfg']['enable_feature_api_cors'] = 1;
 	$GLOBALS['cfg']['api_cors_allow_origin'] = '*';
 
+	$GLOBALS['cfg']['enable_feature_api_extras'] = 1;
+
+	$GLOBALS['cfg']['api_extras'] = array(
+		'notes' => array(
+			'A comma-separated list of additional fields to include with each result.',
+			'Valid fields are anything that might be found at the top level of WOF properties dictionary.',
+			'You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example "mz:")',
+		),
+		'example' => 'mz:uri',
+	);
+
 	# API pagination
 
 	$GLOBALS['cfg']['api_per_page_default'] = 100;
