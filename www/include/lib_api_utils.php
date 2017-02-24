@@ -66,9 +66,12 @@
 			# sake (with say null values) but I have a feeling their presence will just be
 			# confusing... we'll see, I guess (20170222/thisisaaronland)
 
-			# $out['total'] = null;
-			# $out['page'] = null;
-			# $out['pages'] = null;
+			if ($out['total']){
+
+				$out['total'] = null;
+				$out['page'] = null;
+				$out['pages'] = null;
+			}
 
 			$out['per_page'] = $pagination['per_page'];
 			$out['cursor'] = $pagination['cursor'];

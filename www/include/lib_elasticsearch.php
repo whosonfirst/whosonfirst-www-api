@@ -23,12 +23,17 @@
 			'page' => 1,
 			'index' => null,
 			'type' => null,
-			'scroll' => null,
+			'scroll' => $GLOBALS['cfg']['elasticsearch_spelunker_scroll'],
+			'scroll_ttl' => $GLOBALS['cfg']['elasticsearch_spelunker_scroll_ttl'],
 			'scroll_id' => null,
-			'scroll_ttl' => '1m',
+			'cursor' => null,
 		);
 
 		$more = array_merge($defaults, $more);
+
+		if ((! $more["scroll_id"]) && ($more["cursor"])){
+			$more["scroll_id"] = $more["cursor"];
+		}
 
 		# http://www.elasticsearchtutorial.com/basic-elasticsearch-concepts.html
 		# The amount of time it took me to figure out that it's 'size' and 'from'
@@ -61,14 +66,12 @@
 
 		if (($more['scroll']) && ($more['scroll_id'])){
 
-			$get_args = array(
+			$query = array(
 				"scroll" => $more['scroll_ttl'],
 				"scroll_id" => $more['scroll_id'],
 			);
 
-			$get_query = http_build_query($get_args);
-
-			$url .= "/_search/scroll?{$get_query}";
+			$url .= "/_search/scroll";
 		}
 
 		else if ($more['scroll']){

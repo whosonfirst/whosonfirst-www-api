@@ -293,6 +293,7 @@
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
+			"paginated_cursor" => 1,
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
