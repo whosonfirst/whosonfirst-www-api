@@ -118,6 +118,8 @@ RewriteRule  ^(api/)?methods/explore/?$		api_methods.php	[L]
 RewriteRule  ^(api/)?methods/(.*)/explore/?$	api_method_explore.php?method=$2&%{QUERY_STRING}	[L]
 RewriteRule  ^(api/)?methods/(.*)/?$		api_method.php?method=$2&%{QUERY_STRING}		[L]
 
+RewriteRule  ^(api/)?errors/?$			api_errors.php	[L]
+
 RewriteRule  ^(api/)?formats/?$			api_formats.php	[L]
 RewriteRule  ^(api/)?formats/(.*)/?$		api_format.php?format=$2	[L]
 

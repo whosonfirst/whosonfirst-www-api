@@ -67,11 +67,23 @@
 
 </div>
 
-{if 0}
+<div class="row api-sect">
 <h3>Errors</h3>
 
-<p>TO DO</p>
+{if $details.errors|@count}
+
+<p>In addition to <a href="{$cfg.abs_root_url}api/errors/">default error codes</a> common to all methods this API method defines the following additional error codes:</p>
+
+<ul class="api-list-o-things">
+{foreach from=$details.errors item="row" key="code"}
+<li><strong><code>{$code|@escape}</code></strong> &#8212; {$row.message|@escape}</li>
+{/foreach}
+</ul>
+
+{else}
+<p>This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the <a href="{$cfg.abs_root_url}api/errors/">default error codes</a> documentation.</p>
 {/if}
+</div>
 
 {if $details.notes|@count}
 <div class="row api-sect">

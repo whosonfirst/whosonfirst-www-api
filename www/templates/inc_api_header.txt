@@ -13,6 +13,7 @@
 <li><a href="{$cfg.abs_root_url}">API documentation</a></li>
 <li><a href="{$cfg.abs_root_url}methods/">API methods</a></li>
 <li><a href="{$cfg.abs_root_url}formats/">API formats</a></li>
+<li><a href="{$cfg.abs_root_url}errors/">API errors</a></li>
 <li><a href="{$cfg.abs_root_url}keys/register/">Create a new API key</a></li>
 <li><a href="{$cfg.abs_root_url}keys/">Your API keys</a></li>
 <li><a href="{$cfg.abs_root_url}oauth2/tokens/">Your access tokens</a></li>
