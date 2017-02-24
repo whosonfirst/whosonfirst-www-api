@@ -71,6 +71,9 @@
 				"scroll_id" => $more['scroll_id'],
 			);
 
+			# See the way we're removing the index? Yeah... that
+
+			$url = implode(":", array($more['host'], $more['port']));
 			$url .= "/_search/scroll";
 		}
 
