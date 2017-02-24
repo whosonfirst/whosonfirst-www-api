@@ -23,6 +23,9 @@
 			'page' => 1,
 			'index' => null,
 			'type' => null,
+			'scroll' => null,
+			'scroll_id' => null,
+			'scroll_ttl' => '1m',
 		);
 
 		$more = array_merge($defaults, $more);
@@ -44,8 +47,6 @@
 			'search_type' => $more['search_type'],
 		);
 
-		$get_args = http_build_query($get_args);
-
 		$url = implode(":", array($more['host'], $more['port']));
 
 		if ($more['index']){
@@ -56,7 +57,34 @@
 			$url .= "/{$more['type']}";
 		}
 
-		$url .= "/_search?{$get_args}";
+		# https://www.elastic.co/guide/en/elasticsearch/guide/current/scroll.html
+
+		if (($more['scroll']) && ($more['scroll_id'])){
+
+			$get_args = array(
+				"scroll" => $more['scroll_ttl'],
+				"scroll_id" => $more['scroll_id'],
+			);
+
+			$get_query = http_build_query($get_args);
+
+			$url .= "/_search/scroll?{$get_query}";
+		}
+
+		else if ($more['scroll']){
+
+			$get_args["scroll"] = $more["scroll_ttl"];
+			$get_query = http_build_query($get_args);
+
+			$url .= "/_search/?{$get_query}"; 
+		}
+
+		else {
+
+			$get_query = http_build_query($get_args);
+
+			$url .= "/_search?{$get_query}";
+		}
 
 		$body = json_encode($query);
 
@@ -355,6 +383,11 @@
 			'per_page' => $per_page,
 			'page_count' => $page_count,
 		);
+
+		if (isset($data["_scroll_id"])){
+			$cursor = $data["_scroll_id"];
+			$pagination["cursor"] = $cursor;
+		}
 
 		return $pagination;
 	}
