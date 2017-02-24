@@ -16,14 +16,14 @@
 		if ($id){
 
 			if (! isset($GLOBALS['whosonfirst_sources']['sources_by_id'][$id])){
-				api_output_error(433);
+				api_output_error(432);
 			}
 
 			$prefix = $GLOBALS['whosonfirst_sources']['sources_by_id'][$id];
 		} 
 
 		if (! isset($GLOBALS['whosonfirst_sources']['sources'][$prefix])){
-			api_output_error(434);
+			api_output_error(433);
 		}
 
 		$source = $GLOBALS['whosonfirst_sources']['sources'][$prefix];

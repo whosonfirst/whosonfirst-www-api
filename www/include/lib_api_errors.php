@@ -15,14 +15,13 @@
 		$method = $more["method"];
 		$method_row = $GLOBALS['cfg']['api']['methods'][$method];
 
-		$code = intval($code);
-
-		$is_http_error = (http_codes_is_assigned($code)) ? 1 : 0;
-		$is_method_error = (($code >= 432) && ($code <= 449)) ? 1 : 0;
-		$is_api_error = (($code >= 450) && ($code <= 499)) ? 1 : 0;
+		$is_http_error   = api_errors_is_http_error($code);
+		$is_method_error = api_errors_is_method_error($code);
+		$is_api_error    = api_errors_is_api_error($code);
 
 		# dumper("http: {$is_http_error} method: {$is_method_error} api: ${is_api_error}");
 		# dumper("code ${code}");
+		# dumper($method_row["errors"]);
 
 		if ($is_http_error){
 
@@ -45,7 +44,7 @@
 
 		else {
 
-			$status_code = 450;
+			$status_code = ($code < 500) ? 450 : 512;
 			$status_msg = $GLOBALS['cfg']['api']['errors'][$code]['message'];
 		}
 
@@ -55,6 +54,44 @@
 		);
 	}
 
+	#################################################################
+
+	function api_errors_is_http_error($code){
+
+		$code = intval($code);
+
+		return http_codes_is_assigned($code);
+	}
+
+	#################################################################
+
+	function api_errors_is_method_error($code){
+
+		$code = intval($code);
+
+		if (($code >= 432) && ($code <= 449)){
+			return 1;
+		}
+
+		if (($code >= 513) && ($code <= 599)){
+			return 1;
+		}
+
+		return 0;
+	}
+
+	#################################################################
+
+	function api_errors_is_api_error($code){
+
+		$code = intval($code);
+
+		if (($code >= 450) && ($code <= 499)){
+			return 1;
+		}
+
+		return 0;
+	}
 	#################################################################
 
 	# the end

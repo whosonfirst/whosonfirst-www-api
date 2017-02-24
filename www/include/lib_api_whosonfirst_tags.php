@@ -9,11 +9,11 @@
 		$args = array();
 		api_utils_ensure_pagination_args($args);
 
-		$source = api_whosonfirst_tags_ensure_source();
+		$source = api_whosonfirst_tags_ensure_source(array("error_code" => 432));
 		$rsp = whosonfirst_tags_get_tags($source, $args);
 
 		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
+			api_output_error(513);
 		}
 
 		$pagination = $rsp['pagination'];
@@ -38,12 +38,18 @@
 
 	########################################################################
 
-	function api_whosonfirst_tags_ensure_source(){
+	function api_whosonfirst_tags_ensure_source($more=array()){
 	
+		$defaults = array(
+			"error_code" => 454
+		);
+
+		$more = array_merge($defaults, $more);
+
 		if ($source = request_str("source")){
 
 			if (! whosonfirst_tags_is_valid_source($source)){
-				api_output_error(454, "Invalid source");
+				api_output_error($more["error_code"]);
 			}
 
 			return "{$source}:tags";

@@ -35,7 +35,7 @@
 
 	function api_utils_ensure_pagination_results(&$out, &$pagination){
 
-		$out['next'] = null;
+		$out['next_query'] = null;
 		 
 		$method = request_str("method");
 		$method_row = $GLOBALS['cfg']['api']['methods'][$method];

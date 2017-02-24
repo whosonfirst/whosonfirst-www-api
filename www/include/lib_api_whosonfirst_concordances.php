@@ -15,7 +15,7 @@
 		$rsp = whosonfirst_concordances_get_sources($args);
 
 		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
+			api_output_error(513);
 		}
 
 		$rows = $rsp['rows'];
@@ -36,13 +36,13 @@
 		$id = request_str("id");
 
 		if (! $id){
-			api_output_error(453, "Missing 'id' parameter");
+			api_output_error(432);
 		}
 
 		$source = request_str("source");
 
 		if (! $source){
-			api_output_error(453, "Missing 'source' parameter");
+			api_output_error(433);
 		}
 
 		# TO DO - ensure valid source here 
@@ -53,7 +53,7 @@
 		$rsp = whosonfirst_concordances_get_by_id($source, $id, $args);
 
 		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
+			api_output_error(513);
 		}
 
 		$rows = $rsp['rows'];

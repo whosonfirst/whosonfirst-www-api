@@ -21,7 +21,7 @@
 		$rsp = whosonfirst_categories_get_namespaces($source, $args);
 
 		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
+			api_output_error(513);
 		}
 
 		$pagination = $rsp['pagination'];
@@ -53,7 +53,7 @@
 		$rsp = whosonfirst_categories_get_predicates($source, $args);
 
 		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
+			api_output_error(513);
 		}
 
 		$pagination = $rsp['pagination'];
@@ -85,7 +85,7 @@
 		$rsp = whosonfirst_categories_get_values($source, $args);
 
 		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
+			api_output_error(513);
 		}
 
 		$pagination = $rsp['pagination'];
@@ -115,7 +115,7 @@
 		if ($source = request_str("source")){
 
 			if (! whosonfirst_categories_is_valid_source($source)){
-				api_output_error(454, "Invalid source");
+				api_output_error(432);
 			}
 
 			return "{$source}:categories";

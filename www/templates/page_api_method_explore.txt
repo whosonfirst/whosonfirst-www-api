@@ -59,7 +59,7 @@
 
 <div class="form-group">
 <label for="per_page">per page</label>
-<input type="text" name="per_page" class="form-control" value="{$cfg.api_per_page_max|escape}" />
+<input type="text" name="per_page" class="form-control" value="{$cfg.api_per_page_default|escape}" />
 </div>
 
 {/if}

@@ -20,7 +20,7 @@
 		$rsp = whosonfirst_machinetags_get_namespaces($args);
 
 		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
+			api_output_error(513);
 		}
 
 		$pagination = $rsp['pagination'];
@@ -51,7 +51,7 @@
 		$rsp = whosonfirst_machinetags_get_predicates($args);
 
 		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
+			api_output_error(513);
 		}
 
 		$pagination = $rsp['pagination'];
@@ -82,7 +82,7 @@
 		$rsp = whosonfirst_machinetags_get_values($args);
 
 		if (! $rsp['ok']){
-			api_output_error(500, $rsp['error']);
+			api_output_error(513);
 		}
 
 		$pagination = $rsp['pagination'];
