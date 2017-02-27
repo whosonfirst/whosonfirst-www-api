@@ -52,6 +52,62 @@
 			'search_type' => $more['search_type'],
 		);
 
+		$http_more = array(
+			'http_timeout' => $more['http_timeout'],
+		);
+
+		$body = json_encode($query);
+
+		$headers = array(
+			"Content-Type" => "application/x-www-form-urlencoded",
+		);
+
+		# I hate this...
+
+		if ((! $more['scroll'])	|| ($page == 1)){
+
+			$_args = $get_args;
+			$_args['size'] = 0;
+
+			$_url = implode(":", array($more['host'], $more['port']));
+
+			if ($more['index']){
+				$_url .= "/{$more['index']}";
+			}
+
+			if ($more['type']){
+				$_url .= "/{$more['type']}";
+			}
+			
+			$_query = http_build_query($_args);
+			$_url .= "/_search?{$_query}";
+
+			$_rsp = http_post($_url, $body, $headers, $http_more);
+
+			if (! $_rsp['ok']){
+				return $_rsp;
+			}
+
+			$_data = json_decode($_rsp['body'], 'as hash');
+
+			if (! $_data){
+				return array('ok' => 0, 'error' => 'failed to decode JSON');
+			}
+
+			if ($_data['error']){
+				return array('ok' => 0, 'error' => $_data['error']);
+			}
+
+			$_hits = $_data["hits"];
+			$count = $_hits["total"];
+
+			if ($count > $GLOBALS['cfg']['elasticsearch_spelunker_scroll_trigger']){
+				$more['scroll'] = 1;
+			}
+		}
+
+		# Carry on...
+
 		$url = implode(":", array($more['host'], $more['port']));
 
 		if ($more['index']){
@@ -92,58 +148,8 @@
 			$url .= "/_search?{$get_query}";
 		}
 
-		$body = json_encode($query);
-
-		$headers = array(
-			"Content-Type" => "application/x-www-form-urlencoded",
-		);
-
 		# dumper($url);
 		# dumper($query);
-
-		$http_more = array(
-			'http_timeout' => $more['http_timeout'],
-		);
-
-		# I hate this...
-
-		if ((! $more['scroll'])	|| ($page == 1)){
-
-			$_args = $get_args;
-			$_args['size'] = 0;
-
-			$_url = implode(":", array($more['host'], $more['port']));
-
-			if ($more['index']){
-				$_url .= "/{$more['index']}";
-			}
-
-			if ($more['type']){
-				$_url .= "/{$more['type']}";
-			}
-			
-			$_query = http_build_query($_args);
-			$_url .= "/_search?{$_query}";
-
-			$_rsp = http_post($_url, $body, $headers, $http_more);
-
-			if (! $_rsp['ok']){
-				return $_rsp;
-			}
-
-			$_data = json_decode($_rsp['body'], 'as hash');
-
-			if (! $_data){
-				return array('ok' => 0, 'error' => 'failed to decode JSON');
-			}
-
-			if ($_data['error']){
-				return array('ok' => 0, 'error' => $_data['error']);
-			}
-
-		}
-
-		# Carry on...
 
 		$start = microtime_ms();
 
