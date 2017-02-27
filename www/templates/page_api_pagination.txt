@@ -1,0 +1,14 @@
+{capture assign="page_title"}Pagination | API{/capture}
+{include file="inc_head.txt"}
+
+<div class="container">
+{include file="inc_api_header.txt" title="API error codes" subtitle=$subtitle subtitle_isescaped=1}
+</div>
+
+<div class="container">
+
+<p>Pagination. It shouldn't be this complicated. But it is. Everywhere.</p>
+
+</div>
+
+{include file="inc_foot.txt"}
