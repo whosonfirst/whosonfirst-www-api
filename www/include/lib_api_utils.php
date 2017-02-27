@@ -66,11 +66,11 @@
 			# sake (with say null values) but I have a feeling their presence will just be
 			# confusing... we'll see, I guess (20170222/thisisaaronland)
 
-			if ($out['total']){
+			if ($pagination['total_count']){
 
-				$out['total'] = null;
+				$out['total'] = $pagination['total_count'];
 				$out['page'] = null;
-				$out['pages'] = null;
+				$out['pages'] = $pagination['page_count'];
 			}
 
 			$out['per_page'] = $pagination['per_page'];
@@ -94,6 +94,7 @@
 			$out['page'] = $pagination['page'];
 			$out['per_page'] = $pagination['per_page'];
 			$out['pages'] = $pagination['page_count'];
+			$out['cursor'] = null;
 
 			if (($out['page'] + 1) < $out['pages']){
 
