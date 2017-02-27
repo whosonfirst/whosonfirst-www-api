@@ -105,6 +105,46 @@
 			'http_timeout' => $more['http_timeout'],
 		);
 
+		# I hate this...
+
+		if ((! $more['scroll'])	|| ($page == 1)){
+
+			$_args = $get_args;
+			$_args['size'] = 0;
+
+			$_url = implode(":", array($more['host'], $more['port']));
+
+			if ($more['index']){
+				$_url .= "/{$more['index']}";
+			}
+
+			if ($more['type']){
+				$_url .= "/{$more['type']}";
+			}
+			
+			$_query = http_build_query($_args);
+			$_url .= "/_search?{$_query}";
+
+			$_rsp = http_post($_url, $body, $headers, $http_more);
+
+			if (! $_rsp['ok']){
+				return $_rsp;
+			}
+
+			$_data = json_decode($_rsp['body'], 'as hash');
+
+			if (! $_data){
+				return array('ok' => 0, 'error' => 'failed to decode JSON');
+			}
+
+			if ($_data['error']){
+				return array('ok' => 0, 'error' => $_data['error']);
+			}
+
+		}
+
+		# Carry on...
+
 		$start = microtime_ms();
 
 		$rsp = http_post($url, $body, $headers, $http_more);
