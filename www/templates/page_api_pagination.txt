@@ -13,7 +13,7 @@
 
 <p>Databases have always been about trade-offs and no two databases are the same and so no two sets of trade-offs are the same either. The really short version is that some databases can't tell you exactly how many results there are for a given query. Some databases can tell you how many results there are but can't or won't return results past a certain limit. Other databases can do both but only if you use something called a <code>cursor</code> for pagination rather than the traditional <code>offset</code> and <code>limit</code> model (as in "return the next 5 of 50 results starting from postion 20").</p>
 
-<p><span class="hey-look">{$cfg.site_name|@escape}</span> uses different databases for different purposes, because there is still isn't a single all-purpose database that can do everything, so we also have to account for multiple different pagination models. We've identified four overlapping models (plain, cursor, mixed and next-query) each of which are described in detail below.</p>
+<p>Since there isn't an all-purpose database, the <span class="hey-look">{$cfg.site_name|@escape}</span> accounts for multiple different pagination models. We've identified four overlapping models (<a href="#plain">plain</a>, <a href="#cursor">cursor</a>, <a href="#mixed">mixed</a> and <a href="#next-query">next-query</a>) each of which are described in detail below.</p>
 
 <p>If you don't really care and just want to get started <a href="#next-query">you should skip ahead to the documentation for next-query pagination</a>.</p>
 
@@ -48,7 +48,7 @@
 
 <p>Cursor-based pagination is necessary when a database can't or won't tell you how many results there are for a query. This means you will need to pass the same query to the database over and over again for as long as the database returns a <code>cursor</code> which is like a secret hint that <em>only the database understands</em> indicating where the next set of results live.</p>
 
-<p>For example, let's say you wanted to use the API to fetch all the venues near the <a href="https://whosonfirst.mapzen.com/spelunker/id/420571601/">Smithsonian Cooper Hewitt Design Museum</a> in sets of ten. The API will respond with something like this:</p>
+<p>For example, let's say you wanted to use the API to fetch all of the venues near the <a href="https://whosonfirst.mapzen.com/spelunker/id/420571601/">Smithsonian Cooper Hewitt Design Museum</a> in sets of ten. The API will respond with something like this:</p>
 
 <pre>{literal}
 {
@@ -62,7 +62,7 @@
 
 <p>In order to fetch the next set of results you would include a <code>cursor={literal}{CURSOR}{/literal}</code> parameter in your request, rather than a <code>page={literal}{PAGE_NUMBER}{/literal}</code> parameter like you would with plain pagination. Some databases yield time-sensitive cursors that expire after a number of seconds or minutes so the easiest way to think about cursors is that they are <em>all</em> time sensitive.</p>
 
-<p>Databases, amirite?</p>
+<p style="font-style:italic;">Databases, amirite?</p>
 
 </div>
 
@@ -86,7 +86,7 @@
 }
 {/literal}</pre>
 
-<p>But if you then asked the API to fetch all the <code>neighbourhoods</code>, again in sets of five, the API will respond with something like this:</p>
+<p>But if you then asked the API to fetch all of the <code>neighbourhoods</code>, again in sets of five, the API will respond with something like this:</p>
 
 <pre>{literal}
 {
@@ -138,6 +138,37 @@
 </ul>
 
 <p>This type of pagination is not ideal but strives to be a reasonable middle-ground that is not too onerous to implement and easy to use.</p>
+
+</div>
+
+<div class="container" id="headers">
+<h3>Pagination and HTTP headers</h3>
+
+<p>Pagination properties are also returned as HTTP response headers. This is useful for any output format and necessary for output formats like plain old <a href="{$cfg.abs_root_url}api/formats#csv">CSV</a> or Who's On First's <a href="{$cfg.abs_root_url}api/formats#meta">meta</a> format. All of the pagination properties you've come to know and love in the examples above are also returned as HTTP response header prefixed by <code>X-api-pagination-</code>.</p>
+
+<p>For example: </p>
+
+<pre>{literal}
+$> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key={API_KEY}&q=poutine&extras=geom:bbox&page=1&<strong>format=csv</strong>&per_page=1'
+
+&lt; HTTP/1.1 200 OK
+&lt; Access-Control-Allow-Origin: *
+&lt; Content-Type: text/csv
+&lt; Date: Tue, 28 Feb 2017 21:13:37 GMT
+&lt; Status: 200 OK
+<strong>&lt; X-api-pagination-cursor: 
+&lt; X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
+&lt; X-api-pagination-page: 1
+&lt; X-api-pagination-pages: 13
+&lt; X-api-pagination-per-page: 1
+&lt; X-api-pagination-total: 13</strong>
+&lt; X-whosonfirst-csv-header: geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
+&lt; Content-Length: 208
+&lt; Connection: keep-alive
+&lt; 
+geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
+"-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
+{/literal}</pre>
 
 </div>
 

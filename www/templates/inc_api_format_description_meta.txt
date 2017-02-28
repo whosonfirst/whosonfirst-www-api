@@ -1,0 +1,11 @@
+<p>As in a Who's On First "meta" file.</p>
+
+<h4>Example request</h4>
+<pre class="api-example-request">curl -X GET '{$cfg.abs_root_url}rest/?method=whosonfirst.spelunker.search&access_token=****&q=paris&page=1&per_page=5&format=meta'</pre>
+
+<h4>Example response</h4>
+{literal}
+...
+{/literal}
+
+<small>The meta header is only written for the first page of meta responses.</small>
