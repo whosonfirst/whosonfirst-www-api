@@ -53,7 +53,7 @@
 			$header = array_keys($map);
 
 			$str_header = implode(",", $header);
-			header("X-whosonfirst-csv-header: " . htmlspecialchars($str_header));
+			header("X-api-format-meta-header: " . htmlspecialchars($str_header));
 			
 			if ($rsp['page'] == 1){
 				$out = array_values($header);
