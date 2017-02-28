@@ -78,13 +78,11 @@
 
 			if ($cursor = $out['cursor']){
 
+				$query['per_page'] = $out['per_page'];
 				$query["cursor"] = $cursor;
-				$query = http_build_query($query);
 
-				# $next = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['api_endpoint'] . "?{$query}";
-				$next = $query;
-
-				$out['next_query'] = $next;
+				$next_query = http_build_query($query);
+				$out['next_query'] = $next_query;
 			}
 		}
 
@@ -98,13 +96,11 @@
 
 			if (($out['page'] + 1) < $out['pages']){
 
+				$query['per_page'] = $out['per_page'];
 				$query['page'] = $out['page'] + 1;
-				$query = http_build_query($query);
 
-				# $next = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['api_endpoint'] . "?{$query}";
-				$next = $query;
-
-				$out['next_query'] = $next;
+				$next_query = http_build_query($query);
+				$out['next_query'] = $next_query;
 			}
 		}
 

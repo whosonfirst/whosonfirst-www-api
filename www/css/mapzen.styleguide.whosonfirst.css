@@ -28,6 +28,11 @@ h2 .experimental {
     content: "this method is ";
 }
 
+h3 {
+    margin-top:.5em;
+    margin-bottom: .75em;
+}
+
 .api-param-example:before {
     content: "for example: ";
     font-weight:200;
@@ -36,5 +41,9 @@ h2 .experimental {
 .api-param-example {
     text-align:right;
     font-size: small !important;
+    font-weight:700;
+}
+
+.hey-look {
     font-weight:700;
 }

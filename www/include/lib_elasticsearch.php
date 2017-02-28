@@ -136,6 +136,8 @@
 				"scroll_id" => $more['scroll_id'],
 			);
 
+			$body = json_encode($query);
+
 			# See the way we're removing the index? Yeah... that
 
 			$url = implode(":", array($more['host'], $more['port']));

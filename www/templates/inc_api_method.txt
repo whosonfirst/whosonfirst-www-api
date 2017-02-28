@@ -98,7 +98,13 @@
 <li>{$note|escape}</li>
 {/foreach}
 {if $details.paginated}
-<li>This API method uses pagination. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.</li>
+{if $details.pagination=="cursor"}
+<li>This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.</li>
+{elseif $details.pagination=="mixed"}
+<li>This API method uses <span class="hey-look">mixed</span> pagination. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.</li>
+{else}
+<li>This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.</li>
+{/if}
 {/if}
 </ul>
 </div>
