@@ -42,6 +42,7 @@
 				"432" => array("message" => "Invalid source"),
 				"513" => array("message" => "Unable to retrieve namespaces"),				
 			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.categories.getPredicates' => array(
@@ -59,6 +60,7 @@
 				"432" => array("message" => "Invalid source"),
 				"513" => array("message" => "Unable to retrieve predicates."),				
 			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.categories.getValues' => array(
@@ -76,6 +78,7 @@
 				"432" => array("message" => "Invalid source"),
 				"513" => array("message" => "Unable to retrieve values"),				
 			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.categories.getSources' => array(
@@ -88,6 +91,7 @@
 			"errors" => array(
 				"513" => array("message" => "Failed to retrieve concordances"),
 			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.concordances.getById' => array(
@@ -105,6 +109,7 @@
 				"433" => array("message" => "Missing 'source' parameter"),
 				"513" => array("message" => "Failed to retrieve concordance"),
 			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.concordances.getSources' => array(
@@ -115,6 +120,7 @@
 			"library" => "api_whosonfirst_concordances",
                         "parameters" => array(),
                         "errors" => array(),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.machinetags.getNamespaces' => array(
@@ -129,7 +135,8 @@
 			),
 			"errors" => array(
 				"513" => "Failed to retrieve machinetag namespaces",
-			)
+			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.machinetags.getPredicates' => array(
@@ -144,7 +151,8 @@
 			),
 			"errors" => array(
 				"513" => "Failed to retrieve machinetag predicates",
-			)
+			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.machinetags.getValues' => array(
@@ -159,8 +167,8 @@
 			),
 			"errors" => array(
 				"513" => "Failed to retrieve machinetag values",
-			)
-
+			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.places.getByLatLon' => array(
@@ -323,7 +331,8 @@
 			"errors" => array(
 				"432" => array("message" => "Invalid place ID"),
 				"433" => array("message" => "Invalid place name"),
-			)
+			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.placetypes.getList' => array(
@@ -337,7 +346,8 @@
 			),
 			"errors" => array(
 				"432" => array("message" => "Invalid role"),
-			)
+			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.placetypes.getRoles' => array(
@@ -349,6 +359,7 @@
                         "parameters" => array(),
 			"errors" => array(),
 			"notes" => array(),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.sources.getInfo' => array(
@@ -406,7 +417,7 @@
 				"513" => array("message" => "Unable to retrieve tags"),
 			),
                         "notes" => array(),
-			# "disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.tags.getSources' => array(
@@ -418,7 +429,7 @@
                         "parameters" => array(),
                         "errors" => array(),
                         "notes" => array(),
-			# "disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 	), $GLOBALS['cfg']['api']['methods']);

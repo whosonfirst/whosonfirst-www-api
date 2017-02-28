@@ -25,3 +25,7 @@ geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
 {/literal}</pre>
 
 <small>The CVS header is only written, in the body of the response, for the first page of API responses. The <code>X-api-format-csv-header</code> HTTP header is included with all responses.</small>
+
+<h4>Notes</h4>
+
+<p>CSV output is not supported for all API methods.</p>

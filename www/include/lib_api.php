@@ -102,6 +102,15 @@
 			
 		}
 
+		# Make sure this is a valid output format for the method in question
+
+		if (($format = api_output_get_format()) && (is_array($method_row["disallow_formats"]))){
+
+			if (in_array($format, $method_row["disallow_formats"])){ 
+				api_output_error(497);
+			}
+		}
+
 		# Okay – now we get in to validation and authorization. Which means a
 		# whole world of pedantic stupid if we're using Oauth2. Note that you
 		# could use OAuth2 and require API keys be passed explictly but since

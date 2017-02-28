@@ -36,7 +36,14 @@
 {if $details.parameters|@count or $cfg.api_auth_type=='oauth2' or $cfg.paginated}
 <ul class="api-list-o-things">
 <li><strong>access_token <span class="text-danger">(required)</span></strong> &#8212; A valid <a href="{$cfg.abs_root_url}oauth2/">OAuth2 access token</a></li>
-<li><strong>format</strong> &#8212; The format in which to return the data. Supported formats are {', '|implode:$response_formats}. The default format is {$default_format}.</a></li>
+
+{if $details.disallow_formats|@count}
+
+<li><strong>format</strong> &#8212; The format in which to return the data. Normally supported formats are {foreach from=$response_formats item="fmt" name="formats"}<a href="{$cfg.abs_root_url}api/formats/{$fmt|@escape}/">{$fmt|@escape}</a>{if !$smarty.foreach.formats.last}, {/if}{/foreach} however the following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}<a href="{$cfg.abs_root_url}formats/{$fmt|@escape}/">{$fmt|@escape}</a>{if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is <a href="{$cfg.abs_root_url}api/formats/{$default_format|@escape}">{$default_format|@escape}</a>.</li>
+
+{else}
+<li><strong>format</strong> &#8212; The format in which to return the data. Supported formats are {foreach from=$response_formats item="fmt" name="formats"}<a href="{$cfg.abs_root_url}api/formats/{$fmt|@escape}/">{$fmt|@escape}</a>{if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is <a href="{$cfg.abs_root_url}api/formats/{$default_format|@escape}">{$default_format|@escape}</a>.</li>
+{/if}
 
 {if $details.parameters|@count}
 {foreach from=$details.parameters item="param"}
@@ -89,7 +96,7 @@
 {/if}
 </div>
 
-{if $details.notes|@count or $details.paginated}
+{if $details.notes|@count or $details.paginated or $details.disallow_formats|@count}
 <div class="row api-sect" id="notes">
 <h3>Notes</h3>
 
@@ -97,6 +104,11 @@
 {foreach from=$details.notes item="note"}
 <li>{$note|escape}</li>
 {/foreach}
+
+{if $details.disallow_formats|@count}
+<li>The following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}<a href="{$cfg.abs_root_url}formats/{$fmt|@escape}/">{$fmt|@escape}</a>{if !$smarty.foreach.formats.last}, {/if}{/foreach}
+{/if}
+
 {if $details.paginated}
 {if $details.pagination=="cursor"}
 <li>This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.</li>

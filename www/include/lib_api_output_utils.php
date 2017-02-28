@@ -21,6 +21,14 @@
 
 			$status_code = $rsp['error']['code'];
 			$status_msg = $rsp['error']['message'];
+
+			# I don't love that we have to do this... so we should
+			# figure out how not to do this (20170228/thisisaaronland)
+
+			$err = api_errors_build_error($status_code, $status_msg);
+
+			$status_code = $err['code'];
+			$status_msg = $err['message'];
 		}
 
 		else if (isset($more['created'])){
@@ -41,11 +49,11 @@
 		if ((isset($more['is_error'])) && ($more['is_error'])){
 
 			if (! is_array($rsp['error']['code'])){
-				header("X-api-error-code: " . htmlspecialchars($rsp['error']['code']));
+				header("X-api-error-code: " . htmlspecialchars($status_code));
 			}
 
 			if (! is_array($rsp['error']['message'])){
-				header("X-api-error-message: " . htmlspecialchars($rsp['error']['message']));
+				header("X-api-error-message: " . htmlspecialchars($status_msg));
 			}
 		}
 

@@ -23,6 +23,11 @@
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
+
+		$more = array(
+			"key" => "tags",
+		);
+
 		api_output_ok($out);
 	}
 

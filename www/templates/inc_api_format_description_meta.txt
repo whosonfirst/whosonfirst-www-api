@@ -25,3 +25,7 @@ bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,
 {/literal}</pre>
 
 <small>The meta (CVS) header is only written, in the body of the response, for the first page of API responses. The <code>X-api-format-meta-header</code> HTTP header is included with all responses.</small>
+
+<h4>Notes</h4>
+
+<p>Meta (CSV) output is not supported for all API methods.</p>

@@ -40,3 +40,7 @@
     "total": 13
 }
 {/literal}</pre>
+
+<h4>Notes</h4>
+
+<p>JSON output is supported for all API methods.</p>

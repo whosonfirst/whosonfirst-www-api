@@ -129,6 +129,10 @@
 
 		# API methods
 
+		"497" => array(
+			"message" => "Output format is disallowed for this API method"
+		),
+
 		"498" => array(
 			"message" => "API method is disabled"
 		),
