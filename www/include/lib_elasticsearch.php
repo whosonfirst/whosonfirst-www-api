@@ -23,6 +23,10 @@
 			'page' => 1,
 			'index' => null,
 			'type' => null,
+
+			# TO DO : remove spelunker-iness and make these general purpose flags
+			# (20170227/thisisaaronland)
+
 			'scroll' => $GLOBALS['cfg']['elasticsearch_spelunker_scroll'],
 			'scroll_ttl' => $GLOBALS['cfg']['elasticsearch_spelunker_scroll_ttl'],
 			'scroll_id' => null,
@@ -62,7 +66,9 @@
 			"Content-Type" => "application/x-www-form-urlencoded",
 		);
 
-		# I hate this...
+		# I hate this... but basically a user shouldn't have to think about
+		# whether or not something will require a cursor so we check to see
+		# for them... because, computers... (20170227/thisisaaronland)
 
 		if ((! $more['scroll'])	|| ($page == 1)){
 
@@ -101,12 +107,15 @@
 			$_hits = $_data["hits"];
 			$count = $_hits["total"];
 
+			# TO DO : remove spelunker-iness and make this a general purpose flag
+			# (20170227/thisisaaronland)
+
 			if ($count > $GLOBALS['cfg']['elasticsearch_spelunker_scroll_trigger']){
 				$more['scroll'] = 1;
 			}
 		}
 
-		# Carry on...
+		# End of I hate this... for now 
 
 		$url = implode(":", array($more['host'], $more['port']));
 
