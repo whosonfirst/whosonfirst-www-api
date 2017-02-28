@@ -167,7 +167,8 @@
 			"description" => "Lookup Who's On First places intersecting a latitude and longitude",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
-			"paginated" => 0,
+			"paginated" => 1,
+			"pagination" => "cursor",
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
@@ -206,6 +207,7 @@
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
+			"pagination" => "mixed",
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
@@ -223,6 +225,7 @@
 			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_intersects'])),
 			"paginated" => 1,
 			"paginated_cursor" => 1,
+			"pagination" => "cursor",
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
@@ -253,7 +256,7 @@
 			"documented" => $GLOBALS['cfg']['enable_feature_spatial_api_docs'],
 			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_nearby'])),
 			"paginated" => 1,
-			"paginated_cursor" => 1,
+			"pagination" => "cursor",
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
@@ -293,7 +296,7 @@
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
-			"paginated_cursor" => 1,
+			"pagination" => "mixed",
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(

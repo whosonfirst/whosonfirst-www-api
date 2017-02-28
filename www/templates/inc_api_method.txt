@@ -51,8 +51,12 @@
 {/if}
 
 {if $details.paginated}
-{if $details.paginated_cursor}
-<li><strong>cursor</strong> &#8212; This method uses cursor-based pagination (because we can't have nice things) so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.</li>
+{if $details.pagination=="cursor"}
+<li><strong>cursor</strong> &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.</li>
+<li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.</li>
+{elseif $details.pagination=="mixed"}
+<li><strong>cursor</strong> &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.</li>
+<li><strong>page</strong> &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.</li>
 <li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.</li>
 {else}
 <li><strong>page</strong> &#8212; The default is 1.</li>
@@ -85,7 +89,7 @@
 {/if}
 </div>
 
-{if $details.notes|@count}
+{if $details.notes|@count or $details.paginated}
 <div class="row api-sect" id="notes">
 <h3>Notes</h3>
 
@@ -93,6 +97,9 @@
 {foreach from=$details.notes item="note"}
 <li>{$note|escape}</li>
 {/foreach}
+{if $details.paginated}
+<li>This API method uses pagination. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.</li>
+{/if}
 </ul>
 </div>
 {/if}
