@@ -62,11 +62,64 @@
 
 			foreach ($rsp['results'] as $row){
 
+				$row = whosonfirst_places_get_by_id($row['wof:id']);
+
+				# see notes below inre: keeping this in sync with py-mz-wof-meta
+				# (20170228/thisisaaronland)
+
+				$parent_hier = array(
+					"country_id" => 0,
+					"region_id" => 0,
+					"locality_id" => 0
+				);
+
+				if (count($row["wof:hierarchy"]) == 1){
+
+					$hier = $row["wof:hierarchy"][0];
+
+					foreach ($parent_hier as $k => $ignore){
+						$parent_hier[$k] = $hier[$k];
+					}
+				}
+				
 				$out = array();
 
 				foreach ($map as $meta_k => $wof_k){
 
-					$value = $row[ $wof_key ];
+					if ($meta_k == "path"){
+						$value = whosonfirst_uri_id2relpath($row['wof:id']);
+					}
+
+					else if ($meta_k == "file_hash"){
+						$value = "";	# PLEASE FIX ME... we should store this in the ES index...
+								# https://github.com/whosonfirst/py-mapzen-whosonfirst-search/issues/24
+					}
+
+					else if ($meta_k == "fullname"){
+						$value = "";	# this has never really been implemented anywhere - maybe wof:label ?
+					}
+
+					else if (preg_match("/^(?:locality|region|country)_id$/", $meta_k)){
+						$value = $parent_hier[$meta_k];
+					}
+
+					else {
+						$value = $row[ $wof_k ];
+					}
+
+					if ((preg_match("/\:(latitude|longitude)$/", $wof_k)) && (! $value)){
+						$value = 0.0;
+					}
+
+					else if (preg_match("/^wof:supersede/", $wof_k)){
+						$value = implode(";", $value);
+					}
+
+					else {}
+
+					if ((! $value) && (! is_numeric($value))){
+						$value = "";
+					}
 
 					if (! is_scalar($value)){
 						$value = json_encode($value);
@@ -96,22 +149,22 @@
 	function api_output_meta_map(){
 
 		$map = array(
-			'id'			=>  'wof:id',
+			'id'			=> 'wof:id',
 			'parent_id'		=> 'wof:parent_id',
 			'name'			=> 'wof:name',
 			'placetype'		=> 'wof:placetype',
-			'fullname'		=> '',		#  what is this
+			'fullname'		=> '',			# handled by code
 			'source'		=> 'src:geom',
-			'path'			=> '',		# please derive me
+			'path'			=> '',			# handled by code
 			'lastmodified'		=> 'wof:lastmodified',
 			'iso'			=> 'iso:country',
 			'iso_country'		=> 'iso:country',
 			'wof_country'		=> 'wof:country',
 			'bbox'			=> 'geom:bbox',
-			'file_hash'		=> '',
-			'geom_hash'		=> 'geom:hash',
+			'file_hash'		=> '',			# PLEASE FIX ME...
+			'geom_hash'		=> 'wof:geomhash',
 			'geom_latitude'		=> 'geom:latitude',
-			'geom_longitude'	=>'geom:longitude',
+			'geom_longitude'	=> 'geom:longitude',
 			'lbl_latitude'		=> 'lbl:latitude',
 			'lbl_longitude'		=> 'lbl:longitude',
 			'supersedes'		=> 'wof:supersedes',
@@ -119,9 +172,9 @@
 			'inception'		=> 'edtf:inception',
 			'cessation'		=> 'edtf:cessation',
 			'deprecated'		=> 'edtf:deprecated',
-			'country_id'		=> '',
-			'region_id'		=> '',
-			'locality_id'		=> '',
+			'country_id'		=> '',			# handled by code
+			'region_id'		=> '',			# handled by code
+			'locality_id'		=> '',			# handled by code
 		);
 
 		return $map;
