@@ -47,18 +47,10 @@
 			$header = array();
 			$lookup = array();
 
-			# TO DO 1: how/where to check for key with rows ?
-			# TO DO 2: how/where to deal with singletons (things not paginated) ?
+			$map = api_output_meta_map();
+			ksort($map);
 
-			foreach (array_keys($rsp['results'][0]) as $k){
-
-				$k_clean = api_output_csv_clean_header($k);
-
-				$header[] = $k_clean;
-				$lookup[$k_clean] = $k;
-			}
-
-			sort($header);
+			$header = array_keys($map);
 
 			$str_header = implode(",", $header);
 			header("X-whosonfirst-csv-header: " . htmlspecialchars($str_header));
@@ -72,10 +64,9 @@
 
 				$out = array();
 
-				foreach ($header as $k_clean){
+				foreach ($map as $meta_k => $wof_k){
 
-					$key = $lookup[$k_clean];
-					$value = $row[ $key ];
+					$value = $row[ $wof_key ];
 
 					if (! is_scalar($value)){
 						$value = json_encode($value);
@@ -98,10 +89,42 @@
 
 	#################################################################
 
-	function api_output_csv_clean_header($header){
+	# see also which means read: please move this in a common JSON file or something...
+	# https://github.com/whosonfirst/py-mapzen-whosonfirst-meta/blob/master/mapzen/whosonfirst/meta/__init__.py
+	# (20170228/thisisaaronland)
 
-		$clean = str_replace(":", "_", $header);
-		return $clean;
+	function api_output_meta_map(){
+
+		$map = array(
+			'id'			=>  'wof:id',
+			'parent_id'		=> 'wof:parent_id',
+			'name'			=> 'wof:name',
+			'placetype'		=> 'wof:placetype',
+			'fullname'		=> '',		#  what is this
+			'source'		=> 'src:geom',
+			'path'			=> '',		# please derive me
+			'lastmodified'		=> 'wof:lastmodified',
+			'iso'			=> 'iso:country',
+			'iso_country'		=> 'iso:country',
+			'wof_country'		=> 'wof:country',
+			'bbox'			=> 'geom:bbox',
+			'file_hash'		=> '',
+			'geom_hash'		=> 'geom:hash',
+			'geom_latitude'		=> 'geom:latitude',
+			'geom_longitude'	=>'geom:longitude',
+			'lbl_latitude'		=> 'lbl:latitude',
+			'lbl_longitude'		=> 'lbl:longitude',
+			'supersedes'		=> 'wof:supersedes',
+			'superseded_by'		=> 'wof:superseded_by',
+			'inception'		=> 'edtf:inception',
+			'cessation'		=> 'edtf:cessation',
+			'deprecated'		=> 'edtf:deprecated',
+			'country_id'		=> '',
+			'region_id'		=> '',
+			'locality_id'		=> '',
+		);
+
+		return $map;
 	}
 
 	#################################################################

@@ -48,6 +48,16 @@
 				header("X-api-error-message: " . htmlspecialchars($rsp['error']['message']));
 			}
 		}
+
+		if ((isset($rsp['cursor'])) || (isset($rsp['total']))){
+
+			header("X-api-pagination-total: " . htmlspecialchars($rsp['total']));
+			header("X-api-pagination-per-page: " . htmlspecialchars($rsp['per_page']));
+			header("X-api-pagination-pages: " . htmlspecialchars($rsp['pages']));
+			header("X-api-pagination-page: " . htmlspecialchars($rsp['page']));
+			header("X-api-pagination-cursor: " . htmlspecialchars($rsp['cursor']));
+			header("X-api-pagination-next-query: " . htmlspecialchars($rsp['next_query']));
+		}
 	}
 
 	#################################################################
