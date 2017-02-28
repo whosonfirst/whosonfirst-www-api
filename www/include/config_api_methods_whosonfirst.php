@@ -406,6 +406,7 @@
 				"513" => array("message" => "Unable to retrieve tags"),
 			),
                         "notes" => array(),
+			# "disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.tags.getSources' => array(
@@ -417,6 +418,7 @@
                         "parameters" => array(),
                         "errors" => array(),
                         "notes" => array(),
+			# "disallow_formats" => array( "csv", "meta" ),
 		),
 
 	), $GLOBALS['cfg']['api']['methods']);

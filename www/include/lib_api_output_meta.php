@@ -25,6 +25,13 @@
 
 	function api_output_send($rsp, $more=array()){
 
+		$defaults = array(
+			"key" => "results",
+			"is_singleton" => 0,
+		);
+
+		$more = array_merge($defaults, $more);
+
 		api_log(array('stat' => $rsp['stat']), 'write');
 
 		api_output_utils_start_headers($rsp, $more);
@@ -44,6 +51,13 @@
 
 			$fh = fopen("php://memory", "w");
 
+			$k = $more["key"];
+			$possible = $rsp[ $k ];
+
+			if ($more["is_singleton"]){				
+				$possible = array($possible);
+			}
+
 			$header = array();
 			$lookup = array();
 
@@ -55,12 +69,12 @@
 			$str_header = implode(",", $header);
 			header("X-api-format-meta-header: " . htmlspecialchars($str_header));
 			
-			if ($rsp['page'] == 1){
+			if ((! $more["is_singleton"]) && ($rsp['page'] == 1)){
 				$out = array_values($header);
 				fputcsv($fh, $out);
 			}
 
-			foreach ($rsp['results'] as $row){
+			foreach ($possible as $row){
 
 				$row = whosonfirst_places_get_by_id($row['wof:id']);
 

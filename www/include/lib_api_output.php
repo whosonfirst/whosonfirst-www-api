@@ -50,6 +50,10 @@
 			}
 		}
 
+		if (! $format){
+			$format = $GLOBALS['cfg']['api']['default_format'];
+		}
+
 		return $format;
 	}
 

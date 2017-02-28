@@ -146,7 +146,12 @@
 			'record' => $public 
 		);
 
-		api_output_ok($out);
+		$more = array(
+			'key' => 'record',
+			'is_singleton' => 1
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -380,7 +385,12 @@
 			'record' => $doc		     
 		);
 
-		api_output_ok($out);
+		$more = array(
+			'key' => 'record',
+			'is_singleton' => 1
+		);
+
+		api_output_ok($out, $more);
 	}
 	
 	########################################################################

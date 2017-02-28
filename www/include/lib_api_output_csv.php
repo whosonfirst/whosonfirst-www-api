@@ -25,6 +25,13 @@
 
 	function api_output_send($rsp, $more=array()){
 
+		$defaults = array(
+			"key" => "results",
+			"is_singleton" => 0,
+		);
+
+		$more = array_merge($defaults, $more);
+
 		api_log(array('stat' => $rsp['stat']), 'write');
 
 		api_output_utils_start_headers($rsp, $more);
@@ -44,13 +51,17 @@
 
 			$fh = fopen("php://memory", "w");
 
+			$k = $more["key"];
+			$possible = $rsp[ $k ];
+
+			if ($more["is_singleton"]){				
+				$possible = array($possible);
+			}
+
 			$header = array();
 			$lookup = array();
 
-			# TO DO 1: how/where to check for key with rows ?
-			# TO DO 2: how/where to deal with singletons (things not paginated) ?
-
-			foreach (array_keys($rsp['results'][0]) as $k){
+			foreach (array_keys($possible[0]) as $k){
 
 				$k_clean = api_output_csv_clean_header($k);
 
@@ -63,12 +74,12 @@
 			$str_header = implode(",", $header);
 			header("X-api-format-csv-header: " . htmlspecialchars($str_header));
 			
-			if ($rsp['page'] == 1){
+			if ((! $more["is_singleton"]) && ($rsp['page'] == 1)){
 				$out = array_values($header);
 				fputcsv($fh, $out);
 			}
 
-			foreach ($rsp['results'] as $row){
+			foreach ($possible as $row){
 
 				$out = array();
 
