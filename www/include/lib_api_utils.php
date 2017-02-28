@@ -53,6 +53,10 @@
 			}
 		}
 
+		if (($format = request_str("format")) && (in_array($format, $GLOBALS['cfg']['api']['formats']))){
+			$query["format"] = $format;
+		}
+
 		if ((features_is_enabled("api_extras")) && ($method_row["extras"])){
 
 			if ($e = request_str("extras")){
