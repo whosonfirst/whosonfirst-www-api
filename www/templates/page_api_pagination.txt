@@ -101,7 +101,7 @@
 }
 {/literal}</pre>
 
-<p>In both examples we know how many results there will be. In the first example we are able to use plain pagination so we know that this is page one of thirty-eight so we the value of the <code>cursor</code> property is null. In the second example the API has returned a cursor so even though we know the total number of results and can calculate the number of "pages" we set the value of the <code>page</code> property to be null since the requirement on cursor-based pagination makes it moot.</p>
+<p>In both examples we know how many results there will be. In the first example we are able to use plain pagination so we know that this is page one of thirty-eight and thus the value of the <code>cursor</code> property is null. In the second example the API has returned a cursor so even though we know the total number of results and can calculate the number of "pages" we set the value of the <code>page</code> property to be null since the requirement on cursor-based pagination makes it moot.</p>
 
 <p>If you look carefully at the value of the <code>next_query</code> property in both examples you can probably figure out where this is going, next.</p>
 
