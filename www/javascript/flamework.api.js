@@ -90,7 +90,7 @@ flamework.api = function(){
 
 	    form_data.append('method', method);
 		
-	    if (! form_data.access_token){
+	    if (! form_data.has('access_token')){
 
 		var get_accesstoken = self.get_handler('accesstoken');
 
@@ -159,7 +159,13 @@ flamework.api = function(){
 		req.addEventListener("progress", onprogress);
 		req.addEventListener("error", onfailed);
 		req.addEventListener("abort", onabort);
-		
+
+		/*
+		for (var pair of form_data.entries()){
+			console.log(pair[0]+ ', '+ pair[1]); 
+		}
+		*/
+
 		req.open("POST", endpoint, true);
 		req.send(form_data);
 		
