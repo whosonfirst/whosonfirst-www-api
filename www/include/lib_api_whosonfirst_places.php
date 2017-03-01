@@ -154,6 +154,95 @@
 
 	########################################################################
 
+	function api_whosonfirst_places_getParentByLatlon(){
+
+		api_utils_features_ensure_enabled(array(
+			"pip"
+		));
+
+		$lat = request_float("latitude");
+		$lon = request_float("longitude");
+		$pt = request_str("placetype");
+
+		if (! $lat){
+			api_output_error(432);
+		}
+
+		if (! $lon){
+			api_output_error(433);
+		}
+
+		if (! geo_utils_is_valid_latitude($lat)){
+			api_output_error(434);
+		}
+
+		if (! geo_utils_is_valid_longitude($lon)){
+			api_output_error(435);
+		}
+		
+		if (! $pt){
+			api_output_error(436);
+		}
+
+		if (! whosonfirst_placetypes_is_valid_placetype($pt)){
+			api_output_error(437);
+		}
+
+		$more = array();
+		$more["placetype"] = $pt;
+
+		$ancestors = whosonfirst_placetypes_ancestors($pt);
+		$possible = array();
+
+		$last_parent = null;
+
+		foreach ($ancestors as $a){
+
+			$last_parent = $a;
+
+			$more = array("placetype" => $a);
+			$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
+
+			if (! $rsp["ok"]){
+				api_output_error(513);
+			}
+
+			if (count($rsp["rows"])){
+				$possible = $rsp["rows"];			   	
+				break;
+			} 
+		}
+
+		$count = count($possible);
+
+		if ($count == 0){
+			$parent_id = -1;
+		}
+
+		else if ($count == 1){
+			$first = $possible[0];
+			$parent_id = $first["Id"];
+		}
+
+		else if ($last_parent == "neighbourhood"){
+			$parent_id = -3;
+		}
+
+		else {}
+
+		# maybe return a record... not sure how best to do
+		# that if the parent_id is -1, -3, etc.
+		# (20170301/thisisaaronland)
+
+		$out = array(
+			'wof:parent_id' => $parent_id
+		);
+
+		api_output_ok($out);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_places_getByLatLon(){
 
 		api_utils_features_ensure_enabled(array(

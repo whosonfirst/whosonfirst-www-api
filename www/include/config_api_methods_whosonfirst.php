@@ -223,6 +223,34 @@
 			"disallow_formats" => array( "meta" ),
 		),
 
+		'whosonfirst.places.getParentByLatLon' => array(
+			"description" => "Return Who's On First parent ID for a latitude and longitude and placetype",
+			"documented" => 1,
+			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
+			"paginated" => 0,
+			"experimental" => 1,
+			"extras" => 0,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array(
+				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "35.655065"),
+				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "139.369640"),
+				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 1, "example" => "neighbourhood"),
+			),
+			"errors" => array(
+				"432" => array("message" => "Missing 'latitude' parameter"),
+				"433" => array("message" => "Missing 'longitude' parameter"),
+				"434" => array("message" => "Invalid 'latitude' parameter"),
+				"435" => array("message" => "Invalid 'longitude' parameter"),
+				"436" => array("message" => "Missing 'placetype' parameter"),
+				"437" => array("message" => "Invalid placetype"),
+				"513" => array("message" => "Failed to perform lookup"),
+			),
+			"notes" => array(
+				"The inability to locate (or to disambiguate) a parent ID for a lat, lon will not trigger an API error. The following parent IDs may be returned by this API method: '-1' which means that a parent ID could not be identified or that there are multiple choices; or '-3' which means that the parent is a neighbourhood and their are multiple possible choices and you should go out for a beer and argue over which is the correct parent.",
+			),
+			"disallow_formats" => array( "csv", "meta" ),
+		),
+
 		'whosonfirst.places.getInfo' => array(
 			"description" => "Return a Who's On First record by ID.",
 			"documented" => 1,

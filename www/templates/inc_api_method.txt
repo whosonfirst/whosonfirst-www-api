@@ -7,7 +7,7 @@
 
 <div class="row api-sect" id="description">
 <h2 class="api-method-name{if $details.requires_blessing} api-method-blessed{/if}{if !$details.documented} api-method-undocumented{/if}">
-{$method|escape}{if $details.experimental} <small class="hey-look experimental experimental-verbose">experimental</small>{/if}
+{$method|escape}
 </h2>
 
 <p>{$details.description|escape}</p>
@@ -96,7 +96,7 @@
 {/if}
 </div>
 
-{if $details.notes|@count or $details.paginated or $details.disallow_formats|@count}
+{if $details.notes|@count or $details.paginated or $details.experimental or $details.disallow_formats|@count}
 <div class="row api-sect" id="notes">
 <h3>Notes</h3>
 
@@ -118,6 +118,11 @@
 <li>This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.</li>
 {/if}
 {/if}
+
+{if $details.experimental}
+<li>This API method is <span class="hey-look">experimental</span>. Both its inputs and outputs <em>may</em> change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.</li>
+{/if}
+
 </ul>
 </div>
 {/if}
