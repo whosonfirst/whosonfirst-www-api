@@ -192,6 +192,35 @@
 				"436" => array("message" => "Invalid placetype"),
 				"513" => array("message" => "Failed to perform lookup"),
 			),
+			"notes" => array(
+				"This method differs from the whosonfirst.places.getAncestorsByLatLon method in two ways: 1. It returns a list of WOF places rather than hierarchies and 2. If a placetype filter is specified and no matching records are found no attempt will be made to find ancestors higher up the hierarchy. For example looking for an intersecting county or region if no locality is found."
+			)
+		),
+
+		'whosonfirst.places.getHierarchiesByLatLon' => array(
+			"description" => "Return the closest set of ancestors (hierarchies) for a latitude and longitude",
+			"documented" => 1,
+			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
+			"paginated" => 0,
+			"extras" => 0,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array(
+				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.777228"),
+				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.470779"),
+				array("name" => "placetype", "description" => "Skip descendants of this placetype.", "documented" => 1, "required" => 0, "example" => "region"),
+			),
+			"errors" => array(
+				"432" => array("message" => "Missing 'latitude' parameter"),
+				"433" => array("message" => "Missing 'longitude' parameter"),
+				"434" => array("message" => "Invalid 'latitude' parameter"),
+				"435" => array("message" => "Invalid 'longitude' parameter"),
+				"436" => array("message" => "Invalid placetype"),
+				"513" => array("message" => "Failed to perform lookup"),
+			),
+			"notes" => array(
+				"This method differs from whosonfirst.places.getByLatLon method in two ways: 1. It returns a list of hierarchies rather than a WOF place record and 2. It will travel up the hierarchy until an ancestor is found. For example even if there is no locality matching a given lat, lon the code will try again looking for a matching region, and so on."
+			),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.places.getInfo' => array(
@@ -430,32 +459,6 @@
                         "errors" => array(),
                         "notes" => array(),
 			"disallow_formats" => array( "csv", "meta" ),
-		),
-
-		'whosonfirst.places.getAncestorsByLatLon' => array(
-			"description" => "Return the closest set of ancestors (hierarchies) for a latitude and longitude",
-			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
-			"paginated" => 0,
-			"extras" => 0,
-			"library" => "api_whosonfirst_places",
-                        "parameters" => array(
-				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.777228"),
-				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.470779"),
-				array("name" => "placetype", "description" => "Ignore places that are descendants of this placetype.", "documented" => 1, "required" => 0, "example" => "region"),
-			),
-			"errors" => array(
-				"432" => array("message" => "Missing 'latitude' parameter"),
-				"433" => array("message" => "Missing 'longitude' parameter"),
-				"434" => array("message" => "Invalid 'latitude' parameter"),
-				"435" => array("message" => "Invalid 'longitude' parameter"),
-				"436" => array("message" => "Invalid placetype"),
-				"513" => array("message" => "Failed to perform lookup"),
-			),
-			"notes" => array(
-
-			),
-			"disallow_formats" => array( "meta" ),
 		),
 
 	), $GLOBALS['cfg']['api']['methods']);
