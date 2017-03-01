@@ -24,7 +24,7 @@
 		$rsp = call_user_func_array($auth_func, array($method, $key_row));
 
 		if (! $rsp['ok']){
-			api_output_error($rsp['error_code'], $rsp['error']);
+			api_output_error($rsp['error_code']);
 		}
 
 		return $rsp;

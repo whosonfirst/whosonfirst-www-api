@@ -51,21 +51,21 @@
 		$access_token = api_auth_oauth2_get_access_token($method);
 
 		if (! $access_token){
-			return array('ok' => 0, 'error' => 'Required access token missing', 'error_code' => 400);
+			return array('ok' => 0, 'error_code' => 494);
 		}
 
 		$token_row = api_oauth2_access_tokens_get_by_token($access_token);
 
 		if (! $token_row){
-			return array('ok' => 0, 'error' => 'Invalid access token', 'error_code' => 400);
+			return array('ok' => 0, 'error_code' => 493);
 		}
 
 		if ($token_row['disabled']){
-			return array('ok' => 0, 'error' => 'Access token is disabled', 'error_code' => 502);
+			return array('ok' => 0, 'error_code' => 492);
 		}
 
 		if (($token_row['expires']) && ($token_row['expires'] < time())){
-			return array('ok' => 0, 'error' => 'Access token has expired', 'error_code' => 400);
+			return array('ok' => 0, 'error_code' => 491);
 		}
 
 		# I find it singularly annoying that we have to do this here
@@ -84,7 +84,7 @@
 			if ($token_row['perms'] < $method['requires_perms']){
 				$perms_map = api_oauth2_access_tokens_permissions_map();
 				$required = $perms_map[$method['requires_perms']];
-				return array('ok' => 0, 'error' => "Insufficient permissions, method requires a token with '{$required}' permissions", 'error_code' => 403);
+				return array('ok' => 0, 'error_code' => 490);
 			}
 		}
 
@@ -115,7 +115,7 @@
 			$user = users_get_by_id($token_row['user_id']);
 
 			if ((! $user) || ($user['deleted'])){
-				return array('ok' => 0, 'error' => 'Not a valid user', 'error_code' => 400);
+				return array('ok' => 0, 'error_code' => 460);
 			}
 		}
 
