@@ -7,6 +7,14 @@
 
 	function whosonfirst_places_get_by_id($id, $more=array()){
 
+		$cache_key = "whosonfirst_{$id}";
+
+		$cache = cache_get($cache_key);
+
+		if ($cache['ok']){
+			return $cache['data'];
+		}
+
 		$query = array('ids' => array(
 			'values' => array($id)
 		));
@@ -21,7 +29,10 @@
 			return null;
 		}
 
-		return $rsp['rows'][0];
+		$row = $rsp['rows'][0];
+
+		cache_set($cache_key, $row);
+		return $row;
 	}
 
 	########################################################################
