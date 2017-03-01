@@ -432,6 +432,28 @@
 			"disallow_formats" => array( "csv", "meta" ),
 		),
 
+		'whosonfirst.places.whereAmI' => array(
+			"description" => "Return the closest set of ancestors (hierarchy) for a coordinate",
+			"documented" => 1,
+			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
+			"paginated" => 1,
+			"pagination" => "cursor",
+			"extras" => 1,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array(
+				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.766633"),
+				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.417693"),
+			),
+			"errors" => array(
+				"432" => array("message" => "Missing 'latitude' parameter"),
+				"433" => array("message" => "Missing 'longitude' parameter"),
+				"434" => array("message" => "Invalid 'latitude' parameter"),
+				"435" => array("message" => "Invalid 'longitude' parameter"),
+				"436" => array("message" => "Invalid placetype"),
+				"513" => array("message" => "Failed to perform lookup"),
+			),
+		),
+
 	), $GLOBALS['cfg']['api']['methods']);
 
 	########################################################################

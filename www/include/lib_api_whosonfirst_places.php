@@ -52,6 +52,67 @@
 
 	########################################################################
 
+	function api_whosonfirst_places_whereAmI(){
+
+		api_utils_features_ensure_enabled(array(
+			"pip"
+		));
+
+		$lat = request_float("latitude");
+		$lon = request_float("longitude");
+		$pt = request_str("placetype");
+
+		if (! $lat){
+			api_output_error(432);
+		}
+
+		if (! $lon){
+			api_output_error(433);
+		}
+
+		if (! geo_utils_is_valid_latitude($lat)){
+			api_output_error(434);
+		}
+
+		if (! geo_utils_is_valid_longitude($lon)){
+			api_output_error(435);
+		}
+
+		if (! $pt){
+			$pt = "venue";
+		}
+
+		if (! whosonfirst_placetypes_is_valid_placetype($pt)){
+			api_output_error(436);
+		}
+
+		$ancestors = whosonfirst_placetypes_ancestors($pt);
+		$possible = array();
+
+		foreach ($ancestors as $pt){
+
+			$more = array("placetype" => $pt);
+			$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
+
+			if (! $rsp["ok"]){
+				api_output_error(513);
+			}
+
+			if (count($rsp["rows"])){
+				$possible = $rsp["rows"];			   	
+				break;
+			} 
+		}
+
+		$out = array(
+			"debug" => $possible
+		);
+
+		api_output_ok($out);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_places_getByLatLon(){
 
 		api_utils_features_ensure_enabled(array(
