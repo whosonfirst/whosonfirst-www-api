@@ -436,13 +436,13 @@
 			"description" => "Return the closest set of ancestors (hierarchy) for a coordinate",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
-			"paginated" => 1,
-			"pagination" => "cursor",
+			"paginated" => 0,
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.766633"),
-				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.417693"),
+				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.777228"),
+				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.470779"),
+				array("name" => "placetype", "description" => "Ensure records match this placetype.", "documented" => 1, "required" => 0, "example" => "microhood"),
 			),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
@@ -452,6 +452,7 @@
 				"436" => array("message" => "Invalid placetype"),
 				"513" => array("message" => "Failed to perform lookup"),
 			),
+			"disallow_formats" => array( "meta" ),
 		),
 
 	), $GLOBALS['cfg']['api']['methods']);

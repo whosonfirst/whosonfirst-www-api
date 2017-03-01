@@ -79,7 +79,7 @@
 		}
 
 		if (! $pt){
-			$pt = "neighbourhood";
+			$pt = "microhood";
 		}
 
 		if (! whosonfirst_placetypes_is_valid_placetype($pt)){
@@ -106,8 +106,47 @@
 			} 
 		}
 
+		$results = array();
+		$keys = array();
+
+		foreach ($possible as $pip_row) {
+
+			$row = whosonfirst_places_get_by_id($pip_row["Id"]);
+
+			foreach ($row["wof:hierarchy"] as $hier){
+
+				# see below for why we're doing this
+				
+				foreach (array_keys($hier) as $k){
+
+					if (! in_array($k, $keys)){
+						$keys[] = $k;
+					}
+				}
+
+				$results[] = $hier;
+			}
+		}
+
+		# this is mostly to make sure that columns line up
+		# if someone is asking for stuff formatted as CSV
+		# (20170228/thisisaaronland)
+
+		if (count($results) > 1){
+
+			foreach ($results as &$r){
+
+				foreach ($keys as $k){
+
+					if (! isset($r[$k])){
+						$r[$k] = "";
+					}
+				}
+			}
+		}
+
 		$out = array(
-			"debug" => $possible
+			"results" => $results
 		);
 
 		api_output_ok($out);
