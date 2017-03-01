@@ -1,5 +1,7 @@
 <?php
 
+	loadlib("iso639");
+
 	loadlib("elasticsearch");
 	loadlib("elasticsearch_spelunker");
 
@@ -48,12 +50,41 @@
 
 		$seed = rand(0, time());
 
-		$empty = new stdClass;		# I hate you, PHP...
+		$empty = new stdClass;			# I hate you, PHP...
+
+		$country = iso639_random();
+		$code = $country['alpha2'];
+
+		$code = strtolower($code);	# I also hate you too, Elasticsearch...
+
+		$must = array();
+
+		$must_not = array(
+			array('term' => array('geom:latitude' => '0.0' )),
+			array('term' => array('geom:longitude' => '0.0' )),
+		);
 
 		$query = array(
 			'function_score' => array(
+
+				# the old way
+
+				# 'query' => array(
+				# 	'match_all' => $empty
+				# ),
+
+				# the new way
+
 				'query' => array(
-					'match_all' => $empty
+					'filtered' => array(
+						'query' => array('term' => array('wof:country' => $code)),
+						'filter' => array(
+							'and' => array(
+								array('bool' => array('must_not' => $must_not)),
+								array('bool' => array('must' => $must))
+							)
+						)
+					)
 				),
 				'functions' => array(
 					array('random_score' => array('seed' => $seed))
