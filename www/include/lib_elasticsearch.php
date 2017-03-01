@@ -70,7 +70,23 @@
 		# whether or not something will require a cursor so we check to see
 		# for them... because, computers... (20170227/thisisaaronland)
 
+		$pre_count = 0;
+
+		# Generally we want or need to precount things...
+
 		if ((! $more['scroll'])	|| ($page == 1)){
+			$pre_count = 1;
+		}
+
+		# But wait! There's more!! We _don't_ want to precount things
+		# if we're faceting because the scroll stuff confuses the faceting
+		# stuff. Because we can't have nice things...
+
+		if (isset($query["aggregations"])){
+			$pre_count = 0;
+		}
+
+		if ($pre_count){
 
 			$_args = $get_args;
 			$_args['size'] = 0;
@@ -166,6 +182,7 @@
 
 		$rsp = http_post($url, $body, $headers, $http_more);
 
+		# dumper($url);
 		# dumper($rsp);
 
 		$end = microtime_ms();
