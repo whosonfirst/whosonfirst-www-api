@@ -153,6 +153,28 @@
 
 		return $GLOBALS['whosonfirst_placetypes']['placetypes'][$name]['id'];
 	}
+
+	########################################################################
+
+	function whosonfirst_placetypes_ancestors($p, $roles=array('common'), $ancestors=array()){
+
+		$pt = $GLOBALS['whosonfirst_placetypes']['placetypes'][$p];
+
+		foreach ($pt['parents'] as $_p){
+
+			$_pt = $GLOBALS['whosonfirst_placetypes']['placetypes'][$_p];
+			$_r = $_pt['role'];
+
+			if ((! in_array($_p, $ancestors)) && (in_array($_r, $roles))){
+				$ancestors[] = $_p;
+			}
+
+			$ancestors = whosonfirst_placetypes_ancestors($_p, $roles, $ancestors);
+		}
+
+		return $ancestors;
+	}
+
 	########################################################################
 	
 	# the end

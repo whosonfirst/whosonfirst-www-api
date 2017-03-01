@@ -79,17 +79,19 @@
 		}
 
 		if (! $pt){
-			$pt = "venue";
+			$pt = "neighbourhood";
 		}
 
 		if (! whosonfirst_placetypes_is_valid_placetype($pt)){
 			api_output_error(436);
 		}
 
-		$ancestors = whosonfirst_placetypes_ancestors($pt);
+		$placetypes = whosonfirst_placetypes_ancestors($pt);
+		array_unshift($placetypes, $pt);
+
 		$possible = array();
 
-		foreach ($ancestors as $pt){
+		foreach ($placetypes as $pt){
 
 			$more = array("placetype" => $pt);
 			$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
