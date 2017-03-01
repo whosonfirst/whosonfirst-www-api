@@ -52,7 +52,7 @@
 
 	########################################################################
 
-	function api_whosonfirst_places_whereAmI(){
+	function api_whosonfirst_places_getAncestorsByLatLon(){
 
 		api_utils_features_ensure_enabled(array(
 			"pip"

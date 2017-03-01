@@ -95,7 +95,7 @@
 		),
 
 		'whosonfirst.concordances.getById' => array(
-			"description" => "Lookup a Who's On First record (and all its concordances) by another source identifier.",
+			"description" => "Return a Who's On First record (and all its concordances) by another source identifier.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
@@ -172,7 +172,7 @@
 		),
 
 		'whosonfirst.places.getByLatLon' => array(
-			"description" => "Lookup Who's On First places intersecting a latitude and longitude",
+			"description" => "Return Who's On First places intersecting a latitude and longitude",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
 			"paginated" => 1,
@@ -195,7 +195,7 @@
 		),
 
 		'whosonfirst.places.getInfo' => array(
-			"description" => "Lookup a Who's On First record by ID.",
+			"description" => "Return a Who's On First record by ID.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 0,
@@ -211,7 +211,7 @@
 		),
 
 		'whosonfirst.places.getDescendants' => array(
-			"description" => "Lookup all the descendants for a Who's On First ID.",
+			"description" => "Return all the descendants for a Who's On First ID.",
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 1,
@@ -228,7 +228,7 @@
 		),
 
 		'whosonfirst.places.getIntersects' => array(
-			"description" => "Lookup all the Who's On First places intersecting a bounding box.",
+			"description" => "Return all the Who's On First places intersecting a bounding box.",
 			"documented" => $GLOBALS['cfg']['enable_feature_spatial_api_docs'],
 			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_intersects'])),
 			"paginated" => 1,
@@ -260,7 +260,7 @@
 		),	
 
 		'whosonfirst.places.getNearby' => array(
-			"description" => "Lookup all the Who's On First records near a point.",
+			"description" => "Return all the Who's On First records near a point.",
 			"documented" => $GLOBALS['cfg']['enable_feature_spatial_api_docs'],
 			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_nearby'])),
 			"paginated" => 1,
@@ -432,17 +432,17 @@
 			"disallow_formats" => array( "csv", "meta" ),
 		),
 
-		'whosonfirst.places.whereAmI' => array(
-			"description" => "Return the closest set of ancestors (hierarchy) for a coordinate",
+		'whosonfirst.places.getAncestorsByLatLon' => array(
+			"description" => "Return the closest set of ancestors (hierarchies) for a latitude and longitude",
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
 			"paginated" => 0,
-			"extras" => 1,
+			"extras" => 0,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.777228"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.470779"),
-				array("name" => "placetype", "description" => "Ensure records match this placetype.", "documented" => 1, "required" => 0, "example" => "microhood"),
+				array("name" => "placetype", "description" => "Ignore places that are descendants of this placetype.", "documented" => 1, "required" => 0, "example" => "region"),
 			),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
@@ -451,6 +451,9 @@
 				"435" => array("message" => "Invalid 'longitude' parameter"),
 				"436" => array("message" => "Invalid placetype"),
 				"513" => array("message" => "Failed to perform lookup"),
+			),
+			"notes" => array(
+
 			),
 			"disallow_formats" => array( "meta" ),
 		),
