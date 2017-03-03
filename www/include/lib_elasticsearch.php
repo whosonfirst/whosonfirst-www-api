@@ -465,8 +465,25 @@
 		);
 
 		if (isset($data["_scroll_id"])){
+
 			$cursor = $data["_scroll_id"];
 			$pagination["cursor"] = $cursor;
+
+			# Why do I have to do this? I thought the whole point of cursors
+			# was not to have to do this... (20170302/thisiarronland)
+
+			if (count($data['hits']['hits']) == 0){
+
+				# The other thing is that it's important this be an empty string
+				# and not a null value because the test for generating next_query
+				# in api_utils_ensure_pagination_results() is by testing whether
+				# 'if (isset($pagination['cursor'])){'. I'm not saying that's the
+				# best way to do it only that it's the way we do it today. If
+				# there's a better way then we should do that instead...
+				# (20170302/thisisaaronland)
+
+				$pagination["cursor"] = "";
+			}
 		}
 
 		return $pagination;
