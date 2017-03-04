@@ -806,6 +806,10 @@
 
 	function elasticsearch_escape($str){
 
+		if (is_numeric($str)){
+			return intval($str);
+		}
+	
 	        # If you need to use any of the characters which function as operators in
         	# your query itself (and not as operators), then you should escape them
 	        # with a leading backslash. For instance, to search for (1+1)=2, you would

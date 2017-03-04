@@ -616,7 +616,7 @@
 
 		$out = array(
 			'results' => $rsp['rows'],
-			# 'query' => $rsp['query'],
+			# '_query' => $rsp['_query'],
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
