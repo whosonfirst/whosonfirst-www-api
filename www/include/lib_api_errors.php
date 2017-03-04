@@ -19,7 +19,7 @@
 		$is_method_error = api_errors_is_method_error($code);
 		$is_api_error    = api_errors_is_api_error($code);
 
-		# dumper("http: {$is_http_error} method: {$is_method_error} api: ${is_api_error}");
+		# error_log("http: {$is_http_error} method: {$is_method_error} api: ${is_api_error}");
 		# dumper("code ${code}");
 		# dumper($method_row["errors"]);
 

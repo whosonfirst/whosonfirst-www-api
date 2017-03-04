@@ -89,7 +89,7 @@
 				$placetype = $placetype[0];
 				$esc_placetype = elasticsearch_escape($placetype);
 
-				$filters[] = array('term' => array('wof:placetype' => $esc_placetype));
+				$filters[] = array('terms' => array('wof:placetype' => array($esc_placetype)));
 			}
 
 			else {
@@ -183,10 +183,10 @@
 			"names_colloquial" => $colloquial,
 			"names_variant" => $variant,
 			"wof:name" => $name,
-			"country_id" => $country,
-			"region_id" => $region,
-			"locality_id" => $locality,
-			"neighbourhood_id" => $neighbourhood,
+			"wof:hierarchy.country_id" => $country,
+			"wof:hierarchy.region_id" => $region,
+			"wof:hierarchy.locality_id" => $locality,
+			"wof:hierarchy.neighbourhood_id" => $neighbourhood,
 			"wof:concordances_sources" => $concordance,
 		);
 

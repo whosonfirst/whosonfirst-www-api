@@ -29,7 +29,6 @@
 		$rsp = whosonfirst_places_search($q, $filters, $args);
 
 		if (! $rsp['ok']){
-		dumper($rsp);
 			api_output_error(513);
 		}
 
@@ -43,7 +42,8 @@
 		$pagination = $rsp['pagination'];
 
 		$out = array(
-			'results' => $rsp['rows']
+			'results' => $rsp['rows'],
+			# '_query' => $rsp['_query'],
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);

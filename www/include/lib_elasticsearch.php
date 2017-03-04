@@ -210,8 +210,9 @@
 		$rsp['rows'] = $rows;
 		$rsp['pagination'] = $pagination;
 
-		log_notice('elasticsearch', $url . ' ' . $body . " HTTP {$rsp['info']['http_code']}", $rsp['info']['total_time']);
+		# log_notice('elasticsearch', $url . ' ' . $body . " HTTP {$rsp['info']['http_code']}", $rsp['info']['total_time']);
 
+		$rsp['_query'] = $query;
 		return $rsp;
 	}
 
