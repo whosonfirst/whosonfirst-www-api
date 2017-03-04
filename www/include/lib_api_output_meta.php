@@ -68,10 +68,20 @@
 
 			$str_header = implode(",", $header);
 			header("X-api-format-meta-header: " . htmlspecialchars($str_header));
-			
-			if ((! $more["is_singleton"]) && ($rsp['page'] == 1)){
-				$out = array_values($header);
-				fputcsv($fh, $out);
+
+			# sudo put me in a foo_print_header() function or something...
+			# we are doing the same in lib_api_output_csv.php
+			# (20170304/thisisaaronland)
+
+			if (! $more["is_singleton"]){
+
+				$pg_args = array();
+				api_utils_ensure_pagination_args($pg_args);
+
+				if (($pg_args['page'] == 1) && (! isset($pg_args['cursor']))){
+					$out = array_values($header);
+					fputcsv($fh, $out);
+				}
 			}
 
 			foreach ($possible as $row){
