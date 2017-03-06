@@ -43,8 +43,11 @@
 
 		$out = array(
 			'results' => $rsp['rows'],
-			# '_query' => $rsp['_query'],
 		);
+
+		if ($GLOBALS['cfg']['environment'] == 'dev'){
+			$out['_query'] = $rsp['_query'];
+		}
 
 		api_utils_ensure_pagination_results($out, $pagination);
 		api_output_ok($out);
