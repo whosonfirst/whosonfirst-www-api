@@ -1,25 +1,3 @@
-{capture assign="page_title"}Error codes | API{/capture}
-{include file="inc_head.txt"}
+## Error codes
 
-<div class="container">
-{include file="inc_api_header.txt" title="API error codes" subtitle=$subtitle subtitle_isescaped=1}
-
-</div>
-
-<div class="container">
-
-<p>In addition to any already <a href="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">assigned HTTP status codes</a> <span class="hey-look">{$cfg.site_name|@escape}</span> defines the following additional status codes for representing errors or a failure scenario, across all API methods:</p>
-
-<ul class="api-list-o-things">
-{foreach from=$errors item="row" key="code"}
-<li><strong><code>{$code|@escape}</code></strong> &#8212;  {$row.message|@escape}</li>
-{/foreach}
-</ul>
-
-<p>Individual API methods may define their own status codes within the <code>432-449</code> and <code>513-599</code> range on a per-method basis. Status codes in this range <em>may</em> be used with different meanings by different API methods and it is left to API consumers to account for those differences.</p>
-
-<p>The status codes defined above (<code>450</code>, <code>452-499</code>, <code>512</code>) are unique and common to all API methods.</p>
-
-</div>
-
-{include file="inc_foot.txt"}
+{include file="inc_api_errors.txt"}
