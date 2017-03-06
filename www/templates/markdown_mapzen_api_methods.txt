@@ -1,0 +1,8 @@
+## API Methods
+
+{foreach from=$method_classes item="class_details" key="class"}
+{foreach from=$class_details.methods item="method"}
+	{include file="inc_api_method.txt" method=$method.name details=$method}
+{/foreach}
+{/foreach}
+
