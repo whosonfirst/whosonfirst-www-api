@@ -2,7 +2,7 @@
 
 {foreach from=$method_classes item="class_details" key="class"}
 {foreach from=$class_details.methods item="method"}
-	{include file="inc_api_method.txt" method=$method.name details=$method}
+{include file="markdown_mapzen_api_method.txt" method=$method.name details=$method}
 {/foreach}
 {/foreach}
 

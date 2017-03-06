@@ -119,7 +119,7 @@
 			"paginated" => 1,
 			"library" => "api_whosonfirst_concordances",
                         "parameters" => array(),
-                        "errors" => array(),
+                        # "errors" => array(),
 			"disallow_formats" => array( "csv", "meta" ),
 		),
 
