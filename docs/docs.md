@@ -14,9 +14,7 @@
 
 _Please write me._
 
-_Something something something "stuff over HTTP". Something something something query parameters._
-
-_ Something something something `400` class errors are your fault and `500` class errors are our fault._
+_Something something something "stuff over HTTP". Something something something "query parameters". Something something something "`400` class errors are your fault and `500` class errors are our fault"._
 
 <a name="caveats"></a>
 ### Caveats
