@@ -24,7 +24,8 @@ This API method does not define any custom error codes. For the list of error co
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">api.spec.formats**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=api.spec.formats" -F "api_key=API_KEY" </pre>
 
 <a name="api.spec.methods"></a>
 ## api.spec.methods
@@ -50,7 +51,8 @@ This API method does not define any custom error codes. For the list of error co
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">api.spec.methods**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=api.spec.methods" -F "api_key=API_KEY" </pre>
 
 <a name="test.echo"></a>
 ## test.echo
@@ -76,7 +78,8 @@ This API method does not define any custom error codes. For the list of error co
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">test.echo**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=test.echo" -F "api_key=API_KEY" </pre>
 
 <a name="test.error"></a>
 ## test.error
@@ -102,7 +105,8 @@ This API method does not define any custom error codes. For the list of error co
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">test.error**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=test.error" -F "api_key=API_KEY" </pre>
 
 <a name="whosonfirst.categories.getNamespaces"></a>
 ## whosonfirst.categories.getNamespaces
@@ -132,12 +136,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.categories.getNamespaces**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "source=<strong>&lt;SOURCE&gt;**"  -F "predicate=<strong>&lt;PREDICATE&gt;**"  -F "value=<strong>&lt;VALUE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.categories.getNamespaces" -F "api_key=API_KEY"  -F "source=<strong>&lt;SOURCE&gt;"  -F "predicate=<strong>&lt;PREDICATE&gt;"  -F "value=<strong>&lt;VALUE&gt;"</pre>
 
 <a name="whosonfirst.categories.getPredicates"></a>
 ## whosonfirst.categories.getPredicates
@@ -167,12 +172,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.categories.getPredicates**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "source=<strong>&lt;SOURCE&gt;**"  -F "namespace=<strong>&lt;NAMESPACE&gt;**"  -F "value=<strong>&lt;VALUE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.categories.getPredicates" -F "api_key=API_KEY"  -F "source=<strong>&lt;SOURCE&gt;"  -F "namespace=<strong>&lt;NAMESPACE&gt;"  -F "value=<strong>&lt;VALUE&gt;"</pre>
 
 <a name="whosonfirst.categories.getSources"></a>
 ## whosonfirst.categories.getSources
@@ -200,7 +206,8 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.categories.getSources**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.categories.getSources" -F "api_key=API_KEY" </pre>
 
 <a name="whosonfirst.categories.getValues"></a>
 ## whosonfirst.categories.getValues
@@ -230,12 +237,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.categories.getValues**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "source=<strong>&lt;SOURCE&gt;**"  -F "namespace=<strong>&lt;NAMESPACE&gt;**"  -F "predicate=<strong>&lt;PREDICATE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.categories.getValues" -F "api_key=API_KEY"  -F "source=<strong>&lt;SOURCE&gt;"  -F "namespace=<strong>&lt;NAMESPACE&gt;"  -F "predicate=<strong>&lt;PREDICATE&gt;"</pre>
 
 <a name="whosonfirst.concordances.getById"></a>
 ## whosonfirst.concordances.getById
@@ -265,12 +273,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.concordances.getById**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "id=<strong class="api-param-required">&lt;ID&gt;**"  -F "source=<strong class="api-param-required">&lt;SOURCE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.concordances.getById" -F "api_key=API_KEY"  -F "id=<strong class="api-param-required">&lt;ID&gt;"  -F "source=<strong class="api-param-required">&lt;SOURCE&gt;"</pre>
 
 <a name="whosonfirst.concordances.getSources"></a>
 ## whosonfirst.concordances.getSources
@@ -294,12 +303,13 @@ This API method does not define any custom error codes. For the list of error co
 
 ### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.concordances.getSources**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.concordances.getSources" -F "api_key=API_KEY" </pre>
 
 <a name="whosonfirst.machinetags.getNamespaces"></a>
 ## whosonfirst.machinetags.getNamespaces
@@ -326,12 +336,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.machinetags.getNamespaces**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "predicate=<strong>&lt;PREDICATE&gt;**"  -F "value=<strong>&lt;VALUE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.machinetags.getNamespaces" -F "api_key=API_KEY"  -F "predicate=<strong>&lt;PREDICATE&gt;"  -F "value=<strong>&lt;VALUE&gt;"</pre>
 
 <a name="whosonfirst.machinetags.getPredicates"></a>
 ## whosonfirst.machinetags.getPredicates
@@ -358,12 +369,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.machinetags.getPredicates**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "namespace=<strong>&lt;NAMESPACE&gt;**"  -F "value=<strong>&lt;VALUE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.machinetags.getPredicates" -F "api_key=API_KEY"  -F "namespace=<strong>&lt;NAMESPACE&gt;"  -F "value=<strong>&lt;VALUE&gt;"</pre>
 
 <a name="whosonfirst.machinetags.getValues"></a>
 ## whosonfirst.machinetags.getValues
@@ -390,12 +402,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.machinetags.getValues**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "namespace=<strong>&lt;NAMESPACE&gt;**"  -F "predicate=<strong>&lt;PREDICATE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.machinetags.getValues" -F "api_key=API_KEY"  -F "namespace=<strong>&lt;NAMESPACE&gt;"  -F "predicate=<strong>&lt;PREDICATE&gt;"</pre>
 
 <a name="whosonfirst.places.getByLatLon"></a>
 ## whosonfirst.places.getByLatLon
@@ -431,12 +444,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 ### Notes
 
 * This method differs from the whosonfirst.places.getAncestorsByLatLon method in two ways: 1. It returns a list of WOF places rather than hierarchies and 2. If a placetype filter is specified and no matching records are found no attempt will be made to find ancestors higher up the hierarchy. For example looking for an intersecting county or region if no locality is found.
-* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.places.getByLatLon**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "latitude=<strong class="api-param-required">&lt;LATITUDE&gt;**"  -F "longitude=<strong class="api-param-required">&lt;LONGITUDE&gt;**"  -F "placetype=<strong>&lt;PLACETYPE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.places.getByLatLon" -F "api_key=API_KEY"  -F "latitude=<strong class="api-param-required">&lt;LATITUDE&gt;"  -F "longitude=<strong class="api-param-required">&lt;LONGITUDE&gt;"  -F "placetype=<strong>&lt;PLACETYPE&gt;"</pre>
 
 <a name="whosonfirst.places.getDescendants"></a>
 ## whosonfirst.places.getDescendants
@@ -482,12 +496,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* This API method uses <span class="hey-look">mixed</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* This API method uses <span class="hey-look">mixed</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.places.getDescendants**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "id=<strong class="api-param-required">&lt;ID&gt;**"  -F "name=<strong>&lt;NAME&gt;**"  -F "names=<strong>&lt;NAMES&gt;**"  -F "alt=<strong>&lt;ALT&gt;**"  -F "preferred=<strong>&lt;PREFERRED&gt;**"  -F "variant=<strong>&lt;VARIANT&gt;**"  -F "placetype=<strong>&lt;PLACETYPE&gt;**"  -F "tags=<strong>&lt;TAGS&gt;**"  -F "category=<strong>&lt;CATEGORY&gt;**"  -F "iso=<strong>&lt;ISO&gt;**"  -F "country_id=<strong>&lt;COUNTRY_ID&gt;**"  -F "region_id=<strong>&lt;REGION_ID&gt;**"  -F "locality_id=<strong>&lt;LOCALITY_ID&gt;**"  -F "neighbourhood_id=<strong>&lt;NEIGHBOURHOOD_ID&gt;**"  -F "concordance=<strong>&lt;CONCORDANCE&gt;**"  -F "exclude=<strong>&lt;EXCLUDE&gt;**"  -F "include=<strong>&lt;INCLUDE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.places.getDescendants" -F "api_key=API_KEY"  -F "id=<strong class="api-param-required">&lt;ID&gt;"  -F "name=<strong>&lt;NAME&gt;"  -F "names=<strong>&lt;NAMES&gt;"  -F "alt=<strong>&lt;ALT&gt;"  -F "preferred=<strong>&lt;PREFERRED&gt;"  -F "variant=<strong>&lt;VARIANT&gt;"  -F "placetype=<strong>&lt;PLACETYPE&gt;"  -F "tags=<strong>&lt;TAGS&gt;"  -F "category=<strong>&lt;CATEGORY&gt;"  -F "iso=<strong>&lt;ISO&gt;"  -F "country_id=<strong>&lt;COUNTRY_ID&gt;"  -F "region_id=<strong>&lt;REGION_ID&gt;"  -F "locality_id=<strong>&lt;LOCALITY_ID&gt;"  -F "neighbourhood_id=<strong>&lt;NEIGHBOURHOOD_ID&gt;"  -F "concordance=<strong>&lt;CONCORDANCE&gt;"  -F "exclude=<strong>&lt;EXCLUDE&gt;"  -F "include=<strong>&lt;INCLUDE&gt;"</pre>
 
 <a name="whosonfirst.places.getHierarchiesByLatLon"></a>
 ## whosonfirst.places.getHierarchiesByLatLon
@@ -524,7 +539,8 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.places.getHierarchiesByLatLon**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "latitude=<strong class="api-param-required">&lt;LATITUDE&gt;**"  -F "longitude=<strong class="api-param-required">&lt;LONGITUDE&gt;**"  -F "placetype=<strong>&lt;PLACETYPE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.places.getHierarchiesByLatLon" -F "api_key=API_KEY"  -F "latitude=<strong class="api-param-required">&lt;LATITUDE&gt;"  -F "longitude=<strong class="api-param-required">&lt;LONGITUDE&gt;"  -F "placetype=<strong>&lt;PLACETYPE&gt;"</pre>
 
 <a name="whosonfirst.places.getInfo"></a>
 ## whosonfirst.places.getInfo
@@ -552,7 +568,8 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.places.getInfo**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "id=<strong class="api-param-required">&lt;ID&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.places.getInfo" -F "api_key=API_KEY"  -F "id=<strong class="api-param-required">&lt;ID&gt;"</pre>
 
 <a name="whosonfirst.places.getIntersects"></a>
 ## whosonfirst.places.getIntersects
@@ -592,12 +609,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.places.getIntersects**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "min_latitude=<strong class="api-param-required">&lt;MIN_LATITUDE&gt;**"  -F "min_longitude=<strong class="api-param-required">&lt;MIN_LONGITUDE&gt;**"  -F "max_latitude=<strong class="api-param-required">&lt;MAX_LATITUDE&gt;**"  -F "max_longitude=<strong class="api-param-required">&lt;MAX_LONGITUDE&gt;**"  -F "placetype=<strong>&lt;PLACETYPE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.places.getIntersects" -F "api_key=API_KEY"  -F "min_latitude=<strong class="api-param-required">&lt;MIN_LATITUDE&gt;"  -F "min_longitude=<strong class="api-param-required">&lt;MIN_LONGITUDE&gt;"  -F "max_latitude=<strong class="api-param-required">&lt;MAX_LATITUDE&gt;"  -F "max_longitude=<strong class="api-param-required">&lt;MAX_LONGITUDE&gt;"  -F "placetype=<strong>&lt;PLACETYPE&gt;"</pre>
 
 <a name="whosonfirst.places.getNearby"></a>
 ## whosonfirst.places.getNearby
@@ -633,12 +651,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.places.getNearby**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "latitude=<strong class="api-param-required">&lt;LATITUDE&gt;**"  -F "longitude=<strong class="api-param-required">&lt;LONGITUDE&gt;**"  -F "placetype=<strong>&lt;PLACETYPE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.places.getNearby" -F "api_key=API_KEY"  -F "latitude=<strong class="api-param-required">&lt;LATITUDE&gt;"  -F "longitude=<strong class="api-param-required">&lt;LONGITUDE&gt;"  -F "placetype=<strong>&lt;PLACETYPE&gt;"</pre>
 
 <a name="whosonfirst.places.getParentByLatLon"></a>
 ## whosonfirst.places.getParentByLatLon
@@ -677,7 +696,8 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.places.getParentByLatLon**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "latitude=<strong class="api-param-required">&lt;LATITUDE&gt;**"  -F "longitude=<strong class="api-param-required">&lt;LONGITUDE&gt;**"  -F "placetype=<strong class="api-param-required">&lt;PLACETYPE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.places.getParentByLatLon" -F "api_key=API_KEY"  -F "latitude=<strong class="api-param-required">&lt;LATITUDE&gt;"  -F "longitude=<strong class="api-param-required">&lt;LONGITUDE&gt;"  -F "placetype=<strong class="api-param-required">&lt;PLACETYPE&gt;"</pre>
 
 <a name="whosonfirst.places.getRandom"></a>
 ## whosonfirst.places.getRandom
@@ -703,7 +723,8 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.places.getRandom**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.places.getRandom" -F "api_key=API_KEY" </pre>
 
 <a name="whosonfirst.places.search"></a>
 ## whosonfirst.places.search
@@ -748,12 +769,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* This API method uses <span class="hey-look">mixed</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* This API method uses <span class="hey-look">mixed</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.places.search**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "q=<strong>&lt;Q&gt;**"  -F "name=<strong>&lt;NAME&gt;**"  -F "names=<strong>&lt;NAMES&gt;**"  -F "alt=<strong>&lt;ALT&gt;**"  -F "preferred=<strong>&lt;PREFERRED&gt;**"  -F "variant=<strong>&lt;VARIANT&gt;**"  -F "placetype=<strong>&lt;PLACETYPE&gt;**"  -F "tags=<strong>&lt;TAGS&gt;**"  -F "category=<strong>&lt;CATEGORY&gt;**"  -F "iso=<strong>&lt;ISO&gt;**"  -F "country_id=<strong>&lt;COUNTRY_ID&gt;**"  -F "region_id=<strong>&lt;REGION_ID&gt;**"  -F "locality_id=<strong>&lt;LOCALITY_ID&gt;**"  -F "neighbourhood_id=<strong>&lt;NEIGHBOURHOOD_ID&gt;**"  -F "concordance=<strong>&lt;CONCORDANCE&gt;**"  -F "exclude=<strong>&lt;EXCLUDE&gt;**"  -F "include=<strong>&lt;INCLUDE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.places.search" -F "api_key=API_KEY"  -F "q=<strong>&lt;Q&gt;"  -F "name=<strong>&lt;NAME&gt;"  -F "names=<strong>&lt;NAMES&gt;"  -F "alt=<strong>&lt;ALT&gt;"  -F "preferred=<strong>&lt;PREFERRED&gt;"  -F "variant=<strong>&lt;VARIANT&gt;"  -F "placetype=<strong>&lt;PLACETYPE&gt;"  -F "tags=<strong>&lt;TAGS&gt;"  -F "category=<strong>&lt;CATEGORY&gt;"  -F "iso=<strong>&lt;ISO&gt;"  -F "country_id=<strong>&lt;COUNTRY_ID&gt;"  -F "region_id=<strong>&lt;REGION_ID&gt;"  -F "locality_id=<strong>&lt;LOCALITY_ID&gt;"  -F "neighbourhood_id=<strong>&lt;NEIGHBOURHOOD_ID&gt;"  -F "concordance=<strong>&lt;CONCORDANCE&gt;"  -F "exclude=<strong>&lt;EXCLUDE&gt;"  -F "include=<strong>&lt;INCLUDE&gt;"</pre>
 
 <a name="whosonfirst.placetypes.getInfo"></a>
 ## whosonfirst.placetypes.getInfo
@@ -785,7 +807,8 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.placetypes.getInfo**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "id=<strong>&lt;ID&gt;**"  -F "name=<strong>&lt;NAME&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.placetypes.getInfo" -F "api_key=API_KEY"  -F "id=<strong>&lt;ID&gt;"  -F "name=<strong>&lt;NAME&gt;"</pre>
 
 <a name="whosonfirst.placetypes.getList"></a>
 ## whosonfirst.placetypes.getList
@@ -814,7 +837,8 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.placetypes.getList**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "role=<strong>&lt;ROLE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.placetypes.getList" -F "api_key=API_KEY"  -F "role=<strong>&lt;ROLE&gt;"</pre>
 
 <a name="whosonfirst.placetypes.getRoles"></a>
 ## whosonfirst.placetypes.getRoles
@@ -840,7 +864,8 @@ This API method does not define any custom error codes. For the list of error co
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.placetypes.getRoles**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.placetypes.getRoles" -F "api_key=API_KEY" </pre>
 
 <a name="whosonfirst.sources.getInfo"></a>
 ## whosonfirst.sources.getInfo
@@ -872,7 +897,8 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.sources.getInfo**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "id=<strong>&lt;ID&gt;**"  -F "prefix=<strong>&lt;PREFIX&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.sources.getInfo" -F "api_key=API_KEY"  -F "id=<strong>&lt;ID&gt;"  -F "prefix=<strong>&lt;PREFIX&gt;"</pre>
 
 <a name="whosonfirst.sources.getList"></a>
 ## whosonfirst.sources.getList
@@ -895,7 +921,8 @@ This API method does not define any custom error codes. For the list of error co
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.sources.getList**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.sources.getList" -F "api_key=API_KEY" </pre>
 
 <a name="whosonfirst.sources.getPrefixes"></a>
 ## whosonfirst.sources.getPrefixes
@@ -918,7 +945,8 @@ This API method does not define any custom error codes. For the list of error co
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.sources.getPrefixes**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.sources.getPrefixes" -F "api_key=API_KEY" </pre>
 
 <a name="whosonfirst.tags.getSources"></a>
 ## whosonfirst.tags.getSources
@@ -944,7 +972,8 @@ This API method does not define any custom error codes. For the list of error co
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.tags.getSources**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" </pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.tags.getSources" -F "api_key=API_KEY" </pre>
 
 <a name="whosonfirst.tags.getTags"></a>
 ## whosonfirst.tags.getTags
@@ -972,12 +1001,13 @@ In addition to <a href="http://fake.com/api/errors/">default error codes</a> com
 
 ### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="http://fake.com/api/pagination/">pagination documentation</a> for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 ### Example
 
-<pre class="api-example-request">curl -X **** https://fake.com/**api/rest/** -F "method=<strong class="api-param-required">whosonfirst.tags.getTags**" -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**"  -F "source=<strong>&lt;SOURCE&gt;**"</pre>
+```
+curl -X  https://whosonfirst-api.mapzen.com -F "method=whosonfirst.tags.getTags" -F "api_key=API_KEY"  -F "source=<strong>&lt;SOURCE&gt;"</pre>
 
 <a name="pagination"></a>
 ## Pagination

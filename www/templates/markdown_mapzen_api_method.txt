@@ -74,11 +74,11 @@ This API method does not define any custom error codes. For the list of error co
 {/if}
 {if $details.paginated}
 {if $details.pagination=="cursor"}
-* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.
+* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 {elseif $details.pagination=="mixed"}
-* This API method uses <span class="hey-look">mixed</span> pagination. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.
+* This API method uses <span class="hey-look">mixed</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 {else}
-* This API method uses <span class="hey-look">plain</span> pagination. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.
+* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination) for details.
 {/if}
 {/if}
 {if $details.experimental}
@@ -89,10 +89,13 @@ This API method does not define any custom error codes. For the list of error co
 
 ### Example
 
-{if $api_request_method=='GET' and ($cfg.api_auth_type!='oauth2' or $cfg.api_oauth2_allow_get_parameters)}
-<pre class="api-example-request">curl -X **{$api_request_method|escape}** '{$cfg.api_abs_root_url}**{$cfg.api_endpoint}**?method=<strong class="api-param-required">{$method|escape}**{if $cfg.api_auth_type=='oauth2'}&access_token=<strong class="api-param-required">&lt;TOKEN&gt;**{/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;**{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'</pre>
+{if $api_request_method=='GET'}
+```
+curl -X {$api_request_method|escape} 'https://whosonfirst-api.mapzen.com/?method={$method|escape}{if $cfg.api_auth_type=='oauth2'}&api_key=API_KEY{/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
+```
 {else}
-<pre class="api-example-request">curl -X **{$api_request_method|escape}** {$cfg.api_abs_root_url}**{$cfg.api_endpoint}** -F "method=<strong class="api-param-required">{$method|escape}**"{if $cfg.api_auth_type=='oauth2'} -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;**" {/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented} -F "{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;**"{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}</pre>
+```
+curl -X {$api_request_method|escape} https://whosonfirst-api.mapzen.com -F "method={$method|escape}"{if $cfg.api_auth_type=='oauth2'} -F "api_key=API_KEY" {/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented} -F "{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;"{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}</pre>
 {/if}
 
 {if 0}
