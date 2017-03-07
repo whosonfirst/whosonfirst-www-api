@@ -7,6 +7,52 @@
 
 ## API methods
 
+
+### api.spec
+
+* [api.spec.formats](#fix-me)
+* [api.spec.methods](#fix-me)
+
+### test
+
+* [test.echo](#fix-me)
+* [test.error](#fix-me)
+
+### whosonfirst.concordances
+
+* [whosonfirst.concordances.getById](#fix-me)
+* [whosonfirst.concordances.getSources](#fix-me)
+
+### whosonfirst.places
+
+* [whosonfirst.places.getByLatLon](#fix-me)
+* [whosonfirst.places.getDescendants](#fix-me)
+* [whosonfirst.places.getHierarchiesByLatLon](#fix-me)
+* [whosonfirst.places.getInfo](#fix-me)
+* [whosonfirst.places.getIntersects](#fix-me)
+* [whosonfirst.places.getNearby](#fix-me)
+* [whosonfirst.places.getParentByLatLon](#fix-me)
+* [whosonfirst.places.getRandom](#fix-me)
+* [whosonfirst.places.search](#fix-me)
+
+### whosonfirst.placetypes
+
+* [whosonfirst.placetypes.getInfo](#fix-me)
+* [whosonfirst.placetypes.getList](#fix-me)
+* [whosonfirst.placetypes.getRoles](#fix-me)
+
+### whosonfirst.sources
+
+* [whosonfirst.sources.getInfo](#fix-me)
+* [whosonfirst.sources.getList](#fix-me)
+* [whosonfirst.sources.getPrefixes](#fix-me)
+
+### whosonfirst.tags
+
+* [whosonfirst.tags.getSources](#fix-me)
+* [whosonfirst.tags.getTags](#fix-me)
+
+
 <a name="api.spec.formats"></a>
 ### api.spec.formats
 
