@@ -6,5 +6,6 @@
 * [Error codes](#error-codes)
 
 {include file="markdown_mapzen_api_methods.txt"}
+{include file="markdown_mapzen_api_formats.txt"}
 {include file="markdown_mapzen_api_pagination.txt"}
 {include file="markdown_mapzen_api_errors.txt"}

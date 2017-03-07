@@ -1,4 +1,4 @@
-## API Methods
+## API methods
 
 {foreach from=$method_classes item="class_details" key="class"}
 {foreach from=$class_details.methods item="method"}

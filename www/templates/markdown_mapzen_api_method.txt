@@ -1,5 +1,5 @@
 <a name="{$method|escape}"></a>
-## {$method|escape}
+### {$method|escape}
 
 {$details.description|@trim|@escape}
 {if $details.requires_auth || $details.requires_blessing || !$details.documented || !$details.enabled}
@@ -9,11 +9,11 @@
 {if !$details.documented}* This method is **undocumented**.{/if}
 {if !$details.enabled}* This method is **disabled**.{/if}{/if}
 
-### HTTP method
+#### HTTP method
 
-`{$api_request_method|escape}`
+GET
 
-### Arguments
+#### Arguments
 
 {if $details.parameters|@count or $cfg.api_auth_type=='oauth2' or $cfg.paginated}
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
@@ -49,7 +49,7 @@
 None
 {/if}
 
-### Errors
+#### Errors
 
 {if $details.errors|@count}
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
@@ -64,7 +64,7 @@ This API method does not define any custom error codes. For the list of error co
 {/if}
 
 {if $details.notes|@count or $details.paginated or $details.experimental or $details.disallow_formats|@count}
-### Notes
+#### Notes
 
 {foreach from=$details.notes item="note"}
 * {$note|escape}
@@ -84,10 +84,9 @@ This API method does not define any custom error codes. For the list of error co
 {if $details.experimental}
 * This API method is <span class="hey-look">experimental</span>. Both its inputs and outputs <em>may</em> change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
 {/if}
-
 {/if}
 
-### Example
+#### Example
 
 {if $api_request_method=='GET'}
 ```
@@ -95,7 +94,8 @@ curl -X {$api_request_method|escape} 'https://whosonfirst-api.mapzen.com/?method
 ```
 {else}
 ```
-curl -X {$api_request_method|escape} https://whosonfirst-api.mapzen.com -F "method={$method|escape}"{if $cfg.api_auth_type=='oauth2'} -F "api_key=API_KEY" {/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented} -F "{$param.name|escape}=&lt;{$param.name|strtoupper|escape}&gt;"{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}</pre>
+curl -X {$api_request_method|escape} https://whosonfirst-api.mapzen.com -F "method={$method|escape}"{if $cfg.api_auth_type=='oauth2'} -F "api_key=API_KEY" {/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented} -F "{$param.name|escape}=&lt;{$param.name|strtoupper|escape}&gt;"{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}
+```
 {/if}
 
 {if 0}
