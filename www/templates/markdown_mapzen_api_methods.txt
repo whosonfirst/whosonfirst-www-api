@@ -8,6 +8,7 @@
 
 {foreach from=$class_details.methods item="method"}
 * [{$method.name|escape}](#{$method.name|escape}){if $method.experimental} _experimental_{/if}
+
 {/foreach}
 
 {/foreach}

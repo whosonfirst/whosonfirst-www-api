@@ -10,25 +10,48 @@
 
 #### api.spec
 
-* [api.spec.formats](#api.spec.formats)* [api.spec.methods](#api.spec.methods)
+* [api.spec.formats](#api.spec.formats)
+* [api.spec.methods](#api.spec.methods)
+
 #### test
 
-* [test.echo](#test.echo)* [test.error](#test.error)
+* [test.echo](#test.echo)
+* [test.error](#test.error)
+
 #### whosonfirst.concordances
 
-* [whosonfirst.concordances.getById](#whosonfirst.concordances.getById)* [whosonfirst.concordances.getSources](#whosonfirst.concordances.getSources)
+* [whosonfirst.concordances.getById](#whosonfirst.concordances.getById)
+* [whosonfirst.concordances.getSources](#whosonfirst.concordances.getSources)
+
 #### whosonfirst.places
 
-* [whosonfirst.places.getByLatLon](#whosonfirst.places.getByLatLon)* [whosonfirst.places.getDescendants](#whosonfirst.places.getDescendants)* [whosonfirst.places.getHierarchiesByLatLon](#whosonfirst.places.getHierarchiesByLatLon)* [whosonfirst.places.getInfo](#whosonfirst.places.getInfo)* [whosonfirst.places.getIntersects](#whosonfirst.places.getIntersects)* [whosonfirst.places.getNearby](#whosonfirst.places.getNearby)* [whosonfirst.places.getParentByLatLon](#whosonfirst.places.getParentByLatLon) _experimental_* [whosonfirst.places.getRandom](#whosonfirst.places.getRandom)* [whosonfirst.places.search](#whosonfirst.places.search)
+* [whosonfirst.places.getByLatLon](#whosonfirst.places.getByLatLon)
+* [whosonfirst.places.getDescendants](#whosonfirst.places.getDescendants)
+* [whosonfirst.places.getHierarchiesByLatLon](#whosonfirst.places.getHierarchiesByLatLon)
+* [whosonfirst.places.getInfo](#whosonfirst.places.getInfo)
+* [whosonfirst.places.getIntersects](#whosonfirst.places.getIntersects)
+* [whosonfirst.places.getNearby](#whosonfirst.places.getNearby)
+* [whosonfirst.places.getParentByLatLon](#whosonfirst.places.getParentByLatLon) _experimental_
+* [whosonfirst.places.getRandom](#whosonfirst.places.getRandom)
+* [whosonfirst.places.search](#whosonfirst.places.search)
+
 #### whosonfirst.placetypes
 
-* [whosonfirst.placetypes.getInfo](#whosonfirst.placetypes.getInfo)* [whosonfirst.placetypes.getList](#whosonfirst.placetypes.getList)* [whosonfirst.placetypes.getRoles](#whosonfirst.placetypes.getRoles)
+* [whosonfirst.placetypes.getInfo](#whosonfirst.placetypes.getInfo)
+* [whosonfirst.placetypes.getList](#whosonfirst.placetypes.getList)
+* [whosonfirst.placetypes.getRoles](#whosonfirst.placetypes.getRoles)
+
 #### whosonfirst.sources
 
-* [whosonfirst.sources.getInfo](#whosonfirst.sources.getInfo)* [whosonfirst.sources.getList](#whosonfirst.sources.getList)* [whosonfirst.sources.getPrefixes](#whosonfirst.sources.getPrefixes)
+* [whosonfirst.sources.getInfo](#whosonfirst.sources.getInfo)
+* [whosonfirst.sources.getList](#whosonfirst.sources.getList)
+* [whosonfirst.sources.getPrefixes](#whosonfirst.sources.getPrefixes)
+
 #### whosonfirst.tags
 
-* [whosonfirst.tags.getSources](#whosonfirst.tags.getSources)* [whosonfirst.tags.getTags](#whosonfirst.tags.getTags)
+* [whosonfirst.tags.getSources](#whosonfirst.tags.getSources)
+* [whosonfirst.tags.getTags](#whosonfirst.tags.getTags)
+
 
 <a name="api.spec.formats"></a>
 ### api.spec.formats
