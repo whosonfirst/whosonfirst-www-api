@@ -21,9 +21,9 @@ _Something something something "stuff over HTTP". Something something something 
 
 You should treat this API as though it were in "beta".
 
-Which is to say: The point is for the thing to _work_ but there are probably still some rough edges and lingering gotchas so you should adjust your expectations and your code accordingly. In the meantime have at it and please let us know if something is busted or just doesn't feel right.
+Which is to say: The point is for _the thing to work_ but there are probably still some rough edges and lingering gotchas so you should adjust your expectations and your code accordingly. In the meantime have at it and please let us know if something is busted or just doesn't feel right.
 
-Also some methods are "more beta" than others. These methods are flagged as being `experimental` which means that both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+Also some methods are "more beta" than others. These methods are flagged as being `experimental` which means that both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach these API methods defensively.
 
 ## API methods
 
@@ -974,10 +974,10 @@ For example, let's say you wanted to use the API to fetch all the places with a 
 {
 	"results": [ ... ],
 	"next_query": "method=whosonfirst.places.search&alt=Paris&per_page=5&page=2",
-	<strong>"total": 7</strong>,
-	<strong>"page": 1</strong>,
-	<strong>"per_page": 5</strong>,
-	<strong>"pages": 2</strong>,
+	"total": 7,
+	"page": 1,
+	"per_page": 5,
+	"pages": 2,
 	"cursor": null,
 	"stat": "ok"
 }
@@ -997,7 +997,7 @@ For example, let's say you wanted to use the API to fetch all of the venues near
 	"results": [ ... ],
 	"next_query": "method=whosonfirst.places.getNearby&latitude=40.784165&longitude=-73.958110&placetype=venue&per_page=10&cursor={CURSOR}",
 	"per_page": 10,
-	<strong>"cursor": {CURSOR}</strong>,
+	"cursor": {CURSOR},
 	"stat": "ok"
 }
 ```
@@ -1017,11 +1017,11 @@ For example, let's say you wanted to use the API to fetch all the <code>microhoo
 {
 	"results": [ ... ],
 	"next_query": "method=whosonfirst.places.search&placetype=microhood&page=2&per_page=5",
-	<strong>"total": 186</strong>,
-	<strong>"page": 1</strong>,
+	"total": 186,
+	"page": 1,
 	"per_page": 5,
-	<strong>"pages": 38</strong>,
-	<strong>"cursor": null</strong>,
+	"pages": 38,
+	"cursor": null,
 	"stat": "ok"
 }
 ```
@@ -1032,11 +1032,11 @@ But if you then asked the API to fetch all of the <code>neighbourhoods</code>, a
 {
 	"results": [ ... ],
 	"next_query": "method=whosonfirst.places.search&placetype=neighbourhood&per_page=5&cursor={CURSOR}",
-	<strong>"total": 81065</strong>,
-	<strong>"page": null</strong>,
-	<strong>"pages": 16213</strong>,
+	"total": 81065,
+	"page": null,
+	"pages": 16213,
 	"per_page": 5,
-	<strong>"cursor": "{CURSOR}"</strong>,
+	"cursor": "{CURSOR}",
 	"stat": "ok"
 }
 ```
@@ -1055,7 +1055,7 @@ For example, let's say you wanted to use the API to fetch all the localities (th
 ```
 {
 	"results": [ ... ],
-	<strong>"next_query": "method=whosonfirst.places.search&placetype=locality&per_page=5&cursor={CURSOR}"</strong>,
+	"next_query": "method=whosonfirst.places.search&placetype=locality&per_page=5&cursor={CURSOR}",
 	"total": 208214,
 	"page": null,
 	"pages": 41643,
@@ -1085,21 +1085,21 @@ For example:
 ```
 $> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=API_KEY&q=poutine&extras=geom:bbox&page=1&format=csv&per_page=1'
 
-&lt; HTTP/1.1 200 OK
-&lt; Access-Control-Allow-Origin: *
-&lt; Content-Type: text/csv
-&lt; Date: Tue, 28 Feb 2017 21:13:37 GMT
-&lt; Status: 200 OK
-<strong>&lt; X-api-pagination-cursor: 
-&lt; X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
-&lt; X-api-pagination-page: 1
-&lt; X-api-pagination-pages: 13
-&lt; X-api-pagination-per-page: 1
-&lt; X-api-pagination-total: 13</strong>
-&lt; X-whosonfirst-csv-header: geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
-&lt; Content-Length: 208
-&lt; Connection: keep-alive
-&lt; 
+< HTTP/1.1 200 OK
+< Access-Control-Allow-Origin: *
+< Content-Type: text/csv
+< Date: Tue, 28 Feb 2017 21:13:37 GMT
+< Status: 200 OK
+< X-api-pagination-cursor: 
+< X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
+< X-api-pagination-page: 1
+< X-api-pagination-pages: 13
+< X-api-pagination-per-page: 1
+< X-api-pagination-total: 13
+< X-whosonfirst-csv-header: geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
+< Content-Length: 208
+< Connection: keep-alive
+< 
 geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
 "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
 ```
