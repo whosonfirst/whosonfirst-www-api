@@ -14,7 +14,7 @@ Return the list of valid API response formats, including the default format
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -24,6 +24,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 #### Example
 
 ```
@@ -37,7 +38,7 @@ Return the list of available API response methods.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -47,6 +48,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 #### Example
 
 ```
@@ -60,7 +62,7 @@ A testing method which echo&#039;s all parameters back in the response.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -70,6 +72,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 #### Example
 
 ```
@@ -83,7 +86,7 @@ Return a test error from the API
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -93,6 +96,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 #### Example
 
 ```
@@ -106,12 +110,12 @@ Return a Who&#039;s On First record (and all its concordances) by another source
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **id** _required_ &#8212; The ID of concordance you are looking for
 * **source** _required_ &#8212; The source prefix of the concordance you are looking for
 * **page** &#8212; The default is 1.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
 
@@ -124,6 +128,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
+
 
 #### Example
 
@@ -138,10 +143,10 @@ List all the sources that Who&#039;s On First holds hands with.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **page** &#8212; The default is 1.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
 
@@ -150,6 +155,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
+
 
 #### Example
 
@@ -164,14 +170,14 @@ Return Who&#039;s On First places intersecting a latitude and longitude
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **latitude** _required_ &#8212; A valid latitude coordinate.
 * **longitude** _required_ &#8212; A valid longitude coordinate.
 * **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
 
@@ -189,6 +195,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * This method differs from the whosonfirst.places.getAncestorsByLatLon method in two ways: 1. It returns a list of WOF places rather than hierarchies and 2. If a placetype filter is specified and no matching records are found no attempt will be made to find ancestors higher up the hierarchy. For example looking for an intersecting county or region if no locality is found.
 * This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination-cursor) for details.
 
+
 #### Example
 
 ```
@@ -202,8 +209,7 @@ Return all the descendants for a Who&#039;s On First ID.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **id** _required_ &#8212; A valid Who&#039;s On First ID
 * **name**  &#8212; Query for this value in the wof:name field.
 * **names**  &#8212; Query for this value across all name related fields.
@@ -225,6 +231,7 @@ Return all the descendants for a Who&#039;s On First ID.
 * **cursor** &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.
 * **page** &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
 
@@ -236,6 +243,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Notes
 
 * This API method uses <span class="hey-look">mixed</span> pagination. Please consult the [pagination documentation](#pagination-mixed) for details.
+
 
 #### Example
 
@@ -250,11 +258,11 @@ Return the closest set of ancestors (hierarchies) for a latitude and longitude
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **latitude** _required_ &#8212; A valid latitude coordinate.
 * **longitude** _required_ &#8212; A valid longitude coordinate.
 * **placetype**  &#8212; Skip descendants of this placetype.
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
 
@@ -271,6 +279,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * This method differs from whosonfirst.places.getByLatLon method in two ways: 1. It returns a list of hierarchies rather than a WOF place record and 2. It will travel up the hierarchy until an ancestor is found. For example even if there is no locality matching a given lat, lon the code will try again looking for a matching region, and so on.
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [meta](#formats-meta)
+
 #### Example
 
 ```
@@ -284,10 +293,10 @@ Return a Who&#039;s On First record by ID.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **id** _required_ &#8212; A valid Who&#039;s On First ID.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
 
@@ -295,6 +304,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * `432` &#8212; Missing &#039;id&#039; parameter
 * `513` &#8212; Unable to retrieve place
+
 
 
 #### Example
@@ -310,8 +320,7 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **min_latitude** _required_ &#8212; A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box.
 * **min_longitude** _required_ &#8212; A valid longitude coordinate, representing the left (Western) edge of the bounding box.
 * **max_latitude** _required_ &#8212; A valid latitude coordinate, representing the top (Northern) edge of the bounding box.
@@ -320,6 +329,7 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
 
@@ -339,6 +349,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination-cursor) for details.
 
+
 #### Example
 
 ```
@@ -352,14 +363,14 @@ Return all the Who&#039;s On First records near a point.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **latitude** _required_ &#8212; A valid latitude coordinate.
 * **longitude** _required_ &#8212; A valid longitude coordinate.
 * **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
 
@@ -377,6 +388,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination-cursor) for details.
 
+
 #### Example
 
 ```
@@ -390,11 +402,11 @@ Return Who&#039;s On First parent ID for a latitude and longitude and placetype
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **latitude** _required_ &#8212; A valid latitude coordinate.
 * **longitude** _required_ &#8212; A valid longitude coordinate.
 * **placetype** _required_ &#8212; A valid Who&#039;s On First placetype to limit the query by.
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
 
@@ -413,6 +425,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * The inability to locate (or to disambiguate) a parent ID for a lat, lon will not trigger an API error. The following parent IDs may be returned by this API method: &#039;-1&#039; which means that a parent ID could not be identified or that there are multiple choices; or &#039;-3&#039; which means that the parent is a neighbourhood and their are multiple possible choices and you should go out for a beer and argue over which is the correct parent.
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method is <span class="hey-look">experimental</span>. Both its inputs and outputs <em>may</em> change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
 
+
 #### Example
 
 ```
@@ -426,15 +439,16 @@ Return a random Who&#039;s On First record.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
 * `513` &#8212; Unable to retrieve random place.
+
 
 
 #### Example
@@ -450,8 +464,7 @@ Query for Who&#039;s On First records.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **q**  &#8212; Query for this value across all fields.
 * **name**  &#8212; Query for this value in the wof:name field.
 * **names**  &#8212; Query for this value across all name related fields.
@@ -473,6 +486,7 @@ Query for Who&#039;s On First records.
 * **cursor** &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.
 * **page** &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
 
@@ -483,6 +497,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Notes
 
 * This API method uses <span class="hey-look">mixed</span> pagination. Please consult the [pagination documentation](#pagination-mixed) for details.
+
 
 #### Example
 
@@ -497,10 +512,10 @@ Return details for a Who&#039;s On First placetype.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **id**  &#8212; A valid Who&#039;s On First placetype ID.
 * **name**  &#8212; A valid Who&#039;s On First placetype name.
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
 
@@ -513,6 +528,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * Although the &quot;id&quot; and &quot;name&quot; parameters are each marked as optional, you need to pass at least one of them. The order of precedence is &quot;id&quot; followed by &quot;name&quot;.
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 #### Example
 
 ```
@@ -526,9 +542,9 @@ Return a list of Who&#039;s On First placetypes.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **role**  &#8212; Only return placetypes that are part of this role.
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
 
@@ -539,6 +555,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 #### Example
 
 ```
@@ -552,7 +569,7 @@ Return a list of Who&#039;s On First placetype roles.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -562,6 +579,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 #### Example
 
 ```
@@ -575,10 +593,10 @@ Return details for a Who&#039;s On First source.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **id**  &#8212; A valid Who&#039;s On First source ID.
 * **prefix**  &#8212; A valid Who&#039;s On First source prefix.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
 
@@ -590,6 +608,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Notes
 
 * Although the &quot;id&quot; and &quot;prefix&quot; parameters are each marked as optional, you need to pass at least one of them. The order of precedence is &quot;id&quot; followed by &quot;prefix&quot;.
+
 
 #### Example
 
@@ -604,12 +623,13 @@ Return the list of Who&#039;s On First sources.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
 
 This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](#error-codes) documentation.
+
 
 
 #### Example
@@ -625,12 +645,13 @@ Return the list of prefixes for all Who&#039;s On First sources.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
 
 This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](#error-codes) documentation.
+
 
 
 #### Example
@@ -646,7 +667,7 @@ Return the list of sources for all the tags in Who&#039;s On First.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -656,6 +677,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 #### Example
 
 ```
@@ -669,11 +691,11 @@ Return the list of unique tags n Who&#039;s On First.
 
 #### Arguments
 
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **source**  &#8212; Limit results to categories from this source.
 * **page** &#8212; The default is 1.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
 
@@ -685,6 +707,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
+
 
 #### Example
 

@@ -5,13 +5,7 @@
 
 #### Arguments
 
-{if $details.parameters|@count or $cfg.api_auth_type=='oauth2' or $cfg.paginated}
-* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-{if $details.disallow_formats|@count}
-* **format** &#8212; The format in which to return the data. Normally supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](#formats-{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach} however the following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}<a href="{$cfg.abs_root_url}formats/{$fmt|@escape}/">{$fmt|@escape}</a>{if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](#formats-{$default_format|@escape}).
-{else}
-* **format** &#8212; The format in which to return the data. Supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](#formats-{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](#formats-{$default_format|@escape})</a>.
-{/if}
+* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 {if $details.parameters|@count}
 {foreach from=$details.parameters item="param"}
 {if $param.documented || 'admin'|@auth_has_role}
@@ -35,8 +29,10 @@
 * **per_page** &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.
 {/if}
 {/if}
+{if $details.disallow_formats|@count}
+* **format** &#8212; The format in which to return the data. Normally supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](#formats-{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach} however the following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}<a href="{$cfg.abs_root_url}formats/{$fmt|@escape}/">{$fmt|@escape}</a>{if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](#formats-{$default_format|@escape}).
 {else}
-None
+* **format** &#8212; The format in which to return the data. Supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](#formats-{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](#formats-{$default_format|@escape})</a>.
 {/if}
 
 #### Error codes
@@ -75,6 +71,7 @@ This API method does not define any custom error codes. For the list of error co
 * This API method is <span class="hey-look">experimental</span>. Both its inputs and outputs <em>may</em> change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
 {/if}
 {/if}
+
 
 #### Example
 
