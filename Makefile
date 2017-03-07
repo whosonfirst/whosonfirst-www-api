@@ -1,4 +1,4 @@
-docs:
+mz-docs:
 	php -q ./bin/mk_markdown_docs.php > docs/docs.md
 
 templates:
