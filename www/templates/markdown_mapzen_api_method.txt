@@ -57,6 +57,7 @@ This API method does not define any custom error codes. For the list of error co
 {/foreach}
 {if $details.disallow_formats|@count}
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](#formats-{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}
+
 {/if}
 {if $details.paginated}
 {if $details.pagination=="cursor"}

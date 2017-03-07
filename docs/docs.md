@@ -48,6 +48,7 @@ This API method does not define any custom error codes. For the list of error co
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 
+
 #### Example
 
 ```
@@ -72,6 +73,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 
 #### Example
 
@@ -98,6 +100,7 @@ This API method does not define any custom error codes. For the list of error co
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 
+
 #### Example
 
 ```
@@ -122,6 +125,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 
 #### Example
 
@@ -154,7 +158,8 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses [plain](#pagination-plain) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+* This API method uses [plain](#pagination-plain) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
@@ -182,7 +187,8 @@ This API method does not define any custom error codes. For the list of error co
 
 #### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses [plain](#pagination-plain) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+* This API method uses [plain](#pagination-plain) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
@@ -310,6 +316,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * This method differs from whosonfirst.places.getByLatLon method in two ways: 1. It returns a list of hierarchies rather than a WOF place record and 2. It will travel up the hierarchy until an ancestor is found. For example even if there is no locality matching a given lat, lon the code will try again looking for a matching region, and so on.
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [meta](#formats-meta)
+
 
 #### Example
 
@@ -458,7 +465,8 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Notes
 
 * The inability to locate (or to disambiguate) a parent ID for a lat, lon will not trigger an API error. The following parent IDs may be returned by this API method: &#039;-1&#039; which means that a parent ID could not be identified or that there are multiple choices; or &#039;-3&#039; which means that the parent is a neighbourhood and their are multiple possible choices and you should go out for a beer and argue over which is the correct parent.
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method is <span class="hey-look">experimental</span>. Both its inputs and outputs <em>may</em> change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+* This API method is <span class="hey-look">experimental</span>. Both its inputs and outputs <em>may</em> change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
 
 
 #### Example
@@ -567,6 +575,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * Although the &quot;id&quot; and &quot;name&quot; parameters are each marked as optional, you need to pass at least one of them. The order of precedence is &quot;id&quot; followed by &quot;name&quot;.
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 
+
 #### Example
 
 ```
@@ -595,6 +604,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 
+
 #### Example
 
 ```
@@ -619,6 +629,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+
 
 #### Example
 
@@ -722,6 +733,7 @@ This API method does not define any custom error codes. For the list of error co
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 
+
 #### Example
 
 ```
@@ -751,7 +763,8 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses [plain](#pagination-plain) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
+* This API method uses [plain](#pagination-plain) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
