@@ -14,7 +14,7 @@ Return the list of valid API response formats, including the default format
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -25,6 +25,10 @@ This API method does not define any custom error codes. For the list of error co
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 #### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.formats...`
+```
 
 <a name="api.spec.methods"></a>
 ### api.spec.methods
@@ -33,7 +37,7 @@ Return the list of available API response methods.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -44,6 +48,10 @@ This API method does not define any custom error codes. For the list of error co
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 #### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.methods...`
+```
 
 <a name="test.echo"></a>
 ### test.echo
@@ -52,7 +60,7 @@ A testing method which echo&#039;s all parameters back in the response.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -63,6 +71,10 @@ This API method does not define any custom error codes. For the list of error co
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 #### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=test.echo...`
+```
 
 <a name="test.error"></a>
 ### test.error
@@ -71,7 +83,7 @@ Return a test error from the API
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -83,6 +95,10 @@ This API method does not define any custom error codes. For the list of error co
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=test.error...`
+```
+
 <a name="whosonfirst.concordances.getById"></a>
 ### whosonfirst.concordances.getById
 
@@ -90,10 +106,10 @@ Return a Who&#039;s On First record (and all its concordances) by another source
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
-* **id <span class="text-danger">(required)</span>** &#8212; The ID of concordance you are looking for
-* **source <span class="text-danger">(required)</span>** &#8212; The source prefix of the concordance you are looking for
+* **id** _required_ &#8212; The ID of concordance you are looking for
+* **source** _required_ &#8212; The source prefix of the concordance you are looking for
 * **page** &#8212; The default is 1.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
 
@@ -111,6 +127,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getById...`
+```
+
 <a name="whosonfirst.concordances.getSources"></a>
 ### whosonfirst.concordances.getSources
 
@@ -118,7 +138,7 @@ List all the sources that Who&#039;s On First holds hands with.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **page** &#8212; The default is 1.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
@@ -133,6 +153,10 @@ This API method does not define any custom error codes. For the list of error co
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getSources...`
+```
+
 <a name="whosonfirst.places.getByLatLon"></a>
 ### whosonfirst.places.getByLatLon
 
@@ -140,11 +164,11 @@ Return Who&#039;s On First places intersecting a latitude and longitude
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
-* **latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate.
-* **longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate.
-* **placetype <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First placetype to limit the query by.
+* **latitude** _required_ &#8212; A valid latitude coordinate.
+* **longitude** _required_ &#8212; A valid longitude coordinate.
+* **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
@@ -167,6 +191,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getByLatLon...`
+```
+
 <a name="whosonfirst.places.getDescendants"></a>
 ### whosonfirst.places.getDescendants
 
@@ -174,25 +202,25 @@ Return all the descendants for a Who&#039;s On First ID.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
-* **id <span class="text-danger">(required)</span>** &#8212; A valid Who&#039;s On First ID
-* **name <span class="text-danger"></span>** &#8212; Query for this value in the wof:name field.
-* **names <span class="text-danger"></span>** &#8212; Query for this value across all name related fields.
-* **alt <span class="text-danger"></span>** &#8212; Query for this value across all alternate name related fields (variant, colloquial, unknown).
-* **preferred <span class="text-danger"></span>** &#8212; Query for this value across all preferred name related fields.
-* **variant <span class="text-danger"></span>** &#8212; Query for this value across all variant name related fields.
-* **placetype <span class="text-danger"></span>** &#8212; Ensure records match this placetype.
-* **tags <span class="text-danger"></span>** &#8212; Query for places with one or more of these tags.
-* **category <span class="text-danger"></span>** &#8212; Query for places with one or more of these categories.
-* **iso <span class="text-danger"></span>** &#8212; Ensure places belong to this (ISO) country code.
-* **country_id <span class="text-danger"></span>** &#8212; Ensure places belong to this country Who&#039;s On First ID.
-* **region_id <span class="text-danger"></span>** &#8212; Ensure places belong to this region Who&#039;s On First ID.
-* **locality_id <span class="text-danger"></span>** &#8212; Ensure places belong to this locality Who&#039;s On First ID.
-* **neighbourhood_id <span class="text-danger"></span>** &#8212; Ensure places belong to this neighbourhood Who&#039;s On First ID.
-* **concordance <span class="text-danger"></span>** &#8212; Query for places that have been concordified with this source.
-* **exclude <span class="text-danger"></span>** &#8212; Exclude places matching these criteria.
-* **include <span class="text-danger"></span>** &#8212; Include places matching these criteria.
+* **id** _required_ &#8212; A valid Who&#039;s On First ID
+* **name**  &#8212; Query for this value in the wof:name field.
+* **names**  &#8212; Query for this value across all name related fields.
+* **alt**  &#8212; Query for this value across all alternate name related fields (variant, colloquial, unknown).
+* **preferred**  &#8212; Query for this value across all preferred name related fields.
+* **variant**  &#8212; Query for this value across all variant name related fields.
+* **placetype**  &#8212; Ensure records match this placetype.
+* **tags**  &#8212; Query for places with one or more of these tags.
+* **category**  &#8212; Query for places with one or more of these categories.
+* **iso**  &#8212; Ensure places belong to this (ISO) country code.
+* **country_id**  &#8212; Ensure places belong to this country Who&#039;s On First ID.
+* **region_id**  &#8212; Ensure places belong to this region Who&#039;s On First ID.
+* **locality_id**  &#8212; Ensure places belong to this locality Who&#039;s On First ID.
+* **neighbourhood_id**  &#8212; Ensure places belong to this neighbourhood Who&#039;s On First ID.
+* **concordance**  &#8212; Query for places that have been concordified with this source.
+* **exclude**  &#8212; Exclude places matching these criteria.
+* **include**  &#8212; Include places matching these criteria.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.
 * **page** &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details.
@@ -211,6 +239,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDescendants...`
+```
+
 <a name="whosonfirst.places.getHierarchiesByLatLon"></a>
 ### whosonfirst.places.getHierarchiesByLatLon
 
@@ -218,11 +250,11 @@ Return the closest set of ancestors (hierarchies) for a latitude and longitude
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
-* **latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate.
-* **longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate.
-* **placetype <span class="text-danger"></span>** &#8212; Skip descendants of this placetype.
+* **latitude** _required_ &#8212; A valid latitude coordinate.
+* **longitude** _required_ &#8212; A valid longitude coordinate.
+* **placetype**  &#8212; Skip descendants of this placetype.
 
 #### Error codes
 
@@ -241,6 +273,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [meta](#formats-meta)
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getHierarchiesByLatLon...`
+```
+
 <a name="whosonfirst.places.getInfo"></a>
 ### whosonfirst.places.getInfo
 
@@ -248,9 +284,9 @@ Return a Who&#039;s On First record by ID.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
-* **id <span class="text-danger">(required)</span>** &#8212; A valid Who&#039;s On First ID.
+* **id** _required_ &#8212; A valid Who&#039;s On First ID.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 
 #### Error codes
@@ -263,6 +299,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfo...`
+```
+
 <a name="whosonfirst.places.getIntersects"></a>
 ### whosonfirst.places.getIntersects
 
@@ -270,13 +310,13 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
-* **min_latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box.
-* **min_longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate, representing the left (Western) edge of the bounding box.
-* **max_latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate, representing the top (Northern) edge of the bounding box.
-* **max_longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate, representing the right (Eastern) edge of the bounding box.
-* **placetype <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First placetype to limit the query by.
+* **min_latitude** _required_ &#8212; A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box.
+* **min_longitude** _required_ &#8212; A valid longitude coordinate, representing the left (Western) edge of the bounding box.
+* **max_latitude** _required_ &#8212; A valid latitude coordinate, representing the top (Northern) edge of the bounding box.
+* **max_longitude** _required_ &#8212; A valid longitude coordinate, representing the right (Eastern) edge of the bounding box.
+* **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
@@ -301,6 +341,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects...`
+```
+
 <a name="whosonfirst.places.getNearby"></a>
 ### whosonfirst.places.getNearby
 
@@ -308,11 +352,11 @@ Return all the Who&#039;s On First records near a point.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
-* **latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate.
-* **longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate.
-* **placetype <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First placetype to limit the query by.
+* **latitude** _required_ &#8212; A valid latitude coordinate.
+* **longitude** _required_ &#8212; A valid longitude coordinate.
+* **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
@@ -335,6 +379,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby...`
+```
+
 <a name="whosonfirst.places.getParentByLatLon"></a>
 ### whosonfirst.places.getParentByLatLon
 
@@ -342,11 +390,11 @@ Return Who&#039;s On First parent ID for a latitude and longitude and placetype
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
-* **latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate.
-* **longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate.
-* **placetype <span class="text-danger">(required)</span>** &#8212; A valid Who&#039;s On First placetype to limit the query by.
+* **latitude** _required_ &#8212; A valid latitude coordinate.
+* **longitude** _required_ &#8212; A valid longitude coordinate.
+* **placetype** _required_ &#8212; A valid Who&#039;s On First placetype to limit the query by.
 
 #### Error codes
 
@@ -367,6 +415,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getParentByLatLon...`
+```
+
 <a name="whosonfirst.places.getRandom"></a>
 ### whosonfirst.places.getRandom
 
@@ -374,7 +426,7 @@ Return a random Who&#039;s On First record.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 
@@ -387,6 +439,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRandom...`
+```
+
 <a name="whosonfirst.places.search"></a>
 ### whosonfirst.places.search
 
@@ -394,25 +450,25 @@ Query for Who&#039;s On First records.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
-* **q <span class="text-danger"></span>** &#8212; Query for this value across all fields.
-* **name <span class="text-danger"></span>** &#8212; Query for this value in the wof:name field.
-* **names <span class="text-danger"></span>** &#8212; Query for this value across all name related fields.
-* **alt <span class="text-danger"></span>** &#8212; Query for this value across all alternate name related fields (variant, colloquial, unknown).
-* **preferred <span class="text-danger"></span>** &#8212; Query for this value across all preferred name related fields.
-* **variant <span class="text-danger"></span>** &#8212; Query for this value across all variant name related fields.
-* **placetype <span class="text-danger"></span>** &#8212; Ensure records match this placetype.
-* **tags <span class="text-danger"></span>** &#8212; Query for places with one or more of these tags.
-* **category <span class="text-danger"></span>** &#8212; Query for places with one or more of these categories.
-* **iso <span class="text-danger"></span>** &#8212; Ensure places belong to this (ISO) country code.
-* **country_id <span class="text-danger"></span>** &#8212; Ensure places belong to this country Who&#039;s On First ID.
-* **region_id <span class="text-danger"></span>** &#8212; Ensure places belong to this region Who&#039;s On First ID.
-* **locality_id <span class="text-danger"></span>** &#8212; Ensure places belong to this locality Who&#039;s On First ID.
-* **neighbourhood_id <span class="text-danger"></span>** &#8212; Ensure places belong to this neighbourhood Who&#039;s On First ID.
-* **concordance <span class="text-danger"></span>** &#8212; Query for places that have been concordified with this source.
-* **exclude <span class="text-danger"></span>** &#8212; Exclude places matching these criteria.
-* **include <span class="text-danger"></span>** &#8212; Include places matching these criteria.
+* **q**  &#8212; Query for this value across all fields.
+* **name**  &#8212; Query for this value in the wof:name field.
+* **names**  &#8212; Query for this value across all name related fields.
+* **alt**  &#8212; Query for this value across all alternate name related fields (variant, colloquial, unknown).
+* **preferred**  &#8212; Query for this value across all preferred name related fields.
+* **variant**  &#8212; Query for this value across all variant name related fields.
+* **placetype**  &#8212; Ensure records match this placetype.
+* **tags**  &#8212; Query for places with one or more of these tags.
+* **category**  &#8212; Query for places with one or more of these categories.
+* **iso**  &#8212; Ensure places belong to this (ISO) country code.
+* **country_id**  &#8212; Ensure places belong to this country Who&#039;s On First ID.
+* **region_id**  &#8212; Ensure places belong to this region Who&#039;s On First ID.
+* **locality_id**  &#8212; Ensure places belong to this locality Who&#039;s On First ID.
+* **neighbourhood_id**  &#8212; Ensure places belong to this neighbourhood Who&#039;s On First ID.
+* **concordance**  &#8212; Query for places that have been concordified with this source.
+* **exclude**  &#8212; Exclude places matching these criteria.
+* **include**  &#8212; Include places matching these criteria.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.
 * **page** &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details.
@@ -430,6 +486,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search...`
+```
+
 <a name="whosonfirst.placetypes.getInfo"></a>
 ### whosonfirst.placetypes.getInfo
 
@@ -437,10 +497,10 @@ Return details for a Who&#039;s On First placetype.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
-* **id <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First placetype ID.
-* **name <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First placetype name.
+* **id**  &#8212; A valid Who&#039;s On First placetype ID.
+* **name**  &#8212; A valid Who&#039;s On First placetype name.
 
 #### Error codes
 
@@ -455,6 +515,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getInfo...`
+```
+
 <a name="whosonfirst.placetypes.getList"></a>
 ### whosonfirst.placetypes.getList
 
@@ -462,9 +526,9 @@ Return a list of Who&#039;s On First placetypes.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
-* **role <span class="text-danger"></span>** &#8212; Only return placetypes that are part of this role.
+* **role**  &#8212; Only return placetypes that are part of this role.
 
 #### Error codes
 
@@ -477,6 +541,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getList...`
+```
+
 <a name="whosonfirst.placetypes.getRoles"></a>
 ### whosonfirst.placetypes.getRoles
 
@@ -484,7 +552,7 @@ Return a list of Who&#039;s On First placetype roles.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -496,6 +564,10 @@ This API method does not define any custom error codes. For the list of error co
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getRoles...`
+```
+
 <a name="whosonfirst.sources.getInfo"></a>
 ### whosonfirst.sources.getInfo
 
@@ -503,10 +575,10 @@ Return details for a Who&#039;s On First source.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
-* **id <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First source ID.
-* **prefix <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First source prefix.
+* **id**  &#8212; A valid Who&#039;s On First source ID.
+* **prefix**  &#8212; A valid Who&#039;s On First source prefix.
 
 #### Error codes
 
@@ -521,6 +593,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getInfo...`
+```
+
 <a name="whosonfirst.sources.getList"></a>
 ### whosonfirst.sources.getList
 
@@ -528,7 +604,7 @@ Return the list of Who&#039;s On First sources.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
@@ -537,6 +613,10 @@ This API method does not define any custom error codes. For the list of error co
 
 
 #### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getList...`
+```
 
 <a name="whosonfirst.sources.getPrefixes"></a>
 ### whosonfirst.sources.getPrefixes
@@ -545,7 +625,7 @@ Return the list of prefixes for all Who&#039;s On First sources.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
@@ -555,6 +635,10 @@ This API method does not define any custom error codes. For the list of error co
 
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getPrefixes...`
+```
+
 <a name="whosonfirst.tags.getSources"></a>
 ### whosonfirst.tags.getSources
 
@@ -562,7 +646,7 @@ Return the list of sources for all the tags in Who&#039;s On First.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -574,6 +658,10 @@ This API method does not define any custom error codes. For the list of error co
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
 #### Example
 
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getSources...`
+```
+
 <a name="whosonfirst.tags.getTags"></a>
 ### whosonfirst.tags.getTags
 
@@ -581,9 +669,9 @@ Return the list of unique tags n Who&#039;s On First.
 
 #### Arguments
 
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
-* **source <span class="text-danger"></span>** &#8212; Limit results to categories from this source.
+* **source**  &#8212; Limit results to categories from this source.
 * **page** &#8212; The default is 1.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
 
@@ -599,6 +687,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
 #### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags...`
+```
 
 
 <a name="formats"></a>

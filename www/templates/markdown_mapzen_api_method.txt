@@ -6,7 +6,7 @@
 #### Arguments
 
 {if $details.parameters|@count or $cfg.api_auth_type=='oauth2' or $cfg.paginated}
-* **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
+* **api_key*** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 {if $details.disallow_formats|@count}
 * **format** &#8212; The format in which to return the data. Normally supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](#formats-{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach} however the following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}<a href="{$cfg.abs_root_url}formats/{$fmt|@escape}/">{$fmt|@escape}</a>{if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](#formats-{$default_format|@escape}).
 {else}
@@ -15,7 +15,7 @@
 {if $details.parameters|@count}
 {foreach from=$details.parameters item="param"}
 {if $param.documented || 'admin'|@auth_has_role}
-* **{$param.name|escape} <span class="text-danger">{if $param.required}(required){/if}{if !$param.documented} (undocumented){/if}</span>** &#8212; {$param.description|escape}
+* **{$param.name|escape}** {if $param.required}_required_{/if} &#8212; {$param.description|escape}
 {/if}
 {/foreach}
 {/if}
@@ -78,8 +78,9 @@ This API method does not define any custom error codes. For the list of error co
 
 #### Example
 
-{if 0}
 ```
-curl -X {$api_request_method|escape} 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=API_KEY{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}={$param.name|strtoupper|escape}{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}...`
 ```
-{/if}
+{if 0}&api_key=API_KEY{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}={$param.name|strtoupper|escape}{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'{/if}
+
+
