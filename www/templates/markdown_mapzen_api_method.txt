@@ -78,6 +78,8 @@ This API method does not define any custom error codes. For the list of error co
 
 #### Example
 
+{if 0}
 ```
 curl -X {$api_request_method|escape} 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=API_KEY{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}={$param.name|strtoupper|escape}{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
 ```
+{/if}
