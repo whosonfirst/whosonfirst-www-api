@@ -5,7 +5,7 @@ In addition to any already <a href="https://www.iana.org/assignments/http-status
 
 <ul class="api-list-o-things">
 {foreach from=$errors item="row" key="code"}
-* **`{$row.code|@escape}` &#8212;  {$row.message|@escape}
+* `{$row.code|@escape}` &#8212;  {$row.message|@escape}
 {/foreach}
 
 Individual API methods may define their own status codes within the <code>432-449</code> and <code>513-599</code> range on a per-method basis. Status codes in this range <em>may</em> be used with different meanings by different API methods and it is left to API consumers to account for those differences.
