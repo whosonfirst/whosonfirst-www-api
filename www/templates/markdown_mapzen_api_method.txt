@@ -35,7 +35,7 @@
 * **format** &#8212; The format in which to return the data. Supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](#formats-{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](#formats-{$default_format|@escape})</a>.
 {/if}
 
-#### Error codes
+#### Error codes (for this method)
 
 {if $details.errors|@count}
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
