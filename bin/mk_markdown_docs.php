@@ -44,6 +44,13 @@
 	$formats = $GLOBALS['cfg']['api']['formats'];
 	$GLOBALS['smarty']->assign_by_ref("response_formats", $formats);
 
+	$errors = $GLOBALS['cfg']['api']['errors'];
+	ksort($errors);
+
+	$GLOBALS['smarty']->assign("errors", $errors);
+
+	$GLOBALS['smarty']->assign_by_ref("default_format", $GLOBALS['cfg']['api']['default_format']);
+
 	$md = $GLOBALS['smarty']->fetch("markdown_mapzen_api_docs.txt");
 
 	echo $md;

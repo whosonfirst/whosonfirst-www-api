@@ -7,9 +7,9 @@ Pagination shouldn't be complicated. But it is. Because databases, after all the
 
 Databases have always been about trade-offs. No two databases are the same and so no two sets of trade-offs are the same either. The really short version is that some databases can't tell you exactly how many results there are for a given query. Some databases can tell you how many results there are but can't or won't return results past a certain limit. Other databases can do both but only if you use something called a <code>cursor</code> for pagination rather than the traditional <code>offset</code> and <code>limit</code> model (as in "return the next 5 of 50 results starting from postion 20").
 
-Since there isn't an all-purpose database, the <span class="hey-look">{$cfg.site_name|@escape}</span> accounts for multiple different pagination models. We've identified four overlapping models (<a href="#plain">plain</a>, <a href="#cursor">cursor</a>, <a href="#mixed">mixed</a> and <a href="#next-query">next-query</a>) each of which are described in detail below.
+Since there isn't an all-purpose database, the <span class="hey-look">{$cfg.site_name|@escape}</span> accounts for multiple different pagination models. We've identified four overlapping models ([plain](#pagination-plain), [cursor](#pagination-cursor), [mixed](#pagination-mixed) and [next-query](#pagination-next-query)) each of which are described in detail below.
 
-If you don't really care and just want to get started <a href="#next-query">you should skip ahead to the documentation for next-query pagination</a>.
+If you don't really care and just want to get started [you should skip ahead to the documentation for next-query pagination](#pagination-next-query).
 
 <a name="pagination-plain"></a>
 ### Plain pagination
@@ -31,14 +31,14 @@ For example, let's say you wanted to use the API to fetch all the places with a 
 }
 {/literal}```
 
-It's pretty straightforward. There are seven results (<code>total</code>) and this is the first of two pages worth of results (<code>page</code> and <code>pages</code>, respectively). You might already be wondering about the <code>next_query</code> property but <a href="#next-query">we'll get to that shortly</a>.
+It's pretty straightforward. There are seven results (<code>total</code>) and this is the first of two pages worth of results (<code>page</code> and <code>pages</code>, respectively). You might already be wondering about the <code>next_query</code> property but [we'll get to that shortly](#pagination-next-query).
 
 <a name="pagination-cursor"></a>
 ### Cursor-based pagination
 
 Cursor-based pagination is necessary when a database can't or won't tell you how many results there are for a query. This means you will need to pass the same query to the database over and over again for as long as the database returns a <code>cursor</code> which is like a secret hint that <em>only the database understands</em> indicating where the next set of results live.
 
-For example, let's say you wanted to use the API to fetch all of the venues near the <a href="https://whosonfirst.mapzen.com/spelunker/id/420571601/">Smithsonian Cooper Hewitt Design Museum</a> in sets of ten. The API will respond with something like this:
+For example, let's say you wanted to use the API to fetch all of the venues near the [Smithsonian Cooper Hewitt Design Museum](https://whosonfirst.mapzen.com/spelunker/id/420571601/) in sets of ten. The API will respond with something like this:
 
 ```{literal}
 {
@@ -126,12 +126,12 @@ This type of pagination is not ideal but strives to be a reasonable middle-groun
 <a name="pagination-headers"></a>
 ### Pagination and HTTP headers
 
-Pagination properties are also returned as HTTP response headers. This is useful for any output format and necessary for output formats like plain old <a href="{$cfg.abs_root_url}api/formats#csv">CSV</a> or Who's On First's <a href="{$cfg.abs_root_url}api/formats#meta">meta</a> format. All of the pagination properties you've come to know and love in the examples above are also returned as HTTP response header prefixed by <code>X-api-pagination-</code>.
+Pagination properties are also returned as HTTP response headers. This is useful for any output format and necessary for output formats like plain old [CSV](#formats-csv) or Who's On First's [meta](#formats-meta) format. All of the pagination properties you've come to know and love in the examples above are also returned as HTTP response header prefixed by <code>X-api-pagination-</code>.
 
 For example: 
 
-```{literal}
-$> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key={API_KEY}&q=poutine&extras=geom:bbox&page=1&<strong>format=csv</strong>&per_page=1'
+```
+$> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=API_KEY&q=poutine&extras=geom:bbox&page=1&format=csv&per_page=1'
 
 &lt; HTTP/1.1 200 OK
 &lt; Access-Control-Allow-Origin: *
@@ -150,4 +150,4 @@ $> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.pla
 &lt; 
 geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
 "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
-{/literal}```
+```

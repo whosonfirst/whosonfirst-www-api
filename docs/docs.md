@@ -12,14 +12,10 @@
 
 Return the list of valid API response formats, including the default format
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Errors
 
@@ -33,14 +29,10 @@ This API method does not define any custom error codes. For the list of error co
 
 Return the list of available API response methods.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Errors
 
@@ -54,14 +46,10 @@ This API method does not define any custom error codes. For the list of error co
 
 A testing method which echo&#039;s all parameters back in the response.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Errors
 
@@ -75,14 +63,10 @@ This API method does not define any custom error codes. For the list of error co
 
 Return a test error from the API
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Errors
 
@@ -96,14 +80,10 @@ This API method does not define any custom error codes. For the list of error co
 
 Return the list of unique namespaces for all the categories in Who&#039;s On First.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **source <span class="text-danger"></span>** &#8212; Limit results to categories from this source.
 * **predicate <span class="text-danger"></span>** &#8212; Limit results to categories with this predicate.
 * **value <span class="text-danger"></span>** &#8212; Limit results to categories with this value.
@@ -126,14 +106,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return the list of unique predicates for all the the categories in Who&#039;s On First.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **source <span class="text-danger"></span>** &#8212; Limit results to categories from this source.
 * **namespace <span class="text-danger"></span>** &#8212; Limit results to categories with this namespace.
 * **value <span class="text-danger"></span>** &#8212; Limit results to categories with this value.
@@ -156,14 +132,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return the list of sources for all the categories in Who&#039;s On First.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Errors
 
@@ -179,14 +151,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return the list of unique values for all the categories in Who&#039;s On First.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **source <span class="text-danger"></span>** &#8212; Limit results to categories from this source.
 * **namespace <span class="text-danger"></span>** &#8212; Limit results to categories with this namespace.
 * **predicate <span class="text-danger"></span>** &#8212; Limit results to categories with this predicate.
@@ -209,14 +177,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return a Who&#039;s On First record (and all its concordances) by another source identifier.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **id <span class="text-danger">(required)</span>** &#8212; The ID of concordance you are looking for
 * **source <span class="text-danger">(required)</span>** &#8212; The source prefix of the concordance you are looking for
 * **page** &#8212; The default is 1.
@@ -239,14 +203,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 List all the sources that Who&#039;s On First holds hands with.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **page** &#8212; The default is 1.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
 
@@ -263,14 +223,10 @@ This API method does not define any custom error codes. For the list of error co
 
 Return the list of unique namespaces for all the machinetags in Who&#039;s On First.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **predicate <span class="text-danger"></span>** &#8212; Limit results to machinetags with this predicate.
 * **value <span class="text-danger"></span>** &#8212; Limit results to machinetags with this value.
 * **page** &#8212; The default is 1.
@@ -290,14 +246,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return the list of unique predicates for all the the machinetags in Who&#039;s On First
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **namespace <span class="text-danger"></span>** &#8212; Limit results to machinetags with this namespace.
 * **value <span class="text-danger"></span>** &#8212; Limit results to machinetags with this value.
 * **page** &#8212; The default is 1.
@@ -317,14 +269,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return the list of unique values for all the machinetags in Who&#039;s On First.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **namespace <span class="text-danger"></span>** &#8212; Limit results to machinetags with this namespace.
 * **predicate <span class="text-danger"></span>** &#8212; Limit results to machinetags with this predicate.
 * **page** &#8212; The default is 1.
@@ -344,14 +292,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return Who&#039;s On First places intersecting a latitude and longitude
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [](#formats-)</a>.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 * **latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate.
 * **longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate.
 * **placetype <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First placetype to limit the query by.
@@ -380,14 +324,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return all the descendants for a Who&#039;s On First ID.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [](#formats-)</a>.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 * **id <span class="text-danger">(required)</span>** &#8212; A valid Who&#039;s On First ID
 * **name <span class="text-danger"></span>** &#8212; Query for this value in the wof:name field.
 * **names <span class="text-danger"></span>** &#8212; Query for this value across all name related fields.
@@ -426,14 +366,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return the closest set of ancestors (hierarchies) for a latitude and longitude
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate.
 * **longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate.
 * **placetype <span class="text-danger"></span>** &#8212; Skip descendants of this placetype.
@@ -458,14 +394,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return a Who&#039;s On First record by ID.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [](#formats-)</a>.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 * **id <span class="text-danger">(required)</span>** &#8212; A valid Who&#039;s On First ID.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 
@@ -482,14 +414,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return all the Who&#039;s On First places intersecting a bounding box.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [](#formats-)</a>.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 * **min_latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box.
 * **min_longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate, representing the left (Western) edge of the bounding box.
 * **max_latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate, representing the top (Northern) edge of the bounding box.
@@ -522,14 +450,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return all the Who&#039;s On First records near a point.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [](#formats-)</a>.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 * **latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate.
 * **longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate.
 * **placetype <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First placetype to limit the query by.
@@ -558,14 +482,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return Who&#039;s On First parent ID for a latitude and longitude and placetype
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **latitude <span class="text-danger">(required)</span>** &#8212; A valid latitude coordinate.
 * **longitude <span class="text-danger">(required)</span>** &#8212; A valid longitude coordinate.
 * **placetype <span class="text-danger">(required)</span>** &#8212; A valid Who&#039;s On First placetype to limit the query by.
@@ -592,14 +512,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return a random Who&#039;s On First record.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [](#formats-)</a>.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 
 #### Errors
@@ -614,14 +530,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Query for Who&#039;s On First records.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [](#formats-)</a>.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 * **q <span class="text-danger"></span>** &#8212; Query for this value across all fields.
 * **name <span class="text-danger"></span>** &#8212; Query for this value in the wof:name field.
 * **names <span class="text-danger"></span>** &#8212; Query for this value across all name related fields.
@@ -659,14 +571,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return details for a Who&#039;s On First placetype.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **id <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First placetype ID.
 * **name <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First placetype name.
 
@@ -686,14 +594,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return a list of Who&#039;s On First placetypes.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **role <span class="text-danger"></span>** &#8212; Only return placetypes that are part of this role.
 
 #### Errors
@@ -710,14 +614,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return a list of Who&#039;s On First placetype roles.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Errors
 
@@ -731,14 +631,10 @@ This API method does not define any custom error codes. For the list of error co
 
 Return details for a Who&#039;s On First source.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [](#formats-)</a>.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 * **id <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First source ID.
 * **prefix <span class="text-danger"></span>** &#8212; A valid Who&#039;s On First source prefix.
 
@@ -758,14 +654,10 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 Return the list of Who&#039;s On First sources.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [](#formats-)</a>.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Errors
 
@@ -777,14 +669,10 @@ This API method does not define any custom error codes. For the list of error co
 
 Return the list of prefixes for all Who&#039;s On First sources.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [](#formats-)</a>.
+* **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Errors
 
@@ -796,14 +684,10 @@ This API method does not define any custom error codes. For the list of error co
 
 Return the list of sources for all the tags in Who&#039;s On First.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Errors
 
@@ -817,14 +701,10 @@ This API method does not define any custom error codes. For the list of error co
 
 Return the list of unique tags n Who&#039;s On First.
 
-#### HTTP method
-
-GET
-
 #### Arguments
 
 * **api_key <span class="text-danger">(required)</span>** &#8212; A valid [Mapzen API key]()
-* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [](#formats-).
+* **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 * **source <span class="text-danger"></span>** &#8212; Limit results to categories from this source.
 * **page** &#8212; The default is 1.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
@@ -843,7 +723,133 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 <a name="formats"></a>
 ## Response formats
 
-<a name="pagination"></a>
+<a name="formats-json"></a>
+### json
+
+JSON (JavaScript Object Notation) is a data-interchange format based on JavaScript. For more details, consult <a href="http://json.org/">http://json.org/</a>.
+
+#### Example request
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key={API_KEY}&q=poutine&page=1&per_page=1&format=json'
+```
+
+#### Example response
+
+```
+< HTTP/1.1 200 OK
+< Access-Control-Allow-Origin: *
+< Content-Type: text/json
+< Date: Tue, 28 Feb 2017 22:29:49 GMT
+< Status: 200 OK
+< X-api-pagination-cursor: 
+< X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2
+< X-api-pagination-page: 1
+< X-api-pagination-pages: 13
+< X-api-pagination-per-page: 1
+< X-api-pagination-total: 13
+< Content-Length: 410
+< Connection: keep-alive
+< 
+{
+    "cursor": null,
+    "next_query": "method=whosonfirst.places.search&q=poutine&extras=geom%3Abbox&per_page=1&page=2",
+    "page": 1,
+    "pages": 13,
+    "per_page": 1,
+    "results": [
+        {
+            "geom:bbox": "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",
+            "wof:country": "CA",
+            "wof:id": 975139507,
+            "wof:name": "Poutine Restau-Bar Enr",
+            "wof:parent_id": "-1",
+            "wof:placetype": "venue",
+            "wof:repo": "whosonfirst-data-venue-ca"
+        }
+    ],
+    "stat": "ok",
+    "total": 13
+}
+```
+
+### Notes
+
+JSON output is supported for all API methods.<a name="formats-csv"></a>
+### csv
+
+CSV (Comma Separated Value)
+
+#### Example request
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key={API_KEY}&q=poutine&page=1&per_page=1<strong>&format=csv</strong>'
+```
+
+#### Example response
+
+```
+&lt; HTTP/1.1 200 OK
+&lt; Access-Control-Allow-Origin: *
+&lt; Content-Type: text/csv
+&lt; Date: Tue, 28 Feb 2017 21:13:37 GMT
+&lt; Status: 200 OK
+&lt; X-api-pagination-cursor: 
+&lt; X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
+&lt; X-api-pagination-page: 1
+&lt; X-api-pagination-pages: 13
+&lt; X-api-pagination-per-page: 1
+&lt; X-api-pagination-total: 13
+&lt; X-api-format-csv-header: geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
+&lt; Content-Length: 208
+&lt; Connection: keep-alive
+&lt; 
+geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
+"-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
+````
+
+<small>The CVS header is only written, in the body of the response, for the first page of API responses. The <code>X-api-format-csv-header</code> HTTP header is included with all responses.</small>
+
+#### Notes
+
+CSV output is not supported for all API methods.<a name="formats-meta"></a>
+### meta
+
+As in a Who's On First "meta" file. A meta file is really just a CSV file with a pre-defined set of column headers. Meta files are included with all of the Who's On First repositories and are meant to act a quick and easy index (rather than a full-fledged database) that a person might use to inspect the data. Since there is a lot of tooling developed to support meta files (for example, converting a metafile into a <a href="https://whosonfirst.mapzen.com/bundles/">bundle</a>) it seemed like it would useful to support them as an output format in the API.
+
+#### Example request
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key={API_KEY}&q=poutine&page=1&per_page=1&format=meta'
+```
+
+#### Example response
+
+```
+&lt; HTTP/1.1 200 OK
+&lt; Access-Control-Allow-Origin: *
+&lt; Content-Type: text/csv
+&lt; Date: Tue, 28 Feb 2017 22:25:13 GMT
+&lt; Status: 200 OK
+&lt; X-api-pagination-cursor: 
+&lt; X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=meta
+&lt; X-api-pagination-page: 1
+&lt; X-api-pagination-pages: 13
+&lt; X-api-pagination-per-page: 1
+&lt; X-api-pagination-total: 13
+&lt; X-api-format-meta-header: bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,geom_longitude,id,inception,iso,iso_country,lastmodified,lbl_latitude,lbl_longitude,locality_id,name,parent_id,path,placetype,region_id,source,superseded_by,supersedes,wof_country
+&lt; Content-Length: 503
+&lt; Connection: keep-alive
+&lt; 
+bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,geom_longitude,id,inception,iso,iso_country,lastmodified,lbl_latitude,lbl_longitude,locality_id,name,parent_id,path,placetype,region_id,source,superseded_by,supersedes,wof_country
+"-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",uuuu,0,,,,88060b9c65a5eaae29b427583b1bfa93,46.066528,-71.939964,975139507,uuuu,CA,CA,1472521936,0,0,0,"Poutine Restau-Bar Enr",-1,975/139/507/975139507.geojson,venue,0,simplegeo,,,CA
+```
+
+<small>The meta (CVS) header is only written, in the body of the response, for the first page of API responses. The <code>X-api-format-meta-header</code> HTTP header is included with all responses.</small>
+
+#### Notes
+
+Meta (CSV) output is not supported for all API methods.<a name="pagination"></a>
 ## Pagination
 
 ### A short miserable history (of pagination)
@@ -852,9 +858,9 @@ Pagination shouldn't be complicated. But it is. Because databases, after all the
 
 Databases have always been about trade-offs. No two databases are the same and so no two sets of trade-offs are the same either. The really short version is that some databases can't tell you exactly how many results there are for a given query. Some databases can tell you how many results there are but can't or won't return results past a certain limit. Other databases can do both but only if you use something called a <code>cursor</code> for pagination rather than the traditional <code>offset</code> and <code>limit</code> model (as in "return the next 5 of 50 results starting from postion 20").
 
-Since there isn't an all-purpose database, the <span class="hey-look">Who&#039;s On First API</span> accounts for multiple different pagination models. We've identified four overlapping models (<a href="#plain">plain</a>, <a href="#cursor">cursor</a>, <a href="#mixed">mixed</a> and <a href="#next-query">next-query</a>) each of which are described in detail below.
+Since there isn't an all-purpose database, the <span class="hey-look">Who&#039;s On First API</span> accounts for multiple different pagination models. We've identified four overlapping models ([plain](#pagination-plain), [cursor](#pagination-cursor), [mixed](#pagination-mixed) and [next-query](#pagination-next-query)) each of which are described in detail below.
 
-If you don't really care and just want to get started <a href="#next-query">you should skip ahead to the documentation for next-query pagination</a>.
+If you don't really care and just want to get started [you should skip ahead to the documentation for next-query pagination](#pagination-next-query).
 
 <a name="pagination-plain"></a>
 ### Plain pagination
@@ -876,14 +882,14 @@ For example, let's say you wanted to use the API to fetch all the places with a 
 }
 ```
 
-It's pretty straightforward. There are seven results (<code>total</code>) and this is the first of two pages worth of results (<code>page</code> and <code>pages</code>, respectively). You might already be wondering about the <code>next_query</code> property but <a href="#next-query">we'll get to that shortly</a>.
+It's pretty straightforward. There are seven results (<code>total</code>) and this is the first of two pages worth of results (<code>page</code> and <code>pages</code>, respectively). You might already be wondering about the <code>next_query</code> property but [we'll get to that shortly](#pagination-next-query).
 
 <a name="pagination-cursor"></a>
 ### Cursor-based pagination
 
 Cursor-based pagination is necessary when a database can't or won't tell you how many results there are for a query. This means you will need to pass the same query to the database over and over again for as long as the database returns a <code>cursor</code> which is like a secret hint that <em>only the database understands</em> indicating where the next set of results live.
 
-For example, let's say you wanted to use the API to fetch all of the venues near the <a href="https://whosonfirst.mapzen.com/spelunker/id/420571601/">Smithsonian Cooper Hewitt Design Museum</a> in sets of ten. The API will respond with something like this:
+For example, let's say you wanted to use the API to fetch all of the venues near the [Smithsonian Cooper Hewitt Design Museum](https://whosonfirst.mapzen.com/spelunker/id/420571601/) in sets of ten. The API will respond with something like this:
 
 ```
 {
@@ -971,12 +977,12 @@ This type of pagination is not ideal but strives to be a reasonable middle-groun
 <a name="pagination-headers"></a>
 ### Pagination and HTTP headers
 
-Pagination properties are also returned as HTTP response headers. This is useful for any output format and necessary for output formats like plain old <a href="http://fake.com/api/formats#csv">CSV</a> or Who's On First's <a href="http://fake.com/api/formats#meta">meta</a> format. All of the pagination properties you've come to know and love in the examples above are also returned as HTTP response header prefixed by <code>X-api-pagination-</code>.
+Pagination properties are also returned as HTTP response headers. This is useful for any output format and necessary for output formats like plain old [CSV](#formats-csv) or Who's On First's [meta](#formats-meta) format. All of the pagination properties you've come to know and love in the examples above are also returned as HTTP response header prefixed by <code>X-api-pagination-</code>.
 
 For example: 
 
 ```
-$> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key={API_KEY}&q=poutine&extras=geom:bbox&page=1&<strong>format=csv</strong>&per_page=1'
+$> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=API_KEY&q=poutine&extras=geom:bbox&page=1&format=csv&per_page=1'
 
 &lt; HTTP/1.1 200 OK
 &lt; Access-Control-Allow-Origin: *

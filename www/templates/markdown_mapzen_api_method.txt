@@ -2,16 +2,6 @@
 ### {$method|escape}
 
 {$details.description|@trim|@escape}
-{if $details.requires_auth || $details.requires_blessing || !$details.documented || !$details.enabled}
-
-{if $details.requires_auth}* This method requires **authentication**.{/if}
-{if $details.requires_blessing}* This method requires additional **authorization**.{/if}
-{if !$details.documented}* This method is **undocumented**.{/if}
-{if !$details.enabled}* This method is **disabled**.{/if}{/if}
-
-#### HTTP method
-
-GET
 
 #### Arguments
 
