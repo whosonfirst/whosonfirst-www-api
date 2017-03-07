@@ -9,12 +9,18 @@
 <a name="intro"></a>
 ## Introduction
 
-_Please write me. Something something something "stuff over HTTP". Something something something `400` class errors are your fault and `500` class errors are our fault._
+![CGI has a posse](prism.gif)
+
+_Please write me.
+
+Something something something "stuff over HTTP". Something something something query parameters. Something something something `400` class errors are your fault and `500` class errors are our fault._
 
 <a name="caveats"></a>
 ### Caveats
 
-You should treat this API as though it were in "beta". Which is to say: The point is for the thing to _work_ but there are probably still some rough edges and lingering gotchas so you should adjust your expectations and your code accordingly. In the meantime have at it and please let us know if something is busted or just doesn't feel right.
+You should treat this API as though it were in "beta".
+
+Which is to say: The point is for the thing to _work_ but there are probably still some rough edges and lingering gotchas so you should adjust your expectations and your code accordingly. In the meantime have at it and please let us know if something is busted or just doesn't feel right.
 
 Also some methods are "more beta" than others. These methods are flagged as being `experimental` which means that both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
 
