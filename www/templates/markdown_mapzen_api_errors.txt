@@ -1,11 +1,11 @@
-<a name="errors"></a>
+<a name="error-codes"></a>
 ## Error codes
 
 In addition to any already <a href="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">assigned HTTP status codes</a> <span class="hey-look">{$cfg.site_name|@escape}</span> defines the following additional status codes for representing errors or a failure scenario, across all API methods:
 
 <ul class="api-list-o-things">
 {foreach from=$errors item="row" key="code"}
-* **`{$code|@escape}` &#8212;  {$row.message|@escape}
+* **`{$row.code|@escape}` &#8212;  {$row.message|@escape}
 {/foreach}
 
 Individual API methods may define their own status codes within the <code>432-449</code> and <code>513-599</code> range on a per-method basis. Status codes in this range <em>may</em> be used with different meanings by different API methods and it is left to API consumers to account for those differences.

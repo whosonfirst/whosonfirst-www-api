@@ -1,3 +1,10 @@
+# Who's On First API Documentation
+
+* [API methods](#methods)
+* [Response formats](#formats)
+* [Pagination](#pagination)
+* [Error codes](#error-codes)
+
 {include file="markdown_mapzen_api_methods.txt"}
 {include file="markdown_mapzen_api_pagination.txt"}
 {include file="markdown_mapzen_api_errors.txt"}
