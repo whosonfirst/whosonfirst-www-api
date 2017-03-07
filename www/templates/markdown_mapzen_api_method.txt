@@ -46,7 +46,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 {foreach from=$details.errors item="row"}
 {if $row|@is_array}
-* **<code>{$row.code|@escape}</code>** &#8212; {$row.message|@escape}
+* `{$code|@escape}</code>` &#8212; {$row.message|@escape}
 {/if}
 {/foreach}
 {else}

@@ -102,8 +102,8 @@ Return the list of unique namespaces for all the categories in Who&#039;s On Fir
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Invalid source
-* **<code></code>** &#8212; Unable to retrieve namespaces
+* `</code>` &#8212; Invalid source
+* `</code>` &#8212; Unable to retrieve namespaces
 
 #### Notes
 
@@ -130,8 +130,8 @@ Return the list of unique predicates for all the the categories in Who&#039;s On
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Invalid source
-* **<code></code>** &#8212; Unable to retrieve predicates.
+* `</code>` &#8212; Invalid source
+* `</code>` &#8212; Unable to retrieve predicates.
 
 #### Notes
 
@@ -153,7 +153,7 @@ Return the list of sources for all the categories in Who&#039;s On First.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Failed to retrieve concordances
+* `</code>` &#8212; Failed to retrieve concordances
 
 #### Notes
 
@@ -179,8 +179,8 @@ Return the list of unique values for all the categories in Who&#039;s On First.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Invalid source
-* **<code></code>** &#8212; Unable to retrieve values
+* `</code>` &#8212; Invalid source
+* `</code>` &#8212; Unable to retrieve values
 
 #### Notes
 
@@ -206,9 +206,9 @@ Return a Who&#039;s On First record (and all its concordances) by another source
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Missing &#039;id&#039; parameter
-* **<code></code>** &#8212; Missing &#039;source&#039; parameter
-* **<code></code>** &#8212; Failed to retrieve concordance
+* `</code>` &#8212; Missing &#039;id&#039; parameter
+* `</code>` &#8212; Missing &#039;source&#039; parameter
+* `</code>` &#8212; Failed to retrieve concordance
 
 #### Notes
 
@@ -333,12 +333,12 @@ Return Who&#039;s On First places intersecting a latitude and longitude
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Missing &#039;latitude&#039; parameter
-* **<code></code>** &#8212; Missing &#039;longitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;latitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;longitude&#039; parameter
-* **<code></code>** &#8212; Invalid placetype
-* **<code></code>** &#8212; Failed to perform lookup
+* `</code>` &#8212; Missing &#039;latitude&#039; parameter
+* `</code>` &#8212; Missing &#039;longitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;latitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;longitude&#039; parameter
+* `</code>` &#8212; Invalid placetype
+* `</code>` &#8212; Failed to perform lookup
 
 #### Notes
 
@@ -382,8 +382,8 @@ Return all the descendants for a Who&#039;s On First ID.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Missing &#039;id&#039; parameter
-* **<code></code>** &#8212; Unable to retrieve descendants
+* `</code>` &#8212; Missing &#039;id&#039; parameter
+* `</code>` &#8212; Unable to retrieve descendants
 
 #### Notes
 
@@ -408,12 +408,12 @@ Return the closest set of ancestors (hierarchies) for a latitude and longitude
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Missing &#039;latitude&#039; parameter
-* **<code></code>** &#8212; Missing &#039;longitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;latitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;longitude&#039; parameter
-* **<code></code>** &#8212; Invalid placetype
-* **<code></code>** &#8212; Failed to perform lookup
+* `</code>` &#8212; Missing &#039;latitude&#039; parameter
+* `</code>` &#8212; Missing &#039;longitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;latitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;longitude&#039; parameter
+* `</code>` &#8212; Invalid placetype
+* `</code>` &#8212; Failed to perform lookup
 
 #### Notes
 
@@ -437,8 +437,8 @@ Return a Who&#039;s On First record by ID.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Missing &#039;id&#039; parameter
-* **<code></code>** &#8212; Unable to retrieve place
+* `</code>` &#8212; Missing &#039;id&#039; parameter
+* `</code>` &#8212; Unable to retrieve place
 
 
 #### Example
@@ -465,15 +465,15 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Missing &#039;min_latitude&#039; parameter
-* **<code></code>** &#8212; Missing &#039;min_longitude&#039; parameter
-* **<code></code>** &#8212; Missing &#039;max_latitude&#039; parameter
-* **<code></code>** &#8212; Missing &#039;max_longitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;min_latitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;min_longitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;max_latitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;max_longitude&#039; parameter
-* **<code></code>** &#8212; Failed to intersect
+* `</code>` &#8212; Missing &#039;min_latitude&#039; parameter
+* `</code>` &#8212; Missing &#039;min_longitude&#039; parameter
+* `</code>` &#8212; Missing &#039;max_latitude&#039; parameter
+* `</code>` &#8212; Missing &#039;max_longitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;min_latitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;min_longitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;max_latitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;max_longitude&#039; parameter
+* `</code>` &#8212; Failed to intersect
 
 #### Notes
 
@@ -501,13 +501,13 @@ Return all the Who&#039;s On First records near a point.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Missing &#039;latitude&#039; parameter
-* **<code></code>** &#8212; Missing &#039;longitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;latitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;longitude&#039; parameter
-* **<code></code>** &#8212; Invalid radius
-* **<code></code>** &#8212; Invalid placetype
-* **<code></code>** &#8212; Failed to get nearby
+* `</code>` &#8212; Missing &#039;latitude&#039; parameter
+* `</code>` &#8212; Missing &#039;longitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;latitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;longitude&#039; parameter
+* `</code>` &#8212; Invalid radius
+* `</code>` &#8212; Invalid placetype
+* `</code>` &#8212; Failed to get nearby
 
 #### Notes
 
@@ -532,13 +532,13 @@ Return Who&#039;s On First parent ID for a latitude and longitude and placetype
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Missing &#039;latitude&#039; parameter
-* **<code></code>** &#8212; Missing &#039;longitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;latitude&#039; parameter
-* **<code></code>** &#8212; Invalid &#039;longitude&#039; parameter
-* **<code></code>** &#8212; Missing &#039;placetype&#039; parameter
-* **<code></code>** &#8212; Invalid placetype
-* **<code></code>** &#8212; Failed to perform lookup
+* `</code>` &#8212; Missing &#039;latitude&#039; parameter
+* `</code>` &#8212; Missing &#039;longitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;latitude&#039; parameter
+* `</code>` &#8212; Invalid &#039;longitude&#039; parameter
+* `</code>` &#8212; Missing &#039;placetype&#039; parameter
+* `</code>` &#8212; Invalid placetype
+* `</code>` &#8212; Failed to perform lookup
 
 #### Notes
 
@@ -562,7 +562,7 @@ Return a random Who&#039;s On First record.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Unable to retrieve random place.
+* `</code>` &#8212; Unable to retrieve random place.
 
 
 #### Example
@@ -602,7 +602,7 @@ Query for Who&#039;s On First records.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Unable to perform search
+* `</code>` &#8212; Unable to perform search
 
 #### Notes
 
@@ -626,8 +626,8 @@ Return details for a Who&#039;s On First placetype.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Invalid place ID
-* **<code></code>** &#8212; Invalid place name
+* `</code>` &#8212; Invalid place ID
+* `</code>` &#8212; Invalid place name
 
 #### Notes
 
@@ -650,7 +650,7 @@ Return a list of Who&#039;s On First placetypes.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Invalid role
+* `</code>` &#8212; Invalid role
 
 #### Notes
 
@@ -692,8 +692,8 @@ Return details for a Who&#039;s On First source.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Invalid source ID
-* **<code></code>** &#8212; Invalid source prefix
+* `</code>` &#8212; Invalid source ID
+* `</code>` &#8212; Invalid source prefix
 
 #### Notes
 
@@ -771,8 +771,8 @@ Return the list of unique tags n Who&#039;s On First.
 
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-* **<code></code>** &#8212; Invalid source
-* **<code></code>** &#8212; Unable to retrieve tags
+* `</code>` &#8212; Invalid source
+* `</code>` &#8212; Unable to retrieve tags
 
 #### Notes
 
@@ -1069,33 +1069,32 @@ geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
 
 In addition to any already <a href="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">assigned HTTP status codes</a> <span class="hey-look">Who&#039;s On First API</span> defines the following additional status codes for representing errors or a failure scenario, across all API methods:
 
-<ul class="api-list-o-things">
-* `` &#8212;  Unknown error
-* `` &#8212;  Insufficient parameters
-* `` &#8212;  Missing parameter
-* `` &#8212;  Invalid parameter
-* `` &#8212;  Invalid upload response
-* `` &#8212;  Missing upload body
-* `` &#8212;  Upload exceeded maximum filesize
-* `` &#8212;  Invalid mime-type
-* `` &#8212;  Invalid user
-* `` &#8212;  User is disabled
-* `` &#8212;  User is deleted
-* `` &#8212;  Insufficient permissions for this API key
-* `` &#8212;  Invalid access token for this API key
-* `` &#8212;  Unauthorized host for this API key
-* `` &#8212;  API key not configured for use with this method
-* `` &#8212;  Invalid API key
-* `` &#8212;  API key missing
-* `` &#8212;  Access token has insuffient permissions
-* `` &#8212;  Access token is expired
-* `` &#8212;  Access token is disabled
-* `` &#8212;  Invalid access token
-* `` &#8212;  Access token missing
-* `` &#8212;  Output format is disallowed for this API method
-* `` &#8212;  API method is disabled
-* `` &#8212;  API method not found
-* `` &#8212;  Something we tried to do didn&#039;t work. This is our fault, not yours.
+* `450` &#8212;  Unknown error
+* `452` &#8212;  Insufficient parameters
+* `453` &#8212;  Missing parameter
+* `454` &#8212;  Invalid parameter
+* `455` &#8212;  Invalid upload response
+* `456` &#8212;  Missing upload body
+* `457` &#8212;  Upload exceeded maximum filesize
+* `458` &#8212;  Invalid mime-type
+* `460` &#8212;  Invalid user
+* `461` &#8212;  User is disabled
+* `462` &#8212;  User is deleted
+* `478` &#8212;  Insufficient permissions for this API key
+* `479` &#8212;  Invalid access token for this API key
+* `481` &#8212;  Unauthorized host for this API key
+* `482` &#8212;  API key not configured for use with this method
+* `483` &#8212;  Invalid API key
+* `484` &#8212;  API key missing
+* `490` &#8212;  Access token has insuffient permissions
+* `491` &#8212;  Access token is expired
+* `492` &#8212;  Access token is disabled
+* `493` &#8212;  Invalid access token
+* `494` &#8212;  Access token missing
+* `497` &#8212;  Output format is disallowed for this API method
+* `498` &#8212;  API method is disabled
+* `499` &#8212;  API method not found
+* `512` &#8212;  Something we tried to do didn&#039;t work. This is our fault, not yours.
 
 Individual API methods may define their own status codes within the <code>432-449</code> and <code>513-599</code> range on a per-method basis. Status codes in this range <em>may</em> be used with different meanings by different API methods and it is left to API consumers to account for those differences.
 
