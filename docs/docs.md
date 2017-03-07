@@ -28,11 +28,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=api.spec.formats&api_key=API_KEY'
-```<a name="api.spec.methods"></a>
+<a name="api.spec.methods"></a>
 ### api.spec.methods
 
 Return the list of available API response methods.
@@ -53,11 +49,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=api.spec.methods&api_key=API_KEY'
-```<a name="test.echo"></a>
+<a name="test.echo"></a>
 ### test.echo
 
 A testing method which echo&#039;s all parameters back in the response.
@@ -78,11 +70,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=test.echo&api_key=API_KEY'
-```<a name="test.error"></a>
+<a name="test.error"></a>
 ### test.error
 
 Return a test error from the API
@@ -103,11 +91,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=test.error&api_key=API_KEY'
-```<a name="whosonfirst.categories.getNamespaces"></a>
+<a name="whosonfirst.categories.getNamespaces"></a>
 ### whosonfirst.categories.getNamespaces
 
 Return the list of unique namespaces for all the categories in Who&#039;s On First.
@@ -137,11 +121,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.categories.getNamespaces&api_key=API_KEY&source=SOURCE&predicate=PREDICATE&value=VALUE'
-```<a name="whosonfirst.categories.getPredicates"></a>
+<a name="whosonfirst.categories.getPredicates"></a>
 ### whosonfirst.categories.getPredicates
 
 Return the list of unique predicates for all the the categories in Who&#039;s On First.
@@ -171,11 +151,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.categories.getPredicates&api_key=API_KEY&source=SOURCE&namespace=NAMESPACE&value=VALUE'
-```<a name="whosonfirst.categories.getSources"></a>
+<a name="whosonfirst.categories.getSources"></a>
 ### whosonfirst.categories.getSources
 
 Return the list of sources for all the categories in Who&#039;s On First.
@@ -198,11 +174,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.categories.getSources&api_key=API_KEY'
-```<a name="whosonfirst.categories.getValues"></a>
+<a name="whosonfirst.categories.getValues"></a>
 ### whosonfirst.categories.getValues
 
 Return the list of unique values for all the categories in Who&#039;s On First.
@@ -232,11 +204,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.categories.getValues&api_key=API_KEY&source=SOURCE&namespace=NAMESPACE&predicate=PREDICATE'
-```<a name="whosonfirst.concordances.getById"></a>
+<a name="whosonfirst.concordances.getById"></a>
 ### whosonfirst.concordances.getById
 
 Return a Who&#039;s On First record (and all its concordances) by another source identifier.
@@ -266,11 +234,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getById&api_key=API_KEY&id=ID&source=SOURCE'
-```<a name="whosonfirst.concordances.getSources"></a>
+<a name="whosonfirst.concordances.getSources"></a>
 ### whosonfirst.concordances.getSources
 
 List all the sources that Who&#039;s On First holds hands with.
@@ -294,11 +258,7 @@ This API method does not define any custom error codes. For the list of error co
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getSources&api_key=API_KEY'
-```<a name="whosonfirst.machinetags.getNamespaces"></a>
+<a name="whosonfirst.machinetags.getNamespaces"></a>
 ### whosonfirst.machinetags.getNamespaces
 
 Return the list of unique namespaces for all the machinetags in Who&#039;s On First.
@@ -325,11 +285,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.machinetags.getNamespaces&api_key=API_KEY&predicate=PREDICATE&value=VALUE'
-```<a name="whosonfirst.machinetags.getPredicates"></a>
+<a name="whosonfirst.machinetags.getPredicates"></a>
 ### whosonfirst.machinetags.getPredicates
 
 Return the list of unique predicates for all the the machinetags in Who&#039;s On First
@@ -356,11 +312,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.machinetags.getPredicates&api_key=API_KEY&namespace=NAMESPACE&value=VALUE'
-```<a name="whosonfirst.machinetags.getValues"></a>
+<a name="whosonfirst.machinetags.getValues"></a>
 ### whosonfirst.machinetags.getValues
 
 Return the list of unique values for all the machinetags in Who&#039;s On First.
@@ -387,11 +339,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.machinetags.getValues&api_key=API_KEY&namespace=NAMESPACE&predicate=PREDICATE'
-```<a name="whosonfirst.places.getByLatLon"></a>
+<a name="whosonfirst.places.getByLatLon"></a>
 ### whosonfirst.places.getByLatLon
 
 Return Who&#039;s On First places intersecting a latitude and longitude
@@ -427,11 +375,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * This method differs from the whosonfirst.places.getAncestorsByLatLon method in two ways: 1. It returns a list of WOF places rather than hierarchies and 2. If a placetype filter is specified and no matching records are found no attempt will be made to find ancestors higher up the hierarchy. For example looking for an intersecting county or region if no locality is found.
 * This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination-cursor) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getByLatLon&api_key=API_KEY&latitude=LATITUDE&longitude=LONGITUDE&placetype=PLACETYPE'
-```<a name="whosonfirst.places.getDescendants"></a>
+<a name="whosonfirst.places.getDescendants"></a>
 ### whosonfirst.places.getDescendants
 
 Return all the descendants for a Who&#039;s On First ID.
@@ -477,11 +421,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * This API method uses <span class="hey-look">mixed</span> pagination. Please consult the [pagination documentation](#pagination-mixed) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDescendants&api_key=API_KEY&id=ID&name=NAME&names=NAMES&alt=ALT&preferred=PREFERRED&variant=VARIANT&placetype=PLACETYPE&tags=TAGS&category=CATEGORY&iso=ISO&country_id=COUNTRY_ID&region_id=REGION_ID&locality_id=LOCALITY_ID&neighbourhood_id=NEIGHBOURHOOD_ID&concordance=CONCORDANCE&exclude=EXCLUDE&include=INCLUDE'
-```<a name="whosonfirst.places.getHierarchiesByLatLon"></a>
+<a name="whosonfirst.places.getHierarchiesByLatLon"></a>
 ### whosonfirst.places.getHierarchiesByLatLon
 
 Return the closest set of ancestors (hierarchies) for a latitude and longitude
@@ -513,11 +453,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * This method differs from whosonfirst.places.getByLatLon method in two ways: 1. It returns a list of hierarchies rather than a WOF place record and 2. It will travel up the hierarchy until an ancestor is found. For example even if there is no locality matching a given lat, lon the code will try again looking for a matching region, and so on.
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [meta](#formats-meta)
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getHierarchiesByLatLon&api_key=API_KEY&latitude=LATITUDE&longitude=LONGITUDE&placetype=PLACETYPE'
-```<a name="whosonfirst.places.getInfo"></a>
+<a name="whosonfirst.places.getInfo"></a>
 ### whosonfirst.places.getInfo
 
 Return a Who&#039;s On First record by ID.
@@ -541,11 +477,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * **<code></code>** &#8212; Unable to retrieve place
 
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfo&api_key=API_KEY&id=ID'
-```<a name="whosonfirst.places.getIntersects"></a>
+<a name="whosonfirst.places.getIntersects"></a>
 ### whosonfirst.places.getIntersects
 
 Return all the Who&#039;s On First places intersecting a bounding box.
@@ -585,11 +517,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination-cursor) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects&api_key=API_KEY&min_latitude=MIN_LATITUDE&min_longitude=MIN_LONGITUDE&max_latitude=MAX_LATITUDE&max_longitude=MAX_LONGITUDE&placetype=PLACETYPE'
-```<a name="whosonfirst.places.getNearby"></a>
+<a name="whosonfirst.places.getNearby"></a>
 ### whosonfirst.places.getNearby
 
 Return all the Who&#039;s On First records near a point.
@@ -625,11 +553,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination-cursor) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=API_KEY&latitude=LATITUDE&longitude=LONGITUDE&placetype=PLACETYPE'
-```<a name="whosonfirst.places.getParentByLatLon"></a>
+<a name="whosonfirst.places.getParentByLatLon"></a>
 ### whosonfirst.places.getParentByLatLon
 
 Return Who&#039;s On First parent ID for a latitude and longitude and placetype
@@ -663,11 +587,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * The inability to locate (or to disambiguate) a parent ID for a lat, lon will not trigger an API error. The following parent IDs may be returned by this API method: &#039;-1&#039; which means that a parent ID could not be identified or that there are multiple choices; or &#039;-3&#039; which means that the parent is a neighbourhood and their are multiple possible choices and you should go out for a beer and argue over which is the correct parent.
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method is <span class="hey-look">experimental</span>. Both its inputs and outputs <em>may</em> change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getParentByLatLon&api_key=API_KEY&latitude=LATITUDE&longitude=LONGITUDE&placetype=PLACETYPE'
-```<a name="whosonfirst.places.getRandom"></a>
+<a name="whosonfirst.places.getRandom"></a>
 ### whosonfirst.places.getRandom
 
 Return a random Who&#039;s On First record.
@@ -689,11 +609,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 * **<code></code>** &#8212; Unable to retrieve random place.
 
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRandom&api_key=API_KEY'
-```<a name="whosonfirst.places.search"></a>
+<a name="whosonfirst.places.search"></a>
 ### whosonfirst.places.search
 
 Query for Who&#039;s On First records.
@@ -738,11 +654,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * This API method uses <span class="hey-look">mixed</span> pagination. Please consult the [pagination documentation](#pagination-mixed) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=API_KEY&q=Q&name=NAME&names=NAMES&alt=ALT&preferred=PREFERRED&variant=VARIANT&placetype=PLACETYPE&tags=TAGS&category=CATEGORY&iso=ISO&country_id=COUNTRY_ID&region_id=REGION_ID&locality_id=LOCALITY_ID&neighbourhood_id=NEIGHBOURHOOD_ID&concordance=CONCORDANCE&exclude=EXCLUDE&include=INCLUDE'
-```<a name="whosonfirst.placetypes.getInfo"></a>
+<a name="whosonfirst.placetypes.getInfo"></a>
 ### whosonfirst.placetypes.getInfo
 
 Return details for a Who&#039;s On First placetype.
@@ -769,11 +681,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * Although the &quot;id&quot; and &quot;name&quot; parameters are each marked as optional, you need to pass at least one of them. The order of precedence is &quot;id&quot; followed by &quot;name&quot;.
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getInfo&api_key=API_KEY&id=ID&name=NAME'
-```<a name="whosonfirst.placetypes.getList"></a>
+<a name="whosonfirst.placetypes.getList"></a>
 ### whosonfirst.placetypes.getList
 
 Return a list of Who&#039;s On First placetypes.
@@ -797,11 +705,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getList&api_key=API_KEY&role=ROLE'
-```<a name="whosonfirst.placetypes.getRoles"></a>
+<a name="whosonfirst.placetypes.getRoles"></a>
 ### whosonfirst.placetypes.getRoles
 
 Return a list of Who&#039;s On First placetype roles.
@@ -822,11 +726,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getRoles&api_key=API_KEY'
-```<a name="whosonfirst.sources.getInfo"></a>
+<a name="whosonfirst.sources.getInfo"></a>
 ### whosonfirst.sources.getInfo
 
 Return details for a Who&#039;s On First source.
@@ -853,11 +753,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * Although the &quot;id&quot; and &quot;prefix&quot; parameters are each marked as optional, you need to pass at least one of them. The order of precedence is &quot;id&quot; followed by &quot;prefix&quot;.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getInfo&api_key=API_KEY&id=ID&prefix=PREFIX'
-```<a name="whosonfirst.sources.getList"></a>
+<a name="whosonfirst.sources.getList"></a>
 ### whosonfirst.sources.getList
 
 Return the list of Who&#039;s On First sources.
@@ -876,11 +772,7 @@ GET
 This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](#error-codes) documentation.
 
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getList&api_key=API_KEY'
-```<a name="whosonfirst.sources.getPrefixes"></a>
+<a name="whosonfirst.sources.getPrefixes"></a>
 ### whosonfirst.sources.getPrefixes
 
 Return the list of prefixes for all Who&#039;s On First sources.
@@ -899,11 +791,7 @@ GET
 This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](#error-codes) documentation.
 
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getPrefixes&api_key=API_KEY'
-```<a name="whosonfirst.tags.getSources"></a>
+<a name="whosonfirst.tags.getSources"></a>
 ### whosonfirst.tags.getSources
 
 Return the list of sources for all the tags in Who&#039;s On First.
@@ -924,11 +812,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Notes
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getSources&api_key=API_KEY'
-```<a name="whosonfirst.tags.getTags"></a>
+<a name="whosonfirst.tags.getTags"></a>
 ### whosonfirst.tags.getTags
 
 Return the list of unique tags n Who&#039;s On First.
@@ -956,11 +840,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
-#### Example
-
-```
-curl -X  'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags&api_key=API_KEY&source=SOURCE'
-```<a name="formats"></a>
+<a name="formats"></a>
 ## Response formats
 
 <a name="pagination"></a>
