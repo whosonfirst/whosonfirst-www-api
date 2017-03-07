@@ -70,7 +70,7 @@ This API method does not define any custom error codes. For the list of error co
 * {$note|escape}
 {/foreach}
 {if $details.disallow_formats|@count}
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](#formats-fmt){if !$smarty.foreach.formats.last}, {/if}{/foreach}
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](#formats-{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}
 {/if}
 {if $details.paginated}
 {if $details.pagination=="cursor"}
@@ -90,15 +90,10 @@ This API method does not define any custom error codes. For the list of error co
 
 {if $api_request_method=='GET'}
 ```
-curl -X {$api_request_method|escape} 'https://whosonfirst-api.mapzen.com/?method={$method|escape}{if $cfg.api_auth_type=='oauth2'}&api_key=API_KEY{/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}=&lt;{$param.name|strtoupper|escape}&gt;{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
+curl -X {$api_request_method|escape} 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=<API_KEY>{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}=<{$param.name|strtoupper|escape}>{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
 ```
 {else}
 ```
-curl -X {$api_request_method|escape} https://whosonfirst-api.mapzen.com -F "method={$method|escape}"{if $cfg.api_auth_type=='oauth2'} -F "api_key=API_KEY" {/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented} -F "{$param.name|escape}=&lt;{$param.name|strtoupper|escape}&gt;"{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}
+curl -X {$api_request_method|escape} https://whosonfirst-api.mapzen.com -F "method={$method|escape}" -F "api_key=<API_KEY>" {if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented} -F "{$param.name|escape}=<{$param.name|strtoupper|escape}>"{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}
 ```
-{/if}
-
-{if 0}
-{if $details.example_response}
-{/if}
 {/if}

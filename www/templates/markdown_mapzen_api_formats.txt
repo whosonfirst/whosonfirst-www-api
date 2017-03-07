@@ -1,3 +1,10 @@
 <a name="formats"></a>
 ## Response formats
 
+{foreach from=$formats item="format"}
+<a name="formats-{$format|@escape}"></a>
+### {$format|escape}
+
+{capture assign="template"}markdown_api_format_description_{$format|escape}.txt{/capture}
+{include file=$template}
+{/foreach}

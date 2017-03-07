@@ -1,0 +1,35 @@
+CSV (Comma Separated Value)
+
+#### Example request
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key={literal}{API_KEY}{/literal}&q=poutine&page=1&per_page=1<strong>&format=csv</strong>'
+```
+
+#### Example response
+
+```{literal}
+&lt; HTTP/1.1 200 OK
+&lt; Access-Control-Allow-Origin: *
+&lt; Content-Type: text/csv
+&lt; Date: Tue, 28 Feb 2017 21:13:37 GMT
+&lt; Status: 200 OK
+&lt; X-api-pagination-cursor: 
+&lt; X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
+&lt; X-api-pagination-page: 1
+&lt; X-api-pagination-pages: 13
+&lt; X-api-pagination-per-page: 1
+&lt; X-api-pagination-total: 13
+&lt; X-api-format-csv-header: geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
+&lt; Content-Length: 208
+&lt; Connection: keep-alive
+&lt; 
+geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
+"-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
+{/literal}````
+
+<small>The CVS header is only written, in the body of the response, for the first page of API responses. The <code>X-api-format-csv-header</code> HTTP header is included with all responses.</small>
+
+#### Notes
+
+CSV output is not supported for all API methods.

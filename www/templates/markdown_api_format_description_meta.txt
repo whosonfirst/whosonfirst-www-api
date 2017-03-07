@@ -1,0 +1,35 @@
+As in a Who's On First "meta" file. A meta file is really just a CSV file with a pre-defined set of column headers. Meta files are included with all of the Who's On First repositories and are meant to act a quick and easy index (rather than a full-fledged database) that a person might use to inspect the data. Since there is a lot of tooling developed to support meta files (for example, converting a metafile into a <a href="https://whosonfirst.mapzen.com/bundles/">bundle</a>) it seemed like it would useful to support them as an output format in the API.
+
+#### Example request
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key={literal}{API_KEY}{/literal}&q=poutine&page=1&per_page=1&format=meta'
+```
+
+#### Example response
+
+```{literal}
+&lt; HTTP/1.1 200 OK
+&lt; Access-Control-Allow-Origin: *
+&lt; Content-Type: text/csv
+&lt; Date: Tue, 28 Feb 2017 22:25:13 GMT
+&lt; Status: 200 OK
+&lt; X-api-pagination-cursor: 
+&lt; X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=meta
+&lt; X-api-pagination-page: 1
+&lt; X-api-pagination-pages: 13
+&lt; X-api-pagination-per-page: 1
+&lt; X-api-pagination-total: 13
+&lt; X-api-format-meta-header: bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,geom_longitude,id,inception,iso,iso_country,lastmodified,lbl_latitude,lbl_longitude,locality_id,name,parent_id,path,placetype,region_id,source,superseded_by,supersedes,wof_country
+&lt; Content-Length: 503
+&lt; Connection: keep-alive
+&lt; 
+bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,geom_longitude,id,inception,iso,iso_country,lastmodified,lbl_latitude,lbl_longitude,locality_id,name,parent_id,path,placetype,region_id,source,superseded_by,supersedes,wof_country
+"-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",uuuu,0,,,,88060b9c65a5eaae29b427583b1bfa93,46.066528,-71.939964,975139507,uuuu,CA,CA,1472521936,0,0,0,"Poutine Restau-Bar Enr",-1,975/139/507/975139507.geojson,venue,0,simplegeo,,,CA
+{/literal}```
+
+<small>The meta (CVS) header is only written, in the body of the response, for the first page of API responses. The <code>X-api-format-meta-header</code> HTTP header is included with all responses.</small>
+
+#### Notes
+
+Meta (CSV) output is not supported for all API methods.
