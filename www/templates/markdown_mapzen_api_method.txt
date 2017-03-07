@@ -9,7 +9,7 @@
 {if $details.parameters|@count}
 {foreach from=$details.parameters item="param"}
 {if $param.documented || 'admin'|@auth_has_role}
-* **{$param.name|escape}** {if $param.required}_required_{/if} &#8212; {$param.description|escape}
+* **{$param.name|escape}** {if $param.required}_required_{/if} &#8212; {$param.description|escape}{if $param.example} For example `{$param.example|@escape}`{/if}.
 {/if}
 {/foreach}
 {/if}
@@ -77,7 +77,7 @@ This API method does not define any custom error codes. For the list of error co
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=API_KEY{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}={if $param.example}{$param.example|@escape}{else}{$param.name|strtoupper|escape}{/if}{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=API_KEY{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}={$param.name|strtoupper|escape}{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
 ```
 
 

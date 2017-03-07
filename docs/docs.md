@@ -142,8 +142,8 @@ Return a Who&#039;s On First record (and all its concordances) by another source
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **id** _required_ &#8212; The ID of concordance you are looking for
-* **source** _required_ &#8212; The source prefix of the concordance you are looking for
+* **id** _required_ &#8212; The ID of concordance you are looking for For example `3534`.
+* **source** _required_ &#8212; The source prefix of the concordance you are looking for For example `gp`.
 * **page** &#8212; The default is 1.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
@@ -165,7 +165,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getById&api_key=API_KEY&id=3534&source=gp'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getById&api_key=API_KEY&id=ID&source=SOURCE'
 ```
 
 
@@ -206,9 +206,9 @@ Return Who&#039;s On First places intersecting a latitude and longitude
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **latitude** _required_ &#8212; A valid latitude coordinate.
-* **longitude** _required_ &#8212; A valid longitude coordinate.
-* **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by.
+* **latitude** _required_ &#8212; A valid latitude coordinate. For example `37.766633`.
+* **longitude** _required_ &#8212; A valid longitude coordinate. For example `-122.417693`.
+* **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by. For example `neighbourhood`.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
@@ -234,7 +234,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getByLatLon&api_key=API_KEY&latitude=37.766633&longitude=-122.417693&placetype=neighbourhood'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getByLatLon&api_key=API_KEY&latitude=LATITUDE&longitude=LONGITUDE&placetype=PLACETYPE'
 ```
 
 
@@ -246,23 +246,23 @@ Return all the descendants for a Who&#039;s On First ID.
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **id** _required_ &#8212; A valid Who&#039;s On First ID
-* **name**  &#8212; Query for this value in the wof:name field.
-* **names**  &#8212; Query for this value across all name related fields.
-* **alt**  &#8212; Query for this value across all alternate name related fields (variant, colloquial, unknown).
-* **preferred**  &#8212; Query for this value across all preferred name related fields.
-* **variant**  &#8212; Query for this value across all variant name related fields.
-* **placetype**  &#8212; Ensure records match this placetype.
-* **tags**  &#8212; Query for places with one or more of these tags.
-* **category**  &#8212; Query for places with one or more of these categories.
-* **iso**  &#8212; Ensure places belong to this (ISO) country code.
-* **country_id**  &#8212; Ensure places belong to this country Who&#039;s On First ID.
-* **region_id**  &#8212; Ensure places belong to this region Who&#039;s On First ID.
-* **locality_id**  &#8212; Ensure places belong to this locality Who&#039;s On First ID.
-* **neighbourhood_id**  &#8212; Ensure places belong to this neighbourhood Who&#039;s On First ID.
-* **concordance**  &#8212; Query for places that have been concordified with this source.
-* **exclude**  &#8212; Exclude places matching these criteria.
-* **include**  &#8212; Include places matching these criteria.
+* **id** _required_ &#8212; A valid Who&#039;s On First ID For example `420780703`.
+* **name**  &#8212; Query for this value in the wof:name field. For example `Gowanus Heights`.
+* **names**  &#8212; Query for this value across all name related fields. For example `SF`.
+* **alt**  &#8212; Query for this value across all alternate name related fields (variant, colloquial, unknown). For example `Paris`.
+* **preferred**  &#8212; Query for this value across all preferred name related fields. For example `বেইজিং`.
+* **variant**  &#8212; Query for this value across all variant name related fields. For example `💩`.
+* **placetype**  &#8212; Ensure records match this placetype. For example `microhood`.
+* **tags**  &#8212; Query for places with one or more of these tags. For example `diner`.
+* **category**  &#8212; Query for places with one or more of these categories..
+* **iso**  &#8212; Ensure places belong to this (ISO) country code. For example `CA`.
+* **country_id**  &#8212; Ensure places belong to this country Who&#039;s On First ID. For example `85633147`.
+* **region_id**  &#8212; Ensure places belong to this region Who&#039;s On First ID. For example `85669831`.
+* **locality_id**  &#8212; Ensure places belong to this locality Who&#039;s On First ID. For example `101736545`.
+* **neighbourhood_id**  &#8212; Ensure places belong to this neighbourhood Who&#039;s On First ID. For example `102112179`.
+* **concordance**  &#8212; Query for places that have been concordified with this source. For example `loc:id`.
+* **exclude**  &#8212; Exclude places matching these criteria. For example `nullisland`.
+* **include**  &#8212; Include places matching these criteria. For example `deprecated`.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.
 * **page** &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details.
@@ -284,7 +284,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDescendants&api_key=API_KEY&id=420780703&name=Gowanus Heights&names=SF&alt=Paris&preferred=বেইজিং&variant=💩&placetype=microhood&tags=diner&category=CATEGORY&iso=CA&country_id=85633147&region_id=85669831&locality_id=101736545&neighbourhood_id=102112179&concordance=loc:id&exclude=nullisland&include=deprecated'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDescendants&api_key=API_KEY&id=ID&name=NAME&names=NAMES&alt=ALT&preferred=PREFERRED&variant=VARIANT&placetype=PLACETYPE&tags=TAGS&category=CATEGORY&iso=ISO&country_id=COUNTRY_ID&region_id=REGION_ID&locality_id=LOCALITY_ID&neighbourhood_id=NEIGHBOURHOOD_ID&concordance=CONCORDANCE&exclude=EXCLUDE&include=INCLUDE'
 ```
 
 
@@ -296,9 +296,9 @@ Return the closest set of ancestors (hierarchies) for a latitude and longitude
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **latitude** _required_ &#8212; A valid latitude coordinate.
-* **longitude** _required_ &#8212; A valid longitude coordinate.
-* **placetype**  &#8212; Skip descendants of this placetype.
+* **latitude** _required_ &#8212; A valid latitude coordinate. For example `37.777228`.
+* **longitude** _required_ &#8212; A valid longitude coordinate. For example `-122.470779`.
+* **placetype**  &#8212; Skip descendants of this placetype. For example `region`.
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -321,7 +321,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getHierarchiesByLatLon&api_key=API_KEY&latitude=37.777228&longitude=-122.470779&placetype=region'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getHierarchiesByLatLon&api_key=API_KEY&latitude=LATITUDE&longitude=LONGITUDE&placetype=PLACETYPE'
 ```
 
 
@@ -333,7 +333,7 @@ Return a Who&#039;s On First record by ID.
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **id** _required_ &#8212; A valid Who&#039;s On First ID.
+* **id** _required_ &#8212; A valid Who&#039;s On First ID. For example `420561633`.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
@@ -349,7 +349,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfo&api_key=API_KEY&id=420561633'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfo&api_key=API_KEY&id=ID'
 ```
 
 
@@ -361,11 +361,11 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **min_latitude** _required_ &#8212; A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box.
-* **min_longitude** _required_ &#8212; A valid longitude coordinate, representing the left (Western) edge of the bounding box.
-* **max_latitude** _required_ &#8212; A valid latitude coordinate, representing the top (Northern) edge of the bounding box.
-* **max_longitude** _required_ &#8212; A valid longitude coordinate, representing the right (Eastern) edge of the bounding box.
-* **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by.
+* **min_latitude** _required_ &#8212; A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box. For example `37.78807088`.
+* **min_longitude** _required_ &#8212; A valid longitude coordinate, representing the left (Western) edge of the bounding box. For example `-122.34374508`.
+* **max_latitude** _required_ &#8212; A valid latitude coordinate, representing the top (Northern) edge of the bounding box. For example `37.85749665`.
+* **max_longitude** _required_ &#8212; A valid longitude coordinate, representing the right (Eastern) edge of the bounding box. For example `-122.25585446`.
+* **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by. For example `locality`.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
@@ -393,7 +393,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects&api_key=API_KEY&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=locality'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects&api_key=API_KEY&min_latitude=MIN_LATITUDE&min_longitude=MIN_LONGITUDE&max_latitude=MAX_LATITUDE&max_longitude=MAX_LONGITUDE&placetype=PLACETYPE'
 ```
 
 
@@ -405,9 +405,9 @@ Return all the Who&#039;s On First records near a point.
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **latitude** _required_ &#8212; A valid latitude coordinate.
-* **longitude** _required_ &#8212; A valid longitude coordinate.
-* **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by.
+* **latitude** _required_ &#8212; A valid latitude coordinate. For example `40.784165`.
+* **longitude** _required_ &#8212; A valid longitude coordinate. For example `-73.958110`.
+* **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by. For example `venue`.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
@@ -433,7 +433,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=API_KEY&latitude=40.784165&longitude=-73.958110&placetype=venue'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=API_KEY&latitude=LATITUDE&longitude=LONGITUDE&placetype=PLACETYPE'
 ```
 
 
@@ -445,9 +445,9 @@ Return Who&#039;s On First parent ID for a latitude and longitude and placetype
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **latitude** _required_ &#8212; A valid latitude coordinate.
-* **longitude** _required_ &#8212; A valid longitude coordinate.
-* **placetype** _required_ &#8212; A valid Who&#039;s On First placetype to limit the query by.
+* **latitude** _required_ &#8212; A valid latitude coordinate. For example `35.655065`.
+* **longitude** _required_ &#8212; A valid longitude coordinate. For example `139.369640`.
+* **placetype** _required_ &#8212; A valid Who&#039;s On First placetype to limit the query by. For example `neighbourhood`.
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -472,7 +472,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getParentByLatLon&api_key=API_KEY&latitude=35.655065&longitude=139.369640&placetype=neighbourhood'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getParentByLatLon&api_key=API_KEY&latitude=LATITUDE&longitude=LONGITUDE&placetype=PLACETYPE'
 ```
 
 
@@ -510,23 +510,23 @@ Query for Who&#039;s On First records.
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **q**  &#8212; Query for this value across all fields.
-* **name**  &#8212; Query for this value in the wof:name field.
-* **names**  &#8212; Query for this value across all name related fields.
-* **alt**  &#8212; Query for this value across all alternate name related fields (variant, colloquial, unknown).
-* **preferred**  &#8212; Query for this value across all preferred name related fields.
-* **variant**  &#8212; Query for this value across all variant name related fields.
-* **placetype**  &#8212; Ensure records match this placetype.
-* **tags**  &#8212; Query for places with one or more of these tags.
-* **category**  &#8212; Query for places with one or more of these categories.
-* **iso**  &#8212; Ensure places belong to this (ISO) country code.
-* **country_id**  &#8212; Ensure places belong to this country Who&#039;s On First ID.
-* **region_id**  &#8212; Ensure places belong to this region Who&#039;s On First ID.
-* **locality_id**  &#8212; Ensure places belong to this locality Who&#039;s On First ID.
-* **neighbourhood_id**  &#8212; Ensure places belong to this neighbourhood Who&#039;s On First ID.
-* **concordance**  &#8212; Query for places that have been concordified with this source.
-* **exclude**  &#8212; Exclude places matching these criteria.
-* **include**  &#8212; Include places matching these criteria.
+* **q**  &#8212; Query for this value across all fields. For example `poutine`.
+* **name**  &#8212; Query for this value in the wof:name field. For example `Gowanus Heights`.
+* **names**  &#8212; Query for this value across all name related fields. For example `SF`.
+* **alt**  &#8212; Query for this value across all alternate name related fields (variant, colloquial, unknown). For example `Paris`.
+* **preferred**  &#8212; Query for this value across all preferred name related fields. For example `বেইজিং`.
+* **variant**  &#8212; Query for this value across all variant name related fields. For example `💩`.
+* **placetype**  &#8212; Ensure records match this placetype. For example `microhood`.
+* **tags**  &#8212; Query for places with one or more of these tags. For example `diner`.
+* **category**  &#8212; Query for places with one or more of these categories..
+* **iso**  &#8212; Ensure places belong to this (ISO) country code. For example `CA`.
+* **country_id**  &#8212; Ensure places belong to this country Who&#039;s On First ID. For example `85633147`.
+* **region_id**  &#8212; Ensure places belong to this region Who&#039;s On First ID. For example `85669831`.
+* **locality_id**  &#8212; Ensure places belong to this locality Who&#039;s On First ID. For example `101736545`.
+* **neighbourhood_id**  &#8212; Ensure places belong to this neighbourhood Who&#039;s On First ID. For example `102112179`.
+* **concordance**  &#8212; Query for places that have been concordified with this source. For example `loc:id`.
+* **exclude**  &#8212; Exclude places matching these criteria. For example `nullisland`.
+* **include**  &#8212; Include places matching these criteria. For example `deprecated`.
 * **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
 * **cursor** &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.
 * **page** &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details.
@@ -547,7 +547,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=API_KEY&q=poutine&name=Gowanus Heights&names=SF&alt=Paris&preferred=বেইজিং&variant=💩&placetype=microhood&tags=diner&category=CATEGORY&iso=CA&country_id=85633147&region_id=85669831&locality_id=101736545&neighbourhood_id=102112179&concordance=loc:id&exclude=nullisland&include=deprecated'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=API_KEY&q=Q&name=NAME&names=NAMES&alt=ALT&preferred=PREFERRED&variant=VARIANT&placetype=PLACETYPE&tags=TAGS&category=CATEGORY&iso=ISO&country_id=COUNTRY_ID&region_id=REGION_ID&locality_id=LOCALITY_ID&neighbourhood_id=NEIGHBOURHOOD_ID&concordance=CONCORDANCE&exclude=EXCLUDE&include=INCLUDE'
 ```
 
 
@@ -559,8 +559,8 @@ Return details for a Who&#039;s On First placetype.
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **id**  &#8212; A valid Who&#039;s On First placetype ID.
-* **name**  &#8212; A valid Who&#039;s On First placetype name.
+* **id**  &#8212; A valid Who&#039;s On First placetype ID. For example `102322043`.
+* **name**  &#8212; A valid Who&#039;s On First placetype name. For example `disputed`.
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -579,7 +579,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getInfo&api_key=API_KEY&id=102322043&name=disputed'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getInfo&api_key=API_KEY&id=ID&name=NAME'
 ```
 
 
@@ -591,7 +591,7 @@ Return a list of Who&#039;s On First placetypes.
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **role**  &#8212; Only return placetypes that are part of this role.
+* **role**  &#8212; Only return placetypes that are part of this role. For example `common`.
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
 
 #### Error codes
@@ -608,7 +608,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getList&api_key=API_KEY&role=common'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getList&api_key=API_KEY&role=ROLE'
 ```
 
 
@@ -646,8 +646,8 @@ Return details for a Who&#039;s On First source.
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **id**  &#8212; A valid Who&#039;s On First source ID.
-* **prefix**  &#8212; A valid Who&#039;s On First source prefix.
+* **id**  &#8212; A valid Who&#039;s On First source ID. For example `840464301`.
+* **prefix**  &#8212; A valid Who&#039;s On First source prefix. For example `loc`.
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
@@ -665,7 +665,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getInfo&api_key=API_KEY&id=840464301&prefix=loc'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getInfo&api_key=API_KEY&id=ID&prefix=PREFIX'
 ```
 
 
@@ -749,7 +749,7 @@ Return the list of unique tags n Who&#039;s On First.
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **source**  &#8212; Limit results to categories from this source.
+* **source**  &#8212; Limit results to categories from this source. For example `wof`.
 * **page** &#8212; The default is 1.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
 * **format** &#8212; The format in which to return the data. Normally supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: <a href="http://fake.com/formats/csv/">csv</a>, <a href="http://fake.com/formats/meta/">meta</a>. The default format is [json](#formats-json).
@@ -770,7 +770,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags&api_key=API_KEY&source=wof'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags&api_key=API_KEY&source=SOURCE'
 ```
 
 
