@@ -21,9 +21,9 @@ _Something something something "stuff over HTTP". Something something something 
 
 You should treat this API as though it were in "beta".
 
-Which is to say: The point is for _the thing to work_ but there are probably still some rough edges and lingering gotchas so you should adjust your expectations and your code accordingly. In the meantime have at it and please let us know if something is busted or just doesn't feel right.
+Which is to say: The point is for _the thing to work_ but there are probably still some rough edges and lingering gotchas so you should adjust your expectations and your code accordingly. In the meantime have at it and [please let us know](https://twitter.co/alloftheplaces) if something is busted or just doesn't feel right.
 
-Also some methods are "more beta" than others. These methods are flagged as being `experimental` which means that both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach these API methods defensively.
+Also some methods are "more beta" than others. These methods are flagged as being `experimental` which means that both either their inputs or their outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach these API methods defensively.
 
 {include file="markdown_mapzen_api_methods.txt"}
 
