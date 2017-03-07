@@ -44,7 +44,7 @@ None
 {if $details.errors|@count}
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:
 
-{foreach from=$details.errors item="row"}
+{foreach from=$details.errors item="row" key="code"}
 {if $row|@is_array}
 * `{$code|@escape}` &#8212; {$row.message|@escape}
 {/if}
