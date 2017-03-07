@@ -39,7 +39,7 @@
 None
 {/if}
 
-#### Errors
+#### Error codes
 
 {if $details.errors|@count}
 In addition to [default error codes](#error-codes) common to all methods this API method defines the following additional error codes:

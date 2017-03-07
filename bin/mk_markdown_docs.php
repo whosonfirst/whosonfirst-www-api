@@ -2,6 +2,8 @@
 
 	include("init_local.php");
 
+	$GLOBALS['cfg']['environment'] = 'prod';
+
 	loadlib("api");
 	loadlib("api_methods");
 
@@ -51,6 +53,6 @@
 
 	$GLOBALS['smarty']->assign_by_ref("default_format", $GLOBALS['cfg']['api']['default_format']);
 
-	$md = $GLOBALS['smarty']->fetch("markdown_mapzen_api_docs.txt");
-
-	echo $md;
+	echo $GLOBALS['smarty']->fetch("markdown_mapzen_api_docs.txt");
+	exit(0);
+?>

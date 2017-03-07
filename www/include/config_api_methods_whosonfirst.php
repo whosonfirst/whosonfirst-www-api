@@ -30,7 +30,7 @@
 		'whosonfirst.categories.getNamespaces' => array(
 			"description" => "Return the list of unique namespaces for all the categories in Who's On First.",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_categories'],
+			"enabled" => ($GLOBALS['cfg']['enable_feature_categories'] && $GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_categories",
                         "parameters" => array(
@@ -48,7 +48,7 @@
 		'whosonfirst.categories.getPredicates' => array(
 			"description" => "Return the list of unique predicates for all the the categories in Who's On First.",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_categories'],
+			"enabled" => ($GLOBALS['cfg']['enable_feature_categories'] && $GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_categories",
                         "parameters" => array(
@@ -66,7 +66,7 @@
 		'whosonfirst.categories.getValues' => array(
 			"description" => "Return the list of unique values for all the categories in Who's On First.",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_categories'],
+			"enabled" => ($GLOBALS['cfg']['enable_feature_categories'] && $GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_categories",
                         "parameters" => array(
@@ -84,7 +84,7 @@
 		'whosonfirst.categories.getSources' => array(
 			"description" => "Return the list of sources for all the categories in Who's On First.",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_categories'],
+			"enabled" => ($GLOBALS['cfg']['enable_feature_categories'] && $GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_categories",
                         "parameters" => array(),
@@ -126,7 +126,7 @@
 		'whosonfirst.machinetags.getNamespaces' => array(
 			"description" => "Return the list of unique namespaces for all the machinetags in Who's On First.",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_machinetags'],
+			"enabled" => ($GLOBALS['cfg']['enable_feature_machinetags'] && $GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
@@ -142,7 +142,7 @@
 		'whosonfirst.machinetags.getPredicates' => array(
 			"description" => "Return the list of unique predicates for all the the machinetags in Who's On First",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_machinetags'],
+			"enabled" => ($GLOBALS['cfg']['enable_feature_machinetags'] && $GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
@@ -158,7 +158,7 @@
 		'whosonfirst.machinetags.getValues' => array(
 			"description" => "Return the list of unique values for all the machinetags in Who's On First.",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_machinetags'],
+			"enabled" => ($GLOBALS['cfg']['enable_feature_machinetags'] && $GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_machinetags",
                         "parameters" => array(
