@@ -1,6 +1,8 @@
 <a name="formats"></a>
 ## Response formats
 
+The default response format is [{$default_format|@escape}](#format-{$default_format|@escape}).
+
 {foreach from=$response_formats item="format"}
 <a name="formats-{$format|@escape}"></a>
 ### {$format|escape}

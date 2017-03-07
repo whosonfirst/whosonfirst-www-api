@@ -209,7 +209,7 @@ Return Who&#039;s On First places intersecting a latitude and longitude
 * **latitude** _required_ &#8212; A valid latitude coordinate. For example `37.766633`.
 * **longitude** _required_ &#8212; A valid longitude coordinate. For example `-122.417693`.
 * **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by. For example `neighbourhood`.
-* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
+* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
@@ -263,7 +263,7 @@ Return all the descendants for a Who&#039;s On First ID.
 * **concordance**  &#8212; Query for places that have been concordified with this source. For example `loc:id`.
 * **exclude**  &#8212; Exclude places matching these criteria. For example `nullisland`.
 * **include**  &#8212; Include places matching these criteria. For example `deprecated`.
-* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
+* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`)
 * **cursor** &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.
 * **page** &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
@@ -334,7 +334,7 @@ Return a Who&#039;s On First record by ID.
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
 * **id** _required_ &#8212; A valid Who&#039;s On First ID. For example `420561633`.
-* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
+* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
@@ -366,7 +366,7 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 * **max_latitude** _required_ &#8212; A valid latitude coordinate, representing the top (Northern) edge of the bounding box. For example `37.85749665`.
 * **max_longitude** _required_ &#8212; A valid longitude coordinate, representing the right (Eastern) edge of the bounding box. For example `-122.25585446`.
 * **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by. For example `locality`.
-* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
+* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
@@ -408,7 +408,7 @@ Return all the Who&#039;s On First records near a point.
 * **latitude** _required_ &#8212; A valid latitude coordinate. For example `40.784165`.
 * **longitude** _required_ &#8212; A valid longitude coordinate. For example `-73.958110`.
 * **placetype**  &#8212; A valid Who&#039;s On First placetype to limit the query by. For example `venue`.
-* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
+* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`)
 * **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
@@ -484,7 +484,7 @@ Return a random Who&#039;s On First record.
 #### Arguments
 
 * **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
-* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
+* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`)
 * **format** &#8212; The format in which to return the data. Supported formats are [json](#formats-json), [csv](#formats-csv), [meta](#formats-meta). The default format is [json](#formats-json)</a>.
 
 #### Error codes
@@ -527,7 +527,7 @@ Query for Who&#039;s On First records.
 * **concordance**  &#8212; Query for places that have been concordified with this source. For example `loc:id`.
 * **exclude**  &#8212; Exclude places matching these criteria. For example `nullisland`.
 * **include**  &#8212; Include places matching these criteria. For example `deprecated`.
-* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example &quot;mz:&quot;)
+* **extras** &#8212; A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`)
 * **cursor** &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.
 * **page** &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details.
 * **per_page** &#8212; The default is 100 and the maximum is 500.
@@ -777,6 +777,8 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags
 
 <a name="formats"></a>
 ## Response formats
+
+The default response format is [json](#format-json).
 
 <a name="formats-json"></a>
 ### json
