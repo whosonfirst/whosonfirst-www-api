@@ -720,6 +720,7 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 * The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
 
+
 <a name="formats"></a>
 ## Response formats
 
@@ -849,7 +850,8 @@ bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,
 
 #### Notes
 
-Meta (CSV) output is not supported for all API methods.<a name="pagination"></a>
+Meta (CSV) output is not supported for all API methods.
+<a name="pagination"></a>
 ## Pagination
 
 ### A short miserable history (of pagination)
@@ -1001,12 +1003,39 @@ $> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.pla
 &lt; 
 geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
 "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
-```<a name="error-codes"></a>
+```
+<a name="error-codes"></a>
 ## Error codes
 
 In addition to any already <a href="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">assigned HTTP status codes</a> <span class="hey-look">Who&#039;s On First API</span> defines the following additional status codes for representing errors or a failure scenario, across all API methods:
 
 <ul class="api-list-o-things">
+* **`` &#8212;  Unknown error
+* **`` &#8212;  Insufficient parameters
+* **`` &#8212;  Missing parameter
+* **`` &#8212;  Invalid parameter
+* **`` &#8212;  Invalid upload response
+* **`` &#8212;  Missing upload body
+* **`` &#8212;  Upload exceeded maximum filesize
+* **`` &#8212;  Invalid mime-type
+* **`` &#8212;  Invalid user
+* **`` &#8212;  User is disabled
+* **`` &#8212;  User is deleted
+* **`` &#8212;  Insufficient permissions for this API key
+* **`` &#8212;  Invalid access token for this API key
+* **`` &#8212;  Unauthorized host for this API key
+* **`` &#8212;  API key not configured for use with this method
+* **`` &#8212;  Invalid API key
+* **`` &#8212;  API key missing
+* **`` &#8212;  Access token has insuffient permissions
+* **`` &#8212;  Access token is expired
+* **`` &#8212;  Access token is disabled
+* **`` &#8212;  Invalid access token
+* **`` &#8212;  Access token missing
+* **`` &#8212;  Output format is disallowed for this API method
+* **`` &#8212;  API method is disabled
+* **`` &#8212;  API method not found
+* **`` &#8212;  Something we tried to do didn&#039;t work. This is our fault, not yours.
 
 Individual API methods may define their own status codes within the <code>432-449</code> and <code>513-599</code> range on a per-method basis. Status codes in this range <em>may</em> be used with different meanings by different API methods and it is left to API consumers to account for those differences.
 

@@ -4,7 +4,7 @@
 In addition to any already <a href="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">assigned HTTP status codes</a> <span class="hey-look">{$cfg.site_name|@escape}</span> defines the following additional status codes for representing errors or a failure scenario, across all API methods:
 
 <ul class="api-list-o-things">
-{foreach from=$errors_codes item="row" key="code"}
+{foreach from=$errors item="row" key="code"}
 * **`{$row.code|@escape}` &#8212;  {$row.message|@escape}
 {/foreach}
 
