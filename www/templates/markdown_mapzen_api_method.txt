@@ -60,11 +60,11 @@ This API method does not define any custom error codes. For the list of error co
 {/if}
 {if $details.paginated}
 {if $details.pagination=="cursor"}
-* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination-cursor) for details.
+* This API method uses [cursor-based](#pagination-cursor) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 {elseif $details.pagination=="mixed"}
-* This API method uses <span class="hey-look">mixed</span> pagination. Please consult the [pagination documentation](#pagination-mixed) for details.
+* This API method uses [mixed](#pagination-mixed) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 {else}
-* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
+* This API method uses [plain](#pagination-plain) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 {/if}
 {/if}
 {if $details.experimental}
@@ -76,8 +76,8 @@ This API method does not define any custom error codes. For the list of error co
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=API_KEY{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}={if $param.example}{$param.example|@escape}{else}{$param.name|strtoupper|escape}{/if}{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
 ```
-{if 0}&api_key=API_KEY{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}={$param.name|strtoupper|escape}{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'{/if}
+
 
 

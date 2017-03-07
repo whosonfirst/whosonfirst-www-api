@@ -10,48 +10,25 @@
 
 #### api.spec
 
-* [api.spec.formats](#api.spec.formats)
-* [api.spec.methods](#api.spec.methods)
-
+* [api.spec.formats](#api.spec.formats)* [api.spec.methods](#api.spec.methods)
 #### test
 
-* [test.echo](#test.echo)
-* [test.error](#test.error)
-
+* [test.echo](#test.echo)* [test.error](#test.error)
 #### whosonfirst.concordances
 
-* [whosonfirst.concordances.getById](#whosonfirst.concordances.getById)
-* [whosonfirst.concordances.getSources](#whosonfirst.concordances.getSources)
-
+* [whosonfirst.concordances.getById](#whosonfirst.concordances.getById)* [whosonfirst.concordances.getSources](#whosonfirst.concordances.getSources)
 #### whosonfirst.places
 
-* [whosonfirst.places.getByLatLon](#whosonfirst.places.getByLatLon)
-* [whosonfirst.places.getDescendants](#whosonfirst.places.getDescendants)
-* [whosonfirst.places.getHierarchiesByLatLon](#whosonfirst.places.getHierarchiesByLatLon)
-* [whosonfirst.places.getInfo](#whosonfirst.places.getInfo)
-* [whosonfirst.places.getIntersects](#whosonfirst.places.getIntersects)
-* [whosonfirst.places.getNearby](#whosonfirst.places.getNearby)
-* [whosonfirst.places.getParentByLatLon](#whosonfirst.places.getParentByLatLon)
-* [whosonfirst.places.getRandom](#whosonfirst.places.getRandom)
-* [whosonfirst.places.search](#whosonfirst.places.search)
-
+* [whosonfirst.places.getByLatLon](#whosonfirst.places.getByLatLon)* [whosonfirst.places.getDescendants](#whosonfirst.places.getDescendants)* [whosonfirst.places.getHierarchiesByLatLon](#whosonfirst.places.getHierarchiesByLatLon)* [whosonfirst.places.getInfo](#whosonfirst.places.getInfo)* [whosonfirst.places.getIntersects](#whosonfirst.places.getIntersects)* [whosonfirst.places.getNearby](#whosonfirst.places.getNearby)* [whosonfirst.places.getParentByLatLon](#whosonfirst.places.getParentByLatLon) _experimental_* [whosonfirst.places.getRandom](#whosonfirst.places.getRandom)* [whosonfirst.places.search](#whosonfirst.places.search)
 #### whosonfirst.placetypes
 
-* [whosonfirst.placetypes.getInfo](#whosonfirst.placetypes.getInfo)
-* [whosonfirst.placetypes.getList](#whosonfirst.placetypes.getList)
-* [whosonfirst.placetypes.getRoles](#whosonfirst.placetypes.getRoles)
-
+* [whosonfirst.placetypes.getInfo](#whosonfirst.placetypes.getInfo)* [whosonfirst.placetypes.getList](#whosonfirst.placetypes.getList)* [whosonfirst.placetypes.getRoles](#whosonfirst.placetypes.getRoles)
 #### whosonfirst.sources
 
-* [whosonfirst.sources.getInfo](#whosonfirst.sources.getInfo)
-* [whosonfirst.sources.getList](#whosonfirst.sources.getList)
-* [whosonfirst.sources.getPrefixes](#whosonfirst.sources.getPrefixes)
-
+* [whosonfirst.sources.getInfo](#whosonfirst.sources.getInfo)* [whosonfirst.sources.getList](#whosonfirst.sources.getList)* [whosonfirst.sources.getPrefixes](#whosonfirst.sources.getPrefixes)
 #### whosonfirst.tags
 
-* [whosonfirst.tags.getSources](#whosonfirst.tags.getSources)
-* [whosonfirst.tags.getTags](#whosonfirst.tags.getTags)
-
+* [whosonfirst.tags.getSources](#whosonfirst.tags.getSources)* [whosonfirst.tags.getTags](#whosonfirst.tags.getTags)
 
 <a name="api.spec.formats"></a>
 ### api.spec.formats
@@ -74,8 +51,9 @@ This API method does not define any custom error codes. For the list of error co
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.formats...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.formats&api_key=API_KEY'
 ```
+
 
 <a name="api.spec.methods"></a>
 ### api.spec.methods
@@ -98,8 +76,9 @@ This API method does not define any custom error codes. For the list of error co
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.methods...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.methods&api_key=API_KEY'
 ```
+
 
 <a name="test.echo"></a>
 ### test.echo
@@ -122,8 +101,9 @@ This API method does not define any custom error codes. For the list of error co
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=test.echo...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=test.echo&api_key=API_KEY'
 ```
+
 
 <a name="test.error"></a>
 ### test.error
@@ -146,8 +126,9 @@ This API method does not define any custom error codes. For the list of error co
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=test.error...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=test.error&api_key=API_KEY'
 ```
+
 
 <a name="whosonfirst.concordances.getById"></a>
 ### whosonfirst.concordances.getById
@@ -173,14 +154,15 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses [plain](#pagination-plain) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getById...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getById&api_key=API_KEY&id=3534&source=gp'
 ```
+
 
 <a name="whosonfirst.concordances.getSources"></a>
 ### whosonfirst.concordances.getSources
@@ -200,14 +182,15 @@ This API method does not define any custom error codes. For the list of error co
 
 #### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses [plain](#pagination-plain) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getSources...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getSources&api_key=API_KEY'
 ```
+
 
 <a name="whosonfirst.places.getByLatLon"></a>
 ### whosonfirst.places.getByLatLon
@@ -239,14 +222,15 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Notes
 
 * This method differs from the whosonfirst.places.getAncestorsByLatLon method in two ways: 1. It returns a list of WOF places rather than hierarchies and 2. If a placetype filter is specified and no matching records are found no attempt will be made to find ancestors higher up the hierarchy. For example looking for an intersecting county or region if no locality is found.
-* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination-cursor) for details.
+* This API method uses [cursor-based](#pagination-cursor) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getByLatLon...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getByLatLon&api_key=API_KEY&latitude=37.766633&longitude=-122.417693&placetype=neighbourhood'
 ```
+
 
 <a name="whosonfirst.places.getDescendants"></a>
 ### whosonfirst.places.getDescendants
@@ -288,14 +272,15 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Notes
 
-* This API method uses <span class="hey-look">mixed</span> pagination. Please consult the [pagination documentation](#pagination-mixed) for details.
+* This API method uses [mixed](#pagination-mixed) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDescendants...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDescendants&api_key=API_KEY&id=420780703&name=Gowanus Heights&names=SF&alt=Paris&preferred=বেইজিং&variant=💩&placetype=microhood&tags=diner&category=CATEGORY&iso=CA&country_id=85633147&region_id=85669831&locality_id=101736545&neighbourhood_id=102112179&concordance=loc:id&exclude=nullisland&include=deprecated'
 ```
+
 
 <a name="whosonfirst.places.getHierarchiesByLatLon"></a>
 ### whosonfirst.places.getHierarchiesByLatLon
@@ -329,8 +314,9 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getHierarchiesByLatLon...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getHierarchiesByLatLon&api_key=API_KEY&latitude=37.777228&longitude=-122.470779&placetype=region'
 ```
+
 
 <a name="whosonfirst.places.getInfo"></a>
 ### whosonfirst.places.getInfo
@@ -356,8 +342,9 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfo...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfo&api_key=API_KEY&id=420561633'
 ```
+
 
 <a name="whosonfirst.places.getIntersects"></a>
 ### whosonfirst.places.getIntersects
@@ -393,14 +380,15 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Notes
 
-* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination-cursor) for details.
+* This API method uses [cursor-based](#pagination-cursor) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects&api_key=API_KEY&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=locality'
 ```
+
 
 <a name="whosonfirst.places.getNearby"></a>
 ### whosonfirst.places.getNearby
@@ -432,14 +420,15 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Notes
 
-* This API method uses <span class="hey-look">cursor-based</span> pagination. Please consult the [pagination documentation](#pagination-cursor) for details.
+* This API method uses [cursor-based](#pagination-cursor) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=API_KEY&latitude=40.784165&longitude=-73.958110&placetype=venue'
 ```
+
 
 <a name="whosonfirst.places.getParentByLatLon"></a>
 ### whosonfirst.places.getParentByLatLon
@@ -475,8 +464,9 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getParentByLatLon...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getParentByLatLon&api_key=API_KEY&latitude=35.655065&longitude=139.369640&placetype=neighbourhood'
 ```
+
 
 <a name="whosonfirst.places.getRandom"></a>
 ### whosonfirst.places.getRandom
@@ -500,8 +490,9 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRandom...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRandom&api_key=API_KEY'
 ```
+
 
 <a name="whosonfirst.places.search"></a>
 ### whosonfirst.places.search
@@ -542,14 +533,15 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Notes
 
-* This API method uses <span class="hey-look">mixed</span> pagination. Please consult the [pagination documentation](#pagination-mixed) for details.
+* This API method uses [mixed](#pagination-mixed) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=API_KEY&q=poutine&name=Gowanus Heights&names=SF&alt=Paris&preferred=বেইজিং&variant=💩&placetype=microhood&tags=diner&category=CATEGORY&iso=CA&country_id=85633147&region_id=85669831&locality_id=101736545&neighbourhood_id=102112179&concordance=loc:id&exclude=nullisland&include=deprecated'
 ```
+
 
 <a name="whosonfirst.placetypes.getInfo"></a>
 ### whosonfirst.placetypes.getInfo
@@ -578,8 +570,9 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getInfo...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getInfo&api_key=API_KEY&id=102322043&name=disputed'
 ```
+
 
 <a name="whosonfirst.placetypes.getList"></a>
 ### whosonfirst.placetypes.getList
@@ -605,8 +598,9 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getList...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getList&api_key=API_KEY&role=common'
 ```
+
 
 <a name="whosonfirst.placetypes.getRoles"></a>
 ### whosonfirst.placetypes.getRoles
@@ -629,8 +623,9 @@ This API method does not define any custom error codes. For the list of error co
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getRoles...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getRoles&api_key=API_KEY'
 ```
+
 
 <a name="whosonfirst.sources.getInfo"></a>
 ### whosonfirst.sources.getInfo
@@ -659,8 +654,9 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getInfo...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getInfo&api_key=API_KEY&id=840464301&prefix=loc'
 ```
+
 
 <a name="whosonfirst.sources.getList"></a>
 ### whosonfirst.sources.getList
@@ -681,8 +677,9 @@ This API method does not define any custom error codes. For the list of error co
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getList...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getList&api_key=API_KEY'
 ```
+
 
 <a name="whosonfirst.sources.getPrefixes"></a>
 ### whosonfirst.sources.getPrefixes
@@ -703,8 +700,9 @@ This API method does not define any custom error codes. For the list of error co
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getPrefixes...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getPrefixes&api_key=API_KEY'
 ```
+
 
 <a name="whosonfirst.tags.getSources"></a>
 ### whosonfirst.tags.getSources
@@ -727,8 +725,9 @@ This API method does not define any custom error codes. For the list of error co
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getSources...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getSources&api_key=API_KEY'
 ```
+
 
 <a name="whosonfirst.tags.getTags"></a>
 ### whosonfirst.tags.getTags
@@ -752,14 +751,15 @@ In addition to [default error codes](#error-codes) common to all methods this AP
 
 #### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses <span class="hey-look">plain</span> pagination. Please consult the [pagination documentation](#pagination-plain) for details.
+* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](#formats-csv), [meta](#formats-meta)* This API method uses [plain](#pagination-plain) or [next-query](#pagination-next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
 
 
 #### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags...`
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags&api_key=API_KEY&source=wof'
 ```
+
 
 
 <a name="formats"></a>
