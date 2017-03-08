@@ -10,7 +10,7 @@
 			array("name" => "placetype", "description" => "Ensure records match this placetype.", "documented" => 1, "required" => 0, "example" => "microhood"),
 
    			array("name" => "tags", "description" => "Query for places with one or more of these tags.", "documented" => 1, "required" => 0, "example" => "diner"),
-			array("name" => "category", "description" => "Query for places with one or more of these categories.", "documented" => $GLOBALS['cfg']['enable_feature_categories'], "required" => 0),
+			array("name" => "category", "description" => "Query for places with one or more of these categories.", "documented" => ($GLOBALS['cfg']['enable_feature_categories'] &&$GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0, "required" => 0),
 
 			array("name" => "iso", "description" => "Ensure places belong to this (ISO) country code.", "documented" => 1, "required" => 0, "example" => "CA"),
 			array("name" => "country_id", "description" => "Ensure places belong to this country Who's On First ID.", "documented" => 1, "required" => 0, "example" => "85633147"),

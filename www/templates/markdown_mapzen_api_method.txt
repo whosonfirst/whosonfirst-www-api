@@ -16,25 +16,25 @@
 {/foreach}
 {/if}
 {if "api_extras"|@features_is_enabled and $details.extras}
-| `extras` | {$cfg.api_extras.notes|@implode:" "|@escape} | | no |
+| `extras` | {$cfg.api_extras.notes|@implode:" "|@escape} | mz:uri | no |
 {/if}
 {if $details.paginated}
 {if $details.pagination=="cursor"}
-| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](#pagination) for details. | | no |
-| `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | | no |
+| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](#pagination) for details. | _cXVl...c7MDs=_ | no |
+| `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | 100 | no |
 {elseif $details.pagination=="mixed"}
-| `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | | no |
-| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details. | | no |
-| `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | | no |
+| `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
+| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details. | 1 | no |
+| `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | 100 | no |
 {else}
-| `page` | The default is 1. | | no |
-| `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | | no |
+| `page` | The default is 1. | 1 | no |
+| `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | 100 | no |
 {/if}
 {/if}
 {if $details.disallow_formats|@count}
-| `format` | The format in which to return the data. Normally supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach} however the following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape}). | | no |
+| `format` | The format in which to return the data. Normally supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach} however the following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape}). | {$default_format|@escape} | no |
 {else}
-| `format` | The format in which to return the data. Supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape})</a>.| | no |
+| `format` | The format in which to return the data. Supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape})</a>.| {$default_format|@escape} | no |
 {/if}
 
 #### Error codes
