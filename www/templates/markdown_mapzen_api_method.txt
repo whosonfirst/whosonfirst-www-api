@@ -5,34 +5,36 @@
 
 #### Arguments
 
-* **api_key** _required_ &#8212; A valid [Mapzen API key](https://mapzen.com/developers/)
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXX | yes |
 {if $details.parameters|@count}
 {foreach from=$details.parameters item="param"}
 {if $param.documented || 'admin'|@auth_has_role}
-* **{$param.name|escape}** {if $param.required}_required_{/if} &#8212; {$param.description|escape}{if $param.example} For example `{$param.example|@escape}`{/if}.
+| `{$param.name|escape}` | {$param.description|escape} | {if $param.example} {$param.example|@escape}{/if} | {if $param.required}yes{else}no{/if} |
 {/if}
 {/foreach}
 {/if}
 {if "api_extras"|@features_is_enabled and $details.extras}
-* **extras** &#8212; {$cfg.api_extras.notes|@implode:" "|@escape}
+| `extras` | {$cfg.api_extras.notes|@implode:" "|@escape} | | no |
 {/if}
 {if $details.paginated}
 {if $details.pagination=="cursor"}
-* **cursor** &#8212; This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property. Please consult the [pagination documentation](#pagination) for details.
-* **per_page** &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.
+| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](#pagination) for details. | | no |
+| `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | | no |
 {elseif $details.pagination=="mixed"}
-* **cursor** &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.
-* **page** &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details.
-* **per_page** &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.
+| `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | | no |
+| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details. | | no |
+| `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | | no |
 {else}
-* **page** &#8212; The default is 1.
-* **per_page** &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.
+| `page` | The default is 1. | | no |
+| `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | | no |
 {/if}
 {/if}
 {if $details.disallow_formats|@count}
-* **format** &#8212; The format in which to return the data. Normally supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach} however the following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape}).
+| `format` | The format in which to return the data. Normally supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach} however the following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape}). | | no |
 {else}
-* **format** &#8212; The format in which to return the data. Supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape})</a>.
+| `format` | The format in which to return the data. Supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape})</a>.| | no |
 {/if}
 
 #### Error codes
@@ -40,9 +42,11 @@
 {if $details.errors|@count}
 In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
 
+| Error code | Error message |
+| :--- | :--- |
 {foreach from=$details.errors item="row" key="code"}
 {if $row|@is_array}
-* `{$code|@escape}` &#8212; {$row.message|@escape}
+| `{$code|@escape}` | {$row.message|@escape} |
 {/if}
 {/foreach}
 {else}
