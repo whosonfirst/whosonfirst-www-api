@@ -1,10 +1,10 @@
 <a name="formats"></a>
 ## Response formats
 
-The default response format is [{$default_format|@escape}](#format-{$default_format|@escape}).
+The default response format is [{$default_format|@escape}](formats.md#{$default_format|@escape}).
 
 {foreach from=$response_formats item="format"}
-<a name="formats-{$format|@escape}"></a>
+<a name="{$format|@escape}"></a>
 ### {$format|escape}
 
 {capture assign="template"}markdown_api_format_description_{$format|escape}.txt{/capture}

@@ -2,11 +2,25 @@
 
 	include("init_local.php");
 
+	# this is important (if we are building the docs from 
+	# a not-prod machine)
+
 	$GLOBALS['cfg']['environment'] = 'prod';
 
+	#
+
+	loadlib("cli");
 	loadlib("api");
 	loadlib("api_methods");
 
+	$spec = array(
+		"page" => array("flag" => "p", "required" => 1, "help" => ""),
+	);
+
+	$opts = cli_getopts($spec);
+
+	# 
+	
 	ksort($GLOBALS['cfg']['api']['methods']);
 
 	foreach ($GLOBALS['cfg']['api']['methods'] as $method_name => $details){
@@ -53,6 +67,22 @@
 
 	$GLOBALS['smarty']->assign_by_ref("default_format", $GLOBALS['cfg']['api']['default_format']);
 
-	echo $GLOBALS['smarty']->fetch("markdown_mapzen_api_docs.txt");
+	# 
+
+	switch ($opts['page']) {
+
+		case 'methods':
+			$template = "markdown_mapzen_api_methods.txt";
+		case 'formats':
+			$template = "markdown_mapzen_api_formats.txt";
+		case 'pagination':
+			$template = "markdown_mapzen_api_pagination.txt";
+		case 'errors':
+			$template = "markdown_mapzen_api_pagination.txt";
+		default:
+			$template = "markdown_mapzen_api_docs.txt";
+	}
+
+	echo $GLOBALS['smarty']->fetch($template);
 	exit(0);
 ?>

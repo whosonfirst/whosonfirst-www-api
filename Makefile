@@ -1,5 +1,9 @@
 mz-docs:
-	php -q ./bin/mk_markdown_docs.php > docs/docs.md
+	php -q ./bin/mk_markdown_docs.php > docs/index.md
+	php -q ./bin/mk_markdown_docs.php -p methods > docs/methods.md
+	php -q ./bin/mk_markdown_docs.php -p formats > docs/formats.md
+	php -q ./bin/mk_markdown_docs.php -p pagination > docs/pagination.md
+	php -q ./bin/mk_markdown_docs.php -p errors > docs/errors.md
 
 templates:
 	php -q ./bin/compile-templates.php
