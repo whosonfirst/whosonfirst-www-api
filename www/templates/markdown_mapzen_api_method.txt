@@ -75,6 +75,9 @@ This API method does not define any custom error codes. For the list of error co
 {if $details.experimental}
 * This API method is **experimental*. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
 {/if}
+{if $method=="whosonfirst.places.search"}
+* Please note that this method _is not a geocoder_. We already have one of those [and you should use that](https://mapzen.com/documentation/search/) instead if geocoding a string is what you're after.
+{/if}
 {/if}
 
 ##### Example

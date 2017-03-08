@@ -548,6 +548,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Notes
 
 * This API method uses [mixed](pagination.md#mixed) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+* Please note that this method _is not a geocoder_. We already have one of those [and you should use that](https://mapzen.com/documentation/search/) instead if geocoding a string is what you're after.
 
 ##### Example
 
