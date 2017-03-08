@@ -14,7 +14,7 @@
 	loadlib("api_methods");
 
 	$spec = array(
-		"page" => array("flag" => "p", "required" => 1, "help" => ""),
+		"page" => array("flag" => "p", "required" => 0, "help" => ""),
 	);
 
 	$opts = cli_getopts($spec);
@@ -69,18 +69,10 @@
 
 	# 
 
-	switch ($opts['page']) {
+	$template = "markdown_mapzen_api_docs.txt";
 
-		case 'methods':
-			$template = "markdown_mapzen_api_methods.txt";
-		case 'formats':
-			$template = "markdown_mapzen_api_formats.txt";
-		case 'pagination':
-			$template = "markdown_mapzen_api_pagination.txt";
-		case 'errors':
-			$template = "markdown_mapzen_api_pagination.txt";
-		default:
-			$template = "markdown_mapzen_api_docs.txt";
+	if ($page = $opts['page']){
+		$template = "markdown_mapzen_api_{$page}.txt";
 	}
 
 	echo $GLOBALS['smarty']->fetch($template);

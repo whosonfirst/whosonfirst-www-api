@@ -1,5 +1,4 @@
 ## API methods
-
 {capture assign="count_classes"}{$method_classes|@array_keys|@count}{/capture}
 {capture assign="count_split"}{$count_classes/2}{/capture}
 
@@ -10,7 +9,6 @@
 * [{$method.name|escape}](#{$method.name|escape}){if $method.experimental} _experimental_{/if}
 
 {/foreach}
-
 {/foreach}
 
 {foreach from=$method_classes item="class_details" key="class"}

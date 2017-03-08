@@ -1,26 +1,153 @@
-# Who's On First API Documentation
+<a name="pagination"></a>
+## Pagination
 
-<a name="intro"></a>
-## Introduction
+### A short miserable history (of pagination)
 
-The Who's On First API allows developers (and robots) programmatic access to query and retrieve Who's On First data via a [REST-ish](#cgi) interface.
+Pagination shouldn't be complicated. But it is. Because databases, after all these years, are still complicated beasts.
 
-API methods are dispatched over `HTTP` with one or more query parameters and data is returned in response as [JSON](formats.md#json) by default but you may also specify [CSV](formats.md#csv) or Who's On First's own [meta](formats.md#meta) formatted responses for certain [API methods](methods.md). All errors are returned using [HTTP status codes](errors.md) in the `400-500` range. `400` class errors mean the problem was your end and `500` class errors mean the problem was are our fault.
+Databases have always been about trade-offs. No two databases are the same and so no two sets of trade-offs are the same either. The really short version is that some databases can't tell you exactly how many results there are for a given query. Some databases can tell you how many results there are but can't or won't return results past a certain limit. Other databases can do both but only if you use something called a <code>cursor</code> for pagination rather than the traditional <code>offset</code> and <code>limit</code> model (as in "return the next 5 of 50 results starting from postion 20").
 
-<a name="caveats"></a>
-### Caveats
+Since there isn't an all-purpose database, the <span class="hey-look">Who&#039;s On First API</span> accounts for multiple different pagination models. We've identified four overlapping models ([plain](#pagination-plain), [cursor](#pagination-cursor), [mixed](#pagination-mixed) and [next-query](#pagination-next-query)) each of which are described in detail below.
 
-You should treat this API as though it were in "beta".
+If you don't really care and just want to get started [you should skip ahead to the documentation for next-query pagination](#pagination-next-query).
 
-Which is to say: The point is for _the thing to work_ but there are probably still some rough edges and lingering gotchas so you should adjust your expectations and your code accordingly. In the meantime have at it and [please let us know](https://twitter.co/alloftheplaces) if something is busted or just doesn't feel right.
+<a name="pagination-plain"></a>
+### Plain pagination
 
-Also some methods are "more beta" than others. These methods are flagged as being `experimental` which means that both either their inputs or their outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach these API methods defensively.
+Plain pagination assumes that we know how many results a query yields and that we can fetch any set of results at any given offset.
 
-Finally the API is not feature complete yet. The easiest way to think about the Who's On First API is to look at the Who's On First [Spelunker]() website and imagine that anything you can do there to search and navigate all those places should also be possible via the API. As of this writing it is not but we'll get there. If there is anything currently missing that you'd like or need to do sooner than later [send up a flare](https://twitter.co/alloftheplaces) and we'll see about adding it to the list.
+For example, let's say you wanted to use the API to fetch all the places with a variant name containing the word <code>Paris</code> in sets of five. The API will respond with something like this:
 
-### Shout outs
+```
+{
+	"results": [ ... ],
+	"next_query": "method=whosonfirst.places.search&alt=Paris&per_page=5&page=2",
+	"total": 7,
+	"page": 1,
+	"per_page": 5,
+	"pages": 2,
+	"cursor": null,
+	"stat": "ok"
+}
+```
 
-<a name="cgi"></a>
-![CGI has a posse](prism.gif)
+It's pretty straightforward. There are seven results (<code>total</code>) and this is the first of two pages worth of results (<code>page</code> and <code>pages</code>, respectively). You might already be wondering about the <code>next_query</code> property but [we'll get to that shortly](#pagination-next-query).
 
-Hugs and sloppy kisses to the [Common Gateway Interface](https://en.wikipedia.org/wiki/Common_Gateway_Interface).
+<a name="pagination-cursor"></a>
+### Cursor-based pagination
+
+Cursor-based pagination is necessary when a database can't or won't tell you how many results there are for a query. This means you will need to pass the same query to the database over and over again for as long as the database returns a <code>cursor</code> which is like a secret hint that <em>only the database understands</em> indicating where the next set of results live.
+
+For example, let's say you wanted to use the API to fetch all of the venues near the [Smithsonian Cooper Hewitt Design Museum](https://whosonfirst.mapzen.com/spelunker/id/420571601/) in sets of ten. The API will respond with something like this:
+
+```
+{
+	"results": [ ... ],
+	"next_query": "method=whosonfirst.places.getNearby&latitude=40.784165&longitude=-73.958110&placetype=venue&per_page=10&cursor={CURSOR}",
+	"per_page": 10,
+	"cursor": {CURSOR},
+	"stat": "ok"
+}
+```
+
+In order to fetch the next set of results you would include a <code>cursor={CURSOR}</code> parameter in your request, rather than a <code>page={PAGE_NUMBER}</code> parameter like you would with plain pagination. Some databases yield time-sensitive cursors that expire after a number of seconds or minutes so the easiest way to think about cursors is that they are <em>all</em> time sensitive.
+
+_Databases, amirite?_
+
+<a name="pagination-mixed"></a>
+### Mixed pagination
+
+This is where it gets fun. Sometimes an API method might use <em>both</em> plain and cursor-based pagination. That can happen when an underlying database is able to calculate the total number of results but only be able to fetch a fraction of them using plain pagination after which it needs to switch to cursor-based pagination. Which doesn't really make any sense when you think about it because cursors are magic database pixie-dust so there's no way to determine or calculate a corresponding cursor for a traditional page number. So in the end the API itself needs to perform an initial query just to see how many results there are and then adjust whether it is going to use plain or cursor-based pagination on the fly.
+
+For example, let's say you wanted to use the API to fetch all the <code>microhoods</code> in sets of five. The API will respond with something like this:
+
+```
+{
+	"results": [ ... ],
+	"next_query": "method=whosonfirst.places.search&placetype=microhood&page=2&per_page=5",
+	"total": 186,
+	"page": 1,
+	"per_page": 5,
+	"pages": 38,
+	"cursor": null,
+	"stat": "ok"
+}
+```
+
+But if you then asked the API to fetch all of the <code>neighbourhoods</code>, again in sets of five, the API will respond with something like this:
+
+```
+{
+	"results": [ ... ],
+	"next_query": "method=whosonfirst.places.search&placetype=neighbourhood&per_page=5&cursor={CURSOR}",
+	"total": 81065,
+	"page": null,
+	"pages": 16213,
+	"per_page": 5,
+	"cursor": "{CURSOR}",
+	"stat": "ok"
+}
+```
+
+In both examples we know how many results there will be. In the first example we are able to use plain pagination so we know that this is page one of thirty-eight and thus the value of the <code>cursor</code> property is null. In the second example the API has returned a cursor so even though we know the total number of results and can calculate the number of "pages" we set the value of the <code>page</code> property to be null since the requirement on cursor-based pagination makes it moot.
+
+If you look carefully at the value of the <code>next_query</code> property in both examples you can probably figure out where this is going, next.
+
+<a name="pagination-next-query"></a>
+### Next-query-based pagination
+
+Next-query based pagination is an attempt to hide most of the implentation details from API consumers and provide a simple "here-do-this-next" style pagination interface, instead.
+
+For example, let's say you wanted to use the API to fetch all the localities (there are over 200, 000 of them) in sets of five. That will require more than 41, 000 API requests but that's your business. The API will respond with a <code>next_query</code> parameter, something like this:
+
+```
+{
+	"results": [ ... ],
+	"next_query": "method=whosonfirst.places.search&placetype=locality&per_page=5&cursor={CURSOR}",
+	"total": 208214,
+	"page": null,
+	"pages": 41643,
+	"per_page": 5,
+	"cursor": "{CURSOR}",
+	"stat": "ok"
+}
+```
+
+There are a few things to note about the <code>next_query</code> property:
+
+* It contains a URL-encoded query string with the parameters to pass to the API retrieve the <em>next</em> set of results for your query.
+* When it is empty (or <code>null</code>) that means there are no more results.
+* It <em>does not</em> contain any user-specific access tokens or API keys &#8212; you will need to add those yourself.
+* It <em>does not</em> contain any host or endpoint specific information  &#8212; you will need to add that yourself.
+* You may want or need to decode the query string in order to append additional parameters (like authentication) and to handle how those parameters are sent along to the API. For example, whether the method is invoked using HTTP's <code>GET</code> or <code>POST</code> method or whether parameters should be <code>multipart/mime</code> encoded or not. And so on.
+
+This type of pagination is not ideal but strives to be a reasonable middle-ground that is not too onerous to implement and easy to use.
+
+<a name="pagination-headers"></a>
+### Pagination and HTTP headers
+
+Pagination properties are also returned as HTTP response headers. This is useful for any output format and necessary for output formats like plain old [CSV](#formats-csv) or Who's On First's [meta](#formats-meta) format. All of the pagination properties you've come to know and love in the examples above are also returned as HTTP response header prefixed by <code>X-api-pagination-</code>.
+
+For example: 
+
+```
+$> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=API_KEY&q=poutine&extras=geom:bbox&page=1&format=csv&per_page=1'
+
+< HTTP/1.1 200 OK
+< Access-Control-Allow-Origin: *
+< Content-Type: text/csv
+< Date: Tue, 28 Feb 2017 21:13:37 GMT
+< Status: 200 OK
+< X-api-pagination-cursor: 
+< X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
+< X-api-pagination-page: 1
+< X-api-pagination-pages: 13
+< X-api-pagination-per-page: 1
+< X-api-pagination-total: 13
+< X-whosonfirst-csv-header: geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
+< Content-Length: 208
+< Connection: keep-alive
+< 
+geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
+"-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
+```
