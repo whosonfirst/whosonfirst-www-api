@@ -88,7 +88,7 @@ geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
 "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
 ````
 
-<small>The CVS header is only written, in the body of the response, for the first page of API responses. The <code>X-api-format-csv-header</code> HTTP header is included with all responses.</small>
+<small>The CVS header is only written, in the body of the response, for the first page of API responses. The `X-api-format-csv-header` HTTP header is included with all responses.</small>
 
 #### Notes
 
@@ -125,7 +125,7 @@ bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,
 "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",uuuu,0,,,,88060b9c65a5eaae29b427583b1bfa93,46.066528,-71.939964,975139507,uuuu,CA,CA,1472521936,0,0,0,"Poutine Restau-Bar Enr",-1,975/139/507/975139507.geojson,venue,0,simplegeo,,,CA
 ```
 
-<small>The meta (CVS) header is only written, in the body of the response, for the first page of API responses. The <code>X-api-format-meta-header</code> HTTP header is included with all responses.</small>
+<small>The meta (CVS) header is only written, in the body of the response, for the first page of API responses. The `X-api-format-meta-header` HTTP header is included with all responses.</small>
 
 #### Notes
 
