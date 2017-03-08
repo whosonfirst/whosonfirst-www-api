@@ -188,6 +188,8 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances
 * [whosonfirst.places.getDescendants](#whosonfirst.places.getDescendants)
 * [whosonfirst.places.getHierarchiesByLatLon](#whosonfirst.places.getHierarchiesByLatLon)
 * [whosonfirst.places.getInfo](#whosonfirst.places.getInfo)
+* [whosonfirst.places.getIntersects](#whosonfirst.places.getIntersects)
+* [whosonfirst.places.getNearby](#whosonfirst.places.getNearby)
 * [whosonfirst.places.getParentByLatLon](#whosonfirst.places.getParentByLatLon) _experimental_
 * [whosonfirst.places.getRandom](#whosonfirst.places.getRandom)
 * [whosonfirst.places.search](#whosonfirst.places.search)
@@ -349,6 +351,92 @@ In addition to [default error codes](errors.md) common to all methods this API m
 
 ```
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfo&api_key=API_KEY&id=ID'
+```
+<a name="whosonfirst.places.getIntersects"></a>
+#### whosonfirst.places.getIntersects
+
+Return all the Who&#039;s On First places intersecting a bounding box.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `min_latitude` | A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box. |  37.78807088 | yes |
+| `min_longitude` | A valid longitude coordinate, representing the left (Western) edge of the bounding box. |  -122.34374508 | yes |
+| `max_latitude` | A valid latitude coordinate, representing the top (Northern) edge of the bounding box. |  37.85749665 | yes |
+| `max_longitude` | A valid longitude coordinate, representing the right (Eastern) edge of the bounding box. |  -122.25585446 | yes |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  locality | no |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;min_latitude&#039; parameter |
+| `433` | Missing &#039;min_longitude&#039; parameter |
+| `434` | Missing &#039;max_latitude&#039; parameter |
+| `435` | Missing &#039;max_longitude&#039; parameter |
+| `436` | Invalid &#039;min_latitude&#039; parameter |
+| `437` | Invalid &#039;min_longitude&#039; parameter |
+| `438` | Invalid &#039;max_latitude&#039; parameter |
+| `439` | Invalid &#039;max_longitude&#039; parameter |
+| `513` | Failed to intersect |
+
+##### Notes
+
+* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects&api_key=API_KEY&min_latitude=MIN_LATITUDE&min_longitude=MIN_LONGITUDE&max_latitude=MAX_LATITUDE&max_longitude=MAX_LONGITUDE&placetype=PLACETYPE'
+```
+<a name="whosonfirst.places.getNearby"></a>
+#### whosonfirst.places.getNearby
+
+Return all the Who&#039;s On First records near a point.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `latitude` | A valid latitude coordinate. |  40.784165 | yes |
+| `longitude` | A valid longitude coordinate. |  -73.958110 | yes |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;latitude&#039; parameter |
+| `433` | Missing &#039;longitude&#039; parameter |
+| `434` | Invalid &#039;latitude&#039; parameter |
+| `435` | Invalid &#039;longitude&#039; parameter |
+| `436` | Invalid radius |
+| `437` | Invalid placetype |
+| `513` | Failed to get nearby |
+
+##### Notes
+
+* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=API_KEY&latitude=LATITUDE&longitude=LONGITUDE&placetype=PLACETYPE'
 ```
 <a name="whosonfirst.places.getParentByLatLon"></a>
 #### whosonfirst.places.getParentByLatLon
