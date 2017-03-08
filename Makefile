@@ -1,9 +1,9 @@
 mz-docs:
-	php -q ./bin/mk_markdown_docs.php > docs/index.md
-	php -q ./bin/mk_markdown_docs.php --page methods > docs/methods.md
-	php -q ./bin/mk_markdown_docs.php --page formats > docs/formats.md
-	php -q ./bin/mk_markdown_docs.php --page pagination > docs/pagination.md
-	php -q ./bin/mk_markdown_docs.php --page errors > docs/errors.md
+	php -q ./bin/mk_mapzen_docs.php > docs/index.md
+	php -q ./bin/mk_mapzen_docs.php --page methods > docs/methods.md
+	php -q ./bin/mk_mapzen_docs.php --page formats > docs/formats.md
+	php -q ./bin/mk_mapzen_docs.php --page pagination > docs/pagination.md
+	php -q ./bin/mk_mapzen_docs.php --page errors > docs/errors.md
 
 templates:
 	php -q ./bin/compile-templates.php
