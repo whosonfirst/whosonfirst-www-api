@@ -15,7 +15,7 @@ Return the list of valid API response formats, including the default format
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -23,7 +23,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
 
 ##### Example
 
@@ -40,7 +40,7 @@ Return the list of available API response methods.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -48,7 +48,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
 
 ##### Example
 
@@ -71,7 +71,7 @@ A testing method which echo&#039;s all parameters back in the response.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -79,7 +79,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
 
 ##### Example
 
@@ -96,7 +96,7 @@ Return a test error from the API
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -104,7 +104,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
 
 ##### Example
 
@@ -131,7 +131,7 @@ Return a Who&#039;s On First record (and all its concordances) by another source
 | `source` | The source prefix of the concordance you are looking for |  gp | yes |
 | `page` | The default is 1. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -145,8 +145,8 @@ In addition to [default error codes](errors.md) common to all methods this API m
 
 ##### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
-* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 
 ##### Example
 
@@ -165,7 +165,7 @@ List all the sources that Who&#039;s On First holds hands with.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `page` | The default is 1. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -173,8 +173,8 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
-* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 
 ##### Example
 
@@ -208,7 +208,7 @@ Return Who&#039;s On First places intersecting a latitude and longitude
 | `longitude` | A valid longitude coordinate. |  -122.417693 | yes |
 | `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](#pagination) for details. | _cXVl...c7MDs=_ | no |
+| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
 | `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
@@ -228,7 +228,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Notes
 
 * This method differs from the whosonfirst.places.getAncestorsByLatLon method in two ways: 1. It returns a list of WOF places rather than hierarchies and 2. If a placetype filter is specified and no matching records are found no attempt will be made to find ancestors higher up the hierarchy. For example looking for an intersecting county or region if no locality is found.
-* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 
 ##### Example
 
@@ -263,7 +263,7 @@ Return all the descendants for a Who&#039;s On First ID.
 | `include` | Include places matching these criteria. |  deprecated | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
-| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details. | 1 | no |
+| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
 | `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
@@ -278,7 +278,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 
 ##### Notes
 
-* This API method uses [mixed](pagination.md#mixed) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* This API method uses [mixed](pagination.md#mixed) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 
 ##### Example
 
@@ -298,7 +298,7 @@ Return the closest set of ancestors (hierarchies) for a latitude and longitude
 | `latitude` | A valid latitude coordinate. |  37.777228 | yes |
 | `longitude` | A valid longitude coordinate. |  -122.470779 | yes |
 | `placetype` | Skip descendants of this placetype. |  region | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -316,7 +316,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Notes
 
 * This method differs from whosonfirst.places.getByLatLon method in two ways: 1. It returns a list of hierarchies rather than a WOF place record and 2. It will travel up the hierarchy until an ancestor is found. For example even if there is no locality matching a given lat, lon the code will try again looking for a matching region, and so on.
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [meta](formats.md#meta)
 
 ##### Example
 
@@ -368,7 +368,7 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 | `max_longitude` | A valid longitude coordinate, representing the right (Eastern) edge of the bounding box. |  -122.25585446 | yes |
 | `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  locality | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](#pagination) for details. | _cXVl...c7MDs=_ | no |
+| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
 | `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
@@ -390,7 +390,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 
 ##### Notes
 
-* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 
 ##### Example
 
@@ -411,7 +411,7 @@ Return all the Who&#039;s On First records near a point.
 | `longitude` | A valid longitude coordinate. |  -73.958110 | yes |
 | `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](#pagination) for details. | _cXVl...c7MDs=_ | no |
+| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
 | `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
@@ -431,7 +431,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 
 ##### Notes
 
-* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 
 ##### Example
 
@@ -451,7 +451,7 @@ Return Who&#039;s On First parent ID for a latitude and longitude and placetype
 | `latitude` | A valid latitude coordinate. |  35.655065 | yes |
 | `longitude` | A valid longitude coordinate. |  139.369640 | yes |
 | `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -470,8 +470,8 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Notes
 
 * The inability to locate (or to disambiguate) a parent ID for a lat, lon will not trigger an API error. The following parent IDs may be returned by this API method: &#039;-1&#039; which means that a parent ID could not be identified or that there are multiple choices; or &#039;-3&#039; which means that the parent is a neighbourhood and their are multiple possible choices and you should go out for a beer and argue over which is the correct parent.
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
-* This API method is <span class="hey-look">experimental</span>. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* This API method is **experimental*. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
 
 ##### Example
 
@@ -533,7 +533,7 @@ Query for Who&#039;s On First records.
 | `include` | Include places matching these criteria. |  deprecated | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
-| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details. | 1 | no |
+| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
 | `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
@@ -547,7 +547,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 
 ##### Notes
 
-* This API method uses [mixed](pagination.md#mixed) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* This API method uses [mixed](pagination.md#mixed) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 
 ##### Example
 
@@ -573,7 +573,7 @@ Return details for a Who&#039;s On First placetype.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `id` | A valid Who&#039;s On First placetype ID. |  102322043 | no |
 | `name` | A valid Who&#039;s On First placetype name. |  disputed | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -587,7 +587,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Notes
 
 * Although the &quot;id&quot; and &quot;name&quot; parameters are each marked as optional, you need to pass at least one of them. The order of precedence is &quot;id&quot; followed by &quot;name&quot;.
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
 
 ##### Example
 
@@ -605,7 +605,7 @@ Return a list of Who&#039;s On First placetypes.
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `role` | Only return placetypes that are part of this role. |  common | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -617,7 +617,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 
 ##### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
 
 ##### Example
 
@@ -634,7 +634,7 @@ Return a list of Who&#039;s On First placetype roles.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -642,7 +642,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
 
 ##### Example
 
@@ -748,7 +748,7 @@ Return the list of sources for all the tags in Who&#039;s On First.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -756,7 +756,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
 
 ##### Example
 
@@ -776,7 +776,7 @@ Return the list of unique tags n Who&#039;s On First.
 | `source` | Limit results to categories from this source. |  wof | no |
 | `page` | The default is 1. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -789,8 +789,8 @@ In addition to [default error codes](errors.md) common to all methods this API m
 
 ##### Notes
 
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
-* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 
 ##### Example
 

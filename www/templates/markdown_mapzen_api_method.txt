@@ -20,11 +20,11 @@
 {/if}
 {if $details.paginated}
 {if $details.pagination=="cursor"}
-| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](#pagination) for details. | _cXVl...c7MDs=_ | no |
+| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | 100 | no |
 {elseif $details.pagination=="mixed"}
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
-| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](#pagination) for details. | 1 | no |
+| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
 | `per_page` | The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}. | 100 | no |
 {else}
 | `page` | The default is 1. | 1 | no |
@@ -32,7 +32,7 @@
 {/if}
 {/if}
 {if $details.disallow_formats|@count}
-| `format` | The format in which to return the data. Normally supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach} however the following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape}). | {$default_format|@escape} | no |
+| `format` | The format in which to return the data. Normally supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach} however the following output formats are **disallowed** for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape}). | {$default_format|@escape} | no |
 {else}
 | `format` | The format in which to return the data. Supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape})</a>.| {$default_format|@escape} | no |
 {/if}
@@ -60,20 +60,20 @@ This API method does not define any custom error codes. For the list of error co
 * {$note|escape}
 {/foreach}
 {if $details.disallow_formats|@count}
-* The following output formats are <span class="hey-look">disallowed</span> for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}
+* The following output formats are **disallowed** for this API method: {foreach from=$details.disallow_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}
 
 {/if}
 {if $details.paginated}
 {if $details.pagination=="cursor"}
-* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 {elseif $details.pagination=="mixed"}
-* This API method uses [mixed](pagination.md#mixed) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* This API method uses [mixed](pagination.md#mixed) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 {else}
-* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](#pagination) for details.
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
 {/if}
 {/if}
 {if $details.experimental}
-* This API method is <span class="hey-look">experimental</span>. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+* This API method is **experimental*. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
 {/if}
 {/if}
 
