@@ -1,9 +1,9 @@
 <a name="{$method|escape}"></a>
-### {$method|escape}
+#### {$method|escape}
 
 {$details.description|@trim|@escape}
 
-#### Arguments
+##### Arguments
 
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
@@ -37,7 +37,7 @@
 | `format` | The format in which to return the data. Supported formats are {foreach from=$response_formats item="fmt" name="formats"}[{$fmt|@escape}](formats.md#{$fmt|@escape}){if !$smarty.foreach.formats.last}, {/if}{/foreach}. The default format is [{$default_format|@escape}](formats.md#{$default_format|@escape})</a>.| {$default_format|@escape} | no |
 {/if}
 
-#### Error codes
+##### Error codes
 
 {if $details.errors|@count}
 In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
@@ -54,7 +54,7 @@ This API method does not define any custom error codes. For the list of error co
 {/if}
 
 {if $details.notes|@count or $details.paginated or $details.experimental or $details.disallow_formats|@count}
-#### Notes
+##### Notes
 
 {foreach from=$details.notes item="note"}
 * {$note|escape}
@@ -77,12 +77,9 @@ This API method does not define any custom error codes. For the list of error co
 {/if}
 {/if}
 
-
-#### Example
+##### Example
 
 ```
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=API_KEY{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}={$param.name|strtoupper|escape}{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
 ```
-
-
 
