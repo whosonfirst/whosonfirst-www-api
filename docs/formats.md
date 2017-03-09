@@ -4,7 +4,7 @@
 The default response format is [json](formats.md#json).
 
 <a name="json"></a>
-### json
+### JSON
 
 JSON (JavaScript Object Notation) is a data-interchange format based on JavaScript. For more details, consult <a href="http://json.org/">http://json.org/</a>.
 
@@ -53,7 +53,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 }
 ```
 
-### Notes
+#### Notes
 
 JSON output is supported for all API methods.<a name="csv"></a>
 ### csv

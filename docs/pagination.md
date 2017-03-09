@@ -1,7 +1,5 @@
 <a name="pagination"></a>
-## Pagination
-
-### A short miserable history (of pagination)
+## A short, miserable history (of pagination)
 
 Pagination shouldn't be complicated. But it is. Because databases, after all these years, are still complicated beasts.
 
