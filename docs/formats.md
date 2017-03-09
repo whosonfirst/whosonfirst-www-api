@@ -4,7 +4,7 @@
 The default response format is [json](formats.md#json).
 
 <a name="json"></a>
-### json
+### JSON
 
 JSON (JavaScript Object Notation) is a data-interchange format based on JavaScript. For more details, consult <a href="http://json.org/">http://json.org/</a>.
 
