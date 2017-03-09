@@ -30,115 +30,115 @@
 		# general
 
 		"450" => array(
-			"message" => "Unknown error",
+			"message" => "Unknown error.",
 		),
 
 		# query
 
 		"452" => array(
-			"message" => "Insufficient parameters",
+			"message" => "Insufficient parameters.",
 		),
 
 		"453" => array(
-			"message" => "Missing parameter",
+			"message" => "Missing parameter.",
 		),
 
 		"454" => array(
-			"message" => "Invalid parameter",
+			"message" => "Invalid parameter.",
 		),
 
 		# uploads
 
 		"455" => array(
-			"message" => "Invalid upload response"
+			"message" => "Invalid upload response."
 		),
 
 		"456" => array(
-			"message" => "Missing upload body"
+			"message" => "Missing upload body."
 		),
 
 		"457" => array(
-			"message" => "Upload exceeded maximum filesize"
+			"message" => "Upload exceeded maximum filesize."
 		),
 
 		"458" => array(
-			"message" => "Invalid mime-type"
+			"message" => "Invalid mime-type."
 		),
 
 		# users
 
 		"460" => array(
-			"message" => "Invalid user",
+			"message" => "Invalid user.",
 		),
 
 		"461" => array(
-			"message" => "User is disabled",
+			"message" => "User is disabled.",
 		),
 
 		"462" => array(
-			"message" => "User is deleted",
+			"message" => "User is deleted.",
 		),
 
 		# API keys
 
 		"478" => array(
-			"message" => "Insufficient permissions for this API key",
+			"message" => "Insufficient permissions for this API key.",
 		),
 
 		"479" => array(
-			"message" => "Invalid access token for this API key",
+			"message" => "Invalid access token for this API key.",
 		),
 
 		"481" => array(
-			"message" => "Unauthorized host for this API key",
+			"message" => "Unauthorized host for this API key.",
 		),
 
 		"482" => array(
-			"message" => "API key not configured for use with this method",
+			"message" => "API key not configured for use with this method.",
 		),
 
 		"483" => array(
-			"message" => "Invalid API key",
+			"message" => "Invalid API key.",
 		),
 
 		"484" => array(
-			"message" => "API key missing",
+			"message" => "API key missing.",
 		),
 
 		# access tokens
 
 		"490" => array(
-			"message" => "Access token has insuffient permissions",
+			"message" => "Access token has insuffient permissions.",
 		),
 
 		"491" => array(
-			"message" => "Access token is expired",
+			"message" => "Access token is expired.",
 		),
 
 		"492" => array(
-			"message" => "Access token is disabled",
+			"message" => "Access token is disabled.",
 		),
 
 		"493" => array(
-			"message" => "Invalid access token",
+			"message" => "Invalid access token.",
 		),
 
 		"494" => array(
-			"message" => "Access token missing",
+			"message" => "Access token missing.",
 		),
 
 		# API methods
 
 		"497" => array(
-			"message" => "Output format is disallowed for this API method"
+			"message" => "Output format is disallowed for this API method."
 		),
 
 		"498" => array(
-			"message" => "API method is disabled"
+			"message" => "API method is disabled."
 		),
 
 		"499" => array(
-			"message" => "API method not found"
+			"message" => "API method not found."
 		),
 
 		"512" => array(
