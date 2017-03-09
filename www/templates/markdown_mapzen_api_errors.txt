@@ -21,7 +21,9 @@ In addition to any already [assigned HTTP status codes](https://www.iana.org/ass
 | Error code | Error message |
 | :--- | :--- |
 {foreach from=$errors item="row" key="code"}
-{if $row.documented}| `{$code|@escape}` | {$row.message|@escape} |{/if}
+{if $row.documented}
+| `{$code|@escape}` | {$row.message|@escape} |
+{/if}
 {if $code == 499}
 
 <a name="server"></a>
