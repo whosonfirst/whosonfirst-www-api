@@ -1,13 +1,36 @@
 <a name="error-codes"></a>
-## Error codes
-
 In addition to any already [assigned HTTP status codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) The Who's On First API defines the following additional status codes for representing errors or a failure scenario, across all API methods:
+
+### Mapzen
+
+{* https://github.com/apiaxle/apiaxle/blob/9a8c987deb4fd27983a17bb04adcc761493bb182/proxy/lib/error.coffee *}
+
+| Error code | Error message |
+| :--- | :--- |
+| `400` | ApiDisabled |
+| `401` | KeyDisabled |
+| `403` | KeyError |
+| `404` | ApiUnknown |
+| `429` | Queries per minute/hour/day exceeded |
+{if 0}| `502` | EndpointMissingError | 
+| `504` | EndpointTimeoutError |{/if}
+
+### Client-side
 
 | Error code | Error message |
 | :--- | :--- |
 {foreach from=$errors item="row" key="code"}
 | `{$code|@escape}` | {$row.message|@escape} |
+{if $code == 499}
+
+### Server-side
+
+| Error code | Error message |
+| :--- | :--- |
+{/if}
 {/foreach}
+
+### Custom
 
 Individual API methods may define their own status codes within the `432-449` and `513-599` range on a per-method basis. Status codes in this range _may_ be used with different meanings by different API methods and it is left to API consumers to account for those differences.
 

@@ -1,7 +1,18 @@
 <a name="error-codes"></a>
-## Error codes
-
 In addition to any already [assigned HTTP status codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) The Who's On First API defines the following additional status codes for representing errors or a failure scenario, across all API methods:
+
+### Mapzen
+
+
+| Error code | Error message |
+| :--- | :--- |
+| `400` | ApiDisabled |
+| `401` | KeyDisabled |
+| `403` | KeyError |
+| `404` | ApiUnknown |
+| `429` | Queries per minute/hour/day exceeded |
+
+### Client-side
 
 | Error code | Error message |
 | :--- | :--- |
@@ -30,7 +41,14 @@ In addition to any already [assigned HTTP status codes](https://www.iana.org/ass
 | `497` | Output format is disallowed for this API method |
 | `498` | API method is disabled |
 | `499` | API method not found |
+
+### Server-side
+
+| Error code | Error message |
+| :--- | :--- |
 | `512` | Something we tried to do didn&#039;t work. This is our fault, not yours. |
+
+### Custom
 
 Individual API methods may define their own status codes within the `432-449` and `513-599` range on a per-method basis. Status codes in this range _may_ be used with different meanings by different API methods and it is left to API consumers to account for those differences.
 
