@@ -55,39 +55,39 @@
 
 		"455" => array(
 			"message" => "Invalid upload response.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		"456" => array(
 			"message" => "Missing upload body.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		"457" => array(
 			"message" => "Upload exceeded maximum filesize.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		"458" => array(
 			"message" => "Invalid mime-type.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		# users
 
 		"460" => array(
 			"message" => "Invalid user.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		"461" => array(
 			"message" => "User is disabled.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		"462" => array(
 			"message" => "User is deleted.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		# API keys
@@ -99,7 +99,7 @@
 
 		"479" => array(
 			"message" => "Invalid access token for this API key.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		"481" => array(
@@ -126,27 +126,27 @@
 
 		"490" => array(
 			"message" => "Access token has insuffient permissions.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		"491" => array(
 			"message" => "Access token is expired.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		"492" => array(
 			"message" => "Access token is disabled.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		"493" => array(
 			"message" => "Invalid access token.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		"494" => array(
 			"message" => "Access token missing.",
-			"documented" => 0,
+			"documented" => ($GLOBALS['cfg']['environment'] == 'prod') ? 0 : 1,
 		),
 
 		# API methods
