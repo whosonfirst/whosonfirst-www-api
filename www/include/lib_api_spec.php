@@ -84,4 +84,31 @@
 
  	#################################################################
 
+	function api_spec_errors(){
+
+		$all_errors = $GLOBALS['cfg']['api']['errors'];
+		ksort($all_errors);
+
+		$rsp_errors = [];
+
+		foreach ($all_errors as $code => $details){
+
+			if (! $details['documented']){
+				continue;
+			}
+
+			$details['code'] = $code;
+
+			$rsp_errors[] = array(
+				'code' => $code,
+				'message' => $details['message']
+			);
+		}
+
+		$out = array('errors' => $rsp_errors);
+		api_output_ok($out);
+	}
+
+ 	#################################################################
+
 	# the end

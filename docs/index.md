@@ -7,6 +7,10 @@ The Who's On First API allows developers (and robots) programmatic access to que
 
 API methods are dispatched over `HTTP` with one or more query parameters and data is returned in response as [JSON](formats.md#json) by default but you may also specify [CSV](formats.md#csv) or Who's On First's own [meta](formats.md#meta) formatted responses for certain [API methods](methods.md).
 
+The endpoint for the Who's On First API is:
+
+**[https://whosonfirst-api.mapzen.com/](https://whosonfirst-api.mapzen.com/)**
+
 All errors are returned using [HTTP status codes](errors.md) in the `400-599` range. `400` class errors mean the problem was on your end and `500` class errors mean the problem was are our fault.
 
 <a name="caveats"></a>

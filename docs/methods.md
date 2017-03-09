@@ -2,9 +2,35 @@
 
 ### api.spec
 
+* [api.spec.errors](#api.spec.errors)
 * [api.spec.formats](#api.spec.formats)
 * [api.spec.methods](#api.spec.methods)
 
+<a name="api.spec.errors"></a>
+#### api.spec.errors
+
+Return the list of API error responses common to all methods.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.errors&api_key=API_KEY'
+```
 <a name="api.spec.formats"></a>
 #### api.spec.formats
 

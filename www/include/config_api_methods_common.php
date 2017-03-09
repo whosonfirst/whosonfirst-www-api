@@ -12,6 +12,14 @@
 			"disallow_formats" => array( "csv", "meta" ),
 		),
 
+		"api.spec.errors" => array (
+			"description" => "Return the list of API error responses common to all methods.",
+			"documented" => 1,
+			"enabled" => 1,
+			"library" => "api_spec",
+			"disallow_formats" => array( "csv", "meta" ),
+		),
+
 		"api.spec.formats" => array(
 			"description" => "Return the list of valid API response formats, including the default format",
 			"documented" => 1,
