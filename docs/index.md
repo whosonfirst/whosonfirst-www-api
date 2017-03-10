@@ -22,6 +22,20 @@ Also some methods are "more beta" than others. These methods are flagged as bein
 
 Finally the API is not feature complete yet. The easiest way to think about the Who's On First API is to look at the Who's On First [Spelunker]() website and imagine that anything you can do there to search and navigate all those places should also be possible via the API. As of this writing it is not but we'll get there. If there is anything currently missing that you'd like or need to do sooner than later [send up a flare](https://twitter.co/alloftheplaces) and we'll see about adding it to the list.
 
+### API Key
+
+If you already have a Mapzen API key, that should work here too. If not, it only takes a minute to register a new one on the [Mapzen Developer site](https://mapzen.com/developers/).
+
+### Rate limits
+
+We presently have these rate limits in place for each API key:
+
+* Queries per day: 25,000
+* Queries per minute: 300
+* Queries per second: 6
+
+Those numbers will likely change as we figure out what real usage looks like. If they seem overly limiting to what you're aiming to do, just [get in touch](mailto:whosonfirst@mapzen.com) with us about what your needs are.
+
 ### Shout outs
 
 <a name="cgi"></a>
