@@ -20,12 +20,14 @@ Which is to say: The point is for _the thing to work_ but there are probably sti
 
 Also some methods are "more beta" than others. These methods are flagged as being `experimental` which means that both either their inputs or their outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach these API methods defensively.
 
-Finally the API is not feature complete yet. The easiest way to think about the Who's On First API is to look at the Who's On First [Spelunker](https://whosonfirst.mapzen.com/spelunker/) website and imagine that anything you can do there to search and navigate all those places should also be possible via the API. As of this writing it is not but we'll get there. If there is anything currently missing that you'd like or need to do sooner than later [send up a flare](https://twitter.co/alloftheplaces) and we'll see about adding it to the list.
+Finally the API is not feature complete yet. The easiest way to think about the Who's On First API is to look at the Who's On First [Spelunker]() website and imagine that anything you can do there to search and navigate all those places should also be possible via the API. As of this writing it is not but we'll get there. If there is anything currently missing that you'd like or need to do sooner than later [send up a flare](https://twitter.co/alloftheplaces) and we'll see about adding it to the list.
 
-### API Key
+<a name="keys"></a>
+### API Keys
 
 If you already have a Mapzen API key, that should work here too. If not, it only takes a minute to register a new one on the [Mapzen Developer site](https://mapzen.com/developers/).
 
+<a name="rate_limits"></a>
 ### Rate limits
 
 We presently have these rate limits in place for each API key:
@@ -41,4 +43,4 @@ Those numbers will likely change as we figure out what real usage looks like. If
 <a name="cgi"></a>
 ![CGI has a posse](prism.gif)
 
-Hugs and sloppy kisses to the [Common Gateway Interface](https://en.wikipedia.org/wiki/Common_Gateway_Interface).
+High fives and finger guns to the [Common Gateway Interface](https://en.wikipedia.org/wiki/Common_Gateway_Interface).
