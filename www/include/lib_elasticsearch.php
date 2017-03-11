@@ -83,6 +83,7 @@
 		# stuff. Because we can't have nice things...
 
 		if (isset($query["aggregations"])){
+			$more['scroll'] = 0;
 			$pre_count = 0;
 		}
 

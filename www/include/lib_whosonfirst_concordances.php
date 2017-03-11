@@ -10,6 +10,7 @@
 	function whosonfirst_concordances_get_sources($args=array()){
 
 		elasticsearch_spelunker_append_config($args);
+
 		$rsp = elasticsearch_facet("wof:concordances_sources", $args);
 
 		if ($rsp['ok']){

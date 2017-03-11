@@ -102,7 +102,7 @@
 			"library" => "api_whosonfirst_concordances",
                         "parameters" => array(
 				array("name" => "id", "description" => "The ID of concordance you are looking for", "documented" => 1, "required" => 1, "example" => "3534"),
-				array("name" => "source", "description" => "The source prefix of the concordance you are looking for", "documented" => 1, "required" => 1, "example" => "gp"),
+				array("name" => "source", "description" => "The source prefix of the concordance you are looking for", "documented" => 1, "required" => 1, "example" => "gp:id"),
 			),
 			"errors" => array(
 				"432" => array("message" => "Missing 'id' parameter"),
