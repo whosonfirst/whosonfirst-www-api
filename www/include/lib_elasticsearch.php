@@ -486,6 +486,10 @@
 
 				$pagination["cursor"] = "";
 			}
+
+			if ($total_count <= $per_page){
+				unset($pagination["cursor"]);
+			}
 		}
 
 		return $pagination;
