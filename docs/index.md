@@ -25,18 +25,12 @@ Finally the API is not feature complete yet. The easiest way to think about the 
 <a name="keys"></a>
 ### API Keys
 
-If you already have a Mapzen API key, that should work here too. If not, it only takes a minute to register a new one on the [Mapzen Developer site](https://mapzen.com/developers/).
+To use the Who's On First API, you should [first obtain a free developer API key](https://mapzen.com/documentation/overview/).
 
 <a name="rate_limits"></a>
 ### Rate limits
 
-We presently have these rate limits in place for each API key:
-
-* Queries per day: 25,000
-* Queries per minute: 300
-* Queries per second: 6
-
-Those numbers will likely change as we figure out what real usage looks like. If they seem overly limiting to what you're aiming to do, just [get in touch](mailto:whosonfirst@mapzen.com) with us about what your needs are.
+See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-search) for more on API keys and rate limits.
 
 ### Shout outs
 
