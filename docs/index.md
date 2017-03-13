@@ -30,7 +30,7 @@ To use the Who's On First API, you should [first obtain a free developer API key
 <a name="rate_limits"></a>
 ### Rate limits
 
-See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-search) for more on API keys and rate limits.
+See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#whosonfirstapi) for more on API keys and rate limits.
 
 ### Shout outs
 
