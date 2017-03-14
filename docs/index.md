@@ -1,6 +1,4 @@
 <a name="intro"></a>
-## Introduction
-
 The Who's On First API allows developers (and robots) programmatic access to query and retrieve [Who's On First data](https://whosonfirst.mapzen.com/) via a [REST-ish](#cgi) interface.
 
 API methods are dispatched over `HTTP` with one or more query parameters and data is returned in response as [JSON](formats.md#json) by default but you may also specify [CSV](formats.md#csv) or Who's On First's own [meta](formats.md#meta) formatted responses for certain [API methods](methods.md).
