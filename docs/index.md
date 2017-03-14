@@ -1,5 +1,3 @@
-# Who's On First API Documentation
-
 <a name="intro"></a>
 ## Introduction
 
