@@ -28,7 +28,7 @@
 			"disallow_formats" => array( "csv", "meta" ),
 		),
 
-		"test.echo" => array(
+		"api.test.echo" => array(
 			"description" => "A testing method which echo's all parameters back in the response.",
 			"documented" => 1,
 			"enabled" => 1,
@@ -36,7 +36,7 @@
 			"disallow_formats" => array( "csv", "meta" ),
 		),
 
-		"test.error" => array(
+		"api.test.error" => array(
 			"description" => "Return a test error from the API",
 			"documented" => 1,
 			"enabled" => 1,

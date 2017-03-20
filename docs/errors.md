@@ -1,7 +1,7 @@
 In addition to any already [assigned HTTP status codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) The Who's On First API assigns specific meaning to certain codes and defines the following additional status codes for representing errors or a failure scenario, across all API methods:
 
 <a name="mapzen"></a>
-### Mapzen
+### Mapzen errors
 
 
 | Error code | Error message |
@@ -13,7 +13,7 @@ In addition to any already [assigned HTTP status codes](https://www.iana.org/ass
 | `429` | Queries per minute/hour/day exceeded |
 
 <a name="client"></a>
-### Client-side
+### Client-side errors
 
 | Error code | Error message |
 | :--- | :--- |
@@ -31,14 +31,14 @@ In addition to any already [assigned HTTP status codes](https://www.iana.org/ass
 | `499` | API method not found. |
 
 <a name="server"></a>
-### Server-side
+### Server-side errors
 
 | Error code | Error message |
 | :--- | :--- |
 | `512` | Something we tried to do didn&#039;t work. This is our fault, not yours. |
 
 <a name="custom"></a>
-### Custom
+### Custom errors
 
 Individual API methods may define their own status codes within the `432-449` and `513-599` range on a per-method basis. Status codes in this range _may_ be used with different meanings by different API methods and it is left to API consumers to account for those differences.
 

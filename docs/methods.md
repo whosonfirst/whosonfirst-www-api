@@ -82,13 +82,13 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.methods&api_key=API_KEY'
 ```
 
-### test
+### api.test
 
-* [test.echo](#test.echo)
-* [test.error](#test.error)
+* [api.test.echo](#api.test.echo)
+* [api.test.error](#api.test.error)
 
-<a name="test.echo"></a>
-#### test.echo
+<a name="api.test.echo"></a>
+#### api.test.echo
 
 A testing method which echo&#039;s all parameters back in the response.
 
@@ -110,10 +110,10 @@ This API method does not define any custom error codes. For the list of error co
 ##### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=test.echo&api_key=API_KEY'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.test.echo&api_key=API_KEY'
 ```
-<a name="test.error"></a>
-#### test.error
+<a name="api.test.error"></a>
+#### api.test.error
 
 Return a test error from the API
 
@@ -135,7 +135,7 @@ This API method does not define any custom error codes. For the list of error co
 ##### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=test.error&api_key=API_KEY'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.test.error&api_key=API_KEY'
 ```
 
 ### whosonfirst.concordances
@@ -154,7 +154,7 @@ Return a Who&#039;s On First record (and all its concordances) by another source
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `id` | The ID of concordance you are looking for |  3534 | yes |
-| `source` | The source prefix of the concordance you are looking for |  gp | yes |
+| `source` | The source prefix of the concordance you are looking for |  gp:id | yes |
 | `page` | The default is 1. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
 | `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
