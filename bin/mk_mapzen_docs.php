@@ -12,50 +12,63 @@
 	loadlib("cli");
 	loadlib("api");
 	loadlib("api_methods");
+	loadlib("whosonfirst_api");
 
 	$spec = array(
 		"page" => array("flag" => "p", "required" => 0, "help" => ""),
+		"endpoint" => array("flag" => "e", "required" => 0, "help" => ""),
+		"api_key" => array("flag" => "k", "required" => 0, "help" => ""),
+		"access_token" => array("flag" => "t", "required" => 0, "help" => ""),
 	);
 
 	$opts = cli_getopts($spec);
 
+	$page = $opts['page'];
+
 	# 
 	
-	ksort($GLOBALS['cfg']['api']['methods']);
+	if ($page == "methods"){
 
-	foreach ($GLOBALS['cfg']['api']['methods'] as $method_name => $details){
+		ksort($GLOBALS['cfg']['api']['methods']);
 
-		$details['name'] = $method_name;
+		foreach ($GLOBALS['cfg']['api']['methods'] as $method_name => $details){
 
-		if (! api_methods_can_view_method($details, 0)){
-			continue;
+			$details['name'] = $method_name;
+
+			if (! api_methods_can_view_method($details, 0)){
+				continue;
+			}
+
+			$parts = explode(".", $method_name);
+			array_pop($parts);
+
+			$method_prefix = $parts[0];
+			$method_class = implode(".", $parts);
+
+			if (! is_array($method_classes[$method_class])){
+
+				$method_classes[$method_class] = array(
+					'methods' => array(),
+					'prefix' => $method_prefix,
+				);
+			}
+
+			$method_classes[$method_class]['methods'][] = $details;
+			$method_names[] = $details['name'];
+
+			# generate examples here...
+
+
 		}
 
-		$parts = explode(".", $method_name);
-		array_pop($parts);
-
-		$method_prefix = $parts[0];
-		$method_class = implode(".", $parts);
-
-		if (! is_array($method_classes[$method_class])){
-
-			$method_classes[$method_class] = array(
-				'methods' => array(),
-				'prefix' => $method_prefix,
-			);
+		foreach ($method_classes as $class_name => $ignore){
+			usort($method_classes[$class_name]['methods'], function($a, $b) {
+				return strcmp($a['name'], $b['name']);
+			});
 		}
 
-		$method_classes[$method_class]['methods'][] = $details;
-		$method_names[] = $details['name'];
+		$GLOBALS['smarty']->assign_by_ref("method_classes", $method_classes);
 	}
-
-	foreach ($method_classes as $class_name => $ignore){
-		usort($method_classes[$class_name]['methods'], function($a, $b) {
-			return strcmp($a['name'], $b['name']);
-		});
-	}
-
-	$GLOBALS['smarty']->assign_by_ref("method_classes", $method_classes);
 
 	$formats = $GLOBALS['cfg']['api']['formats'];
 	$GLOBALS['smarty']->assign_by_ref("response_formats", $formats);
@@ -69,11 +82,7 @@
 
 	# 
 
-	$template = "markdown_mapzen_api_docs.txt";
-
-	if ($page = $opts['page']){
-		$template = "markdown_mapzen_api_{$page}.txt";
-	}
+	$template = ($page) ? "markdown_mapzen_api_{$page}.txt" : "markdown_mapzen_api_docs.txt";
 
 	echo $GLOBALS['smarty']->fetch($template);
 	exit(0);
