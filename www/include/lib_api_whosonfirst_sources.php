@@ -30,7 +30,13 @@
 		api_whosonfirst_sources_enpublicify_source($source);
 
 		$out = array("source" => $source);
-		api_output_ok($out);
+
+		$more = array(
+			'is_singleton' => 1,
+			'key' => 'source',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -51,7 +57,11 @@
 			"sources" => $sources
 		);
 
-		api_output_ok($out);
+		$more = array(
+			'key' => 'sources',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -66,7 +76,11 @@
 			"prefixes" => $prefixes
 		);
 
-		api_output_ok($out);
+		$more = array(
+			'key' => 'prefixes',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################

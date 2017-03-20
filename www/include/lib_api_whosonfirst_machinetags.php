@@ -30,7 +30,12 @@
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
-		api_output_ok($out);
+
+		$more = array(
+			'key' => 'namespaces',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -61,7 +66,12 @@
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
-		api_output_ok($out);
+
+		$more = array(
+			'key' => 'predicates',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -92,7 +102,12 @@
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
-		api_output_ok($out);
+
+		$more = array(
+			'key' => 'values',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################

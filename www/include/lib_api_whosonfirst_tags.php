@@ -28,7 +28,7 @@
 			"key" => "tags",
 		);
 
-		api_output_ok($out);
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -38,7 +38,11 @@
 		$sources = whosonfirst_tags_sources();
 		$out = array('sources' => $sources);
 		
-		api_output_ok($out);
+		$more = array(
+			'key' => 'sources',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################

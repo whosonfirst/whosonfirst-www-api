@@ -42,7 +42,7 @@
 				"432" => array("message" => "Invalid source"),
 				"513" => array("message" => "Unable to retrieve namespaces"),				
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.categories.getPredicates' => array(
@@ -60,7 +60,7 @@
 				"432" => array("message" => "Invalid source"),
 				"513" => array("message" => "Unable to retrieve predicates."),				
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.categories.getValues' => array(
@@ -78,7 +78,7 @@
 				"432" => array("message" => "Invalid source"),
 				"513" => array("message" => "Unable to retrieve values"),				
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.categories.getSources' => array(
@@ -91,7 +91,7 @@
 			"errors" => array(
 				"513" => array("message" => "Failed to retrieve concordances"),
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.concordances.getById' => array(
@@ -109,7 +109,7 @@
 				"433" => array("message" => "Missing 'source' parameter"),
 				"513" => array("message" => "Failed to retrieve concordance"),
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.concordances.getSources' => array(
@@ -120,7 +120,7 @@
 			"library" => "api_whosonfirst_concordances",
                         "parameters" => array(),
                         # "errors" => array(),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.machinetags.getNamespaces' => array(
@@ -136,7 +136,7 @@
 			"errors" => array(
 				"513" => "Failed to retrieve machinetag namespaces",
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.machinetags.getPredicates' => array(
@@ -152,7 +152,7 @@
 			"errors" => array(
 				"513" => "Failed to retrieve machinetag predicates",
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.machinetags.getValues' => array(
@@ -168,7 +168,7 @@
 			"errors" => array(
 				"513" => "Failed to retrieve machinetag values",
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.places.getByLatLon' => array(
@@ -248,7 +248,7 @@
 			"notes" => array(
 				"The inability to locate (or to disambiguate) a parent ID for a lat, lon will not trigger an API error. The following parent IDs may be returned by this API method: '-1' which means that a parent ID could not be identified or that there are multiple choices; or '-3' which means that the parent is a neighbourhood and their are multiple possible choices and you should go out for a beer and argue over which is the correct parent.",
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.places.getInfo' => array(
@@ -406,7 +406,7 @@
 				"432" => array("message" => "Invalid place ID"),
 				"433" => array("message" => "Invalid place name"),
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.placetypes.getList' => array(
@@ -421,7 +421,7 @@
 			"errors" => array(
 				"432" => array("message" => "Invalid role"),
 			),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.placetypes.getRoles' => array(
@@ -433,7 +433,7 @@
                         "parameters" => array(),
 			"errors" => array(),
 			"notes" => array(),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.sources.getInfo' => array(
@@ -491,7 +491,7 @@
 				"513" => array("message" => "Unable to retrieve tags"),
 			),
                         "notes" => array(),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 		'whosonfirst.tags.getSources' => array(
@@ -503,7 +503,7 @@
                         "parameters" => array(),
                         "errors" => array(),
                         "notes" => array(),
-			"disallow_formats" => array( "csv", "meta" ),
+			"disallow_formats" => array( "meta" ),
 		),
 
 	), $GLOBALS['cfg']['api']['methods']);

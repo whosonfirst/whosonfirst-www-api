@@ -41,7 +41,13 @@
 		api_whosonfirst_enpublicify_placetype($place, array("name" => $name));
 
 		$out = array("placetype" => $place);
-		api_output_ok($out);
+
+		$more = array(
+			'is_singleton' => 1,
+			'key' => 'placetype',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -68,7 +74,12 @@
 		}
 
 		$out = array("placetypes" => $placetypes);
-		api_output_ok($out);
+
+		$more = array(
+			'key' => 'placetypes',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################

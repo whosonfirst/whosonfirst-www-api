@@ -247,11 +247,16 @@
 		# that if the parent_id is -1, -3, etc.
 		# (20170301/thisisaaronland)
 
-		$out = array(
+		$out = array('place' => array(
 			'wof:parent_id' => $parent_id
+		));
+
+		$more = array(
+			'is_singleton' => 1,
+			'key' => 'place',
 		);
 
-		api_output_ok($out);
+		api_output_ok($out, $more);
 	}
 
 	########################################################################

@@ -83,6 +83,12 @@
 
 			if (! $more["is_singleton"]){
 
+				$out = array_values($header);
+				fputcsv($fh, $out);
+			}
+
+			else {
+
 				$pg_args = array();
 				api_utils_ensure_pagination_args($pg_args);
 
