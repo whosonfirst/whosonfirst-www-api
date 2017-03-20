@@ -1,6 +1,6 @@
 mz-docs:
 	php -q ./bin/mk_mapzen_docs.php > docs/index.md
-	php -q ./bin/mk_mapzen_docs.php --page methods > docs/methods.md
+	php -q ./bin/mk_mapzen_docs.php --page methods --endpoint "$(ENDPOINT)" --api_key "$(API_KEY)" --access_token "$(ACCESS_TOKEN)" --examples > docs/methods.md
 	php -q ./bin/mk_mapzen_docs.php --page formats > docs/formats.md
 	php -q ./bin/mk_mapzen_docs.php --page pagination > docs/pagination.md
 	php -q ./bin/mk_mapzen_docs.php --page errors > docs/errors.md

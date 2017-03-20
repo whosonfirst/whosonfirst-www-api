@@ -19,15 +19,32 @@
 		"endpoint" => array("flag" => "e", "required" => 0, "help" => ""),
 		"api_key" => array("flag" => "k", "required" => 0, "help" => ""),
 		"access_token" => array("flag" => "t", "required" => 0, "help" => ""),
+		"examples" => array("flag" => "x", "required" => 0, "boolean" => 1, "help" => ""),
 	);
 
 	$opts = cli_getopts($spec);
 
 	$page = $opts['page'];
+	$examples = $opts['examples'];
 
 	# 
-	
+
+	if ($examples){
+
+		if ($endpoint = $opts['endpoint']){
+			$GLOBALS['whosonfirst_api_endpoint'] = $endpoint;
+		}
+
+		if ((! $opts['api_key']) && (! $opts['access_token'])){
+
+			echo "Missing API key or access token!";
+			exit(1);
+		}
+	}
+
 	if ($page == "methods"){
+
+		$example_calls = array();
 
 		ksort($GLOBALS['cfg']['api']['methods']);
 
@@ -56,9 +73,89 @@
 			$method_classes[$method_class]['methods'][] = $details;
 			$method_names[] = $details['name'];
 
-			# generate examples here...
+			if ($examples){
 
+				$args = array();
 
+				if ($method_name == "whosonfirst.places.search"){
+					$args["q"] = "poutine";
+				}
+
+				else if (is_array($details["parameters"])) {
+
+					foreach ($details["parameters"] as $p){
+						$args[$p["name"]] = $p["example"];
+					}
+				}
+
+				else {}
+
+				#
+
+				if ($details["paginated"]){
+					$args["per_page"] = 1;
+				}
+
+				#
+
+				if ($key = $opts['api_key']){
+					$args['api_key'] = $key;
+				}
+
+				else {
+
+					$token = $opts['access_token'];
+					$args['access_token'] = $token;
+				}
+
+				#
+
+				$rsp = whosonfirst_api_call($method_name, $args);
+
+				if ((! $rsp["ok"]) && ($method_name != "api.test.error")){
+					echo "Failed to generate example response for {$method_name}, because {$rsp['error']}";
+					dumper($args);
+					exit();
+				}
+
+				unset($args["api_key"]);
+				unset($args["access_token"]);
+
+				$data = $rsp["data"];
+				unset($data["_query"]);
+
+				$truncated = 0;
+
+				if ($method_name == "api.spec.errors"){
+					$data["errors"] = array_slice($data["errors"], 0, 2);
+					$truncated = 1;
+				}
+
+				else if ($method_name == "api.spec.methods"){
+					$data["methods"] = array_slice($data["methods"], 0, 2);
+					$truncated = 1;
+				}
+
+				else if ($method_name == "whosonfirst.placetypes.getList"){
+					$data["placetypes"] = array_slice($data["placetypes"], 0, 2);
+					$truncated = 1;
+				}
+
+				else if ($method_name == "whosonfirst.sources.getList"){
+					$data["sources"] = array_slice($data["sources"], 0, 2);
+					$truncated = 1;
+				}
+
+				else {}
+
+				$body = json_encode($data, JSON_PRETTY_PRINT);
+
+				$example_calls[ $method_name ] = array(
+					"request" => $args,
+					"response" => $body,
+					"truncated" => $truncated,
+				);
+			}
 		}
 
 		foreach ($method_classes as $class_name => $ignore){
@@ -68,6 +165,12 @@
 		}
 
 		$GLOBALS['smarty']->assign_by_ref("method_classes", $method_classes);
+
+		$GLOBALS['smarty']->assign_by_ref("method_classes", $method_classes);
+
+		if ($examples){
+			$GLOBALS['smarty']->assign_by_ref("example_calls", $example_calls);
+		}
 	}
 
 	$formats = $GLOBALS['cfg']['api']['formats'];

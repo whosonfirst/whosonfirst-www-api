@@ -1,6 +1,6 @@
 <?php
 
-	$GLOBALS['cfg']['whosonfirst_api_endpoint'] = "https://whosonfirst-api.dev.mapzen.com";
+	$GLOBALS['whosonfirst_api_endpoint'] = "https://whosonfirst-api.dev.mapzen.com";
 
 	########################################################################
 
@@ -10,7 +10,7 @@
 
 	function whosonfirst_api_call($method, $args=array()){
 
-		$rsp = whosonfirst_execute_method($method, $args);
+		$rsp = whosonfirst_api_execute_method($method, $args);
 
 		if (! $rsp['ok']){
 			return $rsp;
@@ -27,9 +27,9 @@
 
 	########################################################################
 
-	function whosonfirst_execute_method($method, $args=array()){
+	function whosonfirst_api_execute_method($method, $args=array()){
 
-		$url = $GLOBALS['cfg']['whosonfirst_api_endpoint'];
+		$url = $GLOBALS['whosonfirst_api_endpoint'];
 		$args["method"] = $method;
 
 		$headers = array();
