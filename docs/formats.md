@@ -1,10 +1,10 @@
 <a name="formats"></a>
 ## Response formats
 
-The default response format is [JSON](formats.md#json).
+The default response format is [json](formats.md#json).
 
 <a name="json"></a>
-### JSON
+### json
 
 JSON (JavaScript Object Notation) is a data-interchange format based on JavaScript. For more details, consult <a href="http://json.org/">http://json.org/</a>.
 
@@ -56,10 +56,9 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 ### Notes
 
 JSON output is supported for all API methods.<a name="csv"></a>
+### csv
 
-### CSV
-
-CSV (Comma Separated Value) is a popular tabular data storage format. 
+CSV (Comma Separated Value)
 
 #### Example request
 
@@ -84,12 +83,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 < X-api-format-csv-header: geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
 < Content-Length: 208
 < Connection: keep-alive
-< 
+
 geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
 "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
 ````
 
-<small>The CSV header is only written, in the body of the response, for the first page of API responses. The `X-api-format-csv-header` HTTP header is included with all responses.</small>
+<small>The CVS header is only written, in the body of the response, for the first page of API responses. The `X-api-format-csv-header` HTTP header is included with all responses.</small>
 
 #### Notes
 
@@ -121,12 +120,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 < X-api-format-meta-header: bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,geom_longitude,id,inception,iso,iso_country,lastmodified,lbl_latitude,lbl_longitude,locality_id,name,parent_id,path,placetype,region_id,source,superseded_by,supersedes,wof_country
 < Content-Length: 503
 < Connection: keep-alive
-< 
+
 bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,geom_longitude,id,inception,iso,iso_country,lastmodified,lbl_latitude,lbl_longitude,locality_id,name,parent_id,path,placetype,region_id,source,superseded_by,supersedes,wof_country
 "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",uuuu,0,,,,88060b9c65a5eaae29b427583b1bfa93,46.066528,-71.939964,975139507,uuuu,CA,CA,1472521936,0,0,0,"Poutine Restau-Bar Enr",-1,975/139/507/975139507.geojson,venue,0,simplegeo,,,CA
 ```
 
-<small>The meta (CSV) header is only written, in the body of the response, for the first page of API responses. The `X-api-format-meta-header` HTTP header is included with all responses.</small>
+<small>The meta (CVS) header is only written, in the body of the response, for the first page of API responses. The `X-api-format-meta-header` HTTP header is included with all responses.</small>
 
 #### Notes
 
