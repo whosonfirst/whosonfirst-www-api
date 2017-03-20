@@ -1,7 +1,7 @@
 <a name="formats"></a>
 ## Response formats
 
-The default response format is [json](formats.md#json).
+The default response format is [JSON](formats.md#json).
 
 <a name="json"></a>
 ### JSON
