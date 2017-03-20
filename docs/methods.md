@@ -1,4 +1,1271 @@
-Failed to generate example response for whosonfirst.places.getInfoMulti, because http_failed<pre style="text-align: left;">array (
-  'ids' =&gt; '101712565,101712563',
-  'access_token' =&gt; 'eceb3b57bf4d72f62aaf8360c8324be5',
-)</pre>
+## API methods
+
+### api.spec
+
+* [api.spec.errors](#api.spec.errors)
+* [api.spec.formats](#api.spec.formats)
+* [api.spec.methods](#api.spec.methods)
+
+<a name="api.spec.errors"></a>
+#### api.spec.errors
+
+Return the list of API error responses common to all methods.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.errors&api_key=mapzen-XXXXXXX'
+
+{
+    &quot;errors&quot;: [
+        {
+            &quot;code&quot;: 450,
+            &quot;message&quot;: &quot;Unknown error.&quot;
+        },
+        {
+            &quot;code&quot;: 452,
+            &quot;message&quot;: &quot;Insufficient parameters.&quot;
+        }
+    ],
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+_This example response has been truncated for the sake of brevity._
+
+<a name="api.spec.formats"></a>
+#### api.spec.formats
+
+Return the list of valid API response formats, including the default format
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.formats&api_key=mapzen-XXXXXXX'
+
+{
+    &quot;formats&quot;: [
+        &quot;json&quot;,
+        &quot;csv&quot;,
+        &quot;meta&quot;
+    ],
+    &quot;default_format&quot;: &quot;json&quot;,
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="api.spec.methods"></a>
+#### api.spec.methods
+
+Return the list of available API response methods.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.methods&api_key=mapzen-XXXXXXX'
+
+{
+    &quot;methods&quot;: [
+        {
+            &quot;name&quot;: &quot;whosonfirst.concordances.getById&quot;,
+            &quot;method&quot;: &quot;GET&quot;,
+            &quot;description&quot;: &quot;Return a Who&#039;s On First record (and all its concordances) by another source identifier.&quot;,
+            &quot;requires_auth&quot;: 0,
+            &quot;parameters&quot;: [
+                {
+                    &quot;name&quot;: &quot;id&quot;,
+                    &quot;description&quot;: &quot;The ID of concordance you are looking for&quot;,
+                    &quot;documented&quot;: 1,
+                    &quot;required&quot;: 1,
+                    &quot;example&quot;: &quot;3534&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;source&quot;,
+                    &quot;description&quot;: &quot;The source prefix of the concordance you are looking for&quot;,
+                    &quot;documented&quot;: 1,
+                    &quot;required&quot;: 1,
+                    &quot;example&quot;: &quot;gp:id&quot;
+                }
+            ],
+            &quot;errors&quot;: {
+                &quot;432&quot;: {
+                    &quot;message&quot;: &quot;Missing &#039;id&#039; parameter&quot;
+                },
+                &quot;433&quot;: {
+                    &quot;message&quot;: &quot;Missing &#039;source&#039; parameter&quot;
+                },
+                &quot;513&quot;: {
+                    &quot;message&quot;: &quot;Failed to retrieve concordance&quot;
+                }
+            }
+        },
+        {
+            &quot;name&quot;: &quot;whosonfirst.concordances.getSources&quot;,
+            &quot;method&quot;: &quot;GET&quot;,
+            &quot;description&quot;: &quot;List all the sources that Who&#039;s On First holds hands with.&quot;,
+            &quot;requires_auth&quot;: 0,
+            &quot;parameters&quot;: [
+
+            ],
+            &quot;errors&quot;: [
+
+            ]
+        }
+    ],
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+_This example response has been truncated for the sake of brevity._
+
+
+### api.test
+
+* [api.test.echo](#api.test.echo)
+* [api.test.error](#api.test.error)
+
+<a name="api.test.echo"></a>
+#### api.test.echo
+
+A testing method which echo&#039;s all parameters back in the response.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.test.echo&api_key=mapzen-XXXXXXX'
+
+{
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="api.test.error"></a>
+#### api.test.error
+
+Return a test error from the API
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.test.error&api_key=mapzen-XXXXXXX'
+
+null
+```
+
+
+### whosonfirst.concordances
+
+* [whosonfirst.concordances.getById](#whosonfirst.concordances.getById)
+* [whosonfirst.concordances.getSources](#whosonfirst.concordances.getSources)
+
+<a name="whosonfirst.concordances.getById"></a>
+#### whosonfirst.concordances.getById
+
+Return a Who&#039;s On First record (and all its concordances) by another source identifier.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `id` | The ID of concordance you are looking for |  3534 | yes |
+| `source` | The source prefix of the concordance you are looking for |  gp:id | yes |
+| `page` | The default is 1. | 1 | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;id&#039; parameter |
+| `433` | Missing &#039;source&#039; parameter |
+| `513` | Failed to retrieve concordance |
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [meta](formats.md#meta)
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getById&api_key=mapzen-XXXXXXX&id=3534&source=gp:id&per_page=1'
+
+{
+    &quot;concordances&quot;: [
+        {
+            &quot;gp:id&quot;: 3534,
+            &quot;fb:id&quot;: &quot;en.montreal&quot;,
+            &quot;wd:id&quot;: &quot;Q340&quot;,
+            &quot;wk:page&quot;: &quot;Montreal&quot;,
+            &quot;fct:id&quot;: &quot;03c06bce-8f76-11e1-848f-cfd5bf3ef515&quot;,
+            &quot;qs:id&quot;: &quot;239659&quot;,
+            &quot;loc:id&quot;: &quot;n80132975&quot;,
+            &quot;tgn:id&quot;: &quot;7013051&quot;,
+            &quot;nyt:id&quot;: &quot;N59179828586486930801&quot;,
+            &quot;gn:id&quot;: 6077243,
+            &quot;dbp:id&quot;: &quot;Montreal&quot;,
+            &quot;wof:id&quot;: 101736545
+        }
+    ],
+    &quot;next_query&quot;: null,
+    &quot;total&quot;: 1,
+    &quot;page&quot;: 1,
+    &quot;per_page&quot;: 1,
+    &quot;pages&quot;: 1,
+    &quot;cursor&quot;: null,
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.concordances.getSources"></a>
+#### whosonfirst.concordances.getSources
+
+List all the sources that Who&#039;s On First holds hands with.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `page` | The default is 1. | 1 | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [meta](formats.md#meta)
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getSources&api_key=mapzen-XXXXXXX&per_page=1'
+
+{
+    &quot;sources&quot;: [
+        {
+            &quot;source&quot;: &quot;sg:id&quot;,
+            &quot;concordances&quot;: 21674066
+        }
+    ],
+    &quot;next_query&quot;: &quot;method=whosonfirst.concordances.getSources&amp;per_page=1&amp;page=2&quot;,
+    &quot;total&quot;: 25,
+    &quot;page&quot;: 1,
+    &quot;per_page&quot;: 1,
+    &quot;pages&quot;: 25,
+    &quot;cursor&quot;: null,
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+
+### whosonfirst.places
+
+* [whosonfirst.places.getByLatLon](#whosonfirst.places.getByLatLon)
+* [whosonfirst.places.getDescendants](#whosonfirst.places.getDescendants)
+* [whosonfirst.places.getHierarchiesByLatLon](#whosonfirst.places.getHierarchiesByLatLon)
+* [whosonfirst.places.getInfo](#whosonfirst.places.getInfo)
+* [whosonfirst.places.getInfoMulti](#whosonfirst.places.getInfoMulti)
+* [whosonfirst.places.getIntersects](#whosonfirst.places.getIntersects)
+* [whosonfirst.places.getNearby](#whosonfirst.places.getNearby)
+* [whosonfirst.places.getParentByLatLon](#whosonfirst.places.getParentByLatLon) _experimental_
+* [whosonfirst.places.getRandom](#whosonfirst.places.getRandom)
+* [whosonfirst.places.search](#whosonfirst.places.search)
+
+<a name="whosonfirst.places.getByLatLon"></a>
+#### whosonfirst.places.getByLatLon
+
+Return Who&#039;s On First places intersecting a latitude and longitude
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `latitude` | A valid latitude coordinate. |  37.766633 | yes |
+| `longitude` | A valid longitude coordinate. |  -122.417693 | yes |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | no |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;latitude&#039; parameter |
+| `433` | Missing &#039;longitude&#039; parameter |
+| `434` | Invalid &#039;latitude&#039; parameter |
+| `435` | Invalid &#039;longitude&#039; parameter |
+| `436` | Invalid placetype |
+| `513` | Failed to perform lookup |
+
+##### Notes
+
+* This method differs from the whosonfirst.places.getAncestorsByLatLon method in two ways: 1. It returns a list of WOF places rather than hierarchies and 2. If a placetype filter is specified and no matching records are found no attempt will be made to find ancestors higher up the hierarchy. For example looking for an intersecting county or region if no locality is found.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getByLatLon&api_key=mapzen-XXXXXXX&latitude=37.766633&longitude=-122.417693&placetype=neighbourhood'
+
+{
+    &quot;places&quot;: [
+        {
+            &quot;wof:id&quot;: 85887443,
+            &quot;wof:parent_id&quot;: &quot;85922583&quot;,
+            &quot;wof:name&quot;: &quot;Mission District&quot;,
+            &quot;wof:placetype&quot;: &quot;neighbourhood&quot;,
+            &quot;wof:country&quot;: &quot;US&quot;,
+            &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+        }
+    ],
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.places.getDescendants"></a>
+#### whosonfirst.places.getDescendants
+
+Return all the descendants for a Who&#039;s On First ID.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `id` | A valid Who&#039;s On First ID |  420780703 | yes |
+| `name` | Query for this value in the wof:name field. |  Gowanus Heights | no |
+| `names` | Query for this value across all name related fields. |  SF | no |
+| `alt` | Query for this value across all alternate name related fields (variant, colloquial, unknown). |  Paris | no |
+| `preferred` | Query for this value across all preferred name related fields. |  বেইজিং | no |
+| `variant` | Query for this value across all variant name related fields. |  💩 | no |
+| `placetype` | Ensure records match this placetype. |  microhood | no |
+| `tags` | Query for places with one or more of these tags. |  diner | no |
+| `iso` | Ensure places belong to this (ISO) country code. |  CA | no |
+| `country_id` | Ensure places belong to this country Who&#039;s On First ID. |  85633147 | no |
+| `region_id` | Ensure places belong to this region Who&#039;s On First ID. |  85669831 | no |
+| `locality_id` | Ensure places belong to this locality Who&#039;s On First ID. |  101736545 | no |
+| `neighbourhood_id` | Ensure places belong to this neighbourhood Who&#039;s On First ID. |  102112179 | no |
+| `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
+| `exclude` | Exclude places matching these criteria. |  nullisland | no |
+| `include` | Include places matching these criteria. |  deprecated | no |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
+| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;id&#039; parameter |
+| `513` | Unable to retrieve descendants |
+
+##### Notes
+
+* This API method uses [mixed](pagination.md#mixed) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDescendants&api_key=mapzen-XXXXXXX&id=420780703&per_page=1'
+
+{
+    &quot;places&quot;: [
+        {
+            &quot;wof:id&quot;: 219976921,
+            &quot;wof:parent_id&quot;: &quot;420780703&quot;,
+            &quot;wof:name&quot;: &quot;Paula Frazier Handwoven&quot;,
+            &quot;wof:placetype&quot;: &quot;venue&quot;,
+            &quot;wof:country&quot;: &quot;US&quot;,
+            &quot;wof:repo&quot;: &quot;whosonfirst-data-venue-us-ca&quot;
+        }
+    ],
+    &quot;next_query&quot;: &quot;method=whosonfirst.places.getDescendants&amp;id=420780703&amp;per_page=1&amp;cursor=cXVlcnlUaGVuRmV0Y2g7NTs4NTMzNTE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNjE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNTI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNjI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNTM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzswOw%3D%3D&quot;,
+    &quot;total&quot;: 74,
+    &quot;page&quot;: null,
+    &quot;pages&quot;: 74,
+    &quot;per_page&quot;: 1,
+    &quot;cursor&quot;: &quot;cXVlcnlUaGVuRmV0Y2g7NTs4NTMzNTE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNjE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNTI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNjI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNTM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzswOw==&quot;,
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.places.getHierarchiesByLatLon"></a>
+#### whosonfirst.places.getHierarchiesByLatLon
+
+Return the closest set of ancestors (hierarchies) for a latitude and longitude
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `latitude` | A valid latitude coordinate. |  37.777228 | yes |
+| `longitude` | A valid longitude coordinate. |  -122.470779 | yes |
+| `placetype` | Skip descendants of this placetype. |  region | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;latitude&#039; parameter |
+| `433` | Missing &#039;longitude&#039; parameter |
+| `434` | Invalid &#039;latitude&#039; parameter |
+| `435` | Invalid &#039;longitude&#039; parameter |
+| `436` | Invalid placetype |
+| `513` | Failed to perform lookup |
+
+##### Notes
+
+* This method differs from whosonfirst.places.getByLatLon method in two ways: 1. It returns a list of hierarchies rather than a WOF place record and 2. It will travel up the hierarchy until an ancestor is found. For example even if there is no locality matching a given lat, lon the code will try again looking for a matching region, and so on.
+* The following output formats are **disallowed** for this API method: [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getHierarchiesByLatLon&api_key=mapzen-XXXXXXX&latitude=37.777228&longitude=-122.470779&placetype=region'
+
+{
+    &quot;hierarchies&quot;: [
+        {
+            &quot;continent_id&quot;: 102191575,
+            &quot;country_id&quot;: 85633793,
+            &quot;region_id&quot;: 85688637
+        }
+    ],
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.places.getInfo"></a>
+#### whosonfirst.places.getInfo
+
+Return a Who&#039;s On First record by ID.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `id` | A valid Who&#039;s On First ID. |  420561633 | yes |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;id&#039; parameter |
+| `513` | Unable to retrieve place |
+
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfo&api_key=mapzen-XXXXXXX&id=420561633'
+
+{
+    &quot;place&quot;: {
+        &quot;wof:id&quot;: 420561633,
+        &quot;wof:parent_id&quot;: &quot;85865899&quot;,
+        &quot;wof:name&quot;: &quot;Super Bowl City&quot;,
+        &quot;wof:placetype&quot;: &quot;microhood&quot;,
+        &quot;wof:country&quot;: &quot;US&quot;,
+        &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+    },
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.places.getInfoMulti"></a>
+#### whosonfirst.places.getInfoMulti
+
+Return multiple Who&#039;s On First records by ID.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `ids` | A comma separated list of valid Who&#039;s On First ID. A maximum of 20 WOF IDs may be specified. |  101712565,101712563 | yes |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;ids&#039; parameter |
+| `433` | Maximum number of WOF IDs exceeded |
+| `513` | Unable to retrieve places |
+
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfoMulti&api_key=mapzen-XXXXXXX&ids=101712565,101712563'
+
+{
+    &quot;places&quot;: [
+        {
+            &quot;wof:id&quot;: 101712565,
+            &quot;wof:parent_id&quot;: &quot;404525063&quot;,
+            &quot;wof:name&quot;: &quot;Cleveland Heights&quot;,
+            &quot;wof:placetype&quot;: &quot;locality&quot;,
+            &quot;wof:country&quot;: &quot;US&quot;,
+            &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+        },
+        {
+            &quot;wof:id&quot;: 101712563,
+            &quot;wof:parent_id&quot;: &quot;404523697&quot;,
+            &quot;wof:name&quot;: &quot;Cleveland&quot;,
+            &quot;wof:placetype&quot;: &quot;locality&quot;,
+            &quot;wof:country&quot;: &quot;US&quot;,
+            &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+        }
+    ],
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.places.getIntersects"></a>
+#### whosonfirst.places.getIntersects
+
+Return all the Who&#039;s On First places intersecting a bounding box.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `min_latitude` | A valid latitude coordinate, representing the bottom (Southern) edge of the bounding box. |  37.78807088 | yes |
+| `min_longitude` | A valid longitude coordinate, representing the left (Western) edge of the bounding box. |  -122.34374508 | yes |
+| `max_latitude` | A valid latitude coordinate, representing the top (Northern) edge of the bounding box. |  37.85749665 | yes |
+| `max_longitude` | A valid longitude coordinate, representing the right (Eastern) edge of the bounding box. |  -122.25585446 | yes |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  locality | no |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;min_latitude&#039; parameter |
+| `433` | Missing &#039;min_longitude&#039; parameter |
+| `434` | Missing &#039;max_latitude&#039; parameter |
+| `435` | Missing &#039;max_longitude&#039; parameter |
+| `436` | Invalid &#039;min_latitude&#039; parameter |
+| `437` | Invalid &#039;min_longitude&#039; parameter |
+| `438` | Invalid &#039;max_latitude&#039; parameter |
+| `439` | Invalid &#039;max_longitude&#039; parameter |
+| `513` | Failed to intersect |
+
+##### Notes
+
+* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects&api_key=mapzen-XXXXXXX&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=locality&per_page=1'
+
+{
+    &quot;places&quot;: [
+        {
+            &quot;wof:id&quot;: 85922583,
+            &quot;wof:parent_id&quot;: 102087579,
+            &quot;wof:name&quot;: &quot;San Francisco&quot;,
+            &quot;wof:placetype&quot;: &quot;locality&quot;,
+            &quot;wof:country&quot;: &quot;US&quot;,
+            &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+        }
+    ],
+    &quot;next_query&quot;: &quot;method=whosonfirst.places.getIntersects&amp;min_latitude=37.78807088&amp;min_longitude=-122.34374508&amp;max_latitude=37.85749665&amp;max_longitude=-122.25585446&amp;placetype=locality&amp;per_page=1&amp;cursor=6&quot;,
+    &quot;per_page&quot;: 1,
+    &quot;cursor&quot;: 6,
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.places.getNearby"></a>
+#### whosonfirst.places.getNearby
+
+Return all the Who&#039;s On First records near a point.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `latitude` | A valid latitude coordinate. |  40.784165 | yes |
+| `longitude` | A valid longitude coordinate. |  -73.958110 | yes |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;latitude&#039; parameter |
+| `433` | Missing &#039;longitude&#039; parameter |
+| `434` | Invalid &#039;latitude&#039; parameter |
+| `435` | Invalid &#039;longitude&#039; parameter |
+| `436` | Invalid radius |
+| `437` | Invalid placetype |
+| `513` | Failed to get nearby |
+
+##### Notes
+
+* This API method uses [cursor-based](pagination.md#cursor) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=mapzen-XXXXXXX&latitude=40.784165&longitude=-73.958110&placetype=venue&per_page=1'
+
+{
+    &quot;places&quot;: [
+        {
+            &quot;wof:id&quot;: 571477873,
+            &quot;wof:parent_id&quot;: -1,
+            &quot;wof:name&quot;: &quot;Gerald Bland Inc&quot;,
+            &quot;wof:placetype&quot;: &quot;venue&quot;,
+            &quot;wof:country&quot;: &quot;US&quot;,
+            &quot;wof:repo&quot;: &quot;whosonfirst-data-venue-us-ny&quot;
+        }
+    ],
+    &quot;next_query&quot;: &quot;method=whosonfirst.places.getNearby&amp;latitude=40.784165&amp;longitude=-73.958110&amp;placetype=venue&amp;per_page=1&amp;cursor=19&quot;,
+    &quot;per_page&quot;: 1,
+    &quot;cursor&quot;: 19,
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.places.getParentByLatLon"></a>
+#### whosonfirst.places.getParentByLatLon
+
+Return Who&#039;s On First parent ID for a latitude and longitude and placetype
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `latitude` | A valid latitude coordinate. |  35.655065 | yes |
+| `longitude` | A valid longitude coordinate. |  139.369640 | yes |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | yes |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;latitude&#039; parameter |
+| `433` | Missing &#039;longitude&#039; parameter |
+| `434` | Invalid &#039;latitude&#039; parameter |
+| `435` | Invalid &#039;longitude&#039; parameter |
+| `436` | Missing &#039;placetype&#039; parameter |
+| `437` | Invalid placetype |
+| `513` | Failed to perform lookup |
+
+##### Notes
+
+* The inability to locate (or to disambiguate) a parent ID for a lat, lon will not trigger an API error. The following parent IDs may be returned by this API method: &#039;-1&#039; which means that a parent ID could not be identified or that there are multiple choices; or &#039;-3&#039; which means that the parent is a neighbourhood and their are multiple possible choices and you should go out for a beer and argue over which is the correct parent.
+* The following output formats are **disallowed** for this API method: [meta](formats.md#meta)
+* This API method is **experimental*. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getParentByLatLon&api_key=mapzen-XXXXXXX&latitude=35.655065&longitude=139.369640&placetype=neighbourhood'
+
+{
+    &quot;place&quot;: {
+        &quot;wof:parent_id&quot;: 102031773
+    },
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.places.getRandom"></a>
+#### whosonfirst.places.getRandom
+
+Return a random Who&#039;s On First record.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `513` | Unable to retrieve random place. |
+
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRandom&api_key=mapzen-XXXXXXX'
+
+{
+    &quot;place&quot;: {
+        &quot;wof:id&quot;: 421187537,
+        &quot;wof:parent_id&quot;: &quot;85676755&quot;,
+        &quot;wof:name&quot;: &quot;\u0627\u0644\u062e\u0644\u064a\u0641\u0627\u062a \u0627\u0644\u062c\u062f\u064a\u062f\u0629&quot;,
+        &quot;wof:placetype&quot;: &quot;locality&quot;,
+        &quot;wof:country&quot;: &quot;QA&quot;,
+        &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+    },
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.places.search"></a>
+#### whosonfirst.places.search
+
+Query for Who&#039;s On First records.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `q` | Query for this value across all fields. |  poutine | no |
+| `name` | Query for this value in the wof:name field. |  Gowanus Heights | no |
+| `names` | Query for this value across all name related fields. |  SF | no |
+| `alt` | Query for this value across all alternate name related fields (variant, colloquial, unknown). |  Paris | no |
+| `preferred` | Query for this value across all preferred name related fields. |  বেইজিং | no |
+| `variant` | Query for this value across all variant name related fields. |  💩 | no |
+| `placetype` | Ensure records match this placetype. |  microhood | no |
+| `tags` | Query for places with one or more of these tags. |  diner | no |
+| `iso` | Ensure places belong to this (ISO) country code. |  CA | no |
+| `country_id` | Ensure places belong to this country Who&#039;s On First ID. |  85633147 | no |
+| `region_id` | Ensure places belong to this region Who&#039;s On First ID. |  85669831 | no |
+| `locality_id` | Ensure places belong to this locality Who&#039;s On First ID. |  101736545 | no |
+| `neighbourhood_id` | Ensure places belong to this neighbourhood Who&#039;s On First ID. |  102112179 | no |
+| `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
+| `exclude` | Exclude places matching these criteria. |  nullisland | no |
+| `include` | Include places matching these criteria. |  deprecated | no |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
+| `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `513` | Unable to perform search |
+
+##### Notes
+
+* This API method uses [mixed](pagination.md#mixed) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+* Please note that this method _is not a geocoder_. We already have one of those [and you should use that](https://mapzen.com/documentation/search/) instead if geocoding a string is what you're after.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=mapzen-XXXXXXX&q=poutine&per_page=1'
+
+{
+    &quot;places&quot;: [
+        {
+            &quot;wof:id&quot;: 975139507,
+            &quot;wof:parent_id&quot;: &quot;-1&quot;,
+            &quot;wof:name&quot;: &quot;Poutine Restau-Bar Enr&quot;,
+            &quot;wof:placetype&quot;: &quot;venue&quot;,
+            &quot;wof:country&quot;: &quot;CA&quot;,
+            &quot;wof:repo&quot;: &quot;whosonfirst-data-venue-ca&quot;
+        }
+    ],
+    &quot;next_query&quot;: &quot;method=whosonfirst.places.search&amp;q=poutine&amp;per_page=1&amp;cursor=cXVlcnlUaGVuRmV0Y2g7NTs4NTMzNzE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzODE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNzI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNzM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzODI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTswOw%3D%3D&quot;,
+    &quot;total&quot;: 13,
+    &quot;page&quot;: null,
+    &quot;pages&quot;: 13,
+    &quot;per_page&quot;: 1,
+    &quot;cursor&quot;: &quot;cXVlcnlUaGVuRmV0Y2g7NTs4NTMzNzE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzODE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNzI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNzM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzODI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTswOw==&quot;,
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+
+### whosonfirst.placetypes
+
+* [whosonfirst.placetypes.getInfo](#whosonfirst.placetypes.getInfo)
+* [whosonfirst.placetypes.getList](#whosonfirst.placetypes.getList)
+* [whosonfirst.placetypes.getRoles](#whosonfirst.placetypes.getRoles)
+
+<a name="whosonfirst.placetypes.getInfo"></a>
+#### whosonfirst.placetypes.getInfo
+
+Return details for a Who&#039;s On First placetype.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `id` | A valid Who&#039;s On First placetype ID. |  102322043 | no |
+| `name` | A valid Who&#039;s On First placetype name. |  disputed | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Invalid place ID |
+| `433` | Invalid place name |
+
+##### Notes
+
+* Although the &quot;id&quot; and &quot;name&quot; parameters are each marked as optional, you need to pass at least one of them. The order of precedence is &quot;id&quot; followed by &quot;name&quot;.
+* The following output formats are **disallowed** for this API method: [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getInfo&api_key=mapzen-XXXXXXX&id=102322043&name=disputed'
+
+{
+    &quot;placetype&quot;: {
+        &quot;id&quot;: 102322043,
+        &quot;name&quot;: &quot;disputed&quot;,
+        &quot;parents&quot;: [
+            &quot;country&quot;
+        ],
+        &quot;role&quot;: &quot;common_optional&quot;
+    },
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.placetypes.getList"></a>
+#### whosonfirst.placetypes.getList
+
+Return a list of Who&#039;s On First placetypes.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `role` | Only return placetypes that are part of this role. |  common | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Invalid role |
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getList&api_key=mapzen-XXXXXXX&role=common'
+
+{
+    &quot;placetypes&quot;: [
+        {
+            &quot;id&quot;: 102312307,
+            &quot;name&quot;: &quot;country&quot;,
+            &quot;parents&quot;: [
+                &quot;empire&quot;,
+                &quot;continent&quot;
+            ],
+            &quot;role&quot;: &quot;common&quot;
+        },
+        {
+            &quot;id&quot;: 102312309,
+            &quot;name&quot;: &quot;continent&quot;,
+            &quot;parents&quot;: [
+                &quot;planet&quot;
+            ],
+            &quot;role&quot;: &quot;common&quot;
+        }
+    ],
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+_This example response has been truncated for the sake of brevity._
+
+<a name="whosonfirst.placetypes.getRoles"></a>
+#### whosonfirst.placetypes.getRoles
+
+Return a list of Who&#039;s On First placetype roles.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getRoles&api_key=mapzen-XXXXXXX'
+
+{
+    &quot;roles&quot;: [
+        &quot;optional&quot;,
+        &quot;common_optional&quot;,
+        &quot;common&quot;
+    ],
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+
+### whosonfirst.sources
+
+* [whosonfirst.sources.getInfo](#whosonfirst.sources.getInfo)
+* [whosonfirst.sources.getList](#whosonfirst.sources.getList)
+* [whosonfirst.sources.getPrefixes](#whosonfirst.sources.getPrefixes)
+
+<a name="whosonfirst.sources.getInfo"></a>
+#### whosonfirst.sources.getInfo
+
+Return details for a Who&#039;s On First source.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `id` | A valid Who&#039;s On First source ID. |  840464301 | no |
+| `prefix` | A valid Who&#039;s On First source prefix. |  loc | no |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Invalid source ID |
+| `433` | Invalid source prefix |
+
+##### Notes
+
+* Although the &quot;id&quot; and &quot;prefix&quot; parameters are each marked as optional, you need to pass at least one of them. The order of precedence is &quot;id&quot; followed by &quot;prefix&quot;.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getInfo&api_key=mapzen-XXXXXXX&id=840464301&prefix=loc'
+
+{
+    &quot;source&quot;: {
+        &quot;fullname&quot;: &quot;Library of Congress&quot;,
+        &quot;id&quot;: 840464301,
+        &quot;key&quot;: &quot;id&quot;,
+        &quot;license&quot;: &quot;https:\/\/www.usa.gov\/government-works&quot;,
+        &quot;name&quot;: &quot;loc&quot;,
+        &quot;prefix&quot;: &quot;loc&quot;,
+        &quot;url&quot;: &quot;http:\/\/www.loc.gov&quot;
+    },
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.sources.getList"></a>
+#### whosonfirst.sources.getList
+
+Return the list of Who&#039;s On First sources.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getList&api_key=mapzen-XXXXXXX'
+
+{
+    &quot;sources&quot;: [
+        {
+            &quot;description&quot;: &quot;&quot;,
+            &quot;fullname&quot;: &quot;Foursquare&quot;,
+            &quot;id&quot;: 857075439,
+            &quot;key&quot;: &quot;id&quot;,
+            &quot;license&quot;: &quot;&quot;,
+            &quot;name&quot;: &quot;foursquare&quot;,
+            &quot;prefix&quot;: &quot;4sq&quot;,
+            &quot;url&quot;: &quot;http:\/\/www.foursquare.com&quot;
+        },
+        {
+            &quot;description&quot;: &quot;&quot;,
+            &quot;fullname&quot;: &quot;Alameda County Data Sharing Initiative&quot;,
+            &quot;id&quot;: 874397693,
+            &quot;key&quot;: &quot;&quot;,
+            &quot;license&quot;: &quot;https:\/\/data.acgov.org\/terms-of-use&quot;,
+            &quot;name&quot;: &quot;acgov&quot;,
+            &quot;prefix&quot;: &quot;acgov&quot;,
+            &quot;url&quot;: &quot;https:\/\/data.acgov.org\/&quot;
+        }
+    ],
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+_This example response has been truncated for the sake of brevity._
+
+<a name="whosonfirst.sources.getPrefixes"></a>
+#### whosonfirst.sources.getPrefixes
+
+Return the list of prefixes for all Who&#039;s On First sources.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getPrefixes&api_key=mapzen-XXXXXXX'
+
+{
+    &quot;prefixes&quot;: null,
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+
+### whosonfirst.tags
+
+* [whosonfirst.tags.getSources](#whosonfirst.tags.getSources)
+* [whosonfirst.tags.getTags](#whosonfirst.tags.getTags)
+
+<a name="whosonfirst.tags.getSources"></a>
+#### whosonfirst.tags.getSources
+
+Return the list of sources for all the tags in Who&#039;s On First.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getSources&api_key=mapzen-XXXXXXX'
+
+{
+    &quot;sources&quot;: [
+        &quot;sg&quot;,
+        &quot;wof&quot;
+    ],
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+<a name="whosonfirst.tags.getTags"></a>
+#### whosonfirst.tags.getTags
+
+Return the list of unique tags n Who&#039;s On First.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `source` | Limit results to categories from this source. |  wof | no |
+| `page` | The default is 1. | 1 | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Invalid source |
+| `513` | Unable to retrieve tags |
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [meta](formats.md#meta)
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags&api_key=mapzen-XXXXXXX&source=wof&per_page=1'
+
+{
+    &quot;tags&quot;: [
+        {
+            &quot;count&quot;: 837015,
+            &quot;tag&quot;: &quot;contractor&quot;
+        }
+    ],
+    &quot;next_query&quot;: &quot;method=whosonfirst.tags.getTags&amp;source=wof&amp;per_page=1&amp;page=2&quot;,
+    &quot;total&quot;: 39631,
+    &quot;page&quot;: 1,
+    &quot;per_page&quot;: 1,
+    &quot;pages&quot;: 39631,
+    &quot;cursor&quot;: null,
+    &quot;stat&quot;: &quot;ok&quot;
+}
+```
+
+

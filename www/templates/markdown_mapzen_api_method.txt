@@ -84,7 +84,7 @@ This API method does not define any custom error codes. For the list of error co
 
 {if $example_calls and $example_calls.$method}
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=API_KEY{foreach from=$example_calls.$method.parameters item="v" key="k" name="params"}{$k.name|escape}={$v}{/foreach}'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=mapzen-XXXXXXX{foreach from=$example_calls.$method.parameters item="v" key="k"}&{$k|@escape}={$v|@escape}{/foreach}'
 
 {$example_calls.$method.response|@escape}
 ```
@@ -93,7 +93,7 @@ _This example response has been truncated for the sake of brevity._
 {/if}
 {else}
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=API_KEY{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}={$param.name|strtoupper|escape}{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=mapzen-XXXXXXX{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}={$param.name|strtoupper|escape}{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'
 ```
 {/if}
 

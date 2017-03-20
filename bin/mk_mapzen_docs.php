@@ -27,13 +27,19 @@
 	$page = $opts['page'];
 	$examples = $opts['examples'];
 
+	#
+
+	$api_endpoint = $GLOBALS['whosonfirst_api_endpoint'];
+
+	if ($endpoint = $opts['endpoint']){
+		$api_endpoint = $endpoint;
+	}
+
+	$GLOBALS['whosonfirst_api_endpoint'] = $api_endpoint;
+
 	# 
 
 	if ($examples){
-
-		if ($endpoint = $opts['endpoint']){
-			$GLOBALS['whosonfirst_api_endpoint'] = $endpoint;
-		}
 
 		if ((! $opts['api_key']) && (! $opts['access_token'])){
 
@@ -81,6 +87,10 @@
 					$args["q"] = "poutine";
 				}
 
+				else if ($method_name == "whosonfirst.places.getDescendants"){
+					$args["id"] = 420780703;
+				}
+
 				else if (is_array($details["parameters"])) {
 
 					foreach ($details["parameters"] as $p){
@@ -106,16 +116,14 @@
 
 					$token = $opts['access_token'];
 					$args['access_token'] = $token;
-				}
+				}			
 
 				#
 
 				$rsp = whosonfirst_api_call($method_name, $args);
 
 				if ((! $rsp["ok"]) && ($method_name != "api.test.error")){
-					echo "Failed to generate example response for {$method_name}, because {$rsp['error']}";
-					dumper($args);
-					exit();
+					continue;
 				}
 
 				unset($args["api_key"]);
@@ -132,7 +140,23 @@
 				}
 
 				else if ($method_name == "api.spec.methods"){
-					$data["methods"] = array_slice($data["methods"], 0, 2);
+
+					$methods = array();
+
+					foreach ($data["methods"] as $m){
+
+						$_method = $GLOBALS['cfg']['api']['methods'][$m['name']];
+
+						if (($_method['enabled']) && ($_method['documented'])){
+							$methods[] = $m;
+						}
+
+						if (count($methods) == 2){
+							break;						   		   
+						}
+					}
+					
+					$data["methods"] = $methods;
 					$truncated = 1;
 				}
 
@@ -151,9 +175,9 @@
 				$body = json_encode($data, JSON_PRETTY_PRINT);
 
 				$example_calls[ $method_name ] = array(
-					"request" => $args,
+					"parameters" => $args,
 					"response" => $body,
-					"truncated" => $truncated,
+					"is_truncated" => $truncated,
 				);
 			}
 		}
