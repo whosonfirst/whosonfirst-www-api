@@ -43,7 +43,7 @@
 		$pagination = $rsp['pagination'];
 
 		$out = array(
-			'results' => $rsp['rows'],
+			'places' => $rsp['rows'],
 		);
 
 		if ($GLOBALS['cfg']['environment'] == 'dev'){
@@ -150,7 +150,7 @@
 		}
 
 		$out = array(
-			"results" => $results
+			"hierarchies" => $results
 		);
 
 		api_output_ok($out);
@@ -307,7 +307,7 @@
 		}
 
 		$out = array(
-			"results" => $results,
+			"places" => $results,
 		);
 
 		api_output_ok($out);
@@ -338,11 +338,11 @@
 		$public = api_whosonfirst_output_enpublicify_single($place, $more);
 
 		$out = array(
-			'record' => $public 
+			'place' => $public 
 		);
 
 		$more = array(
-			'key' => 'record',
+			'key' => 'place',
 			'is_singleton' => 1
 		);
 
@@ -391,7 +391,7 @@
 		api_whosonfirst_output_enpublicify($places['rows'], $more);
 
 		$out = array(
-			'results' => $places['rows'] 
+			'places' => $places['rows'] 
 		);
 
 		api_output_ok($out);
@@ -504,7 +504,7 @@
 		api_whosonfirst_output_enpublicify($results, $more);
 
 		$out = array(
-			'results' => $results
+			'places' => $results
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
@@ -560,10 +560,6 @@
 			$r = 200;
 		}
 
-		# IMPORTANT - WE AREN'T DEALING WITH TILE38 PAGINATION AT ALL YET BECAUSE TILE38
-		# USES 'cursors' AND ... YEAH, CURSORS. WE WILL NEED TO FIGURE SOMETHING OUT BUT
-		# NOT TODAY (20160811/thisisaaronland)
-
 		$more = array();
 
 		if ($placetype = request_str("placetype")){
@@ -598,7 +594,7 @@
 		api_whosonfirst_output_enpublicify($results, $more);
 
 		$out = array(
-			'results' => $results
+			'places' => $results
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
@@ -625,11 +621,11 @@
 		$doc = api_whosonfirst_output_enpublicify_single($doc, $more);
 
 		$out = array(
-			'record' => $doc		     
+			'place' => $doc		     
 		);
 
 		$more = array(
-			'key' => 'record',
+			'key' => 'place',
 			'is_singleton' => 1
 		);
 
@@ -667,9 +663,12 @@
 		$pagination = $rsp['pagination'];
 
 		$out = array(
-			'results' => $rsp['rows'],
-			# '_query' => $rsp['_query'],
+			'places' => $rsp['rows'],
 		);
+
+		if ($GLOBALS['cfg']['environment'] == 'dev'){
+			$out['_query'] = $rsp['_query'];
+		}
 
 		api_utils_ensure_pagination_results($out, $pagination);
 		api_output_ok($out);	
