@@ -22,11 +22,16 @@
 		$pagination = $rsp['pagination'];
 
 		$out = array(
-			'results' => $rows,
+			'sources' => $rows,
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
-		api_output_ok($out);
+
+		$more = array(
+			'key' => 'sources',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -60,11 +65,16 @@
 		$pagination = $rsp['pagination'];
 
 		$out = array(
-			'results' => $rows,
+			'concordances' => $rows,
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
-		api_output_ok($out);
+
+		$more = array(
+			'key' => 'concordances',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################

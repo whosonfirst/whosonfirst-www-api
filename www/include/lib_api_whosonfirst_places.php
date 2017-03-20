@@ -51,7 +51,12 @@
 		}
 
 		api_utils_ensure_pagination_results($out, $pagination);
-		api_output_ok($out);
+
+		$more = array(
+			'key' => 'places',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -153,7 +158,11 @@
 			"hierarchies" => $results
 		);
 
-		api_output_ok($out);
+		$more = array(
+			'key' => 'hierarchies',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -310,7 +319,11 @@
 			"places" => $results,
 		);
 
-		api_output_ok($out);
+		$more = array(
+			'key' => 'places',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -394,7 +407,11 @@
 			'places' => $places['rows'] 
 		);
 
-		api_output_ok($out);
+		$more = array(
+			'key' => 'places',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -508,7 +525,12 @@
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
-		api_output_ok($out);
+
+		$more = array(
+			'key' => 'places',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -598,7 +620,12 @@
 		);
 
 		api_utils_ensure_pagination_results($out, $pagination);
-		api_output_ok($out);
+
+		$more = array(
+			'key' => 'places',
+		);
+
+		api_output_ok($out, $more);
 	}
 
 	########################################################################
@@ -671,7 +698,12 @@
 		}
 
 		api_utils_ensure_pagination_results($out, $pagination);
-		api_output_ok($out);	
+
+		$more = array(
+			'key' => 'places',
+		);
+
+		api_output_ok($out, $more);	
 	}
 
 	########################################################################
