@@ -353,9 +353,22 @@
 
 	function api_whosonfirst_places_getInfoMulti(){
 
-		$ids = request_str("ids");
+		$str_ids = request_str("ids");
 
-		if (! $ids){
+		if (! $str_ids){
+			api_output_error(432);
+		}
+
+		$ids = array();
+
+		foreach (explode(",", $str_ids) as $id){
+
+			if ($id = intval($id)){
+				$ids[] = $id;
+			}
+		}
+
+		if (count($ids) == 0){
 			api_output_error(432);
 		}
 
@@ -364,8 +377,6 @@
 		}
 
 		$places = whosonfirst_places_get_by_id_multi($ids);
-
-		api_output_ok($places);
 
 		if (! $places){
 			api_output_error(513);
@@ -377,10 +388,10 @@
 			$more["extras"] = $extras;
 		}
 
-		$public = api_whosonfirst_output_enpublicify($places, $more);
+		api_whosonfirst_output_enpublicify($places['rows'], $more);
 
 		$out = array(
-			'results' => $public 
+			'results' => $places['rows'] 
 		);
 
 		api_output_ok($out);

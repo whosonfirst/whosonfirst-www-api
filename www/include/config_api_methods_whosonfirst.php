@@ -275,7 +275,7 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
-				array("name" => "ids", "description" => "A comma separated list of valid Who's On First ID.", "documented" => 1, "required" => 1, "example" => "101712565,101712563"),
+				array("name" => "ids", "description" => "A comma separated list of valid Who's On First ID. A maximum of 20 WOF IDs may be specified.", "documented" => 1, "required" => 1, "example" => "101712565,101712563"),
 			),
 			"errors" => array(
 				"432" => array("message" => "Missing 'ids' parameter"),

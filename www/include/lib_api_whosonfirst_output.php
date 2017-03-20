@@ -69,6 +69,8 @@
 
 			$rows[$i] = api_whosonfirst_output_enpublicify_single($rows[$i], $more);
 		}
+
+		# pass-by-ref
 	}
 
 	########################################################################

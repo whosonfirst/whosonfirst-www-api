@@ -41,7 +41,7 @@
 
 	function whosonfirst_places_get_by_id_multi($ids, $more=array()){
 
-		return elasticsearch_spelunker_mget($ids, $more);
+		return elasticsearch_spelunker_mget($ids, $more);	
 	}
 
 	########################################################################
@@ -173,8 +173,6 @@
 			'boost_mode' => 'multiply',
 			'score_mode' => 'multiply',
 		));
-
-		# dumper($filter_query);
 
 		$req = array(
 			'query' => $es_query,

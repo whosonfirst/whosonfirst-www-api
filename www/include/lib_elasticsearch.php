@@ -176,15 +176,9 @@
 			$url .= "/_search?{$get_query}";
 		}
 
-		# dumper($url);
-		# dumper($query);
-
 		$start = microtime_ms();
 
 		$rsp = http_post($url, $body, $headers, $http_more);
-
-		# dumper($url);
-		# dumper($rsp);
 
 		$end = microtime_ms();
 
@@ -257,12 +251,9 @@
 
 		# $t1 = microtime_ms();
 
-		# dumper($es_query);
 		$rsp = elasticsearch_search($es_query, $more);
-		# dumper($rsp);
 
 		# $t2 = microtime_ms();
-		# dumper("search " . ($t2 - $t1));
 
 		if (! $rsp['ok']){
 			return $rsp;
@@ -341,9 +332,6 @@
 
 		$headers = array();
 
-		# dumper($url);
-		# dumper($query);
-
 		# the following requires a copy of lib_http >= this commit:
 		# https://github.com/whosonfirst/flamework/commit/1c552608169c3cebedbd333efe71a5928eaac60a
 		# (20161031/thisisaaronland)
@@ -356,8 +344,6 @@
 		$start = microtime_ms();
 
 		$rsp = http_get($url, $headers, $http_more);
-
-		# dumper($rsp);
 
 		$end = microtime_ms();
 
