@@ -86,7 +86,7 @@ This API method does not define any custom error codes. For the list of error co
 ```
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method={$method|escape}&api_key=mapzen-XXXXXXX{foreach from=$example_calls.$method.parameters item="v" key="k"}&{$k|@escape}={$v|@escape}{/foreach}'
 
-{$example_calls.$method.response|@escape}
+{$example_calls.$method.response}
 ```
 {if $example_calls.$method.is_truncated}
 _This example response has been truncated for the sake of brevity._

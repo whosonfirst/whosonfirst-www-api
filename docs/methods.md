@@ -32,17 +32,17 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.errors&api_key=mapzen-XXXXXXX'
 
 {
-    &quot;errors&quot;: [
+    "errors": [
         {
-            &quot;code&quot;: 450,
-            &quot;message&quot;: &quot;Unknown error.&quot;
+            "code": 450,
+            "message": "Unknown error."
         },
         {
-            &quot;code&quot;: 452,
-            &quot;message&quot;: &quot;Insufficient parameters.&quot;
+            "code": 452,
+            "message": "Insufficient parameters."
         }
     ],
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 _This example response has been truncated for the sake of brevity._
@@ -73,13 +73,13 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.formats&api_key=mapzen-XXXXXXX'
 
 {
-    &quot;formats&quot;: [
-        &quot;json&quot;,
-        &quot;csv&quot;,
-        &quot;meta&quot;
+    "formats": [
+        "json",
+        "csv",
+        "meta"
     ],
-    &quot;default_format&quot;: &quot;json&quot;,
-    &quot;stat&quot;: &quot;ok&quot;
+    "default_format": "json",
+    "stat": "ok"
 }
 ```
 
@@ -109,54 +109,54 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.methods&api_key=mapzen-XXXXXXX'
 
 {
-    &quot;methods&quot;: [
+    "methods": [
         {
-            &quot;name&quot;: &quot;whosonfirst.concordances.getById&quot;,
-            &quot;method&quot;: &quot;GET&quot;,
-            &quot;description&quot;: &quot;Return a Who&#039;s On First record (and all its concordances) by another source identifier.&quot;,
-            &quot;requires_auth&quot;: 0,
-            &quot;parameters&quot;: [
+            "name": "whosonfirst.concordances.getById",
+            "method": "GET",
+            "description": "Return a Who's On First record (and all its concordances) by another source identifier.",
+            "requires_auth": 0,
+            "parameters": [
                 {
-                    &quot;name&quot;: &quot;id&quot;,
-                    &quot;description&quot;: &quot;The ID of concordance you are looking for&quot;,
-                    &quot;documented&quot;: 1,
-                    &quot;required&quot;: 1,
-                    &quot;example&quot;: &quot;3534&quot;
+                    "name": "id",
+                    "description": "The ID of concordance you are looking for",
+                    "documented": 1,
+                    "required": 1,
+                    "example": "3534"
                 },
                 {
-                    &quot;name&quot;: &quot;source&quot;,
-                    &quot;description&quot;: &quot;The source prefix of the concordance you are looking for&quot;,
-                    &quot;documented&quot;: 1,
-                    &quot;required&quot;: 1,
-                    &quot;example&quot;: &quot;gp:id&quot;
+                    "name": "source",
+                    "description": "The source prefix of the concordance you are looking for",
+                    "documented": 1,
+                    "required": 1,
+                    "example": "gp:id"
                 }
             ],
-            &quot;errors&quot;: {
-                &quot;432&quot;: {
-                    &quot;message&quot;: &quot;Missing &#039;id&#039; parameter&quot;
+            "errors": {
+                "432": {
+                    "message": "Missing 'id' parameter"
                 },
-                &quot;433&quot;: {
-                    &quot;message&quot;: &quot;Missing &#039;source&#039; parameter&quot;
+                "433": {
+                    "message": "Missing 'source' parameter"
                 },
-                &quot;513&quot;: {
-                    &quot;message&quot;: &quot;Failed to retrieve concordance&quot;
+                "513": {
+                    "message": "Failed to retrieve concordance"
                 }
             }
         },
         {
-            &quot;name&quot;: &quot;whosonfirst.concordances.getSources&quot;,
-            &quot;method&quot;: &quot;GET&quot;,
-            &quot;description&quot;: &quot;List all the sources that Who&#039;s On First holds hands with.&quot;,
-            &quot;requires_auth&quot;: 0,
-            &quot;parameters&quot;: [
+            "name": "whosonfirst.concordances.getSources",
+            "method": "GET",
+            "description": "List all the sources that Who's On First holds hands with.",
+            "requires_auth": 0,
+            "parameters": [
 
             ],
-            &quot;errors&quot;: [
+            "errors": [
 
             ]
         }
     ],
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 _This example response has been truncated for the sake of brevity._
@@ -193,7 +193,7 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.test.echo&api_key=mapzen-XXXXXXX'
 
 {
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -268,29 +268,29 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getById&api_key=mapzen-XXXXXXX&id=3534&source=gp:id&per_page=1'
 
 {
-    &quot;concordances&quot;: [
+    "concordances": [
         {
-            &quot;gp:id&quot;: 3534,
-            &quot;fb:id&quot;: &quot;en.montreal&quot;,
-            &quot;wd:id&quot;: &quot;Q340&quot;,
-            &quot;wk:page&quot;: &quot;Montreal&quot;,
-            &quot;fct:id&quot;: &quot;03c06bce-8f76-11e1-848f-cfd5bf3ef515&quot;,
-            &quot;qs:id&quot;: &quot;239659&quot;,
-            &quot;loc:id&quot;: &quot;n80132975&quot;,
-            &quot;tgn:id&quot;: &quot;7013051&quot;,
-            &quot;nyt:id&quot;: &quot;N59179828586486930801&quot;,
-            &quot;gn:id&quot;: 6077243,
-            &quot;dbp:id&quot;: &quot;Montreal&quot;,
-            &quot;wof:id&quot;: 101736545
+            "gp:id": 3534,
+            "fb:id": "en.montreal",
+            "wd:id": "Q340",
+            "wk:page": "Montreal",
+            "fct:id": "03c06bce-8f76-11e1-848f-cfd5bf3ef515",
+            "qs:id": "239659",
+            "loc:id": "n80132975",
+            "tgn:id": "7013051",
+            "nyt:id": "N59179828586486930801",
+            "gn:id": 6077243,
+            "dbp:id": "Montreal",
+            "wof:id": 101736545
         }
     ],
-    &quot;next_query&quot;: null,
-    &quot;total&quot;: 1,
-    &quot;page&quot;: 1,
-    &quot;per_page&quot;: 1,
-    &quot;pages&quot;: 1,
-    &quot;cursor&quot;: null,
-    &quot;stat&quot;: &quot;ok&quot;
+    "next_query": null,
+    "total": 1,
+    "page": 1,
+    "per_page": 1,
+    "pages": 1,
+    "cursor": null,
+    "stat": "ok"
 }
 ```
 
@@ -323,19 +323,19 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances.getSources&api_key=mapzen-XXXXXXX&per_page=1'
 
 {
-    &quot;sources&quot;: [
+    "sources": [
         {
-            &quot;source&quot;: &quot;sg:id&quot;,
-            &quot;concordances&quot;: 21674066
+            "source": "sg:id",
+            "concordances": 21674066
         }
     ],
-    &quot;next_query&quot;: &quot;method=whosonfirst.concordances.getSources&amp;per_page=1&amp;page=2&quot;,
-    &quot;total&quot;: 25,
-    &quot;page&quot;: 1,
-    &quot;per_page&quot;: 1,
-    &quot;pages&quot;: 25,
-    &quot;cursor&quot;: null,
-    &quot;stat&quot;: &quot;ok&quot;
+    "next_query": "method=whosonfirst.concordances.getSources&per_page=1&page=2",
+    "total": 25,
+    "page": 1,
+    "per_page": 1,
+    "pages": 25,
+    "cursor": null,
+    "stat": "ok"
 }
 ```
 
@@ -392,17 +392,17 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getByLatLon&api_key=mapzen-XXXXXXX&latitude=37.766633&longitude=-122.417693&placetype=neighbourhood'
 
 {
-    &quot;places&quot;: [
+    "places": [
         {
-            &quot;wof:id&quot;: 85887443,
-            &quot;wof:parent_id&quot;: &quot;85922583&quot;,
-            &quot;wof:name&quot;: &quot;Mission District&quot;,
-            &quot;wof:placetype&quot;: &quot;neighbourhood&quot;,
-            &quot;wof:country&quot;: &quot;US&quot;,
-            &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+            "wof:id": 85887443,
+            "wof:parent_id": "85922583",
+            "wof:name": "Mission District",
+            "wof:placetype": "neighbourhood",
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data"
         }
     ],
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -457,23 +457,23 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDescendants&api_key=mapzen-XXXXXXX&id=420780703&per_page=1'
 
 {
-    &quot;places&quot;: [
+    "places": [
         {
-            &quot;wof:id&quot;: 219976921,
-            &quot;wof:parent_id&quot;: &quot;420780703&quot;,
-            &quot;wof:name&quot;: &quot;Paula Frazier Handwoven&quot;,
-            &quot;wof:placetype&quot;: &quot;venue&quot;,
-            &quot;wof:country&quot;: &quot;US&quot;,
-            &quot;wof:repo&quot;: &quot;whosonfirst-data-venue-us-ca&quot;
+            "wof:id": 219976921,
+            "wof:parent_id": "420780703",
+            "wof:name": "Paula Frazier Handwoven",
+            "wof:placetype": "venue",
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data-venue-us-ca"
         }
     ],
-    &quot;next_query&quot;: &quot;method=whosonfirst.places.getDescendants&amp;id=420780703&amp;per_page=1&amp;cursor=cXVlcnlUaGVuRmV0Y2g7NTs4NTMzNTE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNjE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNTI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNjI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNTM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzswOw%3D%3D&quot;,
-    &quot;total&quot;: 74,
-    &quot;page&quot;: null,
-    &quot;pages&quot;: 74,
-    &quot;per_page&quot;: 1,
-    &quot;cursor&quot;: &quot;cXVlcnlUaGVuRmV0Y2g7NTs4NTMzNTE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNjE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNTI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNjI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNTM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzswOw==&quot;,
-    &quot;stat&quot;: &quot;ok&quot;
+    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs4NTM0MTE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTM0MjE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTM0MTI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTM0MTM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTM0MjI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTswOw%3D%3D",
+    "total": 74,
+    "page": null,
+    "pages": 74,
+    "per_page": 1,
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs4NTM0MTE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTM0MjE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTM0MTI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTM0MTM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTM0MjI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTswOw==",
+    "stat": "ok"
 }
 ```
 
@@ -516,14 +516,14 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getHierarchiesByLatLon&api_key=mapzen-XXXXXXX&latitude=37.777228&longitude=-122.470779&placetype=region'
 
 {
-    &quot;hierarchies&quot;: [
+    "hierarchies": [
         {
-            &quot;continent_id&quot;: 102191575,
-            &quot;country_id&quot;: 85633793,
-            &quot;region_id&quot;: 85688637
+            "continent_id": 102191575,
+            "country_id": 85633793,
+            "region_id": 85688637
         }
     ],
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -557,15 +557,15 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfo&api_key=mapzen-XXXXXXX&id=420561633'
 
 {
-    &quot;place&quot;: {
-        &quot;wof:id&quot;: 420561633,
-        &quot;wof:parent_id&quot;: &quot;85865899&quot;,
-        &quot;wof:name&quot;: &quot;Super Bowl City&quot;,
-        &quot;wof:placetype&quot;: &quot;microhood&quot;,
-        &quot;wof:country&quot;: &quot;US&quot;,
-        &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+    "place": {
+        "wof:id": 420561633,
+        "wof:parent_id": "85865899",
+        "wof:name": "Super Bowl City",
+        "wof:placetype": "microhood",
+        "wof:country": "US",
+        "wof:repo": "whosonfirst-data"
     },
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -600,25 +600,25 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfoMulti&api_key=mapzen-XXXXXXX&ids=101712565,101712563'
 
 {
-    &quot;places&quot;: [
+    "places": [
         {
-            &quot;wof:id&quot;: 101712565,
-            &quot;wof:parent_id&quot;: &quot;404525063&quot;,
-            &quot;wof:name&quot;: &quot;Cleveland Heights&quot;,
-            &quot;wof:placetype&quot;: &quot;locality&quot;,
-            &quot;wof:country&quot;: &quot;US&quot;,
-            &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+            "wof:id": 101712565,
+            "wof:parent_id": "404525063",
+            "wof:name": "Cleveland Heights",
+            "wof:placetype": "locality",
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data"
         },
         {
-            &quot;wof:id&quot;: 101712563,
-            &quot;wof:parent_id&quot;: &quot;404523697&quot;,
-            &quot;wof:name&quot;: &quot;Cleveland&quot;,
-            &quot;wof:placetype&quot;: &quot;locality&quot;,
-            &quot;wof:country&quot;: &quot;US&quot;,
-            &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+            "wof:id": 101712563,
+            "wof:parent_id": "404523697",
+            "wof:name": "Cleveland",
+            "wof:placetype": "locality",
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data"
         }
     ],
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -668,20 +668,20 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects&api_key=mapzen-XXXXXXX&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=locality&per_page=1'
 
 {
-    &quot;places&quot;: [
+    "places": [
         {
-            &quot;wof:id&quot;: 85922583,
-            &quot;wof:parent_id&quot;: 102087579,
-            &quot;wof:name&quot;: &quot;San Francisco&quot;,
-            &quot;wof:placetype&quot;: &quot;locality&quot;,
-            &quot;wof:country&quot;: &quot;US&quot;,
-            &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+            "wof:id": 85922583,
+            "wof:parent_id": 102087579,
+            "wof:name": "San Francisco",
+            "wof:placetype": "locality",
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data"
         }
     ],
-    &quot;next_query&quot;: &quot;method=whosonfirst.places.getIntersects&amp;min_latitude=37.78807088&amp;min_longitude=-122.34374508&amp;max_latitude=37.85749665&amp;max_longitude=-122.25585446&amp;placetype=locality&amp;per_page=1&amp;cursor=6&quot;,
-    &quot;per_page&quot;: 1,
-    &quot;cursor&quot;: 6,
-    &quot;stat&quot;: &quot;ok&quot;
+    "next_query": "method=whosonfirst.places.getIntersects&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=locality&per_page=1&cursor=6",
+    "per_page": 1,
+    "cursor": 6,
+    "stat": "ok"
 }
 ```
 
@@ -727,20 +727,20 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=mapzen-XXXXXXX&latitude=40.784165&longitude=-73.958110&placetype=venue&per_page=1'
 
 {
-    &quot;places&quot;: [
+    "places": [
         {
-            &quot;wof:id&quot;: 571477873,
-            &quot;wof:parent_id&quot;: -1,
-            &quot;wof:name&quot;: &quot;Gerald Bland Inc&quot;,
-            &quot;wof:placetype&quot;: &quot;venue&quot;,
-            &quot;wof:country&quot;: &quot;US&quot;,
-            &quot;wof:repo&quot;: &quot;whosonfirst-data-venue-us-ny&quot;
+            "wof:id": 571477873,
+            "wof:parent_id": -1,
+            "wof:name": "Gerald Bland Inc",
+            "wof:placetype": "venue",
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data-venue-us-ny"
         }
     ],
-    &quot;next_query&quot;: &quot;method=whosonfirst.places.getNearby&amp;latitude=40.784165&amp;longitude=-73.958110&amp;placetype=venue&amp;per_page=1&amp;cursor=19&quot;,
-    &quot;per_page&quot;: 1,
-    &quot;cursor&quot;: 19,
-    &quot;stat&quot;: &quot;ok&quot;
+    "next_query": "method=whosonfirst.places.getNearby&latitude=40.784165&longitude=-73.958110&placetype=venue&per_page=1&cursor=19",
+    "per_page": 1,
+    "cursor": 19,
+    "stat": "ok"
 }
 ```
 
@@ -785,10 +785,10 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getParentByLatLon&api_key=mapzen-XXXXXXX&latitude=35.655065&longitude=139.369640&placetype=neighbourhood'
 
 {
-    &quot;place&quot;: {
-        &quot;wof:parent_id&quot;: 102031773
+    "place": {
+        "wof:parent_id": 102031773
     },
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -820,15 +820,15 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRandom&api_key=mapzen-XXXXXXX'
 
 {
-    &quot;place&quot;: {
-        &quot;wof:id&quot;: 421187537,
-        &quot;wof:parent_id&quot;: &quot;85676755&quot;,
-        &quot;wof:name&quot;: &quot;\u0627\u0644\u062e\u0644\u064a\u0641\u0627\u062a \u0627\u0644\u062c\u062f\u064a\u062f\u0629&quot;,
-        &quot;wof:placetype&quot;: &quot;locality&quot;,
-        &quot;wof:country&quot;: &quot;QA&quot;,
-        &quot;wof:repo&quot;: &quot;whosonfirst-data&quot;
+    "place": {
+        "wof:id": 1108747407,
+        "wof:parent_id": "85669505",
+        "wof:name": "Gozhi",
+        "wof:placetype": "county",
+        "wof:country": "BT",
+        "wof:repo": "whosonfirst-data"
     },
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -883,23 +883,23 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=mapzen-XXXXXXX&q=poutine&per_page=1'
 
 {
-    &quot;places&quot;: [
+    "places": [
         {
-            &quot;wof:id&quot;: 975139507,
-            &quot;wof:parent_id&quot;: &quot;-1&quot;,
-            &quot;wof:name&quot;: &quot;Poutine Restau-Bar Enr&quot;,
-            &quot;wof:placetype&quot;: &quot;venue&quot;,
-            &quot;wof:country&quot;: &quot;CA&quot;,
-            &quot;wof:repo&quot;: &quot;whosonfirst-data-venue-ca&quot;
+            "wof:id": 975139507,
+            "wof:parent_id": "-1",
+            "wof:name": "Poutine Restau-Bar Enr",
+            "wof:placetype": "venue",
+            "wof:country": "CA",
+            "wof:repo": "whosonfirst-data-venue-ca"
         }
     ],
-    &quot;next_query&quot;: &quot;method=whosonfirst.places.search&amp;q=poutine&amp;per_page=1&amp;cursor=cXVlcnlUaGVuRmV0Y2g7NTs4NTMzNzE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzODE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNzI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNzM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzODI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTswOw%3D%3D&quot;,
-    &quot;total&quot;: 13,
-    &quot;page&quot;: null,
-    &quot;pages&quot;: 13,
-    &quot;per_page&quot;: 1,
-    &quot;cursor&quot;: &quot;cXVlcnlUaGVuRmV0Y2g7NTs4NTMzNzE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzODE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTMzNzI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzNzM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTMzODI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTswOw==&quot;,
-    &quot;stat&quot;: &quot;ok&quot;
+    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs4NTM0MzE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTM0NDE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTM0MzI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTM0NDI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTM0MzM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzswOw%3D%3D",
+    "total": 13,
+    "page": null,
+    "pages": 13,
+    "per_page": 1,
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs4NTM0MzE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTM0NDE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTM0MzI6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4NTM0NDI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4NTM0MzM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzswOw==",
+    "stat": "ok"
 }
 ```
 
@@ -944,15 +944,15 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getInfo&api_key=mapzen-XXXXXXX&id=102322043&name=disputed'
 
 {
-    &quot;placetype&quot;: {
-        &quot;id&quot;: 102322043,
-        &quot;name&quot;: &quot;disputed&quot;,
-        &quot;parents&quot;: [
-            &quot;country&quot;
+    "placetype": {
+        "id": 102322043,
+        "name": "disputed",
+        "parents": [
+            "country"
         ],
-        &quot;role&quot;: &quot;common_optional&quot;
+        "role": "common_optional"
     },
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -987,26 +987,26 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getList&api_key=mapzen-XXXXXXX&role=common'
 
 {
-    &quot;placetypes&quot;: [
+    "placetypes": [
         {
-            &quot;id&quot;: 102312307,
-            &quot;name&quot;: &quot;country&quot;,
-            &quot;parents&quot;: [
-                &quot;empire&quot;,
-                &quot;continent&quot;
+            "id": 102312307,
+            "name": "country",
+            "parents": [
+                "empire",
+                "continent"
             ],
-            &quot;role&quot;: &quot;common&quot;
+            "role": "common"
         },
         {
-            &quot;id&quot;: 102312309,
-            &quot;name&quot;: &quot;continent&quot;,
-            &quot;parents&quot;: [
-                &quot;planet&quot;
+            "id": 102312309,
+            "name": "continent",
+            "parents": [
+                "planet"
             ],
-            &quot;role&quot;: &quot;common&quot;
+            "role": "common"
         }
     ],
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 _This example response has been truncated for the sake of brevity._
@@ -1037,12 +1037,12 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.getRoles&api_key=mapzen-XXXXXXX'
 
 {
-    &quot;roles&quot;: [
-        &quot;optional&quot;,
-        &quot;common_optional&quot;,
-        &quot;common&quot;
+    "roles": [
+        "optional",
+        "common_optional",
+        "common"
     ],
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -1086,16 +1086,16 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getInfo&api_key=mapzen-XXXXXXX&id=840464301&prefix=loc'
 
 {
-    &quot;source&quot;: {
-        &quot;fullname&quot;: &quot;Library of Congress&quot;,
-        &quot;id&quot;: 840464301,
-        &quot;key&quot;: &quot;id&quot;,
-        &quot;license&quot;: &quot;https:\/\/www.usa.gov\/government-works&quot;,
-        &quot;name&quot;: &quot;loc&quot;,
-        &quot;prefix&quot;: &quot;loc&quot;,
-        &quot;url&quot;: &quot;http:\/\/www.loc.gov&quot;
+    "source": {
+        "fullname": "Library of Congress",
+        "id": 840464301,
+        "key": "id",
+        "license": "https:\/\/www.usa.gov\/government-works",
+        "name": "loc",
+        "prefix": "loc",
+        "url": "http:\/\/www.loc.gov"
     },
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -1122,29 +1122,29 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getList&api_key=mapzen-XXXXXXX'
 
 {
-    &quot;sources&quot;: [
+    "sources": [
         {
-            &quot;description&quot;: &quot;&quot;,
-            &quot;fullname&quot;: &quot;Foursquare&quot;,
-            &quot;id&quot;: 857075439,
-            &quot;key&quot;: &quot;id&quot;,
-            &quot;license&quot;: &quot;&quot;,
-            &quot;name&quot;: &quot;foursquare&quot;,
-            &quot;prefix&quot;: &quot;4sq&quot;,
-            &quot;url&quot;: &quot;http:\/\/www.foursquare.com&quot;
+            "description": "",
+            "fullname": "Foursquare",
+            "id": 857075439,
+            "key": "id",
+            "license": "",
+            "name": "foursquare",
+            "prefix": "4sq",
+            "url": "http:\/\/www.foursquare.com"
         },
         {
-            &quot;description&quot;: &quot;&quot;,
-            &quot;fullname&quot;: &quot;Alameda County Data Sharing Initiative&quot;,
-            &quot;id&quot;: 874397693,
-            &quot;key&quot;: &quot;&quot;,
-            &quot;license&quot;: &quot;https:\/\/data.acgov.org\/terms-of-use&quot;,
-            &quot;name&quot;: &quot;acgov&quot;,
-            &quot;prefix&quot;: &quot;acgov&quot;,
-            &quot;url&quot;: &quot;https:\/\/data.acgov.org\/&quot;
+            "description": "",
+            "fullname": "Alameda County Data Sharing Initiative",
+            "id": 874397693,
+            "key": "",
+            "license": "https:\/\/data.acgov.org\/terms-of-use",
+            "name": "acgov",
+            "prefix": "acgov",
+            "url": "https:\/\/data.acgov.org\/"
         }
     ],
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 _This example response has been truncated for the sake of brevity._
@@ -1172,8 +1172,8 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getPrefixes&api_key=mapzen-XXXXXXX'
 
 {
-    &quot;prefixes&quot;: null,
-    &quot;stat&quot;: &quot;ok&quot;
+    "prefixes": null,
+    "stat": "ok"
 }
 ```
 
@@ -1209,11 +1209,11 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getSources&api_key=mapzen-XXXXXXX'
 
 {
-    &quot;sources&quot;: [
-        &quot;sg&quot;,
-        &quot;wof&quot;
+    "sources": [
+        "sg",
+        "wof"
     ],
-    &quot;stat&quot;: &quot;ok&quot;
+    "stat": "ok"
 }
 ```
 
@@ -1252,19 +1252,19 @@ In addition to [default error codes](errors.md) common to all methods this API m
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags&api_key=mapzen-XXXXXXX&source=wof&per_page=1'
 
 {
-    &quot;tags&quot;: [
+    "tags": [
         {
-            &quot;count&quot;: 837015,
-            &quot;tag&quot;: &quot;contractor&quot;
+            "count": 837015,
+            "tag": "contractor"
         }
     ],
-    &quot;next_query&quot;: &quot;method=whosonfirst.tags.getTags&amp;source=wof&amp;per_page=1&amp;page=2&quot;,
-    &quot;total&quot;: 39631,
-    &quot;page&quot;: 1,
-    &quot;per_page&quot;: 1,
-    &quot;pages&quot;: 39631,
-    &quot;cursor&quot;: null,
-    &quot;stat&quot;: &quot;ok&quot;
+    "next_query": "method=whosonfirst.tags.getTags&source=wof&per_page=1&page=2",
+    "total": 39631,
+    "page": 1,
+    "per_page": 1,
+    "pages": 39631,
+    "cursor": null,
+    "stat": "ok"
 }
 ```
 
