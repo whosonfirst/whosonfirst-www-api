@@ -6,6 +6,10 @@
 
 */
 
+body {
+    background-color: #fff !important;
+}
+
 input[type="checkbox"] {
     opacity: 1 !important;
 }

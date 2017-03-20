@@ -267,6 +267,23 @@
 			)
 		),
 
+		'whosonfirst.places.getInfoMulti' => array(
+			"description" => "Return multiple Who's On First records by ID.",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"extras" => 1,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array(
+				array("name" => "ids", "description" => "A comma separated list of valid Who's On First ID.", "documented" => 1, "required" => 1, "example" => "101712565,101712563"),
+			),
+			"errors" => array(
+				"432" => array("message" => "Missing 'ids' parameter"),
+				"433" => array("message" => "Maximum number of WOF IDs exceeded"),
+				"513" => array("message" => "Unable to retrieve places"),
+			)
+		),
+
 		'whosonfirst.places.getDescendants' => array(
 			"description" => "Return all the descendants for a Who's On First ID.",
 			"documented" => 1,

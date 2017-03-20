@@ -351,6 +351,43 @@
 
 	########################################################################
 
+	function api_whosonfirst_places_getInfoMulti(){
+
+		$ids = request_str("ids");
+
+		if (! $ids){
+			api_output_error(432);
+		}
+
+		if (count($ids) > 20){
+			api_output_error(433);
+		}
+
+		$places = whosonfirst_places_get_by_id_multi($ids);
+
+		api_output_ok($places);
+
+		if (! $places){
+			api_output_error(513);
+		}
+
+		$more = array();
+
+		if ($extras = request_str("extras")){
+			$more["extras"] = $extras;
+		}
+
+		$public = api_whosonfirst_output_enpublicify($places, $more);
+
+		$out = array(
+			'results' => $public 
+		);
+
+		api_output_ok($out);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_places_getIntersects(){
 
 		api_utils_features_ensure_enabled(array(
