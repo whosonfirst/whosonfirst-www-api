@@ -1,7 +1,4 @@
-# Who's On First API Documentation
-
 <a name="intro"></a>
-## Introduction
 
 The Who's On First API allows developers (and robots) programmatic access to query and retrieve Who's On First data via a [REST-ish](#cgi) interface.
 
