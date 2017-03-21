@@ -1,10 +1,10 @@
 <a name="formats"></a>
 ## Response formats
 
-The default response format is [json](formats.md#json).
+The default response format is [JSON](formats.md#json).
 
 <a name="json"></a>
-### json
+### JSON
 
 JSON (JavaScript Object Notation) is a data-interchange format based on JavaScript. For more details, consult <a href="http://json.org/">http://json.org/</a>.
 
@@ -56,9 +56,10 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 ### Notes
 
 JSON output is supported for all API methods.<a name="csv"></a>
-### csv
 
-CSV (Comma Separated Value)
+### CSV 
+
+CSV (Comma Separated Value) is a popular tabular data format. 
 
 #### Example request
 
@@ -86,14 +87,15 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 
 geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
 "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
-````
+```
 
 <small>The CVS header is only written, in the body of the response, for the first page of API responses. The `X-api-format-csv-header` HTTP header is included with all responses.</small>
 
 #### Notes
 
 CSV output is not supported for all API methods.<a name="meta"></a>
-### meta
+
+### Meta file
 
 As in a Who's On First "meta" file. A meta file is really just a CSV file with a pre-defined set of column headers. Meta files are included with all of the Who's On First repositories and are meant to act a quick and easy index (rather than a full-fledged database) that a person might use to inspect the data. Since there is a lot of tooling developed to support meta files (for example, converting a metafile into a <a href="https://whosonfirst.mapzen.com/bundles/">bundle</a>) it seemed like it would useful to support them as an output format in the API.
 
@@ -125,7 +127,7 @@ bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,
 "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",uuuu,0,,,,88060b9c65a5eaae29b427583b1bfa93,46.066528,-71.939964,975139507,uuuu,CA,CA,1472521936,0,0,0,"Poutine Restau-Bar Enr",-1,975/139/507/975139507.geojson,venue,0,simplegeo,,,CA
 ```
 
-<small>The meta (CVS) header is only written, in the body of the response, for the first page of API responses. The `X-api-format-meta-header` HTTP header is included with all responses.</small>
+<small>The meta (CSV) header is only written, in the body of the response, for the first page of API responses. The `X-api-format-meta-header` HTTP header is included with all responses.</small>
 
 #### Notes
 
