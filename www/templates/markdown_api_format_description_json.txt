@@ -45,6 +45,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 }
 {/literal}```
 
-### Notes
+#### Notes
 
 JSON output is supported for all API methods.
+

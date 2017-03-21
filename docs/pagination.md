@@ -18,7 +18,7 @@ For example, let's say you wanted to use the API to fetch all the places with a 
 
 ```
 {
-	"results": [ ... ],
+	"places": [ ... ],
 	"next_query": "method=whosonfirst.places.search&alt=Paris&per_page=5&page=2",
 	"total": 7,
 	"page": 1,
@@ -40,7 +40,7 @@ For example, let's say you wanted to use the API to fetch all of the venues near
 
 ```
 {
-	"results": [ ... ],
+	"places": [ ... ],
 	"next_query": "method=whosonfirst.places.getNearby&latitude=40.784165&longitude=-73.958110&placetype=venue&per_page=10&cursor={CURSOR}",
 	"per_page": 10,
 	"cursor": {CURSOR},
@@ -61,7 +61,7 @@ For example, let's say you wanted to use the API to fetch all the <code>microhoo
 
 ```
 {
-	"results": [ ... ],
+	"places": [ ... ],
 	"next_query": "method=whosonfirst.places.search&placetype=microhood&page=2&per_page=5",
 	"total": 186,
 	"page": 1,
@@ -76,7 +76,7 @@ But if you then asked the API to fetch all of the <code>neighbourhoods</code>, a
 
 ```
 {
-	"results": [ ... ],
+	"places": [ ... ],
 	"next_query": "method=whosonfirst.places.search&placetype=neighbourhood&per_page=5&cursor={CURSOR}",
 	"total": 81065,
 	"page": null,
@@ -100,7 +100,7 @@ For example, let's say you wanted to use the API to fetch all the localities (th
 
 ```
 {
-	"results": [ ... ],
+	"places": [ ... ],
 	"next_query": "method=whosonfirst.places.search&placetype=locality&per_page=5&cursor={CURSOR}",
 	"total": 208214,
 	"page": null,

@@ -1,12 +1,14 @@
 <a name="formats"></a>
 ## Response formats
 
-The default response format is [{$default_format|@escape}](formats.md#{$default_format|@escape}).
+The default response format is [{$default_format|@strtoupper|@escape}](formats.md#{$default_format|@escape}).
 
 {foreach from=$response_formats item="format"}
 <a name="{$format|@escape}"></a>
-### {$format|escape}
+### {if $format=="meta"}Meta file{else}{$format|@strtoupper|escape}{/if}
+
 
 {capture assign="template"}markdown_api_format_description_{$format|escape}.txt{/capture}
 {include file=$template}
+
 {/foreach}
