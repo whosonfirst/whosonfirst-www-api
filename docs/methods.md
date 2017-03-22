@@ -467,12 +467,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDe
             "wof:repo": "whosonfirst-data-venue-us-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs4Nzg5MjM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4Nzg5MzQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4Nzg5MjQ6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4Nzg5MzU6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4Nzg5MjU6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzswOw%3D%3D",
+    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxMTQyOTczOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk2NTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzExNDI5NzQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxMTQyOTc1OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk2NDp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "total": 74,
     "page": null,
     "pages": 74,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs4Nzg5MjM6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4Nzg5MzQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4Nzg5MjQ6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4Nzg5MzU6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4Nzg5MjU6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzswOw==",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxMTQyOTczOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk2NTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzExNDI5NzQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxMTQyOTc1OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk2NDp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "stat": "ok"
 }
 ```
@@ -821,11 +821,11 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRa
 
 {
     "place": {
-        "wof:id": 890416407,
-        "wof:parent_id": "85671589",
-        "wof:name": "Machinda",
+        "wof:id": 890441411,
+        "wof:parent_id": "85674873",
+        "wof:name": "Nouakchott",
         "wof:placetype": "locality",
-        "wof:country": "GQ",
+        "wof:country": "MR",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -893,12 +893,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.searc
             "wof:repo": "whosonfirst-data-venue-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs4Nzg5NTM6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4Nzg5NDQ6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4Nzg5NTQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4Nzg5NTU6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4Nzg5NDU6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzswOw%3D%3D",
+    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxMTQyOTgzOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTE0Mjk5NTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzExNDI5ODQ6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxMTQyOTk0OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk4NTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "total": 13,
     "page": null,
     "pages": 13,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs4Nzg5NTM6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4Nzg5NDQ6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs4Nzg5NTQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4Nzg5NTU6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs4Nzg5NDU6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzswOw==",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxMTQyOTgzOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTE0Mjk5NTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzExNDI5ODQ6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxMTQyOTk0OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk4NTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "stat": "ok"
 }
 ```

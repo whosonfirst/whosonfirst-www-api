@@ -26,7 +26,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 
 geom_bbox,wof_country,wof_id,wof_name,wof_parent_id,wof_placetype,wof_repo
 "-71.9399642944,46.0665283203,-71.9399642944,46.0665283203",CA,975139507,"Poutine Restau-Bar Enr",-1,venue,whosonfirst-data-venue-ca
-{/literal}````
+{/literal}```
 
 <small>The CVS header is only written, in the body of the response, for the first page of API responses. The `X-api-format-csv-header` HTTP header is included with all responses.</small>
 

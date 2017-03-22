@@ -5,7 +5,9 @@ API methods are dispatched over `HTTP` with one or more query parameters and dat
 
 The endpoint for the Who's On First API is: **[https://whosonfirst-api.mapzen.com/](https://whosonfirst-api.mapzen.com/)**
 
-All errors are returned using [HTTP status codes](errors.md) in the `400-599` range. `400` class errors mean the problem was on your end and `500` class errors mean the problem was are our fault.
+All errors are returned using [HTTP status codes](errors.md) in the `400-599` range.
+
+`400` class errors mean the problem was on your end and `500` class errors mean the problem was our fault.
 
 <a name="caveats"></a>
 ### Caveats
