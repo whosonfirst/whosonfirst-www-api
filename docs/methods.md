@@ -467,12 +467,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDe
             "wof:repo": "whosonfirst-data-venue-us-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxMTQyOTczOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk2NTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzExNDI5NzQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxMTQyOTc1OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk2NDp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDgyMzU3OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4MjM1NjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODIzNTg6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDgyMzQ2OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM0Nzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "total": 74,
     "page": null,
     "pages": 74,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxMTQyOTczOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk2NTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzExNDI5NzQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxMTQyOTc1OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk2NDp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDgyMzU3OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4MjM1NjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODIzNTg6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDgyMzQ2OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM0Nzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "stat": "ok"
 }
 ```
@@ -821,11 +821,11 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRa
 
 {
     "place": {
-        "wof:id": 890441411,
-        "wof:parent_id": "85674873",
-        "wof:name": "Nouakchott",
+        "wof:id": 421168911,
+        "wof:parent_id": "85680827",
+        "wof:name": "C\u1ea7n Th\u01a1",
         "wof:placetype": "locality",
-        "wof:country": "MR",
+        "wof:country": "VN",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -885,20 +885,20 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.searc
 {
     "places": [
         {
-            "wof:id": 975139507,
-            "wof:parent_id": "-1",
-            "wof:name": "Poutine Restau-Bar Enr",
+            "wof:id": 152777717,
+            "wof:parent_id": "85874363",
+            "wof:name": "Poutine LA Fleur",
             "wof:placetype": "venue",
             "wof:country": "CA",
             "wof:repo": "whosonfirst-data-venue-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxMTQyOTgzOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTE0Mjk5NTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzExNDI5ODQ6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxMTQyOTk0OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk4NTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDgyMzY1OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM3NzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODIzNjY6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDgyMzY3OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM3ODpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
     "total": 13,
     "page": null,
     "pages": 13,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxMTQyOTgzOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTE0Mjk5NTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzExNDI5ODQ6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxMTQyOTk0OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTE0Mjk4NTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDgyMzY1OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM3NzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODIzNjY6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDgyMzY3OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM3ODpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
     "stat": "ok"
 }
 ```
@@ -1259,10 +1259,10 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags
         }
     ],
     "next_query": "method=whosonfirst.tags.getTags&source=wof&per_page=1&page=2",
-    "total": 39631,
+    "total": 39636,
     "page": 1,
     "per_page": 1,
-    "pages": 39631,
+    "pages": 39636,
     "cursor": null,
     "stat": "ok"
 }

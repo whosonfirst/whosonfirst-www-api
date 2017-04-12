@@ -369,7 +369,7 @@
 	$GLOBALS['cfg']['enable_feature_spatial'] = 1;
 	$GLOBALS['cfg']['enable_feature_spatial_api_docs'] = 0;
 	$GLOBALS['cfg']['enable_feature_spatial_nearby'] = 1;
-	$GLOBALS['cfg']['enable_feature_spatial_intersects'] = 0;
+	$GLOBALS['cfg']['enable_feature_spatial_intersects'] = 1;
 
 	$GLOBALS['cfg']['spatial_tile38_host'] = 'localhost';
 	$GLOBALS['cfg']['spatial_tile38_port'] = '9851';
