@@ -367,7 +367,7 @@
 	# START of wof spatial stuff
 
 	$GLOBALS['cfg']['enable_feature_spatial'] = 1;
-	$GLOBALS['cfg']['enable_feature_spatial_api_docs'] = 0;
+	$GLOBALS['cfg']['enable_feature_spatial_api_docs'] = 1;
 	$GLOBALS['cfg']['enable_feature_spatial_nearby'] = 1;
 	$GLOBALS['cfg']['enable_feature_spatial_intersects'] = 1;
 
