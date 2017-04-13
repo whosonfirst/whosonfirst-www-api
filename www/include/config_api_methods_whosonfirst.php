@@ -345,6 +345,7 @@
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "40.784165"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-73.958110"),
 				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0, "example" => "venue"),
+				array("name" => "radius", "description" => "A valid radius (in meters) to limit the query by. Default radius is 100. Maximum radius is 500.", "documented" => 1, "required" => 0, "example" => 25, "default" => 100, "max" => 500),
 			),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),

@@ -467,12 +467,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDe
             "wof:repo": "whosonfirst-data-venue-us-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDgyMzU3OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4MjM1NjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODIzNTg6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDgyMzQ2OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM0Nzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDgyMzg3OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM5NjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODIzODY6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDgyMzg4OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM5NzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
     "total": 74,
     "page": null,
     "pages": 74,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDgyMzU3OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4MjM1NjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODIzNTg6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDgyMzQ2OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM0Nzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDgyMzg3OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM5NjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODIzODY6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDgyMzg4OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM5NzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
     "stat": "ok"
 }
 ```
@@ -698,6 +698,7 @@ Return all the Who&#039;s On First records near a point.
 | `latitude` | A valid latitude coordinate. |  40.784165 | yes |
 | `longitude` | A valid longitude coordinate. |  -73.958110 | yes |
 | `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `radius` | A valid radius (in meters) to limit the query by. Default radius is 100. Maximum radius is 500. |  25 | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
@@ -724,22 +725,18 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=mapzen-XXXXXXX&latitude=40.784165&longitude=-73.958110&placetype=venue&per_page=1'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=mapzen-XXXXXXX&latitude=40.784165&longitude=-73.958110&placetype=venue&radius=25&per_page=1'
 
 {
     "places": [
-        {
-            "wof:id": 571477873,
-            "wof:parent_id": -1,
-            "wof:name": "Gerald Bland Inc",
-            "wof:placetype": "venue",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data-venue-us-ny"
-        }
+
     ],
-    "next_query": "method=whosonfirst.places.getNearby&latitude=40.784165&longitude=-73.958110&placetype=venue&per_page=1&cursor=19",
+    "next_query": null,
+    "total": null,
+    "page": null,
     "per_page": 1,
-    "cursor": 19,
+    "pages": null,
+    "cursor": null,
     "stat": "ok"
 }
 ```
@@ -821,11 +818,11 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRa
 
 {
     "place": {
-        "wof:id": 421168911,
-        "wof:parent_id": "85680827",
-        "wof:name": "C\u1ea7n Th\u01a1",
-        "wof:placetype": "locality",
-        "wof:country": "VN",
+        "wof:id": 890513857,
+        "wof:parent_id": "85669735",
+        "wof:name": "Yongding Xian",
+        "wof:placetype": "localadmin",
+        "wof:country": "CN",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -885,20 +882,20 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.searc
 {
     "places": [
         {
-            "wof:id": 152777717,
-            "wof:parent_id": "85874363",
-            "wof:name": "Poutine LA Fleur",
+            "wof:id": 975139507,
+            "wof:parent_id": "-1",
+            "wof:name": "Poutine Restau-Bar Enr",
             "wof:placetype": "venue",
             "wof:country": "CA",
             "wof:repo": "whosonfirst-data-venue-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDgyMzY1OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM3NzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODIzNjY6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDgyMzY3OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM3ODpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
+    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDgyNDE2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4MjQwNjp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzE0ODI0MDc6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDgyNDE3OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4MjQwODp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "total": 13,
     "page": null,
     "pages": 13,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDgyMzY1OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM3NzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODIzNjY6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDgyMzY3OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MjM3ODpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDgyNDE2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4MjQwNjp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzE0ODI0MDc6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDgyNDE3OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4MjQwODp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "stat": "ok"
 }
 ```
