@@ -116,7 +116,7 @@
 	function api_utils_features_ensure_enabled($f){
 
 		if (! features_is_enabled($f)){
-			api_output_error(503, "This feature is disabled");
+			api_output_error(503);
 		}
 	}
 

@@ -19,14 +19,16 @@
 		$is_method_error = api_errors_is_method_error($code);
 		$is_api_error    = api_errors_is_api_error($code);
 
-		# error_log("http: {$is_http_error} method: {$is_method_error} api: ${is_api_error}");
+		# dumper("http: {$is_http_error} method: {$is_method_error} api: ${is_api_error}");
 		# dumper("code ${code}");
 		# dumper($method_row["errors"]);
 
 		if ($is_http_error){
 
 			$status_code = $code;
-			$status_msg = $codes[ $status_code ];
+
+			$codes = http_codes();
+			$status_msg = "{$codes[ $status_code ]} (this API method is currently disabled)";
 		}
 
 		else if (($is_method_error) && (isset($method_row["errors"])) && (isset($method_row["errors"][$code]))){

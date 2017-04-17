@@ -303,8 +303,8 @@
 
 		'whosonfirst.places.getIntersects' => array(
 			"description" => "Return all the Who's On First places intersecting a bounding box.",
-			"documented" => $GLOBALS['cfg']['enable_feature_spatial_api_docs'],
-			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_intersects'])),
+			"documented" => 1,
+			"enabled" => 1,
 			"paginated" => 1,
 			"paginated_cursor" => 1,
 			"pagination" => "cursor",
@@ -335,8 +335,8 @@
 
 		'whosonfirst.places.getNearby' => array(
 			"description" => "Return all the Who's On First records near a point.",
-			"documented" => $GLOBALS['cfg']['enable_feature_spatial_api_docs'],
-			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_nearby'])),
+			"documented" => 1,
+			"enabled" => 1,
 			"paginated" => 1,
 			"pagination" => "cursor",
 			"extras" => 1,
