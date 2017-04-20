@@ -27,6 +27,17 @@
 			'errors',
 			'notes',
 			'example',
+			'extras',
+			'paginated',
+			'pagination',
+			'disallow_formats',
+		);
+
+		$export_keys_params = array(
+			'name',
+			'description',
+			'required',
+			'example',
 		);
 
 		$defaults = array(
@@ -34,7 +45,11 @@
 			'requires_auth' => 0,
 			'description' => '',
 			'parameters' => array(),
-			'errors' => array(),		
+			'errors' => array(),
+			'extras' => 0,
+			'paginated' => 0,
+			'pagination' => 'plain',
+			'disallow_formats' => array(),
 		);
 
 		$methods = array();
@@ -62,16 +77,34 @@
 				}
 
 				$v = $details[$k];
+
+				if ($k == "parameters"){
+
+					$params_list = array();
+
+					foreach ($v as $param_raw){
+
+						$param = array();
+
+						foreach ($export_keys_params as $p){
+
+							if (isset($param_raw[$p])){
+								$param[$p] = $param_raw[$p];							
+							}
+						}
+
+						$params_list[] = $param;
+					}
+
+					$v = $params_list;
+				}
+
 				$method[$k] = $v;
 			}
 
-			/*
-			$rsp = api_spec_utils_example_for_method($name);
-
-			if ($rsp['ok']){
-				$method['example'] = $rsp['example'];
+			if (! $method['paginated']){
+				unset($method['pagination']);
 			}
-			*/
 
 			$methods[] = $method;
 		}
