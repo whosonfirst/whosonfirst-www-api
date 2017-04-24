@@ -9,7 +9,7 @@
 	function api_output_ok($rsp=array(), $more=array()){
 
 		$defaults = array(
-			"pelias_query" => array(),
+			"query" => array(),
 		);
 
 		$more = array_merge($defaults, $more);
@@ -83,7 +83,7 @@
 		$geocoding = array(
 			"version" => "0.2",
 			"attribution" => "https://github.com/whosonfirst/whosonfirst-data/blob/master/LICENSE.md",
-			"query" => $more["pelias_query"],
+			"query" => $more["query"],
 			"engine" => $engine,
 			"timestamps" => $now,
 		);

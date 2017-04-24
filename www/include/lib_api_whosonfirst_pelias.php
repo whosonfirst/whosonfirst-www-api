@@ -243,8 +243,30 @@
 			$pelias_query[$pelias_k] = $v;
 		}
 
+		$is_pelias_query = false;
+
+		foreach ($query_map as $ignore => $pelias_k){
+
+			if (request_isset($pelias_k)){
+				$is_pelias_query = true;
+				break;
+			}
+		}
+
+		if ($is_pelias_query){
+		
+			$next_query = $pelias_query;
+			
+			if ($c = $out["cursor"]){
+				$next_query["cursor"] = $c;
+			}
+
+			$out["next_query"] = http_build_query($next_query);
+			# rewrite $out["next_query"] here...
+		}
+
 		$more = array(
-			"pelias_query" => $pelias_query,
+			"query" => $pelias_query,
 		);
 
 		api_output_ok($out, $more);

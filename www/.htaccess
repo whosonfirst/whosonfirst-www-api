@@ -143,6 +143,8 @@ RewriteRule  ^(api/)?rest/?$							api_rest.php?%{QUERY_STRING}  [L]
 
 # for the pelias API
 RewriteRule    ^(api/)?pelias/(v1)/search?$					/$1rest?method=whosonfirst.pelias.search&format=geojson&version=$2&%{QUERY_STRING} [L]
+# See this? It's a terrible hack...
+RewriteRule    ^(api/)?restpelias/(v1)/search?$					/$1rest?method=whosonfirst.pelias.search&format=geojson&version=$2&%{QUERY_STRING} [L]
 
 RewriteRule  ^ping/?$								ping.php?%{QUERY_STRING}  [L]
 
