@@ -35,6 +35,8 @@
 
 		# TO DO: decide whether we going to query all the things or
 		# just names...
+
+		# TO DO: check for and valiate '?query_field=' here...
 		
 		$_REQUEST["q"] = $text;
 
@@ -84,10 +86,21 @@
 			api_output_error(453);
 		}
 
-		# TO DO: decide whether we going to query all the things or
-		# just names...
+		# TO DO: support all the name fields
 		
-		$_REQUEST["q"] = $text;
+		$query_field = "q";
+
+		if ($qf = request_str("query_field")){
+
+			if (! in_array($qf, array("q", "alt"))){
+
+				api_output_error(450);
+			}
+
+			$query_field = $qf;
+		}
+
+		$_REQUEST[ $query_field ] = $text;
 		$q = request_str("q");
 		
 		# next make sure we aren't being asked to query
@@ -261,7 +274,7 @@
 		api_utils_ensure_pagination_results($out, $pagination);
 
 		$query_map = array(
-			"q" => "text",
+			$query_field => "text",
 			"per_page" => "size",
 			"xxx" => "querySize",
 			"iso" => "boundary.country",
