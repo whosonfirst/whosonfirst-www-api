@@ -66,11 +66,35 @@
 			$nelon, $nelat,
 		);
 		
+		$now = time();
+
+		$query = array(
+			# TBD...
+		);
+
+		$engine = array(
+			"name" => "Who's On First",
+			"author" => "Mapzen",
+			"version" => "0.1"
+		);
+
+		$geocoding = array(
+			"version" => "0.2",
+			"attribution" => "https://github.com/whosonfirst/whosonfirst-data/blob/master/LICENSE.md",
+			"query" => $query,
+			"engine" => $engine,
+			"timestamps" => $now,
+		);
+
+		$pagination = $rsp;
+		unset($pagination["places"]);
+
 		$collection = array(
-			"geocoding" => array(),
+			"geocoding" => $geocoding,
 			"type" => "FeatureCollection",
 			"features" => $features,
 			"bbox" => $bbox,
+			# "wof:pagination" => $pagination,
 		);
 		
 		api_output_send($collection, $more);
