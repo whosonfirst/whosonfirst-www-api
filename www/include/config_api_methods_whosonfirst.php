@@ -171,6 +171,46 @@
 			"disallow_formats" => array( "meta" ),
 		),
 
+		'whosonfirst.pelias.search' => array(
+			"description" => "Query Who's On First using the Pelias API",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 1,
+			"pagination" => "mixed",
+			"extras" => 1,
+			"library" => "api_whosonfirst_pelias",
+                        "parameters" => array(
+				array("name" => "text", "description" => "A valid query string.", "documented" => 1, "required" => 1, "example" => "JFK"),
+				array("name" => "size", "description" => "... This is the equivalent of the WOF 'per_page' parameter. The WOF 'per_page' parameter takes precedence.", "documented" => 1, "required" => 0, "example" => 10),
+				array("name" => "layers", "description" => "Ensure records match this placetype. This is equivalent to the WOF 'placetype' parameter.", "documented" => 1, "required" => 0, "example" => "borough"),
+				array("name" => "boundary.rect.min_lat", "description" => "...", "documented" => 1, "required" => 0, "example" => "25.84"),
+				array("name" => "boundary.rect.min_lon", "description" => "...", "documented" => 1, "required" => 0, "example" => "-106.65"),
+				array("name" => "boundary.rect.max_lat", "description" => "...", "documented" => 1, "required" => 0, "example" => "36.5"),
+				array("name" => "boundary.rect.max_lon", "description" => "...", "documented" => 1, "required" => 0, "example" => "-93.51"),				
+				array("name" => "boundary.country", "description" => "Ensure places belong to this ISO country code. This is equivalent to the WOF 'iso' parameter.", "documented" => 1, "required" => 0, "example" => "ch"),				
+				array("name" => "placetype", "description" => "Ensure records match this placetype. This is equivalent to the Pelias 'layers' parameter and takes precedance.", "documented" => 1, "required" => 0, "example" => "neighbourhood"),
+				array("name" => "iso", "description" => "Ensure places belong to this ISO country code. This is equivalent to the Pelias 'boundary.country' parameter and takes precedence.", "documented" => 1, "required" => 0, "example" => "fr"),
+				array("name" => "min_latitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "25.84"),
+				array("name" => "min_longitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "-106.65"),
+				array("name" => "max_latitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "36.5"),
+				array("name" => "max_longitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "-93.51"),
+			),
+			"errors" => array(
+				"432" => array("message" => "Unsupported Pelias parameter"),
+				"433" => array("message" => "Multiple placetypes not supported"),
+				"434" => array("message" => "Invalid placetype"),				
+				"435" => array("message" => "Invalid 'min_latitude' parameter"),
+				"436" => array("message" => "Invalid 'max_longitude' parameter"),
+				"437" => array("message" => "Invalid 'max_latitude' parameter"),
+				"438" => array("message" => "Invalid 'max_longitude' parameter"),
+				"439" => array("message" => "One or more missing parameters in bounding box query"),
+				"513" => array("message" => "Failed to perform lookup"),
+			),
+			"notes" => array(
+				"... unsupported parameters: boundary.circle.lat, boundary.circle.lon, boundary.circle.radius, focus.point.lat, focus.point.lon, sources",
+			)
+		),
+		
 		'whosonfirst.places.getByLatLon' => array(
 			"description" => "Return Who's On First places intersecting a latitude and longitude",
 			"documented" => 1,

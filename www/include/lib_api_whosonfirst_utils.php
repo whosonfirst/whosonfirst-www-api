@@ -34,6 +34,18 @@
 		$exclude = request_str("exclude");
 		$include = request_str("include");
 
+		# it is assumed that these have all been validate by now
+		
+		$swlat = request_float("min_latitude");
+		$swlon = request_float("min_longitude");
+		$nelat = request_float("max_latitude");
+		$nelon = request_float("max_longitude");
+		
+		$swlat = trim($swlat);		
+		$swlon = trim($swlon);
+		$nelat = trim($nelat);
+		$nelon = trim($nelon);
+
 		$nullisland = true;
 		$deprecated = false;
 		
@@ -171,6 +183,11 @@
 			else {
 				# PLEASE WRITE ME
 			}
+		}
+
+		if (($swlat) && ($swlon) && ($nelat) && ($nelon)){
+
+			# PLEASE WRITE ME... need to index geom:bbox I think?
 		}
 
 		# TO DO: categories (20160708/thisisaaronland)
