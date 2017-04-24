@@ -291,12 +291,6 @@
 
 	$GLOBALS['cfg']['api'] = array(
 
-		# the old old still being used everywhere
-
-		'formats_old' => array( 'json', 'csv', 'meta', 'geojson' ),
-
-		# the new new still being fleshed out
-
 		'formats' => array(
 			'json' => array('enabled' => 1, 'documented' => 1),
 			'csv' => array('enabled' => 1, 'documented' => 1),
