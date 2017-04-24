@@ -1,5 +1,6 @@
 <?php
 
+	loadlib("whosonfirst_places");
 	loadlib("api_whosonfirst_output");
 	loadlib("api_whosonfirst_placetypes");	
 	loadlib("api_whosonfirst_utils");
@@ -14,7 +15,7 @@
 		
 		# first make sure there is a query
 		
-		$q = request_get("text");
+		$q = request_str("text");
 
 		if (! $q){
 			api_output_error(453);
@@ -41,7 +42,7 @@
 			"sources",
 		);
 
-		for ($unsupported as $param){
+		foreach ($unsupported as $param){
 
 			if (get_isset($param)){
 				api_output_error(432);
@@ -51,7 +52,7 @@
 		# okay see what else there is to process and convert
 		# it from a pelias query to a wof query
 		
-		if ($sz = get_int("size")){
+		if ($sz = get_int64("size")){
 			$_REQUEST["per_page"] = $sz;
 		}
 
@@ -164,7 +165,8 @@
 
 		$extras = array();
 		
-		if ($extras = request_str("extras")){
+		if (request_isset("extras")){
+			$extras = request_str("extras");	
 			$extras = explode(",", $extras);
 		}
 
