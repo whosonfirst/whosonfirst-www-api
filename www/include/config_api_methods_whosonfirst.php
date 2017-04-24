@@ -211,6 +211,7 @@
 				array("name" => "min_longitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "-106.65"),
 				array("name" => "max_latitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "36.5"),
 				array("name" => "max_longitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "-93.51"),
+				array("name" => "query_field", "description" => "...", "documented" => 1, "required" => 0, "example" => "alt"),
 			),
 			"errors" => array(
 				"432" => array("message" => "Unsupported Pelias API parameter"),
@@ -223,6 +224,7 @@
 				"439" => array("message" => "One or more missing parameters in bounding box query"),
 				"440" => array("message" => "Invalid output format"),
 				"441" => array("message" => "Invalid Pelias API version"),
+				"442" => array("message" => "Invalid (WOF) query field"),
 				"513" => array("message" => "Failed to perform lookup"),
 			),
 			"notes" => array(

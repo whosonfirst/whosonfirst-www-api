@@ -92,9 +92,8 @@
 
 		if ($qf = request_str("query_field")){
 
-			if (! in_array($qf, array("q", "alt"))){
-
-				api_output_error(450);
+			if (! in_array($qf, array("q", "alt", "name", "names", "preferred"))){
+				api_output_error(442);
 			}
 
 			$query_field = $qf;
