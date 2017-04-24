@@ -4,8 +4,11 @@
 	loadlib("api_whosonfirst_output");
 	loadlib("api_whosonfirst_placetypes");	
 	loadlib("api_whosonfirst_utils");
-
 	loadlib("geo_utils");
+
+	# https://mapzen.com/documentation/mapzen-js/search/
+	# https://mapzen.com/documentation/search/search/#available-search-parameters
+	# https://mapzen.com/documentation/search/response/
 
 	########################################################################
 
@@ -33,12 +36,19 @@
 
 		# TO DO: support focus.point.lat and focus.point.lon
 
-		# TO DO: decide whether we going to query all the things or
-		# just names...
+		$query_field = "q";
 
-		# TO DO: check for and valiate '?query_field=' here...
-		
-		$_REQUEST["q"] = $text;
+		if ($qf = request_str("query_field")){
+
+			if (! in_array($qf, array("q", "alt", "name", "names", "preferred"))){
+				api_output_error(442);
+			}
+
+			$query_field = $qf;
+		}
+
+		$_REQUEST[ $query_field ] = $text;
+		$q = request_str("q");
 
 		# SEE THIS - IT IS IMPORTANT. WE AREN'T ACTUALLY DOING
 		# AUTOCOMPLETE AT THE MOMENT AND THIS IS JUST TO KEEP
@@ -86,8 +96,6 @@
 			api_output_error(453);
 		}
 
-		# TO DO: support all the name fields
-		
 		$query_field = "q";
 
 		if ($qf = request_str("query_field")){
