@@ -13,11 +13,11 @@
 
 		foreach ($GLOBALS['cfg']['api']['formats'] as $fmt => $details){
 
-			if (! details['enabled']){
+			if (! $details['enabled']){
 				continue;
 			}
 
-			if (! details['documented']){
+			if (! $details['documented']){
 				continue;
 			}
 
