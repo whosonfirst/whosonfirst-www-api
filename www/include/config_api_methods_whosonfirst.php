@@ -196,14 +196,16 @@
 				array("name" => "max_longitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "-93.51"),
 			),
 			"errors" => array(
-				"432" => array("message" => "Unsupported Pelias parameter"),
-				"433" => array("message" => "Multiple placetypes not supported"),
+				"432" => array("message" => "Unsupported Pelias API parameter"),
+				"433" => array("message" => "Multiple placetypes not supported (yet)"),
 				"434" => array("message" => "Invalid placetype"),				
 				"435" => array("message" => "Invalid 'min_latitude' parameter"),
 				"436" => array("message" => "Invalid 'max_longitude' parameter"),
 				"437" => array("message" => "Invalid 'max_latitude' parameter"),
 				"438" => array("message" => "Invalid 'max_longitude' parameter"),
 				"439" => array("message" => "One or more missing parameters in bounding box query"),
+				"440" => array("message" => "Invalid output format"),
+				"441" => array("message" => "Invalid Pelias API version"),
 				"513" => array("message" => "Failed to perform lookup"),
 			),
 			"notes" => array(

@@ -11,8 +11,20 @@
 
 	function api_whosonfirst_pelias_search(){
 
-		# force $_REQUEST["format"] here?
-		
+		if (request_isset("format")){
+
+			if (request_str("format") != "geojson"){
+				api_output_error(440);
+			}
+		}
+
+		if (request_isset("version")){
+
+			if (request_str("version") != "v1"){
+				api_output_error(441);
+			}
+		}
+
 		# first make sure there is a query
 		
 		$q = request_str("text");
