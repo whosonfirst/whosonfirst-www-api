@@ -38,10 +38,27 @@
 			$feature = array(
 				"type" => "Feature",
 				"geometry" => $geom,
-				"properties" => $pt,
+				"properties" => $pl,
 			);
 
 			$features[] = $feature;
+
+			if ((! isset($swlat)) || ($lat < $swlat)){
+				$swlat = $lat;
+			}
+
+			if ((! isset($swlon)) || ($lon < $swlon)){
+				$swlon = $lon;
+			}
+
+			if ((! isset($nelat)) || ($lat > $nelat)){
+				$nelat = $lat;
+			}
+
+			if ((! isset($nelon)) || ($lon > $nelon)){
+				$nelon = $lon;
+			}
+
 		}
 
 		$bbox = array(
@@ -52,11 +69,11 @@
 		$collection = array(
 			"geocoding" => array(),
 			"type" => "FeatureCollection",
-			"features" => "features",
+			"features" => $features,
 			"bbox" => $bbox,
 		);
 		
-		api_output_send($rsp, $more);
+		api_output_send($collection, $more);
 	}
 
 	#################################################################
