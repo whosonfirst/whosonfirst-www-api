@@ -9,8 +9,23 @@
 
 	function api_spec_formats(){
 
+		$formats = array();
+
+		foreach ($GLOBALS['cfg']['api']['formats'] as $fmt => $details){
+
+			if (! details['enabled']){
+				continue;
+			}
+
+			if (! details['documented']){
+				continue;
+			}
+
+			$formats[] = $fmt;
+		}
+
 		api_output_ok(array(
-			'formats' => $GLOBALS['cfg']['api']['formats'],
+			'formats' => $formats,
 			'default_format' => $GLOBALS['cfg']['api']['default_format']
 		));
 	}
