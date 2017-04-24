@@ -19,10 +19,10 @@
 		# we assume that someone (or code) earlier up the stack
 		# has assigned ?extras:geom:latitude,geom:longitude
 
-		$swlat = null;
-		$swlon = null;		
-		$nelat = null;
-		$nelon = null;		
+		$swlat = 0.0;
+		$swlon = 0.0;		
+		$nelat = 0.0;
+		$nelon = 0.0;		
 		
 		foreach ($rsp["places"] as $pl){
 

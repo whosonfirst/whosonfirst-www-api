@@ -9,6 +9,57 @@
 
 	########################################################################
 
+	function api_whosonfirst_pelias_autocomplete(){
+
+		if (request_isset("format")){
+
+			if (request_str("format") != "geojson"){
+				api_output_error(440);
+			}
+		}
+
+		if (request_isset("version")){
+
+			if (request_str("version") != "v1"){
+				api_output_error(441);
+			}
+		}
+
+		$text = request_str("text");
+
+		if (! $text){
+			api_output_error(453);
+		}
+
+		# TO DO: support focus.point.lat and focus.point.lon
+
+		# TO DO: decide whether we going to query all the things or
+		# just names...
+		
+		$_REQUEST["q"] = $text;
+
+		# SEE THIS - IT IS IMPORTANT. WE AREN'T ACTUALLY DOING
+		# AUTOCOMPLETE AT THE MOMENT AND THIS IS JUST TO KEEP
+		# MAPZEN.JS FROM THINKING THAT SEARCH IS ENTIRELY HOSED
+		# (20170424/thisisaaronland)
+
+		$out = array(
+			"places" => array(),
+		);
+
+		$pelias_query = array(
+			"text" => request_str("q"),
+		);
+
+		$more = array(
+			"query" => $pelias_query,
+		);
+
+		api_output_ok($out, $more);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_pelias_search(){
 
 		if (request_isset("format")){
@@ -27,16 +78,17 @@
 
 		# first make sure there is a query
 		
-		$q = request_str("text");
+		$text = request_str("text");
 
-		if (! $q){
+		if (! $text){
 			api_output_error(453);
 		}
 
 		# TO DO: decide whether we going to query all the things or
 		# just names...
 		
-		$_REQUEST["q"] = $q;
+		$_REQUEST["q"] = $text;
+		$q = request_str("q");
 		
 		# next make sure we aren't being asked to query
 		# something we support

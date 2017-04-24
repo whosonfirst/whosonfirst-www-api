@@ -142,8 +142,11 @@ RewriteRule  ^(api/)?rest/?$							api_rest.php?%{QUERY_STRING}  [L]
 # RewriteRule  ^rest/(.*)/?$							api_rest.php?method=$1&%{QUERY_STRING}  [L]
 
 # for the pelias API
+RewriteRule    ^(api/)?pelias/(v1)/autocomplete?$				/$1rest?method=whosonfirst.pelias.autocomplete&format=geojson&version=$2&%{QUERY_STRING} [L]
 RewriteRule    ^(api/)?pelias/(v1)/search?$					/$1rest?method=whosonfirst.pelias.search&format=geojson&version=$2&%{QUERY_STRING} [L]
-# See this? It's a terrible hack...
+
+# See these? They are terrible hacks to account for internal MZ proxy URLs...
+RewriteRule    ^(api/)?restpelias/(v1)/autocomplete?$				/$1rest?method=whosonfirst.pelias.autocomplete&format=geojson&version=$2&%{QUERY_STRING} [L]
 RewriteRule    ^(api/)?restpelias/(v1)/search?$					/$1rest?method=whosonfirst.pelias.search&format=geojson&version=$2&%{QUERY_STRING} [L]
 
 RewriteRule  ^ping/?$								ping.php?%{QUERY_STRING}  [L]

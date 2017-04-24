@@ -171,6 +171,22 @@
 			"disallow_formats" => array( "meta" ),
 		),
 
+		'whosonfirst.pelias.autocomplete' => array(
+			"description" => "Query Who's On First using the Pelias autocomplete API",
+			"documented" => 0,
+			"enabled" => 1,
+			"paginated" => 0,
+			"extras" => 1,
+			"library" => "api_whosonfirst_pelias",
+                        "parameters" => array(
+				array("name" => "text", "description" => "A valid query string. This is the equivalent of the WOF 'names' parameter, which takes precedence.", "documented" => 1, "required" => 1, "example" => "JFK"),
+				array("name" => "names", "description" => "...", "documented" => 1, "required" => 0, "example" => "JFK"),
+			),
+			"notes" => array(
+				"As of this writing this API method will return zero results by design. WOF does not currently support autocomplete and this method is necessary to keep the Mapzen.JS search widget happy."
+			)
+		),
+
 		'whosonfirst.pelias.search' => array(
 			"description" => "Query Who's On First using the Pelias API",
 			"documented" => 1,
@@ -180,7 +196,7 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_pelias",
                         "parameters" => array(
-				array("name" => "text", "description" => "A valid query string.", "documented" => 1, "required" => 1, "example" => "JFK"),
+				array("name" => "text", "description" => "A valid query string. This is the equivalent of the WOF 'names' parameter, which takes precedence.", "documented" => 1, "required" => 1, "example" => "JFK"),
 				array("name" => "size", "description" => "... This is the equivalent of the WOF 'per_page' parameter. The WOF 'per_page' parameter takes precedence.", "documented" => 1, "required" => 0, "example" => 10),
 				array("name" => "layers", "description" => "Ensure records match this placetype. This is equivalent to the WOF 'placetype' parameter.", "documented" => 1, "required" => 0, "example" => "borough"),
 				array("name" => "boundary.rect.min_lat", "description" => "...", "documented" => 1, "required" => 0, "example" => "25.84"),
@@ -188,6 +204,7 @@
 				array("name" => "boundary.rect.max_lat", "description" => "...", "documented" => 1, "required" => 0, "example" => "36.5"),
 				array("name" => "boundary.rect.max_lon", "description" => "...", "documented" => 1, "required" => 0, "example" => "-93.51"),				
 				array("name" => "boundary.country", "description" => "Ensure places belong to this ISO country code. This is equivalent to the WOF 'iso' parameter.", "documented" => 1, "required" => 0, "example" => "ch"),				
+				array("name" => "names", "description" => "...", "documented" => 1, "required" => 0, "example" => "JFK"),
 				array("name" => "placetype", "description" => "Ensure records match this placetype. This is equivalent to the Pelias 'layers' parameter and takes precedance.", "documented" => 1, "required" => 0, "example" => "neighbourhood"),
 				array("name" => "iso", "description" => "Ensure places belong to this ISO country code. This is equivalent to the Pelias 'boundary.country' parameter and takes precedence.", "documented" => 1, "required" => 0, "example" => "fr"),
 				array("name" => "min_latitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "25.84"),
