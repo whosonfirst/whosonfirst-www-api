@@ -209,7 +209,7 @@
 		api_utils_ensure_pagination_results($out, $pagination);
 
 		$query_map = array(
-			"q" => "name",
+			"q" => "text",
 			"per_page" => "size",
 			"xxx" => "querySize",
 			"iso" => "boundary.country",

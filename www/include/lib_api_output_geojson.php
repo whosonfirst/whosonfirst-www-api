@@ -26,25 +26,33 @@
 		
 		foreach ($rsp["places"] as $pl){
 
+			// https://mapzen.com/documentation/search/response/
+
 			$lat = $pl["geom:latitude"];
 			$lon = $pl["geom:longitude"];			
 
-			# update swlat/lon and nelat/lon here...
-			
-			unset($pl["geom:latitude"]);
-			unset($pl["geom:longitude"]);
-			
 			$coords = array($lon, $lat);
-			
+
 			$geom = array(
 				"type" => "Point",
 				"coordinates" => $coords
 			);
 
+			$props = $pl;
+			
+			unset($props["geom:latitude"]);
+			unset($props["geom:longitude"]);		
+
+			// these are required by mapzen.js
+
+			$props["name"] = $props["wof:name"];
+			$props["label"] = $props["wof:name"];
+			$props["layer"] = $props["wof:placetype"];
+		
 			$feature = array(
 				"type" => "Feature",
 				"geometry" => $geom,
-				"properties" => $pl,
+				"properties" => $props,
 			);
 
 			$features[] = $feature;
