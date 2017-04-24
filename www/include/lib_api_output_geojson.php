@@ -8,6 +8,12 @@
 
 	function api_output_ok($rsp=array(), $more=array()){
 
+		$defaults = array(
+			"pelias_query" => array(),
+		);
+
+		$more = array_merge($defaults, $more);
+
 		$features = array();
 
 		# we assume that someone (or code) earlier up the stack
@@ -68,10 +74,6 @@
 		
 		$now = time();
 
-		$query = array(
-			# TBD...
-		);
-
 		$engine = array(
 			"name" => "Who's On First",
 			"author" => "Mapzen",
@@ -81,7 +83,7 @@
 		$geocoding = array(
 			"version" => "0.2",
 			"attribution" => "https://github.com/whosonfirst/whosonfirst-data/blob/master/LICENSE.md",
-			"query" => $query,
+			"query" => $more["pelias_query"],
 			"engine" => $engine,
 			"timestamps" => $now,
 		);
@@ -118,8 +120,8 @@
 
 	function api_output_send($rsp, $more=array()){
 
-		$rsp['stat'] = (isset($more['is_error'])) ? 'error' : 'ok';
-		api_log(array('stat' => $rsp['stat']), 'write');
+		$stat = (isset($more['is_error'])) ? 'error' : 'ok';
+		api_log(array('stat' => $stat), 'write');
 
 		api_output_utils_start_headers($rsp, $more);
 

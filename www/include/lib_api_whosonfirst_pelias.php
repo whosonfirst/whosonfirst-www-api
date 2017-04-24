@@ -208,6 +208,45 @@
 
 		api_utils_ensure_pagination_results($out, $pagination);
 
+		$query_map = array(
+			"q" => "name",
+			"per_page" => "size",
+			"xxx" => "querySize",
+			"iso" => "boundary.country",
+			"placetype" => "layers",
+			"min_latitude" => "boundary.rect.min_lat",
+			"min_longitude" => "boundary.rect.min_lon",
+			"max_latitude" => "boundary.rect.max_lat",
+			"max_longitude" => "boundary.rect.max_lon",
+		);
+
+		$pelias_query = array(
+			"lang" => array(
+				"name" => "English",
+				"iso6391" => "en",
+				"iso6392" => "eng",
+			),
+		);
+
+		foreach ($query_map as $wof_k => $pelias_k){
+
+			if (! request_isset($wof_k)){
+				continue;
+			}
+
+			$v = request_str($wof_k);
+
+			if ($pelias_k == "layers"){
+				$v = array($v);
+			}
+
+			$pelias_query[$pelias_k] = $v;
+		}
+
+		$more = array(
+			"pelias_query" => $pelias_query,
+		);
+
 		api_output_ok($out, $more);
 	}
 
