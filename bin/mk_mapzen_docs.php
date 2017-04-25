@@ -198,7 +198,16 @@
 	}
 
 	$formats = $GLOBALS['cfg']['api']['formats'];
-	$GLOBALS['smarty']->assign_by_ref("response_formats", $formats);
+	$rsp_formats = array();
+
+	foreach ($formats as $fmt => $details){
+
+		if (($details["enabled"]) && ($details["documented"])){
+			$rsp_formats[] = $fmt;
+		}
+	}
+
+	$GLOBALS['smarty']->assign_by_ref("response_formats", $rsp_formats);
 
 	$errors = $GLOBALS['cfg']['api']['errors'];
 	ksort($errors);
