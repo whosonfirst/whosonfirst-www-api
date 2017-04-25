@@ -20,7 +20,7 @@
 		error_404();
 	}
 
-	if (! in_isset($formats[$fmt])){
+	if (! isset($formats[$fmt])){
 		error_404();
 	}
 
@@ -35,7 +35,7 @@
 	}
 
 	$GLOBALS['smarty']->assign("default", $default);
-	$GLOBALS['smarty']->assign("format", $format);
+	$GLOBALS['smarty']->assign("format", $fmt);
 
 	$GLOBALS['smarty']->display("page_api_format.txt");
 	exit();
