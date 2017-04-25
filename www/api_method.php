@@ -41,9 +41,9 @@
 
 	$rsp_formats = array();
 
-	foreach ($GLOBALS['cfg']['api']['formats'] as $fmt => $details){
+	foreach ($GLOBALS['cfg']['api']['formats'] as $fmt => $fmt_details){
 
-		if (($details["enabled"]) && ($details["documented"])){
+		if (($fmt_details["enabled"]) && ($fmt_details["documented"])){
 			$rsp_formats[]= $fmt;
 		}
 	}
