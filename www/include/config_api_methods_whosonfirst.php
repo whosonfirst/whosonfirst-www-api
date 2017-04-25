@@ -231,7 +231,7 @@
 			"notes" => array(
 				"Although neither the 'text' or 'q' parameters are required individually you must pass at least one of them.",
 				"If both a Pelias API and its equivalent WOF parameter are passed the WOF parameter will take precendence. For example if you search for '?text=JFK&q=poutine' the API will only search for 'poutine'.",
-				"The following Pelias API parameters are currently unsupported: boundary.circle.lat, boundary.circle.lon, boundary.circle.radius, focus.point.lat, focus.point.lon, sources",
+				"The following Pelias API parameters are currently unsupported: boundary.circle.lat, boundary.circle.lon, boundary.circle.radius, boundary.rect.min_lat, boundary.rect.min_lon, boundary.rect.max_lat, boundary.rect.max_lon, focus.point.lat, focus.point.lon, sources",
 			),
 			"disallow_formats" => array( "csv", "meta" ),
 		),

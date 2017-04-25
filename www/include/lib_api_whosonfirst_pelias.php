@@ -243,7 +243,7 @@
 		# okay set up search filters
 		
 		$filters = api_whosonfirst_utils_search_filters();
-		
+
 		$args = array();
 		api_utils_ensure_pagination_args($args);
 		
