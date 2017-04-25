@@ -30,10 +30,6 @@
 
 		$text = request_str("text");
 
-		if (! $text){
-			api_output_error(453);
-		}
-
 		# TO DO: support focus.point.lat and focus.point.lon
 
 		$query_field = "q";
@@ -93,15 +89,11 @@
 		
 		$text = request_str("text");
 
-		if (! $text){
-			api_output_error(453);
-		}
-
 		$query_field = "q";
 
 		if ($qf = request_str("query_field")){
 
-			if (! in_array($qf, array("q", "alt", "name", "names", "preferred"))){
+			if (! in_array($qf, array("q", "alt", "name", "names", "preferred", "variant"))){
 				api_output_error(442);
 			}
 
@@ -110,7 +102,11 @@
 
 		$_REQUEST[ $query_field ] = $text;
 		$q = request_str("q");
-		
+
+		if ((! trim($text)) && (! trim($q))){
+			api_output_error(453);
+		}
+
 		# next make sure we aren't being asked to query
 		# something we support - see also:
 		

@@ -99,6 +99,10 @@
 
 					foreach ($v as $param_raw){
 
+						if (! $param_raw["documented"]){
+							continue;
+						}
+
 						$param = array();
 
 						foreach ($export_keys_params as $p){
