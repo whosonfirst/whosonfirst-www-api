@@ -295,7 +295,7 @@
 			'json' => array('enabled' => 1, 'documented' => 1),
 			'csv' => array('enabled' => 1, 'documented' => 1),
 			'meta' => array('enabled' => 1, 'documented' => 1),
-			'geojson' => array('enabled' => 1, 'documented' => 0),
+			'geojson' => array('enabled' => 1, 'documented' => 1),
 		),
 
 		'default_format' => 'json',

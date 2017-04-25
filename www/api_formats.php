@@ -14,7 +14,7 @@
 	$default = $GLOBALS['cfg']['api']['default_format'];
 
 	$formats = $GLOBALS['cfg']['api']['formats'];
-	sort($formats);
+	ksort($formats);
 
 	$GLOBALS['smarty']->assign("default", $default);
 	$GLOBALS['smarty']->assign("formats", $formats);

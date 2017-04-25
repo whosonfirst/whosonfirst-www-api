@@ -28,7 +28,7 @@
 		
 		foreach ($rsp["places"] as $pl){
 
-			if ((isset($pl["lbl:latitude"])) && (isset($pl["lbl:longitude"]))){
+			if (isset($pl["lbl:latitude"]) && isset($pl["lbl:longitude"]) && $pl["lbl:latitude"] && $pl["longitude"]){
 				$lat = $pl["lbl:latitude"];
 				$lon = $pl["lbl:longitude"];			
 			}
@@ -83,16 +83,19 @@
 			$nelon, $nelat,
 		);
 		
-		$pagination = $rsp;
-		unset($pagination["places"]);
-
 		$collection = array(
-			"geocoding" => $geocoding,
 			"type" => "FeatureCollection",
 			"features" => $features,
 			"bbox" => $bbox,
-			"pagination" => $pagination,
 		);
+
+		if (isset($rsp["next_query"])){
+
+			$pagination = $rsp;
+			unset($pagination["places"]);
+
+			$collection["pagination"] = $pagination;
+		}
 		
 		if ($more["geocoding"]){
 

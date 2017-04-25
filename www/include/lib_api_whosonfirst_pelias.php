@@ -40,7 +40,7 @@
 
 		if ($qf = request_str("query_field")){
 
-			if (! in_array($qf, array("q", "alt", "name", "names", "preferred"))){
+			if (! in_array($qf, array("q", "alt", "name", "names", "preferred", "variant"))){
 				api_output_error(442);
 			}
 
@@ -253,7 +253,7 @@
 			api_output_error(513);
 		}
 
-		$extras = api_whosonfirst_utils_ensure_geojson_extras();
+		$extras = api_whosonfirst_utils_get_extras();
 		
 		$more = array(
 			"extras" => $extras,

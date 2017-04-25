@@ -42,7 +42,7 @@
 				"432" => array("message" => "Invalid source"),
 				"513" => array("message" => "Unable to retrieve namespaces"),				
 			),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.categories.getPredicates' => array(
@@ -60,7 +60,7 @@
 				"432" => array("message" => "Invalid source"),
 				"513" => array("message" => "Unable to retrieve predicates."),				
 			),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.categories.getValues' => array(
@@ -78,7 +78,7 @@
 				"432" => array("message" => "Invalid source"),
 				"513" => array("message" => "Unable to retrieve values"),				
 			),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.categories.getSources' => array(
@@ -91,7 +91,7 @@
 			"errors" => array(
 				"513" => array("message" => "Failed to retrieve concordances"),
 			),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.concordances.getById' => array(
@@ -109,7 +109,7 @@
 				"433" => array("message" => "Missing 'source' parameter"),
 				"513" => array("message" => "Failed to retrieve concordance"),
 			),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.concordances.getSources' => array(
@@ -120,7 +120,7 @@
 			"library" => "api_whosonfirst_concordances",
                         "parameters" => array(),
                         # "errors" => array(),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.machinetags.getNamespaces' => array(
@@ -136,7 +136,7 @@
 			"errors" => array(
 				"513" => "Failed to retrieve machinetag namespaces",
 			),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.machinetags.getPredicates' => array(
@@ -152,7 +152,7 @@
 			"errors" => array(
 				"513" => "Failed to retrieve machinetag predicates",
 			),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.machinetags.getValues' => array(
@@ -168,7 +168,7 @@
 			"errors" => array(
 				"513" => "Failed to retrieve machinetag values",
 			),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.pelias.autocomplete' => array(
@@ -184,7 +184,8 @@
 			),
 			"notes" => array(
 				"As of this writing this API method will return zero results by design. WOF does not currently support autocomplete and this method is necessary to keep the Mapzen.JS search widget happy."
-			)
+			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 
 		'whosonfirst.pelias.search' => array(
@@ -196,22 +197,22 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_pelias",
                         "parameters" => array(
-				array("name" => "text", "description" => "A valid query string. This is the equivalent of the WOF 'names' parameter, which takes precedence.", "documented" => 1, "required" => 1, "example" => "JFK"),
-				array("name" => "size", "description" => "... This is the equivalent of the WOF 'per_page' parameter. The WOF 'per_page' parameter takes precedence.", "documented" => 1, "required" => 0, "example" => 10),
+				array("name" => "text", "description" => "A valid query string. This is the equivalent of the WOF 'names' parameter.", "documented" => 1, "required" => 0, "example" => "JFK"),
+				array("name" => "size", "description" => "The number of results per query. This is the equivalent of the WOF 'per_page' parameter.", "documented" => 1, "required" => 0, "example" => 10),
 				array("name" => "layers", "description" => "Ensure records match this placetype. This is equivalent to the WOF 'placetype' parameter.", "documented" => 1, "required" => 0, "example" => "borough"),
-				array("name" => "boundary.rect.min_lat", "description" => "...", "documented" => 1, "required" => 0, "example" => "25.84"),
-				array("name" => "boundary.rect.min_lon", "description" => "...", "documented" => 1, "required" => 0, "example" => "-106.65"),
-				array("name" => "boundary.rect.max_lat", "description" => "...", "documented" => 1, "required" => 0, "example" => "36.5"),
-				array("name" => "boundary.rect.max_lon", "description" => "...", "documented" => 1, "required" => 0, "example" => "-93.51"),				
+				array("name" => "boundary.rect.min_lat", "description" => "...", "documented" => 0, "required" => 0, "example" => "25.84"),
+				array("name" => "boundary.rect.min_lon", "description" => "...", "documented" => 0, "required" => 0, "example" => "-106.65"),
+				array("name" => "boundary.rect.max_lat", "description" => "...", "documented" => 0, "required" => 0, "example" => "36.5"),
+				array("name" => "boundary.rect.max_lon", "description" => "...", "documented" => 0, "required" => 0, "example" => "-93.51"),				
 				array("name" => "boundary.country", "description" => "Ensure places belong to this ISO country code. This is equivalent to the WOF 'iso' parameter.", "documented" => 1, "required" => 0, "example" => "ch"),				
-				array("name" => "names", "description" => "...", "documented" => 1, "required" => 0, "example" => "JFK"),
-				array("name" => "placetype", "description" => "Ensure records match this placetype. This is equivalent to the Pelias 'layers' parameter and takes precedance.", "documented" => 1, "required" => 0, "example" => "neighbourhood"),
-				array("name" => "iso", "description" => "Ensure places belong to this ISO country code. This is equivalent to the Pelias 'boundary.country' parameter and takes precedence.", "documented" => 1, "required" => 0, "example" => "fr"),
-				array("name" => "min_latitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "25.84"),
-				array("name" => "min_longitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "-106.65"),
-				array("name" => "max_latitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "36.5"),
-				array("name" => "max_longitude", "description" => "...", "documented" => 1, "required" => 0, "example" => "-93.51"),
-				array("name" => "query_field", "description" => "...", "documented" => 1, "required" => 0, "example" => "alt"),
+				array("name" => "q", "description" => "A valid query string. This is the equivalent of the Pelias 'text' parameter.", "documented" => 1, "required" => 0, "example" => "JFK"),
+				array("name" => "placetype", "description" => "Ensure records match this placetype. This is equivalent to the Pelias 'layers' parameter.", "documented" => 1, "required" => 0, "example" => "neighbourhood"),
+				array("name" => "iso", "description" => "Ensure places belong to this ISO country code. This is equivalent to the Pelias 'boundary.country' parameter.", "documented" => 1, "required" => 0, "example" => "fr"),
+				array("name" => "min_latitude", "description" => "...", "documented" => 0, "required" => 0, "example" => "25.84"),
+				array("name" => "min_longitude", "description" => "...", "documented" => 0, "required" => 0, "example" => "-106.65"),
+				array("name" => "max_latitude", "description" => "...", "documented" => 0, "required" => 0, "example" => "36.5"),
+				array("name" => "max_longitude", "description" => "...", "documented" => 0, "required" => 0, "example" => "-93.51"),
+				array("name" => "query_field", "description" => "Scope the query alternate names (alt), variant names (variant), preferred names (preferred), wof:name values (name) or all the names (names). Valid options are: alt, name, names, preferred, variant. If left empty then the query will be performed across all WOF properties.", "documented" => 1, "required" => 0, "example" => "alt"),
 			),
 			"errors" => array(
 				"432" => array("message" => "Unsupported Pelias API parameter"),
@@ -228,8 +229,11 @@
 				"513" => array("message" => "Failed to perform lookup"),
 			),
 			"notes" => array(
-				"... unsupported parameters: boundary.circle.lat, boundary.circle.lon, boundary.circle.radius, focus.point.lat, focus.point.lon, sources",
-			)
+				"Although neither the 'text' or 'q' parameters are required individually you must pass at least one of them.",
+				"If both a Pelias API and its equivalent WOF parameter are passed the WOF parameter will take precendence. For example if you search for '?text=JFK&q=poutine' the API will only search for 'poutine'.",
+				"The following Pelias API parameters are currently unsupported: boundary.circle.lat, boundary.circle.lon, boundary.circle.radius, focus.point.lat, focus.point.lon, sources",
+			),
+			"disallow_formats" => array( "csv", "meta" ),
 		),
 		
 		'whosonfirst.places.getByLatLon' => array(
@@ -390,8 +394,7 @@
 				"513" => array("message" => "Failed to intersect"),
 
 			),
-			"notes" => array(
-			),
+			"notes" => array(),
 		),	
 
 		'whosonfirst.places.getNearby' => array(
@@ -483,7 +486,7 @@
 			"errors" => array(
 				"432" => array("message" => "Invalid role"),
 			),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.placetypes.getRoles' => array(
@@ -495,7 +498,7 @@
                         "parameters" => array(),
 			"errors" => array(),
 			"notes" => array(),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.sources.getInfo' => array(
@@ -515,6 +518,7 @@
 			"notes" => array(
 				"Although the \"id\" and \"prefix\" parameters are each marked as optional, you need to pass at least one of them. The order of precedence is \"id\" followed by \"prefix\"."
 			),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.sources.getList' => array(
@@ -526,6 +530,7 @@
                         "parameters" => array(),
                         "errors" => array(),
                         "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.sources.getPrefixes' => array(
@@ -537,6 +542,7 @@
                         "parameters" => array(),
                         "errors" => array(),
                         "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.tags.getTags' => array(
@@ -553,7 +559,7 @@
 				"513" => array("message" => "Unable to retrieve tags"),
 			),
                         "notes" => array(),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 		'whosonfirst.tags.getSources' => array(
@@ -565,7 +571,7 @@
                         "parameters" => array(),
                         "errors" => array(),
                         "notes" => array(),
-			"disallow_formats" => array( "meta" ),
+			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
 	), $GLOBALS['cfg']['api']['methods']);
