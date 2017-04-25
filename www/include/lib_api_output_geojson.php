@@ -17,8 +17,9 @@
 
 		$features = array();
 
-		# we assume that someone (or code) earlier up the stack
-		# has assigned ?extras:geom:latitude,geom:longitude
+		# we assume that someone (or code) earlier up the stack has assigned:
+		# ?extras:lbl:latitude,lbl:longitude,geom:latitude,geom:longitude
+		# see also: api_whosonfirst_utils_ensure_geojson_extras()
 
 		$swlat = 0.0;
 		$swlon = 0.0;		

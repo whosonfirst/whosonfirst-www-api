@@ -112,16 +112,19 @@
 		$q = request_str("q");
 		
 		# next make sure we aren't being asked to query
-		# something we support
+		# something we support - see also:
 		
+		# https://github.com/whosonfirst/whosonfirst-www-api/issues/33		
+		# https://github.com/whosonfirst/whosonfirst-www-api/issues/34
+
 		$unsupported = array(
 			"boundary.circle.lat",
 			"boundary.circle.lon",
 			"boundary.circle.radius",
-			# "boundary.rect.min_lat",
-			# "boundary.rect.min_lon",
-			# "boundary.rect.max_lat",
-			# "boundary.rect.max_lon",
+			"boundary.rect.min_lat",
+			"boundary.rect.min_lon",
+			"boundary.rect.max_lat",
+			"boundary.rect.max_lon",
 			"focus.point.lat",
 			"focus.point.lon",
 			"sources",
@@ -159,6 +162,8 @@
 			
 			$_REQUEST["placetype"] = $pt[0];
 		}
+
+		# see above (inre: bbox queries)
 
 		if ($min_lat = get_float("boundary.rect.min_lat")){
 			$_REQUEST["min_latitude"] = $min_lat;
@@ -266,7 +271,6 @@
 		$query_map = array(
 			$query_field => "text",
 			"per_page" => "size",
-			"xxx" => "querySize",
 			"iso" => "boundary.country",
 			"placetype" => "layers",
 			"min_latitude" => "boundary.rect.min_lat",
@@ -276,6 +280,7 @@
 		);
 
 		$pelias_query = array(
+
 			"lang" => array(
 				"name" => "English",
 				"iso6391" => "en",
@@ -313,11 +318,18 @@
 			$next_query = $pelias_query;
 			
 			if ($c = $out["cursor"]){
-				$next_query["cursor"] = $c;
-			}
 
-			$out["next_query"] = http_build_query($next_query);
-			# rewrite $out["next_query"] here...
+				$next_query["cursor"] = $c;
+				$out["next_query"] = http_build_query($next_query);
+
+			} else {
+
+				if ($out["page"] < $out["pages"]){
+
+					$next_query["page"] = $out["page"] + 1;
+					$out["next_query"] = http_build_query($next_query);
+				}
+			}
 		}
 
 		$more = array(
