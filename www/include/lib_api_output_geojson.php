@@ -46,8 +46,12 @@
 			);
 
 			$props = $pl;
-	
+
+
 			if ($more["geocoding"]){		
+
+				# these are required by the mapzen.js geocoder widget
+
 				$props["name"] = $props["wof:name"];
 				$props["label"] = $props["wof:name"];
 				$props["layer"] = $props["wof:placetype"];

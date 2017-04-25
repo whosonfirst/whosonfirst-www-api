@@ -188,6 +188,8 @@
 		if (($swlat) && ($swlon) && ($nelat) && ($nelon)){
 
 			# PLEASE WRITE ME... need to index geom:bbox I think?
+			# https://github.com/whosonfirst/whosonfirst-www-api/issues/33		
+			# https://github.com/whosonfirst/whosonfirst-www-api/issues/34
 		}
 
 		# TO DO: categories (20160708/thisisaaronland)
