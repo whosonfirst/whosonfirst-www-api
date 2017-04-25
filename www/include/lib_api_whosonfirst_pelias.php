@@ -65,6 +65,7 @@
 
 		$more = array(
 			"query" => $pelias_query,
+			"geocoding" => 1,
 		);
 
 		api_output_ok($out, $more);
@@ -247,25 +248,7 @@
 			api_output_error(513);
 		}
 
-		$extras = array();
-		
-		if (request_isset("extras")){
-			$extras = request_str("extras");	
-			$extras = explode(",", $extras);
-		}
-
-		# these are required in order to include coordinates
-		# in lib_api_output_geojson
-		
-		if (! in_array("geom:latitude", $extras)){
-			$extras[] = "geom:latitude";
-		}
-
-		if (! in_array("geom:longitude", $extras)){
-			$extras[] = "geom:longitude";
-		}
-
-		$extras = implode(",", $extras);
+		$extras = api_whosonfirst_utils_ensure_geojson_extras();
 		
 		$more = array(
 			"extras" => $extras,
@@ -338,6 +321,7 @@
 		}
 
 		$more = array(
+			"geocoding" => 1,
 			"query" => $pelias_query,
 		);
 

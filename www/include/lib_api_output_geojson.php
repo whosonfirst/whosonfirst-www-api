@@ -9,6 +9,7 @@
 	function api_output_ok($rsp=array(), $more=array()){
 
 		$defaults = array(
+			"geocoding" => 0,
 			"query" => array(),
 		);
 
@@ -26,10 +27,15 @@
 		
 		foreach ($rsp["places"] as $pl){
 
-			// https://mapzen.com/documentation/search/response/
+			if ((isset($pl["lbl:latitude"])) && (isset($pl["lbl:longitude"]))){
+				$lat = $pl["lbl:latitude"];
+				$lon = $pl["lbl:longitude"];			
+			}
 
-			$lat = $pl["geom:latitude"];
-			$lon = $pl["geom:longitude"];			
+			else {
+				$lat = $pl["geom:latitude"];
+				$lon = $pl["geom:longitude"];			
+			}
 
 			$coords = array($lon, $lat);
 
@@ -39,16 +45,13 @@
 			);
 
 			$props = $pl;
-			
-			unset($props["geom:latitude"]);
-			unset($props["geom:longitude"]);		
+	
+			if ($more["geocoding"]){		
+				$props["name"] = $props["wof:name"];
+				$props["label"] = $props["wof:name"];
+				$props["layer"] = $props["wof:placetype"];
+			}
 
-			// these are required by mapzen.js
-
-			$props["name"] = $props["wof:name"];
-			$props["label"] = $props["wof:name"];
-			$props["layer"] = $props["wof:placetype"];
-		
 			$feature = array(
 				"type" => "Feature",
 				"geometry" => $geom,
@@ -57,22 +60,21 @@
 
 			$features[] = $feature;
 
-			if ((! isset($swlat)) || ($lat < $swlat)){
+			if (($swlat == 0.0) || ($lat < $swlat)){
 				$swlat = $lat;
 			}
 
-			if ((! isset($swlon)) || ($lon < $swlon)){
+			if (($swlon == 0.0) || ($lon < $swlon)){
 				$swlon = $lon;
 			}
 
-			if ((! isset($nelat)) || ($lat > $nelat)){
+			if (($nelat == 0.0) || ($lat > $nelat)){
 				$nelat = $lat;
 			}
 
-			if ((! isset($nelon)) || ($lon > $nelon)){
+			if (($nelon == 0.0) || ($lon > $nelon)){
 				$nelon = $lon;
 			}
-
 		}
 
 		$bbox = array(
@@ -80,22 +82,6 @@
 			$nelon, $nelat,
 		);
 		
-		$now = time();
-
-		$engine = array(
-			"name" => "Who's On First",
-			"author" => "Mapzen",
-			"version" => "0.1"
-		);
-
-		$geocoding = array(
-			"version" => "0.2",
-			"attribution" => "https://github.com/whosonfirst/whosonfirst-data/blob/master/LICENSE.md",
-			"query" => $more["query"],
-			"engine" => $engine,
-			"timestamps" => $now,
-		);
-
 		$pagination = $rsp;
 		unset($pagination["places"]);
 
@@ -104,9 +90,30 @@
 			"type" => "FeatureCollection",
 			"features" => $features,
 			"bbox" => $bbox,
-			# "wof:pagination" => $pagination,
+			"pagination" => $pagination,
 		);
 		
+		if ($more["geocoding"]){
+
+			$now = time();
+
+			$engine = array(
+				"name" => "Who's On First",
+				"author" => "Mapzen",
+				"version" => "0.1"
+			);
+
+			$geocoding = array(
+				"version" => "0.2",
+				"attribution" => "https://github.com/whosonfirst/whosonfirst-data/blob/master/LICENSE.md",
+				"query" => $more["query"],
+				"engine" => $engine,
+				"timestamps" => $now,
+			);
+
+			$collection["geocoding"] = $geocoding;
+		}
+
 		api_output_send($collection, $more);
 	}
 

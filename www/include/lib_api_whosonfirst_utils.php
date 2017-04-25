@@ -283,4 +283,34 @@
 
 	########################################################################
 
+	function api_whosonfirst_utils_ensure_geojson_extras(){
+
+		$extras = array();
+		
+		if (request_isset("extras")){
+			$extras = request_str("extras");	
+			$extras = explode(",", $extras);
+		}
+
+		# these are required in order to include coordinates
+		# in lib_api_output_geojson
+		
+		$ensure_centroids = array(
+			"geom:latitude", "geom:longitude",
+			"lbl:latitude", "lbl:longitude",
+		);
+
+		foreach ($ensure_centroids as $ex){
+		
+			if (! in_array($ex, $extras)){
+				$extras[] = $ex;
+			}
+		}
+
+		$extras = implode(",", $extras);
+		return $extras;
+	}
+
+	########################################################################
+
 	# the end
