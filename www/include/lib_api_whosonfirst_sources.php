@@ -73,7 +73,7 @@
 		$sources = array_keys($GLOBALS['whosonfirst_sources']['sources']);
  
 		$out = array(
-			"prefixes" => $prefixes
+			"prefixes" => $sources,
 		);
 
 		$more = array(
