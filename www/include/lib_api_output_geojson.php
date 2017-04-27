@@ -11,6 +11,8 @@
 		$defaults = array(
 			"geocoding" => 0,
 			"query" => array(),
+			"key" => "results",
+			"is_singleton" => 0,
 		);
 
 		$more = array_merge($defaults, $more);
@@ -26,7 +28,14 @@
 		$nelat = 0.0;
 		$nelon = 0.0;		
 		
-		foreach ($rsp["places"] as $pl){
+		$k = $more["key"];
+		$possible = $rsp[ $k ];
+
+		if ($more["is_singleton"]){
+			$possible = array($possible);
+		}
+
+		foreach ($possible as $pl){
 
 			if (isset($pl["lbl:latitude"]) && isset($pl["lbl:longitude"]) && $pl["lbl:latitude"] && $pl["longitude"]){
 				$lat = $pl["lbl:latitude"];
