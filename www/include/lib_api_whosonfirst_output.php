@@ -31,7 +31,12 @@
 
 			foreach ($extras as $f){
 
-				if (! in_array($f, $fields)){
+				# See this - it's important if you pass an empty field ('')
+				# to ES it will FREAK OUT and return null values for all
+				# the fields. This is why we can't have nice things...
+				# (20170428/thisisaaronland)
+
+				if (($f) && (! in_array($f, $fields))){
 					$has_extras = 1;
 					$fields[] = $f;
 				}

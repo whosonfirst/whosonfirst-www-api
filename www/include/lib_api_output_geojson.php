@@ -27,7 +27,7 @@
 		$swlon = 0.0;		
 		$nelat = 0.0;
 		$nelon = 0.0;		
-		
+
 		$k = $more["key"];
 		$possible = $rsp[ $k ];
 
