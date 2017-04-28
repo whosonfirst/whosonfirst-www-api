@@ -212,6 +212,7 @@
 		foreach ($simple as $field => $input){
 
 			if ($input){
+
 				$input = api_whosonfirst_utils_ensure_array($input);
 				$filters[] = api_whosonfirst_utils_enfilterify_simple($field, $input);
 			}
@@ -228,10 +229,20 @@
 
 	function api_whosonfirst_utils_enfilterify_simple($field, $terms){
 
+		$more = array(
+			"to_allow" => array()
+		);
+
+		# so that "gp:id" doesn't become "gp{:}id"
+
+		if ($field == "wof:concordances_sources"){
+			$more["to_allow"] = array(":");
+		}
+
 		if (count($terms) == 1){
 
 			$term = $terms[0];
-			$esc_term = elasticsearch_escape($term);
+			$esc_term = elasticsearch_escape($term, $more);
 
 			return array('query' => array(
 				'match' => array($field => array(
@@ -244,7 +255,7 @@
 		
 		foreach ($terms as $term){
 
-			$esc_term = elasticsearch_escape($term);
+			$esc_term = elasticsearch_escape($term, $more);
 			
 			$must[] = array('query' => array(
 				'match' => array($field => array(
