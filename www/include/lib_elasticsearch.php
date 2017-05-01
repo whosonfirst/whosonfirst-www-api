@@ -795,7 +795,13 @@
 
 	########################################################################
 
-	function elasticsearch_escape($str){
+	function elasticsearch_escape($str, $more=array()){
+
+		$defaults = array(
+			"to_allow" => array()
+		);
+
+		$more = array_merge($defaults, $more);
 
 		if (is_numeric($str)){
 			return intval($str);
@@ -845,7 +851,12 @@
 		foreach ($chars as $char){
 
 			if (in_array($char, $to_escape)){
-				$char = "\{$char}";
+
+				# because concordances so "gp:id" doesn't become "gp{:}id"
+
+				if (! in_array($char, $more['to_allow'])){
+					$char = "\{$char}";
+				}
 			}
 
 			else if (in_array($char, array("&", "|"))){

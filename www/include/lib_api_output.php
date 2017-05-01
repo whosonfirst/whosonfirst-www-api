@@ -45,8 +45,14 @@
 
 		if ($possible){
 
-			if (in_array($possible, $GLOBALS['cfg']['api']['formats'])){
-				$format = $possible;
+
+			if (isset($GLOBALS['cfg']['api']['formats'][$possible])){
+
+				$details = $GLOBALS['cfg']['api']['formats'][$possible];
+
+				if ($details['enabled']){
+					$format = $possible;
+				}
 			}
 		}
 

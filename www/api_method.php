@@ -39,8 +39,17 @@
 
 	# TO DO: convert markdown in $details
 
+	$rsp_formats = array();
+
+	foreach ($GLOBALS['cfg']['api']['formats'] as $fmt => $fmt_details){
+
+		if (($fmt_details["enabled"]) && ($fmt_details["documented"])){
+			$rsp_formats[]= $fmt;
+		}
+	}
+
 	$GLOBALS['smarty']->assign("method", $method);
-	$GLOBALS['smarty']->assign("response_formats", $GLOBALS['cfg']['api']['formats']);
+	$GLOBALS['smarty']->assign("response_formats", $rsp_formats);
 	$GLOBALS['smarty']->assign("default_format", $GLOBALS['cfg']['api']['default_format']);
 
 	$GLOBALS['smarty']->assign_by_ref("details", $details);

@@ -34,6 +34,18 @@
 		$exclude = request_str("exclude");
 		$include = request_str("include");
 
+		# it is assumed that these have all been validate by now
+		
+		$swlat = request_float("min_latitude");
+		$swlon = request_float("min_longitude");
+		$nelat = request_float("max_latitude");
+		$nelon = request_float("max_longitude");
+		
+		$swlat = trim($swlat);		
+		$swlon = trim($swlon);
+		$nelat = trim($nelat);
+		$nelon = trim($nelon);
+
 		$nullisland = true;
 		$deprecated = false;
 		
@@ -173,6 +185,13 @@
 			}
 		}
 
+		if (($swlat) && ($swlon) && ($nelat) && ($nelon)){
+
+			# PLEASE WRITE ME... need to index geom:bbox I think?
+			# https://github.com/whosonfirst/whosonfirst-www-api/issues/33		
+			# https://github.com/whosonfirst/whosonfirst-www-api/issues/34
+		}
+
 		# TO DO: categories (20160708/thisisaaronland)
 
 		$simple = array(
@@ -193,6 +212,7 @@
 		foreach ($simple as $field => $input){
 
 			if ($input){
+
 				$input = api_whosonfirst_utils_ensure_array($input);
 				$filters[] = api_whosonfirst_utils_enfilterify_simple($field, $input);
 			}
@@ -209,10 +229,20 @@
 
 	function api_whosonfirst_utils_enfilterify_simple($field, $terms){
 
+		$more = array(
+			"to_allow" => array()
+		);
+
+		# so that "gp:id" doesn't become "gp{:}id"
+
+		if ($field == "wof:concordances_sources"){
+			$more["to_allow"] = array(":");
+		}
+
 		if (count($terms) == 1){
 
 			$term = $terms[0];
-			$esc_term = elasticsearch_escape($term);
+			$esc_term = elasticsearch_escape($term, $more);
 
 			return array('query' => array(
 				'match' => array($field => array(
@@ -225,7 +255,7 @@
 		
 		foreach ($terms as $term){
 
-			$esc_term = elasticsearch_escape($term);
+			$esc_term = elasticsearch_escape($term, $more);
 			
 			$must[] = array('query' => array(
 				'match' => array($field => array(
@@ -262,6 +292,46 @@
 		}
 
 		return $things;
+	}
+
+	########################################################################
+
+	function api_whosonfirst_utils_get_extras(){
+
+		$format = request_str("format");
+		$extras = request_str("extras");
+
+		if ($format == "geojson"){
+
+			$extras = api_whosonfirst_utils_ensure_geojson_extras($extras);
+		}
+
+		return $extras;		
+	}
+
+	########################################################################
+
+	function api_whosonfirst_utils_ensure_geojson_extras($extras){
+
+		$extras = explode(",", $extras);
+
+		# these are required in order to include coordinates
+		# in lib_api_output_geojson
+		
+		$ensure_centroids = array(
+			"geom:latitude", "geom:longitude",
+			"lbl:latitude", "lbl:longitude",
+		);
+
+		foreach ($ensure_centroids as $ex){
+		
+			if (! in_array($ex, $extras)){
+				$extras[] = $ex;
+			}
+		}
+
+		$extras = implode(",", $extras);
+		return $extras;
 	}
 
 	########################################################################

@@ -9,9 +9,11 @@
 </div>
 </div>
 
-{foreach from=$formats item="format"}
+{foreach from=$formats item="details" key="format"}
+{if $details.enabled and $details.documented}
 <a name="{$format|escape}"></a>
 {include file="inc_api_format_description.txt" format=$format}
+{/if}
 {/foreach}
 
 {include file="inc_foot.txt"}

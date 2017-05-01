@@ -291,7 +291,14 @@
 
 	$GLOBALS['cfg']['api'] = array(
 
-		'formats' => array( 'json', 'csv', 'meta', '🐔' ),
+		'formats' => array(
+			'chicken' => array('enabled' => 1, 'documented' => 1),		
+			'csv' => array('enabled' => 1, 'documented' => 1),
+			'geojson' => array('enabled' => 1, 'documented' => 1),			
+			'json' => array('enabled' => 1, 'documented' => 1),
+			'meta' => array('enabled' => 1, 'documented' => 1),
+		),
+
 		'default_format' => 'json',
 
 		# We're defining methods using the method_definitions

@@ -35,7 +35,7 @@
 
 		$more = array();
 
-		if ($extras = request_str("extras")){
+		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
 
@@ -306,7 +306,7 @@
 
 		$more = array();
 
-		if ($extras = request_str("extras")){
+		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
 
@@ -349,7 +349,7 @@
 
 		$more = array();
 
-		if ($extras = request_str("extras")){
+		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
 
@@ -402,7 +402,7 @@
 
 		$more = array();
 
-		if ($extras = request_str("extras")){
+		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
 
@@ -506,7 +506,7 @@
 			$more['placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
 		}
 
-		if ($extras = request_str("extras")){
+		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
 
@@ -601,7 +601,7 @@
 			$more['cursor'] = $cursor;
 		}
 
-		if ($extras = request_str("extras")){
+		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
 
@@ -645,7 +645,7 @@
 
 		$more = array();
 
-		if ($extras = request_str("extras")){
+		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
 
@@ -687,7 +687,7 @@
 
 		$more = array();
 
-		if ($extras = request_str("extras")){
+		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
 

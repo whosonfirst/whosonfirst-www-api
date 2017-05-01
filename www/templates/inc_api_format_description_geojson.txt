@@ -1,0 +1,73 @@
+<p>GeoJSON is a data-interchange format based on JavaScript. For more details, consult <a href="http://geojson.org/">http://geojson.org/</a>.</p>
+
+<h4>Example request</h4>
+<pre class="api-example-request">curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.getInfoMulti&api_key={literal}{API_KEY}{/literal}&&ids=101712565,101712563&format=geojson</strong>'</pre>
+
+<h4>Example response</h4>
+<pre>{literal}
+< HTTP/1.1 200 OK
+< Access-Control-Allow-Origin: *
+< Content-Type: text/json
+< Date: Tue, 25 Apr 2017 14:08:08 GMT
+{
+    "bbox": [
+        -81.680223,
+        41.479264,
+        -81.563564,
+        41.511215
+    ],
+    "features": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -81.563564,
+                    41.511215
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "geom:latitude": 41.511215,
+                "geom:longitude": -81.563564,
+                "lbl:latitude": 41.510978,
+                "lbl:longitude": -81.564146,
+                "wof:country": "US",
+                "wof:id": 101712565,
+                "wof:name": "Cleveland Heights",
+                "wof:parent_id": "404525063",
+                "wof:placetype": "locality",
+                "wof:repo": "whosonfirst-data"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -81.680223,
+                    41.479264
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "geom:latitude": 41.479264,
+                "geom:longitude": -81.680223,
+                "lbl:latitude": 41.496551,
+                "lbl:longitude": -81.65133,
+                "wof:country": "US",
+                "wof:id": 101712563,
+                "wof:name": "Cleveland",
+                "wof:parent_id": "404523697",
+                "wof:placetype": "locality",
+                "wof:repo": "whosonfirst-data"
+            },
+            "type": "Feature"
+        }
+    ],
+    "type": "FeatureCollection"
+}
+{/literal}</pre>
+
+<h4>Notes</h4>
+
+<p>As of this writing all GeoJSON formatted responses are returned as a <code>FeatureCollection</code> whose member type is a <code>Point</code> representing either a label centroid, when available, or the geographic centroid of the feature.</p>
+
+<p>GeoJSON output is supported for all API methods.</p>

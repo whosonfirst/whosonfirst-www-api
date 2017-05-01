@@ -13,18 +13,29 @@
 
 	$default = $GLOBALS['cfg']['api']['default_format'];
 	$formats = $GLOBALS['cfg']['api']['formats'];
-	$format = get_str("format");
 
-	if (! $format){
+	$fmt = get_str("format");
+
+	if (! $fmt){
 		error_404();
 	}
 
-	if (! in_array($format, $formats)){
+	if (! isset($formats[$fmt])){
+		error_404();
+	}
+
+	$format = $formats[$fmt];
+
+	if (! $format['enabled']){
+		error_404();
+	}
+
+	if (! $format['documented']){
 		error_404();
 	}
 
 	$GLOBALS['smarty']->assign("default", $default);
-	$GLOBALS['smarty']->assign("format", $format);
+	$GLOBALS['smarty']->assign("format", $fmt);
 
 	$GLOBALS['smarty']->display("page_api_format.txt");
 	exit();
