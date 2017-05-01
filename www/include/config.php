@@ -292,7 +292,7 @@
 	$GLOBALS['cfg']['api'] = array(
 
 		'formats' => array(
-			'chicken' => array('enabled' => 1, 'documented' => 1),		
+			'chicken' => array('enabled' => 0, 'documented' => 1, 'alt' => array('🐔')),		# no, really...
 			'csv' => array('enabled' => 1, 'documented' => 1),
 			'geojson' => array('enabled' => 1, 'documented' => 1),			
 			'json' => array('enabled' => 1, 'documented' => 1),
@@ -397,4 +397,10 @@
 	$GLOBALS['cfg']['enable_feature_categories'] = 0;
 
 	# END OF machinetags/categories stuff
+
+	# START OF chicken/rooster stuff
+
+	$GLOBALS['cfg']['chicken_api']['endpoint'] = 'http://localhost:1280';
+
+	# END OF chicken/rooster stuff
 

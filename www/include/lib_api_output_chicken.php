@@ -72,7 +72,9 @@
 	function api_output_chicken($rsp){
 
 		$json = json_encode($rsp, JSON_PRETTY_PRINT);
-		$rsp = chicken_api_call($json);
+
+		$more = array('endpoint' => $GLOBALS['cfg']['chicken_api']['endpoint']);
+		$rsp = chicken_api_call($json, $more);
 
 		if (! $rsp["ok"]){
 			$rsp["body"] = "🍗";

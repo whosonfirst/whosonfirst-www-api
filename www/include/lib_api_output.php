@@ -45,13 +45,35 @@
 
 		if ($possible){
 
-
 			if (isset($GLOBALS['cfg']['api']['formats'][$possible])){
 
 				$details = $GLOBALS['cfg']['api']['formats'][$possible];
 
 				if ($details['enabled']){
 					$format = $possible;
+				}
+			}
+		}
+
+		# this is pretty much entirely so that can do this and have
+		# it resolve to ?format=chicken (20170501/thisisaaronland)
+		# ?method=whosonfirst.places.getInfo&id=420561633&format=🐔 
+
+		if (! $format){
+
+			foreach ($GLOBALS['cfg']['api']['formats'] as $fmt => $details){
+
+				if (! $details['enabled']){
+					continue;
+				}
+
+				if (! is_array($details['alt'])){
+					continue;
+				}
+
+				if (in_array($possible, $details['alt'])){
+					$format = $fmt;
+					break;
 				}
 			}
 		}
