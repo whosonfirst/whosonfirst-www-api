@@ -14,12 +14,7 @@
 
 	function api_whosonfirst_pelias_autocomplete(){
 
-		if (request_isset("format")){
-
-			if (request_str("format") != "geojson"){
-				api_output_error(440);
-			}
-		}
+		api_whosonfirst_pelias_ensure_format();
 
 		if (request_isset("version")){
 
@@ -71,12 +66,7 @@
 
 	function api_whosonfirst_pelias_search(){
 
-		if (request_isset("format")){
-
-			if (request_str("format") != "geojson"){
-				api_output_error(440);
-			}
-		}
+		api_whosonfirst_pelias_ensure_format();
 
 		if (request_isset("version")){
 
@@ -334,6 +324,26 @@
 		);
 
 		api_output_ok($out, $more);
+	}
+
+	########################################################################
+
+	function api_whosonfirst_pelias_ensure_format(){
+
+		$allowed = array(
+			"chicken",
+			"geojson"
+		);
+
+		if (request_isset("format")){
+
+			$fmt = request_str("format");
+
+			if (! in_array($fmt, $allowed)){
+				api_output_error(440);
+			}
+		}
+
 	}
 
 	########################################################################
