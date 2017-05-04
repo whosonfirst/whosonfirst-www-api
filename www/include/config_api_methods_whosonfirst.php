@@ -501,6 +501,36 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
+		'whosonfirst.repos.getByLatLon' => array(
+			"description" => "Return a Who's On First repo name for a latitude and longitude.",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_repos",
+                        "parameters" => array(
+				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.766633"),
+				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.417693"),
+				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0, "example" => "venue"),
+			),
+			"errors" => array(
+				"432" => array("message" => "Missing 'latitude' parameter"),
+				"433" => array("message" => "Missing 'longitude' parameter"),
+				"434" => array("message" => "Invalid 'latitude' parameter"),
+				"435" => array("message" => "Invalid 'longitude' parameter"),
+				"436" => array("message" => "Missing 'placetype' parameter"),
+				"437" => array("message" => "Invalid placetype"),
+				"513" => array("message" => "Failed to perform point-in-polygon lookup"),
+				"514" => array("message" => "Failed to locate any places"),
+				"515" => array("message" => "Too many places to choose from."),
+				"516" => array("message" => "Missing iso:country property!"),
+				"517" => array("message" => "Missing unlc:subdivision property!"),
+				"518" => array("message" => "Invalid unlc:subdivision property."),
+			),
+			"notes" => array(
+			),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
 		'whosonfirst.sources.getInfo' => array(
 			"description" => "Return details for a Who's On First source.",
 			"documented" => 1,

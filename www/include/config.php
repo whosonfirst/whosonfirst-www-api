@@ -292,7 +292,7 @@
 	$GLOBALS['cfg']['api'] = array(
 
 		'formats' => array(
-			'chicken' => array('enabled' => 0, 'documented' => 1, 'alt' => array('🐔')),		# no, really...
+			'chicken' => array('enabled' => 1, 'documented' => 1, 'alt' => array('🐔')),		# no, really...
 			'csv' => array('enabled' => 1, 'documented' => 1),
 			'geojson' => array('enabled' => 1, 'documented' => 1),			
 			'json' => array('enabled' => 1, 'documented' => 1),
