@@ -127,7 +127,13 @@
 
 		$repo = implode("-", $repo);
 
-		$out = array("repo" => $repo);
+		$url = "https://github.com/whosonfirst-data/{$repo}";
+
+		$out = array(
+			"repo" => $repo,
+			"url" => $url,
+		);
+
 		api_output_ok($out);
 	}
 
