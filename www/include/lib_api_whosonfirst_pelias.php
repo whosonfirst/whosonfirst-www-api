@@ -57,6 +57,7 @@
 		$more = array(
 			"query" => $pelias_query,
 			"geocoding" => 1,
+			"key" => "places",
 		);
 
 		api_output_ok($out, $more);
@@ -321,6 +322,7 @@
 		$more = array(
 			"geocoding" => 1,
 			"query" => $pelias_query,
+			"key" => "places",
 		);
 
 		api_output_ok($out, $more);
