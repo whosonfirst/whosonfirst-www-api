@@ -1,0 +1,32 @@
+<p>🐔 🐔 🐔</p>
+
+<h4>Example request</h4>
+<pre class="api-example-request">curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfoMulti&api_key=mapzen-xxxxxx&ids=101712565,101712563&format=chicken'</pre>
+
+<h4>Example response</h4>
+<pre>{literal}
+< HTTP/1.1 200 OK
+< Access-Control-Allow-Origin: *
+< Content-Type: text/chicken
+< Date: Tue, 25 Apr 2017 14:08:08 GMT
+{
+    "🐔": [
+        {
+            "🐔:🐔": 101712565,
+            "🐔:🐔_🐔": "404525063",
+            "🐔:🐔": "🐔 🐔",
+            "🐔:🐔": "🐔",
+            "🐔:🐔": "🐔",
+            "🐔:🐔": "🐔-🐔"
+        },
+        {
+            "🐔:🐔": 101712563,
+            "🐔:🐔_🐔": "404523697",
+            "🐔:🐔": "🐔",
+            "🐔:🐔": "🐔",
+            "🐔:🐔": "🐔",
+            "🐔:🐔": "🐔-🐔"
+        }
+    ]
+}
+{/literal}</pre>
