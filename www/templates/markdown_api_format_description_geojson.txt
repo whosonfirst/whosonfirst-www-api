@@ -74,4 +74,4 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.getInf
 
 As of this writing all GeoJSON formatted responses are returned as a `FeatureCollection` whose member geometry type is a `Point` representing either a label centroid, when available, or the geographic centroid of the feature.
 
-GeoJSON output is supported for all API methods.
+GeoJSON output is not supported for all API methods.
