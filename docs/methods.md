@@ -16,7 +16,7 @@ Return the list of API error responses common to all methods.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -24,7 +24,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta)
 
 ##### Example
 
@@ -57,7 +57,7 @@ Return the list of valid API response formats, including the default format
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -65,7 +65,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta)
 
 ##### Example
 
@@ -74,10 +74,11 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=api.spec.formats&api_key
 
 {
     "formats": [
-        "json",
+        "chicken",
         "csv",
-        "meta",
-        "geojson"
+        "geojson",
+        "json",
+        "meta"
     ],
     "default_format": "json",
     "stat": "ok"
@@ -94,7 +95,7 @@ Return the list of available API response methods.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -102,7 +103,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta)
 
 ##### Example
 
@@ -190,7 +191,7 @@ A testing method which echo&#039;s all parameters back in the response.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -198,7 +199,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta)
 
 ##### Example
 
@@ -220,7 +221,7 @@ Return a test error from the API
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -228,7 +229,7 @@ This API method does not define any custom error codes. For the list of error co
 
 ##### Notes
 
-* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta)
+* The following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta)
 
 ##### Example
 
@@ -258,7 +259,7 @@ Return a Who&#039;s On First record (and all its concordances) by another source
 | `source` | The source prefix of the concordance you are looking for |  gp:id | yes |
 | `page` | The default is 1. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -319,7 +320,7 @@ List all the sources that Who&#039;s On First holds hands with.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `page` | The default is 1. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -379,7 +380,7 @@ Query Who&#039;s On First using the Pelias API
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
 | `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -455,7 +456,7 @@ Return Who&#039;s On First places intersecting a latitude and longitude
 | `longitude` | A valid longitude coordinate. |  -122.417693 | yes |
 | `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -532,7 +533,7 @@ Return all the descendants for a Who&#039;s On First ID.
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
 | `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -563,12 +564,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDe
             "wof:repo": "whosonfirst-data-venue-us-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDgzNTQxOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MzU1MTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODM1NTI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDgzNTUzOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4MzU0Mjp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDg0MTk4OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4NDIxNTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODQxOTc6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDg0MTk5OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4NDIxNjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
     "total": 74,
     "page": null,
     "pages": 74,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDgzNTQxOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MzU1MTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODM1NTI6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDgzNTUzOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4MzU0Mjp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDg0MTk4OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4NDIxNTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODQxOTc6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDg0MTk5OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4NDIxNjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
     "stat": "ok"
 }
 ```
@@ -586,7 +587,7 @@ Return the closest set of ancestors (hierarchies) for a latitude and longitude
 | `latitude` | A valid latitude coordinate. |  37.777228 | yes |
 | `longitude` | A valid longitude coordinate. |  -122.470779 | yes |
 | `placetype` | Skip descendants of this placetype. |  region | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -635,7 +636,7 @@ Return a Who&#039;s On First record by ID.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `id` | A valid Who&#039;s On First ID. |  420561633 | yes |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -677,7 +678,7 @@ Return multiple Who&#039;s On First records by ID.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `ids` | A comma separated list of valid Who&#039;s On First ID. A maximum of 20 WOF IDs may be specified. |  101712565,101712563 | yes |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -736,7 +737,7 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -798,7 +799,7 @@ Return all the Who&#039;s On First records near a point.
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -850,7 +851,7 @@ Return Who&#039;s On First parent ID for a latitude and longitude and placetype
 | `latitude` | A valid latitude coordinate. |  35.655065 | yes |
 | `longitude` | A valid longitude coordinate. |  139.369640 | yes |
 | `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -896,7 +897,7 @@ Return a random Who&#039;s On First record.
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -914,11 +915,11 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRa
 
 {
     "place": {
-        "wof:id": 85903759,
-        "wof:parent_id": "-1",
-        "wof:name": "\u063a\u0631\u0628\u0627\u0621",
-        "wof:placetype": "neighbourhood",
-        "wof:country": "OM",
+        "wof:id": 421176527,
+        "wof:parent_id": "85671967",
+        "wof:name": "Port-au-Prince",
+        "wof:placetype": "locality",
+        "wof:country": "HT",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -955,7 +956,7 @@ Query for Who&#039;s On First records.
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
 | `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -978,20 +979,20 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.searc
 {
     "places": [
         {
-            "wof:id": 152777717,
-            "wof:parent_id": "85874363",
-            "wof:name": "Poutine LA Fleur",
+            "wof:id": 975139507,
+            "wof:parent_id": "-1",
+            "wof:name": "Poutine Restau-Bar Enr",
             "wof:placetype": "venue",
             "wof:country": "CA",
             "wof:repo": "whosonfirst-data-venue-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDgzNTYxOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MzU3MjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODM1NzE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDgzNTYyOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MzU3MzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
+    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDg0MjMyOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4NDIzMzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODQyMzQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDg0MjM2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4NDIzNTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
     "total": 13,
     "page": null,
     "pages": 13,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDgzNTYxOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MzU3MjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODM1NzE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDgzNTYyOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4MzU3MzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDg0MjMyOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4NDIzMzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODQyMzQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDg0MjM2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4NDIzNTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
     "stat": "ok"
 }
 ```
@@ -1015,7 +1016,7 @@ Return details for a Who&#039;s On First placetype.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `id` | A valid Who&#039;s On First placetype ID. |  102322043 | no |
 | `name` | A valid Who&#039;s On First placetype name. |  disputed | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1060,7 +1061,7 @@ Return a list of Who&#039;s On First placetypes.
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `role` | Only return placetypes that are part of this role. |  common | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1114,7 +1115,7 @@ Return a list of Who&#039;s On First placetype roles.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1140,6 +1141,61 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.placetypes.g
 ```
 
 
+### whosonfirst.repos
+
+* [whosonfirst.repos.getByLatLon](#whosonfirst.repos.getByLatLon)
+
+<a name="whosonfirst.repos.getByLatLon"></a>
+#### whosonfirst.repos.getByLatLon
+
+Return a Who&#039;s On First repo name for a latitude and longitude.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `latitude` | A valid latitude coordinate. |  37.766633 | yes |
+| `longitude` | A valid longitude coordinate. |  -122.417693 | yes |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;latitude&#039; parameter |
+| `433` | Missing &#039;longitude&#039; parameter |
+| `434` | Invalid &#039;latitude&#039; parameter |
+| `435` | Invalid &#039;longitude&#039; parameter |
+| `436` | Missing &#039;placetype&#039; parameter |
+| `437` | Invalid placetype |
+| `513` | Failed to perform point-in-polygon lookup |
+| `514` | Failed to locate any places |
+| `515` | Too many places to choose from. |
+| `516` | Missing iso:country property! |
+| `517` | Missing unlc:subdivision property! |
+| `518` | Invalid unlc:subdivision property. |
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta)
+
+##### Example
+
+```
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.repos.getByLatLon&api_key=mapzen-XXXXXXX&latitude=37.766633&longitude=-122.417693&placetype=venue'
+
+{
+    "repo": "whosonfirst-data-venue-us-ca",
+    "url": "https:\/\/github.com\/whosonfirst-data\/whosonfirst-data-venue-us-ca",
+    "stat": "ok"
+}
+```
+
+
 ### whosonfirst.sources
 
 * [whosonfirst.sources.getInfo](#whosonfirst.sources.getInfo)
@@ -1158,7 +1214,7 @@ Return details for a Who&#039;s On First source.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
 | `id` | A valid Who&#039;s On First source ID. |  840464301 | no |
 | `prefix` | A valid Who&#039;s On First source prefix. |  loc | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1203,7 +1259,7 @@ Return the list of Who&#039;s On First sources.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1256,7 +1312,7 @@ Return the list of prefixes for all Who&#039;s On First sources.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1272,7 +1328,102 @@ This API method does not define any custom error codes. For the list of error co
 curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getPrefixes&api_key=mapzen-XXXXXXX'
 
 {
-    "prefixes": null,
+    "prefixes": [
+        "4sq",
+        "acgov",
+        "addr",
+        "amsgis",
+        "atgov",
+        "atldpcd",
+        "ausstat",
+        "austriaod",
+        "azavea",
+        "baltomoit",
+        "begov",
+        "bj",
+        "bra",
+        "btv",
+        "camgov",
+        "can-bbygov",
+        "can-dnvgov",
+        "can-mtlsmvt",
+        "can-nwds",
+        "can-surgis",
+        "cbsnl",
+        "chgov",
+        "dbp",
+        "denvercpd",
+        "edtf",
+        "faa",
+        "fb",
+        "fct",
+        "figov",
+        "fips",
+        "frgov",
+        "geom",
+        "gn",
+        "gp",
+        "hasc",
+        "hkigis",
+        "hsgov",
+        "iata",
+        "icao",
+        "iso",
+        "kuogov",
+        "lacity",
+        "loc",
+        "meso",
+        "ms",
+        "mt",
+        "mz",
+        "mzb",
+        "name",
+        "ne",
+        "ni",
+        "nolagis",
+        "nycgov",
+        "nyt",
+        "oa",
+        "oakced",
+        "os",
+        "oulugov",
+        "out",
+        "pedia",
+        "porbps",
+        "qs",
+        "sdgis",
+        "seagv",
+        "sfac",
+        "sfgov",
+        "sg",
+        "sjp",
+        "smcgov",
+        "ssuberlin",
+        "statcan",
+        "stpaulgov",
+        "svn-sma",
+        "tgn",
+        "tkugov",
+        "tmpgov",
+        "torsdfa",
+        "transitland",
+        "tz",
+        "unknown",
+        "unlc",
+        "uscensus",
+        "uszcta",
+        "vanpds",
+        "wapo",
+        "wd",
+        "wk",
+        "woe",
+        "woedb",
+        "wof",
+        "xx",
+        "ys",
+        "zolk",
+        "zs"
+    ],
     "stat": "ok"
 }
 ```
@@ -1293,7 +1444,7 @@ Return the list of sources for all the tags in Who&#039;s On First.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1330,7 +1481,7 @@ Return the list of unique tags n Who&#039;s On First.
 | `source` | Limit results to categories from this source. |  wof | no |
 | `page` | The default is 1. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [json](formats.md#json), [csv](formats.md#csv), [meta](formats.md#meta), [geojson](formats.md#geojson) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1359,10 +1510,10 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags
         }
     ],
     "next_query": "method=whosonfirst.tags.getTags&source=wof&per_page=1&page=2",
-    "total": 39636,
+    "total": 39639,
     "page": 1,
     "per_page": 1,
-    "pages": 39636,
+    "pages": 39639,
     "cursor": null,
     "stat": "ok"
 }
