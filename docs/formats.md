@@ -45,7 +45,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIn
 
 #### Notes
 
-🐔 (chicken) output is not supported all API methods.
+🐔 (chicken) output is supported for all API methods.
 
 <a name="csv"></a>
 ### CSV

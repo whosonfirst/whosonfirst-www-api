@@ -344,10 +344,10 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances
         }
     ],
     "next_query": "method=whosonfirst.concordances.getSources&per_page=1&page=2",
-    "total": 25,
+    "total": 27,
     "page": 1,
     "per_page": 1,
-    "pages": 25,
+    "pages": 27,
     "cursor": null,
     "stat": "ok"
 }
@@ -529,6 +529,8 @@ Return all the descendants for a Who&#039;s On First ID.
 | `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
 | `exclude` | Exclude places matching these criteria. |  nullisland | no |
 | `include` | Include places matching these criteria. |  deprecated | no |
+| `min_lastmod` | Limit results to places that have been modified on or since this date (encoded as a Unix timestamp). |  1493855252 | no |
+| `max_lastmod` | Limit results to places that have been modified on or before this date (encoded as a Unix timestamp). |  1496783757 | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
 | `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
@@ -556,20 +558,20 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDe
 {
     "places": [
         {
-            "wof:id": 219976921,
+            "wof:id": 169473107,
             "wof:parent_id": "420780703",
-            "wof:name": "Paula Frazier Handwoven",
+            "wof:name": "Alfa Consulting",
             "wof:placetype": "venue",
             "wof:country": "US",
             "wof:repo": "whosonfirst-data-venue-us-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDg0MTk4OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4NDIxNTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODQxOTc6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDg0MTk5OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4NDIxNjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
-    "total": 74,
+    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsyMjkwODk2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MjI5MDg4MTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzIyOTA4OTc6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsyMjkwODk4OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MjI5MDg4Mjp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "total": 120,
     "page": null,
-    "pages": 74,
+    "pages": 120,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDg0MTk4OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4NDIxNTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODQxOTc6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsxNDg0MTk5OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MTQ4NDIxNjpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsyMjkwODk2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MjI5MDg4MTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzIyOTA4OTc6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsyMjkwODk4OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MjI5MDg4Mjp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "stat": "ok"
 }
 ```
@@ -915,11 +917,11 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRa
 
 {
     "place": {
-        "wof:id": 421176527,
-        "wof:parent_id": "85671967",
-        "wof:name": "Port-au-Prince",
-        "wof:placetype": "locality",
-        "wof:country": "HT",
+        "wof:id": 1092049133,
+        "wof:parent_id": "85675575",
+        "wof:name": "Nuwakot",
+        "wof:placetype": "county",
+        "wof:country": "NP",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -952,6 +954,8 @@ Query for Who&#039;s On First records.
 | `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
 | `exclude` | Exclude places matching these criteria. |  nullisland | no |
 | `include` | Include places matching these criteria. |  deprecated | no |
+| `min_lastmod` | Limit results to places that have been modified on or since this date (encoded as a Unix timestamp). |  1493855252 | no |
+| `max_lastmod` | Limit results to places that have been modified on or before this date (encoded as a Unix timestamp). |  1496783757 | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
 | `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
@@ -964,6 +968,9 @@ In addition to [default error codes](errors.md) common to all methods this API m
 
 | Error code | Error message |
 | :--- | :--- |
+| `432` | Invalid minimum lastmodified date |
+| `433` | Invalid maximum lastmodified date |
+| `434` | Impossible date range |
 | `513` | Unable to perform search |
 
 ##### Notes
@@ -987,12 +994,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.searc
             "wof:repo": "whosonfirst-data-venue-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsxNDg0MjMyOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4NDIzMzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODQyMzQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDg0MjM2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4NDIzNTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
+    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTsyMjkwODk5OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MjI5MDg5ODp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzIyOTA5MDA6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsyMjkwOTAyOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MjI5MDkwMTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "total": 13,
     "page": null,
     "pages": 13,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsxNDg0MjMyOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4NDIzMzpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzE0ODQyMzQ6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTsxNDg0MjM2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7MTQ4NDIzNTpLQ21yWWdKT1JrQ1NwTmhEWGJzWFdROzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTsyMjkwODk5OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MjI5MDg5ODp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzIyOTA5MDA6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzsyMjkwOTAyOnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7MjI5MDkwMTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "stat": "ok"
 }
 ```
@@ -1331,6 +1338,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getP
     "prefixes": [
         "4sq",
         "acgov",
+        "acme",
         "addr",
         "amsgis",
         "atgov",
@@ -1346,6 +1354,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getP
         "camgov",
         "can-bbygov",
         "can-dnvgov",
+        "can-lvlsu",
         "can-mtlsmvt",
         "can-nwds",
         "can-surgis",
@@ -1353,6 +1362,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getP
         "chgov",
         "dbp",
         "denvercpd",
+        "ebc",
         "edtf",
         "faa",
         "fb",
@@ -1371,6 +1381,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getP
         "iso",
         "kuogov",
         "lacity",
+        "latimes",
         "loc",
         "meso",
         "ms",
@@ -1382,6 +1393,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.sources.getP
         "ni",
         "nolagis",
         "nycgov",
+        "nycgov_subway",
         "nyt",
         "oa",
         "oakced",
@@ -1510,10 +1522,10 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags
         }
     ],
     "next_query": "method=whosonfirst.tags.getTags&source=wof&per_page=1&page=2",
-    "total": 39639,
+    "total": 39655,
     "page": 1,
     "per_page": 1,
-    "pages": 39639,
+    "pages": 39655,
     "cursor": null,
     "stat": "ok"
 }
