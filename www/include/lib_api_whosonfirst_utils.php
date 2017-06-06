@@ -34,6 +34,9 @@
 		$exclude = request_str("exclude");
 		$include = request_str("include");
 
+		$min_lastmod = request_int32("min_lastmod");
+		$max_lastmod = request_int32("max_lastmod");
+
 		# it is assumed that these have all been validate by now
 		
 		$swlat = request_float("min_latitude");
@@ -115,6 +118,36 @@
 				$filters[] = array('terms' => array('wof:placetype' => $esc_placetypes));
 			}
 		}
+
+		# lastmod stuff
+		# see also: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-range-query.html
+
+		if (($min_lastmod) && ($max_lastmod)){
+
+			$filters[] = array("range" => array(
+				"wof:lastmodified" => array("gte" => $min_lastmod, "lte" => $max_lastmod)
+			));
+		}
+
+		else if ($min_lastmod){
+
+			$now = time();
+
+			$filters[] = array("range" => array(
+				"wof:lastmodified" => array("gte" => $min_lastmod, "lte" => $now)
+			));
+		}
+
+		else if ($max_lastmod){
+
+			$now = time();
+
+			$filters[] = array("range" => array(
+				"wof:lastmodified" => array("gte" => $now, "lte" => $max_lastmod)
+			));
+		}
+
+		else {}
 
 		# TO DO: handle plain-old-tags and machinetags in one place (like here)
 		# (20160708/thisisaaronland)

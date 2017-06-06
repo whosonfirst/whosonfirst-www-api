@@ -23,6 +23,24 @@
 			api_output_error(452);
 		}
 
+		$min_lastmod = request_int32("min_lastmod");
+		$max_lastmod = request_int32("max_lastmod");
+
+		if (($min_lastmod) && ($min_lastmod < 0)){
+			api_output_error(432);
+		}
+
+		if (($max_lastmod) && ($max_lastmod < 0)){
+			api_output_error(433);
+		}
+
+		if (($min_lastmod) && ($max_lastmod)){
+
+			if ($min_lastmod > $max_lastmod){
+				api_output_error(434);
+			}
+		}
+
 		$args = array();
 		api_utils_ensure_pagination_args($args);
 

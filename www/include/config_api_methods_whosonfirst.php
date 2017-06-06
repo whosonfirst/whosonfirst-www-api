@@ -20,6 +20,9 @@
 			array("name" => "concordance", "description" => "Query for places that have been concordified with this source.", "documented" => 1, "required" => 0, "example" => "loc:id"),
 			array("name" => "exclude", "description" => "Exclude places matching these criteria.", "documented" => 1, "required" => 0, "example" => "nullisland"),
 			array("name" => "include", "description" => "Include places matching these criteria.", "documented" => 1, "required" => 0, "example" => "deprecated"),
+			array("name" => "min_lastmod", "description" => "Limit results to places that have been modified on or since this date (encoded as a Unix timestamp).", "documented" => 1, "required" => 0, "example" => 1493855252),
+			array("name" => "max_lastmod", "description" => "Limit results to places that have been modified on or before this date (encoded as a Unix timestamp).", "documented" => 1, "required" => 0, "example" => 1496783757),
+
 		),
 	);
 
@@ -450,6 +453,9 @@
                                	array("name" => "q", "description" => "Query for this value across all fields.", "documented" => 1, "required" => 0, "example" => "poutine"),
                        	), $GLOBALS['api_methods_whosonfirst']['filter_parameters']),
 			"errors" => array(
+				"432" => array("message" => "Invalid minimum lastmodified date"),
+				"433" => array("message" => "Invalid maximum lastmodified date"),
+				"434" => array("message" => "Impossible date range"),
 				"513" => array("message" => "Unable to perform search"),
 			)
 		),
