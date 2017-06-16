@@ -172,7 +172,7 @@
 			}
 		}
 
-		if (request_isset("spr")){
+		if (request_str("spr")){
 
 			$lookup = array();
 			$ids = array();
