@@ -270,12 +270,13 @@
 			"documented" => 1,
 			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
 			"paginated" => 0,
-			"extras" => 0,
+			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array(
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.777228"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.470779"),
 				array("name" => "placetype", "description" => "Skip descendants of this placetype.", "documented" => 1, "required" => 0, "example" => "region"),
+				array("name" => "spr", "description" => "Format results as a standard place response (spr).", "documented" => 1, "required" => 0, "example" => 1),
 			),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
@@ -284,9 +285,11 @@
 				"435" => array("message" => "Invalid 'longitude' parameter"),
 				"436" => array("message" => "Invalid placetype"),
 				"513" => array("message" => "Failed to perform lookup"),
+				"514" => array("message" => "Failed to perform standard place response (spr) lookup"),
 			),
 			"notes" => array(
-				"This method differs from whosonfirst.places.getByLatLon method in two ways: 1. It returns a list of hierarchies rather than a WOF place record and 2. It will travel up the hierarchy until an ancestor is found. For example even if there is no locality matching a given lat, lon the code will try again looking for a matching region, and so on."
+				"This method differs from whosonfirst.places.getByLatLon method in two ways: 1. It returns a list of hierarchies rather than a WOF place record and 2. It will travel up the hierarchy until an ancestor is found. For example even if there is no locality matching a given lat, lon the code will try again looking for a matching region, and so on.",
+				"The 'extras' parameter is only honoured when the 'spr' parameter is present."
 			),
 			"disallow_formats" => array( "meta" ),
 		),

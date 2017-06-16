@@ -172,6 +172,62 @@
 			}
 		}
 
+		if (request_isset("spr")){
+
+			$lookup = array();
+			$ids = array();
+
+			foreach ($results as $hier){
+
+				foreach ($hier as $pt => $id){
+
+					$ids[] = $id;
+				}
+			}
+
+			$places = whosonfirst_places_get_by_id_multi($ids);
+
+			if (! $places){
+				api_output_error(514);
+			}
+
+			$more = array();
+
+			if ($extras = api_whosonfirst_utils_get_extras()){
+				$more["extras"] = $extras;
+			}
+
+			api_whosonfirst_output_enpublicify($places['rows'], $more);
+
+			foreach ($places['rows'] as $row){
+				$lookup[$row['wof:id']] = $row;
+			}
+
+			$results_spr = array();
+
+			foreach ($results as $hier){
+
+				$hier_spr = array();
+
+				foreach ($hier as $pt => $id){
+
+					if (isset($lookup[$id])){				
+						$row = $lookup[$id];
+						$hier_spr[$row['wof:placetype']] = $row;
+					}
+
+					else {
+						$pt = str_replace("_id", "", $pt);
+						$hier_spr[$pt] = $array();
+					}
+				}
+
+				$results_spr[] = $hier_spr;
+			}
+
+			$results = $results_spr;
+		}
+
 		$out = array(
 			"hierarchies" => $results
 		);
