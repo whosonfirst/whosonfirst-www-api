@@ -3,7 +3,7 @@ GeoJSON is a data-interchange format based on JavaScript. For more details, cons
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.getInfoMulti&api_key={literal}{API_KEY}{/literal}&&ids=101712565,101712563&format=geojson'
+curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.getInfoMulti&api_key=your-mapzen-api-key&&ids=101712565,101712563&format=geojson'
 ```
 
 #### Example response
