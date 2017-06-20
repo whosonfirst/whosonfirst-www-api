@@ -11,7 +11,7 @@ The default response format is [JSON](formats.md#json).
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfoMulti&api_key={API_KEY}&ids=101712565,101712563&format=chicken'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfoMulti&api_key=your-mapzen-api-key&ids=101712565,101712563&format=chicken'
 ```
 
 #### Example response
@@ -55,7 +55,7 @@ CSV (Comma Separated Value)
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key={API_KEY}&q=poutine&page=1&per_page=1&format=csv'
+curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=csv'
 ```
 
 #### Example response
@@ -93,7 +93,7 @@ GeoJSON is a data-interchange format based on JavaScript. For more details, cons
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.getInfoMulti&api_key={API_KEY}&&ids=101712565,101712563&format=geojson'
+curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.getInfoMulti&api_key=your-mapzen-api-key&&ids=101712565,101712563&format=geojson'
 ```
 
 #### Example response
@@ -173,7 +173,7 @@ JSON (JavaScript Object Notation) is a data-interchange format based on JavaScri
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key={API_KEY}&q=poutine&page=1&per_page=1&format=json'
+curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=json'
 ```
 
 #### Example response
@@ -227,7 +227,7 @@ As in a Who's On First "meta" file. A meta file is really just a CSV file with a
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key={API_KEY}&q=poutine&page=1&per_page=1&format=meta'
+curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=meta'
 ```
 
 #### Example response

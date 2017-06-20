@@ -8,3 +8,4 @@ tests/coverage.state
 coverage/
 certified
 *.bak
+bin/mk-docs.sh
