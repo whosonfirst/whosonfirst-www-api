@@ -7,7 +7,7 @@
 
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
-| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | mapzen-XXXXXXX | yes |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 {if $details.parameters|@count}
 {foreach from=$details.parameters item="param"}
 {if $param.documented || 'admin'|@auth_has_role}
