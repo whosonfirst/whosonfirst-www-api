@@ -159,7 +159,14 @@
 		# if someone is asking for stuff formatted as CSV
 		# (20170228/thisisaaronland)
 
-		if (count($results) > 1){
+		# but only when people are asking for things to be
+		# returned as CSV files because this:
+		# https://github.com/whosonfirst/whosonfirst-www-api/issues/49
+		# (20170622/thisisaaronland)
+
+		$format = request_str("format");
+
+		if (($format == "csv") && (count($results) > 1)){
 
 			foreach ($results as &$r){
 
