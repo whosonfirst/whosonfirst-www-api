@@ -225,7 +225,7 @@
 
 					else {
 						$pt = str_replace("_id", "", $pt);
-						$hier_spr[$pt] = array();
+						$hier_spr[$pt] = null;	# https://github.com/whosonfirst/whosonfirst-www-api/issues/54
 					}
 				}
 
