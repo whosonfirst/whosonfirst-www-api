@@ -2,12 +2,18 @@
 
 	loadlib("machinetags");
 	loadlib("machinetags_elasticsearch_wildcard");
+	loadlib("whosonfirst_placetypes");
 
 	########################################################################
 
 	function api_whosonfirst_utils_search_filters(){
 
+		# it is assumed that these have been validated by now
+		# see also: api_whosonfirst_utils_ensure_valid_placetypes
+
 		$placetype = request_str("placetype");
+		$exclude_placetype = request_str("exclude_placetype");
+
 		$iso = request_str("iso");
 
 		$tags = request_str("tags");
@@ -92,8 +98,6 @@
 			# this gets handled below
 		}
 
-		# TO DO: lib_whosonfirst_placetypes - and validate
-
 		if ($placetype){
 
 			$placetype = api_whosonfirst_utils_ensure_array($placetype);
@@ -103,7 +107,6 @@
 
 				$placetype = $placetype[0];
 				$esc_placetype = elasticsearch_escape($placetype);
-
 				$filters[] = array('terms' => array('wof:placetype' => array($esc_placetype)));
 			}
 
@@ -115,7 +118,43 @@
 					$esc_placetypes[] = elasticsearch_escape($p);
 				}
 
-				$filters[] = array('terms' => array('wof:placetype' => $esc_placetypes));
+				if (count($esc_placetypes)){
+					$filters[] = array('terms' => array('wof:placetype' => $esc_placetypes));
+				}
+			}
+		}
+
+		if ($exclude_placetype){
+
+			$to_exclude = api_whosonfirst_utils_ensure_array($exclude_placetype);
+
+			$count = count($to_exclude);
+
+			if ($count == 1){
+
+				$to_exclude = $to_exclude[0];
+
+				if (whosonfirst_placetypes_is_valid_placetype($to_exclude)){
+
+					$esc_placetype = elasticsearch_escape($to_exclude);
+					$must_not[] = array('terms' => array('wof:placetype' => array($esc_placetype)));
+				}
+			}
+
+			else {
+
+				$esc_placetypes = array();
+
+				foreach ($to_exclude as $p){
+
+					if (whosonfirst_placetypes_is_valid_placetype($p)){
+						$esc_placetypes[] = elasticsearch_escape($p);
+					}
+				}
+
+				if (count($esc_placetypes)){
+					$must_not[] = array('terms' => array('wof:placetype' => $esc_placetypes));
+				}
 			}
 		}
 
@@ -307,7 +346,6 @@
 	function api_whosonfirst_utils_ensure_array($thing){
 
 		if (! is_array($thing)){
-
 			$thing = mb_split(";", $thing);		# maybe ?
 		}
 
@@ -365,6 +403,29 @@
 
 		$extras = implode(",", $extras);
 		return $extras;
+	}
+
+	########################################################################
+
+	function api_whosonfirst_utils_ensure_valid_placetypes($possible, $err_code=450){
+
+		$possible = api_whosonfirst_utils_ensure_array($possible);
+
+		if (count($possible) == 0){
+			api_output_error($err_code);
+		}
+
+		if (count($possible) > 10){
+			api_output_error($err_code);
+		}
+
+		foreach ($possible as $pt){
+
+			if (! whosonfirst_placetypes_is_valid_placetype($pt)){
+				api_output_error($err_code);
+			}
+		}
+
 	}
 
 	########################################################################

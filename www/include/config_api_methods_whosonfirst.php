@@ -2,27 +2,140 @@
 
 	$GLOBALS['api_methods_whosonfirst'] = array(
 		'filter_parameters' => array(
-			array("name" => "name", "description" => "Query for this value in the wof:name field.", "documented" => 1, "required" => 0, "example" => "Gowanus Heights"),
-			array("name" => "names", "description" => "Query for this value across all name related fields.", "documented" => 1, "required" => 0, "example" => "SF"),
-			array("name" => "alt", "description" => "Query for this value across all alternate name related fields (variant, colloquial, unknown).", "documented" => 1, "required" => 0, "example" => "Paris"),
-			array("name" => "preferred", "description" => "Query for this value across all preferred name related fields.", "documented" => 1, "required" => 0, "example" => "বেইজিং"),
-			array("name" => "variant", "description" => "Query for this value across all variant name related fields.", "documented" => 1, "required" => 0, "example" => "💩"),
-			array("name" => "placetype", "description" => "Ensure records match this placetype.", "documented" => 1, "required" => 0, "example" => "microhood"),
-
-   			array("name" => "tags", "description" => "Query for places with one or more of these tags.", "documented" => 1, "required" => 0, "example" => "diner"),
-			array("name" => "category", "description" => "Query for places with one or more of these categories.", "documented" => ($GLOBALS['cfg']['enable_feature_categories'] &&$GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0, "required" => 0),
-
-			array("name" => "iso", "description" => "Ensure places belong to this (ISO) country code.", "documented" => 1, "required" => 0, "example" => "CA"),
-			array("name" => "country_id", "description" => "Ensure places belong to this country Who's On First ID.", "documented" => 1, "required" => 0, "example" => "85633147"),
-			array("name" => "region_id", "description" => "Ensure places belong to this region Who's On First ID.", "documented" => 1, "required" => 0, "example" => "85669831"),
-			array("name" => "locality_id", "description" => "Ensure places belong to this locality Who's On First ID.", "documented" => 1, "required" => 0, "example" => "101736545"),
-			array("name" => "neighbourhood_id", "description" => "Ensure places belong to this neighbourhood Who's On First ID.", "documented" => 1, "required" => 0, "example" => "102112179"),
-			array("name" => "concordance", "description" => "Query for places that have been concordified with this source.", "documented" => 1, "required" => 0, "example" => "loc:id"),
-			array("name" => "exclude", "description" => "Exclude places matching these criteria.", "documented" => 1, "required" => 0, "example" => "nullisland"),
-			array("name" => "include", "description" => "Include places matching these criteria.", "documented" => 1, "required" => 0, "example" => "deprecated"),
-			array("name" => "min_lastmod", "description" => "Limit results to places that have been modified on or since this date (encoded as a Unix timestamp).", "documented" => 1, "required" => 0, "example" => 1493855252),
-			array("name" => "max_lastmod", "description" => "Limit results to places that have been modified on or before this date (encoded as a Unix timestamp).", "documented" => 1, "required" => 0, "example" => 1496783757),
-
+			array(
+				"name" => "name",
+				"description" => "Query for this value in the wof:name field.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "Gowanus Heights"
+			),
+			array(
+				"name" => "names",
+				"description" => "Query for this value across all name related fields.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "SF"
+			),
+			array(
+				"name" => "alt",
+				"description" => "Query for this value across all alternate name related fields (variant, colloquial, unknown).",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "Paris"
+			),
+			array(
+				"name" => "preferred",
+				"description" => "Query for this value across all preferred name related fields.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "বেইজিং"
+			),
+			array(
+				"name" => "variant",
+				"description" => "Query for this value across all variant name related fields.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "💩"
+			),
+			array(
+				"name" => "placetype",
+				"description" => "Ensure records match this placetype.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "microhood",
+				"notes" => "You may ensure that records include multiple placetypes by passing a ';' separated list of up to 10 placetypes, for example 'venue;neighbourhood'."
+			),
+			array(
+				"name" => "exclude_placetype",
+				"description" => "Ensure records exclude this placetype.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "venue",
+				"notes" => "You may ensure that records exclude multiple placetypes by passing a ';' separated list of up to 10 placetypes, for example 'venue;neighbourhood'."
+			),
+   			array(
+				"name" => "tags",
+				"description" => "Query for places with one or more of these tags.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "diner"
+			),
+			array(
+				"name" => "category",
+				"description" => "Query for places with one or more of these categories.",
+				"documented" => ($GLOBALS['cfg']['enable_feature_categories'] &&$GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0,
+				"required" => 0
+			),
+			array(
+				"name" => "iso",
+				"description" => "Ensure places belong to this (ISO) country code.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "CA"
+			),
+			array(
+				"name" => "country_id",
+				"description" => "Ensure places belong to this country Who's On First ID.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "85633147"
+			),
+			array(
+				"name" => "region_id",
+				"description" => "Ensure places belong to this region Who's On First ID.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "85669831"
+			),
+			array(
+				"name" => "locality_id",
+				"description" => "Ensure places belong to this locality Who's On First ID.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "101736545"
+			),
+			array(
+				"name" => "neighbourhood_id",
+				"description" => "Ensure places belong to this neighbourhood Who's On First ID.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "102112179"
+			),
+			array(
+				"name" => "concordance",
+				"description" => "Query for places that have been concordified with this source.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "loc:id"
+			),
+			array(
+				"name" => "exclude",
+				"description" => "Exclude places matching these criteria.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "nullisland"
+			),
+			array(
+				"name" => "include",
+				"description" => "Include places matching these criteria.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "deprecated"
+			),
+			array(
+				"name" => "min_lastmod",
+				"description" => "Limit results to places that have been modified on or since this date (encoded as a Unix timestamp).",
+				"documented" => 1,
+				"required" => 0,
+				"example" => 1493855252
+			),
+			array(
+				"name" => "max_lastmod",
+				"description" => "Limit results to places that have been modified on or before this date (encoded as a Unix timestamp).",
+				"documented" => 1,
+				"required" => 0,
+				"example" => 1496783757
+			),
 		),
 	);
 
@@ -459,6 +572,7 @@
 				"432" => array("message" => "Invalid minimum lastmodified date"),
 				"433" => array("message" => "Invalid maximum lastmodified date"),
 				"434" => array("message" => "Impossible date range"),
+				"435" => array("message" => "Invalid placetype"),
 				"513" => array("message" => "Unable to perform search"),
 			)
 		),

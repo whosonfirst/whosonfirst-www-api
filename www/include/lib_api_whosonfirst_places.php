@@ -17,6 +17,17 @@
 
 		$q = request_str("q");
 
+		$placetype = request_str("placetype");
+		$exclude = request_str("exclude_placetype");
+
+		if ($placetype){
+			api_whosonfirst_utils_ensure_valid_placetypes($placetype, 435);
+		}
+
+		if ($exclude){
+			api_whosonfirst_utils_ensure_valid_placetypes($exclude, 435);
+		}
+
 		$filters = api_whosonfirst_utils_search_filters();
 
 		if (($q == "") && (count($filters) <= 1)){
