@@ -520,6 +520,7 @@ Return all the descendants for a Who&#039;s On First ID.
 | `preferred` | Query for this value across all preferred name related fields. |  বেইজিং | no |
 | `variant` | Query for this value across all variant name related fields. |  💩 | no |
 | `placetype` | Ensure records match this placetype. |  microhood | no |
+| `exclude_placetype` | Ensure records exclude this placetype. |  venue | no |
 | `tags` | Query for places with one or more of these tags. |  diner | no |
 | `iso` | Ensure places belong to this (ISO) country code. |  CA | no |
 | `country_id` | Ensure places belong to this country Who&#039;s On First ID. |  85633147 | no |
@@ -566,12 +567,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDe
             "wof:repo": "whosonfirst-data-venue-us-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs1MDU5MzQzOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTA1OTMxOTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUwNTkzMjA6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs1MDU5MzQ0OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTA1OTMyMTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs1MzEwNjc2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDY1Mjp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUzMTA2NTE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs1MzEwNjc3OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDY1Mzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "total": 120,
     "page": null,
     "pages": 120,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs1MDU5MzQzOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTA1OTMxOTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUwNTkzMjA6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs1MDU5MzQ0OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTA1OTMyMTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs1MzEwNjc2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDY1Mjp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUzMTA2NTE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs1MzEwNjc3OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDY1Mzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "stat": "ok"
 }
 ```
@@ -942,11 +943,11 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRa
 
 {
     "place": {
-        "wof:id": 1108759859,
-        "wof:parent_id": "85671341",
-        "wof:name": "Komenda\/ Edina\/ Eguafo",
-        "wof:placetype": "county",
-        "wof:country": "GH",
+        "wof:id": 421193771,
+        "wof:parent_id": "-1",
+        "wof:name": "Salwa-block 10",
+        "wof:placetype": "neighbourhood",
+        "wof:country": "KW",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -970,6 +971,7 @@ Query for Who&#039;s On First records.
 | `preferred` | Query for this value across all preferred name related fields. |  বেইজিং | no |
 | `variant` | Query for this value across all variant name related fields. |  💩 | no |
 | `placetype` | Ensure records match this placetype. |  microhood | no |
+| `exclude_placetype` | Ensure records exclude this placetype. |  venue | no |
 | `tags` | Query for places with one or more of these tags. |  diner | no |
 | `iso` | Ensure places belong to this (ISO) country code. |  CA | no |
 | `country_id` | Ensure places belong to this country Who&#039;s On First ID. |  85633147 | no |
@@ -996,6 +998,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 | `432` | Invalid minimum lastmodified date |
 | `433` | Invalid maximum lastmodified date |
 | `434` | Impossible date range |
+| `435` | Invalid placetype |
 | `513` | Unable to perform search |
 
 ##### Notes
@@ -1019,12 +1022,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.searc
             "wof:repo": "whosonfirst-data-venue-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs1MDU5MzYzOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTA1OTM0MDp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUwNTkzMzk6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs1MDU5MzY0OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTA1OTM0MTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs1MzEwNzQ2OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7NTMxMDc0Nzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUzMTA3NzE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs1MzEwNzcyOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDc0ODp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "total": 14,
     "page": null,
     "pages": 14,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs1MDU5MzYzOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTA1OTM0MDp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUwNTkzMzk6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs1MDU5MzY0OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTA1OTM0MTp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs1MzEwNzQ2OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7NTMxMDc0Nzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUzMTA3NzE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs1MzEwNzcyOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDc0ODp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
     "stat": "ok"
 }
 ```
@@ -1566,10 +1569,10 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags
         }
     ],
     "next_query": "method=whosonfirst.tags.getTags&source=wof&per_page=1&page=2",
-    "total": 39673,
+    "total": 39691,
     "page": 1,
     "per_page": 1,
-    "pages": 39673,
+    "pages": 39691,
     "cursor": null,
     "stat": "ok"
 }
