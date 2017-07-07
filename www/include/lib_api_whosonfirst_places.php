@@ -670,13 +670,13 @@
 
 		if ($r = request_int32("radius")){
 
-			if (($r < 0) || ($r > 500)){
+			if (($r < 0) || ($r > $GLOBALS['cfg']['spatial_nearby_max_radius'])){
 				api_output_error(436);
 			}
 		}
 
 		else {
-			$r = 100;
+			$r = $GLOBALS['cfg']['spatial_nearby_default_radius'];
 		}
 
 		$more = array();

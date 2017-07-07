@@ -378,6 +378,11 @@
 	$GLOBALS['cfg']['enable_feature_spatial_nearby'] = 1;
 	$GLOBALS['cfg']['enable_feature_spatial_intersects'] = 1;
 
+	# see also: https://github.com/whosonfirst/whosonfirst-www-api/issues/56
+
+	$GLOBALS['cfg']['spatial_nearby_default_radius'] = 100;
+	$GLOBALS['cfg']['spatial_nearby_max_radius'] = 80467;	# 50 miles because I miss Dopplr (20170707/thisisaaronland)
+
 	$GLOBALS['cfg']['spatial_tile38_host'] = 'localhost';
 	$GLOBALS['cfg']['spatial_tile38_port'] = '9851';
 	$GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst';
