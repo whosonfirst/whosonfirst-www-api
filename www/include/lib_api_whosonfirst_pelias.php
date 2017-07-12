@@ -12,8 +12,10 @@
 
 	########################################################################
 
-	function api_whosonfirst_pelias_autocomplete(){
+	# curl -X GET 'https://whosonfirst-api.mapzen.com/pelias/v1/autocomplete?text=Gowanu'
 
+	function api_whosonfirst_pelias_autocomplete(){
+		
 		api_whosonfirst_pelias_ensure_format();
 
 		if (request_isset("version")){
@@ -35,9 +37,15 @@
 		
 		$filters = api_whosonfirst_pelias_ensure_filters();
 
+		$filter_query = array('filtered' => array(
+			'query' => $query,
+			'filter' => array('and' => $filters),
+		));
 
 		$req = array(
-			"query" => $query,
+			# this results in weirdness still, not sure why (20170712/thisisaaronland)
+			# "query" => $filter_query,
+			"query" => $query
 		);
 
 		$more = array();
