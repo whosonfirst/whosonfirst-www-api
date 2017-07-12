@@ -28,7 +28,7 @@
 		$text = request_str("text");
 
 		$query = array("match" => array(
-			"names_autocomplete" => $q
+			"names_autocomplete" => $text
 		));
 
 		# okay set up search filters

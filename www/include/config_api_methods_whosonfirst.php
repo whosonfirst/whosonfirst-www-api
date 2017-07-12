@@ -289,14 +289,13 @@
 
 		'whosonfirst.pelias.autocomplete' => array(
 			"description" => "Query Who's On First using the Pelias autocomplete API",
-			"documented" => 0,
+			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 0,
 			"extras" => 1,
 			"library" => "api_whosonfirst_pelias",
                         "parameters" => array(
 				array("name" => "text", "description" => "A valid query string. This is the equivalent of the WOF 'names' parameter, which takes precedence.", "documented" => 1, "required" => 1, "example" => "JFK"),
-				array("name" => "names", "description" => "...", "documented" => 1, "required" => 0, "example" => "JFK"),
 			),
 			"notes" => array(
 				"As of this writing this API method will return zero results by design. WOF does not currently support autocomplete and this method is necessary to keep the Mapzen.JS search widget happy."

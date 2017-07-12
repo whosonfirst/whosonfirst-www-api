@@ -363,7 +363,7 @@
 
 	$GLOBALS['cfg']['elasticsearch_spelunker_host'] = 'http://localhost';
 	$GLOBALS['cfg']['elasticsearch_spelunker_port'] = '9200';
-	$GLOBALS['cfg']['elasticsearch_spelunker_index'] = 'whosonfirst_20160831';
+	$GLOBALS['cfg']['elasticsearch_spelunker_index'] = 'whosonfirst';
 
 	$GLOBALS['cfg']['elasticsearch_spelunker_scroll'] = 1;
 	$GLOBALS['cfg']['elasticsearch_spelunker_scroll_ttl'] = '2m';
