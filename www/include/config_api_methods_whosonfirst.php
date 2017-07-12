@@ -289,7 +289,7 @@
 
 		'whosonfirst.pelias.autocomplete' => array(
 			"description" => "Query Who's On First using the Pelias autocomplete API",
-			"documented" => 1,
+			"documented" => 0,
 			"enabled" => 1,
 			"paginated" => 0,
 			"extras" => 1,
