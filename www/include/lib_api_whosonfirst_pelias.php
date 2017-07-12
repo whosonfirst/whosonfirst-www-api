@@ -23,31 +23,42 @@
 			}
 		}
 
-		$text = request_str("text");
-
 		# TO DO: support focus.point.lat and focus.point.lon
 
-		$query_field = "q";
+		$text = request_str("text");
 
-		if ($qf = request_str("query_field")){
+		$query = array("match" => array(
+			"names_autocomplete" => $q
+		));
 
-			if (! in_array($qf, array("q", "alt", "name", "names", "preferred", "variant"))){
-				api_output_error(442);
-			}
+		# okay set up search filters
+		
+		$filters = api_whosonfirst_pelias_ensure_filters();
 
-			$query_field = $qf;
+
+		$req = array(
+			"query" => $query,
+		);
+
+		$more = array();
+
+		$rsp = elasticsearch_spelunker_search($req, $more);
+
+		if (! $rsp["ok"]){
+			api_output_error(513);
 		}
 
-		$_REQUEST[ $query_field ] = $text;
-		$q = request_str("q");
-
-		# SEE THIS - IT IS IMPORTANT. WE AREN'T ACTUALLY DOING
-		# AUTOCOMPLETE AT THE MOMENT AND THIS IS JUST TO KEEP
-		# MAPZEN.JS FROM THINKING THAT SEARCH IS ENTIRELY HOSED
-		# (20170424/thisisaaronland)
+		$extras = api_whosonfirst_utils_get_extras();
+		
+		$more = array(
+			"extras" => $extras,
+		);
+		
+		api_whosonfirst_output_enpublicify($rsp['rows'], $more);
+		$pagination = $rsp['pagination'];
 
 		$out = array(
-			"places" => array(),
+			"places" => $rsp['rows'],
 		);
 
 		$pelias_query = array(
@@ -97,10 +108,112 @@
 		if ((! trim($text)) && (! trim($q))){
 			api_output_error(453);
 		}
-
-		# next make sure we aren't being asked to query
-		# something we support - see also:
 		
+		# okay set up search filters
+		
+		$filters = api_whosonfirst_pelias_ensure_filters();
+
+		$args = array();
+		api_utils_ensure_pagination_args($args);
+		
+		$rsp = whosonfirst_places_search($q, $filters, $args);
+
+		if (! $rsp['ok']){
+			api_output_error(513);
+		}
+
+		$extras = api_whosonfirst_utils_get_extras();
+		
+		$more = array(
+			"extras" => $extras,
+		);
+		
+		api_whosonfirst_output_enpublicify($rsp['rows'], $more);
+		$pagination = $rsp['pagination'];
+
+		$out = array(
+			"places" => $rsp['rows'],
+		);
+
+		api_utils_ensure_pagination_results($out, $pagination);
+
+		$query_map = array(
+			$query_field => "text",
+			"per_page" => "size",
+			"iso" => "boundary.country",
+			"placetype" => "layers",
+			"min_latitude" => "boundary.rect.min_lat",
+			"min_longitude" => "boundary.rect.min_lon",
+			"max_latitude" => "boundary.rect.max_lat",
+			"max_longitude" => "boundary.rect.max_lon",
+		);
+
+		$pelias_query = array(
+
+			"lang" => array(
+				"name" => "English",
+				"iso6391" => "en",
+				"iso6392" => "eng",
+			),
+		);
+
+		foreach ($query_map as $wof_k => $pelias_k){
+
+			if (! request_isset($wof_k)){
+				continue;
+			}
+
+			$v = request_str($wof_k);
+
+			if ($pelias_k == "layers"){
+				$v = array($v);
+			}
+
+			$pelias_query[$pelias_k] = $v;
+		}
+
+		$is_pelias_query = false;
+
+		foreach ($query_map as $ignore => $pelias_k){
+
+			if (request_isset($pelias_k)){
+				$is_pelias_query = true;
+				break;
+			}
+		}
+
+		if ($is_pelias_query){
+		
+			$next_query = $pelias_query;
+			
+			if ($c = $out["cursor"]){
+
+				$next_query["cursor"] = $c;
+				$out["next_query"] = http_build_query($next_query);
+
+			} else {
+
+				if ($out["page"] < $out["pages"]){
+
+					$next_query["page"] = $out["page"] + 1;
+					$out["next_query"] = http_build_query($next_query);
+				}
+			}
+		}
+
+		$more = array(
+			"geocoding" => 1,
+			"query" => $pelias_query,
+			"key" => "places",
+		);
+
+		api_output_ok($out, $more);
+	}
+
+	########################################################################
+
+	function api_whosonfirst_pelias_ensure_filters(){
+
 		# https://github.com/whosonfirst/whosonfirst-www-api/issues/33		
 		# https://github.com/whosonfirst/whosonfirst-www-api/issues/34
 
@@ -226,106 +339,9 @@
 				api_output_error(439);
 			}
 		}
-		
-		# okay set up search filters
-		
+
 		$filters = api_whosonfirst_utils_search_filters();
-
-		$args = array();
-		api_utils_ensure_pagination_args($args);
-		
-		$rsp = whosonfirst_places_search($q, $filters, $args);
-
-		if (! $rsp['ok']){
-			api_output_error(513);
-		}
-
-		$extras = api_whosonfirst_utils_get_extras();
-		
-		$more = array(
-			"extras" => $extras,
-		);
-		
-		api_whosonfirst_output_enpublicify($rsp['rows'], $more);
-		$pagination = $rsp['pagination'];
-
-		$out = array(
-			"places" => $rsp['rows'],
-		);
-
-		api_utils_ensure_pagination_results($out, $pagination);
-
-		$query_map = array(
-			$query_field => "text",
-			"per_page" => "size",
-			"iso" => "boundary.country",
-			"placetype" => "layers",
-			"min_latitude" => "boundary.rect.min_lat",
-			"min_longitude" => "boundary.rect.min_lon",
-			"max_latitude" => "boundary.rect.max_lat",
-			"max_longitude" => "boundary.rect.max_lon",
-		);
-
-		$pelias_query = array(
-
-			"lang" => array(
-				"name" => "English",
-				"iso6391" => "en",
-				"iso6392" => "eng",
-			),
-		);
-
-		foreach ($query_map as $wof_k => $pelias_k){
-
-			if (! request_isset($wof_k)){
-				continue;
-			}
-
-			$v = request_str($wof_k);
-
-			if ($pelias_k == "layers"){
-				$v = array($v);
-			}
-
-			$pelias_query[$pelias_k] = $v;
-		}
-
-		$is_pelias_query = false;
-
-		foreach ($query_map as $ignore => $pelias_k){
-
-			if (request_isset($pelias_k)){
-				$is_pelias_query = true;
-				break;
-			}
-		}
-
-		if ($is_pelias_query){
-		
-			$next_query = $pelias_query;
-			
-			if ($c = $out["cursor"]){
-
-				$next_query["cursor"] = $c;
-				$out["next_query"] = http_build_query($next_query);
-
-			} else {
-
-				if ($out["page"] < $out["pages"]){
-
-					$next_query["page"] = $out["page"] + 1;
-					$out["next_query"] = http_build_query($next_query);
-				}
-			}
-		}
-
-		$more = array(
-			"geocoding" => 1,
-			"query" => $pelias_query,
-			"key" => "places",
-		);
-
-		api_output_ok($out, $more);
+		return $filters;
 	}
 
 	########################################################################
