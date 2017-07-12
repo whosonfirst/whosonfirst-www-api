@@ -295,7 +295,7 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_pelias",
                         "parameters" => array(
-				array("name" => "text", "description" => "A valid query string. This is the equivalent of the WOF 'names' parameter, which takes precedence.", "documented" => 1, "required" => 1, "example" => "JFK"),
+				array("name" => "text", "description" => "A valid query string.", "documented" => 1, "required" => 1, "example" => "Gowanu"),
 			),
 			"notes" => array(
 				"As of this writing this API method will return zero results by design. WOF does not currently support autocomplete and this method is necessary to keep the Mapzen.JS search widget happy."
