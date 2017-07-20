@@ -28,12 +28,6 @@
 			api_whosonfirst_utils_ensure_valid_placetypes($exclude, 435);
 		}
 
-		$filters = api_whosonfirst_utils_search_filters();
-
-		if (($q == "") && (count($filters) <= 1)){
-			api_output_error(452);
-		}
-
 		$min_lastmod = request_int32("min_lastmod");
 		$max_lastmod = request_int32("max_lastmod");
 
@@ -50,6 +44,24 @@
 			if ($min_lastmod > $max_lastmod){
 				api_output_error(434);
 			}
+		}
+
+		if (request_isset("is_current")){
+
+			# because request_int32 will only return an
+			# unsigned integer (20170720/thisisaaronland)
+
+			$c = request_str("is_current");
+
+			if (! in_array($c, array("-1", "0", "1"))){
+				api_output_error(400);
+			}
+		}
+
+		$filters = api_whosonfirst_utils_search_filters();
+
+		if (($q == "") && (count($filters) <= 1)){
+			api_output_error(452);
 		}
 
 		$args = array();

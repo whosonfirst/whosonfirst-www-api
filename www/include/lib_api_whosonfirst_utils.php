@@ -16,6 +16,8 @@
 
 		$iso = request_str("iso");
 
+		$is_current = request_str("is_current");
+
 		$tags = request_str("tags");
 
 		# $machinetag = request_str("mt");
@@ -97,6 +99,20 @@
 
 			# this gets handled below
 		}
+
+		if ($is_current == "-1"){
+			$filters[] = array('term' => array('mz:is_current' => -1));
+		}
+
+		else if ($is_current == "0"){
+			$filters[] = array('term' => array('mz:is_current' => 0));
+		} 
+
+		else if ($is_current == "1"){
+			$filters[] = array('term' => array('mz:is_current' => 1));
+		}
+
+		else {}
 
 		if ($placetype){
 
