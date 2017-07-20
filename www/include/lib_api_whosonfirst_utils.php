@@ -49,6 +49,9 @@
 			}
 		}
 
+		# is_deprecated is cast as an int
+		# is_cessated is cast as int
+
 	}
 
 	########################################################################
@@ -66,6 +69,12 @@
 		$iso = request_str("iso");
 
 		$is_current = request_str("is_current");
+
+		$is_deprecated = request_str("is_deprecated");
+		$is_cessated = request_str("is_cessated");
+
+		$is_superseded = request_str("is_superseded");
+		$is_superseder = request_str("is_superseder");
 
 		$tags = request_str("tags");
 
@@ -149,6 +158,8 @@
 			# this gets handled below
 		}
 
+		# is_current
+
 		if ($is_current == "-1"){
 			$filters[] = array('term' => array('mz:is_current' => -1));
 		}
@@ -162,6 +173,38 @@
 		}
 
 		else {}
+
+		# is_deprecated
+
+		if ($is_deprecated == "0"){
+			# edtf:deprecated is not present or "" or "uuuu"
+		}
+
+		else if ($is_deprecated == "1"){
+			# edtf:deprecated is present and (not "" or "uuuu")
+		}
+
+		else {}
+
+		# is_cessated
+
+		if ($is_cessation == "0"){
+			# edtf:cessation is not present or "" or "uuuu"
+		}
+
+		else if ($is_cessated == "1"){
+			# edtf:cessation is present and (not "" or "uuuu")
+		}
+
+		else {}
+
+		# is_superseded
+		# wof:superseded_by is not empty
+
+		# is_superseder - PLEASE RENAME ME...
+		# wof:supersedes is not empty
+
+		#
 
 		if ($placetype){
 
