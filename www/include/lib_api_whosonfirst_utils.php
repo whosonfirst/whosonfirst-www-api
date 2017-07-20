@@ -6,10 +6,59 @@
 
 	########################################################################
 
+	function api_whosonfirst_utils_validate_search_filters(){
+
+		$placetype = request_str("placetype");
+		$exclude = request_str("exclude_placetype");
+
+		if ($placetype){
+			api_whosonfirst_utils_ensure_valid_placetypes($placetype, 435);
+		}
+
+		if ($exclude){
+			api_whosonfirst_utils_ensure_valid_placetypes($exclude, 435);
+		}
+
+		$min_lastmod = request_int32("min_lastmod");
+		$max_lastmod = request_int32("max_lastmod");
+
+		if (($min_lastmod) && ($min_lastmod < 0)){
+			api_output_error(432);
+		}
+
+		if (($max_lastmod) && ($max_lastmod < 0)){
+			api_output_error(433);
+		}
+
+		if (($min_lastmod) && ($max_lastmod)){
+
+			if ($min_lastmod > $max_lastmod){
+				api_output_error(434);
+			}
+		}
+
+		if (request_isset("is_current")){
+
+			# because request_int32 will only return an
+			# unsigned integer (20170720/thisisaaronland)
+
+			$c = request_str("is_current");
+
+			if (! in_array($c, array("-1", "0", "1"))){
+				api_output_error(400);
+			}
+		}
+
+	}
+
+	########################################################################
+
 	function api_whosonfirst_utils_search_filters(){
 
+		api_whosonfirst_utils_validate_search_filters();
+
 		# it is assumed that these have been validated by now
-		# see also: api_whosonfirst_utils_ensure_valid_placetypes
+		# see above
 
 		$placetype = request_str("placetype");
 		$exclude_placetype = request_str("exclude_placetype");
