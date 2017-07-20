@@ -178,10 +178,49 @@
 
 		if ($is_deprecated == "0"){
 			# edtf:deprecated is not present or "" or "uuuu"
+
+			$foo = array(
+				'array' => array('exists' => array(
+					'field' => 'edtf:deprecated'
+				)
+			));
+
+			$bar = array('bool' => array(
+				'must' => array(
+					array("term" => array("edtf:deprecated" => "")),
+			      		array("term" => array("edtf:deprecated" => "uuuu")),
+				)
+			));
+
+			$baz = array('bool' => array(
+				'should' => array( $foo, $bar )
+			));
+
+			# $filters[] = $baz;
+
 		}
 
 		else if ($is_deprecated == "1"){
 			# edtf:deprecated is present and (not "" or "uuuu")
+
+			$foo = array(
+				'array' => array('exists' => array(
+					'field' => 'edtf:deprecated'
+				)
+			));
+
+			$bar = array('bool' => array(
+				'must_not' => array(
+					array("term" => array("edtf:deprecated" => "")),
+			      		array("term" => array("edtf:deprecated" => "uuuu")),
+				)
+			));
+
+			$baz = array('bool' => array(
+				'must' => array( $foo, $bar )
+			));
+
+			# $filters[] = $baz;
 		}
 
 		else {}
