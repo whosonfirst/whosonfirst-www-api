@@ -340,7 +340,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances
     "sources": [
         {
             "source": "sg:id",
-            "concordances": 21674066
+            "concordances": 21089055
         }
     ],
     "next_query": "method=whosonfirst.concordances.getSources&per_page=1&page=2",
@@ -528,6 +528,7 @@ Return all the descendants for a Who&#039;s On First ID.
 | `locality_id` | Ensure places belong to this locality Who&#039;s On First ID. |  101736545 | no |
 | `neighbourhood_id` | Ensure places belong to this neighbourhood Who&#039;s On First ID. |  102112179 | no |
 | `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. |  1 | no |
 | `exclude` | Exclude places matching these criteria. |  nullisland | no |
 | `include` | Include places matching these criteria. |  deprecated | no |
 | `min_lastmod` | Limit results to places that have been modified on or since this date (encoded as a Unix timestamp). |  1493855252 | no |
@@ -567,12 +568,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDe
             "wof:repo": "whosonfirst-data-venue-us-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs1MzEwNjc2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDY1Mjp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUzMTA2NTE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs1MzEwNjc3OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDY1Mzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs2NTc3Nzc6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3Nzg6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3OTA6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc3OTE6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc3OTI6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzswOw%3D%3D",
     "total": 120,
     "page": null,
     "pages": 120,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs1MzEwNjc2OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDY1Mjp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUzMTA2NTE6eEtBOVd2TzZRc3k5MlVkTEs2WHkydzs1MzEwNjc3OktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDY1Mzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs2NTc3Nzc6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3Nzg6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3OTA6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc3OTE6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc3OTI6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzswOw==",
     "stat": "ok"
 }
 ```
@@ -943,11 +944,11 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRa
 
 {
     "place": {
-        "wof:id": 421193771,
-        "wof:parent_id": "-1",
-        "wof:name": "Salwa-block 10",
+        "wof:id": 85794285,
+        "wof:parent_id": "101751737",
+        "wof:name": "Goatstown",
         "wof:placetype": "neighbourhood",
-        "wof:country": "KW",
+        "wof:country": "IR",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -979,6 +980,7 @@ Query for Who&#039;s On First records.
 | `locality_id` | Ensure places belong to this locality Who&#039;s On First ID. |  101736545 | no |
 | `neighbourhood_id` | Ensure places belong to this neighbourhood Who&#039;s On First ID. |  102112179 | no |
 | `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. |  1 | no |
 | `exclude` | Exclude places matching these criteria. |  nullisland | no |
 | `include` | Include places matching these criteria. |  deprecated | no |
 | `min_lastmod` | Limit results to places that have been modified on or since this date (encoded as a Unix timestamp). |  1493855252 | no |
@@ -1014,20 +1016,20 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.searc
 {
     "places": [
         {
-            "wof:id": 975139507,
-            "wof:parent_id": "-1",
-            "wof:name": "Poutine Restau-Bar Enr",
+            "wof:id": 571751713,
+            "wof:parent_id": "85831563",
+            "wof:name": "Poutine",
             "wof:placetype": "venue",
-            "wof:country": "CA",
-            "wof:repo": "whosonfirst-data-venue-ca"
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data-venue-us-ny"
         }
     ],
-    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs1MzEwNzQ2OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7NTMxMDc0Nzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUzMTA3NzE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs1MzEwNzcyOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDc0ODp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
-    "total": 14,
+    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs2NTc3OTc6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3OTg6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc4MTA6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc4MTE6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc4MTI6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzswOw%3D%3D",
+    "total": 2,
     "page": null,
-    "pages": 14,
+    "pages": 2,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs1MzEwNzQ2OnhLQTlXdk82UXN5OTJVZExLNlh5Mnc7NTMxMDc0Nzp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzUzMTA3NzE6S0NtcllnSk9Sa0NTcE5oRFhic1hXUTs1MzEwNzcyOktDbXJZZ0pPUmtDU3BOaERYYnNYV1E7NTMxMDc0ODp4S0E5V3ZPNlFzeTkyVWRMSzZYeTJ3OzA7",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs2NTc3OTc6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3OTg6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc4MTA6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc4MTE6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc4MTI6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzswOw==",
     "stat": "ok"
 }
 ```
@@ -1564,15 +1566,15 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags
 {
     "tags": [
         {
-            "count": 837015,
+            "count": 815933,
             "tag": "contractor"
         }
     ],
     "next_query": "method=whosonfirst.tags.getTags&source=wof&per_page=1&page=2",
-    "total": 39691,
+    "total": 39224,
     "page": 1,
     "per_page": 1,
-    "pages": 39691,
+    "pages": 39224,
     "cursor": null,
     "stat": "ok"
 }
