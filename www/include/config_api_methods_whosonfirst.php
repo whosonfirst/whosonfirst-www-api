@@ -3,13 +3,6 @@
 	$GLOBALS['api_methods_whosonfirst'] = array(
 		'filter_parameters' => array(
 			array(
-				"name" => "is_current",
-				"description" => "Filter results by their 'mz:is_current' property.",
-				"documented" => 1,
-				"required" => 0,
-				"example" => "1"
-			),
-			array(
 				"name" => "name",
 				"description" => "Query for this value in the wof:name field.",
 				"documented" => 1,
@@ -114,6 +107,13 @@
 				"documented" => 1,
 				"required" => 0,
 				"example" => "loc:id"
+			),
+			array(
+				"name" => "is_current",
+				"description" => "Filter results by their 'mz:is_current' property.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
 			),
 			array(
 				"name" => "exclude",
