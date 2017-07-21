@@ -49,9 +49,6 @@
 			}
 		}
 
-		# is_deprecated is cast as an int
-		# is_cessated is cast as int
-
 	}
 
 	########################################################################
@@ -71,7 +68,7 @@
 		$is_current = request_str("is_current");
 
 		$is_deprecated = request_str("is_deprecated");
-		$is_cessated = request_str("is_cessated");
+		$is_ceased = request_str("is_ceased");
 
 		$is_superseded = request_str("is_superseded");
 		$is_superseder = request_str("is_superseder");
@@ -177,62 +174,51 @@
 		# is_deprecated
 
 		if ($is_deprecated == "0"){
-			# edtf:deprecated is not present or "" or "uuuu"
 
-			$foo = array(
-				'array' => array('exists' => array(
-					'field' => 'edtf:deprecated'
-				)
-			));
-
-			$bar = array('bool' => array(
-				'must' => array(
-					array("term" => array("edtf:deprecated" => "")),
-			      		array("term" => array("edtf:deprecated" => "uuuu")),
-				)
-			));
-
-			$baz = array('bool' => array(
-				'should' => array( $foo, $bar )
-			));
-
-			# $filters[] = $baz;
-
+			# blocked on https://github.com/whosonfirst/whosonfirst-www-api/issues/60#issuecomment-317021588
 		}
 
 		else if ($is_deprecated == "1"){
-			# edtf:deprecated is present and (not "" or "uuuu")
 
-			$foo = array(
-				'array' => array('exists' => array(
-					'field' => 'edtf:deprecated'
-				)
-			));
-
-			$bar = array('bool' => array(
-				'must_not' => array(
-					array("term" => array("edtf:deprecated" => "")),
-			      		array("term" => array("edtf:deprecated" => "uuuu")),
-				)
-			));
-
-			$baz = array('bool' => array(
-				'must' => array( $foo, $bar )
-			));
-
-			# $filters[] = $baz;
+			# blocked on https://github.com/whosonfirst/whosonfirst-www-api/issues/60#issuecomment-317021588
 		}
 
 		else {}
 
-		# is_cessated
+		# is_ceased
 
-		if ($is_cessation == "0"){
-			# edtf:cessation is not present or "" or "uuuu"
+		if ($is_ceased == "0"){
+
+			$must = array(
+				array("terms" => array("edtf:cessation" => array ("", "u", "uuuu" ) ))
+			);			     
+
+			$must_not = array();
+
+			$filter = array('bool' => array(
+				'must' => $must,
+				'must_not' => $must_not,
+			));
+
+			$filters[] = $filter;
 		}
 
-		else if ($is_cessated == "1"){
-			# edtf:cessation is present and (not "" or "uuuu")
+		else if ($is_ceased == "1"){
+
+			$must = array(
+			      'exists' => array( 'field' => 'edtf:cessation' )
+			);			     
+
+			$must_not = array(
+			  	array("terms" => array("edtf:cessation" => array ("", "u", "uuuu" ) ))
+			);
+
+			$filter = array('bool' => array(
+				'must' => $must,
+				'must_not' => $must_not,
+			));
+
+			$filters[] = $filter;
 		}
 
 		else {}
