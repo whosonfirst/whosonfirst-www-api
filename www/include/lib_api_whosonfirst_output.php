@@ -47,7 +47,15 @@
 				$ids = array();
 
 				foreach ($rows as $row){
-					$ids[] = $row['wof:id'];
+
+					$wofid = $row['wof:id'];
+
+					# this shouldn't be necassary but that's true of a lot of things in life...
+					# https://github.com/whosonfirst/go-whosonfirst-tile38/issues/10
+
+					if (! in_array($wofid, $ids)){
+						$ids[] = $row['wof:id'];
+					}
 				}
 
 				$es_more = array('fields' => $fields);
