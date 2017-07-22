@@ -155,8 +155,11 @@
 			$must_not[] = array('term' => array('geom:longitude' => 0.0));	
 		}
 
-		if (! $deprecated){
+		if (request_isset("is_deprecated")){
+			$deprecated = true;
+		}
 
+		if (! $deprecated){
 			$must_not[] = array('exists' => array('field' => 'edtf:deprecated'));
 		}
 			

@@ -62,10 +62,6 @@
 
 		$body = json_encode($query);
 
-		echo "--\n";
-		echo $body . "\n";
-		echo "--\n";
-		
 		$headers = array(
 			"Content-Type" => "application/x-www-form-urlencoded",
 		);
