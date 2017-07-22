@@ -118,6 +118,19 @@
 		$filters = array();
 		$must_not = array();
 
+		$is_existential = false;
+
+		foreach (array("is_current", "is_deprecated", "is_ceased") as $p){
+
+			if (request_isset($p)){
+				$is_existential = true;
+				break;
+			}
+		}
+
+		# TBD... (20170722/thisisaaronland)
+		# if (! $is_existential){
+
 		if ($exclude){
 
 			$exclude = api_whosonfirst_utils_ensure_array($exclude);
@@ -146,6 +159,9 @@
 
 			$must_not[] = array('exists' => array('field' => 'edtf:deprecated'));
 		}
+			
+		# end of TBD... (20170722/thisisaaronland)
+		# }
 
 		if ($iso){
 
@@ -175,12 +191,44 @@
 
 		if ($is_deprecated == "0"){
 
-			# blocked on https://github.com/whosonfirst/whosonfirst-www-api/issues/60#issuecomment-317021588
+			# this WILL fail - blocked on:
+			# https://github.com/whosonfirst/whosonfirst-www-api/issues/60#issuecomment-317021588
+			# https://github.com/whosonfirst/es-whosonfirst-schema/issues/17
+
+			$must = array(
+				array("terms" => array("edtf:deprecated" => array ("", "u", "uuuu" ) ))
+			);			     
+
+			$must_not = array();
+
+			$filter = array('bool' => array(
+				'must' => $must,
+				'must_not' => $must_not,
+			));
+
+			$filters[] = $filter;
 		}
 
 		else if ($is_deprecated == "1"){
 
-			# blocked on https://github.com/whosonfirst/whosonfirst-www-api/issues/60#issuecomment-317021588
+			# this WILL fail - blocked on:
+			# https://github.com/whosonfirst/whosonfirst-www-api/issues/60#issuecomment-317021588
+			# https://github.com/whosonfirst/es-whosonfirst-schema/issues/17
+
+			$must = array(
+			      'exists' => array( 'field' => 'edtf:deprecated' )
+			);			     
+
+			$must_not = array(
+			  	array("terms" => array("edtf:deprecated" => array ("", "u", "uuuu" ) ))
+			);
+
+			$filter = array('bool' => array(
+				'must' => $must,
+				'must_not' => $must_not,
+			));
+
+			$filters[] = $filter;
 		}
 
 		else {}
