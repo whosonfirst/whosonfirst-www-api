@@ -130,6 +130,20 @@
 				"example" => "1"
 			),
 			array(
+				"name" => "is_superseded",
+				"description" => "Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
+				"name" => "is_superseding",
+				"description" => "Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
 				"name" => "exclude",
 				"description" => "Exclude places matching these criteria.",
 				"documented" => 1,

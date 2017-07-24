@@ -71,7 +71,7 @@
 		$is_ceased = request_str("is_ceased");
 
 		$is_superseded = request_str("is_superseded");
-		$is_superseder = request_str("is_superseder");
+		$is_superseding = request_str("is_superseding");
 
 		$tags = request_str("tags");
 
@@ -259,7 +259,7 @@
 
 		else if ($is_ceased == "1"){
 
-			$must = array(
+ 			$must = array(
 			      'exists' => array( 'field' => 'edtf:cessation' )
 			);			     
 
@@ -277,11 +277,61 @@
 
 		else {}
 
-		# is_superseded
-		# wof:superseded_by is not empty
+		# is_superseded - remember "exists" means "documents that have at least one non-null value"
+		# https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html
 
-		# is_superseder - PLEASE RENAME ME...
-		# wof:supersedes is not empty
+		if ($is_superseded == "0"){
+
+			$must_not = array(
+			      'exists' => array( 'field' => 'wof:superseded_by' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must_not' => $must_not,
+			));
+		} 
+
+		else if ($is_superseded == "1"){
+
+			$must = array(
+			      'exists' => array( 'field' => 'wof:superseded_by' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must' => $must,
+			));
+
+		}
+
+		else {}
+
+		# is_superseding - remember "exists" means "documents that have at least one non-null value"
+		# https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html
+
+		if ($is_superseding == "0"){
+
+			$must_not = array(
+			      'exists' => array( 'field' => 'wof:supersedes' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must_not' => $must_not,
+			));
+		} 
+
+		else if ($is_superseding == "1"){
+
+			$must = array(
+			      'exists' => array( 'field' => 'wof:supersedes' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must' => $must,
+			));
+
+		}
+
+		else {}
 
 		#
 
