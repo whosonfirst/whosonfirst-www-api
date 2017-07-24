@@ -194,29 +194,30 @@
 
 		if ($is_deprecated == "0"){
 
-			# this WILL fail - blocked on:
-			# https://github.com/whosonfirst/whosonfirst-www-api/issues/60#issuecomment-317021588
-			# https://github.com/whosonfirst/es-whosonfirst-schema/issues/17
+			$must_not = array(
+			      'exists' => array( 'field' => 'edtf:deprecated' )
+			);
 
-			$must = array(
-				array("terms" => array("edtf:deprecated" => array ("", "u", "uuuu" ) ))
-			);			     
-
-			$must_not = array();
-
-			$filter = array('bool' => array(
-				'must' => $must,
+			$filter[] = array('bool' => array(
 				'must_not' => $must_not,
 			));
 
-			$filters[] = $filter;
+			# so far as I can tell there is no way to write an ES query
+			# that says either field (x) doesn't exist or if it does exist
+			# does not have a value of (a, b, c) ... 
+			# (20170724/thisisaaronland)
+
+			$should = array(
+				array("exists" => array( 'field' => 'edtf:deprecated' )),
+				array("terms" => array("edtf:deprecated" => array ("", "u", "uuuu" ) ))
+			);			     
+
+			# $filters[] = array("bool" => array(
+			# 	"should" => $should
+			# ));
 		}
 
 		else if ($is_deprecated == "1"){
-
-			# this WILL fail - blocked on:
-			# https://github.com/whosonfirst/whosonfirst-www-api/issues/60#issuecomment-317021588
-			# https://github.com/whosonfirst/es-whosonfirst-schema/issues/17
 
 			$must = array(
 			      'exists' => array( 'field' => 'edtf:deprecated' )
