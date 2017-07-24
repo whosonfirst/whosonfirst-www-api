@@ -190,7 +190,8 @@
 
 		else {}
 
-		# is_deprecated
+		# is_deprecated - requires that your spelunker schema be >=
+		# https://github.com/whosonfirst/es-whosonfirst-schema/commit/a1c0353e2e3123027b91e4063780a64fa03b4c16
 
 		if ($is_deprecated == "0"){
 
@@ -237,7 +238,8 @@
 
 		else {}
 
-		# is_ceased
+		# is_ceased - requires that your spelunker schema be >=
+		# https://github.com/whosonfirst/es-whosonfirst-schema/commit/a1c0353e2e3123027b91e4063780a64fa03b4c16
 
 		if ($is_ceased == "0"){
 
