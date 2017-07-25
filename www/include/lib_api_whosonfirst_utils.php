@@ -49,6 +49,14 @@
 			}
 		}
 
+		if (request_isset("has_brand")){
+
+			$b = request_str("has_brand");
+
+			if (! in_array($b, array("0", "1"))){
+				api_output_error(400);
+			}
+		}
 	}
 
 	########################################################################
@@ -90,6 +98,8 @@
 		$concordance = request_str("concordance");
 		
 		$brand = request_int64("brand_id");
+
+		$has_brand = request_str("has_brand");
 
 		$country = request_int64("country_id");
 		$region = request_int64("region_id");
@@ -156,6 +166,32 @@
 
 			# this gets handled below
 		}
+
+		# has_brand
+
+		if ($has_brand == "0"){
+
+			$must_not = array(
+			      'exists' => array( 'field' => 'wof:brand_id' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must_not' => $must_not,
+			));
+		}
+
+		else if ($has_brand == "1"){
+
+			$must = array(
+			      'exists' => array( 'field' => 'wof:brand_id' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must' => $must,
+			));
+		}
+
+		else {}
 
 		# is_current
 

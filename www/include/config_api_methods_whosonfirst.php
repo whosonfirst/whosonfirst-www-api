@@ -130,6 +130,13 @@
 				"example" => "1"
 			),
 			array(
+				"name" => "has_brand",
+				"description" => "Filter results to include only those places that have a Who's On First brand ID. Valid options are: 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
 				"name" => "exclude",
 				"description" => "Exclude places matching these criteria.",
 				"documented" => 1,
