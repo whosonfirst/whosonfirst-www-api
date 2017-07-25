@@ -102,6 +102,13 @@
 				"example" => "102112179"
 			),
 			array(
+				"name" => "brand_id",
+				"description" => "Ensure places belong to this Who's On First brand ID.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1126128733"
+			),
+			array(
 				"name" => "concordance",
 				"description" => "Query for places that have been concordified with this source.",
 				"documented" => 1,

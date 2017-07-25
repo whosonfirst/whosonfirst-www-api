@@ -89,6 +89,8 @@
 
 		$concordance = request_str("concordance");
 		
+		$brand = request_int64("brand_id");
+
 		$country = request_int64("country_id");
 		$region = request_int64("region_id");
 		$locality = request_int64("locality_id");
@@ -407,6 +409,7 @@
 			"names_colloquial" => $colloquial,
 			"names_variant" => $variant,
 			"wof:name" => $name,
+			"wof:brand_id" => $brand,
 			"wof:hierarchy.country_id" => $country,
 			"wof:hierarchy.region_id" => $region,
 			"wof:hierarchy.locality_id" => $locality,
