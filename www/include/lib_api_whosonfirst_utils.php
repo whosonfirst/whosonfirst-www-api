@@ -79,7 +79,7 @@
 		$is_ceased = request_str("is_ceased");
 
 		$is_superseded = request_str("is_superseded");
-		$is_superseder = request_str("is_superseder");
+		$is_superseding = request_str("is_superseding");
 
 		$tags = request_str("tags");
 
@@ -130,6 +130,19 @@
 		$filters = array();
 		$must_not = array();
 
+		$is_existential = false;
+
+		foreach (array("is_current", "is_deprecated", "is_ceased") as $p){
+
+			if (request_isset($p)){
+				$is_existential = true;
+				break;
+			}
+		}
+
+		# TBD... (20170722/thisisaaronland)
+		# if (! $is_existential){
+
 		if ($exclude){
 
 			$exclude = api_whosonfirst_utils_ensure_array($exclude);
@@ -154,10 +167,16 @@
 			$must_not[] = array('term' => array('geom:longitude' => 0.0));	
 		}
 
-		if (! $deprecated){
+		if (request_isset("is_deprecated")){
+			$deprecated = true;
+		}
 
+		if (! $deprecated){
 			$must_not[] = array('exists' => array('field' => 'edtf:deprecated'));
 		}
+			
+		# end of TBD... (20170722/thisisaaronland)
+		# }
 
 		if ($iso){
 
@@ -209,21 +228,56 @@
 
 		else {}
 
-		# is_deprecated
+		# is_deprecated - requires that your spelunker schema be >=
+		# https://github.com/whosonfirst/es-whosonfirst-schema/commit/a1c0353e2e3123027b91e4063780a64fa03b4c16
 
 		if ($is_deprecated == "0"){
 
-			# blocked on https://github.com/whosonfirst/whosonfirst-www-api/issues/60#issuecomment-317021588
+			$must_not = array(
+			      'exists' => array( 'field' => 'edtf:deprecated' )
+			);
+
+			$filter[] = array('bool' => array(
+				'must_not' => $must_not,
+			));
+
+			# so far as I can tell there is no way to write an ES query
+			# that says either field (x) doesn't exist or if it does exist
+			# does not have a value of (a, b, c) ... 
+			# (20170724/thisisaaronland)
+
+			$should = array(
+				array("exists" => array( 'field' => 'edtf:deprecated' )),
+				array("terms" => array("edtf:deprecated" => array ("", "u", "uuuu" ) ))
+			);			     
+
+			# $filters[] = array("bool" => array(
+			# 	"should" => $should
+			# ));
 		}
 
 		else if ($is_deprecated == "1"){
 
-			# blocked on https://github.com/whosonfirst/whosonfirst-www-api/issues/60#issuecomment-317021588
+			$must = array(
+			      'exists' => array( 'field' => 'edtf:deprecated' )
+			);			     
+
+			$must_not = array(
+			  	array("terms" => array("edtf:deprecated" => array ("", "u", "uuuu" ) ))
+			);
+
+			$filter = array('bool' => array(
+				'must' => $must,
+				'must_not' => $must_not,
+			));
+
+			$filters[] = $filter;
 		}
 
 		else {}
 
-		# is_ceased
+		# is_ceased - requires that your spelunker schema be >=
+		# https://github.com/whosonfirst/es-whosonfirst-schema/commit/a1c0353e2e3123027b91e4063780a64fa03b4c16
 
 		if ($is_ceased == "0"){
 
@@ -243,7 +297,7 @@
 
 		else if ($is_ceased == "1"){
 
-			$must = array(
+ 			$must = array(
 			      'exists' => array( 'field' => 'edtf:cessation' )
 			);			     
 
@@ -261,11 +315,61 @@
 
 		else {}
 
-		# is_superseded
-		# wof:superseded_by is not empty
+		# is_superseded - remember "exists" means "documents that have at least one non-null value"
+		# https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html
 
-		# is_superseder - PLEASE RENAME ME...
-		# wof:supersedes is not empty
+		if ($is_superseded == "0"){
+
+			$must_not = array(
+			      'exists' => array( 'field' => 'wof:superseded_by' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must_not' => $must_not,
+			));
+		} 
+
+		else if ($is_superseded == "1"){
+
+			$must = array(
+			      'exists' => array( 'field' => 'wof:superseded_by' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must' => $must,
+			));
+
+		}
+
+		else {}
+
+		# is_superseding - remember "exists" means "documents that have at least one non-null value"
+		# https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html
+
+		if ($is_superseding == "0"){
+
+			$must_not = array(
+			      'exists' => array( 'field' => 'wof:supersedes' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must_not' => $must_not,
+			));
+		} 
+
+		else if ($is_superseding == "1"){
+
+			$must = array(
+			      'exists' => array( 'field' => 'wof:supersedes' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must' => $must,
+			));
+
+		}
+
+		else {}
 
 		#
 

@@ -130,6 +130,27 @@
 				"example" => "1"
 			),
 			array(
+				"name" => "is_deprecated",
+				"description" => "Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
+				"name" => "is_superseded",
+				"description" => "Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
+				"name" => "is_superseding",
+				"description" => "Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
 				"name" => "has_brand",
 				"description" => "Filter results to include only those places that have a Who's On First brand ID. Valid options are: 1, 0",
 				"documented" => 1,

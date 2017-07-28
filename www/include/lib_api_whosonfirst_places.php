@@ -29,7 +29,6 @@
 		$rsp = whosonfirst_places_search($q, $filters, $args);
 
 		if (! $rsp['ok']){
-			error_log("[SEARCH]" . var_export($rsp, 1));
 			api_output_error(513);
 		}
 
