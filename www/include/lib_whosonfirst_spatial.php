@@ -103,6 +103,11 @@
 		$possible = array(
 			"wof:id",
 			"wof:placetype_id",
+			"mz:is_current",
+			"mz:is_deprecated",
+			"mz:is_ceased",
+			"mz:is_superseded",
+			"mz:is_superseding",
 		);
 
 		foreach ($possible as $key){
@@ -173,8 +178,32 @@
 
 		$cmd[] = "LIMIT {$more['per_page']}";
 
-		if ($pt = $more['placetype_id']){
-			$cmd[] = "WHERE wof:placetype_id {$pt} ${pt}";
+		# old code
+		# if ($pt = $more['placetype_id']){
+		# 	$cmd[] = "WHERE wof:placetype_id {$pt} ${pt}";
+		# }
+
+		$where = array();
+
+		$possible = array(
+			# "wof:id",
+			"wof:placetype_id",
+			"mz:is_current",
+			"mz:is_deprecated",
+			"mz:is_ceased",
+			"mz:is_superseded",
+			"mz:is_superseding",
+		);
+
+		foreach ($possible as $key){
+
+			if ((! isset($more[$key])) || (! $more[$key])){
+				continue;
+			}
+
+			$id = $more[$key];
+
+			$cmd[] = "WHERE {$key} {$id} {$id}";
 		}
 
 		$cmd[] = "POINTS";
