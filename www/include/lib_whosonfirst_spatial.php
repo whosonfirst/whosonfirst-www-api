@@ -108,6 +108,12 @@
 			"mz:is_ceased",
 			"mz:is_superseded",
 			"mz:is_superseding",
+			# temporary because I indexed dev wrong (20170801/thisisaaronland)
+			"wof:is_current",
+			"wof:is_deprecated",
+			"wof:is_ceased",
+			"wof:is_superseded",
+			"wof:is_superseding",
 		);
 
 		foreach ($possible as $key){
@@ -193,6 +199,12 @@
 			"mz:is_ceased",
 			"mz:is_superseded",
 			"mz:is_superseding",
+			# temporary because I indexed dev wrong (20170801/thisisaaronland)
+			"wof:is_current",
+			"wof:is_deprecated",
+			"wof:is_ceased",
+			"wof:is_superseded",
+			"wof:is_superseding",
 		);
 
 		foreach ($possible as $key){
@@ -211,6 +223,8 @@
 		$cmd[] = "BOUNDS {$swlat} {$swlon} {$nelat} {$nelon}";
 
 		$cmd = implode(" ", $cmd);
+
+		dumper($cmd);
 
 		return whosonfirst_spatial_do_paginated($cmd, $more);
 	}

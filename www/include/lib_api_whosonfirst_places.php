@@ -568,6 +568,37 @@
 			$more['placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
 		}
 
+		# stub code just to get it working... (20170801/thisisaaronland)
+		
+		$existential = array(
+			"is_current",
+			"is_deprecated",
+			"is_ceased",
+			"is_superseded",
+			"is_superseding",
+		);
+
+		foreach ($existential as $k){
+
+			if (! request_isset($k)){
+				continue;
+			}
+
+			$v = request_str($k);
+
+			# -1 is only ok for is_current...
+
+			if (! in_array($v, array("-1", "0", "1"))){
+				api_output_error(400);
+			}
+
+			# this is the correct key but I indexed wof:is_* on dev...
+			# $fq_k = "mz:" . $k;
+
+			$fq_k = "wof:" . $k;
+			$more[ $fq_k ] = $v;
+		}
+
 		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
@@ -656,7 +687,38 @@
 			api_whosonfirst_places_ensure_valid_placetype($placetype);
 			$more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
 		}
+
+		# stub code just to get it working... (20170801/thisisaaronland)
 		
+		$existential = array(
+			"is_current",
+			"is_deprecated",
+			"is_ceased",
+			"is_superseded",
+			"is_superseding",
+		);
+
+		foreach ($existential as $k){
+
+			if (! request_isset($k)){
+				continue;
+			}
+
+			$v = request_str($k);
+
+			# -1 is only ok for is_current...
+
+			if (! in_array($v, array("-1", "0", "1"))){
+				api_output_error(400);
+			}
+
+			# this is the correct key but I indexed wof:is_* on dev...
+			# $fq_k = "mz:" . $k;
+
+			$fq_k = "wof:" . $k;
+			$more[ $fq_k ] = $v;
+		}
+
 		if ($cursor = request_str("cursor")){
 
 			api_whosonfirst_places_ensure_valid_cursor($cursor, array("error_code" => 437));
@@ -666,7 +728,7 @@
 		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
-
+		
 		api_utils_ensure_pagination_args($more);
 
 		$rsp = whosonfirst_spatial_nearby_latlon($lat, $lon, $r, $more);
