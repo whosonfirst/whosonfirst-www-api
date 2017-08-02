@@ -204,15 +204,11 @@
 
 			$v = $candidates[$key];
 
-			# because this... https://github.com/tidwall/tile38/issues/206
-
-			if ($v == "1"){
-				$cmd[] = "WHERE {$key} 0 1";
+			if (strval($v) == ""){
+				continue;
 			}
 
-			else {
-				$cmd[] = "WHERE {$key} {$v} {$v}";
-			}				
+			$cmd[] = "WHERE {$key} {$v} {$v}";
 		}
 
 		# pass-by-ref
