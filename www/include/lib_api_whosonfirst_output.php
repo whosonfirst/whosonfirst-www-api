@@ -17,7 +17,7 @@
 		# because this: https://github.com/whosonfirst/whosonfirst-www-api/issues/11
 		# and this: https://github.com/whosonfirst/whosonfirst-www-api/issues/8
 
-		if (($extras = $more["extras"]) && ($more["is_tile38"])){
+		if (($extras = $more["extras"]) && ($more["is_tile38"]) && (count($rows))){
 
 			if (! is_array($extras)){
 				$extras = explode(",", $extras);
