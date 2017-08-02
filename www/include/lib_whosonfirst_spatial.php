@@ -110,11 +110,11 @@
 			"mz:is_superseding",
 		);
 
-		whosonfirst_spatial_apply_query_filters($cmd, $possible, $more);
-
 		$cmd = array(
 			"NEARBY", "__COLLECTION__",
 		);
+
+		whosonfirst_spatial_apply_query_filters($cmd, $possible, $more);
 
 		if ($cursor = $more['cursor']){
 			$cmd[] = "CURSOR {$cursor}";
