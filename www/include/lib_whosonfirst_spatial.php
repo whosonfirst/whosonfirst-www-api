@@ -170,7 +170,6 @@
 		$cmd[] = "LIMIT {$more['per_page']}";
 
 		$possible = array(
-			# "wof:id",
 			"wof:placetype_id",
 			"mz:is_current",
 			"mz:is_deprecated",
@@ -191,6 +190,13 @@
 	}
 
 	########################################################################
+
+	# NEARBY whosonfirst WHERE mz:is_ceased 1 1 POINTS POINT 45.52861 -73.575554 6000
+	# {"ok":true,"fields":["wof:id","wof:placetype_id","wof:parent_id","mz:is_current","mz:is_deprecated","mz:is_ceased","mz:is_superseded","mz:is_superseding"],"points":[{"id":"1108955791#whosonfirst-data-venue-ca","point":{"lat":45.535303,"lon":-73.572103},"fields":[1108955791,102312325,85866479,0,0,1,1,0]},{"id":"1108798701#whosonfirst-data-venue-ca","point":{"lat":45.525033,"lon":-73.584983},"fields":[1108798701,102312325,1108959395,0,0,1,0,0]},{"id":"152963655#whosonfirst-data-venue-ca","point":{"lat":45.514236,"lon":-73.572899},"fields":[152963655,102312325,1108959393,0,0,1,0,0]},{"id":"152356267#whosonfirst-data-venue-ca","point":{"lat":45.52861,"lon":-73.575554},"fields":[152356267,102312325,85874353,0,0,1,0,0]}],"count":4,"cursor":0,"elapsed":"122.171803ms"}
+
+	# INTERSECTS whosonfirst LIMIT 1 WHERE mz:is_deprecated 1 1 POINTS BOUNDS 9.393889 -5.521112 15.085111 2.404293
+	# {"ok":true,"fields":["wof:id","wof:placetype_id","wof:parent_id","mz:is_current","mz:is_deprecated","mz:is_ceased","mz:is_superseded","mz:is_superseding"],"points":[{"id":"421203219#whosonfirst-data","point":{"lat":11.16972,"lon":-1.145},"fields":[421203219,102312313,85668951,0,1,0,0,0]}],"count":1,"cursor":3,"elapsed":"1.207586ms"}
+
 
 	function whosonfirst_spatial_apply_query_filters(&$cmd, $possible, $candidates){
 

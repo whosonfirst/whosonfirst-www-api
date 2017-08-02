@@ -198,35 +198,35 @@
 			array(
 				"name" => "is_current",
 				"description" => "Filter results by their 'mz:is_current' property.",
-				"documented" => 1,
+				"documented" => 0,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_ceased",
 				"description" => "Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0",
-				"documented" => 1,
+				"documented" => 0,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_deprecated",
 				"description" => "Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0",
-				"documented" => 1,
+				"documented" => 0,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_superseded",
 				"description" => "Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0",
-				"documented" => 1,
+				"documented" => 0,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_superseding",
 				"description" => "Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0",
-				"documented" => 1,
+				"documented" => 0,
 				"required" => 0,
 				"example" => "1"
 			),
