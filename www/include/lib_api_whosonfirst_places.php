@@ -483,6 +483,9 @@
 
 	########################################################################
 
+	# regions that intersect burkina faso that are superseded
+	# ?method=whosonfirst.places.getIntersects&min_latitude=9.393889&min_longitude=-5.521112&max_latitude=15.085111&max_longitude=2.404293&placetype=region&is_superseded=1&extras=edtf:,wof:superseded,wof:superseded_by
+
 	function api_whosonfirst_places_getIntersects(){
 
 		api_utils_features_ensure_enabled(array(
