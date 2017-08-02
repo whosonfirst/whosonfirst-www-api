@@ -592,10 +592,7 @@
 				api_output_error(400);
 			}
 
-			# this is the correct key but I indexed wof:is_* on dev...
-			# $fq_k = "mz:" . $k;
-
-			$fq_k = "wof:" . $k;
+			$fq_k = "mz:" . $k;
 			$more[ $fq_k ] = $v;
 		}
 
@@ -712,10 +709,8 @@
 				api_output_error(400);
 			}
 
-			# this is the correct key but I indexed wof:is_* on dev...
-			# $fq_k = "mz:" . $k;
+			$fq_k = "mz:" . $k;
 
-			$fq_k = "wof:" . $k;
 			$more[ $fq_k ] = $v;
 		}
 
