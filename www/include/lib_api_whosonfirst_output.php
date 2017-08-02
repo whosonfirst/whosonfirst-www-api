@@ -25,11 +25,18 @@
 
 			$fields = array_keys($rows[0]);		# don't forget to fetch the defaults
 			$has_extras = 0;
+			$has_wildcards = 0;
 
 			# just double check that there is actually something we need
 			# pull out of ES before we poke the network (20161031/thisisaaronland)
 
 			foreach ($extras as $f){
+
+				if (preg_match("/\:\*?$/", $f)){
+					$has_extras = 1;
+					$has_wildcards = 1;
+					break;
+				}
 
 				# See this - it's important if you pass an empty field ('')
 				# to ES it will FREAK OUT and return null values for all
@@ -58,7 +65,11 @@
 					}
 				}
 
-				$es_more = array('fields' => $fields);
+				$es_more = array();
+
+				if (! $has_wildcards){
+					$es_more["fields"] = $fields;
+				}
 
 				$rsp = whosonfirst_places_get_by_id_multi($ids, $es_more);
 
