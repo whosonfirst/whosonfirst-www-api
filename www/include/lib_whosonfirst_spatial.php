@@ -110,16 +110,7 @@
 			"mz:is_superseding",
 		);
 
-		foreach ($possible as $key){
-
-			if ((! isset($more[$key])) || (! $more[$key])){
-				continue;
-			}
-
-			$id = $more[$key];
-
-			$where[] = "WHERE {$key} {$id} {$id}";
-		}
+		whosonfirst_spatial_apply_query_filters($cmd, $possible, $more);
 
 		$cmd = array(
 			"NEARBY", "__COLLECTION__",
@@ -178,13 +169,6 @@
 
 		$cmd[] = "LIMIT {$more['per_page']}";
 
-		# old code
-		# if ($pt = $more['placetype_id']){
-		# 	$cmd[] = "WHERE wof:placetype_id {$pt} ${pt}";
-		# }
-
-		$where = array();
-
 		$possible = array(
 			# "wof:id",
 			"wof:placetype_id",
@@ -195,16 +179,7 @@
 			"mz:is_superseding",
 		);
 
-		foreach ($possible as $key){
-
-			if ((! isset($more[$key])) || (! $more[$key])){
-				continue;
-			}
-
-			$id = $more[$key];
-
-			$cmd[] = "WHERE {$key} {$id} {$id}";
-		}
+		whosonfirst_spatial_apply_query_filters($cmd, $possible, $more);
 
 		$cmd[] = "POINTS";
 
@@ -213,6 +188,34 @@
 		$cmd = implode(" ", $cmd);
 
 		return whosonfirst_spatial_do_paginated($cmd, $more);
+	}
+
+	########################################################################
+
+	function whosonfirst_spatial_apply_query_filters(&$cmd, $possible, $candidates){
+
+		# WHERE docs: http://tile38.com/commands/intersects/
+
+		foreach ($possible as $key){
+
+			if (! isset($candidates[$key])){
+				continue;
+			}
+
+			$v = $candidates[$key];
+
+			# because this... https://github.com/tidwall/tile38/issues/206
+
+			if ($v == "1"){
+				$cmd[] = "WHERE {$key} 0 1";
+			}
+
+			else {
+				$cmd[] = "WHERE {$key} {$v} {$v}";
+			}				
+		}
+
+		# pass-by-ref
 	}
 
 	########################################################################
