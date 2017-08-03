@@ -568,36 +568,11 @@
 		if ($placetype = request_str("placetype")){
 
 			api_whosonfirst_places_ensure_valid_placetype($placetype);
-			$more['placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
+			$more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
 		}
 
-		# stub code just to get it working... (20170801/thisisaaronland)
-		
-		$existential = array(
-			"is_current",
-			"is_deprecated",
-			"is_ceased",
-			"is_superseded",
-			"is_superseding",
-		);
-
-		foreach ($existential as $k){
-
-			if (! request_isset($k)){
-				continue;
-			}
-
-			$v = request_str($k);
-
-			# -1 is only ok for is_current...
-
-			if (! in_array($v, array("-1", "0", "1"))){
-				api_output_error(400);
-			}
-
-			$fq_k = "mz:" . $k;
-			$more[ $fq_k ] = $v;
-		}
+		$flags = api_whosonfirst_ensure_existential_flags();
+		$more = array_merge($more, $flags);
 
 		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
@@ -621,6 +596,10 @@
 		$out = array(
 			'places' => $results
 		);
+
+		if ($GLOBALS['cfg']['environment'] == 'dev'){
+			$out['_query'] = $rsp['command'];
+		}
 
 		api_utils_ensure_pagination_results($out, $pagination);
 
@@ -688,34 +667,8 @@
 			$more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
 		}
 
-		# stub code just to get it working... (20170801/thisisaaronland)
-		
-		$existential = array(
-			"is_current",
-			"is_deprecated",
-			"is_ceased",
-			"is_superseded",
-			"is_superseding",
-		);
-
-		foreach ($existential as $k){
-
-			if (! request_isset($k)){
-				continue;
-			}
-
-			$v = request_str($k);
-
-			# -1 is only ok for is_current...
-
-			if (! in_array($v, array("-1", "0", "1"))){
-				api_output_error(400);
-			}
-
-			$fq_k = "mz:" . $k;
-
-			$more[ $fq_k ] = $v;
-		}
+		$flags = api_whosonfirst_ensure_existential_flags();
+		$more = array_merge($more, $flags);
 
 		if ($cursor = request_str("cursor")){
 
@@ -745,6 +698,10 @@
 		$out = array(
 			'places' => $results
 		);
+
+		if ($GLOBALS['cfg']['environment'] == 'dev'){
+			$out['_query'] = $rsp['command'];
+		}
 
 		api_utils_ensure_pagination_results($out, $pagination);
 
@@ -864,4 +821,54 @@
 	
 	########################################################################
 	
+	function api_whosonfirst_ensure_existential_flags($more=array()){
+
+		$defaults = array(
+			"prefix" => "mz",
+		);
+
+		$more = array_merge($defaults, $more);
+
+		$flags = array();
+
+		$existential = array(
+			"is_current",
+			"is_deprecated",
+			"is_ceased",
+			"is_superseded",
+			"is_superseding",
+		);
+
+		foreach ($existential as $k){
+
+			if (! request_isset($k)){
+				continue;
+			}
+
+			$v = request_str($k);
+
+			if ($k == "is_current"){
+
+				if (! in_array($v, array("-1", "0", "1"))){
+					api_output_error(400);
+				}
+			}
+
+			else {
+
+				if (! in_array($v, array("0", "1"))){
+					api_output_error(400);
+				}
+			}
+
+			$fq_k = $more["prefix"] . ":" . $k;
+
+			$flags[ $fq_k ] = $v;
+		}
+
+		return $flags;
+	}
+
+	########################################################################
+
 	# the end

@@ -216,7 +216,7 @@
 
 			$cmd[] = "WHERE {$key} {$v} {$v}";
 		}
-
+		
 		# pass-by-ref
 	}
 
