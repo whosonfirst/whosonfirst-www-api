@@ -45,3 +45,5 @@ dev-to-master:
 	git pull origin dev
 	git push origin master
 	git checkout dev
+
+d2m: dev-to-master

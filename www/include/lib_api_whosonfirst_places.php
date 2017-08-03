@@ -17,39 +17,10 @@
 
 		$q = request_str("q");
 
-		$placetype = request_str("placetype");
-		$exclude = request_str("exclude_placetype");
-
-		if ($placetype){
-			api_whosonfirst_utils_ensure_valid_placetypes($placetype, 435);
-		}
-
-		if ($exclude){
-			api_whosonfirst_utils_ensure_valid_placetypes($exclude, 435);
-		}
-
 		$filters = api_whosonfirst_utils_search_filters();
 
 		if (($q == "") && (count($filters) <= 1)){
 			api_output_error(452);
-		}
-
-		$min_lastmod = request_int32("min_lastmod");
-		$max_lastmod = request_int32("max_lastmod");
-
-		if (($min_lastmod) && ($min_lastmod < 0)){
-			api_output_error(432);
-		}
-
-		if (($max_lastmod) && ($max_lastmod < 0)){
-			api_output_error(433);
-		}
-
-		if (($min_lastmod) && ($max_lastmod)){
-
-			if ($min_lastmod > $max_lastmod){
-				api_output_error(434);
-			}
 		}
 
 		$args = array();
@@ -58,7 +29,6 @@
 		$rsp = whosonfirst_places_search($q, $filters, $args);
 
 		if (! $rsp['ok']){
-			error_log("[SEARCH]" . var_export($rsp, 1));
 			api_output_error(513);
 		}
 
@@ -513,6 +483,9 @@
 
 	########################################################################
 
+	# regions that intersect burkina faso that are superseded
+	# ?method=whosonfirst.places.getIntersects&min_latitude=9.393889&min_longitude=-5.521112&max_latitude=15.085111&max_longitude=2.404293&placetype=region&is_superseded=1&extras=edtf:,wof:superseded,wof:superseded_by
+
 	function api_whosonfirst_places_getIntersects(){
 
 		api_utils_features_ensure_enabled(array(
@@ -595,8 +568,11 @@
 		if ($placetype = request_str("placetype")){
 
 			api_whosonfirst_places_ensure_valid_placetype($placetype);
-			$more['placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
+			$more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
 		}
+
+		$flags = api_whosonfirst_ensure_existential_flags();
+		$more = array_merge($more, $flags);
 
 		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
@@ -620,6 +596,10 @@
 		$out = array(
 			'places' => $results
 		);
+
+		if ($GLOBALS['cfg']['environment'] == 'dev'){
+			$out['_query'] = $rsp['command'];
+		}
 
 		api_utils_ensure_pagination_results($out, $pagination);
 
@@ -686,7 +666,10 @@
 			api_whosonfirst_places_ensure_valid_placetype($placetype);
 			$more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
 		}
-		
+
+		$flags = api_whosonfirst_ensure_existential_flags();
+		$more = array_merge($more, $flags);
+
 		if ($cursor = request_str("cursor")){
 
 			api_whosonfirst_places_ensure_valid_cursor($cursor, array("error_code" => 437));
@@ -696,7 +679,7 @@
 		if ($extras = api_whosonfirst_utils_get_extras()){
 			$more["extras"] = $extras;
 		}
-
+		
 		api_utils_ensure_pagination_args($more);
 
 		$rsp = whosonfirst_spatial_nearby_latlon($lat, $lon, $r, $more);
@@ -715,6 +698,10 @@
 		$out = array(
 			'places' => $results
 		);
+
+		if ($GLOBALS['cfg']['environment'] == 'dev'){
+			$out['_query'] = $rsp['command'];
+		}
 
 		api_utils_ensure_pagination_results($out, $pagination);
 
@@ -834,4 +821,54 @@
 	
 	########################################################################
 	
+	function api_whosonfirst_ensure_existential_flags($more=array()){
+
+		$defaults = array(
+			"prefix" => "mz",
+		);
+
+		$more = array_merge($defaults, $more);
+
+		$flags = array();
+
+		$existential = array(
+			"is_current",
+			"is_deprecated",
+			"is_ceased",
+			"is_superseded",
+			"is_superseding",
+		);
+
+		foreach ($existential as $k){
+
+			if (! request_isset($k)){
+				continue;
+			}
+
+			$v = request_str($k);
+
+			if ($k == "is_current"){
+
+				if (! in_array($v, array("-1", "0", "1"))){
+					api_output_error(400);
+				}
+			}
+
+			else {
+
+				if (! in_array($v, array("0", "1"))){
+					api_output_error(400);
+				}
+			}
+
+			$fq_k = $more["prefix"] . ":" . $k;
+
+			$flags[ $fq_k ] = $v;
+		}
+
+		return $flags;
+	}
+
+	########################################################################
+
 	# the end

@@ -6,15 +6,80 @@
 
 	########################################################################
 
+	function api_whosonfirst_utils_validate_search_filters(){
+
+		$placetype = request_str("placetype");
+		$exclude = request_str("exclude_placetype");
+
+		if ($placetype){
+			api_whosonfirst_utils_ensure_valid_placetypes($placetype, 435);
+		}
+
+		if ($exclude){
+			api_whosonfirst_utils_ensure_valid_placetypes($exclude, 435);
+		}
+
+		$min_lastmod = request_int32("min_lastmod");
+		$max_lastmod = request_int32("max_lastmod");
+
+		if (($min_lastmod) && ($min_lastmod < 0)){
+			api_output_error(432);
+		}
+
+		if (($max_lastmod) && ($max_lastmod < 0)){
+			api_output_error(433);
+		}
+
+		if (($min_lastmod) && ($max_lastmod)){
+
+			if ($min_lastmod > $max_lastmod){
+				api_output_error(434);
+			}
+		}
+
+		if (request_isset("is_current")){
+
+			# because request_int32 will only return an
+			# unsigned integer (20170720/thisisaaronland)
+
+			$c = request_str("is_current");
+
+			if (! in_array($c, array("-1", "0", "1"))){
+				api_output_error(400);
+			}
+		}
+
+		if (request_isset("has_brand")){
+
+			$b = request_str("has_brand");
+
+			if (! in_array($b, array("0", "1"))){
+				api_output_error(400);
+			}
+		}
+	}
+
+	########################################################################
+
 	function api_whosonfirst_utils_search_filters(){
 
+		api_whosonfirst_utils_validate_search_filters();
+
 		# it is assumed that these have been validated by now
-		# see also: api_whosonfirst_utils_ensure_valid_placetypes
+		# see above
 
 		$placetype = request_str("placetype");
 		$exclude_placetype = request_str("exclude_placetype");
 
 		$iso = request_str("iso");
+
+		$is_current = request_str("is_current");
+
+		$is_deprecated = request_str("is_deprecated");
+		$is_ceased = request_str("is_ceased");
+
+		$is_superseded = request_str("is_superseded");
+		$is_superseding = request_str("is_superseding");
 
 		$tags = request_str("tags");
 
@@ -32,6 +97,10 @@
 
 		$concordance = request_str("concordance");
 		
+		$brand = request_int64("brand_id");
+
+		$has_brand = request_str("has_brand");
+
 		$country = request_int64("country_id");
 		$region = request_int64("region_id");
 		$locality = request_int64("locality_id");
@@ -61,6 +130,19 @@
 		$filters = array();
 		$must_not = array();
 
+		$is_existential = false;
+
+		foreach (array("is_current", "is_deprecated", "is_ceased") as $p){
+
+			if (request_isset($p)){
+				$is_existential = true;
+				break;
+			}
+		}
+
+		# TBD... (20170722/thisisaaronland)
+		# if (! $is_existential){
+
 		if ($exclude){
 
 			$exclude = api_whosonfirst_utils_ensure_array($exclude);
@@ -85,10 +167,16 @@
 			$must_not[] = array('term' => array('geom:longitude' => 0.0));	
 		}
 
-		if (! $deprecated){
+		if (request_isset("is_deprecated")){
+			$deprecated = true;
+		}
 
+		if (! $deprecated){
 			$must_not[] = array('exists' => array('field' => 'edtf:deprecated'));
 		}
+			
+		# end of TBD... (20170722/thisisaaronland)
+		# }
 
 		if ($iso){
 
@@ -97,6 +185,193 @@
 
 			# this gets handled below
 		}
+
+		# has_brand
+
+		if ($has_brand == "0"){
+
+			$must_not = array(
+			      'exists' => array( 'field' => 'wof:brand_id' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must_not' => $must_not,
+			));
+		}
+
+		else if ($has_brand == "1"){
+
+			$must = array(
+			      'exists' => array( 'field' => 'wof:brand_id' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must' => $must,
+			));
+		}
+
+		else {}
+
+		# is_current
+
+		if ($is_current == "-1"){
+			$filters[] = array('term' => array('mz:is_current' => -1));
+		}
+
+		else if ($is_current == "0"){
+			$filters[] = array('term' => array('mz:is_current' => 0));
+		} 
+
+		else if ($is_current == "1"){
+			$filters[] = array('term' => array('mz:is_current' => 1));
+		}
+
+		else {}
+
+		# is_deprecated - requires that your spelunker schema be >=
+		# https://github.com/whosonfirst/es-whosonfirst-schema/commit/a1c0353e2e3123027b91e4063780a64fa03b4c16
+
+		if ($is_deprecated == "0"){
+
+			$must_not = array(
+			      'exists' => array( 'field' => 'edtf:deprecated' )
+			);
+
+			$filter[] = array('bool' => array(
+				'must_not' => $must_not,
+			));
+
+			# so far as I can tell there is no way to write an ES query
+			# that says either field (x) doesn't exist or if it does exist
+			# does not have a value of (a, b, c) ... 
+			# (20170724/thisisaaronland)
+
+			$should = array(
+				array("exists" => array( 'field' => 'edtf:deprecated' )),
+				array("terms" => array("edtf:deprecated" => array ("", "u", "uuuu" ) ))
+			);			     
+
+			# $filters[] = array("bool" => array(
+			# 	"should" => $should
+			# ));
+		}
+
+		else if ($is_deprecated == "1"){
+
+			$must = array(
+			      'exists' => array( 'field' => 'edtf:deprecated' )
+			);			     
+
+			$must_not = array(
+			  	array("terms" => array("edtf:deprecated" => array ("", "u", "uuuu" ) ))
+			);
+
+			$filter = array('bool' => array(
+				'must' => $must,
+				'must_not' => $must_not,
+			));
+
+			$filters[] = $filter;
+		}
+
+		else {}
+
+		# is_ceased - requires that your spelunker schema be >=
+		# https://github.com/whosonfirst/es-whosonfirst-schema/commit/a1c0353e2e3123027b91e4063780a64fa03b4c16
+
+		if ($is_ceased == "0"){
+
+			$must = array(
+				array("terms" => array("edtf:cessation" => array ("", "u", "uuuu" ) ))
+			);			     
+
+			$must_not = array();
+
+			$filter = array('bool' => array(
+				'must' => $must,
+				'must_not' => $must_not,
+			));
+
+			$filters[] = $filter;
+		}
+
+		else if ($is_ceased == "1"){
+
+ 			$must = array(
+			      'exists' => array( 'field' => 'edtf:cessation' )
+			);			     
+
+			$must_not = array(
+			  	array("terms" => array("edtf:cessation" => array ("", "u", "uuuu" ) ))
+			);
+
+			$filter = array('bool' => array(
+				'must' => $must,
+				'must_not' => $must_not,
+			));
+
+			$filters[] = $filter;
+		}
+
+		else {}
+
+		# is_superseded - remember "exists" means "documents that have at least one non-null value"
+		# https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html
+
+		if ($is_superseded == "0"){
+
+			$must_not = array(
+			      'exists' => array( 'field' => 'wof:superseded_by' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must_not' => $must_not,
+			));
+		} 
+
+		else if ($is_superseded == "1"){
+
+			$must = array(
+			      'exists' => array( 'field' => 'wof:superseded_by' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must' => $must,
+			));
+
+		}
+
+		else {}
+
+		# is_superseding - remember "exists" means "documents that have at least one non-null value"
+		# https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html
+
+		if ($is_superseding == "0"){
+
+			$must_not = array(
+			      'exists' => array( 'field' => 'wof:supersedes' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must_not' => $must_not,
+			));
+		} 
+
+		else if ($is_superseding == "1"){
+
+			$must = array(
+			      'exists' => array( 'field' => 'wof:supersedes' )
+			);			     
+
+			$filters[] = array('bool' => array(
+				'must' => $must,
+			));
+
+		}
+
+		else {}
+
+		#
 
 		if ($placetype){
 
@@ -274,6 +549,7 @@
 			"names_colloquial" => $colloquial,
 			"names_variant" => $variant,
 			"wof:name" => $name,
+			"wof:brand_id" => $brand,
 			"wof:hierarchy.country_id" => $country,
 			"wof:hierarchy.region_id" => $region,
 			"wof:hierarchy.locality_id" => $locality,

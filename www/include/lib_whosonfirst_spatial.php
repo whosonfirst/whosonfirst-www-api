@@ -11,7 +11,7 @@
 	# 2. The indexing logic is currently implemented in two places while the inflating
 	#    logic is currently implemented once. Indexing happens in this library and also
 	#    in the go-whosonfirst-tile38 package. Inflating happens in this library. It's
-	#    also still a moving target. Specifically: Which fields do we index with the 
+	#    also still a moving target. Specifically: Which fields do we index with the
 	#    geometry itself in Tile38 (these can only be numeric fields like wof:parent_id
 	#    or mz:is_current) and which fields do we store separately in a 'WOFID#meta'
 	#    entry in Tile38.
@@ -39,7 +39,7 @@
 
 		$placetype = $props['wof:placetype'];
 		$placetype_id = whosonfirst_placetypes_name_to_id($placetype);
-						
+
 		$str_geom = json_encode($geom);
 
 		$cmd = array(
@@ -47,10 +47,10 @@
 			"FIELD", "wof:id", $wofid,
 			"FIELD", "wof:placetype_id", $placetype_id,
 			"FIELD", "wof:parent_id", $parent_id,
-			# PLEASE IMPLEMENT ME... (20161010/thisisaaronland)				 
+			# PLEASE IMPLEMENT ME... (20161010/thisisaaronland)
 			# "FIELD", "wof:deprecated", $deprecated,
 			# "FIELD", "wof:superseded", $superseded,
-			# "FIELD", "wof:is_current", $current,			
+			# "FIELD", "wof:is_current", $current,
 			"OBJECT", $str_geom
 		);
 
@@ -67,7 +67,7 @@
 		if (! $rsp2['ok']){
 			return $rsp2;
 		}
-		
+
 		return $rsp;
 	}
 
@@ -76,7 +76,7 @@
 	function whosonfirst_spatial_nearby_feature(&$feature, $more=array()){
 
 		$props = $feature['properties'];
-		
+
 		# sudo make me a function to pick the best coordinate for
 		# nearby-iness (20160811/thisisaaronland)
 
@@ -84,7 +84,7 @@
 		$lon = $props['geom:longitude'];
 
 		$r = 100;
-	
+
 		return whosonfirst_spatial_nearby_latlon($lat, $lon, $r, $more);
 	}
 
@@ -103,22 +103,18 @@
 		$possible = array(
 			"wof:id",
 			"wof:placetype_id",
+			"mz:is_current",
+			"mz:is_deprecated",
+			"mz:is_ceased",
+			"mz:is_superseded",
+			"mz:is_superseding",
 		);
-
-		foreach ($possible as $key){
-
-			if ((! isset($more[$key])) || (! $more[$key])){
-				continue;
-			}
-
-			$id = $more[$key];
-
-			$where[] = "WHERE {$key} {$id} {$id}";
-		}
 
 		$cmd = array(
 			"NEARBY", "__COLLECTION__",
 		);
+
+		whosonfirst_spatial_apply_query_filters($cmd, $possible, $more);
 
 		if ($cursor = $more['cursor']){
 			$cmd[] = "CURSOR {$cursor}";
@@ -147,7 +143,7 @@
 
 		$defaults = array(
 			'per_page' => $GLOBALS['cfg']['pagination_per_page'],
-			'placetype_id' => null,			
+			'placetype_id' => null,
 			'cursor' => null,
 		);
 
@@ -160,22 +156,29 @@
 		# WITHIN and INTERSECTS have identical syntax. The only difference between the two is that
 		# WITHIN returns objects that are contained inside an area, and intersects returns objects
 		# that are contained or intersects an area.
-		# 
+		#
 		# http://tile38.com/commands/intersects/
 
 		$cmd = array(
 			"INTERSECTS __COLLECTION__",
 		);
-		
+
 		if ($cursor = $more['cursor']){
 			$cmd[] = "CURSOR {$cursor}";
 		}
 
 		$cmd[] = "LIMIT {$more['per_page']}";
 
-		if ($pt = $more['placetype_id']){
-			$cmd[] = "WHERE wof:placetype_id {$pt} ${pt}";
-		}
+		$possible = array(
+			"wof:placetype_id",
+			"mz:is_current",
+			"mz:is_deprecated",
+			"mz:is_ceased",
+			"mz:is_superseded",
+			"mz:is_superseding",
+		);
+
+		whosonfirst_spatial_apply_query_filters($cmd, $possible, $more);
 
 		$cmd[] = "POINTS";
 
@@ -184,6 +187,37 @@
 		$cmd = implode(" ", $cmd);
 
 		return whosonfirst_spatial_do_paginated($cmd, $more);
+	}
+
+	########################################################################
+
+	# NEARBY whosonfirst WHERE mz:is_ceased 1 1 POINTS POINT 45.52861 -73.575554 6000
+	# {"ok":true,"fields":["wof:id","wof:placetype_id","wof:parent_id","mz:is_current","mz:is_deprecated","mz:is_ceased","mz:is_superseded","mz:is_superseding"],"points":[{"id":"1108955791#whosonfirst-data-venue-ca","point":{"lat":45.535303,"lon":-73.572103},"fields":[1108955791,102312325,85866479,0,0,1,1,0]},{"id":"1108798701#whosonfirst-data-venue-ca","point":{"lat":45.525033,"lon":-73.584983},"fields":[1108798701,102312325,1108959395,0,0,1,0,0]},{"id":"152963655#whosonfirst-data-venue-ca","point":{"lat":45.514236,"lon":-73.572899},"fields":[152963655,102312325,1108959393,0,0,1,0,0]},{"id":"152356267#whosonfirst-data-venue-ca","point":{"lat":45.52861,"lon":-73.575554},"fields":[152356267,102312325,85874353,0,0,1,0,0]}],"count":4,"cursor":0,"elapsed":"122.171803ms"}
+
+	# INTERSECTS whosonfirst LIMIT 1 WHERE mz:is_deprecated 1 1 POINTS BOUNDS 9.393889 -5.521112 15.085111 2.404293
+	# {"ok":true,"fields":["wof:id","wof:placetype_id","wof:parent_id","mz:is_current","mz:is_deprecated","mz:is_ceased","mz:is_superseded","mz:is_superseding"],"points":[{"id":"421203219#whosonfirst-data","point":{"lat":11.16972,"lon":-1.145},"fields":[421203219,102312313,85668951,0,1,0,0,0]}],"count":1,"cursor":3,"elapsed":"1.207586ms"}
+
+
+	function whosonfirst_spatial_apply_query_filters(&$cmd, $possible, $candidates){
+
+		# WHERE docs: http://tile38.com/commands/intersects/
+
+		foreach ($possible as $key){
+
+			if (! isset($candidates[$key])){
+				continue;
+			}
+
+			$v = $candidates[$key];
+
+			if (strval($v) == ""){
+				continue;
+			}
+
+			$cmd[] = "WHERE {$key} {$v} {$v}";
+		}
+		
+		# pass-by-ref
 	}
 
 	########################################################################
@@ -201,17 +235,17 @@
 		foreach ($more['meta_fields'] as $f){
 			$meta[$f] = $props[$f];
 		}
-		
+
 		$meta = json_encode($meta);
-		
+
 		$meta_key = "{$wofid}:meta";
-		
+
 		$cmd = array("SET", "__COLLECTION__", $meta_key, "STRING", $meta);
 		$cmd = implode(" ", $cmd);
 
 		return whosonfirst_spatial_do($cmd, $more);
 	}
-	
+
 	########################################################################
 
 	function whosonfirst_spatial_append_meta(&$rsp, $more=array()){
@@ -221,7 +255,7 @@
 		);
 
 		$more = array_merge($defaults, $more);
-		
+
 		$fields = $rsp['fields'];
 
 		foreach ($more['meta_fields'] as $f){
@@ -238,7 +272,7 @@
 		$count_points = count($rsp['points']);
 
 		# first construct all the requests
-		
+
 		for ($i=0; $i < $count_points; $i++){
 
 			$row = $rsp['points'][$i];
@@ -251,17 +285,17 @@
 		}
 
 		# execute all the requests (this is the do_multi bit)
-		
+
 		foreach ($cmds as $cmd){
 
 			# Note the lack of error checking...
-			
+
 			$rsp2 = whosonfirst_spatial_do($cmd, $more);
 			$rsps[] = $rsp2;
 		}
 
 		# parse all the requests
-		
+
 		for ($i=0; $i < $count_points; $i++){
 
 			# Note the lack of error checking...
@@ -271,12 +305,12 @@
 				$rsp['points'][$i]['fields'][] = $obj[$f];
 			}
 		}
-	
+
 		$rsp['fields'] = $fields;
 
 		# pass-by-ref
 	}
-	
+
 	########################################################################
 
 	function whosonfirst_spatial_do($cmd, $more=array()){
@@ -326,7 +360,7 @@
 
 		# See this? It takes ~ 20-40 µs to fetch each name individually.
 		# Which isn't very much even when added up. There are two considerations
-		# here: 1) It's useful just to be able to append the name from the 
+		# here: 1) It's useful just to be able to append the name from the
 		# tile38 index itself 2) It might be just as fast to look up the
 		# entire record from ES itself. Basically what I am trying to say is
 		# that it's too soon so we're just going to do this for now...
@@ -335,7 +369,7 @@
 		whosonfirst_spatial_append_meta($rsp);
 
 		$results = array();
-		
+
 		$fields = $rsp['fields'];
 		$count_fields = count($fields);
 
@@ -355,7 +389,7 @@
 			list($id, $repo) = explode("#", $row['id']);
 
 			$placetype = whosonfirst_placetypes_id_to_name($props['wof:placetype_id']);
-			
+
 			$results[] = array(
 				'wof:name' => $props['wof:name'],
 				'wof:id' => $props['wof:id'],
@@ -372,5 +406,5 @@
 	}
 
 	########################################################################
-	
+
 	# the end

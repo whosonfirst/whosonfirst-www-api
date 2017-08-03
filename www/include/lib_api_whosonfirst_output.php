@@ -17,7 +17,7 @@
 		# because this: https://github.com/whosonfirst/whosonfirst-www-api/issues/11
 		# and this: https://github.com/whosonfirst/whosonfirst-www-api/issues/8
 
-		if (($extras = $more["extras"]) && ($more["is_tile38"])){
+		if (($extras = $more["extras"]) && ($more["is_tile38"]) && (count($rows))){
 
 			if (! is_array($extras)){
 				$extras = explode(",", $extras);
@@ -25,11 +25,18 @@
 
 			$fields = array_keys($rows[0]);		# don't forget to fetch the defaults
 			$has_extras = 0;
+			$has_wildcards = 0;
 
 			# just double check that there is actually something we need
 			# pull out of ES before we poke the network (20161031/thisisaaronland)
 
 			foreach ($extras as $f){
+
+				if (preg_match("/\:\*?$/", $f)){
+					$has_extras = 1;
+					$has_wildcards = 1;
+					break;
+				}
 
 				# See this - it's important if you pass an empty field ('')
 				# to ES it will FREAK OUT and return null values for all
@@ -47,10 +54,22 @@
 				$ids = array();
 
 				foreach ($rows as $row){
-					$ids[] = $row['wof:id'];
+
+					$wofid = $row['wof:id'];
+
+					# this shouldn't be necassary but that's true of a lot of things in life...
+					# https://github.com/whosonfirst/go-whosonfirst-tile38/issues/10
+
+					if (! in_array($wofid, $ids)){
+						$ids[] = $row['wof:id'];
+					}
 				}
 
-				$es_more = array('fields' => $fields);
+				$es_more = array();
+
+				if (! $has_wildcards){
+					$es_more["fields"] = $fields;
+				}
 
 				$rsp = whosonfirst_places_get_by_id_multi($ids, $es_more);
 
