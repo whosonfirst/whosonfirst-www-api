@@ -340,14 +340,14 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.concordances
     "sources": [
         {
             "source": "sg:id",
-            "concordances": 21089055
+            "concordances": 20584083
         }
     ],
     "next_query": "method=whosonfirst.concordances.getSources&per_page=1&page=2",
-    "total": 29,
+    "total": 31,
     "page": 1,
     "per_page": 1,
-    "pages": 29,
+    "pages": 31,
     "cursor": null,
     "stat": "ok"
 }
@@ -483,17 +483,17 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getBy
 {
     "places": [
         {
-            "wof:id": 85834637,
-            "wof:parent_id": "1108830809",
-            "wof:name": "Inner Mission",
+            "wof:id": 85887443,
+            "wof:parent_id": "85922583",
+            "wof:name": "Mission District",
             "wof:placetype": "neighbourhood",
             "wof:country": "US",
             "wof:repo": "whosonfirst-data"
         },
         {
-            "wof:id": 85887443,
-            "wof:parent_id": "85922583",
-            "wof:name": "Mission District",
+            "wof:id": 85834637,
+            "wof:parent_id": "1108830809",
+            "wof:name": "Inner Mission",
             "wof:placetype": "neighbourhood",
             "wof:country": "US",
             "wof:repo": "whosonfirst-data"
@@ -527,8 +527,14 @@ Return all the descendants for a Who&#039;s On First ID.
 | `region_id` | Ensure places belong to this region Who&#039;s On First ID. |  85669831 | no |
 | `locality_id` | Ensure places belong to this locality Who&#039;s On First ID. |  101736545 | no |
 | `neighbourhood_id` | Ensure places belong to this neighbourhood Who&#039;s On First ID. |  102112179 | no |
+| `brand_id` | Ensure places belong to this Who&#039;s On First brand ID. |  1126128733 | no |
 | `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
 | `is_current` | Filter results by their &#039;mz:is_current&#039; property. |  1 | no |
+| `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
+| `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
+| `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
+| `is_superseding` | Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0 |  1 | no |
+| `has_brand` | Filter results to include only those places that have a Who&#039;s On First brand ID. Valid options are: 1, 0 |  1 | no |
 | `exclude` | Exclude places matching these criteria. |  nullisland | no |
 | `include` | Include places matching these criteria. |  deprecated | no |
 | `min_lastmod` | Limit results to places that have been modified on or since this date (encoded as a Unix timestamp). |  1493855252 | no |
@@ -568,12 +574,12 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getDe
             "wof:repo": "whosonfirst-data-venue-us-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs2NTc3Nzc6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3Nzg6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3OTA6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc3OTE6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc3OTI6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzswOw%3D%3D",
+    "next_query": "method=whosonfirst.places.getDescendants&id=420780703&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTszNjUwMzg0OlFUam1ETWxKU3pta0hZTHgxMmVEdmc7MzY1MDM4NTpRVGptRE1sSlN6bWtIWUx4MTJlRHZnOzM2NTAzODY6UVRqbURNbEpTem1rSFlMeDEyZUR2ZzszNjUwMzg3OlFUam1ETWxKU3pta0hZTHgxMmVEdmc7MzY1MDM4ODpRVGptRE1sSlN6bWtIWUx4MTJlRHZnOzA7",
     "total": 120,
     "page": null,
     "pages": 120,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs2NTc3Nzc6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3Nzg6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3OTA6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc3OTE6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc3OTI6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzswOw==",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTszNjUwMzg0OlFUam1ETWxKU3pta0hZTHgxMmVEdmc7MzY1MDM4NTpRVGptRE1sSlN6bWtIWUx4MTJlRHZnOzM2NTAzODY6UVRqbURNbEpTem1rSFlMeDEyZUR2ZzszNjUwMzg3OlFUam1ETWxKU3pta0hZTHgxMmVEdmc7MzY1MDM4ODpRVGptRE1sSlN6bWtIWUx4MTJlRHZnOzA7",
     "stat": "ok"
 }
 ```
@@ -590,8 +596,8 @@ Return the closest set of ancestors (hierarchies) for a latitude and longitude
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `latitude` | A valid latitude coordinate. |  37.777228 | yes |
 | `longitude` | A valid longitude coordinate. |  -122.470779 | yes |
-| `placetype` | Skip descendants of this placetype. |  region | no |
 | `spr` | Format results as a standard place response (spr). |  1 | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
@@ -618,39 +624,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getHierarchiesByLatLon&api_key=your-mapzen-api-key&latitude=37.777228&longitude=-122.470779&placetype=region&spr=1'
-
-{
-    "hierarchies": [
-        {
-            "continent": {
-                "wof:id": 102191575,
-                "wof:parent_id": "-1",
-                "wof:name": "North America",
-                "wof:placetype": "continent",
-                "wof:country": "",
-                "wof:repo": "whosonfirst-data"
-            },
-            "country": {
-                "wof:id": 85633793,
-                "wof:parent_id": "102191575",
-                "wof:name": "United States",
-                "wof:placetype": "country",
-                "wof:country": "US",
-                "wof:repo": "whosonfirst-data"
-            },
-            "region": {
-                "wof:id": 85688637,
-                "wof:parent_id": "85633793",
-                "wof:name": "California",
-                "wof:placetype": "region",
-                "wof:country": "US",
-                "wof:repo": "whosonfirst-data"
-            }
-        }
-    ],
-    "stat": "ok"
-}
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getHierarchiesByLatLon&api_key=your-mapzen-api-key&latitude=LATITUDE&longitude=LONGITUDE&spr=SPR&placetype=PLACETYPE'
 ```
 
 <a name="whosonfirst.places.getInfo"></a>
@@ -762,7 +736,7 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 | `min_longitude` | A valid longitude coordinate, representing the left (Western) edge of the bounding box. |  -122.34374508 | yes |
 | `max_latitude` | A valid latitude coordinate, representing the top (Northern) edge of the bounding box. |  37.85749665 | yes |
 | `max_longitude` | A valid longitude coordinate, representing the right (Eastern) edge of the bounding box. |  -122.25585446 | yes |
-| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  locality | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
@@ -791,22 +765,18 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects&api_key=your-mapzen-api-key&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=locality&per_page=1'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getIntersects&api_key=your-mapzen-api-key&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=venue&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
 
 {
     "places": [
-        {
-            "wof:id": 85922583,
-            "wof:parent_id": 102087579,
-            "wof:name": "San Francisco",
-            "wof:placetype": "locality",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data"
-        }
+
     ],
-    "next_query": "method=whosonfirst.places.getIntersects&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=locality&per_page=1&cursor=6",
+    "next_query": null,
+    "total": null,
+    "page": null,
     "per_page": 1,
-    "cursor": 6,
+    "pages": null,
+    "cursor": null,
     "stat": "ok"
 }
 ```
@@ -823,8 +793,8 @@ Return all the Who&#039;s On First records near a point.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `latitude` | A valid latitude coordinate. |  40.784165 | yes |
 | `longitude` | A valid longitude coordinate. |  -73.958110 | yes |
-| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
 | `radius` | A valid radius (in meters) to limit the query by. Default radius is 100. Maximum radius is 500. |  25 | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
@@ -851,7 +821,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=your-mapzen-api-key&latitude=40.784165&longitude=-73.958110&placetype=venue&radius=25&per_page=1'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getNearby&api_key=your-mapzen-api-key&latitude=40.784165&longitude=-73.958110&radius=25&placetype=venue&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
 
 {
     "places": [
@@ -944,11 +914,11 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getRa
 
 {
     "place": {
-        "wof:id": 85794285,
-        "wof:parent_id": "101751737",
-        "wof:name": "Goatstown",
+        "wof:id": 85782551,
+        "wof:parent_id": "-1",
+        "wof:name": "Veerapandianpattinam",
         "wof:placetype": "neighbourhood",
-        "wof:country": "IR",
+        "wof:country": "IN",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -979,8 +949,14 @@ Query for Who&#039;s On First records.
 | `region_id` | Ensure places belong to this region Who&#039;s On First ID. |  85669831 | no |
 | `locality_id` | Ensure places belong to this locality Who&#039;s On First ID. |  101736545 | no |
 | `neighbourhood_id` | Ensure places belong to this neighbourhood Who&#039;s On First ID. |  102112179 | no |
+| `brand_id` | Ensure places belong to this Who&#039;s On First brand ID. |  1126128733 | no |
 | `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
 | `is_current` | Filter results by their &#039;mz:is_current&#039; property. |  1 | no |
+| `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
+| `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
+| `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
+| `is_superseding` | Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0 |  1 | no |
+| `has_brand` | Filter results to include only those places that have a Who&#039;s On First brand ID. Valid options are: 1, 0 |  1 | no |
 | `exclude` | Exclude places matching these criteria. |  nullisland | no |
 | `include` | Include places matching these criteria. |  deprecated | no |
 | `min_lastmod` | Limit results to places that have been modified on or since this date (encoded as a Unix timestamp). |  1493855252 | no |
@@ -1016,20 +992,20 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.searc
 {
     "places": [
         {
-            "wof:id": 571751713,
-            "wof:parent_id": "85831563",
-            "wof:name": "Poutine",
+            "wof:id": 975139507,
+            "wof:parent_id": "-1",
+            "wof:name": "Poutine Restau-Bar Enr",
             "wof:placetype": "venue",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data-venue-us-ny"
+            "wof:country": "CA",
+            "wof:repo": "whosonfirst-data-venue-ca"
         }
     ],
-    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTs2NTc3OTc6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3OTg6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc4MTA6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc4MTE6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc4MTI6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzswOw%3D%3D",
-    "total": 2,
+    "next_query": "method=whosonfirst.places.search&q=poutine&per_page=1&cursor=cXVlcnlUaGVuRmV0Y2g7NTszNjUwMzk5OlFUam1ETWxKU3pta0hZTHgxMmVEdmc7MzY1MDQwMDpRVGptRE1sSlN6bWtIWUx4MTJlRHZnOzM2NTA0MDI6UVRqbURNbEpTem1rSFlMeDEyZUR2ZzszNjUwNDAxOlFUam1ETWxKU3pta0hZTHgxMmVEdmc7MzY1MDQzNDo4a19EVFpOM1RWU09uNm5xNjQ4djJ3OzA7",
+    "total": 16,
     "page": null,
-    "pages": 2,
+    "pages": 16,
     "per_page": 1,
-    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTs2NTc3OTc6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc3OTg6Z0FUb05KMmNSek9WVGFVS2xVYm1WUTs2NTc4MTA6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc4MTE6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzs2NTc4MTI6SlFBVlJPbHVSMWFnSlh3LTBtaW1yZzswOw==",
+    "cursor": "cXVlcnlUaGVuRmV0Y2g7NTszNjUwMzk5OlFUam1ETWxKU3pta0hZTHgxMmVEdmc7MzY1MDQwMDpRVGptRE1sSlN6bWtIWUx4MTJlRHZnOzM2NTA0MDI6UVRqbURNbEpTem1rSFlMeDEyZUR2ZzszNjUwNDAxOlFUam1ETWxKU3pta0hZTHgxMmVEdmc7MzY1MDQzNDo4a19EVFpOM1RWU09uNm5xNjQ4djJ3OzA7",
     "stat": "ok"
 }
 ```
@@ -1223,7 +1199,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.repos.getByLatLon&api_key=your-mapzen-api-key&latitude=37.766633&longitude=-122.417693&placetype=venue'
+curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.repos.getByLatLon&api_key=your-mapzen-api-key&latitude=37.766633&longitude=-122.417693&placetype=venue&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1'
 
 {
     "repo": "whosonfirst-data-venue-us-ca",
@@ -1566,15 +1542,15 @@ curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.tags.getTags
 {
     "tags": [
         {
-            "count": 815933,
+            "count": 768015,
             "tag": "contractor"
         }
     ],
     "next_query": "method=whosonfirst.tags.getTags&source=wof&per_page=1&page=2",
-    "total": 39224,
+    "total": 38151,
     "page": 1,
     "per_page": 1,
-    "pages": 39224,
+    "pages": 38151,
     "cursor": null,
     "stat": "ok"
 }
