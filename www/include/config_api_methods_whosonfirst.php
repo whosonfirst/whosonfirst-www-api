@@ -43,7 +43,7 @@
 				"documented" => 1,
 				"required" => 0,
 				"example" => "microhood",
-				"notes" => "You may ensure that records include multiple placetypes by passing a ';' separated list of up to 10 placetypes, for example 'venue;neighbourhood'."
+				"notes" => "You may ensure that records include multiple placetypes by passing a ',' separated list of up to 10 placetypes, for example 'venue,neighbourhood'."
 			),
 			array(
 				"name" => "exclude_placetype",
@@ -51,7 +51,7 @@
 				"documented" => 1,
 				"required" => 0,
 				"example" => "venue",
-				"notes" => "You may ensure that records exclude multiple placetypes by passing a ';' separated list of up to 10 placetypes, for example 'venue;neighbourhood'."
+				"notes" => "You may ensure that records exclude multiple placetypes by passing a ',' separated list of up to 10 placetypes, for example 'venue,neighbourhood'."
 			),
    			array(
 				"name" => "tags",

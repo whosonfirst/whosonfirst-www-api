@@ -389,7 +389,7 @@
 
 				$esc_placetypes = array();
 
-				foreach ($placetypes as $p){
+				foreach ($placetype as $p){
 					$esc_placetypes[] = elasticsearch_escape($p);
 				}
 
@@ -619,10 +619,10 @@
 	
 	########################################################################
 	
-	function api_whosonfirst_utils_ensure_array($thing){
+	function api_whosonfirst_utils_ensure_array($thing, $sep=","){
 
 		if (! is_array($thing)){
-			$thing = mb_split(";", $thing);		# maybe ?
+			$thing = mb_split($sep, $thing);
 		}
 
 		return $thing;
