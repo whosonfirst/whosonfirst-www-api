@@ -1,0 +1,26 @@
+{capture assign="wof_id"}{$place|@whosonfirst_places_property:"wof:id"}{/capture}
+{capture assign="wof_name"}{$place|@whosonfirst_places_property:"wof:name"}{/capture}
+{capture assign="wof_placetype"}{$place|@whosonfirst_places_property:"wof:placetype"}{/capture}
+{include file="inc_head.txt"}
+
+<div class="container">
+
+<h2>{$wof_name|@escape} <small>is a <span class="hey-look">{$wof_placetype|@escape}</span> and its Who's On First ID is <span class="hey-look">{$wof_id|@escape}</span></small></h2>
+
+<div id="map" data-wof-id="{$wof_id|@escape}" data-wof-placetype="{$wof_placetype|@escape}" data-geom-latitude="{$place|@whosonfirst_places_property:"geom:latitude"|@escape}" data-geom-longitude="{$place|@whosonfirst_places_property:"geom:longitude"|@escape}" data-geom-bbox="{$place|@whosonfirst_places_property:"geom:bbox"|@escape}" data-api-key="{$cfg.mapzen.api_key|@escape}" style="width:100%; height:300px;"></div>
+
+</div>
+
+<link rel="stylesheet" href="{$cfg.abs_root_url}css/mapzen.js.css" />
+<script src="{$cfg.abs_root_url}javascript/mapzen.js"></script>
+<script src="{$cfg.abs_root_url}javascript/mapzen.places.map.js"></script>
+
+{literal}
+<script>
+window.addEventListener("load", function load(event){
+	mapzen.places.map.draw_map();
+});
+</script>
+{/literal}
+
+{include file="inc_foot.txt"}

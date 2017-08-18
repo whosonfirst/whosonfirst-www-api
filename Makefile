@@ -21,12 +21,24 @@ setup:
 	bin/configure_secrets.sh .
 	ubuntu/setup-db.sh wof_api wof_api
 
-mapzen:	styleguide
+mapzen:	styleguide mapzenjs refill
 
 styleguide:
 	if test -e www/css/mapzen.styleguide.css; then cp www/css/mapzen.styleguide.css www/css/mapzen.styleguide.css.bak; fi
 	curl -s -o www/css/mapzen.styleguide.css https://mapzen.com/common/styleguide/styles/styleguide.css
 	curl -s -o www/javascript/mapzen.styleguide.min.js https://mapzen.com/common/styleguide/scripts/mapzen-styleguide.min.js
+
+tangram:
+	curl -s -o www/javascript/tangram.js https://mapzen.com/tangram/tangram.debug.js
+	curl -s -o www/javascript/tangram.min.js https://mapzen.com/tangram/tangram.min.js
+
+refill:
+	curl -s -o www/tangram/refill-style.zip https://mapzen.com/carto/refill-style/refill-style.zip
+
+mapzenjs:
+	curl -s -o www/css/mapzen.js.css https://mapzen.com/js/mapzen.css
+	curl -s -o www/javascript/mapzen.js https://mapzen.com/js/mapzen.js
+	curl -s -o www/javascript/mapzen.min.js https://mapzen.com/js/mapzen.min.js
 
 chrome:
 	curl -s -o www/css/mapzen.whosonfirst.chrome.css https://raw.githubusercontent.com/whosonfirst/css-mapzen-whosonfirst/master/css/mapzen.whosonfirst.chrome.css

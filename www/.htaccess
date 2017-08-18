@@ -70,6 +70,8 @@ RewriteRule  ^account/delete/?$		account_delete.php	[L]
 RewriteRule ^about/?$			about.php 		[L,QSA]
 RewriteRule ^contact/?$			contact.php 		[L,QSA]
 
+RewriteRule  ^id/([0-9]+)/?$		id.php?id=$1&%{QUERY_STRING} [L]
+
 # See all this stuff that's been commented out? It's a lot of hoop-jumping
 # to separate API calls (api.example.com/rest) from all the other user-level
 # administrative pages (example.com/api/methods) and to make sure things that
@@ -151,7 +153,6 @@ RewriteRule    ^(api/)?pelias/(v1)/((alt|name|names|preferred|variant)/)?search/
 
 RewriteRule    ^(api/)?restpelias/(v1)/((alt|name|names|preferred|variant)/)?autocomplete/?$	/$1rest?method=whosonfirst.pelias.autocomplete&query_field=$4&format=geojson&version=$2&%{QUERY_STRING} [L]
 RewriteRule    ^(api/)?restpelias/(v1)/((alt|name|names|preferred|variant)/)?search/?$		/$1rest?method=whosonfirst.pelias.search&query_field=$4&format=geojson&version=$2&%{QUERY_STRING} [L]
-
 
 RewriteRule  ^ping/?$								ping.php?%{QUERY_STRING}  [L]
 

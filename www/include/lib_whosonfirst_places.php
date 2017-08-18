@@ -218,4 +218,26 @@
 
 	########################################################################
 
+	function whosonfirst_places_property($place, $path){
+
+		$property = null;
+
+		foreach (explode(".", $path) as $p){
+		
+			if (! isset($place[$p])){
+				return null;
+			}
+
+			$property = $place[$p];
+
+			if (is_array($property)){
+				$place = $property;
+			}
+		}
+
+		return $property;
+	}
+
+	########################################################################
+
 	# the end
