@@ -20,6 +20,11 @@
     <script src="{$cfg.abs_root_url}javascript/flamework.api.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.js"></script>
 
+    <link rel="stylesheet" href="{$cfg.abs_root_url}css/mapzen.js.css" />
+    <script src="{$cfg.abs_root_url}javascript/mapzen.js"></script>
+
+    <script src="{$cfg.abs_root_url}javascript/mapzen.places.map.js"></script>
+	
     <link href="{$cfg.abs_root_url}css/mapzen.whosonfirst.chrome.css" rel="stylesheet">
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.chrome.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.chrome.init.js"></script>
@@ -31,6 +36,6 @@
 
   </head>
 
-  <body data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$cfg.api_abs_root_url}{$cfg.api_endpoint}"{if "api_site_tokens"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}>
+  <body data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$cfg.api_abs_root_url}{$cfg.api_endpoint}"{if "api_site_tokens"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
 
   {include file="inc_head_navi.txt"}

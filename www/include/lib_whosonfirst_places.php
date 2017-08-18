@@ -240,4 +240,12 @@
 
 	########################################################################
 
+	function whosonfirst_places_url_for_place($place){
+
+		$enc_id = urlencode($place["wof:id"]);
+		return $GLOBALS["cfg"]["abs_root_url"] . "id/{$enc_id}/";
+	}
+
+	########################################################################
+
 	# the end
