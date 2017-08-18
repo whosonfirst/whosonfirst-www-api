@@ -1,8 +1,12 @@
 <?php
 
 	include("include/init.php");
-
 	loadlib("whosonfirst_places");
+
+	if (! get_isset("id")){
+		header("location: {$GLOBALS['cfg']['abs_root_url']}");
+		exit();
+	}
 
 	$id = get_int64("id");
 
@@ -13,7 +17,7 @@
 	}
 
 	$GLOBALS['smarty']->assign_by_ref("place", $place);
-	
 	$GLOBALS['smarty']->display("page_id.txt", $place);
+
 	exit();
 ?>

@@ -70,6 +70,7 @@ RewriteRule  ^account/delete/?$		account_delete.php	[L]
 RewriteRule ^about/?$			about.php 		[L,QSA]
 RewriteRule ^contact/?$			contact.php 		[L,QSA]
 
+RewriteRule  ^id/?$			id.php [L]				# mostly so we can get cfg.abs_root_url
 RewriteRule  ^id/([0-9]+)/?$		id.php?id=$1&%{QUERY_STRING} [L]
 
 # See all this stuff that's been commented out? It's a lot of hoop-jumping
