@@ -301,8 +301,8 @@
 	# like nginx then by setting the environment locally then there is no way to introspect the
 	# host that hosting this code without the URLs getting all fubar-ed. Good times...
 	#
-	$GLOBALS['cfg']['enable_feature_abs_root_suffix'] = 1;
-	$GLOBALS['cfg']['abs_root_suffix'] = "/api";
+	# $GLOBALS['cfg']['enable_feature_abs_root_suffix'] = 1;
+	# $GLOBALS['cfg']['abs_root_suffix'] = "/api";
 	# $GLOBALS['cfg']['abs_root_suffix_env'] = 'HTTP_X_PROXY_PATH';
 	# 
 	# (20160603/thisisaaronland)
