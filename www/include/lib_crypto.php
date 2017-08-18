@@ -24,7 +24,7 @@
 			loadlib("crypto_mcrypt");
 			break;
 		default:
-			die("You must specify a crypto module in cfg.crypto_module");
+			die("You must specify a crypto module in cfg.crypto_use_module");
 	}
 
 	#################################################################
