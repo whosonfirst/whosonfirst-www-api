@@ -40,6 +40,9 @@ mapzenjs:
 	curl -s -o www/javascript/mapzen.js https://mapzen.com/js/mapzen.js
 	curl -s -o www/javascript/mapzen.min.js https://mapzen.com/js/mapzen.min.js
 
+whosonfirstjs:
+	curl -s -o www/javascript/mapzen.whosonfirst.uri.js https://raw.githubusercontent.com/whosonfirst/js-mapzen-whosonfirst/master/src/mapzen.whosonfirst.uri.js
+
 chrome:
 	curl -s -o www/css/mapzen.whosonfirst.chrome.css https://raw.githubusercontent.com/whosonfirst/css-mapzen-whosonfirst/master/css/mapzen.whosonfirst.chrome.css
 	curl -s -o www/javascript/mapzen.whosonfirst.chrome.js https://raw.githubusercontent.com/whosonfirst/js-mapzen-whosonfirst/master/src/mapzen.whosonfirst.chrome.js

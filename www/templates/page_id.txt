@@ -20,12 +20,6 @@
 <p>This is a <span class="hey-look">{$wof_placetype|@escape}</span> and its Who's On First ID is <a href="{$place|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_id|@escape}</a>.{if $wof_parent_id != -1} It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a>.{/if}</p>
 </div>
 
-{literal}
-<script>
-window.addEventListener("load", function load(event){
-	mapzen.places.map.draw_place_map("map");
-});
-</script>
-{/literal}
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.id.init.js"></script>
 
 {include file="inc_foot.txt"}

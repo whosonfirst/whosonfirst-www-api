@@ -33,7 +33,7 @@ mapzen.places.map = (function(){
 	    return maps[map_id];
 	},
 	
-	'draw_place_map': function(map_id){
+	'draw_place_map': function(map_id, cb){
 	    
 	    var map_el = document.getElementById(map_id);
 	    var map = self.get_map(map_id);
@@ -74,17 +74,45 @@ mapzen.places.map = (function(){
 		}
 
 		map.setView([lat, lon], zoom);
-		return;
 	    }
+
+	    else {
+		var sw = L.latLng(min_lat, min_lon);
+		var ne = L.latLng(max_lat, max_lon);
+		
+		var bounds = L.latLngBounds(sw, ne);
+		var opts = { "padding": [100, 100] };	   
+		
+		map.fitBounds(bounds, opts);
+	    }
+
+	    cb(map);
+	},
+
+        'add_geojson_to_map': function(map, geojson, more){
+
+	    if (! more){
+                more = {};
+            }
 	    
-            var sw = L.latLng(min_lat, min_lon);
-            var ne = L.latLng(max_lat, max_lon);
+            var args = {
+                // "style": style,
+		// "pointToLayer": handler
+            }
 	    
-	    var bounds = L.latLngBounds(sw, ne);
-            var opts = { "padding": [100, 100] };	   
+            // console.log("[map][geojson] ADD", geojson, args);
 	    
-            map.fitBounds(bounds, opts);
-	}
+            var layer = L.geoJSON(geojson, args);
+	    
+            // http://leafletjs.com/reference-1.1.0.html#layergroup-setzindex
+            // https://github.com/Leaflet/Leaflet/issues/3427 (sigh...)
+	    
+            if (more["z-index"]){
+                var z = layer.setZIndex(more["z-index"]);
+            }
+	    
+            return layer.addTo(map);
+        }
     };
     
     return self;
