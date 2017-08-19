@@ -59,10 +59,12 @@ mapzen.places.map = (function(){
 		var parent_bbox = map_el.getAttribute("data-parent-geom-bbox");
 		parent_bbox = parent_bbox.split(",");
 
-		var min_lon = parseFloat(parent_bbox[0]);
-		var min_lat = parseFloat(parent_bbox[1]);
-		var max_lon = parseFloat(parent_bbox[2]);
-		var max_lat = parseFloat(parent_bbox[3]);
+		if (parent_bbox.length == 4){
+		    min_lon = parseFloat(parent_bbox[0]);
+		    min_lat = parseFloat(parent_bbox[1]);
+		    max_lon = parseFloat(parent_bbox[2]);
+		    max_lat = parseFloat(parent_bbox[3]);
+		}
 	    }
 
 	    if ((min_lat == max_lat) && (min_lon == max_lon)){
@@ -85,6 +87,21 @@ mapzen.places.map = (function(){
 		
 		map.fitBounds(bounds, opts);
 	    }
+
+            // this doesn't work well enough to use yet...
+
+	    /*
+	    var abs_root_url = document.body.getAttribute("data-abs-root-url");
+
+	    var opts = {
+		"url": abs_root_url + "pelias/v1",
+                "focus": false,
+		"panToPoint": false,
+            };
+	    
+	    var geocoder = L.Mapzen.geocoder(opts);
+            geocoder.addTo(map);
+	    */
 
 	    cb(map);
 	},

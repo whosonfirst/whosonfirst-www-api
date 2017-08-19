@@ -211,8 +211,25 @@
 		);
 
 		$rsp = elasticsearch_spelunker_search($req, $more);
-		# $rsp['query'] = $query;
+		return $rsp;
+	}
 
+	########################################################################
+
+	function whosonfirst_places_get_tagged($tag, $filters, $more=array()){
+
+		$esc_tag = elasticsearch_escape($tag);
+
+		$query = array("match" => array(
+			"wof:tags" => $esc_tag
+		));
+
+		$req = array(
+			"query" => $query,
+			'filter' => array('and' => $filters),
+		);
+
+		$rsp = elasticsearch_spelunker_search($req, $more);
 		return $rsp;
 	}
 
@@ -244,6 +261,14 @@
 
 		$enc_id = urlencode($place["wof:id"]);
 		return $GLOBALS["cfg"]["abs_root_url"] . "id/{$enc_id}/";
+	}
+
+	########################################################################
+
+	function whosonfirst_places_data_url_for_place($place){
+
+		loadlib("whosonfirst_uri");
+		return whosonfirst_uri_id2abspath("https://whosonfirst.mapzen.com/data", $place["wof:id"]);
 	}
 
 	########################################################################

@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>{$cfg.site_name|escape}{if $page_title} | {$page_title|escape}{/if}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    {if $extra_meta}{$extra_meta}{/if}
 
     <!-- Le styles -->
     <link href="{$cfg.abs_root_url}css/bootstrap.min.css" rel="stylesheet">

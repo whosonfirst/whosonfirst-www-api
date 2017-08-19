@@ -1,10 +1,26 @@
 {capture assign="wof_id"}{$place|@whosonfirst_places_property:"wof:id"}{/capture}
 {capture assign="wof_name"}{$place|@whosonfirst_places_property:"wof:name"}{/capture}
 {capture assign="wof_placetype"}{$place|@whosonfirst_places_property:"wof:placetype"}{/capture}
+{capture assign="wof_country"}{$place|@whosonfirst_places_property:"wof:country"}{/capture}
 {capture assign="wof_parent_id"}{$place|@whosonfirst_places_property:"wof:parent_id"}{/capture}
 {capture assign="wof_parent_name"}{$place|@whosonfirst_places_property:"wof:parent.wof:name"}{/capture}
 {capture assign="wof_parent_placetype"}{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"}{/capture}
+{capture assign="wof_blurb_escaped"}{$wof_name|@escape} is a {$wof_placetype|@escape} and its Who's On First ID is {$wof_id|@escape}.{if $wof_country != ""} :flag-{$wof_country|@strtolower|@escape}:{/if}{/capture}
 {capture assign="page_title"}{$wof_name} ({$wof_id}){/capture}
+{capture assign="extra_meta"}
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Mapzen Places" />
+<meta property="og:title" content="{$wof_name|@escape} ({$wof_id|@escape})" />
+<meta property="og:description" content="{$wof_blurb_escaped}" />
+<meta property="og:image" content="https://mapzen.com/common/styleguide/images/favicons/favicon-32x32.png" />
+<meta property="twitter:card" value="summary" />
+<meta property="twitter:site" content="@mapzen" />
+<meta property="twitter:creator" content="@mapzen" />
+<meta property="twitter:url" content="{$place|@whosonfirst_places_url_for_place}" />
+<meta property="twitter:title" content="{$wof_name|@escape} ({$wof_id|@escape})" />
+<meta property="twitter:description" content="{$wof_blurb_escaped}" />
+<meta property="twitter:image" content="https://mapzen.com/common/styleguide/images/favicons/favicon-32x32.png" />
+{/capture}
 {include file="inc_head.txt"}
 
 <div class="container">
@@ -12,12 +28,40 @@
 <div class="row">
 <h2>{$wof_name|@escape}</h2>
 
-<div id="map" data-wof-id="{$wof_id|@escape}" data-wof-placetype="{$wof_placetype|@escape}" data-geom-latitude="{$place|@whosonfirst_places_property:"geom:latitude"|@escape}" data-geom-longitude="{$place|@whosonfirst_places_property:"geom:longitude"|@escape}" data-geom-bbox="{$place|@whosonfirst_places_property:"geom:bbox"|@escape}" data-parent-geom-bbox="{$place|@whosonfirst_places_property:"wof:parent.geom:bbox"}" style="width:100%; height:400px; border:5px solid #000; margin-bottom: 1em;"></div>
+<div id="map" data-wof-id="{$wof_id|@escape}" data-wof-parent-id="{$wof_parent_id|@escape}" data-wof-placetype="{$wof_placetype|@escape}" data-geom-latitude="{$place|@whosonfirst_places_property:"geom:latitude"|@escape}" data-geom-longitude="{$place|@whosonfirst_places_property:"geom:longitude"|@escape}" data-geom-bbox="{$place|@whosonfirst_places_property:"geom:bbox"|@escape}" data-parent-geom-bbox="{$place|@whosonfirst_places_property:"wof:parent.geom:bbox"}" style="width:100%; height:400px; border:5px solid #000; margin-bottom: 1em;"></div>
 
 </div>
 
 <div class="row">
-<p>This is a <span class="hey-look">{$wof_placetype|@escape}</span> and its Who's On First ID is <a href="{$place|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_id|@escape}</a>.{if $wof_parent_id != -1} It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a>.{/if}</p>
+<ul class="list">
+    <li><span class="hey-look">{$wof_name|@escape}</span> is a <a href="#" class="hey-look">{$wof_placetype|@escape}</a> and its Who's On First ID is <a href="{$place|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_id|@escape}</a>.</li>
+    <li>
+    {if $wof_parent_id == -1}
+    We aren't entirely certain who this {$wof_placetype|@escape} is parented by.
+    {elseif $wof_parent_id < 0}
+    This {$wof_placetype|@escape}'s parentage is complicated.
+    {else}
+    It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a> which is a <a href="#" class="hey-look">{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"|@escape}</a>.
+    {/if}
+    </li>
+</ul>
+
+    {if $wof_placetype == "venue"}
+<ul class="list">
+    {capture assign="addr_full"}{$place|@whosonfirst_places_property:"addr:full"}{/capture}
+    {capture assign="addr_phone"}{$place|@whosonfirst_places_property:"addr:phone"}{/capture}
+    {assign var="wof_tags" value=$place|@whosonfirst_places_property:"wof:tags"}
+    {if $addr_full != ""}<li>Its address is <span class="hey-look">{$addr_full|@escape}</span> and its exact latitude and longitude is <a href="#" class="hey-look">{$place|@whosonfirst_places_property:"geom:latitude"|@escape}, {$place|@whosonfirst_places_property:"geom:longitude"|@escape}</a>.</li>{/if}
+    {if $addr_phone != ""}<li>Its phone number is <span class="hey-look">{$addr_phone|@escape}</span>.</li>{/if}
+    {if $wof_tags|@count}<li>It is tagged {foreach from=$wof_tags item="tag" name="tags"}<a href="{$cfg.abs_root_url}tags/{$tag|@escape}/{if $wof_parent_id > 0}?wofid={$wof_parent_id|@escape}{/if}" class="hey-look">{$tag|@escape}</a>{if $smarty.foreach.tags.last}.{else} and {/if}{/foreach}{/if}</li>
+    </ul>    
+    {/if}
+
+<ul class="list">
+    <li>See a detailed listing for this {$wof_placetype|@escape} on the <a href="https://whosonfirst.mapzen.com/spelunker/id/{$wof_id|@escape}/" class="hey-look">Who's On First Spelunker</a>.</li>
+    <li><a href="{$place|@whosonfirst_places_data_url_for_place}" class="hey-look">Download</a> the raw data for this {$wof_placetype|@escape}.</li>
+</ul>
+
 </div>
 
 <script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.id.init.js"></script>
