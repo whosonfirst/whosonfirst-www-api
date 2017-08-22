@@ -1,0 +1,7 @@
+{capture assign="wof_id"}{$place|@whosonfirst_places_property:"wof:id"}{/capture}
+{capture assign="wof_name"}{$place|@whosonfirst_places_property:"wof:name"}{/capture}
+{capture assign="wof_placetype"}{$place|@whosonfirst_places_property:"wof:placetype"}{/capture}
+{literal}{{/literal}
+	"wof:id": {$wof_id|@escape},
+	"wof:name": {$wof_name|@escape}
+{literal}}{/literal}
