@@ -320,24 +320,35 @@
 
 		# this is toggled on/off above with following config:
 		# $GLOBALS['cfg']['enable_feature_api_method_aliases']
+		#
 		# and get slotted in to the general config with the 
 		# api_config_init_aliases() function which is in turn
 		# invoked by the general api_config_init() function
 
 		'method_aliases' => array(
 
-			'methods' => array(
-				# please implement me...
-			),
+			# these are applied first
 
 			'method_classes' => array(
 				# for example:
 				# 'whosonfirst.concordances' => array(
 				# 	'mapzen.places.concordances' => array(
-				#		'documented' => 0
+				#		'documented' => 1
 				#	),
 				# ),
 			),
+
+			# then these...
+
+			'methods' => array(
+				# for example:
+				# 'whosonfirst.concordances.getById' => array(
+				#	'mapzen.places.concordances.getById' => array(
+				#		'documented' => 0
+				#	)
+				# )
+			),
+
 		),
 
 		# We are NOT doing the same for blessed API keys since

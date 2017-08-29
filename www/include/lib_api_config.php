@@ -135,18 +135,32 @@
 				}
 
 				foreach ($aliases as $alias_spec => $alias_details){
+
 					$method_alias = str_replace($class_spec, $alias_spec, $method_name);
 
-					if (! isset($GLOBALS['cfg']['api']['methods'][$method_alias])){
-					
-						# apply any overrides that may be necessary
-						$alias_details = array_merge($method_details, $alias_details);
+					# apply any overrides that may be necessary
+					$alias_details = array_merge($method_details, $alias_details);
 
-						$GLOBALS['cfg']['api']['methods'][$method_alias] = $alias_details;
-					}
+					$GLOBALS['cfg']['api']['methods'][$method_alias] = $alias_details;
 				}
 			}
 		}
+
+		foreach ($GLOBALS['cfg']['api']['method_aliases']['methods'] as $method_name => $aliases){
+
+			if (! isset($GLOBALS['cfg']['api']['methods'][$method_name])){
+				continue;
+			}
+
+			foreach ($aliases as $method_alias => $alias_details){
+
+				# apply any overrides that may be necessary
+				$alias_details = array_merge($method_details, $alias_details);
+
+				$GLOBALS['cfg']['api']['methods'][$method_alias] = $alias_details;
+			}
+		}
+
 	}
 
 	#################################################################
