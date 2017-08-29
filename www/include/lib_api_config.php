@@ -106,6 +106,10 @@
 			}
 		}
 
+		if ($GLOBALS['cfg']['enable_feature_api_method_aliases']){
+			api_config_init_aliases();
+		}
+
 		api_config_init_blessings();
 
 		if ($GLOBALS['this_is_webpage']){
@@ -114,6 +118,29 @@
 
 			if (features_is_enabled($req_features)){
 				api_config_init_site_keys();
+			}
+		}
+	}
+
+	#################################################################
+
+	function api_config_init_aliases(){
+
+		foreach ($GLOBALS['cfg']['api']['method_aliases']['method_classes'] as $class_spec => $aliases){
+
+			foreach ($GLOBALS['cfg']['api']['methods'] as $method_name => $method_details){
+
+				if (! preg_match("/^{$class_spec}/", $method_name)){
+					continue;
+				}
+
+				foreach ($aliases as $alias_spec){
+					$method_alias = str_replace($class_spec, $alias_spec, $method_name);
+
+					if (! isset($GLOBALS['cfg']['api']['methods'][$method_alias])){
+						$GLOBALS['cfg']['api']['methods'][$method_alias] = $method_details;
+					}
+				}
 			}
 		}
 	}

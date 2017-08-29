@@ -227,32 +227,6 @@
 	# WET PAINT - don't be surprised if it all changes...
 	# (20170829/thisisaaronland)
 
-	$GLOBALS['cfg']['api_method_aliases'] = array(
-		'methods' => array(),
-		'method_classes' => array(
-			'whosonfirst.concordances' => array(
-				'mapzen.places.concordances',
-			),
-			'whosonfirst.pelias' => array(
-				'mapzen.places.pelias',
-			),
-			'whosonfirst.places' => array(
-				'mapzen.places',
-			),
-			'whosonfirst.placetypes' => array(
-				'mapzen.places.placetypes',
-			),
-			'whosonfirst.repos' => array(
-				'mapzen.places.repos',
-			),
-			'whosonfirst.sources' => array(
-				'mapzen.places.sources',
-			),
-			'whosonfirst.tags' => array(
-				'mapzen.places.tags',
-			),
-		)
-	);
 
 	$GLOBALS['cfg']['enable_feature_api_require_keys'] = 0;		# because oauth2...
 	$GLOBALS['cfg']['enable_feature_api_register_keys'] = 1;
@@ -343,6 +317,40 @@
 		'methods' => array(),
 
 		'errors' => array(),
+
+		# this is toggled on/off above with following config:
+		# $GLOBALS['cfg']['enable_feature_api_method_aliases']
+
+		'method_aliases' => array(
+
+			'methods' => array(
+				# please implement me...
+			),
+
+			'method_classes' => array(
+				'whosonfirst.concordances' => array(
+					'mapzen.places.concordances',
+				),
+				'whosonfirst.pelias' => array(
+					'mapzen.places.pelias',
+				),
+				'whosonfirst.places' => array(
+					'mapzen.places',
+				),
+				'whosonfirst.placetypes' => array(
+					'mapzen.places.placetypes',
+				),
+				'whosonfirst.repos' => array(
+					'mapzen.places.repos',
+				),
+				'whosonfirst.sources' => array(
+					'mapzen.places.sources',
+				),
+				'whosonfirst.tags' => array(
+					'mapzen.places.tags',
+				),
+			),
+		),
 
 		# We are NOT doing the same for blessed API keys since
 		# it's expected that their number will be small and
