@@ -320,6 +320,9 @@
 
 		# this is toggled on/off above with following config:
 		# $GLOBALS['cfg']['enable_feature_api_method_aliases']
+		# and get slotted in to the general config with the 
+		# api_config_init_aliases() function which is in turn
+		# invoked by the general api_config_init() function
 
 		'method_aliases' => array(
 
@@ -328,27 +331,10 @@
 			),
 
 			'method_classes' => array(
-				'whosonfirst.concordances' => array(
-					'mapzen.places.concordances',
-				),
-				'whosonfirst.pelias' => array(
-					'mapzen.places.pelias',
-				),
-				'whosonfirst.places' => array(
-					'mapzen.places',
-				),
-				'whosonfirst.placetypes' => array(
-					'mapzen.places.placetypes',
-				),
-				'whosonfirst.repos' => array(
-					'mapzen.places.repos',
-				),
-				'whosonfirst.sources' => array(
-					'mapzen.places.sources',
-				),
-				'whosonfirst.tags' => array(
-					'mapzen.places.tags',
-				),
+				# for example:
+				# 'whosonfirst.concordances' => array(
+				# 	'mapzen.places.concordances',
+				# ),
 			),
 		),
 
