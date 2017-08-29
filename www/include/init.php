@@ -171,23 +171,36 @@
 
 	$config_files = array();
 
-	# See the order of predence? It's important. Global is global.
-	# Local is by hostname. Dev is local to a specific machine or
-	# instance where you may not know or have a hostname...
-	# (20160404/thisisaaronland)
+	# See the order of predence? It's important:
+	#
+	# 'config.php' is global for all instances of the application.
+	#
+	# 'config_local.php' is for your instance of an application, for non-secret
+	# things that are specific to your requirements - hostnames for example.
+	#
+	# 'config_local_{HOST}.php' is local to a specific machine or instance based
+	# on it's short hostname (hostname -s)
+	#
+	# The same rules apply to 'secrets_local.php' and 'secrets_local_{HOST}.php'
+	# 
+	# Importantly of the six possible files listed below only 'config.php' is
+	# allowed to be checked in to git - all the others are explicitly denied so
+	# it's up to you to ensure they get deployed to your application as needed.
+	#
+	# (20170829/thisisaaronland)
 	
 	$global_config = FLAMEWORK_INCLUDE_DIR . "config.php";
 	$global_secrets = FLAMEWORK_INCLUDE_DIR . "secrets.php";
 	
-	$local_config = FLAMEWORK_INCLUDE_DIR . "config_local_{$host}.php";
-	$local_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_local_{$host}.php";
+	$local_config = FLAMEWORK_INCLUDE_DIR . "config_local.php";
+	$local_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_local.php";
 
-	$dev_config = FLAMEWORK_INCLUDE_DIR . "config_dev.php";
-	$dev_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_dev.php";
+	$host_config = FLAMEWORK_INCLUDE_DIR . "config_local_{$host}.php";
+	$host_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_local_{$host}.php";
 
 	$config_files[] = $global_config;
 
-	$to_check = array($local_config, $dev_config, $global_secrets, $local_secrets, $dev_secrets);
+	$to_check = array($local_config, $host_config, $global_secrets, $local_secrets, $host_secrets);
 
 	foreach ($to_check as $path){
 
@@ -197,16 +210,6 @@
 	}
 
 	foreach ($config_files as $path){
-
-		# See this - prod does not make exceptions. If you're in prod then
-		# just make it work, yeah? (20160405/thisisaaronland)
-
-		if ($GLOBALS['cfg']['environment'] == 'prod'){
-
-			if (in_array($path, array($dev_config, $dev_secrets))){
-				continue;
-			}
-		}
 
 		# echo "load {$path} <br />";
 
