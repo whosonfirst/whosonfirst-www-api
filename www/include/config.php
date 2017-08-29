@@ -333,7 +333,9 @@
 			'method_classes' => array(
 				# for example:
 				# 'whosonfirst.concordances' => array(
-				# 	'mapzen.places.concordances',
+				# 	'mapzen.places.concordances' => array(
+				#		'documented' => 0
+				#	),
 				# ),
 			),
 		),

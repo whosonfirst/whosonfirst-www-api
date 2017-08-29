@@ -134,11 +134,15 @@
 					continue;
 				}
 
-				foreach ($aliases as $alias_spec){
+				foreach ($aliases as $alias_spec => $alias_details){
 					$method_alias = str_replace($class_spec, $alias_spec, $method_name);
 
 					if (! isset($GLOBALS['cfg']['api']['methods'][$method_alias])){
-						$GLOBALS['cfg']['api']['methods'][$method_alias] = $method_details;
+					
+						# apply any overrides that may be necessary
+						$alias_details = array_merge($method_details, $alias_details);
+
+						$GLOBALS['cfg']['api']['methods'][$method_alias] = $alias_details;
 					}
 				}
 			}
