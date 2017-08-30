@@ -47,6 +47,9 @@ ErrorDocument 403 /403.php
 # Get mod_rewrite fired up
 RewriteEngine on
 
+RewriteCond   %{HTTP_HOST}	^(.*)elb\.amazonaws\.com$
+RewriteRule   .*		- [F]
+
 # Login stuff
 
 # RewriteRule  ^signup/?$			signup.php		[L]
