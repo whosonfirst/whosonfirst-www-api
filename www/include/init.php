@@ -189,12 +189,14 @@
 
 	$to_check = array($local_config, $dev_config, $global_secrets, $local_secrets, $dev_secrets);
 
+
 	foreach ($to_check as $path){
 
 		if (file_exists($path)){
 			$config_files[] = $path;
 		}
 	}
+
 
 	foreach ($config_files as $path){
 
