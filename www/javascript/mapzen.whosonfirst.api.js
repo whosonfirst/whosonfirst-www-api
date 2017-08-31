@@ -11,15 +11,22 @@ mapzen.whosonfirst.api = (function(){
 
             _api = new flamework.api();
             _api.set_handler('endpoint', mapzen.whosonfirst.api.endpoint);
+            _api.set_handler('accesstoken', mapzen.whosonfirst.api.accesstoken);	// DEPRECATED
             _api.set_handler('authentication', mapzen.whosonfirst.api.authentication);
         },
 
         'call': function(method, data, on_success, on_error){
             _api.call(method, data, on_success, on_error);
         },
-
+	
         'endpoint': function(){
             return document.body.getAttribute("data-api-endpoint");
+        },
+
+	// 'accesstoken' IS DEPRECATED AND 'authentication' IS THE NEW SHINY
+
+        'accesstoken': function(){
+            return document.body.getAttribute("data-api-access-token");
         },
 
         'authentication': function(form_data){
