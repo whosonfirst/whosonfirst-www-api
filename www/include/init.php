@@ -238,12 +238,14 @@
 		$local_secrets, $server_secrets, $host_secrets
 	);
 
+
 	foreach ($to_check as $path){
 
 		if (file_exists($path)){
 			$config_files[] = $path;
 		}
 	}
+
 
 	foreach ($config_files as $path){
 

@@ -11,7 +11,7 @@ mapzen.whosonfirst.api = (function(){
 
             _api = new flamework.api();
             _api.set_handler('endpoint', mapzen.whosonfirst.api.endpoint);
-            _api.set_handler('accesstoken', mapzen.whosonfirst.api.accesstoken);
+            _api.set_handler('authentication', mapzen.whosonfirst.api.authentication);
         },
 
         'call': function(method, data, on_success, on_error){
@@ -22,8 +22,15 @@ mapzen.whosonfirst.api = (function(){
             return document.body.getAttribute("data-api-endpoint");
         },
 
-        'accesstoken': function(){
-            return document.body.getAttribute("data-api-access-token");
+        'authentication': function(form_data){
+
+	    var access_token = document.body.getAttribute("data-api-access-token");
+	    
+	    if (! form_data.has("access_token")){
+		form_data.append("access_token", access_token);
+	    }
+	    
+	    return form_data;
         }
     }
 
