@@ -216,7 +216,7 @@
 
 	$server_name = $_SERVER['SERVER_NAME'];
 	$server_name = str_replace(".", "_", $server_name);
-	
+
 	$global_config = FLAMEWORK_INCLUDE_DIR . "config.php";
 	$global_secrets = FLAMEWORK_INCLUDE_DIR . "secrets.php";
 	

@@ -148,6 +148,7 @@ $(document).ready(function(){
 	    	    _api = new flamework.api();
             	    _api.set_handler('endpoint', window.api_explorer.endpoint);
             	    _api.set_handler('accesstoken', window.api_explorer.accesstoken);
+		    _api.set_handler('authentication', window.api_explorer.authentication);
        	        },
 
                 'call': function(method, data, on_success, on_error){
@@ -160,7 +161,19 @@ $(document).ready(function(){
 
                 'accesstoken': function(){
                     return document.body.getAttribute("data-api-access-token");
-                }
+                },
+
+        	'authentication': function(form_data){
+	
+		    var access_token = document.body.getAttribute("data-api-access-token");
+	    
+		    if (! form_data.has("access_token")){
+		       form_data.append("access_token", access_token);
+	    	    }
+	    
+		    return form_data;
+        	}
+
             }
 
             return self;
