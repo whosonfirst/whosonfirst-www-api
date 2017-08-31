@@ -4,11 +4,7 @@
 	# Things you may want to change in a hurry
 
 	$GLOBALS['cfg']['site_name'] = 'Who\'s On First API';
-<<<<<<< HEAD
 	$GLOBALS['cfg']['environment'] = 'prod';
-=======
-	$GLOBALS['cfg']['environment'] = 'dev';
->>>>>>> 82c38130bb71707250efc609fa436ffadb482eb5
 
 	$GLOBALS['cfg']['site_disabled'] = 0;
 	$GLOBALS['cfg']['site_disabled_retry_after'] = 0;	# seconds; if set will return HTTP Retry-After header
