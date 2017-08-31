@@ -32,6 +32,22 @@ mapzen.places.map = (function(){
 
 	    return maps[map_id];
 	},
+
+	'draw_nearby_map': function(map_id, cb){
+	    
+	    var map_el = document.getElementById(map_id);
+	    var map = self.get_map(map_id);
+
+	    if (map_el.getAttribute("data-wof-id")){
+		return self.draw_place_map(map_id, cb);
+	    }
+
+	    console.log(location.href);
+
+	    map.setView([37.7749, -122.4194], 12);
+
+	    cb(map);
+	},
 	
 	'draw_place_map': function(map_id, cb){
 	    
@@ -108,13 +124,52 @@ mapzen.places.map = (function(){
 
         'add_geojson_to_map': function(map, geojson, more){
 
+	    console.log("GEOJSON", geojson);
+
 	    if (! more){
                 more = {};
             }
-	    
+
+	    var point_style = {
+                "color": "#000",
+                "weight": 2,
+                "opacity": 1,
+                "radius": 6,
+                "fillColor": "#0BBDFF",
+                "fillOpacity": 1
+	    };
+
+	    var point_handler = function(feature, latlon){
+		
+                var props = feature['properties'];
+                var label = props['wof:name'];
+		
+                var m = L.circleMarker(latlon, point_style);
+                m.bindTooltip(label);
+		
+                return m;
+	    };
+
+	    var feature_handler = function(feature, layer) {
+
+                var props = feature['properties'];
+		var wofid = props["wof:id"];
+
+		layer.on('click', function (e){
+
+		    var enc_id = encodeURIComponent(wofid);
+
+		    var abs_root_url = document.body.getAttribute("data-abs-root-url");
+		    var url = abs_root_url + "id/" + enc_id + "/";
+
+		    location.href = url;
+		});
+
+	    };
+
             var args = {
-                // "style": style,
-		// "pointToLayer": handler
+		"pointToLayer": point_handler,
+		"onEachFeature": feature_handler,
             }
 	    
             // console.log("[map][geojson] ADD", geojson, args);

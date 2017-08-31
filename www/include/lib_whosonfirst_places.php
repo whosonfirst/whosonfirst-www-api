@@ -265,6 +265,14 @@
 
 	########################################################################
 
+	function whosonfirst_places_nearby_url_for_place($place){
+
+		$enc_id = urlencode($place["wof:id"]);
+		return $GLOBALS["cfg"]["abs_root_url"] . "nearby/{$enc_id}/";
+	}
+
+	########################################################################
+
 	function whosonfirst_places_data_url_for_place($place){
 
 		loadlib("whosonfirst_uri");

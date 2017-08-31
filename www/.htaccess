@@ -75,8 +75,12 @@ RewriteRule ^contact/?$			contact.php 		[L,QSA]
 
 RewriteRule  ^id/?$			id.php [L]				# mostly so we can get cfg.abs_root_url
 RewriteRule  ^id/([0-9]+)/?$		id.php?id=$1&%{QUERY_STRING} [L]
+# RewriteRule  ^id/([0-9]+)/nearby/?$	/nearby/$1/?%{QUERY_STRING} [R,L]
 
 RewriteRule  ^id/([0-9]+)/info(.json)?$		info.php?id=$1&%{QUERY_STRING} [L]
+
+RewriteRule  ^nearby/?$				nearby.php?%{QUERY_STRING} [L]
+RewriteRule  ^nearby/([0-9]+)/?$		nearby.php?id=$1&%{QUERY_STRING} [L]
 
 RewriteRule  ^tags/([a-z]+)/?$		tag.php?tag=$1&%{QUERY_STRING} [L]
 
