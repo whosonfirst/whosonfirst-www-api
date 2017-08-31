@@ -39,7 +39,15 @@
     {if $wof_parent_id == -1}
     We aren't entirely certain who this {$wof_placetype|@escape} is parented by.
     {elseif $wof_parent_id < 0}
+
     This {$wof_placetype|@escape}'s parentage is complicated.
+
+    {assign var="wof_parents" value=$place|@whosonfirst_places_property:"wof:parents"}
+
+    {if $wof_parents|@count}
+    It is parented by {foreach from=$wof_parents item="row" name="parents"}<a href="{$row|@whosonfirst_places_url_for_place}" class="hey-look">{$row|@whosonfirst_places_property:"wof:name"}</a>{if !$smarty.foreach.parents.last} and {/if}{/foreach} {if $wof_parents|@count==2}both of which{else}all of which{/if} are a <a href="#" class="hey-look">{$wof_parents.0|@whosonfirst_places_property:"wof:placetype"}</a>.
+    {/if}
+
     {else}
     It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a> which is a <a href="#" class="hey-look">{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"|@escape}</a>.
     {/if}
