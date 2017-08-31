@@ -222,17 +222,16 @@
 	$GLOBALS['cfg']['enable_feature_api_logging'] = 1;
 	$GLOBALS['cfg']['enable_feature_api_throttling'] = 0;
 
-	$GLOBALS['cfg']['enable_feature_api_method_aliases'] = 0;
-
-	# WET PAINT - don't be surprised if it all changes...
-	# (20170829/thisisaaronland)
-
-
 	$GLOBALS['cfg']['enable_feature_api_require_keys'] = 0;		# because oauth2...
 	$GLOBALS['cfg']['enable_feature_api_register_keys'] = 1;
 
 	$GLOBALS['cfg']['enable_feature_api_delegated_auth'] = 1;
 	$GLOBALS['cfg']['enable_feature_api_authenticate_self'] = 1;
+
+	# PLEASE DISCUSS OVERRIDES AND ALIASES HERE...
+
+	$GLOBALS['cfg']['enable_feature_api_method_overrides'] = 0;
+	$GLOBALS['cfg']['enable_feature_api_method_aliases'] = 0;
 
 	# API URLs and endpoints
 

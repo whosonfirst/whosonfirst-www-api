@@ -106,6 +106,10 @@
 			}
 		}
 
+		if ($GLOBALS['cfg']['enable_feature_api_method_overrides']){
+			api_config_init_overrides();
+		}
+
 		if ($GLOBALS['cfg']['enable_feature_api_method_aliases']){
 			api_config_init_aliases();
 		}
@@ -120,6 +124,33 @@
 				api_config_init_site_keys();
 			}
 		}
+	}
+
+	#################################################################
+
+	function api_config_init_overrides(){
+
+		foreach ($GLOBALS['cfg']['api']['method_overrides']['method_classes'] as $class_spec => $override){
+
+			foreach ($GLOBALS['cfg']['api']['methods'] as $method_name => $method_details){
+
+				if (! preg_match("/^{$class_spec}/", $method_name)){
+					continue;
+				}
+
+				$GLOBALS['cfg']['api']['methods'][$method_name] = array_merge($GLOBALS['cfg']['api']['methods'][$method_name], $override);
+			}
+		}
+
+		foreach ($GLOBALS['cfg']['api']['method_overrides']['methods'] as $method_name => $override){
+
+			if (! isset($GLOBALS['cfg']['api']['methods'][$method_name])){
+				continue;
+			}
+
+			$GLOBALS['cfg']['api']['methods'][$method_name] = array_merge($GLOBALS['cfg']['api']['methods'][$method_name], $override);
+		}
+
 	}
 
 	#################################################################
