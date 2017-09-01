@@ -178,18 +178,12 @@
 	# 'config_local.php' is for your instance of an application, for non-secret
 	# things that are specific to your requirements - hostnames for example.
 	#
-	# 'config_local_{SERVERNAME}.php' is similar to 'config_local.php' except
-	# that it contains settings specific to a DNS hostname. The value of SERVERNAME
-	# is taken from the global $_SERVER['SERVER_NAME'] variable and dots ('.') are
-	# replaced with underbars ('_').
-	#
 	# 'config_local_{HOST}.php' is local to a specific machine or instance based
 	# on it's short hostname (hostname -s rather than )
 	#
-	# The same rules apply to 'secrets_local.php' and 'secrets_local_{SERVERNAME}.php'
-	# and 'secrets_local_{HOST}.php' files.
+	# The same rules apply to 'secrets_local.php' and 'secrets_local_{HOST}.php' files.
 	# 
-	# Importantly of the eight possible files listed below only 'config.php' is
+	# Importantly of the six possible files listed below only 'config.php' is
 	# allowed to be checked in to git - all the others are explicitly denied so
 	# it's up to you to ensure they get deployed to your application and its various
 	# hosts as needed.
@@ -199,38 +193,12 @@
 	# probably only necessary for debugging... well, a particular host.
 	#
 	# It's just that sometimes you actually need this level of hair-splitting...
-	#
-	# Here's an example:
-	#
-	# In config.php we might say
-	# $GLOBALS['cfg']['site_name'] = 'Who\'s On First API';
-	# $GLOBALS['cfg']['environment'] = 'prod';
-	#
-	# And then in config_local.php we might say:
-	# $GLOBALS['cfg']['environment'] = 'dev';
-	#
-	# And then in config_local_dev_example_mapzen_com.php we might say:
-	# $GLOBALS['cfg']['site_name'] = 'Mapzen Examples';
-	#
-	# (20170829/thisisaaronland)
-
-	# This lends itself to spoofing by way of curl -H 'Host:wub_wub_wub' headers
-	# so that's not good as a general thing... (20170901/thisisaaronland)
-
-	$server_name = $_SERVER['SERVER_NAME'];
-	$server_name = str_replace(".", "_", $server_name);
 
 	$global_config = FLAMEWORK_INCLUDE_DIR . "config.php";
 	$global_secrets = FLAMEWORK_INCLUDE_DIR . "secrets.php";
 	
 	$local_config = FLAMEWORK_INCLUDE_DIR . "config_local.php";
 	$local_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_local.php";
-
-	# See notes above about this generally being a not-good thing
-	# (20170901/thisisaaronland)
-		       
-	$server_config = FLAMEWORK_INCLUDE_DIR . "config_local_{$server_name}.php";
-	$server_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_local_{$server_name}.php";
 
 	$host_config = FLAMEWORK_INCLUDE_DIR . "config_local_{$host}.php";
 	$host_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_local_{$host}.php";
