@@ -214,6 +214,9 @@
 	#
 	# (20170829/thisisaaronland)
 
+	# This lends itself to spoofing by way of curl -H 'Host:wub_wub_wub' headers
+	# so that's not good as a general thing... (20170901/thisisaaronland)
+
 	$server_name = $_SERVER['SERVER_NAME'];
 	$server_name = str_replace(".", "_", $server_name);
 
@@ -223,6 +226,9 @@
 	$local_config = FLAMEWORK_INCLUDE_DIR . "config_local.php";
 	$local_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_local.php";
 
+	# See notes above about this generally being a not-good thing
+	# (20170901/thisisaaronland)
+		       
 	$server_config = FLAMEWORK_INCLUDE_DIR . "config_local_{$server_name}.php";
 	$server_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_local_{$server_name}.php";
 
