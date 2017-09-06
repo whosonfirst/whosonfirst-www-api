@@ -12,6 +12,9 @@ WWW="${PROJECT}/www"
 INCLUDE="${WWW}/include"
 CONFIG="${INCLUDE}/config.php"
 
-${PERL} -p -i -e "s/\['cfg'\]\['site_disabled'\]\s*=\s*[^;];/['cfg']['site_disabled'] = 0;/" ${CONFIG}
+for CONFIG in `ls -a ${INCLUDE}/config.php ${INCLUDE}/config_local*.php`
+do
+    ${PERL} -p -i -e "s/\['cfg'\]\['site_disabled'\]\s*=\s*[^;];/['cfg']['site_disabled'] = 0;/" ${CONFIG}
+done
 
 exit 0
