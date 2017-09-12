@@ -320,8 +320,7 @@
 
 	function whosonfirst_spatial_do($cmd, $more=array()){
 
-		shuffle($GLOBALS['cfg']['spatial_tile38_endpoints']);
-		$endpoint = $GLOBALS['cfg']['spatial_tile38_endpoints'][0];
+		$endpoint = whosonfirst_spatial_endpoint();
 
 		$defaults = array(
 			'endpoint' => $endpoint,
@@ -410,6 +409,16 @@
 		}
 
 		return $results;
+	}
+
+	########################################################################
+
+	function whosonfirst_spatial_endpoint(){
+
+		shuffle($GLOBALS['cfg']['spatial_tile38_endpoints']);
+		$endpoint = $GLOBALS['cfg']['spatial_tile38_endpoints'][0];
+
+		return $endpoint;
 	}
 
 	########################################################################

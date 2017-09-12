@@ -6,10 +6,9 @@
 
 	function tile38_do($cmd, $more=array()){
 
-		$host = $more['host'];
-		$port = $more['port'];
+		$endpoint = $more['endpoint'];
 
-		$url = "http://{$host}:{$port}";
+		$url = "http://{$endpoint}";
 
 		# dumper($url);
 		# dumper($cmd);
