@@ -383,9 +383,17 @@
 	$GLOBALS['cfg']['spatial_nearby_default_radius'] = 100;
 	$GLOBALS['cfg']['spatial_nearby_max_radius'] = 80467;	# 50 miles because I miss Dopplr (20170707/thisisaaronland)
 
+	$GLOBALS['cfg']['spatial_tile38_endpoints'] = array(
+		'localhost:9851'
+	);
+
+	$GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst';
+
+	# THESE TWO VARIABLES ARE DEPRECATED - PLEASE USE 'spatial_tile38_endpoints'
+
 	$GLOBALS['cfg']['spatial_tile38_host'] = 'localhost';
 	$GLOBALS['cfg']['spatial_tile38_port'] = '9851';
-	$GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst';
+
 
 	# END of wof spatial stuff
 
