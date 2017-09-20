@@ -3,7 +3,7 @@
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfoMulti&api_key=your-mapzen-api-key&ids=101712565,101712563&format=chicken'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getInfoMulti&api_key=your-mapzen-api-key&ids=101712565,101712563&format=chicken'
 ```
 
 #### Example response

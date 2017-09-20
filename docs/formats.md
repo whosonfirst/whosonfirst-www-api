@@ -11,7 +11,7 @@ The default response format is [JSON](formats.md#json).
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.getInfoMulti&api_key=your-mapzen-api-key&ids=101712565,101712563&format=chicken'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getInfoMulti&api_key=your-mapzen-api-key&ids=101712565,101712563&format=chicken'
 ```
 
 #### Example response
@@ -55,7 +55,7 @@ CSV (Comma Separated Value)
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=csv'
+curl -X GET 'https://places.mapzen.com/v1?method=mapzen.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=csv'
 ```
 
 #### Example response
@@ -67,7 +67,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 < Date: Tue, 28 Feb 2017 21:13:37 GMT
 < Status: 200 OK
 < X-api-pagination-cursor: 
-< X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
+< X-api-pagination-next-query: method=mapzen.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
 < X-api-pagination-page: 1
 < X-api-pagination-pages: 13
 < X-api-pagination-per-page: 1
@@ -93,7 +93,7 @@ GeoJSON is a data-interchange format based on JavaScript. For more details, cons
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.getInfoMulti&api_key=your-mapzen-api-key&&ids=101712565,101712563&format=geojson'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getInfoMulti&api_key=your-mapzen-api-key&&ids=101712565,101712563&format=geojson'
 ```
 
 #### Example response
@@ -173,7 +173,7 @@ JSON (JavaScript Object Notation) is a data-interchange format based on JavaScri
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=json'
+curl -X GET 'https://places.mapzen.com/v1/?method=whosonfirst.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=json'
 ```
 
 #### Example response
@@ -185,7 +185,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 < Date: Tue, 28 Feb 2017 22:29:49 GMT
 < Status: 200 OK
 < X-api-pagination-cursor: 
-< X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2
+< X-api-pagination-next-query: method=mapzen.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2
 < X-api-pagination-page: 1
 < X-api-pagination-pages: 13
 < X-api-pagination-per-page: 1
@@ -195,7 +195,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 < 
 {
     "cursor": null,
-    "next_query": "method=whosonfirst.places.search&q=poutine&extras=geom%3Abbox&per_page=1&page=2",
+    "next_query": "method=mapzen.places.search&q=poutine&extras=geom%3Abbox&per_page=1&page=2",
     "page": 1,
     "pages": 13,
     "per_page": 1,
@@ -227,7 +227,7 @@ As in a Who's On First "meta" file. A meta file is really just a CSV file with a
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=meta'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=meta'
 ```
 
 #### Example response
@@ -239,7 +239,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 < Date: Tue, 28 Feb 2017 22:25:13 GMT
 < Status: 200 OK
 < X-api-pagination-cursor: 
-< X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=meta
+< X-api-pagination-next-query: method=mapzen.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=meta
 < X-api-pagination-page: 1
 < X-api-pagination-pages: 13
 < X-api-pagination-per-page: 1

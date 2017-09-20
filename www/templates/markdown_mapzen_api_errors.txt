@@ -1,4 +1,4 @@
-In addition to any already [assigned HTTP status codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) The Who's On First API assigns specific meaning to certain codes and defines the following additional status codes for representing errors or a failure scenario, across all API methods:
+In addition to any already [assigned HTTP status codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) The Mapzen Places API assigns specific meaning to certain codes and defines the following additional status codes for representing errors or a failure scenario, across all API methods:
 
 <a name="mapzen"></a>
 ### Mapzen errors
