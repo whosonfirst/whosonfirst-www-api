@@ -7,8 +7,7 @@ PROJECT=`dirname $UBUNTU`
 
 PROJECT_NAME=`basename ${PROJECT}`
 
-APACHE="${PROJECT}/apache"
-CONF="${APACHE}/${PROJECT_NAME}.conf"
+CONF="${PROJECT}/config/${PROJECT_NAME}-apache.conf"
 
 if [ ! -f ${CONF}.example ]
 then
