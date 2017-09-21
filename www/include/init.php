@@ -1,4 +1,4 @@
-<?
+<?php
 
 	#
 	# some startup tasks which come before anything else:
@@ -103,7 +103,7 @@
 			return $lib;
 		}
 
-		return FLAMEWORK_INCLUDE_DIR . $lib;		
+		return FLAMEWORK_INCLUDE_DIR . $lib;
 	}
 
 	#
@@ -182,7 +182,7 @@
 	# on it's short hostname (hostname -s rather than )
 	#
 	# The same rules apply to 'secrets_local.php' and 'secrets_local_{HOST}.php' files.
-	# 
+	#
 	# Importantly of the six possible files listed below only 'config.php' is
 	# allowed to be checked in to git - all the others are explicitly denied so
 	# it's up to you to ensure they get deployed to your application and its various
@@ -196,7 +196,7 @@
 
 	$global_config = FLAMEWORK_INCLUDE_DIR . "config.php";
 	$global_secrets = FLAMEWORK_INCLUDE_DIR . "secrets.php";
-	
+
 	$local_config = FLAMEWORK_INCLUDE_DIR . "config_local.php";
 	$local_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_local.php";
 
@@ -248,7 +248,7 @@
 
 	if ($disallow){
 		$status = "503 Service Unavailable";
-                header("HTTP/1.1 {$status}");
+		header("HTTP/1.1 {$status}");
 		header("Status: {$status}");
 		exit();
 	}
@@ -278,7 +278,7 @@
 			$server_url = "{$scheme}://{$_SERVER['SERVER_NAME']}";
 		}
 	}
-	
+
 	if (! $server_url){
 		$server_url = "{$scheme}://{$_SERVER['SERVER_NAME']}";
 	}
@@ -289,7 +289,7 @@
 	# at some point or another. So we choose trailing slashes.
 
 	$GLOBALS['cfg']['abs_root_url'] = rtrim($server_url, '/') . "/";
-	
+
 	# Because sometimes you can't run your Flamework project off of the root path
 	# of a domain and need to do stuff like this in your httpd.conf file
 	#
@@ -310,7 +310,7 @@
 	# in either your httpd.conf or .htaccess file, like this:
 	#
 	# SetEnv FLAMEWORK_SUFFIX "/boundaryissues/ca"
-	# 
+	#
 	# The problem with doing that is if you're just _actually_ running your Flamework project
 	# on / but serving it up on a nested path (and probably a different domain) via something
 	# like nginx then by setting the environment locally then there is no way to introspect the
@@ -319,7 +319,7 @@
 	# $GLOBALS['cfg']['enable_feature_abs_root_suffix'] = 1;
 	# $GLOBALS['cfg']['abs_root_suffix'] = "/api";
 	# $GLOBALS['cfg']['abs_root_suffix_env'] = 'HTTP_X_PROXY_PATH';
-	# 
+	#
 	# (20160603/thisisaaronland)
 
 	if ($GLOBALS['cfg']['enable_feature_abs_root_suffix']){
@@ -336,7 +336,7 @@
 			$ok = 1;
 
 			foreach (explode("/", $suffix) as $chunk){
-		
+
 				if (chunk == ".."){
 					$ok = 0;
 					break;
@@ -550,13 +550,13 @@
 	# (unless you've disable the 'auto_connect' flag) and
 	# will blow its brains out if there's a problem.
 	#
-	
+
 	$start = microtime_ms();
 
 	db_init();
 
 	$end = microtime_ms();
-	$time = $end - $start; 
+	$time = $end - $start;
 
 	$GLOBALS['timings']['db_init_time'] = $time;
 
@@ -583,16 +583,16 @@
 
 	if ($this_is_webpage){
 
-	   	# we assume login_check_login has been called above already
+		# we assume login_check_login has been called above already
 		# (20160121/thisisaaronland)
 
-	        # API site key/token stuff
+		# API site key/token stuff
 
 		if (features_is_enabled("api")){
 
-                        loadlib("api");
+			loadlib("api");
 
-		        if (features_is_enabled(array("api_site_keys", "api_site_tokens"))){
+			if (features_is_enabled(array("api_site_keys", "api_site_tokens"))){
 
 				loadlib("api_keys");
 				loadlib("api_oauth2_access_tokens");
