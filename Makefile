@@ -27,6 +27,7 @@ styleguide:
 	if test -e www/css/mapzen.styleguide.css; then cp www/css/mapzen.styleguide.css www/css/mapzen.styleguide.css.bak; fi
 	curl -s -o www/css/mapzen.styleguide.css https://mapzen.com/common/styleguide/styles/styleguide.css
 	curl -s -o www/javascript/mapzen.styleguide.min.js https://mapzen.com/common/styleguide/scripts/mapzen-styleguide.min.js
+	curl -s -o www/common/styleguide/images/background/contour_darkpurple2_lg.png https://mapzen.com/common/styleguide/images/background/contour_darkpurple2_lg.png
 
 tangram:
 	curl -s -o www/javascript/tangram.js https://mapzen.com/tangram/tangram.debug.js

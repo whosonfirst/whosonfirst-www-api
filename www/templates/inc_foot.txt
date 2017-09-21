@@ -1,12 +1,16 @@
 
-    <div class="container">
-      <hr>
+    {if "mapzen_places"|@features_is_enabled}
+        {include file="inc_foot_mapzen.txt"}
+    {else}
+        <div class="container">
+            <hr>
 
-      <footer>
-            <p>this is a <a href="http://www.mapzen.com/">mapzen</a> gig</p>
-      </footer>
+            <footer>
+                <p>this is a <a href="http://www.mapzen.com/">mapzen</a> gig</p>
+            </footer>
 
-    </div> <!-- /container -->
+        </div> <!-- /container -->
+    {/if}
 
   </body>
 </html>
