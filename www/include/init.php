@@ -571,6 +571,19 @@
 		}
 	}
 
+	# Customizations for Mapzen Places
+
+	if ($this_is_webpage){
+
+		if (features_is_enabled('mapzen_places')){
+			$GLOBALS['cfg']['site_name'] = 'Mapzen Places';
+			$GLOBALS['cfg']['enable_feature_api_site_tokens'] = 0;
+			$GLOBALS['cfg']['api_endpoint'] = "v1/";
+			$GLOBALS['smarty']->assign('body_class', 'project fixed-main-nav');
+		}
+
+	}
+
 	#
 	# this timer stores the end of core library loading
 	#
@@ -601,6 +614,7 @@
 				$GLOBALS['smarty']->assign_by_ref("site_token", $token['access_token']);
 			}
 		}
+
 	}
 
 	# end of flamework-api stuff for API site keys
