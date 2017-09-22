@@ -26,7 +26,6 @@
 			'per_page' => 36
 		);
 		api_utils_ensure_pagination_args($args);
-		dumper($args);
 
 		$rsp = whosonfirst_places_search($q, $filters, $args);
 
