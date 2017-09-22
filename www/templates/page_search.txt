@@ -1,0 +1,60 @@
+{include file='inc_head.txt' nav_tab='home'}
+
+<div id="content" class="container">
+	<div class="row headroom-large">
+		<div class="col-xs-12">
+			<h1>search results</h1>
+			<ol class="breadcrumb">
+				<li>
+					<a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a>
+				</li>
+				<li class="active">Search Results</li>
+			</ol>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-6">
+			<form action="{$cfg.abs_root_url}search">
+				<div class="form-group inline-submit">
+					<input type="search" name="q" value="{$query|escape}" placeholder="Search Mapzen Places" class="col-xs-8 col-sm-9">
+					<input type="submit" value="search" class="col-xs-4 btn btn-transparent col-sm-3">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<span class="small">
+				{$pagination.total_count|number_format} results
+				{if $pagination.total_count > 0}
+					<!-- (page {$pagination.page|escape} of {$pagination.page_count|escape}) -->
+					(showing the first 100)
+				{/if}
+			</span>
+			<ol id="search-results">
+				{foreach from=$results item=result}
+					<li>
+						<a href="{$cfg.abs_root_url}id/{$result[$id_key]|escape}">{$result[$name_key]|escape}</a>
+						<span class="small">
+							<code>{$result[$id_key]|escape}</code>
+							{if $result[$placetype_key]|in_array:$an_placetypes}
+								an
+							{else}
+								a
+							{/if}
+							{$result[$placetype_key]|escape}
+							{if $result[$country_key]}
+								in {$result[$country_key]|escape}
+							{/if}
+						</span>
+					</li>
+				{/foreach}
+			</ol>
+		</div>
+	</div>
+	<!--
+	{include file="inc_pagination.txt"}
+	-->
+</div>
+
+{include file='inc_foot.txt'}

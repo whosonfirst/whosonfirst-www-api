@@ -86,6 +86,8 @@ RewriteRule  ^placetypes/([a-z]+)/?$		placetype.php?placetype=$1&%{QUERY_STRING}
 
 RewriteRule  ^tags/([a-z]+)/?$		tag.php?tag=$1&%{QUERY_STRING} [L]
 
+RewriteRule  ^search/?$		search.php?%{QUERY_STRING} [L]
+
 # See all this stuff that's been commented out? It's a lot of hoop-jumping
 # to separate API calls (api.example.com/rest) from all the other user-level
 # administrative pages (example.com/api/methods) and to make sure things that
@@ -176,4 +178,3 @@ RewriteRule  ^signin/?$					/signin_mapzen_oauth.php	[L]
 RewriteRule  ^auth/?$					/auth_callback_mapzen_oauth.php?%{QUERY_STRING} [L]
 
 # END OF flamework-mapzen-sso stuff
-
