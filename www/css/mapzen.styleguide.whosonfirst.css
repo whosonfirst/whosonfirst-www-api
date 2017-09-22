@@ -51,3 +51,7 @@ h3 {
 .hey-look {
     font-weight:700;
 }
+
+#search-results {
+    margin-top: 1em;
+}
