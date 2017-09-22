@@ -3,53 +3,68 @@
 	include('include/init.php');
 	loadlib('elasticsearch_spelunker');
 	loadlib('whosonfirst_places');
+	loadlib('search_utils');
 	loadlib('api_whosonfirst_utils');
 	loadlib('api_whosonfirst_output');
 
-	// Coerce a 'names' search. (20170922/dphiffer)
-	$_REQUEST['names'] = $_REQUEST['q'];
-
 	$q = request_str("q");
+
+	// Coerce something that looks like a search. (20170922/dphiffer)
+	$_REQUEST['names'] = $q;
+	$_REQUEST['method'] = 'whosonfirst.places.search';
+
 	$GLOBALS['smarty']->assign('query', $q);
 
-	// Based on code from api_whosonfirst_places_search. This should
-	// get moved into a library. (20170922/dphiffer)
+	if ($q) {
 
-	$filters = api_whosonfirst_utils_search_filters();
+		// Based on code from api_whosonfirst_places_search. This should
+		// get moved into a library. (20170922/dphiffer)
 
-	$args = array(
-		//'per_page' => 36
-	);
-	api_utils_ensure_pagination_args($args);
+		$filters = api_whosonfirst_utils_search_filters();
 
-	$rsp = whosonfirst_places_search($q, $filters, $args);
+		$args = array(
+			'per_page' => 36
+		);
+		api_utils_ensure_pagination_args($args);
+		dumper($args);
 
-	if (! $rsp['ok']){
-		error_500();
+		$rsp = whosonfirst_places_search($q, $filters, $args);
+
+		if (! $rsp['ok']){
+			error_500();
+		}
+
+		$more = array();
+		$pagination = $rsp['pagination'];
+
+		api_whosonfirst_output_enpublicify($rsp['rows'], $more);
+
+		$out = array(
+			'places' => $rsp['rows']
+		);
+
+		api_utils_ensure_pagination_results($out, $pagination);
+		search_utils_ensure_pagination($q, $out, $pagination);
+
+		//dumper($out['next_query']);
+
+		$GLOBALS['smarty']->assign_by_ref('results', $out['places']);
+		$GLOBALS['smarty']->assign_by_ref('pagination', $pagination);
+		$GLOBALS['smarty']->assign('results_start', 1 + $pagination['per_page'] * ($pagination['page'] - 1));
+
+		$an_placetypes = array(
+			'address',
+			'empire',
+			'intersection',
+			'ocean'
+		);
+		$GLOBALS['smarty']->assign_by_ref('an_placetypes', $an_placetypes);
+
+		$GLOBALS['smarty']->assign('id_key', 'wof:id');
+		$GLOBALS['smarty']->assign('name_key', 'wof:name');
+		$GLOBALS['smarty']->assign('placetype_key', 'wof:placetype');
+		$GLOBALS['smarty']->assign('country_key', 'wof:country');
 	}
-
-	$more = array();
-
-	api_whosonfirst_output_enpublicify($rsp['rows'], $more);
-
-	$GLOBALS['smarty']->assign_by_ref('results', $rsp['rows']);
-	$GLOBALS['smarty']->assign_by_ref('pagination', $rsp['pagination']);
-
-	$an_placetypes = array(
-		'address',
-		'empire',
-		'intersection',
-		'ocean'
-	);
-	$GLOBALS['smarty']->assign_by_ref('an_placetypes', $an_placetypes);
-
-	$GLOBALS['smarty']->assign('id_key', 'wof:id');
-	$GLOBALS['smarty']->assign('name_key', 'wof:name');
-	$GLOBALS['smarty']->assign('placetype_key', 'wof:placetype');
-	$GLOBALS['smarty']->assign('country_key', 'wof:country');
-
-	$GLOBALS['smarty']->assign('pagination_url', 'search/?q=' . rawurlencode($q));
-	$GLOBALS['smarty']->assign('pagination_page_as_queryarg', true);
 
 	$GLOBALS['smarty']->display('page_search.txt');
 	exit();
