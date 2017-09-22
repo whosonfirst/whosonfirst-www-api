@@ -62,7 +62,7 @@
     {if $addr_full != ""}<li>Its address is <span class="hey-look">{$addr_full|@escape}</span> and its exact latitude and longitude is <a href="{$place|@whosonfirst_places_nearby_url_for_place}" class="hey-look">{$place|@whosonfirst_places_property:"geom:latitude"|@escape}, {$place|@whosonfirst_places_property:"geom:longitude"|@escape}</a>.</li>{/if}
     {if $addr_phone != ""}<li>Its phone number is <span class="hey-look">{$addr_phone|@escape}</span>.</li>{/if}
     {if $wof_tags|@count}<li>It is tagged {foreach from=$wof_tags item="tag" name="tags"}<a href="{$cfg.abs_root_url}tags/{$tag|@escape}/{if $wof_parent_id > 0}?wofid={$wof_parent_id|@escape}{/if}" class="hey-look">{$tag|@escape}</a>{if $smarty.foreach.tags.last}.{else} and {/if}{/foreach}{/if}</li>
-    </ul>    
+    </ul>
     {/if}
 
 <ul class="list">
@@ -70,6 +70,7 @@
     <li><a href="{$place|@whosonfirst_places_data_url_for_place}" class="hey-look">Download</a> the raw data for this {$wof_placetype|@escape}.</li>
 </ul>
 
+</div>
 </div>
 
 <script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.id.init.js"></script>
