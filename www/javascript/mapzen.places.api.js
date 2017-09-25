@@ -108,10 +108,18 @@
 
 			form_data.append('method', method);
 
+			// Authentication can either get assigned as a POST var
+			// (as with the vanilla WOF API) or appended to the
+			// endpoint (as with the MZ Places API). We pass both
+			// form_data and endpoint to the handler, and if a
+			// return value is passed back, that gets assiend as the
+			// new endpoint. (20170925/dphiffer)
 			var set_auth = self.get_handler('authentication');
-
 			if (set_auth){
-				form_data = set_auth(form_data);
+				rsp = set_auth(form_data, endpoint);
+				if (rsp) {
+					endpoint = rsp;
+				}
 			}
 
 			var onload = function(rsp){
