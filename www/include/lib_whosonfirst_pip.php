@@ -17,6 +17,10 @@
 		 	"longitude" => $lon,
 		 );
 
+		 if (features_is_enabled("pip_v1")){
+		 	$query["v1"] = "1";
+		 }
+
 		 if ($pt = $more["placetype"]){
 		 	$query["placetype"] = $pt;
 		 }
