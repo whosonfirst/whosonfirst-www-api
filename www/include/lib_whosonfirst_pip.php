@@ -27,7 +27,8 @@
 
 		 $query = http_build_query($query);
 
-		 $url = $GLOBALS["cfg"]["whosonfirst_pip_endpoint"] . "?{$query}";
+		 $endpoint = whosonfirst_pip_endpoint();
+		 $url = $endpoint . "?" . $query;
 
 		 $rsp = http_get($url);
 
@@ -44,6 +45,23 @@
 		 }
 
 		 return array("ok" => 1, "rows" => $data);
+	}
+
+	########################################################################
+
+	function whosonfirst_pip_endpoint(){
+
+		# deprecated
+
+		if (! isset($GLOBALS["cfg"]["whosonfirst_pip_endpoints"])){
+			return $GLOBALS["cfg"]["whosonfirst_pip_endpoint"];
+		}
+
+		$possible = $GLOBALS["cfg"]["whosonfirst_pip_endpoints"];
+		shuffle($possible);
+		shuffle($possible);
+
+		return $possible[0];
 	}
 
 	########################################################################
