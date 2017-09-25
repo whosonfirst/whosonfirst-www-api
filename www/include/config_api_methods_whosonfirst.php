@@ -193,7 +193,7 @@
 				"description" => "A valid Who's On First placetype to limit the query by.",
 				"documented" => 1,
 				"required" => 0,
-				"example" => "venue"
+				"example" => "neighhourhood"
 			),
 			array(
 				"name" => "is_current",
