@@ -20,8 +20,13 @@
 
     <script src="{$cfg.abs_root_url}javascript/htmlspecialchars.min.js"></script>
 
+    {if "places"|@features_is_enabled}
     <script src="{$cfg.abs_root_url}javascript/mapzen.places.api.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.places.api.init.js"></script>
+    {else}
+    <script src="{$cfg.abs_root_url}javascript/flamework.api.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.js"></script>
+    {/if}
 
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/mapzen.js.css" />
     <script src="{$cfg.abs_root_url}javascript/mapzen.js"></script>
