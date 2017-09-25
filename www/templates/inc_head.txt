@@ -42,12 +42,16 @@
   </head>
 
   {if "mapzen_places"|@features_is_enabled}
-    {assign var="api_endpoint" value="v1/"}
+    {if $cfg.environment == 'dev'}
+      {assign var="api_endpoint" value="https://places.dev.mapzen.com/v1/"}
+    {else}
+      {assign var="api_endpoint" value="https://places.mapzen.com/v1/"}
+    {/if}
   {else}
-    {assign var="api_endpoint" value=$cfg.api_endpoint}
+    {assign var="api_endpoint" value="{$cfg.api_abs_root_url}{$cfg.api_endpoint}"}
   {/if}
 
-  <body class="{$body_class}" data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$cfg.api_abs_root_url}{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "mapzen_places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
+  <body class="{$body_class}" data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "mapzen_places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
 
   {if "mapzen_places"|@features_is_enabled}
     {include file="inc_head_navi_mapzen.txt"}
