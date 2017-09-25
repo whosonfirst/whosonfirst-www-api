@@ -39,12 +39,6 @@
 			'authentication': null_handler,
 		},
 
-		'init': function(){
-
-			self.set_handler('endpoint', mapzen.places.api.endpoint);
-			self.set_handler('authentication', mapzen.places.api.authentication);
-		},
-
 		'set_handler': function(target, handler){
 
 			if (! self._handlers[target]){
@@ -210,24 +204,9 @@
 
 		'execute_method': function(method, data, on_success, on_error){
 			self.call(method, data, on_success, on_error);
-		},
-
-		'authentication': function(form_data){
-
-			var key = document.body.getAttribute("data-mapzen-api-key");
-
-			if (! form_data.has("api_key")){
-				form_data.append("api_key", key);
-			}
-
-			return form_data;
 		}
 	}
 
 	return self;
 
-})();
-
-window.addEventListener('load', function(e){
-    mapzen.places.api.init();
-});
+}));

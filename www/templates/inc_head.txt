@@ -20,8 +20,8 @@
 
     <script src="{$cfg.abs_root_url}javascript/htmlspecialchars.min.js"></script>
 
-    <script src="{$cfg.abs_root_url}javascript/flamework.api.js"></script>
-    <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/mapzen.places.api.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/mapzen.places.api.init.js"></script>
 
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/mapzen.js.css" />
     <script src="{$cfg.abs_root_url}javascript/mapzen.js"></script>
@@ -41,7 +41,13 @@
 
   </head>
 
-  <body class="{$body_class}" data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$cfg.api_abs_root_url}{$cfg.api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "mapzen_places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
+  {if "mapzen_places"|@features_is_enabled}
+    {assign var="api_endpoint" value="v1/"}
+  {else}
+    {assign var="api_endpoint" value=$cfg.api_endpoint}
+  {/if}
+
+  <body class="{$body_class}" data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$cfg.api_abs_root_url}{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "mapzen_places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
 
   {if "mapzen_places"|@features_is_enabled}
     {include file="inc_head_navi_mapzen.txt"}
