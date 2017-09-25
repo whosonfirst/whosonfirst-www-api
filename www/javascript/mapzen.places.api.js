@@ -198,6 +198,45 @@
 			return false;
 		},
 
+		'call_paginated': function(method, data, on_page, on_finished, on_error){
+
+			var results = [];
+
+			var dothis_onsuccess = function(rsp) {
+
+				results.push(rsp);
+
+				// Added a callback to show each page of results
+				// (20170614/dphiffer)
+				if (on_page) {
+					on_page(rsp);
+				}
+
+				if (rsp.next_query) {
+					var args = rsp.next_query.split('&');
+					for (var i = 0; i < args.length; i++) {
+						var arg = args[i].split('=');
+						var key = decodeURIComponent(arg[0]);
+						var value = decodeURIComponent(arg[1]);
+						data[key] = value;
+					}
+					self.call(method, data, dothis_onsuccess, on_error);
+				}  else {
+					on_success(results);
+				}
+			};
+
+			self.call(method, data, dothis_onsuccess, on_error);
+		},
+
+		'execute_method': function(method, data, on_success, on_error){
+			self.call(method, data, on_success, on_error);
+		},
+
+		'execute_method_paginated': function(method, data, on_page, on_finished, on_error){
+			self.call_paginated(method, data, on_page, on_finished, on_error);
+		},
+
 		'destruct': function(msg){
 
 			return {
@@ -208,10 +247,6 @@
 				}
 			};
 
-		},
-
-		'execute_method': function(method, data, on_success, on_error){
-			self.call(method, data, on_success, on_error);
 		}
 	}
 
