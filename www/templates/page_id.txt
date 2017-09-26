@@ -32,9 +32,9 @@
 
 </div>
 
-<div class="row">
+<div class="row" itemprop="location" itemscope itemtype="http://schema.org/Place">
 <ul class="list">
-    <li><span class="hey-look">{$wof_name|@escape}</span> is a <a href="#" class="hey-look">{$wof_placetype|@escape}</a> and its Who's On First ID is <a href="{$place|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_id|@escape}</a>.</li>
+    <li><span class="hey-look" itemprop="name">{$wof_name|@escape}</span> is a <a href="#" class="hey-look">{$wof_placetype|@escape}</a> and its Who's On First ID is <a href="{$place|@whosonfirst_places_url_for_place}" class="hey-look" itemprop="identifier">{$wof_id|@escape}</a>.</li>
     <li>
     {if $wof_parent_id == -1}
     We aren't entirely certain who this {$wof_placetype|@escape} is parented by.
@@ -45,11 +45,11 @@
     {assign var="wof_parents" value=$place|@whosonfirst_places_property:"wof:parents"}
 
     {if $wof_parents|@count}
-    It is parented by {foreach from=$wof_parents item="row" name="parents"}<a href="{$row|@whosonfirst_places_url_for_place}" class="hey-look">{$row|@whosonfirst_places_property:"wof:name"}</a>{if !$smarty.foreach.parents.last} and {/if}{/foreach} {if $wof_parents|@count==2}both of which{else}all of which{/if} are a <a href="#" class="hey-look">{$wof_parents.0|@whosonfirst_places_property:"wof:placetype"}</a>.
+    It is parented by {foreach from=$wof_parents item="row" name="parents"}<a href="{$row|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$row|@whosonfirst_places_property:"wof:name"}</a>{if !$smarty.foreach.parents.last} and {/if}{/foreach} {if $wof_parents|@count==2}both of which{else}all of which{/if} are a <a href="#" class="hey-look">{$wof_parents.0|@whosonfirst_places_property:"wof:placetype"}</a>.
     {/if}
 
     {else}
-    It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a> which is a <a href="#" class="hey-look">{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"|@escape}</a>.
+    It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a> which is a <a href="#" class="hey-look">{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"|@escape}</a>.
     {/if}
     </li>
 </ul>
@@ -59,8 +59,8 @@
     {capture assign="addr_full"}{$place|@whosonfirst_places_property:"addr:full"}{/capture}
     {capture assign="addr_phone"}{$place|@whosonfirst_places_property:"addr:phone"}{/capture}
     {assign var="wof_tags" value=$place|@whosonfirst_places_property:"wof:tags"}
-    {if $addr_full != ""}<li>Its address is <span class="hey-look">{$addr_full|@escape}</span> and its exact latitude and longitude is <a href="{$place|@whosonfirst_places_nearby_url_for_place}" class="hey-look">{$place|@whosonfirst_places_property:"geom:latitude"|@escape}, {$place|@whosonfirst_places_property:"geom:longitude"|@escape}</a>.</li>{/if}
-    {if $addr_phone != ""}<li>Its phone number is <span class="hey-look">{$addr_phone|@escape}</span>.</li>{/if}
+    {if $addr_full != ""}<li>Its address is <span class="hey-look" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">{$addr_full|@escape}</span> and its exact latitude and longitude is <a href="{$place|@whosonfirst_places_nearby_url_for_place}" class="hey-look" itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates"><span itemprop="latitude">{$place|@whosonfirst_places_property:"geom:latitude"|@escape}</span>, <span itemprop="longitude">{$place|@whosonfirst_places_property:"geom:longitude"|@escape}</span></a>.</li>{/if}
+    {if $addr_phone != ""}<li>Its phone number is <span class="hey-look" itemprop="telephone">{$addr_phone|@escape}</span>.</li>{/if}
     {if $wof_tags|@count}<li>It is tagged {foreach from=$wof_tags item="tag" name="tags"}<a href="{$cfg.abs_root_url}tags/{$tag|@escape}/{if $wof_parent_id > 0}?wofid={$wof_parent_id|@escape}{/if}" class="hey-look">{$tag|@escape}</a>{if $smarty.foreach.tags.last}.{else} and {/if}{/foreach}{/if}</li>
     </ul>
     {/if}
