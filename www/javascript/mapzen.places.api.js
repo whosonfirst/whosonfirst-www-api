@@ -32,13 +32,29 @@
 		return undefined;
 	};
 
+	var mapzen_endpoint = function(){
+		return "https://places.mapzen.com/v1"
+	};
+
+	var mapzen_authentication = function(form_data){
+		form_data.append("api_key", "mapzen-xxxxxxx");
+	};
+	
 	var self = {
 
 		'_handlers': {
-			'endpoint': null_handler,
-			'api_key': null_handler,
+			'endpoint': mapzen_endpoint,
+			'authentication': mapzen_authentication,			
+			'api_key': null_handler,		// deprecated - please use authentication
 		},
 
+		'set_apikey': function(key){
+
+			return self.set_handler("authentication", function(form_data){
+				form_data.append("api_key", key);
+			});
+		},
+		
 		'set_handler': function(target, handler){
 
 			if (! self._handlers[target]){
@@ -63,8 +79,31 @@
 			return self._handlers[target];
 		},
 
+		'method': function(name, args){
+
+			if (! args){
+				args = {"verb": "GET"};
+			}
+
+			var m = function(n, v){
+
+				var self = {
+					'name': function(){ return n; },
+					'verb': function(){ return v; },
+				};
+
+				return self;
+			};
+
+			return m(name, args["verb"]);
+		},
+		
 		'call': function(method, data, on_success, on_error){
 
+			if (typeof(method) == "string"){
+				method = self.method(method);
+			}
+			
 			var dothis_onsuccess = function(rsp){
 
 				if (on_success){
@@ -74,13 +113,26 @@
 
 			var dothis_onerror = function(rsp){
 
-				console.log(rsp);
+				console.log("ERROR", rsp);
 
 				if (on_error){
 					on_error(rsp);
 				}
 			};
 
+			var form_data = data;
+			
+			if ((! form_data) || (! form_data.append)){
+
+				form_data = new FormData();
+
+				for (key in data){
+					form_data.append(key, data[key]);
+				}
+			}
+
+			form_data.append('method', method.name());
+			
 			var get_endpoint = self.get_handler('endpoint');
 
 			if (! get_endpoint){
@@ -95,33 +147,17 @@
 				return false
 			}
 
-			var get_api_key = self.get_handler('api_key');
-			if (! get_api_key){
-				dothis_onerror(self.destruct("Missing api_key handler"));
-				return false
-			}
+			if (! form_data.get("api_key")){
 
-			var api_key = get_api_key();
+				var set_authentication = self.get_handler('authentication');
 
-			if (! api_key){
-				dothis_onerror(self.destruct("API key handler returns no api_key!"));
-				return false
-			}
-
-			endpoint += '?api_key=' + api_key;
-
-			var form_data = data;
-
-			if (! form_data.append){
-
-				form_data = new FormData();
-
-				for (key in data){
-					form_data.append(key, data[key]);
+				if (! set_authentication){
+					dothis_onerror(self.destruct("there is no authentication handler"));
+					return false;
 				}
-			}
 
-			form_data.append('method', method);
+				set_authentication(form_data);
+			}
 
 			var onload = function(rsp){
 
@@ -137,20 +173,27 @@
 				var raw = target['responseText'];
 				var data = undefined;
 
-				try {
-					data = JSON.parse(raw);
+				var fmt = form_data.get("format");
+
+				if ((fmt == "json") || (fmt == "geojson") || (fmt == null)){
+
+					try {
+						data = JSON.parse(raw);
+					}
+
+					catch (e){
+						dothis_onerror(self.destruct("failed to parse JSON " + e));
+						return false;
+					}
+
+					if (data['stat'] != 'ok'){
+						dothis_onerror(data);
+						return false;
+					}
 				}
 
-				catch (e){
-
-					dothis_onerror(self.destruct("failed to parse JSON " + e));
-					return false;
-				}
-
-				if (data['stat'] != 'ok'){
-
-					dothis_onerror(data);
-					return false;
+				else {
+					data = raw;
 				}
 
 				dothis_onsuccess(data);
@@ -162,12 +205,10 @@
 			};
 
 			var onfailed = function(rsp){
-
 				dothis_onerror(self.destruct("connection failed " + rsp));
 			};
 
 			var onabort = function(rsp){
-
 				dothis_onerror(self.destruct("connection aborted " + rsp));
 			};
 
@@ -181,11 +222,27 @@
 				req.addEventListener("error", onfailed);
 				req.addEventListener("abort", onabort);
 
-				/*
-				for (var pair of form_data.entries()){
-					console.log(pair[0]+ ', '+ pair[1]);
+				if (method.verb() == "GET"){
+
+					if (form_data.keys()){
+
+						var query = [];
+
+						for (var pair of form_data.entries()) {
+							query.push(pair[0] + "=" + encodeURIComponent(pair[1]));
+						}
+
+						var query_string = query.join("&");
+						var sep = (endpoint.indexOf('?') == -1) ? '?' : '&';
+
+						endpoint = endpoint + sep + query.join("&");
+					}
+
+					req.open("GET", endpoint, true);
+					req.send();
+
+					return;
 				}
-				*/
 
 				req.open("POST", endpoint, true);
 				req.send(form_data);
@@ -212,14 +269,18 @@
 				}
 
 				if (rsp.next_query) {
+					
 					var args = rsp.next_query.split('&');
+					
 					for (var i = 0; i < args.length; i++) {
 						var arg = args[i].split('=');
 						var key = decodeURIComponent(arg[0]);
 						var value = decodeURIComponent(arg[1]);
 						data[key] = value;
 					}
+					
 					self.call(method, data, dothis_oncomplete, on_error);
+					
 				}  else if (on_complete) {
 					on_complete(results);
 				}
