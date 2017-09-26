@@ -1,5 +1,5 @@
-<li>
-	<a href="{$cfg.abs_root_url}id/{$result[$id_key]|escape}">{$result[$name_key]|escape}</a>
+<li itemscope itemtype="http://schema.org/Place">
+	<a href="{$cfg.abs_root_url}id/{$result[$id_key]|escape}" itemprop="name">{$result[$name_key]|escape}</a>
 	<span class="small">
 		<code>{$result[$id_key]|escape}</code>
 		{if $result[$placetype_key]|in_array:$an_placetypes}
