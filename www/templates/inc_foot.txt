@@ -1,5 +1,5 @@
 
-    {if "mapzen_places"|@features_is_enabled}
+    {if "places"|@features_is_enabled}
         {include file="inc_foot_mapzen.txt"}
     {else}
         <div class="container">
