@@ -44,6 +44,10 @@
       <script src="{$cfg.abs_root_url}javascript/html5.js"></script>
     <![endif]-->
 
+    {if "places"|@features_is_enabled}
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{$cfg.abs_root_url}sitemaps/index.xml" />
+    {/if}
+
   </head>
 
   {if "places"|@features_is_enabled}
