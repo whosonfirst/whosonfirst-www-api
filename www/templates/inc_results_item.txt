@@ -1,0 +1,15 @@
+<li>
+	<a href="{$cfg.abs_root_url}id/{$result[$id_key]|escape}">{$result[$name_key]|escape}</a>
+	<span class="small">
+		<code>{$result[$id_key]|escape}</code>
+		{if $result[$placetype_key]|in_array:$an_placetypes}
+			an
+		{else}
+			a
+		{/if}
+		{$result[$placetype_key]|escape}
+		{if $result[$country_key] && $result[$placetype_key] != 'country'}
+			in {$result[$country_key]|escape}
+		{/if}
+	</span>
+</li>

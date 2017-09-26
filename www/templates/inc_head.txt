@@ -11,7 +11,7 @@
     <link href="{$cfg.abs_root_url}css/mapzen.styleguide.css" rel="stylesheet">
     <link href="{$cfg.abs_root_url}css/mapzen.styleguide.whosonfirst.css" rel="stylesheet">
 
-    {if "mapzen_places"|@features_is_enabled}
+    {if "places"|@features_is_enabled}
     <link href="{$cfg.abs_root_url}css/mapzen.website.css" rel="stylesheet">
     {/if}
 
@@ -46,7 +46,7 @@
 
   </head>
 
-  {if "mapzen_places"|@features_is_enabled}
+  {if "places"|@features_is_enabled}
     {if $cfg.environment == 'dev'}
       {assign var="api_endpoint" value="https://places.dev.mapzen.com/v1/"}
     {else}
@@ -56,9 +56,9 @@
     {assign var="api_endpoint" value=$cfg.api_abs_root_url|cat:$cfg.api_endpoint}
   {/if}
 
-  <body data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "mapzen_places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
+  <body data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
 
-  {if "mapzen_places"|@features_is_enabled}
+  {if "places"|@features_is_enabled}
     {include file="inc_head_navi_mapzen.txt"}
   {else}
     {include file="inc_head_navi.txt"}

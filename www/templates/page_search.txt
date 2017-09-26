@@ -23,39 +23,7 @@
 		</div>
 	</div>
 	{if $query}
-		<div class="row">
-			<div class="col-md-12">
-				<span class="small">
-					{$pagination.total_count|number_format} results
-					{if $pagination.total_count > 0}
-						(page {$pagination.page|escape} of {$pagination.page_count|escape})
-					{/if}
-				</span>
-				<ol id="search-results" start="{$results_start}">
-					{foreach from=$results item=result}
-						<li itemscope itemtype="http://schema.org/Place">
-							<a href="{$cfg.abs_root_url}id/{$result[$id_key]|escape}" itemprop="name">{$result[$name_key]|escape}</a>
-							<span class="small">
-								<code>{$result[$id_key]|escape}</code>
-								{if $result[$placetype_key]|in_array:$an_placetypes}
-									an
-								{else}
-									a
-								{/if}
-								{$result[$placetype_key]|escape}
-								{if $result[$country_key] && $result[$placetype_key] != 'country'}
-									in {$result[$country_key]|escape}
-								{/if}
-							</span>
-						</li>
-					{/foreach}
-				</ol>
-			</div>
-		</div>
-
-		{if $pagination.total_count > $pagination.results_start + $pagination.per_page}
-			{include file="inc_pagination_nextprev.txt"}
-		{/if}
+		{include file="inc_results.txt"}
 	{/if}
 </div>
 

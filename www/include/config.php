@@ -10,7 +10,7 @@
 	$GLOBALS['cfg']['site_disabled_retry_after'] = 0;	# seconds; if set will return HTTP Retry-After header
 
 	# See also init.php customizations for Mapzen Places
-	$GLOBALS['cfg']['enable_feature_mapzen_places'] = 0;
+	$GLOBALS['cfg']['enable_feature_places'] = 0;
 
 	# Message is displayed in the nav header in inc_head.txt
 

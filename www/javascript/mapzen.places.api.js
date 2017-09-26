@@ -32,11 +32,32 @@
 		return undefined;
 	};
 
+	var mapzen_endpoint = function(){
+		return "https://places.mapzen.com/v1"
+	};
+
+	var mapzen_authentication = function(form_data){
+		var api_key = "mapzen-xxxxxxx";
+		if (typeof L !== "undefined" &&
+		    typeof L.Mapzen !== "undefined" &&
+		    typeof L.Mapzen.apiKey !== "undefined"){
+			api_key = L.Mapzen.apiKey;
+		}
+		form_data.append("api_key", api_key);
+	};
+
 	var self = {
 
 		'_handlers': {
-			'endpoint': null_handler,
-			'authentication': null_handler,
+			'endpoint': mapzen_endpoint,
+			'authentication': mapzen_authentication
+		},
+
+		'set_apikey': function(key){
+
+			return self.set_handler("authentication", function(form_data){
+				form_data.append("api_key", key);
+			});
 		},
 
 		'set_handler': function(target, handler){
@@ -63,7 +84,30 @@
 			return self._handlers[target];
 		},
 
+		'method': function(name, args){
+
+			if (! args){
+				args = {"verb": "GET"};
+			}
+
+			var m = function(n, v){
+
+				var self = {
+					'name': function(){ return n; },
+					'verb': function(){ return v; },
+				};
+
+				return self;
+			};
+
+			return m(name, args["verb"]);
+		},
+
 		'call': function(method, data, on_success, on_error){
+
+			if (typeof(method) == "string"){
+				method = self.method(method);
+			}
 
 			var dothis_onsuccess = function(rsp){
 
@@ -74,30 +118,16 @@
 
 			var dothis_onerror = function(rsp){
 
-				console.log(rsp);
+				console.log("ERROR", rsp);
 
 				if (on_error){
 					on_error(rsp);
 				}
 			};
 
-			var get_endpoint = self.get_handler('endpoint');
-
-			if (! get_endpoint){
-				dothis_onerror(self.destruct("Missing endpoint handler"));
-				return false
-			}
-
-			endpoint = get_endpoint();
-
-			if (! endpoint){
-				dothis_onerror(self.destruct("Endpoint handler returns no endpoint!"));
-				return false
-			}
-
 			var form_data = data;
 
-			if (! form_data.append){
+			if ((! form_data) || (! form_data.append)){
 
 				form_data = new FormData();
 
@@ -106,20 +136,32 @@
 				}
 			}
 
-			form_data.append('method', method);
+			form_data.append('method', method.name());
 
-			// Authentication can either get assigned as a POST var
-			// (as with the vanilla WOF API) or appended to the
-			// endpoint (as with the MZ Places API). We pass both
-			// form_data and endpoint to the handler, and if a
-			// return value is passed back, that gets assiend as the
-			// new endpoint. (20170925/dphiffer)
-			var set_auth = self.get_handler('authentication');
-			if (set_auth){
-				rsp = set_auth(form_data, endpoint);
-				if (rsp) {
-					endpoint = rsp;
+			var get_endpoint = self.get_handler('endpoint');
+
+			if (! get_endpoint){
+				dothis_onerror(self.destruct("Missing endpoint handler"));
+				return false
+			}
+
+			var endpoint = get_endpoint();
+
+			if (! endpoint){
+				dothis_onerror(self.destruct("Endpoint handler returns no endpoint!"));
+				return false
+			}
+
+			if (! form_data.get("api_key")){
+
+				var set_authentication = self.get_handler('authentication');
+
+				if (! set_authentication){
+					dothis_onerror(self.destruct("there is no authentication handler"));
+					return false;
 				}
+
+				set_authentication(form_data);
 			}
 
 			var onload = function(rsp){
@@ -136,20 +178,27 @@
 				var raw = target['responseText'];
 				var data = undefined;
 
-				try {
-					data = JSON.parse(raw);
+				var fmt = form_data.get("format");
+
+				if ((fmt == "json") || (fmt == "geojson") || (fmt == null)){
+
+					try {
+						data = JSON.parse(raw);
+					}
+
+					catch (e){
+						dothis_onerror(self.destruct("failed to parse JSON " + e));
+						return false;
+					}
+
+					if (data['stat'] != 'ok'){
+						dothis_onerror(data);
+						return false;
+					}
 				}
 
-				catch (e){
-
-					dothis_onerror(self.destruct("failed to parse JSON " + e));
-					return false;
-				}
-
-				if (data['stat'] != 'ok'){
-
-					dothis_onerror(data);
-					return false;
+				else {
+					data = raw;
 				}
 
 				dothis_onsuccess(data);
@@ -161,12 +210,10 @@
 			};
 
 			var onfailed = function(rsp){
-
 				dothis_onerror(self.destruct("connection failed " + rsp));
 			};
 
 			var onabort = function(rsp){
-
 				dothis_onerror(self.destruct("connection aborted " + rsp));
 			};
 
@@ -180,11 +227,27 @@
 				req.addEventListener("error", onfailed);
 				req.addEventListener("abort", onabort);
 
-				/*
-				for (var pair of form_data.entries()){
-					console.log(pair[0]+ ', '+ pair[1]);
+				if (method.verb() == "GET"){
+
+					if (form_data.keys()){
+
+						var query = [];
+
+						for (var pair of form_data.entries()) {
+							query.push(pair[0] + "=" + encodeURIComponent(pair[1]));
+						}
+
+						var query_string = query.join("&");
+						var sep = (endpoint.indexOf('?') == -1) ? '?' : '&';
+
+						endpoint = endpoint + sep + query.join("&");
+					}
+
+					req.open("GET", endpoint, true);
+					req.send();
+
+					return;
 				}
-				*/
 
 				req.open("POST", endpoint, true);
 				req.send(form_data);
@@ -211,14 +274,18 @@
 				}
 
 				if (rsp.next_query) {
+
 					var args = rsp.next_query.split('&');
+
 					for (var i = 0; i < args.length; i++) {
 						var arg = args[i].split('=');
 						var key = decodeURIComponent(arg[0]);
 						var value = decodeURIComponent(arg[1]);
 						data[key] = value;
 					}
+
 					self.call(method, data, dothis_oncomplete, on_error);
+
 				}  else if (on_complete) {
 					on_complete(results);
 				}
