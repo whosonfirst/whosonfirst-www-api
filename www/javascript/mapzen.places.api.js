@@ -37,15 +37,20 @@
 	};
 
 	var mapzen_authentication = function(form_data){
-		form_data.append("api_key", "mapzen-xxxxxxx");
+		var api_key = "mapzen-xxxxxxx";
+		if (typeof L !== "undefined" &&
+		    typeof L.Mapzen !== "undefined" &&
+		    typeof L.Mapzen.apiKey !== "undefined"){
+			api_key = L.Mapzen.apiKey;
+		}
+		form_data.append("api_key", api_key);
 	};
-	
+
 	var self = {
 
 		'_handlers': {
 			'endpoint': mapzen_endpoint,
-			'authentication': mapzen_authentication,			
-			'api_key': null_handler,		// deprecated - please use authentication
+			'authentication': mapzen_authentication
 		},
 
 		'set_apikey': function(key){
@@ -54,7 +59,7 @@
 				form_data.append("api_key", key);
 			});
 		},
-		
+
 		'set_handler': function(target, handler){
 
 			if (! self._handlers[target]){
@@ -97,13 +102,13 @@
 
 			return m(name, args["verb"]);
 		},
-		
+
 		'call': function(method, data, on_success, on_error){
 
 			if (typeof(method) == "string"){
 				method = self.method(method);
 			}
-			
+
 			var dothis_onsuccess = function(rsp){
 
 				if (on_success){
@@ -121,7 +126,7 @@
 			};
 
 			var form_data = data;
-			
+
 			if ((! form_data) || (! form_data.append)){
 
 				form_data = new FormData();
@@ -132,7 +137,7 @@
 			}
 
 			form_data.append('method', method.name());
-			
+
 			var get_endpoint = self.get_handler('endpoint');
 
 			if (! get_endpoint){
@@ -269,18 +274,18 @@
 				}
 
 				if (rsp.next_query) {
-					
+
 					var args = rsp.next_query.split('&');
-					
+
 					for (var i = 0; i < args.length; i++) {
 						var arg = args[i].split('=');
 						var key = decodeURIComponent(arg[0]);
 						var value = decodeURIComponent(arg[1]);
 						data[key] = value;
 					}
-					
+
 					self.call(method, data, dothis_oncomplete, on_error);
-					
+
 				}  else if (on_complete) {
 					on_complete(results);
 				}
