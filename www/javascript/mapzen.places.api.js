@@ -112,8 +112,8 @@
 			// (as with the vanilla WOF API) or appended to the
 			// endpoint (as with the MZ Places API). We pass both
 			// form_data and endpoint to the handler, and if a
-			// return value is passed back, that gets assiend as the
-			// new endpoint. (20170925/dphiffer)
+			// return value is passed back, that gets assigned as
+			// the new endpoint. (20170925/dphiffer)
 			var set_auth = self.get_handler('authentication');
 			if (set_auth){
 				rsp = set_auth(form_data, endpoint);
