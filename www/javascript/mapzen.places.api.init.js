@@ -5,12 +5,11 @@ window.addEventListener('load', function(e){
 		return endpoint;
 	}
 
-	var authentication_handler = function(form_data, endpoint) {
+	var api_key_handler = function() {
 		var api_key = document.body.getAttribute("data-mapzen-api-key");
-		endpoint += '?api_key=' + api_key;
-		return endpoint;
+		return api_key;
 	}
 
 	mapzen.places.api.set_handler('endpoint', endpoint_handler);
-	mapzen.places.api.set_handler('authentication', authentication_handler);
+	mapzen.places.api.set_handler('api_key', api_key_handler);
 });

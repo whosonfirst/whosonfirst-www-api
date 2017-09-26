@@ -36,7 +36,7 @@
 
 		'_handlers': {
 			'endpoint': null_handler,
-			'authentication': null_handler,
+			'api_key': null_handler,
 		},
 
 		'set_handler': function(target, handler){
@@ -88,12 +88,27 @@
 				return false
 			}
 
-			endpoint = get_endpoint();
+			var endpoint = get_endpoint();
 
 			if (! endpoint){
 				dothis_onerror(self.destruct("Endpoint handler returns no endpoint!"));
 				return false
 			}
+
+			var get_api_key = self.get_handler('api_key');
+			if (! get_api_key){
+				dothis_onerror(self.destruct("Missing api_key handler"));
+				return false
+			}
+
+			var api_key = get_api_key();
+
+			if (! api_key){
+				dothis_onerror(self.destruct("API key handler returns no api_key!"));
+				return false
+			}
+
+			endpoint += '?api_key=' + api_key;
 
 			var form_data = data;
 
@@ -107,20 +122,6 @@
 			}
 
 			form_data.append('method', method);
-
-			// Authentication can either get assigned as a POST var
-			// (as with the vanilla WOF API) or appended to the
-			// endpoint (as with the MZ Places API). We pass both
-			// form_data and endpoint to the handler, and if a
-			// return value is passed back, that gets assigned as
-			// the new endpoint. (20170925/dphiffer)
-			var set_auth = self.get_handler('authentication');
-			if (set_auth){
-				rsp = set_auth(form_data, endpoint);
-				if (rsp) {
-					endpoint = rsp;
-				}
-			}
 
 			var onload = function(rsp){
 
