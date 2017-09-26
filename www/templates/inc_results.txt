@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-md-12">
+		<span class="small">
+			{$pagination.total_count|number_format} results
+			{if $pagination.total_count > 0}
+				(page {$pagination.page|escape} of {$pagination.page_count|escape})
+			{/if}
+		</span>
+		<ol id="search-results" start="{$results_start}">
+			{foreach from=$results item=result}
+				{include file="inc_results_item.txt"}
+			{/foreach}
+		</ol>
+	</div>
+</div>
+
+{if $pagination.total_count > $pagination.results_start + $pagination.per_page}
+	{include file="inc_pagination_nextprev.txt"}
+{/if}
