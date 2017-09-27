@@ -11,6 +11,9 @@ templates:
 secret:
 	php -q ./bin/generate_secret.php
 
+countries:
+	php -q ./bin/mk_countries.php
+
 setup:
 	if test ! -f www/include/secrets.php; then cp www/include/secrets.php.example www/include/secrets.php; fi
 	ubuntu/setup-ubuntu.sh

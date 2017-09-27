@@ -11,7 +11,7 @@
 		{$result|@whosonfirst_places_placetype_pronoun|@escape}
 		{$result[$placetype_key]|escape}
 		{if $result[$country_key] && $result[$placetype_key] != 'country'}
-			in {$result[$country_key]|escape}
+			in {$result|@whosonfirst_places_country_link}
 		{/if}
 		{if $result[$placetype_key] == 'venue' && $result[$address_key]}
 			<div class="result-meta">{$result[$address_key]|escape}</div>

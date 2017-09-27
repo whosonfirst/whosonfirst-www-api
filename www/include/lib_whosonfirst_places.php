@@ -4,6 +4,7 @@
 
 	loadlib("elasticsearch");
 	loadlib("elasticsearch_spelunker");
+	loadlib("whosonfirst_countries");
 
 	########################################################################
 
@@ -269,6 +270,24 @@
 			return 'an';
 		} else {
 			return 'a';
+		}
+
+	}
+
+	########################################################################
+
+	function whosonfirst_places_country_link($place) {
+
+		$code = $place['wof:country'];
+		$country = $GLOBALS['whosonfirst_countries'][$code];
+
+		if ($country) {
+			$esc_id = htmlspecialchars($country['wof:id']);
+			$esc_name = htmlspecialchars($country['wof:name']);
+			$url = $GLOBALS['cfg']['abs_root_url'] . "id/$esc_id/";
+			return "<a href=\"$url\">$esc_name</a>";
+		} else {
+			return $code;
 		}
 
 	}
