@@ -389,20 +389,12 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getByLatLon&api_
 {
     "places": [
         {
-            "wof:id": 85834637,
-            "wof:parent_id": "1108830809",
-            "wof:name": "Inner Mission",
-            "wof:placetype": "neighbourhood",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data"
-        },
-        {
-            "wof:id": 85887443,
-            "wof:parent_id": "85922583",
-            "wof:name": "Mission District",
-            "wof:placetype": "neighbourhood",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data"
+            "wof:id": null,
+            "wof:parent_id": null,
+            "wof:name": null,
+            "wof:placetype": null,
+            "wof:country": null,
+            "wof:repo": null
         }
     ],
     "stat": "ok"
@@ -496,7 +488,7 @@ Return the closest set of ancestors (hierarchies) for a latitude and longitude
 | `latitude` | A valid latitude coordinate. |  37.777228 | yes |
 | `longitude` | A valid longitude coordinate. |  -122.470779 | yes |
 | `spr` | Format results as a standard place response (spr). |  1 | no |
-| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighhourhood | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
@@ -635,7 +627,7 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 | `min_longitude` | A valid longitude coordinate, representing the left (Western) edge of the bounding box. |  -122.34374508 | yes |
 | `max_latitude` | A valid latitude coordinate, representing the top (Northern) edge of the bounding box. |  37.85749665 | yes |
 | `max_longitude` | A valid longitude coordinate, representing the right (Eastern) edge of the bounding box. |  -122.25585446 | yes |
-| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighhourhood | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
@@ -664,20 +656,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getIntersects&api_key=your-mapzen-api-key&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=venue&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
-
-{
-    "places": [
-
-    ],
-    "next_query": null,
-    "total": null,
-    "page": null,
-    "per_page": 1,
-    "pages": null,
-    "cursor": null,
-    "stat": "ok"
-}
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getIntersects&api_key=your-mapzen-api-key&min_latitude=MIN_LATITUDE&min_longitude=MIN_LONGITUDE&max_latitude=MAX_LATITUDE&max_longitude=MAX_LONGITUDE&placetype=PLACETYPE'
 ```
 
 <a name="mapzen.places.getNearby"></a>
@@ -693,7 +672,7 @@ Return all the Who&#039;s On First records near a point.
 | `latitude` | A valid latitude coordinate. |  40.784165 | yes |
 | `longitude` | A valid longitude coordinate. |  -73.958110 | yes |
 | `radius` | A valid radius (in meters) to limit the query by. Default radius is 100. Maximum radius is 500. |  25 | no |
-| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighhourhood | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
@@ -720,20 +699,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getNearby&api_key=your-mapzen-api-key&latitude=40.784165&longitude=-73.958110&radius=25&placetype=venue&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
-
-{
-    "places": [
-
-    ],
-    "next_query": null,
-    "total": null,
-    "page": null,
-    "per_page": 1,
-    "pages": null,
-    "cursor": null,
-    "stat": "ok"
-}
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getNearby&api_key=your-mapzen-api-key&latitude=LATITUDE&longitude=LONGITUDE&radius=RADIUS&placetype=PLACETYPE'
 ```
 
 <a name="mapzen.places.getParentByLatLon"></a>
@@ -778,7 +744,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getParentByLatLo
 
 {
     "place": {
-        "wof:parent_id": 102031773
+        "wof:parent_id": null
     },
     "stat": "ok"
 }
@@ -813,11 +779,11 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getRandom&api_ke
 
 {
     "place": {
-        "wof:id": 1092076933,
-        "wof:parent_id": "85680321",
-        "wof:name": "Sauce",
-        "wof:placetype": "county",
-        "wof:country": "UY",
+        "wof:id": 85675607,
+        "wof:parent_id": "85632747",
+        "wof:name": "Buada",
+        "wof:placetype": "region",
+        "wof:country": "NR",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -1010,9 +976,9 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.pelias.autocompl
             "wof:repo": "whosonfirst-data-venue-us-ny"
         },
         {
-            "wof:id": 286656437,
-            "wof:parent_id": "-3",
-            "wof:name": "NYC Housing Gowanus Houses",
+            "wof:id": 253239519,
+            "wof:parent_id": "85892961",
+            "wof:name": "Gowanus Builders Inc",
             "wof:placetype": "venue",
             "wof:country": "US",
             "wof:repo": "whosonfirst-data-venue-us-ny"
@@ -1292,7 +1258,7 @@ Return a Who&#039;s On First repo name for a latitude and longitude.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `latitude` | A valid latitude coordinate. |  37.766633 | yes |
 | `longitude` | A valid longitude coordinate. |  -122.417693 | yes |
-| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighhourhood | no |
 | `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
@@ -1321,13 +1287,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.repos.getByLatLon&api_key=your-mapzen-api-key&latitude=37.766633&longitude=-122.417693&placetype=venue&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1'
-
-{
-    "repo": "whosonfirst-data-venue-us-ca",
-    "url": "https:\/\/github.com\/whosonfirst-data\/whosonfirst-data-venue-us-ca",
-    "stat": "ok"
-}
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.repos.getByLatLon&api_key=your-mapzen-api-key&latitude=LATITUDE&longitude=LONGITUDE&placetype=PLACETYPE'
 ```
 
 
