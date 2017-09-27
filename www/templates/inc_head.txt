@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/mapzen.js.css" />
     <script src="{$cfg.abs_root_url}javascript/mapzen.js"></script>
 
+    <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.geojson.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.uri.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.places.map.js"></script>
 
