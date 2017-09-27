@@ -1,18 +1,20 @@
 <div class="row">
 	<div class="col-md-12">
-		<span class="small">
-			{$pagination.total_count|number_format} results
-			{if $pagination.total_count > 0}
-				(page {$pagination.page|escape} of {$pagination.page_count|number_format|escape})
-			{/if}
-		</span>
 		{if $pagination.total_count > 0}
 			<div id="map" class="headroom"></div>
+			<span class="small">
+				{$pagination.total_count|number_format} result{if $pagination.total_count > 1}s{/if}
+				{if $pagination.total_count > 0}
+					(page {$pagination.page|escape} of {$pagination.page_count|number_format|escape})
+				{/if}
+			</span>
 			<ul id="search-results">
 				{foreach from=$results item=result}
 					{include file="inc_results_item.txt"}
 				{/foreach}
 			</ul>
+		{else}
+			<span class="small">No results found.</span>
 		{/if}
 	</div>
 </div>
