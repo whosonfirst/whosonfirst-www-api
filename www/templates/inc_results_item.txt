@@ -1,3 +1,11 @@
+{php}
+$this->assign('an_placetypes', array(
+	'address',
+	'empire',
+	'intersection',
+	'ocean'
+));
+{/php}
 <li itemscope itemtype="http://schema.org/Place">
 	<a href="{$cfg.abs_root_url}id/{$result[$id_key]|escape}" itemprop="name">{$result[$name_key]|escape}</a>
 	<span class="small">
@@ -10,6 +18,9 @@
 		{$result[$placetype_key]|escape}
 		{if $result[$country_key] && $result[$placetype_key] != 'country'}
 			in {$result[$country_key]|escape}
+		{/if}
+		{if $result[$placetype_key] == 'venue' && $result[$address_key]}
+			<div class="result-meta">{$result[$address_key]|escape}</div>
 		{/if}
 	</span>
 </li>

@@ -33,9 +33,11 @@
 			error_500();
 		}
 
-		$more = array();
 		$pagination = $rsp['pagination'];
 
+		$more = array(
+			'extras' => 'addr:'
+		);
 		api_whosonfirst_output_enpublicify($rsp['rows'], $more);
 
 		$out = array(
@@ -50,19 +52,6 @@
 		$GLOBALS['smarty']->assign_by_ref('results', $out['places']);
 		$GLOBALS['smarty']->assign_by_ref('pagination', $pagination);
 		$GLOBALS['smarty']->assign('results_start', 1 + $pagination['per_page'] * ($pagination['page'] - 1));
-
-		$an_placetypes = array(
-			'address',
-			'empire',
-			'intersection',
-			'ocean'
-		);
-		$GLOBALS['smarty']->assign_by_ref('an_placetypes', $an_placetypes);
-
-		$GLOBALS['smarty']->assign('id_key', 'wof:id');
-		$GLOBALS['smarty']->assign('name_key', 'wof:name');
-		$GLOBALS['smarty']->assign('placetype_key', 'wof:placetype');
-		$GLOBALS['smarty']->assign('country_key', 'wof:country');
 	}
 
 	$GLOBALS['smarty']->display('page_search.txt');
