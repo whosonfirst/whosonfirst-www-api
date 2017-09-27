@@ -11,6 +11,7 @@
 
 li.results-item {
 	list-style: none;
+	margin-top: 5px;
 }
 
 .current-page {
