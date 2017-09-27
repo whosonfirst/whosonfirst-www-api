@@ -63,10 +63,9 @@
 
 		$GLOBALS['smarty']->assign_by_ref('results', $out['places']);
 		$GLOBALS['smarty']->assign_by_ref('pagination', $pagination);
-		$GLOBALS['smarty']->assign('results_start', 1 + $pagination['per_page'] * ($pagination['page'] - 1));
 	}
 
-	$debug = request_str("debug");
+	$debug = request_bool("debug");
 	if ($debug) {
 		$query_json = json_encode($rsp['_query'], JSON_PRETTY_PRINT);
 		$GLOBALS['smarty']->assign('debug', $query_json);

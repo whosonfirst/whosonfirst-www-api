@@ -4,3 +4,11 @@
 	border: 5px solid #000;
 	margin-bottom: 1em;
 }
+
+#search-results {
+	padding: 0;
+}
+
+li.results-item {
+	list-style: none;
+}

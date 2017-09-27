@@ -8,11 +8,11 @@
 		</span>
 		{if $pagination.total_count > 0}
 			<div id="map" class="headroom"></div>
-			<ol id="search-results" start="{$results_start}">
+			<ul id="search-results">
 				{foreach from=$results item=result}
 					{include file="inc_results_item.txt"}
 				{/foreach}
-			</ol>
+			</ul>
 		{/if}
 	</div>
 </div>
