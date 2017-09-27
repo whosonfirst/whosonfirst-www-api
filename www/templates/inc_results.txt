@@ -1,3 +1,9 @@
+{assign var="id_key" value="wof:id"}
+{assign var="name_key" value="wof:name"}
+{assign var="address_key" value="addr:full"}
+{assign var="placetype_key" value="wof:placetype"}
+{assign var="country_key" value="wof:country"}
+
 <div class="row">
 	<div class="col-md-12">
 		<span class="small">
