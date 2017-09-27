@@ -2,19 +2,19 @@
 	<div class="col-md-12">
 		{if $pagination.total_count > 0}
 			<div id="map" class="headroom"></div>
-			<span class="small">
+			<h4>
 				{$pagination.total_count|number_format} result{if $pagination.total_count > 1}s{/if}
 				{if $pagination.total_count > 0}
-					(page {$pagination.page|escape} of {$pagination.page_count|number_format|escape})
+					<span class="current-page">page {$pagination.page|escape} of {$pagination.page_count|number_format|escape}</span>
 				{/if}
-			</span>
+			</h4>
 			<ul id="search-results">
 				{foreach from=$results item=result}
 					{include file="inc_results_item.txt"}
 				{/foreach}
 			</ul>
 		{else}
-			<span class="small">No results found.</span>
+			<h4>No results found.</h4>
 		{/if}
 	</div>
 </div>

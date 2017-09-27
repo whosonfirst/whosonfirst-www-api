@@ -12,3 +12,8 @@
 li.results-item {
 	list-style: none;
 }
+
+.current-page {
+	font-weight: normal;
+	margin-left: 0.5em;
+}
