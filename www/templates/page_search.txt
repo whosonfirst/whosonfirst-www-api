@@ -20,9 +20,7 @@
 			</div>
 		</div>
 	{/if}
-	{if $query}
-		{include file="inc_results.txt"}
-	{/if}
+	{include file="inc_results.txt"}
 </div>
 
 {include file='inc_foot.txt'}
