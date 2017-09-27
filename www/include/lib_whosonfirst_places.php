@@ -278,7 +278,7 @@
 
 	function whosonfirst_places_country_link($place) {
 
-		$code = $place['wof:country'];
+		$code = $place['iso:country'];
 		$country = $GLOBALS['whosonfirst_countries'][$code];
 
 		if ($country) {
