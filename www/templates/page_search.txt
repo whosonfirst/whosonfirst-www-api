@@ -13,6 +13,13 @@
 		</div>
 	</div>
 	{include file="inc_search_form.txt"}
+	{if $debug}
+		<div class="row headroom">
+			<div class="col-xs-12">
+				<pre><code>{$debug|escape}</code></pre>
+			</div>
+		</div>
+	{/if}
 	{if $query}
 		{include file="inc_results.txt"}
 	{/if}

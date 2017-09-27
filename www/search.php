@@ -12,6 +12,7 @@
 
 	$query = request_str("q");
 	$scope = request_str("scope");
+
 	if ($scope == 'names') {
 		$_REQUEST['names'] = $query;
 	} else if ($scope == 'default') {
@@ -27,9 +28,6 @@
 
 	if ($query) {
 
-		// Based on code from api_whosonfirst_places_search. This should
-		// get moved into a library. (20170922/dphiffer)
-
 		$filters = api_whosonfirst_utils_search_filters();
 
 		$args = array(
@@ -44,11 +42,11 @@
 		}
 
 		$pagination = $rsp['pagination'];
-		$GLOBALS['smarty']->assign('pagination_page_as_queryarg', true);
 		$args = http_build_query(array(
 			'q' => $query,
 			'scope' => $scope
 		));
+		$GLOBALS['smarty']->assign('pagination_page_as_queryarg', true);
 		$GLOBALS['smarty']->assign('pagination_url', $GLOBALS['cfg']['abs_root_url'] . "search/?$args");
 
 		$more = array(
@@ -66,6 +64,12 @@
 		$GLOBALS['smarty']->assign_by_ref('results', $out['places']);
 		$GLOBALS['smarty']->assign_by_ref('pagination', $pagination);
 		$GLOBALS['smarty']->assign('results_start', 1 + $pagination['per_page'] * ($pagination['page'] - 1));
+	}
+
+	$debug = request_str("debug");
+	if ($debug) {
+		$query_json = json_encode($rsp['_query'], JSON_PRETTY_PRINT);
+		$GLOBALS['smarty']->assign('debug', $query_json);
 	}
 
 	$GLOBALS['smarty']->display('page_search.txt');
