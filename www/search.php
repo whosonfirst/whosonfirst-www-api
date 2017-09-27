@@ -14,8 +14,12 @@
 	$scope = request_str("scope");
 	if ($scope == 'names') {
 		$_REQUEST['names'] = $query;
-	} else {
-		$scope = 'q';
+	} else if ($scope == 'default') {
+		$_REQUEST['default'] = $query;
+	} else if ($scope == 'preferred') {
+		$_REQUEST['preferred'] = $query;
+	} else if ($scope == 'alt') {
+		$_REQUEST['alt'] = $query;
 	}
 
 	$GLOBALS['smarty']->assign('query', $query);

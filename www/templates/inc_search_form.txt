@@ -1,12 +1,14 @@
 <form action="{$cfg.abs_root_url}search" class="row">
-	<div class="form-group inline-submit col-sm-7 col-xs-12">
+	<div class="form-group inline-submit col-sm-6 col-xs-12">
 		<input type="search" name="q" value="{$query|escape}" placeholder="Search Mapzen Places" class="col-xs-8 col-sm-9">
 		<input type="submit" value="search" class="col-xs-4 btn btn-transparent col-sm-3">
 	</div>
-	<div class="form-group col-sm-5 col-xs-12">
+	<div class="form-group col-sm-6 col-xs-12">
 		<select name="scope">
-			<option value="q"{if $scope == 'q'} selected="selected"{/if}>All properties</option>
-			<option value="names"{if $scope == 'names'} selected="selected"{/if}>Name properties</option>
+			<option value="names"{if $scope == 'names'} selected="selected"{/if}>All names</option>
+			<option value="default"{if $scope == 'default'} selected="selected"{/if}>Default names</option>
+			<option value="preferred"{if $scope == 'preferred'} selected="selected"{/if}>Preferred names</option>
+			<option value="alt"{if $scope == 'alt'} selected="selected"{/if}>Variant names</option>
 		</select>
 	</div>
 </form>
