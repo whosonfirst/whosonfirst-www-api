@@ -12,16 +12,7 @@
 			</ol>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-12 col-md-6">
-			<form action="{$cfg.abs_root_url}search">
-				<div class="form-group inline-submit">
-					<input type="search" name="q" value="{$query|escape}" placeholder="Search Mapzen Places" class="col-xs-8 col-sm-9">
-					<input type="submit" value="search" class="col-xs-4 btn btn-transparent col-sm-3">
-				</div>
-			</form>
-		</div>
-	</div>
+	{include file="inc_search_form.txt"}
 	{if $query}
 		{include file="inc_results.txt"}
 	{/if}

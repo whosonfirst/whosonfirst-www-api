@@ -4,7 +4,7 @@ window.addEventListener("load", function load(event){
 		return;
 	}
 	var map = mapzen.places.map.get_map("map");
-	
+
 	// We use a mock GeoJSON FeatureCollection to derive the bbox
 	var geojson = {
 		type: "FeatureCollection",
@@ -32,8 +32,6 @@ window.addEventListener("load", function load(event){
 		geojson.features.push(feature);
 		mapzen.places.map.add_geojson_to_map(map, feature);
 	}
-
-	console.log(geojson);
 
 	var bbox = mapzen.whosonfirst.geojson.derive_bbox(geojson);
 	if (bbox[0] == bbox[2] && bbox[1] == bbox[3]) {

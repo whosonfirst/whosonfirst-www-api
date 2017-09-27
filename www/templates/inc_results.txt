@@ -3,7 +3,7 @@
 		<span class="small">
 			{$pagination.total_count|number_format} results
 			{if $pagination.total_count > 0}
-				(page {$pagination.page|escape} of {$pagination.page_count|escape})
+				(page {$pagination.page|escape} of {$pagination.page_count|number_format|escape})
 			{/if}
 		</span>
 		{if $pagination.total_count > 0}

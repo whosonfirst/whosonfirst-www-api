@@ -8,17 +8,12 @@
 		</div>
 	</div>
 
-	{if "places"|@features_is_enabled}
-	<div class="row">
-		<div class="col-xs-12 col-md-6">
-			<form action="{$cfg.abs_root_url}search">
-				<div class="form-group inline-submit">
-					<input type="search" name="q" value="{$query|escape}" placeholder="Search Mapzen Places" class="col-xs-8 col-sm-9">
-					<input type="submit" value="search" class="col-xs-4 btn btn-transparent col-sm-3">
-				</div>
-			</form>
-		</div>
+	<div class="headroom">
+		{include file="inc_search_form.txt"}
 	</div>
+
+	{if "places"|@features_is_enabled}
+
 	<div class="row headroom">
 		<div class="col-xs-12">
 			<h3>See also</h3>
