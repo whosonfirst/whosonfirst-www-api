@@ -35,7 +35,7 @@ END;
 		$esc_id = intval($place['wof:id']);
 		$esc_name = addslashes($place['wof:name']);
 		$country = <<<END
-		'{$place['wof:country']}' => array(
+		'{$place['iso:country']}' => array(
 			'wof:id' => $esc_id,
 			'wof:name' => '$esc_name'
 		),
