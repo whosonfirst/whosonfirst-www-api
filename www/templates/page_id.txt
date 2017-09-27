@@ -34,7 +34,7 @@
 
 <div class="row" itemprop="location" itemscope itemtype="http://schema.org/Place">
 <ul class="list">
-    <li><span class="hey-look" itemprop="name">{$wof_name|@escape}</span> is a <a href="#" class="hey-look">{$wof_placetype|@escape}</a> and its Who's On First ID is <a href="{$place|@whosonfirst_places_url_for_place}" class="hey-look" itemprop="identifier">{$wof_id|@escape}</a>.</li>
+    <li><span class="hey-look" itemprop="name">{$wof_name|@escape}</span> is a <span class="hey-look">{$wof_placetype|@escape}</span> and its Who's On First ID is <a href="{$place|@whosonfirst_places_url_for_place}" class="hey-look" itemprop="identifier">{$wof_id|@escape}</a>.</li>
     <li>
     {if $wof_parent_id == -1}
     We aren't entirely certain who this {$wof_placetype|@escape} is parented by.
@@ -45,11 +45,11 @@
     {assign var="wof_parents" value=$place|@whosonfirst_places_property:"wof:parents"}
 
     {if $wof_parents|@count}
-    It is parented by {foreach from=$wof_parents item="row" name="parents"}<a href="{$row|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$row|@whosonfirst_places_property:"wof:name"}</a>{if !$smarty.foreach.parents.last} and {/if}{/foreach} {if $wof_parents|@count==2}both of which{else}all of which{/if} are a <a href="#" class="hey-look">{$wof_parents.0|@whosonfirst_places_property:"wof:placetype"}</a>.
+    It is parented by {foreach from=$wof_parents item="row" name="parents"}<a href="{$row|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$row|@whosonfirst_places_property:"wof:name"}</a>{if !$smarty.foreach.parents.last} and {/if}{/foreach} {if $wof_parents|@count==2}both of which{else}all of which{/if} are a <span class="hey-look">{$wof_parents.0|@whosonfirst_places_property:"wof:placetype"}</span>.
     {/if}
 
     {else}
-    It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a> which is a <a href="#" class="hey-look">{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"|@escape}</a>.
+    It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a> which is a <span class="hey-look">{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"|@escape}</span>.
     {/if}
     </li>
 </ul>
