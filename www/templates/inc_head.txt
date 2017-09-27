@@ -11,8 +11,11 @@
     <link href="{$cfg.abs_root_url}css/mapzen.styleguide.css" rel="stylesheet">
     <link href="{$cfg.abs_root_url}css/mapzen.styleguide.whosonfirst.css" rel="stylesheet">
 
+    <link href="{$cfg.abs_root_url}css/whosonfirst.api.css" rel="stylesheet">
+
     {if "places"|@features_is_enabled}
     <link href="{$cfg.abs_root_url}css/mapzen.website.css" rel="stylesheet">
+    <link href="{$cfg.abs_root_url}css/mapzen.places.api.css" rel="stylesheet">
     {/if}
 
     <script src="{$cfg.abs_root_url}javascript/jquery-2.1.0.min.js"></script>
