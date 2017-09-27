@@ -31,7 +31,7 @@
 	}
 
 	else {
-	
+
 		$pt = $place["wof:placetype"];
 		$hiers = $place["wof:hierarchy"];
 
@@ -58,6 +58,9 @@
 			$place["wof:parents"] = $rsp["rows"];
 		}
 	}
+
+	$search_url = whosonfirst_places_search_referer_url($query, $filters, $args);
+	$GLOBALS['smarty']->assign("search_url", $search_url);
 
 	$GLOBALS['smarty']->assign_by_ref("place", $place);
 	$GLOBALS['smarty']->display("page_id.txt");

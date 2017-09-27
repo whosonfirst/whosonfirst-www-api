@@ -294,6 +294,47 @@
 
 	########################################################################
 
+	function whosonfirst_places_search_referer_url() {
+
+		// This is used to link back to search results from id.php.
+		// We'll inspect the HTTP Referer header and if it looks exactly
+		// like a search results URL, we reconstruct our own version
+		// of it using a whitelist of acceptable query args.
+		// If not, we return null. (20170927/dphiffer)
+
+		$referer = $_SERVER['HTTP_REFERER'];
+		$referer_url = parse_url($referer);
+		$referer_query = array();
+		parse_str($referer_url['query'], $referer_query);
+
+		$allowable_args = array(
+			'q',
+			'scope',
+			'page'
+		);
+
+		$args = array();
+		if ($referer_query) {
+			foreach ($referer_query as $arg => $val) {
+				if (in_array($arg, $allowable_args)) {
+					$args[$arg] = $val;
+				}
+			}
+		}
+
+		if (preg_match('/^\/search\/?$/', $referer_url['path']) &&
+		    $args) {
+			$query = http_build_query($args);
+			$search_url = $GLOBALS['cfg']['abs_root_url'] . "search/?$query";
+			return $search_url;
+		}
+
+		return null;
+
+	}
+
+	########################################################################
+
 	function whosonfirst_places_url_for_place($place){
 
 		$enc_id = urlencode($place["wof:id"]);

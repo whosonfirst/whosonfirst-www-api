@@ -31,6 +31,9 @@
 				<li>
 					<a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a>
 				</li>
+				{if $search_url}
+					<li><a href="{$search_url|escape}">Search Results</a></li>
+				{/if}
 				<li class="active">{$wof_name|@escape}</li>
 			</ol>
 		</div>
