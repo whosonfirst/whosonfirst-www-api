@@ -1,20 +1,14 @@
-{php}
-$this->assign('an_placetypes', array(
-	'address',
-	'empire',
-	'intersection',
-	'ocean'
-));
-{/php}
-<li itemscope itemtype="http://schema.org/Place">
+{assign var="id_key" value="wof:id"}
+{assign var="name_key" value="wof:name"}
+{assign var="address_key" value="addr:full"}
+{assign var="placetype_key" value="wof:placetype"}
+{assign var="country_key" value="wof:country"}
+
+<li itemscope itemtype="http://schema.org/Place" class="results-item" data-geom-latitude="{$result|@whosonfirst_places_property:"geom:latitude"|@escape}" data-geom-longitude="{$result|@whosonfirst_places_property:"geom:latitude"|@escape}">
 	<a href="{$cfg.abs_root_url}id/{$result[$id_key]|escape}" itemprop="name">{$result[$name_key]|escape}</a>
 	<span class="small">
 		<code>{$result[$id_key]|escape}</code>
-		{if $result[$placetype_key]|in_array:$an_placetypes}
-			an
-		{else}
-			a
-		{/if}
+		{$result|@whosonfirst_places_placetype_pronoun|@escape}
 		{$result[$placetype_key]|escape}
 		{if $result[$country_key] && $result[$placetype_key] != 'country'}
 			in {$result[$country_key]|escape}

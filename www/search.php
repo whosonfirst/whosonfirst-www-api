@@ -41,7 +41,7 @@
 		$GLOBALS['smarty']->assign('pagination_url', $GLOBALS['cfg']['abs_root_url'] . "search/?$args");
 
 		$more = array(
-			'extras' => 'addr:'
+			'extras' => 'addr:,geom:latitude,geom:longitude'
 		);
 		api_whosonfirst_output_enpublicify($rsp['rows'], $more);
 

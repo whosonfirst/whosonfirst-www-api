@@ -1,9 +1,3 @@
-{assign var="id_key" value="wof:id"}
-{assign var="name_key" value="wof:name"}
-{assign var="address_key" value="addr:full"}
-{assign var="placetype_key" value="wof:placetype"}
-{assign var="country_key" value="wof:country"}
-
 <div class="row">
 	<div class="col-md-12">
 		<span class="small">
@@ -12,6 +6,7 @@
 				(page {$pagination.page|escape} of {$pagination.page_count|escape})
 			{/if}
 		</span>
+		<div id="map" class="headroom"></div>
 		<ol id="search-results" start="{$results_start}">
 			{foreach from=$results item=result}
 				{include file="inc_results_item.txt"}
@@ -23,3 +18,5 @@
 {if $pagination.total_count > $pagination.results_start + $pagination.per_page}
 	{include file="inc_pagination.txt"}
 {/if}
+
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.results.init.js"></script>

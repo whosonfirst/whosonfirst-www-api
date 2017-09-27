@@ -41,7 +41,7 @@
 
 	function whosonfirst_places_get_by_id_multi($ids, $more=array()){
 
-		return elasticsearch_spelunker_mget($ids, $more);	
+		return elasticsearch_spelunker_mget($ids, $more);
 	}
 
 	########################################################################
@@ -116,7 +116,7 @@
 
 		else {
 			$esc_q = elasticsearch_escape($q);
-		
+
 			$query = array(
 				'match' => array( '_all' => array(
 					'operator' => 'and',
@@ -240,7 +240,7 @@
 		$property = null;
 
 		foreach (explode(".", $path) as $p){
-		
+
 			if (! isset($place[$p])){
 				return null;
 			}
@@ -253,6 +253,24 @@
 		}
 
 		return $property;
+	}
+
+	########################################################################
+
+	function whosonfirst_places_placetype_pronoun($place) {
+
+		$an_placetypes = array(
+			'address',
+			'empire',
+			'intersection',
+			'ocean'
+		);
+		if (in_array($place['wof:placetype'], $an_placetypes)) {
+			return 'an';
+		} else {
+			return 'a';
+		}
+
 	}
 
 	########################################################################
