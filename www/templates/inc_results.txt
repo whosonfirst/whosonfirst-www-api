@@ -21,5 +21,5 @@
 </div>
 
 {if $pagination.total_count > $pagination.results_start + $pagination.per_page}
-	{include file="inc_pagination_nextprev.txt"}
+	{include file="inc_pagination.txt"}
 {/if}

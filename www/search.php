@@ -34,6 +34,11 @@
 		}
 
 		$pagination = $rsp['pagination'];
+		$GLOBALS['smarty']->assign('pagination_page_as_queryarg', true);
+		$args = http_build_query(array(
+			'q' => $q
+		));
+		$GLOBALS['smarty']->assign('pagination_url', $GLOBALS['cfg']['abs_root_url'] . "search/?$args");
 
 		$more = array(
 			'extras' => 'addr:'
@@ -46,8 +51,6 @@
 
 		api_utils_ensure_pagination_results($out, $pagination);
 		search_utils_ensure_pagination($q, $out, $pagination);
-
-		//dumper($out['next_query']);
 
 		$GLOBALS['smarty']->assign_by_ref('results', $out['places']);
 		$GLOBALS['smarty']->assign_by_ref('pagination', $pagination);
