@@ -4,7 +4,7 @@
 {assign var="placetype_key" value="wof:placetype"}
 {assign var="country_key" value="wof:country"}
 
-<li itemscope itemtype="http://schema.org/Place" class="results-item" data-wof-id="{$result|@whosonfirst_places_property:"wof:id"|@escape}" data-geom-latitude="{$result|@whosonfirst_places_property:"geom:latitude"|@escape}" data-geom-longitude="{$result|@whosonfirst_places_property:"geom:longitude"|@escape}">
+<li itemscope itemtype="http://schema.org/Place" class="results-item" data-wof-id="{$result|@whosonfirst_places_property:"wof:id"|@escape}" data-latitude="{$result|@whosonfirst_places_coordinate:"latitude"|@escape}" data-longitude="{$result|@whosonfirst_places_coordinate:"longitude"|@escape}">
 	<a href="{$cfg.abs_root_url}id/{$result[$id_key]|escape}" itemprop="name">{$result[$name_key]|escape}</a>
 	<span class="small">
 		<code>{$result[$id_key]|escape}</code>
