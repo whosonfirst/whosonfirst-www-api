@@ -31,6 +31,8 @@
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.js"></script>
     {/if}
 
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst_countries.js"></script>
+
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/mapzen.js.css" />
     <script src="{$cfg.abs_root_url}javascript/mapzen.js"></script>
 
