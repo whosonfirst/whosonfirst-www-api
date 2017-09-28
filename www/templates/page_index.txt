@@ -4,7 +4,7 @@
 	<div class="row headroom-large">
 		<div class="col-xs-12">
 			<h1>{$cfg.site_name|@escape}</h1>
-			<p><span class="hey-look">{$cfg.site_name|@escape}</span> is a gazetteer. <q>Gazetteer</q> is a fancy word for <q>a big list of places</q> where each place has a stable, unique identifier and pointers to all the other places that it has a relationship with.</p>
+			<p><span class="hey-look">{$cfg.site_name|@escape}</span> is a gazetteer. <q>Gazetteer</q> is a fancy word for <q>a big list of places</q> where each place has a stable, unique identifier and pointers to all the other places that it has a relationship with. <a href="{$cfg.abs_root_url}nearby/">Browse nearby places</a></p>
 		</div>
 	</div>
 
