@@ -30,12 +30,18 @@ END;
 	$fh = fopen('www/include/lib_whosonfirst_countries.php', 'w');
 	fwrite($fh, $head);
 
+	$countries = array();
 	$rsp = whosonfirst_places_search('', $filters, $args);
 	foreach ($rsp['rows'] as $place) {
 		$esc_id = intval($place['wof:id']);
 		$esc_name = addslashes($place['wof:name']);
+		$esc_code = addslashes($place['iso:country']);
+		$countries[$esc_code] = array(
+			'wof:id' => $esc_id,
+			'wof:name' => $place['wof:name']
+		);
 		$country = <<<END
-		'{$place['iso:country']}' => array(
+		'{$esc_code}' => array(
 			'wof:id' => $esc_id,
 			'wof:name' => '$esc_name'
 		),
@@ -52,3 +58,6 @@ END;
 
 	fwrite($fh, $foot);
 	fclose($fh);
+
+	$countries_json = json_encode($countries);
+	file_put_contents('www/javascript/whosonfirst_countries.js', "var whosonfirst_countries = $countries_json;");
