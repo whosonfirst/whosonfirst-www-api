@@ -31,6 +31,8 @@
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.js"></script>
     {/if}
 
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst_countries.js"></script>
+
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/mapzen.js.css" />
     <script src="{$cfg.abs_root_url}javascript/mapzen.js"></script>
 
@@ -38,6 +40,8 @@
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.uri.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.places.map.js"></script>
 
+    <link rel="stylesheet" href="{$cfg.abs_root_url}css/L.Control.Locate.css" />
+    <script src="{$cfg.abs_root_url}javascript/L.Control.Locate.min.js"></script>
 
     <link href="{$cfg.abs_root_url}css/mapzen.whosonfirst.chrome.css" rel="stylesheet">
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.chrome.js"></script>
@@ -55,11 +59,7 @@
   </head>
 
   {if "places"|@features_is_enabled}
-    {if $cfg.environment == 'dev'}
-      {assign var="api_endpoint" value="https://places.dev.mapzen.com/v1/"}
-    {else}
-      {assign var="api_endpoint" value="https://places.mapzen.com/v1/"}
-    {/if}
+    {assign var="api_endpoint" value="https://places.mapzen.com/v1/"}
   {else}
     {assign var="api_endpoint" value=$cfg.api_abs_root_url|cat:$cfg.api_endpoint}
   {/if}

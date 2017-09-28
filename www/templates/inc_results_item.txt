@@ -1,20 +1,6 @@
-{assign var="id_key" value="wof:id"}
-{assign var="name_key" value="wof:name"}
-{assign var="address_key" value="addr:full"}
-{assign var="placetype_key" value="wof:placetype"}
-{assign var="country_key" value="wof:country"}
-
-<li itemscope itemtype="http://schema.org/Place" class="results-item" data-wof-id="{$result|@whosonfirst_places_property:"wof:id"|@escape}" data-geom-latitude="{$result|@whosonfirst_places_property:"geom:latitude"|@escape}" data-geom-longitude="{$result|@whosonfirst_places_property:"geom:longitude"|@escape}">
-	<a href="{$cfg.abs_root_url}id/{$result[$id_key]|escape}" itemprop="name">{$result[$name_key]|escape}</a>
-	<span class="small">
-		<code>{$result[$id_key]|escape}</code>
-		{$result|@whosonfirst_places_placetype_pronoun|@escape}
-		{$result[$placetype_key]|escape}
-		{if $result[$country_key] && $result[$placetype_key] != 'country'}
-			in {$result|@whosonfirst_places_country_link}
-		{/if}
-		{if $result[$placetype_key] == 'venue' && $result[$address_key]}
-			<div class="result-meta">{$result[$address_key]|escape}</div>
-		{/if}
-	</span>
-</li>
+<tr itemscope itemtype="http://schema.org/Place" class="results-item" data-wof-id="{$result|@whosonfirst_places_property:"wof:id"|@escape}" data-latitude="{$result|@whosonfirst_places_coordinate:"latitude"|@escape}" data-longitude="{$result|@whosonfirst_places_coordinate:"longitude"|@escape}">
+	<td><code>{$result|@whosonfirst_places_property:"wof:id"|@escape}</code></td>
+	<td><a href="{$cfg.abs_root_url}id/{$result|@whosonfirst_places_property:"wof:id"|@escape}" itemprop="name">{$result|@whosonfirst_places_property:"wof:name"|@escape}</a></td>
+	<td>{$result|@whosonfirst_places_property:"wof:placetype"|@escape}</td>
+	<td>{$result|@whosonfirst_places_country_link}</td>
+</tr>

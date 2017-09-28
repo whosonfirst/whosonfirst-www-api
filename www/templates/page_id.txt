@@ -8,6 +8,7 @@
 {capture assign="wof_blurb_escaped"}{$wof_name|@escape} is a {$wof_placetype|@escape} and its Who's On First ID is {$wof_id|@escape}.{if $wof_country != ""} :flag-{$wof_country|@strtolower|@escape}:{/if}{/capture}
 {capture assign="page_title"}{$wof_name} ({$wof_id}){/capture}
 {capture assign="extra_meta"}
+{capture assign="lat_lon_link"}<a href="{$place|@whosonfirst_places_nearby_url_for_place}" class="hey-look" itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates"><span itemprop="latitude">{$place|@whosonfirst_places_property:"geom:latitude"|@escape}</span>, <span itemprop="longitude">{$place|@whosonfirst_places_property:"geom:longitude"|@escape}</span></a>{/capture}
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Mapzen Places" />
 <meta property="og:title" content="{$wof_name|@escape} ({$wof_id|@escape})" />
@@ -71,9 +72,17 @@
 				{capture assign="addr_full"}{$place|@whosonfirst_places_property:"addr:full"}{/capture}
 				{capture assign="addr_phone"}{$place|@whosonfirst_places_property:"addr:phone"}{/capture}
 				{assign var="wof_tags" value=$place|@whosonfirst_places_property:"wof:tags"}
-				{if $addr_full != ""}<li>Its address is <span class="hey-look" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">{$addr_full|@escape}</span> and its exact latitude and longitude is <a href="{$place|@whosonfirst_places_nearby_url_for_place}" class="hey-look" itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates"><span itemprop="latitude">{$place|@whosonfirst_places_property:"geom:latitude"|@escape}</span>, <span itemprop="longitude">{$place|@whosonfirst_places_property:"geom:longitude"|@escape}</span></a>.</li>{/if}
+				{if $addr_full != ""}
+					<li>Its address is <span class="hey-look" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">{$addr_full|@escape}</span> and its exact latitude and longitude is {$lat_lon_link}.</li>
+				{else}
+					<li>Its exact latitude and longitude is {$lat_lon_link}.</li>
+				{/if}
 				{if $addr_phone != ""}<li>Its phone number is <span class="hey-look" itemprop="telephone">{$addr_phone|@escape}</span>.</li>{/if}
 				{if $wof_tags|@count}<li>It is tagged {foreach from=$wof_tags item="tag" name="tags"}<a href="{$cfg.abs_root_url}tags/{$tag|@escape}/{if $wof_parent_id > 0}?wofid={$wof_parent_id|@escape}{/if}" class="hey-look">{$tag|@escape}</a>{if $smarty.foreach.tags.last}.{else} and {/if}{/foreach}{/if}</li>
+			</ul>
+		{else}
+			<ul class="list">
+				<li>Its exact latitude and longitude is {$lat_lon_link}.</li>
 			</ul>
 		{/if}
 

@@ -359,4 +359,17 @@
 
 	########################################################################
 
+	function whosonfirst_places_coordinate($place, $coord){
+
+		$property = null;
+
+		if ($place["lbl:$coord"]) {
+			$property = $place["lbl:$coord"];
+		} else if ($place["geom:$coord"]) {
+			$property = $place["geom:$coord"];
+		}
+
+		return $property;
+	}
+
 	# the end
