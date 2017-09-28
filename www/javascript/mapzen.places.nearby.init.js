@@ -21,7 +21,7 @@ window.addEventListener("load", function load(event){
 				"latitude": lat,
 				"longitude": lon,
 				"per_page": 500,
-				"extras": "geom:",
+				"extras": "geom:,lbl:",
 			};
 
 			var on_page = function(rsp){
@@ -37,11 +37,7 @@ window.addEventListener("load", function load(event){
 
 					var name = place["wof:name"];
 
-					var lat = place["geom:latitude"];
-					var lon = place["geom:longitude"];
-
-					var coords = [ lon, lat ];
-
+					var coords = mapzen.places.map.get_place_coords(place);
 					var geom = {
 						"type": "Point",
 						"coordinates": coords,

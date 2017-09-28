@@ -185,6 +185,26 @@ mapzen.places.map = (function(){
 			}
 
 			return layer.addTo(map);
+		},
+
+		'get_place_coords': function(place){
+
+			var lat = null;
+			var lon = null;
+
+			if ('lbl:latitude' in place){
+				lat = place['lbl:latitude'];
+			} else if ('geom:latitude' in place){
+				lat = place['geom:latitude'];
+			}
+
+			if ('lbl:longitude' in place){
+				lon = place['lbl:longitude'];
+			} else if ('geom:longitude' in place){
+				lon = place['geom:longitude'];
+			}
+
+			return [lon, lat];
 		}
 	};
 
