@@ -4,7 +4,7 @@ mapzen.places = mapzen.places || {};
 mapzen.places.map = (function(){
 
     var maps = {};
-    
+
     var self = {
 
 	'get_map': function(map_id){
@@ -14,18 +14,22 @@ mapzen.places.map = (function(){
 		var api_key = document.body.getAttribute("data-mapzen-api-key");
 		var abs_root_url = document.body.getAttribute("data-abs-root-url");
 
-		L.Mapzen.apiKey = api_key;	    
+		L.Mapzen.apiKey = api_key;
 
 		var map = L.Mapzen.map(map_id, {
-		
+			zoomControl: false,
                     // https://github.com/mapzen/mapzen.js/blob/master/src/js/components/tangram.js
-		
+
                     tangramOptions: {
 			//scene: L.Mapzen.BasemapStyles.Refill,
 			scene: abs_root_url + "tangram/refill-style.zip",
 			tangramURL: abs_root_url + "javascript/tangram.min.js"
                     }
 		});
+
+		L.control.zoom({
+			position: 'topleft'
+		}).addTo(map);
 
 		maps[map_id] = map;
 	    }
@@ -34,7 +38,7 @@ mapzen.places.map = (function(){
 	},
 
 	'draw_nearby_map': function(map_id, cb){
-	    
+
 	    var map_el = document.getElementById(map_id);
 	    var map = self.get_map(map_id);
 
@@ -48,9 +52,9 @@ mapzen.places.map = (function(){
 
 	    cb(map);
 	},
-	
+
 	'draw_place_map': function(map_id, cb){
-	    
+
 	    var map_el = document.getElementById(map_id);
 	    var map = self.get_map(map_id);
 
@@ -97,10 +101,10 @@ mapzen.places.map = (function(){
 	    else {
 		var sw = L.latLng(min_lat, min_lon);
 		var ne = L.latLng(max_lat, max_lon);
-		
+
 		var bounds = L.latLngBounds(sw, ne);
-		var opts = { "padding": [100, 100] };	   
-		
+		var opts = { "padding": [100, 100] };
+
 		map.fitBounds(bounds, opts);
 	    }
 
@@ -114,7 +118,7 @@ mapzen.places.map = (function(){
                 "focus": false,
 		"panToPoint": false,
             };
-	    
+
 	    var geocoder = L.Mapzen.geocoder(opts);
             geocoder.addTo(map);
 	    */
@@ -140,13 +144,13 @@ mapzen.places.map = (function(){
 	    };
 
 	    var point_handler = function(feature, latlon){
-		
+
                 var props = feature['properties'];
                 var label = props['wof:name'];
-		
+
                 var m = L.circleMarker(latlon, point_style);
                 m.bindTooltip(label);
-		
+
                 return m;
 	    };
 
@@ -171,22 +175,22 @@ mapzen.places.map = (function(){
 		"pointToLayer": point_handler,
 		"onEachFeature": feature_handler,
             }
-	    
+
             // console.log("[map][geojson] ADD", geojson, args);
-	    
+
             var layer = L.geoJSON(geojson, args);
-	    
+
             // http://leafletjs.com/reference-1.1.0.html#layergroup-setzindex
             // https://github.com/Leaflet/Leaflet/issues/3427 (sigh...)
-	    
+
             if (more["z-index"]){
                 var z = layer.setZIndex(more["z-index"]);
             }
-	    
+
             return layer.addTo(map);
         }
     };
-    
+
     return self;
 
 })();
