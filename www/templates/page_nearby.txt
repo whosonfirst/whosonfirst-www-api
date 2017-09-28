@@ -6,8 +6,12 @@
 {/if}
 <div id="content" class="container">
 	<div class="row headroom">
-		<div class="col-md-8 col-xs-12">
+		<div class="col-xs-12">
 			<h1>nearby places</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-8 col-xs-12">
 			<ol class="breadcrumb">
 				<li>
 					<a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a>
@@ -20,7 +24,7 @@
 				<li class="active">Nearby Places</li>
 			</ol>
 		</div>
-		<div class="col-md-4 col-xs-12 text-right">
+		<div class="col-sm-4 text-right hidden-xs">
 			<a href="#" id="nearby-find" class="btn btn-transparent">Find my location</a>
 		</div>
 	</div>
