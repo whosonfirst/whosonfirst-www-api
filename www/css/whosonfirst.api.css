@@ -5,20 +5,7 @@
 	margin-bottom: 1em;
 }
 
-#search-results {
-	padding: 0;
-}
-
-li.results-item {
-	list-style: none;
-	margin-top: 5px;
-}
-
 .current-page {
 	font-weight: normal;
 	margin-left: 0.5em;
-}
-
-#nearby-find {
-	margin-top: 108px;
 }
