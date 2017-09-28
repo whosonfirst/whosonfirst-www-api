@@ -14,7 +14,7 @@
 				</li>
 				{if $place}
 				<li>
-					<a href="{$cfg.abs_root_url|escape}/{$wof_id|escape}">{$wof_name}|escape}</a>
+					<a href="{$cfg.abs_root_url|escape}id/{$wof_id|escape}">{$wof_name|escape}</a>
 				</li>
 				{/if}
 				<li class="active">Nearby Places</li>
