@@ -11,7 +11,7 @@ window.addEventListener("load", function load(event){
 		features: []
 	};
 
-	var results = document.querySelectorAll('li.results-item');
+	var results = document.querySelectorAll('.results-item');
 	for (var i = 0; i < results.length; i++) {
 		var item = results[i];
 		var lat = parseFloat(item.getAttribute('data-latitude'));
