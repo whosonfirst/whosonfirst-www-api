@@ -143,6 +143,8 @@ window.addEventListener("load", function load(event){
 				maxZoom: 16
 			}
 		}).addTo(map);
+		window.locate = locate;
+		window.map = map;
 
 		var btn = document.getElementById('nearby-find');
 		btn.addEventListener('click', function(e) {
@@ -159,9 +161,11 @@ window.addEventListener("load", function load(event){
 		}, false);
 
 		map.on({
-			locationfound: function() {
+			locationfound: function(location) {
+				locate.stop();
 				var css = btn.className + '';
 				btn.className = css.replace('disabled', '');
+				map.setView([location.latitude, location.longitude], 16);
 				nearby();
 			},
 			locationerror: function() {
