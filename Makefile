@@ -24,13 +24,20 @@ setup:
 	bin/configure_secrets.sh .
 	ubuntu/setup-db.sh wof_api wof_api
 
-mapzen:	styleguide mapzenjs refill
+mapzen:	styleguide favicons mapzenjs refill
 
 styleguide:
 	curl -s -o www/css/mapzen.styleguide.css https://mapzen.com/common/styleguide/styles/styleguide.css
 	curl -s -o www/css/mapzen.website.css https://mapzen.com/common/styleguide/styles/website.css
 	curl -s -o www/javascript/mapzen.styleguide.min.js https://mapzen.com/common/styleguide/scripts/mapzen-styleguide.min.js
 	curl -s -o www/common/styleguide/images/background/contour_darkpurple2_lg.png https://mapzen.com/common/styleguide/images/background/contour_darkpurple2_lg.png
+
+favicons:
+	curl -s -o www/images/favicons/apple-touch-icon.png https://mapzen.com/common/styleguide/images/favicons/apple-touch-icon.png
+	curl -s -o www/images/favicons/favicon-16x16.png https://mapzen.com/common/styleguide/images/favicons/favicon-16x16.png
+	curl -s -o www/images/favicons/favicon-32x32.png https://mapzen.com/common/styleguide/images/favicons/favicon-32x32.png
+	curl -s -o www/images/favicons/manifest.json https://mapzen.com/common/styleguide/images/favicons/manifest.json
+	curl -s -o www/images/favicons/safari-pinned-tab.svg https://mapzen.com/common/styleguide/images/favicons/safari-pinned-tab.svg
 
 tangram:
 	curl -s -o www/javascript/tangram.js https://mapzen.com/tangram/tangram.debug.js
