@@ -29,6 +29,29 @@
 	{else}
 		<div id="map"></div>
 	{/if}
+	<h4 id="no-results">No results found.</h4>
+	<h4 id="loading-results" class="hidden">Loading results...</h4>
+	<h4 id="num-results" class="hidden"></h4>
+	<div class="table-wrapper">
+		<table id="search-results" class="table hidden">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Placetype</th>
+					<th>Country</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="result-template" itemscope itemtype="http://schema.org/Place" class="results-item hidden">
+					<td><code class="id"></code></td>
+					<td><a href="#" itemprop="name" class="name"></a></td>
+					<td class="placetype"></td>
+					<td class="country"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
 
 <script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.api.js"></script>
