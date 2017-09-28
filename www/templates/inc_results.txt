@@ -8,11 +8,23 @@
 					<span class="current-page">page {$pagination.page|escape} of {$pagination.page_count|number_format|escape}</span>
 				{/if}
 			</h4>
-			<ul id="search-results">
-				{foreach from=$results item=result}
-					{include file="inc_results_item.txt"}
-				{/foreach}
-			</ul>
+			<div class="table-wrapper">
+				<table id="search-results" class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Placetype</th>
+							<th>Country</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach from=$results item=result}
+							{include file="inc_results_item.txt"}
+						{/foreach}
+					</tbody>
+				</table>
+			</div>
 		{else}
 			<h4>No results found.</h4>
 		{/if}
