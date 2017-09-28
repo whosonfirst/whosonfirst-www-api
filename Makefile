@@ -61,6 +61,12 @@ whosonfirst:
 	curl -s -o www/include/lib_whosonfirst_sources_spec.php https://raw.githubusercontent.com/whosonfirst/flamework-whosonfirst/master/www/include/lib_whosonfirst_sources_spec.php
 	curl -s -o www/include/lib_whosonfirst_uri.php https://raw.githubusercontent.com/whosonfirst/flamework-whosonfirst/master/www/include/lib_whosonfirst_uri.php
 
+leaflet-locate:
+	curl -s -o www/javascript/L.Control.Locate.min.js https://raw.githubusercontent.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js
+	curl -s -o www/javascript/L.Control.Locate.js https://raw.githubusercontent.com/domoritz/leaflet-locatecontrol/gh-pages/src/L.Control.Locate.js
+	curl -s -o www/css/L.Control.Locate.css https://raw.githubusercontent.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.css
+	curl -s -o www/css/L.Control.Locate.min.css https://raw.githubusercontent.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.css
+
 dev-to-master:
 	git checkout master
 	git pull origin dev

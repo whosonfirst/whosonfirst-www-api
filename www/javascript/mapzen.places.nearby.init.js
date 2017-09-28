@@ -81,6 +81,41 @@ window.addEventListener("load", function load(event){
 		map.on("zoomend", nearby);
 
 		nearby();
+
+		var locate = L.control.locate({
+			setView: 'once',
+			drawCircle: false,
+			drawMarker: false,
+			locateOptions: {
+				maxZoom: 16
+			}
+		}).addTo(map);
+
+		var btn = document.getElementById('nearby-find');
+		btn.addEventListener('click', function(e) {
+
+			e.preventDefault();
+			var css = btn.className + '';
+			if (css.indexOf('disabled') != -1) {
+				return;
+			}
+
+			btn.className = css + ' disabled';
+			locate.start();
+
+		}, false);
+
+		map.on({
+			locationfound: function() {
+				var css = btn.className + '';
+				btn.className = css.replace(' disabled', '');
+				nearby();
+			},
+			locationerror: function() {
+				var css = btn.className + '';
+				btn.className = css.replace(' disabled', '');
+			}
+		});
 	};
 
 	mapzen.places.map.draw_nearby_map("map", cb);
