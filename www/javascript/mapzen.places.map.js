@@ -125,10 +125,14 @@ mapzen.places.map = (function(){
 
 		'add_geojson_to_map': function(map, geojson, more){
 
-			console.log("GEOJSON", geojson);
-
 			if (! more){
 				more = {};
+			}
+
+			var point_color = "#0BBDFF";
+			if (document.body.className.indexOf('places') != -1) {
+				// https://mapzen.com/common/styleguide/design-elements.html#colors
+				point_color = '#ff4947';
 			}
 
 			var point_style = {
@@ -136,7 +140,7 @@ mapzen.places.map = (function(){
 				"weight": 2,
 				"opacity": 1,
 				"radius": 6,
-				"fillColor": "#0BBDFF",
+				"fillColor": point_color,
 				"fillOpacity": 1
 			};
 

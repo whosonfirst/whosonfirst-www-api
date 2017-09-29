@@ -56,6 +56,12 @@
     <link rel="sitemap" type="application/xml" title="Sitemap" href="{$cfg.abs_root_url}sitemaps/index.xml" />
     {/if}
 
+    <link rel="apple-touch-icon" href="/images/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="manifest" href="/images/favicons/manifest.json">
+    <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#2C1E3F">
+
   </head>
 
   {if "places"|@features_is_enabled}
@@ -64,7 +70,7 @@
     {assign var="api_endpoint" value=$cfg.api_abs_root_url|cat:$cfg.api_endpoint}
   {/if}
 
-  <body data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
+  <body {if "places"|@features_is_enabled}class="places" {/if}data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
 
   {if "places"|@features_is_enabled}
     {include file="inc_head_navi_mapzen.txt"}
