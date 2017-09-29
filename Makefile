@@ -74,14 +74,15 @@ leaflet-locate:
 	curl -s -o www/css/L.Control.Locate.css https://raw.githubusercontent.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.css
 	curl -s -o www/css/L.Control.Locate.min.css https://raw.githubusercontent.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.css
 
-LEAFLET_MARKERCLUSTER_VERSION = "1.1.0"
+LEAFLET_MARKERCLUSTER_VERSION = 1.1.0
 leaflet-markercluster:
 	curl -s -L -o /tmp/leaflet-markercluster.zip https://github.com/Leaflet/Leaflet.markercluster/archive/v$(LEAFLET_MARKERCLUSTER_VERSION).zip
 	unzip -q /tmp/leaflet-markercluster.zip -d /tmp
 	cp /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)/dist/leaflet.markercluster.js www/javascript/leaflet.markercluster.min.js
 	cp /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)/dist/leaflet.markercluster-src.js www/javascript/leaflet.markercluster.js
 	cp /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)/dist/MarkerCluster.css www/css/leaflet.markercluster.css
-	rm -rf /tmp/leaflet-markercluster*
+	rm -rf /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)
+	rm /tmp/leaflet-markercluster.zip
 
 dev-to-master:
 	git checkout master
