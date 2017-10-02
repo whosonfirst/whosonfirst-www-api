@@ -81,6 +81,7 @@ leaflet-markercluster:
 	cp /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)/dist/leaflet.markercluster.js www/javascript/leaflet.markercluster.min.js
 	cp /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)/dist/leaflet.markercluster-src.js www/javascript/leaflet.markercluster.js
 	cp /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)/dist/MarkerCluster.css www/css/leaflet.markercluster.css
+	cp /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)/dist/MarkerCluster.Default.css www/css/leaflet.markercluster.default.css
 	rm -rf /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)
 	rm /tmp/leaflet-markercluster.zip
 
