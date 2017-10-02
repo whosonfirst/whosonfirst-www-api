@@ -48,28 +48,16 @@ mapzen.places.map = (function(){
 				latlon = [lat, lon];
 			}
 
-			var m = L.circleMarker(latlon, self.get_marker_style());
+			var icon = L.divIcon({
+				className: 'map-marker'
+			});
+			var m = L.marker(latlon, {
+				icon: icon,
+				iconSize: [14, 14]
+			});
 			m.bindTooltip(label);
 
 			return m;
-		},
-
-		'get_marker_style': function() {
-
-			var point_color = "#0BBDFF";
-			if (document.body.className.indexOf('places') != -1) {
-				// https://mapzen.com/common/styleguide/design-elements.html#colors
-				point_color = '#f9a293';
-			}
-
-			var point_style = {
-				"color": "#000",
-				"weight": 2,
-				"opacity": 1,
-				"radius": 6,
-				"fillColor": point_color,
-				"fillOpacity": 1
-			};
 		},
 
 		'feature_handler': function(feature, layer){

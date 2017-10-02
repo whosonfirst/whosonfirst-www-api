@@ -9,3 +9,13 @@
 	font-weight: normal;
 	margin-left: 0.5em;
 }
+
+.map-marker {
+	border: 2px solid #000;
+	width: 12px;
+	height: 12px;
+	margin-left: -6px;
+	margin-top: -6px;
+	background: #0BBDFF;
+	border-radius: 12px;
+}

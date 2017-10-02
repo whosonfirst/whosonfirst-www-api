@@ -44,7 +44,7 @@
     <script src="{$cfg.abs_root_url}javascript/L.Control.Locate.min.js"></script>
 
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/leaflet.markercluster.css" />
-    <link rel="stylesheet" href="{$cfg.abs_root_url}css/leaflet.markercluster.default.css" />
+    <link rel="stylesheet" href="{$cfg.abs_root_url}css/leaflet.markercluster.mapzen.css" />
     <script src="{$cfg.abs_root_url}javascript/leaflet.markercluster.min.js"></script>
 
     <link href="{$cfg.abs_root_url}css/mapzen.whosonfirst.chrome.css" rel="stylesheet">
