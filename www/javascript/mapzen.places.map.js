@@ -18,6 +18,7 @@ mapzen.places.map = (function(){
 
 				var map = L.Mapzen.map(map_id, {
 					zoomControl: false,
+					maxZoom: 20,
 					// https://github.com/mapzen/mapzen.js/blob/master/src/js/components/tangram.js
 					tangramOptions: {
 						//scene: L.Mapzen.BasemapStyles.Refill,
@@ -34,6 +35,57 @@ mapzen.places.map = (function(){
 			}
 
 			return maps[map_id];
+		},
+
+		'get_marker': function(feature, latlon){
+
+			var props = feature['properties'];
+			var label = props['wof:name'];
+
+			if (! latlon) {
+				var lat = props['geom:latitude'];
+				var lon = props['geom:longitude'];
+				latlon = [lat, lon];
+			}
+
+			var m = L.circleMarker(latlon, self.get_marker_style());
+			m.bindTooltip(label);
+
+			return m;
+		},
+
+		'get_marker_style': function() {
+
+			var point_color = "#0BBDFF";
+			if (document.body.className.indexOf('places') != -1) {
+				// https://mapzen.com/common/styleguide/design-elements.html#colors
+				point_color = '#f9a293';
+			}
+
+			var point_style = {
+				"color": "#000",
+				"weight": 2,
+				"opacity": 1,
+				"radius": 6,
+				"fillColor": point_color,
+				"fillOpacity": 1
+			};
+		},
+
+		'feature_handler': function(feature, layer){
+
+			var props = feature['properties'];
+			var wofid = props["wof:id"];
+
+			layer.on('click', function (e){
+
+				var enc_id = encodeURIComponent(wofid);
+
+				var abs_root_url = document.body.getAttribute("data-abs-root-url");
+				var url = abs_root_url + "id/" + enc_id + "/";
+
+				location.href = url;
+			});
 		},
 
 		'draw_nearby_map': function(map_id, cb){
@@ -129,53 +181,10 @@ mapzen.places.map = (function(){
 				more = {};
 			}
 
-			var point_color = "#0BBDFF";
-			if (document.body.className.indexOf('places') != -1) {
-				// https://mapzen.com/common/styleguide/design-elements.html#colors
-				point_color = '#f9a293';
-			}
-
-			var point_style = {
-				"color": "#000",
-				"weight": 2,
-				"opacity": 1,
-				"radius": 6,
-				"fillColor": point_color,
-				"fillOpacity": 1
-			};
-
-			var point_handler = function(feature, latlon){
-
-				var props = feature['properties'];
-				var label = props['wof:name'];
-
-				var m = L.circleMarker(latlon, point_style);
-				m.bindTooltip(label);
-
-				return m;
-			};
-
-			var feature_handler = function(feature, layer) {
-
-				var props = feature['properties'];
-				var wofid = props["wof:id"];
-
-				layer.on('click', function (e){
-
-					var enc_id = encodeURIComponent(wofid);
-
-					var abs_root_url = document.body.getAttribute("data-abs-root-url");
-					var url = abs_root_url + "id/" + enc_id + "/";
-
-					location.href = url;
-				});
-
-			};
-
 			var args = {
-				"pointToLayer": point_handler,
-				"onEachFeature": feature_handler,
-			}
+				"pointToLayer": self.get_marker,
+				"onEachFeature": self.feature_handler
+			};
 
 			// console.log("[map][geojson] ADD", geojson, args);
 
@@ -189,6 +198,24 @@ mapzen.places.map = (function(){
 			}
 
 			return layer.addTo(map);
+		},
+
+		'add_geojson_clusters_to_map': function(map, geojson, more){
+
+			var cluster = L.markerClusterGroup({
+				maxClusterRadius: 120,
+				showCoverageOnHover: false
+			});
+			var feature, layer;
+
+			for (var i = 0; i < geojson.features.length; i++) {
+				feature = geojson.features[i];
+				marker = self.get_marker(feature);
+				self.feature_handler(feature, marker);
+				cluster.addLayer(marker);
+			}
+
+			map.addLayer(cluster);
 		},
 
 		'get_place_coords': function(place){

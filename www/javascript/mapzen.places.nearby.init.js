@@ -114,7 +114,7 @@ window.addEventListener("load", function load(event){
 					"features": features,
 				};
 
-				nearby_layer = mapzen.places.map.add_geojson_to_map(map, feature_collection);
+				nearby_layer = mapzen.places.map.add_geojson_clusters_to_map(map, feature_collection);
 				add_geojson_to_results_table(feature_collection);
 			};
 
@@ -130,8 +130,8 @@ window.addEventListener("load", function load(event){
 			mapzen.places.api.call_paginated(method, args, on_page, on_error);
 		};
 
-		map.on("dragend", nearby);
-		map.on("zoomend", nearby);
+		//map.on("dragend", nearby);
+		//map.on("zoomend", nearby);
 
 		nearby();
 
@@ -143,8 +143,6 @@ window.addEventListener("load", function load(event){
 				maxZoom: 16
 			}
 		}).addTo(map);
-		window.locate = locate;
-		window.map = map;
 
 		var btn = document.getElementById('nearby-find');
 		btn.addEventListener('click', function(e) {
