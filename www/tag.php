@@ -18,7 +18,7 @@
 			'query' => "venue", 'operator' => 'and'
 		)
 	)));
-	
+
 	if ($wofid = get_int64("wofid")){
 
 		$place = whosonfirst_places_get_by_id($wofid);
@@ -31,13 +31,13 @@
 
 		$filters[] = array("query" => array(
 			'match' => array("wof:belongsto" => array(
-                        	'query' => $esc_wofid, 'operator' => 'and'
+				'query' => $esc_wofid, 'operator' => 'and'
 			)
 		)));
 
 		$GLOBALS["smarty"]->assign_by_ref("place", $place);
 	}
-	
+
 	$args = array();
 
 	if ($page = get_int32("page")){
@@ -46,12 +46,10 @@
 
 	$rsp = whosonfirst_places_get_tagged($tag, $filters, $args);
 
-	$GLOBALS["smarty"]->assign_by_ref("places", $rsp["rows"]);
+	$GLOBALS["smarty"]->assign_by_ref("results", $rsp["rows"]);
 	$GLOBALS["smarty"]->assign_by_ref("pagination", $rsp["pagination"]);
 
 	$GLOBALS["smarty"]->display("page_tag.txt");
 	exit();
 
 ?>
-
-	
