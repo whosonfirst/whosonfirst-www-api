@@ -14,7 +14,7 @@
 	</div>
 	<div class="row headroom-large">
 		<div class="col-xs-12">
-			<h2>places tagged {$tag|@escape}{if $place}<small> in <a href="{$place|@whosonfirst_places_url_for_place}">{$place|@whosonfirst_places_property:"wof:name"|@escape}<a></small>{/if}</h2>
+			<h2>places tagged {$tag|@escape}{if $place}<small> in <a href="{$place|@whosonfirst_places_url_for_place}">{$place|@whosonfirst_places_property:"wof:name"|@escape}</a></small>{/if}</h2>
 		</div>
 	</div>
 	{if $debug}

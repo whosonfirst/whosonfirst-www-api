@@ -84,6 +84,7 @@ RewriteRule  ^nearby/([0-9]+)/?$		nearby.php?id=$1&%{QUERY_STRING} [L]
 
 RewriteRule  ^placetypes/([a-z]+)/?$		placetype.php?placetype=$1&%{QUERY_STRING} [L]
 
+RewriteRule  ^tags/([a-z]+)/in-([0-9]+)/?$	tag.php?tag=$1&wofid=$2&%{QUERY_STRING} [L]
 RewriteRule  ^tags/([a-z]+)/?$		tag.php?tag=$1&%{QUERY_STRING} [L]
 
 RewriteRule  ^search/?$		search.php?%{QUERY_STRING} [L]

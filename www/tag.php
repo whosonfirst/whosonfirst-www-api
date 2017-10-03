@@ -49,8 +49,13 @@
 	$GLOBALS["smarty"]->assign_by_ref("results", $rsp["rows"]);
 	$GLOBALS["smarty"]->assign_by_ref("pagination", $rsp["pagination"]);
 
+	$pagination_url = $GLOBALS['cfg']['abs_root_url'] . "tags/$tag";
+	if ($wofid) {
+		$pagination_url .= "/in-$wofid";
+	}
+
 	$GLOBALS['smarty']->assign('pagination_page_as_queryarg', true);
-	$GLOBALS['smarty']->assign('pagination_url', $GLOBALS['cfg']['abs_root_url'] . "tags/$tag");
+	$GLOBALS['smarty']->assign('pagination_url', $pagination_url);
 
 	$debug = request_bool("debug");
 	if ($debug) {
