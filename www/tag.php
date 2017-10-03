@@ -52,6 +52,12 @@
 	$GLOBALS['smarty']->assign('pagination_page_as_queryarg', true);
 	$GLOBALS['smarty']->assign('pagination_url', $GLOBALS['cfg']['abs_root_url'] . "tags/$tag");
 
+	$debug = request_bool("debug");
+	if ($debug) {
+		$query_json = json_encode($rsp['_query'], JSON_PRETTY_PRINT);
+		$GLOBALS['smarty']->assign('debug', $query_json);
+	}
+
 	$GLOBALS["smarty"]->display("page_tag.txt");
 	exit();
 

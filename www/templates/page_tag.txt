@@ -17,6 +17,13 @@
 			<h2>places tagged {$tag|@escape}{if $place}<small> in <a href="{$place|@whosonfirst_places_url_for_place}">{$place|@whosonfirst_places_property:"wof:name"|@escape}<a></small>{/if}</h2>
 		</div>
 	</div>
+	{if $debug}
+		<div class="row headroom">
+			<div class="col-xs-12">
+				<pre><code>{$debug|escape}</code></pre>
+			</div>
+		</div>
+	{/if}
 	{include file="inc_results.txt"}
 </div>
 
