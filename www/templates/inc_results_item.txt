@@ -2,5 +2,6 @@
 	<td><code>{$result|@whosonfirst_places_property:"wof:id"|@escape}</code></td>
 	<td><a href="{$cfg.abs_root_url}id/{$result|@whosonfirst_places_property:"wof:id"|@escape}" itemprop="name">{$result|@whosonfirst_places_property:"wof:name"|@escape}</a></td>
 	<td>{$result|@whosonfirst_places_property:"wof:placetype"|@escape}</td>
+	<td>{$result|@whosonfirst_places_currentness|@escape}</td>
 	<td>{$result|@whosonfirst_places_country_link}</td>
 </tr>

@@ -283,7 +283,7 @@
 
 	function whosonfirst_places_country_link($place) {
 
-		$code = $place['iso:country'];
+		$code = strtoupper($place['iso:country']);
 		$country = $GLOBALS['whosonfirst_countries'][$code];
 
 		if ($country) {
@@ -336,6 +336,28 @@
 
 		return null;
 
+	}
+
+	########################################################################
+
+	function whosonfirst_places_currentness($place){
+
+		if ($place['mz:is_current'] == 1){
+			return 'current';
+		}
+		else if ($place['edtf:deprecated'] &&
+		         $place['edtf:deprecated'] != 'uuuu'){
+			return 'deprecated';
+		}
+		else if ($place['edtf:cessation'] &&
+		         $place['edtf:cessation'] != 'uuuu'){
+			return 'ceased';
+		}
+		else if ($place['edtf:superseded'] &&
+		         $place['edtf:superseded'] != 'uuuu'){
+			return 'superseded';
+		}
+		return 'unknown';
 	}
 
 	########################################################################
