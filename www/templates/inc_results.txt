@@ -5,7 +5,7 @@
 			<h4>
 				{$pagination.total_count|number_format} result{if $pagination.total_count > 1}s{/if}
 				{if $pagination.total_count > 0}
-					<span class="current-page">page {$pagination.page|escape} of {$pagination.page_count|number_format|escape}</span>
+					<small class="current-page">page {$pagination.page|escape} of {$pagination.page_count|number_format|escape}</small>
 				{/if}
 			</h4>
 			<div class="table-wrapper">
