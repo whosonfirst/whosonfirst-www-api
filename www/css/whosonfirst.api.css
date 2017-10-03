@@ -5,11 +5,6 @@
 	margin-bottom: 1em;
 }
 
-.current-page {
-	font-weight: normal;
-	margin-left: 0.5em;
-}
-
 .map-marker {
 	border: 2px solid #000;
 	width: 12px;
@@ -18,4 +13,13 @@
 	margin-top: -6px;
 	background: #0BBDFF;
 	border-radius: 12px;
+}
+
+.current-page {
+	font-weight: normal;
+	margin-left: 0.5em;
+}
+
+#nearby-find {
+	margin-top: 48px;
 }

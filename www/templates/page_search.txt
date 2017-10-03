@@ -1,15 +1,19 @@
 {include file='inc_head.txt' nav_tab='home'}
 
 <div id="content" class="container">
-	<div class="row headroom-large">
+	<div class="row">
 		<div class="col-xs-12">
-			<h1>search results</h1>
 			<ol class="breadcrumb">
 				<li>
 					<a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a>
 				</li>
 				<li class="active">Search Results</li>
 			</ol>
+		</div>
+	</div>
+	<div class="row headroom-large">
+		<div class="col-xs-12">
+			<h1>search results</h1>
 		</div>
 	</div>
 	{include file="inc_search_form.txt"}
