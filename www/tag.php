@@ -49,6 +49,9 @@
 	$GLOBALS["smarty"]->assign_by_ref("results", $rsp["rows"]);
 	$GLOBALS["smarty"]->assign_by_ref("pagination", $rsp["pagination"]);
 
+	$GLOBALS['smarty']->assign('pagination_page_as_queryarg', true);
+	$GLOBALS['smarty']->assign('pagination_url', $GLOBALS['cfg']['abs_root_url'] . "tags/$tag");
+
 	$GLOBALS["smarty"]->display("page_tag.txt");
 	exit();
 
