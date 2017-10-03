@@ -221,6 +221,11 @@
 
 		$esc_tag = elasticsearch_escape($tag);
 
+		$defaults = array(
+			'per_page' => 36
+		);
+		$more = array_merge($defaults, $more);
+
 		$query = array("match" => array(
 			"wof:tags" => $esc_tag
 		));
