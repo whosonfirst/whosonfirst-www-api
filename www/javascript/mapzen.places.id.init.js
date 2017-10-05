@@ -60,30 +60,64 @@ window.addEventListener("load", function load(event){
 			});
 		}
 
+		var go_start_loading = function(){
+			var btn = document.getElementById('go-btn');
+			var classes = btn.className + '';
+			btn.className = classes + ' disabled';
+			btn.value = 'Loading...';
+		};
+
+		var go_is_loading = function(){
+			var btn = document.getElementById('go-btn');
+			var classes = btn.className + '';
+			return classes.indexOf('disabled') != -1;
+		};
+
+		var go_done_loading = function(){
+			var btn = document.getElementById('go-btn');
+			var classes = btn.className + '';
+			btn.className = classes.replace('disabled', '');
+			btn.value = 'Get Directions';
+		}
+
 		var go_geolocate_click = function(e){
 			e.preventDefault();
+			if (go_is_loading()) {
+				return;
+			}
+			go_start_loading();
 			if ("geolocation" in navigator){
 				navigator.geolocation.getCurrentPosition(function(position) {
 					var lat = position.coords.latitude.toFixed(6);
 					var lon = position.coords.longitude.toFixed(6);
-					go_show_inputs(lat + ', ' + lon);
+					var from = lat + ', ' + lon;
+					var type = 'driving';
+					if ("localStorage" in window &&
+					    localStorage.directions){
+						type = localStorage.directions;
+					}
+					go_show_inputs(from);
+					go_directions(from);
 				});
 			}
 			else {
 				alert('Your browser does not support geolocation.');
+				go_done_loading();
 			}
 		};
 
 		var go_show_inputs = function(from, type){
-			if (type){
-				var select = document.getElementById('go-costing');
-				for (var i = 0; i < select.options.length; i++){
-					if (select.options[i].value == type){
-						select.selectedIndex = i;
-						break;
-					}
+			if (! type){
+				type = get_default_type();
+			}
+			var select = document.getElementById('go-costing');
+			for (var i = 0; i < select.options.length; i++){
+				if (select.options[i].value == type){
+					select.selectedIndex = i;
+					break;
 				}
 			}
+
 			if (from){
 				document.getElementById('go-from').value = from;
 			}
@@ -92,6 +126,13 @@ window.addEventListener("load", function load(event){
 		};
 
 		var go_directions = function(from, type){
+
+			if (! type){
+				type = get_default_type();
+			}
+			else {
+				set_default_type(type);
+			}
 
 			var latlon = from.split(',');
 			if (latlon.length == 2){
@@ -157,6 +198,7 @@ window.addEventListener("load", function load(event){
 
 			var routingControl = L.Mapzen.routing.control({
 				waypoints: [from, to],
+				fitSelectedRoutes: true,
 				router: L.Mapzen.routing.router({
 					costing: costings[type]
 				}),
@@ -165,6 +207,9 @@ window.addEventListener("load", function load(event){
 				}),
 				defaultErrorHandler: on_routing_error
 			}).addTo(map);
+			routingControl.on('routesfound', function(){
+				go_done_loading();
+			});
 
 			return true;
 		};
@@ -198,6 +243,7 @@ window.addEventListener("load", function load(event){
 		}
 		if (args.directions &&
 		    args.from){
+			go_start_loading();
 			var result = go_directions(args.from, args.directions);
 			if (typeof result == "string"){
 				var alert = document.getElementById('go-feedback');
@@ -264,6 +310,22 @@ window.addEventListener("load", function load(event){
 			localStorage.units = units;
 		}
 		return units;
+	}
+
+	function get_default_type(){
+		var type = 'driving';
+		if ("localStorage" in window &&
+		    localStorage.directions){
+			type = localStorage.directions;
+		}
+		return type;
+	}
+
+	function set_default_type(type){
+		if ("localStorage" in window){
+			localStorage.directions = type;
+		}
+		return type;
 	}
 
 });

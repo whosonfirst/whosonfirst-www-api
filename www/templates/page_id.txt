@@ -90,7 +90,7 @@
 				</select>
 				directions from
 				<input type="text" id="go-from" name="from" placeholder="latitude, longitude">
-				<input class="btn btn-mapzen" type="submit" value="Get directions">
+				<input id="go-btn" class="btn btn-mapzen" type="submit" value="Get directions">
 			</form>
 		</div>
 	</div>
