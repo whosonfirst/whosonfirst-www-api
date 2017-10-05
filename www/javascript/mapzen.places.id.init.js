@@ -53,7 +53,9 @@ window.addEventListener("load", function load(event){
 			e.preventDefault();
 			if ("geolocation" in navigator){
 				navigator.geolocation.getCurrentPosition(function(position) {
-					go_set_latlon(position.coords.latitude, position.coords.longitude);
+					var lat = position.coords.latitude.toFixed(6);
+					var lon = position.coords.longitude.toFixed(6);
+					go_set_inputs(lat + ', ' + lon);
 				});
 			}
 			else {
@@ -61,30 +63,35 @@ window.addEventListener("load", function load(event){
 			}
 		};
 
-		var go_set_latlon = function(lat, lon){
-			if (lat){
-				lat = parseFloat(lat);
-				lat = lat.toFixed(6);
-				document.getElementById('go-latitude').value = lat;
-			}
-			if (lon){
-				lon = parseFloat(lon);
-				lon = lon.toFixed(6);
-				document.getElementById('go-longitude').value = lon;
-			}
-			document.getElementById('go-latlon').className = 'row';
-		};
-
-		var go_directions = function(type, lat, lon){
-
-			go_set_latlon(lat, lon);
-			var select = document.getElementById('go-costing');
-			for (var i = 0; i < select.options.length; i++){
-				if (select.options[i].value == type){
-					select.selectedIndex = i;
-					break;
+		var go_set_inputs = function(from, type){
+			if (type){
+				var select = document.getElementById('go-costing');
+				for (var i = 0; i < select.options.length; i++){
+					if (select.options[i].value == type){
+						select.selectedIndex = i;
+						break;
+					}
 				}
 			}
+			if (from){
+				document.getElementById('go-from').value = from;
+			}
+			document.getElementById('go-inputs').className = 'row';
+			document.getElementById('go-feedback').className = 'hidden';
+		};
+
+		var go_directions = function(from, type){
+
+			var latlon = from.split(',');
+			var lat = parseFloat(latlon[0].trim());
+			var lon = parseFloat(latlon[1].trim());
+
+			if (isNaN(lat) || isNaN(lon)){
+				go_set_inputs('', type);
+				return "Invalid latitude/longitude starting point.";
+			}
+			go_set_inputs(from, type);
+			var from = L.latLng(lat, lon);
 
 			var costings = {
 				walking: 'pedestrian',
@@ -95,13 +102,6 @@ window.addEventListener("load", function load(event){
 			if (! costings[type]){
 				return "Unknown directions method '" + htmlspecialchars(type) + "'";
 			}
-
-			var lat = parseFloat(lat);
-			var lon = parseFloat(lon);
-			if (isNaN(lat) || isNaN(lon)){
-				return "Invalid latitude/longitude starting point.";
-			}
-			var from = L.latLng(lat, lon);
 
 			var lat = document.querySelector('*[itemprop="latitude"').innerHTML;
 			var lon = document.querySelector('*[itemprop="longitude"').innerHTML;
@@ -118,26 +118,33 @@ window.addEventListener("load", function load(event){
 					costing: costings[type]
 				})
 			}).addTo(map);
+
+			return true;
 		};
 
 		document.getElementById('go-geolocate').addEventListener('click', go_geolocate_click, false);
 		document.getElementById('go-show-latlon').addEventListener('click', function(e){
 			e.preventDefault();
-			go_set_latlon();
+			document.getElementById('go-from').select();
+			go_set_inputs();
 		}, false);
 
 		var args = {};
 		var query = window.location.search.substr(1).split('&');
 		for (var key, val, keyval, i = 0; i < query.length; i++){
 			keyval = query[i].split('=');
-			key = decodeURIComponent(keyval[0]);
-			val = decodeURIComponent(keyval[1]);
+			key = decodeURIComponent(keyval[0].replace(/\+/g, ' '));
+			val = decodeURIComponent(keyval[1].replace(/\+/g, ' '));
 			args[key] = val;
 		}
 		if (args.directions &&
-		    args.from_lat &&
-		    args.from_lon){
-			go_directions(args.directions, args.from_lat, args.from_lon);
+		    args.from){
+			var result = go_directions(args.from, args.directions);
+			if (typeof result == "string"){
+				var alert = document.getElementById('go-feedback');
+				alert.innerHTML = htmlspecialchars(result);
+				alert.className = 'alert alert-danger';
+			}
 		}
 	};
 

@@ -77,8 +77,9 @@
 		</ul>
 	</div>
 
-	<div id="go-latlon" class="hidden row">
-		<div class="col-xs-6">
+	<div id="go-inputs" class="hidden row">
+		<div class="col-xs-12">
+			<div id="go-feedback" class="hidden"></div>
 			<form action="{$cfg.abs_root_url|escape}id/{$wof_id|@escape}" id="go-form" class="wide">
 				<div class="form-group row">
 					<div class="col-xs-12">
@@ -89,19 +90,8 @@
 							<option>transit</option>
 							<option>driving</option>
 						</select>
-						directions from:
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="col-xs-5" for="go-latitude">Latitude:</label>
-					<div class="col-xs-7">
-						<input type="text" id="go-latitude" name="from_lat" placeholder="latitude">
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="col-xs-5" for="go-longitude">Longitude:</label>
-					<div class="col-xs-7">
-						<input type="text" id="go-longitude" name="from_lon" placeholder="longitude">
+						directions from
+						<input type="text" id="go-from" name="from" placeholder="latitude, longitude">
 					</div>
 				</div>
 				<input class="btn btn-mapzen" type="submit" value="Get directions">
