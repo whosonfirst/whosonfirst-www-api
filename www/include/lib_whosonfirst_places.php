@@ -5,6 +5,7 @@
 	loadlib("elasticsearch");
 	loadlib("elasticsearch_spelunker");
 	loadlib("whosonfirst_countries");
+	loadlib("whosonfirst_existential");
 
 	########################################################################
 
@@ -342,20 +343,17 @@
 
 	function whosonfirst_places_currentness($place){
 
-		if ($place['mz:is_current'] == 1){
+		if (whosonfirst_existential_is_current($place) == 1){
 			return 'current';
 		}
-		else if ($place['edtf:deprecated'] &&
-		         $place['edtf:deprecated'] != 'uuuu'){
-			return 'deprecated';
-		}
-		else if ($place['edtf:cessation'] &&
-		         $place['edtf:cessation'] != 'uuuu'){
+		else if (whosonfirst_existential_is_ceased($place) == 1){
 			return 'ceased';
 		}
-		else if ($place['edtf:superseded'] &&
-		         $place['edtf:superseded'] != 'uuuu'){
+		else if (whosonfirst_existential_is_superseded($place) == 1){
 			return 'superseded';
+		}
+		else if (whosonfirst_existential_is_deprecated($place) == 1){
+			return 'deprecated';
 		}
 		return 'unknown';
 	}
