@@ -9,11 +9,15 @@ window.addEventListener("load", function load(event){
 	var abs_root_url = document.body.getAttribute("data-abs-root-url");
 
 	function add_geojson_to_results_table(geojson){
+
 		for (var i = 0; i < geojson.features.length; i++){
+
 			var feature = geojson.features[i];
 			var props = feature.properties;
 			var tr = result_template.cloneNode(true);
+
 			results_tbody.appendChild(tr);
+			tr.className = 'results-item';
 
 			var esc_id = htmlspecialchars(props['wof:id']);
 			tr.querySelector('.id').innerHTML = esc_id;
@@ -25,7 +29,21 @@ window.addEventListener("load", function load(event){
 
 			var esc_pt = htmlspecialchars(props['wof:placetype']);
 			tr.querySelector('.placetype').innerHTML = esc_pt;
-			tr.className = 'results-item';
+
+			var currentness = 'unknown';
+			if (mapzen.whosonfirst.existential.is_current(props)){
+				currentness = 'current';
+			}
+			else if (mapzen.whosonfirst.existential.is_deprecated(props)){
+				currentness = 'deprecated';
+			}
+			else if (mapzen.whosonfirst.existential.is_ceased(props)){
+				currentness = 'ceased';
+			}
+			else if (mapzen.whosonfirst.existential.is_superseded(props)){
+				currentness = 'superseded';
+			}
+			tr.querySelector('.currentness').innerHTML = currentness;
 
 			var country_code = props['iso:country'];
 			if (typeof whosonfirst_countries[country_code] != 'undefined'){
@@ -76,7 +94,7 @@ window.addEventListener("load", function load(event){
 				"latitude": lat,
 				"longitude": lon,
 				"per_page": 500,
-				"extras": "geom:,iso:country,lbl:",
+				"extras": "geom:,iso:country,lbl:,mz:is_current,edtf:,wof:superseded_by",
 			};
 
 			var on_page = function(rsp){

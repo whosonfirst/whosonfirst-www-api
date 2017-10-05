@@ -43,6 +43,7 @@
 					<th>ID</th>
 					<th>Name</th>
 					<th>Placetype</th>
+					<th>Currentness</th>
 					<th>Country</th>
 				</tr>
 			</thead>
@@ -51,6 +52,7 @@
 					<td><code class="id"></code></td>
 					<td><a href="#" itemprop="name" class="name"></a></td>
 					<td class="placetype"></td>
+					<td class="currentness"></td>
 					<td class="country"></td>
 				</tr>
 			</tbody>

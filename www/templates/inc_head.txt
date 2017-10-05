@@ -38,6 +38,7 @@
 
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.geojson.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.uri.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.existential.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.places.map.js"></script>
 
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/L.Control.Locate.css" />
