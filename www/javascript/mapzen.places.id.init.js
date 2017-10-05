@@ -132,6 +132,29 @@ window.addEventListener("load", function load(event){
 				lrm.className = classes.replace('hidden', '');
 			}
 
+			var on_routing_error = function(e){
+				if (e.error &&
+				    e.error.message){
+					// yeah, we get a JSON blob passed back, which is weird
+					try {
+						var msg = JSON.parse(e.error.message);
+					}
+					catch (e){
+						console.error(e);
+					}
+					var feedback = document.getElementById('go-feedback');
+					feedback.innerHTML = htmlspecialchars(msg.error);
+					feedback.className = 'alert alert-danger headroom';
+
+					// Hide directions pane, since we don't have any
+					var lrm = document.body.querySelector('.leaflet-routing-container');
+					if (lrm){
+						var classes = lrm.className + '';
+						lrm.className = classes + ' hidden';
+					}
+				}
+			};
+
 			var routingControl = L.Mapzen.routing.control({
 				waypoints: [from, to],
 				router: L.Mapzen.routing.router({
@@ -140,28 +163,7 @@ window.addEventListener("load", function load(event){
 				formatter: new L.Mapzen.routing.formatter({
 					units: units
 				}),
-				defaultErrorHandler: function(e){
-					if (e.error &&
-					    e.error.message){
-						// yeah, we get a JSON blob passed back, which is weird
-						try {
-							var msg = JSON.parse(e.error.message);
-						}
-						catch (e){
-							console.error(e);
-						}
-						var feedback = document.getElementById('go-feedback');
-						feedback.innerHTML = htmlspecialchars(msg.error);
-						feedback.className = 'alert alert-danger headroom';
-
-						// Hide directions pane, since we don't have any
-						var lrm = document.body.querySelector('.leaflet-routing-container');
-						if (lrm){
-							var classes = lrm.className + '';
-							lrm.className = classes + ' hidden';
-						}
-					}
-				}
+				defaultErrorHandler: on_routing_error
 			}).addTo(map);
 
 			return true;
