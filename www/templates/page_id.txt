@@ -50,7 +50,7 @@
 	</div>
 
 	<div class="row" itemprop="location" itemscope itemtype="http://schema.org/Place">
-		<ul class="list">
+		<ul class="list col-xs-12">
 			<li><span class="hey-look" itemprop="name">{$wof_name|@escape}</span> is a <span class="hey-look">{$wof_placetype|@escape}</span> and its Who's On First ID is <a href="{$place|@whosonfirst_places_url_for_place}" class="hey-look" itemprop="identifier">{$wof_id|@escape}</a>.</li>
 			<li>
 				{if $wof_parent_id == -1}
@@ -69,10 +69,49 @@
 					It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a> which is a <span class="hey-look">{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"|@escape}</span>.
 				{/if}
 			</li>
+			<li id="go-step0">
+				Get directions from
+				<a href="#" id="go-geolocate">where I am now</a> (use geolocation)
+				or <a href="#" id="go-latlon">from a specific location</a>.
+			</li>
 		</ul>
+	</div>
 
-		{if $wof_placetype == "venue"}
-			<ul class="list">
+	<div id="go-step1" class="hidden row">
+		<div class="col-xs-6">
+			<form action="{$cfg.abs_root_url|escape}id/{$wof_id|@escape}" id="go-form" class="wide">
+				<div class="form-group row">
+					<div class="col-xs-12">
+						Get
+						<select name="directions" id="go-costing">
+							<option>walking</option>
+							<option>biking</option>
+							<option>transit</option>
+							<option>driving</option>
+						</select>
+						directions from:
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-xs-5" for="go-latitude">Latitude:</label>
+					<div class="col-xs-7">
+						<input type="text" id="go-latitude" name="from_lat" placeholder="latitude">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-xs-5" for="go-longitude">Longitude:</label>
+					<div class="col-xs-7">
+						<input type="text" id="go-longitude" name="from_lon" placeholder="longitude">
+					</div>
+				</div>
+				<input class="btn btn-mapzen" type="submit" value="Get directions">
+			</form>
+		</div>
+	</div>
+
+	<div class="row">
+		<ul class="list col-xs-12">
+			{if $wof_placetype == "venue"}
 				{capture assign="addr_full"}{$place|@whosonfirst_places_property:"addr:full"}{/capture}
 				{capture assign="addr_phone"}{$place|@whosonfirst_places_property:"addr:phone"}{/capture}
 				{assign var="wof_tags" value=$place|@whosonfirst_places_property:"wof:tags"}
@@ -83,14 +122,9 @@
 				{/if}
 				{if $addr_phone != ""}<li>Its phone number is <span class="hey-look" itemprop="telephone">{$addr_phone|@escape}</span>.</li>{/if}
 				{if $wof_tags|@count}<li>It is tagged {foreach from=$wof_tags item="tag" name="tags"}<a href="{$cfg.abs_root_url}tags/{$tag|@escape}/{if $wof_parent_id > 0}?wofid={$wof_parent_id|@escape}{/if}" class="hey-look">{$tag|@escape}</a>{if $smarty.foreach.tags.last}.{else} and {/if}{/foreach}{/if}</li>
-			</ul>
-		{else}
-			<ul class="list">
+			{else}
 				<li>Its exact latitude and longitude is {$lat_lon_link}.</li>
-			</ul>
-		{/if}
-
-		<ul class="list">
+			{/if}
 			<li>See a detailed listing for this {$wof_placetype|@escape} on the <a href="https://whosonfirst.mapzen.com/spelunker/id/{$wof_id|@escape}/" class="hey-look">Who's On First Spelunker</a>.</li>
 			<li><a href="{$place|@whosonfirst_places_data_url_for_place}" class="hey-look">Download</a> the raw data for this {$wof_placetype|@escape}.</li>
 		</ul>

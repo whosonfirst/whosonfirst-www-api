@@ -51,4 +51,36 @@ window.addEventListener("load", function load(event){
 	};
 
 	mapzen.places.map.draw_place_map("map", cb);
+
+	var go_geolocate_click = function(e){
+		e.preventDefault();
+		if ("geolocation" in navigator){
+			navigator.geolocation.getCurrentPosition(function(position) {
+				go_step1(position.coords.latitude, position.coords.longitude);
+			});
+		}
+		else {
+			alert('Your browser does not support geolocation.');
+		}
+	};
+
+	var go_step1 = function(lat, lon){
+		if (lat){
+			lat = parseFloat(lat);
+			lat = lat.toFixed(6);
+			document.getElementById('go-latitude').value = lat;
+		}
+		if (lon){
+			lon = parseFloat(lon);
+			lon = lon.toFixed(6);
+			document.getElementById('go-longitude').value = lon;
+		}
+		document.getElementById('go-step1').className = 'row';
+	};
+
+	document.getElementById('go-geolocate').addEventListener('click', go_geolocate_click, false);
+	document.getElementById('go-latlon').addEventListener('click', function(e) {
+		e.preventDefault();
+		go_step1();
+	}, false);
 });
