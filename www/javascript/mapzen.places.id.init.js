@@ -125,6 +125,77 @@ window.addEventListener("load", function load(event){
 			document.getElementById('go-feedback').className = 'hidden';
 		};
 
+		var go_adjust_bounds = function(){
+
+			// Adapted from https://mapzen.com/resources/projects/turn-by-turn/demo/demo.js
+
+			// Adjust padding for fitBounds()
+			// ==============================
+			//
+			// See this discussion: https://github.com/perliedman/leaflet-routing-machine/issues/60
+			// We override Leaflet's default fitBounds method to use our padding options by
+			// default. Thus, LRM calls fitBounds() as is. Additionally, any other scripts
+			// that call for fitBounds() can take advantage of the same padding behaviour.
+
+			var is_mobile = (window.innerWidth < 472);
+			var bounds_tl = is_mobile ? [15, 200] : [30, 30];
+			var bounds_br = is_mobile ? [15, 15] : [328, 30];
+
+			map.origFitBounds = map.fitBounds;
+			map.fitBounds = function (bounds, options) {
+				console.log('ok fitting the bounds');
+				map.origFitBounds(bounds, {
+					// Left padding accounts for the narrative window.
+					// Top padding accounts for the floating section navigation bar.
+					// These conditions apply only when the viewport breakpoint is at
+					// desktop screens or higher. Otherwise, assume that the narrative
+					// window is not present, and that the section navigation is
+					// condensed, so less padding is required on mobile viewports.
+					paddingTopLeft: bounds_tl,
+					// Bottom and right padding accounts only for slight
+					// breathing room, in order to prevent markers from appearing
+					// at the very edge of maps.
+					paddingBottomRight: bounds_br,
+				});
+			};
+
+			// Adjust offset for panTo()
+			// ==============================
+			map.origPanTo = map.panTo;
+			// In LRM, coordinate is array format [lat, lng]
+			map.panTo = function (coordinate) {
+				var offset_x = Math.round((bounds_tl[0] - bounds_br[0]) / 2);
+				var offset_y = Math.round((bounds_tl[1] - bounds_br[1]) / 2);
+				var x = map.latLngToContainerPoint(coordinate).x - offset_x;
+				var y = map.latLngToContainerPoint(coordinate).y - offset_y;
+				var point = map.containerPointToLatLng([x, y]);
+				map.origPanTo(point);
+			};
+		};
+
+		var go_routing_error = function(e){
+			if (e.error &&
+			    e.error.message){
+				// yeah, we get a JSON blob passed back, which is weird
+				try {
+					var msg = JSON.parse(e.error.message);
+				}
+				catch (e){
+					console.error(e);
+				}
+				var feedback = document.getElementById('go-feedback');
+				feedback.innerHTML = htmlspecialchars(msg.error);
+				feedback.className = 'alert alert-danger headroom';
+
+				// Hide directions pane, since we don't have any
+				var lrm = document.body.querySelector('.leaflet-routing-container');
+				if (lrm){
+					var classes = lrm.className + '';
+					lrm.className = classes + ' hidden';
+				}
+			}
+		};
+
 		var go_directions = function(from, type){
 
 			if (! type){
@@ -173,29 +244,7 @@ window.addEventListener("load", function load(event){
 				lrm.className = classes.replace('hidden', '');
 			}
 
-			var on_routing_error = function(e){
-				if (e.error &&
-				    e.error.message){
-					// yeah, we get a JSON blob passed back, which is weird
-					try {
-						var msg = JSON.parse(e.error.message);
-					}
-					catch (e){
-						console.error(e);
-					}
-					var feedback = document.getElementById('go-feedback');
-					feedback.innerHTML = htmlspecialchars(msg.error);
-					feedback.className = 'alert alert-danger headroom';
-
-					// Hide directions pane, since we don't have any
-					var lrm = document.body.querySelector('.leaflet-routing-container');
-					if (lrm){
-						var classes = lrm.className + '';
-						lrm.className = classes + ' hidden';
-					}
-				}
-			};
-
+			go_adjust_bounds();
 			var routingControl = L.Mapzen.routing.control({
 				waypoints: [from, to],
 				fitSelectedRoutes: true,
@@ -205,7 +254,7 @@ window.addEventListener("load", function load(event){
 				formatter: new L.Mapzen.routing.formatter({
 					units: units
 				}),
-				defaultErrorHandler: on_routing_error
+				defaultErrorHandler: go_routing_error
 			}).addTo(map);
 			routingControl.on('routesfound', function(){
 				go_done_loading();
@@ -251,50 +300,6 @@ window.addEventListener("load", function load(event){
 				alert.className = 'alert alert-danger headroom';
 			}
 		}
-
-		// Adapted from https://mapzen.com/resources/projects/turn-by-turn/demo/demo.js
-
-		// Adjust padding for fitBounds()
-		// ==============================
-		//
-		// See this discussion: https://github.com/perliedman/leaflet-routing-machine/issues/60
-		// We override Leaflet's default fitBounds method to use our padding options by
-		// default. Thus, LRM calls fitBounds() as is. Additionally, any other scripts
-		// that call for fitBounds() can take advantage of the same padding behaviour.
-
-		var is_mobile = (window.innerWidth < 472);
-		var bounds_tl = is_mobile ? [15, 200] : [320, 30];
-		var bounds_br = is_mobile ? [15, 15] : [30, 30];
-
-		map.origFitBounds = map.fitBounds;
-		map.fitBounds = function (bounds, options) {
-			map.origFitBounds(bounds, {
-				// Left padding accounts for the narrative window.
-				// Top padding accounts for the floating section navigation bar.
-				// These conditions apply only when the viewport breakpoint is at
-				// desktop screens or higher. Otherwise, assume that the narrative
-				// window is not present, and that the section navigation is
-				// condensed, so less padding is required on mobile viewports.
-				paddingTopLeft: bounds_tl,
-				// Bottom and right padding accounts only for slight
-				// breathing room, in order to prevent markers from appearing
-				// at the very edge of maps.
-				paddingBottomRight: bounds_br,
-			});
-		};
-
-		// Adjust offset for panTo()
-		// ==============================
-		map.origPanTo = map.panTo;
-		// In LRM, coordinate is array format [lat, lng]
-		map.panTo = function (coordinate) {
-			var offset_x = Math.round((bounds_tl[0] - bounds_br[0]) / 2);
-			var offset_y = Math.round((bounds_tl[1] - bounds_br[1]) / 2);
-			var x = map.latLngToContainerPoint(coordinate).x - offset_x;
-			var y = map.latLngToContainerPoint(coordinate).y - offset_y;
-			var point = map.containerPointToLatLng([x, y]);
-			map.origPanTo(point);
-		};
 	};
 
 	mapzen.places.map.draw_place_map("map", cb);
