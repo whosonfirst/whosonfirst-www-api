@@ -69,15 +69,15 @@
 					It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a> which is a <span class="hey-look">{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"|@escape}</span>.
 				{/if}
 			</li>
-			<li id="go-step0">
+			<li>
 				Get directions from
 				<a href="#" id="go-geolocate">where I am now</a> (use geolocation)
-				or <a href="#" id="go-latlon">from a specific location</a>.
+				or <a href="#" id="go-show-latlon">from a specific location</a>.
 			</li>
 		</ul>
 	</div>
 
-	<div id="go-step1" class="hidden row">
+	<div id="go-latlon" class="hidden row">
 		<div class="col-xs-6">
 			<form action="{$cfg.abs_root_url|escape}id/{$wof_id|@escape}" id="go-form" class="wide">
 				<div class="form-group row">
