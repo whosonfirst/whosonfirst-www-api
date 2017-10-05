@@ -112,11 +112,40 @@ window.addEventListener("load", function load(event){
 			}
 			var to = L.latLng(lat, lon);
 
+			// Show directions pane, in case we hid it before
+			var lrm = document.body.querySelector('.leaflet-routing-container');
+			if (lrm){
+				var classes = lrm.className + '';
+				lrm.className = classes.replace('hidden', '');
+			}
+
 			var routingControl = L.Mapzen.routing.control({
 				waypoints: [from, to],
 				router: L.Mapzen.routing.router({
 					costing: costings[type]
-				})
+				}),
+				defaultErrorHandler: function(e){
+					if (e.error &&
+					    e.error.message){
+						// yeah, we get a JSON blob passed back, which is weird
+						try {
+							var msg = JSON.parse(e.error.message);
+						}
+						catch (e){
+							console.error(e);
+						}
+						var feedback = document.getElementById('go-feedback');
+						feedback.innerHTML = htmlspecialchars(msg.error);
+						feedback.className = 'alert alert-danger';
+
+						// Hide directions pane, since we don't have any
+						var lrm = document.body.querySelector('.leaflet-routing-container');
+						if (lrm){
+							var classes = lrm.className + '';
+							lrm.className = classes + ' hidden';
+						}
+					}
+				}
 			}).addTo(map);
 
 			return true;
