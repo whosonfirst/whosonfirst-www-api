@@ -72,7 +72,7 @@
 			<li>
 				Get directions from
 				<a href="#" id="go-geolocate">where I am now</a> (use geolocation)
-				or <a href="#" id="go-show-latlon">from a specific location</a>.
+				or <a href="#" id="go-show-inputs">from a specific location</a>.
 			</li>
 		</ul>
 	</div>
@@ -81,19 +81,15 @@
 		<div class="col-xs-12">
 			<div id="go-feedback" class="hidden"></div>
 			<form action="{$cfg.abs_root_url|escape}id/{$wof_id|@escape}" id="go-form" class="wide">
-				<div class="form-group row">
-					<div class="col-xs-12">
-						Get
-						<select name="directions" id="go-costing">
-							<option>walking</option>
-							<option>biking</option>
-							<option>transit</option>
-							<option>driving</option>
-						</select>
-						directions from
-						<input type="text" id="go-from" name="from" placeholder="latitude, longitude">
-					</div>
-				</div>
+				Get
+				<select name="directions" id="go-costing">
+					<option>driving</option>
+					<option>walking</option>
+					<option>biking</option>
+					<option>transit</option>
+				</select>
+				directions from
+				<input type="text" id="go-from" name="from" placeholder="latitude, longitude">
 				<input class="btn btn-mapzen" type="submit" value="Get directions">
 			</form>
 		</div>
