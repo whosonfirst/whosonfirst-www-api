@@ -143,7 +143,6 @@ window.addEventListener("load", function load(event){
 
 			map.origFitBounds = map.fitBounds;
 			map.fitBounds = function (bounds, options) {
-				console.log('ok fitting the bounds');
 				map.origFitBounds(bounds, {
 					// Left padding accounts for the narrative window.
 					// Top padding accounts for the floating section navigation bar.
