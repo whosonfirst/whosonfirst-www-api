@@ -83,8 +83,10 @@ window.addEventListener("load", function load(event){
 		var go_directions = function(from, type){
 
 			var latlon = from.split(',');
-			var lat = parseFloat(latlon[0].trim());
-			var lon = parseFloat(latlon[1].trim());
+			if (latlon.length == 2){
+				var lat = parseFloat(latlon[0].trim());
+				var lon = parseFloat(latlon[1].trim());
+			}
 
 			if (isNaN(lat) || isNaN(lon)){
 				go_set_inputs('', type);
@@ -136,7 +138,7 @@ window.addEventListener("load", function load(event){
 						}
 						var feedback = document.getElementById('go-feedback');
 						feedback.innerHTML = htmlspecialchars(msg.error);
-						feedback.className = 'alert alert-danger';
+						feedback.className = 'alert alert-danger headroom';
 
 						// Hide directions pane, since we don't have any
 						var lrm = document.body.querySelector('.leaflet-routing-container');
@@ -154,7 +156,15 @@ window.addEventListener("load", function load(event){
 		document.getElementById('go-geolocate').addEventListener('click', go_geolocate_click, false);
 		document.getElementById('go-show-latlon').addEventListener('click', function(e){
 			e.preventDefault();
-			document.getElementById('go-from').select();
+			setTimeout(function(){
+				var from = document.getElementById('go-from');
+				if (from.value == ''){
+					from.focus();
+				}
+				else {
+					from.select();
+				}
+			}, 0);
 			go_set_inputs();
 		}, false);
 
@@ -162,9 +172,11 @@ window.addEventListener("load", function load(event){
 		var query = window.location.search.substr(1).split('&');
 		for (var key, val, keyval, i = 0; i < query.length; i++){
 			keyval = query[i].split('=');
-			key = decodeURIComponent(keyval[0].replace(/\+/g, ' '));
-			val = decodeURIComponent(keyval[1].replace(/\+/g, ' '));
-			args[key] = val;
+			if (keyval.length == 2){
+				key = decodeURIComponent(keyval[0].replace(/\+/g, ' '));
+				val = decodeURIComponent(keyval[1].replace(/\+/g, ' '));
+				args[key] = val;
+			}
 		}
 		if (args.directions &&
 		    args.from){
@@ -172,7 +184,7 @@ window.addEventListener("load", function load(event){
 			if (typeof result == "string"){
 				var alert = document.getElementById('go-feedback');
 				alert.innerHTML = htmlspecialchars(result);
-				alert.className = 'alert alert-danger';
+				alert.className = 'alert alert-danger headroom';
 			}
 		}
 	};
