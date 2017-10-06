@@ -20,7 +20,10 @@ mapzen.places.routing = (function(){
 			}
 			else {
 				self.fetch('https://ip.dev.mapzen.com/?raw=1', function(rsp) {
-					units = self.get_default_units(rsp.country_id);
+					self.units = self.get_default_units(rsp.country_id);
+					if ("localStorage" in window){
+						localStorage.units = self.units;
+					}
 				});
 			}
 			self.units = units;
@@ -247,10 +250,10 @@ mapzen.places.routing = (function(){
 					costing: costings[type]
 				}),
 				formatter: new L.Mapzen.routing.formatter({
-					units: units
+					units: self.units
 				}),
 				defaultErrorHandler: self.routing_error
-			}).addTo(map);
+			}).addTo(self.map);
 			routingControl.on('routesfound', function(){
 				self.done_loading();
 			});
@@ -302,9 +305,6 @@ mapzen.places.routing = (function(){
 			    country_id == 85632181 || // Myanmar
 			    country_id == 85632249){  // Liberia
 				units = 'imperial';
-			}
-			if ("localStorage" in window){
-				localStorage.units = units;
 			}
 			return units;
 		},
