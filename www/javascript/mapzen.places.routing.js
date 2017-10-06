@@ -9,7 +9,9 @@ mapzen.places.routing = (function(){
 			self.map = map;
 			self.setup_units();
 			self.setup_controls();
-			self.check_url();
+			self.setup_hash_events();
+			self.check_query(location.search);
+			self.check_query(location.hash);
 		},
 
 		'setup_units': function(){
@@ -32,23 +34,23 @@ mapzen.places.routing = (function(){
 		'setup_controls': function(){
 			document.getElementById('go-geolocate').addEventListener('click', self.geolocate_click, false);
 			document.getElementById('go-show-inputs').addEventListener('click', self.show_inputs_click, false);
+			document.getElementById('go-form').addEventListener('submit', self.form_submit, false);
 		},
 
-		'check_url': function(){
-			var args = {};
-			var query = window.location.search.substr(1).split('&');
-			for (var key, val, keyval, i = 0; i < query.length; i++){
-				keyval = query[i].split('=');
-				if (keyval.length == 2){
-					key = decodeURIComponent(keyval[0].replace(/\+/g, ' '));
-					val = decodeURIComponent(keyval[1].replace(/\+/g, ' '));
-					args[key] = val;
-				}
-			}
-			if (args.directions &&
-			    args.from){
+		'setup_hash_events': function(){
+			window.addEventListener('hashchange', function(){
+				self.check_query(location.hash);
+			}, false);
+		},
+
+		'check_query': function(query){
+			var dir_match = query.match(/directions=([^&]+)/);
+			var from_match = query.match(/from=([^&]+)/);
+			if (dir_match && from_match){
+				var from = decodeURIComponent(from_match[1].replace(/\+/g, ' '));
+				var type = decodeURIComponent(dir_match[1].replace(/\+/g, ' '));
 				self.start_loading();
-				var result = self.get_directions(args.from, args.directions);
+				var result = self.get_directions(from, type);
 				if (typeof result == "string"){
 					var alert = document.getElementById('go-feedback');
 					alert.innerHTML = htmlspecialchars(result);
@@ -88,13 +90,11 @@ mapzen.places.routing = (function(){
 					var lat = position.coords.latitude.toFixed(6);
 					var lon = position.coords.longitude.toFixed(6);
 					var from = lat + ', ' + lon;
-					var type = 'driving';
-					if ("localStorage" in window &&
-					    localStorage.directions){
-						type = localStorage.directions;
-					}
+					var type = self.get_default_type();
 					self.show_inputs(from);
-					self.get_directions(from);
+					var query = 'from=' + encodeURIComponent(from) + '&' +
+						    'directions=' + encodeURIComponent(type);
+					location.hash = '#' + query;
 				});
 			}
 			else {
@@ -120,6 +120,16 @@ mapzen.places.routing = (function(){
 			}
 			document.getElementById('go-inputs').className = 'row';
 			document.getElementById('go-feedback').className = 'hidden';
+		},
+
+		'form_submit': function(e){
+			e.preventDefault();
+			var from = document.getElementById('go-from').value;
+			var select = document.getElementById('go-costing');
+			var type = select.options[select.selectedIndex].value;
+			var query = 'from=' + encodeURIComponent(from.replace(/ /g, '+')) + '&' +
+			            'directions=' + encodeURIComponent(type.replace(/ /g, '+'));
+			location.hash = '#' + query;
 		},
 
 		'adjust_bounds': function(){
