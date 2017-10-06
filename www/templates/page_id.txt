@@ -69,14 +69,17 @@
 					It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a> which is a <span class="hey-look">{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"|@escape}</span>.
 				{/if}
 			</li>
+			{if "routing"|@features_is_enabled}
 			<li>
 				Get directions from
 				<a href="#" id="go-geolocate">where I am now</a> (use geolocation)
 				or <a href="#" id="go-show-inputs">from a specific location</a>.
 			</li>
+			{/if}
 		</ul>
 	</div>
 
+	{if "routing"|@features_is_enabled}
 	<div id="go-inputs" class="hidden row">
 		<div class="col-xs-12">
 			<div id="go-feedback" class="hidden"></div>
@@ -94,6 +97,7 @@
 			</form>
 		</div>
 	</div>
+	{/if}
 
 	<div class="row">
 		<ul class="list col-xs-12">

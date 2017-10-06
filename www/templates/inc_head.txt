@@ -41,6 +41,10 @@
     <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.existential.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.places.map.js"></script>
 
+    {if "routing"|@features_is_enabled}
+    <script src="{$cfg.abs_root_url}javascript/mapzen.places.routing.js"></script>
+    {/if}
+
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/L.Control.Locate.css" />
     <script src="{$cfg.abs_root_url}javascript/L.Control.Locate.min.js"></script>
 

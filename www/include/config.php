@@ -12,6 +12,8 @@
 	# See also init.php customizations for Mapzen Places
 	$GLOBALS['cfg']['enable_feature_places'] = 0;
 
+	$GLOBALS['cfg']['enable_feature_routing'] = 0;
+
 	# Message is displayed in the nav header in inc_head.txt
 
 	$GLOBALS['cfg']['display_message'] = 0;
