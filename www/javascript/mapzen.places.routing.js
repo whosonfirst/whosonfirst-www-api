@@ -4,7 +4,11 @@ mapzen.places = mapzen.places || {};
 mapzen.places.routing = (function(){
 
 	var cache_key = 'routing_cache';
-	var cache_ttl = 5 * 60 * 1000;
+
+	// Cache until end of today.
+	var eod = new Date();
+	eod.setHours(23, 59, 59, 999);
+	var cache_ttl = eod.getTime() - new Date().getTime();
 
 	var self = {
 
@@ -15,6 +19,7 @@ mapzen.places.routing = (function(){
 			self.setup_hash_events();
 			self.check_query(location.search);
 			self.check_query(location.hash);
+			self.cache_gc();
 		},
 
 		'setup_units': function(){
@@ -347,19 +352,9 @@ mapzen.places.routing = (function(){
 			if (cache && url in cache){
 				console.log('CHECKING CACHE', cache[url]);
 				var cached = cache[url];
-				var now = new Date().getTime();
-				if (now - cached.cached_at > cache_ttl){
-					// expire it
-					delete cache[url];
-					self.cache_save(cache);
-					console.log('EXPIRED cache found');
-					return null;
-				} else {
-					// cache hit
-					var data = cached.data;
-					console.log('CACHE HIT', data);
-					return data;
-				}
+				var data = cached.data;
+				console.log('CACHE HIT', data);
+				return data;
 			}
 			console.log('CACHE MISS: ' + url);
 			return null;
@@ -395,6 +390,24 @@ mapzen.places.routing = (function(){
 				return cache;
 			}
 			return false;
+		},
+
+		'cache_gc': function(){
+			var cache = self.cache_load() || {};
+			console.log('checking cache', cache);
+			var now = new Date().getTime();
+			var found_expired = false;
+			for (var url in cache){
+				if (now - cache[url].cached_at > cache_ttl){
+					// expire expired cache
+					delete cache[url];
+					console.log('EXPIRED cache ' + url);
+					found_expired = true;
+				}
+			}
+			if (found_expired){
+				self.cache_save(cache);
+			}
 		}
 
 	};
