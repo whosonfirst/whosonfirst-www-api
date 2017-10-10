@@ -4716,7 +4716,7 @@ module.exports={
 	'use strict';
 
 	var L = require('leaflet');
-	
+
 	module.exports = L.LayerGroup.extend({
 		includes: L.Mixin.Events,
 
@@ -4750,7 +4750,7 @@ module.exports={
 				this.options.styles,
 				this.options.addWaypoints);
 		},
-		
+
 		getBounds: function() {
 			return L.latLngBounds(this._route.coordinates);
 		},
@@ -5128,7 +5128,7 @@ module.exports={
 
 		'es': spanish,
 		'sp': spanish,
-		
+
 		'nl': {
 			directions: {
 				N: 'noordelijke',
@@ -20601,12 +20601,68 @@ if (typeof module === 'object' && module.exports) {
         wps.push(new Waypoint(L.latLng(wp.latLng), wp.name || "", wp.options || {}))
       }
 
+      // Before we hit the Valhalla API, let's make sure we don't have the route
+      // cached already. (20171006/dphiffer)
+      if ("localStorage" in window && localStorage.route_cache){
+        var cache_ttl = 5 * 60 * 1000; // 5min
+        var now = new Date().getTime();
+        try {
+          var cache = JSON.parse(localStorage.route_cache);
+        }
+        catch (e){
+          console.log('ERROR decoding route cache');
+          cache = {};
+        }
+        console.log('CHECKING CACHE', cache[url]);
+        if (cache[url]){
+          var cached = cache[url];
+          if (now - cached.cached_at > cache_ttl){
+            // expire it
+            delete cache[url];
+            localStorage.route_cache = JSON.stringify(cache);
+            console.log('EXPIRED cache found');
+          }
+          else {
+            // cache hit
+            var data = cached.data;
+            console.log('CACHE HIT', data);
+            var cb = this._routeDone;
+            setTimeout(function(){
+              cb(data, wps, routingOptions, callback, context);
+            }, 0);
+            return this;
+          }
+        }
+        console.log('CACHE MISS: ' + url);
+      }
+
       corslite(url, L.bind(function(err, resp) {
         var data;
         clearTimeout(timer);
         if (!timedOut) {
           if (!err) {
             data = JSON.parse(resp.responseText);
+
+            // Store the route in localStorage in case we want to look it up
+            // again and avoid hitting the API a 2nd time. (20171006/dphiffer)
+            if ("localStorage" in window){
+              var cache = {};
+              if (localStorage.route_cache){
+                try {
+                  cache = JSON.decode(localStorage.route_cache);
+                }
+                catch (e){
+                  cache = {};
+                }
+              }
+              cache[url] = {
+                'data': data,
+                'cached_at': (new Date().getTime())
+              };
+              console.log('CACHE STORE: ' + url);
+              localStorage.route_cache = JSON.stringify(cache);
+            }
+
             this._routeDone(data, wps, routingOptions, callback, context);
           } else {
             console.log("Error : " + err.response);
@@ -21099,7 +21155,7 @@ var MapzenScarab = (function () {
   function _buildDescription(id, container) {
     var infoBox = document.createElement('div')
     infoBox.className = "mz-bug-" + id
-    infoBox.textContent = opts.description 
+    infoBox.textContent = opts.description
     infoBox.style.width = container.offsetWidth + 'px'
     infoBox.style.marginLeft = container.style.marginLeft
 
@@ -21108,7 +21164,7 @@ var MapzenScarab = (function () {
   }
 
   function resizeDescription(container) {
-    var containerWidth = container.offsetWidth 
+    var containerWidth = container.offsetWidth
     infoDescriptionEl.style.width = containerWidth + 'px'
     infoDescriptionEl.style.marginLeft = container.style.marginLeft
   }
