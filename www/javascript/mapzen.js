@@ -20626,7 +20626,7 @@ if (typeof module === 'object' && module.exports) {
             // cache hit
             var data = cached.data;
             console.log('CACHE HIT', data);
-            var cb = this._routeDone;
+            var cb = L.bind(this._routeDone, this);
             setTimeout(function(){
               cb(data, wps, routingOptions, callback, context);
             }, 0);
@@ -20652,7 +20652,7 @@ if (typeof module === 'object' && module.exports) {
                   cache = JSON.decode(localStorage.route_cache);
                 }
                 catch (e){
-                  cache = {};
+                  console.error('Could not decode route_cache from localStorage');
                 }
               }
               cache[url] = {
