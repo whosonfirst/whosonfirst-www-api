@@ -3,6 +3,9 @@ mapzen.places = mapzen.places || {};
 
 mapzen.places.routing = (function(){
 
+	var cache_key = 'routing_cache';
+	var cache_ttl = 5 * 60 * 1000;
+
 	var self = {
 
 		'init': function(map){
@@ -257,7 +260,9 @@ mapzen.places.routing = (function(){
 				waypoints: [from, to],
 				fitSelectedRoutes: true,
 				router: L.Mapzen.routing.router({
-					costing: costings[type]
+					costing: costings[type],
+					cacheCheck: self.cache_check,
+					cacheStore: self.cache_set_value
 				}),
 				formatter: new L.Mapzen.routing.formatter({
 					units: self.units
@@ -333,7 +338,65 @@ mapzen.places.routing = (function(){
 				localStorage.directions = type;
 			}
 			return type;
+		},
+
+		'cache_check': function(url) {
+
+			var cache = self.cache_load();
+
+			if (cache && url in cache){
+				console.log('CHECKING CACHE', cache[url]);
+				var cached = cache[url];
+				var now = new Date().getTime();
+				if (now - cached.cached_at > cache_ttl){
+					// expire it
+					delete cache[url];
+					self.cache_save(cache);
+					console.log('EXPIRED cache found');
+					return null;
+				} else {
+					// cache hit
+					var data = cached.data;
+					console.log('CACHE HIT', data);
+					return data;
+				}
+			}
+			console.log('CACHE MISS: ' + url);
+			return null;
+		},
+
+		'cache_set_value': function(url, data){
+			var cache = self.cache_load() || {};
+			cache[url] = {
+				'data': data,
+				'cached_at': (new Date().getTime())
+			};
+			console.log('CACHE STORE: ' + url);
+			return self.cache_save(cache);
+		},
+
+		'cache_load': function(){
+			var cache = null;
+			if ("localStorage" in window && localStorage[cache_key]){
+				try {
+					cache = JSON.parse(localStorage[cache_key]);
+				}
+				catch (e){
+					console.log('ERROR decoding route cache');
+					cache = {};
+				}
+			}
+			return cache;
+		},
+
+		'cache_save': function(cache){
+			if ("localStorage" in window){
+				localStorage[cache_key] = JSON.stringify(cache);
+				return cache;
+			}
+			return false;
 		}
+
 	};
 
 	return self;

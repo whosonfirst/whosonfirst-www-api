@@ -20601,39 +20601,17 @@ if (typeof module === 'object' && module.exports) {
         wps.push(new Waypoint(L.latLng(wp.latLng), wp.name || "", wp.options || {}))
       }
 
-      // Before we hit the Valhalla API, let's make sure we don't have the route
-      // cached already. (20171006/dphiffer)
-      if ("localStorage" in window && localStorage.route_cache){
-        var cache_ttl = 5 * 60 * 1000; // 5min
-        var now = new Date().getTime();
-        try {
-          var cache = JSON.parse(localStorage.route_cache);
+      // Before we hit the Valhalla API, let's make sure we don't have the
+      // route cached already. (20171006/dphiffer)
+      if ('cacheCheck' in routingOptions) {
+        var data = routingOptions.cacheCheck(url);
+        if (data) {
+          var cb = L.bind(this._routeDone, this);
+          setTimeout(function(){
+            cb(data, wps, routingOptions, callback, context);
+          }, 0);
+          return this;
         }
-        catch (e){
-          console.log('ERROR decoding route cache');
-          cache = {};
-        }
-        console.log('CHECKING CACHE', cache[url]);
-        if (cache[url]){
-          var cached = cache[url];
-          if (now - cached.cached_at > cache_ttl){
-            // expire it
-            delete cache[url];
-            localStorage.route_cache = JSON.stringify(cache);
-            console.log('EXPIRED cache found');
-          }
-          else {
-            // cache hit
-            var data = cached.data;
-            console.log('CACHE HIT', data);
-            var cb = L.bind(this._routeDone, this);
-            setTimeout(function(){
-              cb(data, wps, routingOptions, callback, context);
-            }, 0);
-            return this;
-          }
-        }
-        console.log('CACHE MISS: ' + url);
       }
 
       corslite(url, L.bind(function(err, resp) {
@@ -20643,24 +20621,8 @@ if (typeof module === 'object' && module.exports) {
           if (!err) {
             data = JSON.parse(resp.responseText);
 
-            // Store the route in localStorage in case we want to look it up
-            // again and avoid hitting the API a 2nd time. (20171006/dphiffer)
-            if ("localStorage" in window){
-              var cache = {};
-              if (localStorage.route_cache){
-                try {
-                  cache = JSON.decode(localStorage.route_cache);
-                }
-                catch (e){
-                  console.error('Could not decode route_cache from localStorage');
-                }
-              }
-              cache[url] = {
-                'data': data,
-                'cached_at': (new Date().getTime())
-              };
-              console.log('CACHE STORE: ' + url);
-              localStorage.route_cache = JSON.stringify(cache);
+            if ('cacheStore' in routingOptions) {
+              routingOptions.cacheStore(url, data);
             }
 
             this._routeDone(data, wps, routingOptions, callback, context);
