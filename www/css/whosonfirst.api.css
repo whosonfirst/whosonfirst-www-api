@@ -36,3 +36,7 @@
 	margin-top: -5px;
 	margin-left: 5px;
 }
+
+body.places #content ul li {
+	list-style: none;
+}
