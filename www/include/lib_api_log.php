@@ -16,7 +16,7 @@
 			return array('ok' => 1);
 		}
 
-		$func = $GLOBALS['api_log_hooks']['dispatch'];
+		$func = $GLOBALS['cfg']['api_log_hooks']['dispatch'];
 
 		if ((! $func) || (! function_exists($func))){
 			return array('ok' => 0, 'error' => 'Dispatch function has not been declared');
