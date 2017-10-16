@@ -187,8 +187,11 @@
 
 			api_whosonfirst_output_enpublicify($places['rows'], $more);
 
-			foreach ($places['rows'] as $row){
-				$lookup[$row['wof:id']] = $row;
+			if (is_array($places['rows'])){
+
+				foreach ($places['rows'] as $row){
+					$lookup[$row['wof:id']] = $row;
+				}
 			}
 
 			$results_spr = array();
