@@ -1,0 +1,26 @@
+{if !$mz_hours}
+	Hours: &mdash;
+{else}
+	Hours:
+	{if $mz_hours.mon && $mz_hours.mon.open && $mz_hours.mon.close}
+		<br>Monday: {$mz_hours.mon.open}&ndash;{$mz_hours.mon.close}
+	{/if}
+	{if $mz_hours.tue && $mz_hours.tue.open && $mz_hours.tue.close}
+		<br>Tuesday: {$mz_hours.tue.open}&ndash;{$mz_hours.tue.close}
+	{/if}
+	{if $mz_hours.wed && $mz_hours.wed.open && $mz_hours.wed.close}
+		<br>Wednesday: {$mz_hours.wed.open}&ndash;{$mz_hours.wed.close}
+	{/if}
+	{if $mz_hours.thu && $mz_hours.thu.open && $mz_hours.thu.close}
+		<br>Thursday: {$mz_hours.thu.open}&ndash;{$mz_hours.thu.close}
+	{/if}
+	{if $mz_hours.fri && $mz_hours.fri.open && $mz_hours.fri.close}
+		<br>Friday: {$mz_hours.fri.open}&ndash;{$mz_hours.fri.close}
+	{/if}
+	{if $mz_hours.sat && $mz_hours.sat.open && $mz_hours.sat.close}
+		<br>Saturday: {$mz_hours.sat.open}&ndash;{$mz_hours.sat.close}
+	{/if}
+	{if $mz_hours.sun && $mz_hours.sun.open && $mz_hours.sun.close}
+		<br>Sunday: {$mz_hours.sun.open}&ndash;{$mz_hours.sun.close}
+	{/if}
+{/if}

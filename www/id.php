@@ -63,6 +63,7 @@
 	$GLOBALS['smarty']->assign("search_url", $search_url);
 
 	$GLOBALS['smarty']->assign_by_ref("place", $place);
+	$GLOBALS['smarty']->assign_by_ref("mz_hours", $place['mz:hours']);
 	$GLOBALS['smarty']->display("page_id.txt");
 
 	exit();
