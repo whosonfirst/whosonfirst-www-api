@@ -360,6 +360,22 @@
 
 	########################################################################
 
+	function whosonfirst_places_format_time($time){
+
+		if (preg_match('/^(\d\d):(\d\d)$/', $time, $matches)){
+			$hh = intval($matches[1]);
+			$mm = $matches[2];
+			if ($hh > 12){
+				return ($hh - 12) . ":{$mm}pm";
+			} else {
+				return "$hh:{$mm}am";
+			}
+		}
+		return $time;
+	}
+
+	########################################################################
+
 	function whosonfirst_places_url_for_place($place){
 
 		$enc_id = urlencode($place["wof:id"]);

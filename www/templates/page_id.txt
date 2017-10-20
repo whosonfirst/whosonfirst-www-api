@@ -116,6 +116,8 @@
 			{else}
 				<li>Its exact latitude and longitude is {$lat_lon_link}.</li>
 			{/if}
+		</ul>
+		<ul class="list col-xs-12">
 			<li>See a detailed listing for this {$wof_placetype|@escape} on the <a href="https://whosonfirst.mapzen.com/spelunker/id/{$wof_id|@escape}/" class="hey-look">Who's On First Spelunker</a>.</li>
 			<li><a href="{$place|@whosonfirst_places_data_url_for_place}" class="hey-look">Download</a> the raw data for this {$wof_placetype|@escape}.</li>
 		</ul>
