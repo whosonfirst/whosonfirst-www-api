@@ -64,6 +64,24 @@
 
 	$GLOBALS['smarty']->assign_by_ref("place", $place);
 	$GLOBALS['smarty']->assign_by_ref("mz_hours", $place['mz:hours']);
+
+	$links = array();
+	$link_properties = array(
+		'addr:website' => 'Website',
+		'addr:twitter' => 'Twitter',
+		'addr:facebook' => 'Facebook',
+		'addr:instagram' => 'Instagram',
+		'addr:youtube' => 'YouTube',
+		'addr:github' => 'GitHub'
+	);
+	foreach ($link_properties as $prop => $text){
+		if ($place[$prop]){
+			$url = $place[$prop];
+			$links[$url] = $text;
+		}
+	}
+	$GLOBALS['smarty']->assign_by_ref("links", $links);
+
 	$GLOBALS['smarty']->display("page_id.txt");
 
 	exit();

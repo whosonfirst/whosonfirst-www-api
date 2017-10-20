@@ -113,6 +113,7 @@
 				{if $addr_phone != ""}<li>Its phone number is <span class="hey-look" itemprop="telephone">{$addr_phone|@escape}</span>.</li>{/if}
 				{if $wof_tags|@count}<li>It is tagged {foreach from=$wof_tags item="tag" name="tags"}<a href="{$cfg.abs_root_url}tags/{$tag|@escape}/{if $wof_parent_id > 0}in-{$wof_parent_id|@escape}{/if}" class="hey-look">{$tag|@escape}</a>{if $smarty.foreach.tags.last}.{else} and {/if}{/foreach}{/if}</li>
 				<li>{include file="inc_venue_hours.txt"}</li>
+				<li>{include file="inc_venue_links.txt"}</li>
 			{else}
 				<li>Its exact latitude and longitude is {$lat_lon_link}.</li>
 			{/if}

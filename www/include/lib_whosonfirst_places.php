@@ -358,8 +358,6 @@
 		return 'unknown';
 	}
 
-	########################################################################
-
 	function whosonfirst_places_format_time($time){
 
 		if (preg_match('/^(\d\d):(\d\d)$/', $time, $matches)){
