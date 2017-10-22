@@ -466,3 +466,13 @@
 	# END OF chicken/rooster stuff
 
 	$GLOBALS['cfg']['mapzen']['api_key'] = 'READ-FROM-SECRETS';
+
+       # START OF OSM OAuth stuff
+
+        $GLOBALS['cfg']['osm_oauth_key'] = '';
+        $GLOBALS['cfg']['osm_oauth_secret'] = '';
+
+        # (see notes in www/signin_osm_oauth.php)
+        $GLOBALS['cfg']['crypto_oauth_cookie_secret'] = 'READ-FROM-SECRETS';
+
+       # END OF OSM OAuth stuff
