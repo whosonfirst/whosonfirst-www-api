@@ -1,5 +1,7 @@
 <a name="intro"></a>
-Who’s On First is a gazetteer or a big list of places, each with a stable identifier and some number of descriptive properties about that location. An interesting way to think about a gazetteer is to consider it as the space where debate about a place is managed but not decided.
+Mapzen Places is an API to access Who’s On First place data. You can get administrative boundaries and hierarchies, neighbourhoods, postal codes, venues, and more.
+
+Who’s On First is a gazetteer or a big list of places, each with a stable identifier and some number of descriptive properties about that location. An interesting way to think about a gazetteer is to consider it as the space where debate about a place is managed but not decided. Learn more about the Who’s On First data model over at https://whosonfirst.mapzen.com/docs/.
 
 Who's On First has been designed with the goal of ensuring longevity, portability and durability. What they means, in a nutshell, is:
 
