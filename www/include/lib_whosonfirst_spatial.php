@@ -58,7 +58,7 @@
 
 		foreach ($GLOBALS['cfg']['spatial_tile38_endpoints'] as $endpoint){
 
-			$more['endpoint'] = $endpoing;
+			$more['endpoint'] = $endpoint;
 
 			$rsp = whosonfirst_spatial_do($cmd, $more);
 
