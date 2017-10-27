@@ -79,10 +79,10 @@ window.addEventListener("load", function load(event){
 				for (var id in rsp.query.pages) {
 					var page = rsp.query.pages[id];
 					var summary_text = page.extract;
-					var sentences = page.extract.split('.');
+					var sentences = page.extract.split('. ');
 					if (sentences.length > 1) {
 						// Let's keep it to two sentences.
-						summary_text = sentences[0] + '.' + sentences[1] + '.';
+						summary_text = sentences[0] + '. ' + sentences[1] + '.';
 					}
 					summary.innerHTML = '<h5>Wikipedia</h5><blockquote><p>' + htmlspecialchars(summary_text) + '</p></blockquote><a href="https://en.wikipedia.org/wiki/' + wk_page + '">' + htmlspecialchars(page.title) + ' on Wikipedia</a>';
 				}
