@@ -124,6 +124,12 @@
 		</ul>
 	</div>
 
+	{if $wikipedia_page}
+	<div class="row">
+		<div class="list col-xs-12" id="wikipedia-summary" data-page="{$wikipedia_page|escape}"></div>
+	</div>
+	{/if}
+
 </div>
 
 <script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.id.init.js"></script>
