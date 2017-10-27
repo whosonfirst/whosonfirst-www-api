@@ -58,12 +58,12 @@ window.addEventListener("load", function load(event){
 
 	var summary = document.getElementById('wikipedia-summary');
 	if (summary) {
-		var page = summary.getAttribute('data-page');
-		if (page) {
-			var title = page.replace(/_/g, ' ');
+		var wk_page = summary.getAttribute('data-page');
+		if (wk_page) {
+			var title = wk_page.replace(/_/g, ' ');
 			var url_title = encodeURIComponent(title);
 			var origin = encodeURIComponent('*');
-			var url = 'https://en.wikipedia.org/w/api.php?format=json&action=parse&redirects=1&prop=text&section=0&page=' + page + '&origin=' + origin;
+			var url = 'https://en.wikipedia.org/w/api.php?format=json&action=query&redirects=1&prop=extracts&exintro=&explaintext=&titles=' + url_title + '&origin=' + origin;
 			var onerror = function() {
 				console.error('Could not load ' + url);
 			};
@@ -76,18 +76,15 @@ window.addEventListener("load", function load(event){
 					console.error('Could not parse result');
 					return;
 				}
-				summary.style.visibility = 'hidden';
-				summary.innerHTML = rsp.parse.text['*'];
-				var p_search = summary.querySelectorAll('p');
-				for (var i = 0; i < p_search.length; i++) {
-					var p = p_search[i];
-					if (p.parentNode.className == 'mw-parser-output') {
-						break;
+				for (var id in rsp.query.pages) {
+					var page = rsp.query.pages[id];
+					var summary_text = page.extract;
+					var sentences = page.extract.split('.');
+					if (sentences.length > 1) {
+						// Let's keep it to two sentences.
+						summary_text = sentences[0] + '.' + sentences[1] + '.';
 					}
-				}
-				if (p) {
-					summary.innerHTML = '<h5>Wikipedia</h5><blockquote><p>' + p.innerHTML + '</p></blockquote><a href="https://en.wikipedia.org/wiki/' + page + '">' + htmlspecialchars(rsp.parse.title) + ' on Wikipedia</a>';
-					summary.style.visibility = 'visible';
+					summary.innerHTML = '<h5>Wikipedia</h5><blockquote><p>' + htmlspecialchars(summary_text) + '</p></blockquote><a href="https://en.wikipedia.org/wiki/' + wk_page + '">' + htmlspecialchars(page.title) + ' on Wikipedia</a>';
 				}
 			};
 			req.open("get", url, true);
