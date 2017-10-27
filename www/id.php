@@ -59,6 +59,11 @@
 		}
 	}
 
+	if ($place['wof:concordances'] &&
+	    $place['wof:concordances']['wk:page']){
+		$GLOBALS['smarty']->assign('wikipedia_page', $place['wof:concordances']['wk:page']);
+	}
+
 	$search_url = whosonfirst_places_search_referer_url($query, $filters, $args);
 	$GLOBALS['smarty']->assign("search_url", $search_url);
 
