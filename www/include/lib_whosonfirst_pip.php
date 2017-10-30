@@ -17,10 +17,6 @@
 		 	"longitude" => $lon,
 		 );
 
-		 if (features_is_enabled("pip_v1")){
-		 	$query["v1"] = "1";
-		 }
-
 		 # 'filter_parameters_spatial'
 
 		 if ($pt = $more["placetype"]){
@@ -68,7 +64,7 @@
 		 	return array("ok" => 0, "error" => "Failed to parse response");			
 		 }
 
-		 $rows = (features_is_enabled("pip_v1")) ? $data : $data["places"];
+		 $rows = $data["places"];
 
 		 return array("ok" => 1, "rows" => $rows);
 	}

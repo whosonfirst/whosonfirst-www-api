@@ -445,9 +445,9 @@
 	# END of wof spatial stuff
 
 	# START OF pip stuff
+	# this assumes https://github.com/whosonfirst/go-whosonfirst-pip-v2
 
 	$GLOBALS['cfg']['enable_feature_pip'] = 1;
-	$GLOBALS['cfg']['enable_feature_pip_v1'] = 1;
 	$GLOBALS['cfg']["whosonfirst_pip_endpoint"] = '';
 
 	# END OF pip stuff
