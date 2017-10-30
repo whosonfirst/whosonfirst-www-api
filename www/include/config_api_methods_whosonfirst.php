@@ -187,7 +187,7 @@
 			),
 		),
 
-		'filter_parameters_tile38' => array(
+		'filter_parameters_spatial' => array(
 			array(
 				"name" => "placetype",
 				"description" => "A valid Who's On First placetype to limit the query by.",
@@ -198,35 +198,35 @@
 			array(
 				"name" => "is_current",
 				"description" => "Filter results by their 'mz:is_current' property.",
-				"documented" => 0,
+				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_ceased",
 				"description" => "Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0",
-				"documented" => 0,
+				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_deprecated",
 				"description" => "Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0",
-				"documented" => 0,
+				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_superseded",
 				"description" => "Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0",
-				"documented" => 0,
+				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_superseding",
 				"description" => "Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0",
-				"documented" => 0,
+				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
 			),
@@ -453,11 +453,10 @@
 			"pagination" => "cursor",
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
-                        "parameters" => array(
+                        "parameters" => array_merge(array(
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.766633"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.417693"),
-				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0, "example" => "neighbourhood"),
-			),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
 				"433" => array("message" => "Missing 'longitude' parameter"),
@@ -482,7 +481,7 @@
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.777228"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.470779"),
 				array("name" => "spr", "description" => "Format results as a standard place response (spr).", "documented" => 1, "required" => 0, "example" => 1),
-			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_tile38']),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
 				"433" => array("message" => "Missing 'longitude' parameter"),
@@ -591,7 +590,7 @@
 				array("name" => "min_longitude", "description" => "A valid longitude coordinate, representing the left (Western) edge of the bounding box.", "documented" => 1, "required" => 1, "example" => "-122.34374508"),
 				array("name" => "max_latitude", "description" => "A valid latitude coordinate, representing the top (Northern) edge of the bounding box.", "documented" => 1, "required" => 1, "example" => "37.85749665"),
 				array("name" => "max_longitude", "description" => "A valid longitude coordinate, representing the right (Eastern) edge of the bounding box.", "documented" => 1, "required" => 1, "example" => "-122.25585446"),
-			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_tile38']),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'min_latitude' parameter"),
 				"433" => array("message" => "Missing 'min_longitude' parameter"),
@@ -619,7 +618,7 @@
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "40.784165"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-73.958110"),
 				array("name" => "radius", "description" => "A valid radius (in meters) to limit the query by. Default radius is 100. Maximum radius is 500.", "documented" => 1, "required" => 0, "example" => 25, "default" => 100, "max" => 500),
-			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_tile38']),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
 				"433" => array("message" => "Missing 'longitude' parameter"),
@@ -723,7 +722,7 @@
                   	"parameters" => array_merge(array(
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.766633"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.417693"),
-			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_tile38']),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
 				"433" => array("message" => "Missing 'longitude' parameter"),
