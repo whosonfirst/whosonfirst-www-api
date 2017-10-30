@@ -123,7 +123,13 @@
 
 		foreach ($possible as $pip_row) {
 
-			$row = whosonfirst_places_get_by_id($pip_row["Id"]);
+			if (features_is_enabled("pip_v1")){
+				$row = whosonfirst_places_get_by_id($pip_row["Id"]);
+			}
+
+			else {
+				$row = whosonfirst_places_get_by_id($pip_row["wof:id"]);
+			}
 
 			foreach ($row["wof:hierarchy"] as $hier){
 
@@ -383,12 +389,18 @@
 		}
 
 		$results = array();
-
+		
 		foreach ($rsp["rows"] as $pip_row){
-			
-			$row = whosonfirst_places_get_by_id($pip_row["Id"]);
-			$public = api_whosonfirst_output_enpublicify_single($row, $more);
 
+			if (features_is_enabled("pip_v1")){
+				$row = whosonfirst_places_get_by_id($pip_row["Id"]);
+			}
+
+			else {
+				$row = whosonfirst_places_get_by_id($pip_row["wof:id"]);
+			}
+
+			$public = api_whosonfirst_output_enpublicify_single($row, $more);
 			$results[] = $public;
 		}
 

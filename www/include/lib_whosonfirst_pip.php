@@ -27,6 +27,28 @@
 		 	$query["placetype"] = $pt;
 		 }
 
+		 $possible = array(
+			"mz:is_current",
+			"mz:is_deprecated",
+			"mz:is_ceased",
+			"mz:is_superseded",
+			"mz:is_superseding",
+		 );
+
+		 foreach ($possible as $k){
+
+		 	if (! isset($more[$k])){
+				continue;
+			}
+
+			$v = $more[$k];
+
+			$k = explode(":", $k, 2);
+			$k = $k[1];
+
+			$query[$k] = $v;
+		 }
+
 		 $query = http_build_query($query);
 
 		 $endpoint = whosonfirst_pip_endpoint();
@@ -46,7 +68,9 @@
 		 	return array("ok" => 0, "error" => "Failed to parse response");			
 		 }
 
-		 return array("ok" => 1, "rows" => $data, "_query" => $query);
+		 $rows = (features_is_enabled("pip_v1")) ? $data : $data["places"];
+
+		 return array("ok" => 1, "rows" => $rows);
 	}
 
 	########################################################################
