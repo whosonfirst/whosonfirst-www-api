@@ -94,6 +94,8 @@
 			api_output_error(436);
 		}
 
+		$flags = api_whosonfirst_ensure_existential_flags();
+
 		$placetypes = whosonfirst_placetypes_ancestors($pt);
 		array_unshift($placetypes, $pt);
 
@@ -102,6 +104,8 @@
 		foreach ($placetypes as $pt){
 
 			$more = array("placetype" => $pt);
+			$more = array_merge($more, $flags);
+
 			$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
 
 			if (! $rsp["ok"]){
@@ -362,6 +366,9 @@
 
 			$more["placetype"] = $pt;
 		}
+
+		$flags = api_whosonfirst_ensure_existential_flags();
+		$more = array_merge($more, $flags);
 
 		$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
 

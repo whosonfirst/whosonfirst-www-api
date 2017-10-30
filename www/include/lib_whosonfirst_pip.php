@@ -21,6 +21,8 @@
 		 	$query["v1"] = "1";
 		 }
 
+		 # 'filter_parameters_spatial'
+
 		 if ($pt = $more["placetype"]){
 		 	$query["placetype"] = $pt;
 		 }
@@ -44,7 +46,7 @@
 		 	return array("ok" => 0, "error" => "Failed to parse response");			
 		 }
 
-		 return array("ok" => 1, "rows" => $data);
+		 return array("ok" => 1, "rows" => $data, "_query" => $query);
 	}
 
 	########################################################################
