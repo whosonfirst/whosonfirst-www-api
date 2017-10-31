@@ -105,6 +105,8 @@
 
 		$where = array();
 
+		# see also: api_whosonfirst_ensure_existential_flags()
+
 		$possible = array(
 			"wof:id",
 			"wof:placetype_id",

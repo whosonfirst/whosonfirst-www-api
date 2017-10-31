@@ -2,6 +2,9 @@
 
 	loadlib("http");
 
+	# see also:
+	# https://github.com/whosonfirst/go-whosonfirst-pip-v2
+
 	########################################################################
 
 	function whosonfirst_pip_get_by_latlon($lat, $lon, $more=array()){
@@ -22,6 +25,8 @@
 		 if ($pt = $more["placetype"]){
 		 	$query["placetype"] = $pt;
 		 }
+
+		 # see also: api_whosonfirst_ensure_existential_flags()
 
 		 $possible = array(
 			"mz:is_current",
