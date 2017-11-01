@@ -330,6 +330,71 @@
 
 	########################################################################
 
+	function api_whosonfirst_places_getByPolyline(){
+
+		api_utils_features_ensure_enabled(array(
+			"pip",
+			"pip_polyline"
+		));
+
+		$polyline = request_str("polyline");
+		
+		if (! $polyline){
+			api_output_error(432);
+		}
+
+		$args = array();
+
+		if (request_isset("valhalla")){
+			$args["valhalla"] = 1;
+		}
+
+		if (request_isset("unique")){
+			$args["unique"] = 1;
+		}
+
+		api_utils_ensure_pagination_args($args);
+
+		$flags = api_whosonfirst_ensure_existential_flags();
+		$args = array_merge($args, $flags);
+
+		api_output_error(500)
+
+		$rsp = whosonfirst_pip_get_by_polyline($polyline, $args);
+
+		if (! $rsp["ok"]){
+			api_output_error(513);
+		}
+
+		$more = array();
+
+		if ($extras = api_whosonfirst_utils_get_extras()){
+			$more["extras"] = $extras;
+		}
+
+		$results = array();
+		
+		foreach ($rsp["rows"] as $pip_row){
+
+			$row = whosonfirst_places_get_by_id($pip_row["wof:id"]);
+
+			$public = api_whosonfirst_output_enpublicify_single($row, $more);
+			$results[] = $public;
+		}
+
+		$out = array(
+			"places" => $results,
+		);
+
+		$more = array(
+			'key' => 'places',
+		);
+
+		api_output_ok($out, $more);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_places_getByLatLon(){
 
 		api_utils_features_ensure_enabled(array(
