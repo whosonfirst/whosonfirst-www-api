@@ -64,10 +64,18 @@
 {elseif $details.pagination=="mixed"}
 <li><strong>cursor</strong> &#8212; This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the <code>cursor</code> property.</li>
 <li><strong>page</strong> &#8212; The default is 1. If this API method returns a non-empty <code>cursor</code> property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the <code>next_query</code> property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the <a href="{$cfg.abs_root_url}api/pagination/">pagination documentation</a> for details.</li>
+{if $details.pagination_per_page_max}
+<li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$details.pagination_per_page_max|escape}.</li>
+{else}
 <li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.</li>
+{/if}
 {else}
 <li><strong>page</strong> &#8212; The default is 1.</li>
+{if $details.pagination_per_page_max}
+<li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$details.pagination_per_page_max|escape}.</li>
+{else}
 <li><strong>per_page</strong> &#8212; The default is {$cfg.api_per_page_default|escape} and the maximum is {$cfg.api_per_page_max|escape}.</li>
+{/if}
 {/if}
 {/if}
 

@@ -471,17 +471,19 @@
 		),
 
 		'whosonfirst.places.getByPolyline' => array(
-			"description" => "Return Who's On First places intersecting a latitude and longitude",
+			"description" => "Return Who's On First places intersecting each point along a polyline.",
 			"documented" => 1,
 			"enabled" => ($GLOBALS['cfg']['enable_feature_pip'] && $GLOBALS['cfg']['enable_feature_pip_polyline']),
 			"paginated" => 1,
 			"pagination" => "default",
+			"pagination_per_page_max" => 100,
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
 				array("name" => "polyline", "description" => "A valid polyline-encoded string.", "documented" => 1, "required" => 1, "example" => ""),
 				array("name" => "precision", "description" => "The decimal precision for your polyline, for example 5 (Google) or 6 (Mapzen Valhalla)", "documented" => 1, "required" => 0, "example" => "6", "default" => 5),
 				array("name" => "unique", "description" => "Signal that results should only contain the unique set of places that intersect all steps in the polyline)", "documented" => 1, "required" => 0, "example" => "1"),
+
 			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'polyline' parameter"),
@@ -490,7 +492,7 @@
 				"513" => array("message" => "Failed to perform lookup"),
 			),
 			"notes" => array(
-				""
+				"If you pass the 'unique' flag please note that the set of unique places will be for the paginated slice of the polyline rather than the entire polyline itself. This may cause pagination results to look a bit weird and why the 'total' pagination property will be set to null (since its count will reflect the total number of points in your polyline)."
 			)
 		),
 

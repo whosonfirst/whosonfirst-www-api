@@ -2,7 +2,16 @@
 
 	##############################################################################
 
-	function api_utils_ensure_pagination_args(&$args){
+	function api_utils_ensure_pagination_args(&$args, $method_row=null){
+
+		$per_page_default = $GLOBALS['cfg']['api_per_page_default'];
+		$per_page_max = $GLOBALS['cfg']['api_per_page_max'];
+
+		if ($method_row){
+			if (isset($method_row["pagination_per_page_max"])){
+				$per_page_max = $method_row["pagination_per_page_max"];
+			}
+		}
 
 		if ($page = request_int32("page")){
 			$args['page'] = $page;
@@ -17,11 +26,11 @@
 		}
 
 		if (! $args['per_page']){
-			$args['per_page'] = $GLOBALS['cfg']['api_per_page_default'];
+			$args['per_page'] = $per_page_default;
 		}
 
-		else if ($args['per_page'] > $GLOBALS['cfg']['api_per_page_max']){
-			$args['per_page'] = $GLOBALS['cfg']['api_per_page_max'];
+		else if ($args['per_page'] > $per_page_max){
+			$args['per_page'] = $per_page_max;
 		}
 
 		if ($cursor = request_str("cursor")){

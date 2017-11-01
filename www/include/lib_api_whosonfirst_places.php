@@ -330,7 +330,7 @@
 
 	########################################################################
 
-	function api_whosonfirst_places_getByPolyline(){
+	function api_whosonfirst_places_getByPolyline($method_row){
 
 		api_utils_features_ensure_enabled(array(
 			"pip",
@@ -375,7 +375,7 @@
 		$flags = api_whosonfirst_ensure_existential_flags($flags_more);
 		$args = array_merge($args, $flags);
 
-		api_utils_ensure_pagination_args($args);
+		api_utils_ensure_pagination_args($args, $method_row);
 
 		$rsp = whosonfirst_pip_get_by_polyline($polyline, $args);
 
@@ -411,6 +411,13 @@
 		$out = array(
 			"places" => $results,
 		);
+
+		# see notes in method spec in config_api_methods_whosonfirst.php
+		# (20171101/thisisaaronland)
+
+		if ($args["unique"]){
+			$pagination["total_count"] = null;
+		}
 
 		api_utils_ensure_pagination_results($out, $pagination);
 

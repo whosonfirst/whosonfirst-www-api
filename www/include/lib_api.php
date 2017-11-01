@@ -181,7 +181,10 @@
 			api_output_error(499);
 		}
 
-		call_user_func($func);
+		# see the way we're passing $method_row to the function?
+		# not much uses that yet... (20171101/thisisaaronland)
+
+		call_user_func_array($func, array($method_row));
 		exit();
 	}
 
