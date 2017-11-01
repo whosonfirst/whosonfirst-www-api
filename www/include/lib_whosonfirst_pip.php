@@ -103,8 +103,9 @@
 		 }
 
 		 $rows = $data["places"];
+		 $pagination = $data["pagination"];
 
-		 return array("ok" => 1, "rows" => $rows);
+		 return array("ok" => 1, "rows" => $rows, "pagination" => $pagination);
 	}
 
 	########################################################################

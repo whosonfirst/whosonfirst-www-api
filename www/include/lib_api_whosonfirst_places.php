@@ -345,15 +345,28 @@
 
 		$args = array();
 
-		if (request_isset("valhalla")){
-			$args["valhalla"] = 1;
+		if ($p = request_int32("precision")){
+
+			if (! in_array($p, array(5, 6))){
+				api_output_error(433);
+			}
+
+			# in advance of updating go-whosonfirst-pip-v2
+			# (20171101/thisisaaronland)
+
+			if ($p == 6){
+				$args["valhalla"] = 1;
+			}
 		}
 
 		if (request_isset("unique")){
 			$args["unique"] = 1;
 		}
 
-		# PLEASE FOR TO BE ADDING PLACETYPES
+		if ($placetype = request_str("placetype")){
+			api_whosonfirst_places_ensure_valid_placetype($placetype);
+			$args["placetype"] = $placetype;
+		}
 
 		$flags_more = array(
 			"prefix" => null,
@@ -377,18 +390,29 @@
 		}
 
 		$results = array();
-		
-		foreach ($rsp["rows"] as $pip_row){
 
-			$row = whosonfirst_places_get_by_id($pip_row["wof:id"]);
+		foreach ($rsp["rows"] as $step){
 
-			$public = api_whosonfirst_output_enpublicify_single($row, $more);
-			$results[] = $public;
+			$places = array();
+
+			foreach ($step as $pip_row){
+
+				$row = whosonfirst_places_get_by_id($pip_row["wof:id"]);
+
+				$public = api_whosonfirst_output_enpublicify_single($row, $more);
+				$places[] = $public;
+			}
+
+			$results[] = $places;
 		}
+
+		$pagination = $rsp["pagination"];
 
 		$out = array(
 			"places" => $results,
 		);
+
+		api_utils_ensure_pagination_results($out, $pagination);
 
 		$more = array(
 			'key' => 'places',
