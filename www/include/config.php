@@ -448,6 +448,7 @@
 	# this assumes https://github.com/whosonfirst/go-whosonfirst-pip-v2
 
 	$GLOBALS['cfg']['enable_feature_pip'] = 1;
+	$GLOBALS['cfg']['enable_feature_pip_polyline'] = 0;
 	$GLOBALS['cfg']["whosonfirst_pip_endpoint"] = '';
 
 	# END OF pip stuff
