@@ -353,12 +353,16 @@
 			$args["unique"] = 1;
 		}
 
-		api_utils_ensure_pagination_args($args);
+		# PLEASE FOR TO BE ADDING PLACETYPES
 
-		$flags = api_whosonfirst_ensure_existential_flags();
+		$flags_more = array(
+			"prefix" => null,
+		);
+
+		$flags = api_whosonfirst_ensure_existential_flags($flags_more);
 		$args = array_merge($args, $flags);
 
-		api_output_error(500)
+		api_utils_ensure_pagination_args($args);
 
 		$rsp = whosonfirst_pip_get_by_polyline($polyline, $args);
 
@@ -936,8 +940,12 @@
 				}
 			}
 
-			$fq_k = $more["prefix"] . ":" . $k;
+			$fq_k = $k;
 
+			if ($more["prefix"]){
+				$fq_k = $more["prefix"] . ":" . $k;
+			}
+			
 			$flags[ $fq_k ] = $v;
 		}
 
