@@ -480,7 +480,7 @@
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
-				array("name" => "polyline", "description" => "A valid polyline-encoded string.", "documented" => 1, "required" => 1, "example" => ""),
+				array("name" => "polyline", "description" => "A valid polyline-encoded string.", "documented" => 1, "required" => 1, "example" => "eewvlAnzxblChRwl@nSeo@Nm@~BoHzAuEdAyCd@iB`BcF|s@m|B~Mwb@xBqGjBuFjUkt@xv@qcChBcGbBsFfc@ytAzAeFyCiBsPkL_OmJyf@a\\af@s[i\\}SmEyCkBkAaC{AmTuNyLaIqb@wXiBkAaCiBqQkLaHuEaCyAqB{AiC{Ao^kViBkAyB{AoSwMeJcGsBkA_CkBqRgMyGgEuEwCoXaRuO}Jyb@eYcFgD{e@c[yGuE_TyMaHuEye@q[{B{Am^{UqB{Aqb@wXqB{AyBkAu^kVyB{AyBkAo^kVyByAjAwD|c@gvAbf@r[ze@b[oIfX"),
 				array("name" => "precision", "description" => "The decimal precision for your polyline, for example 5 (Google) or 6 (Mapzen Valhalla)", "documented" => 1, "required" => 0, "example" => "6", "default" => 5),
 				array("name" => "unique", "description" => "Signal that results should only contain the unique set of places that intersect all steps in the polyline)", "documented" => 1, "required" => 0, "example" => "1"),
 
