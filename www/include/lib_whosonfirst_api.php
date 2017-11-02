@@ -1,6 +1,6 @@
 <?php
 
-	$GLOBALS['whosonfirst_api_endpoint'] = "https://whosonfirst-api.dev.mapzen.com";
+	$GLOBALS['whosonfirst_api_endpoint'] = "https://places.dev.mapzen.com";
 
 	########################################################################
 

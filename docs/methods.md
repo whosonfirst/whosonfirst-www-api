@@ -389,11 +389,26 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getByLatLon&api_key=your-mapzen-api-key&latitude=37.766633&longitude=-122.417693&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getByLatLon&api_key=your-mapzen-api-key&latitude=37.766633&longitude=-122.417693&placetype=neighbourhood'
 
 {
     "places": [
-
+        {
+            "wof:id": 85887443,
+            "wof:parent_id": "85922583",
+            "wof:name": "Mission District",
+            "wof:placetype": "neighbourhood",
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data"
+        },
+        {
+            "wof:id": 85834637,
+            "wof:parent_id": "1108830809",
+            "wof:name": "Inner Mission",
+            "wof:placetype": "neighbourhood",
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data"
+        }
     ],
     "stat": "ok"
 }
@@ -442,15 +457,22 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getByPolyline&api_key=your-mapzen-api-key&polyline=e_teFdj_jV|OzS_NlRbNdRqFdHt`AdsAqWlEqAkSug@nFxMfqB`jAaOhSfvCqb@tHjMx}I&precision=6&unique=1&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getByPolyline&api_key=your-mapzen-api-key&polyline=e_teFdj_jV|OzS_NlRbNdRqFdHt`AdsAqWlEqAkSug@nFxMfqB`jAaOhSfvCqb@tHjMx}I&unique=1&placetype=postalcode&per_page=1'
 
 {
     "places": [
         [
-
+            {
+                "wof:id": 554784673,
+                "wof:parent_id": "85922583",
+                "wof:name": "94105",
+                "wof:placetype": "postalcode",
+                "wof:country": "US",
+                "wof:repo": "whosonfirst-data-postalcode-us"
+            }
         ]
     ],
-    "next_query": "method=mapzen.places.getByPolyline&polyline=e_teFdj_jV%7COzS_NlRbNdRqFdHt%60AdsAqWlEqAkSug%40nFxMfqB%60jAaOhSfvCqb%40tHjMx%7DI&precision=6&unique=1&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1&page=2",
+    "next_query": "method=mapzen.places.getByPolyline&polyline=e_teFdj_jV%7COzS_NlRbNdRqFdHt%60AdsAqWlEqAkSug%40nFxMfqB%60jAaOhSfvCqb%40tHjMx%7DI&unique=1&placetype=postalcode&per_page=1&page=2",
     "total": null,
     "page": 1,
     "per_page": 1,
@@ -579,11 +601,68 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getHierarchiesByLatLon&api_key=your-mapzen-api-key&latitude=37.777228&longitude=-122.470779&spr=1&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getHierarchiesByLatLon&api_key=your-mapzen-api-key&latitude=37.777228&longitude=-122.470779&spr=1&placetype=neighbourhood'
 
 {
     "hierarchies": [
-
+        {
+            "neighbourhood": {
+                "wof:id": 85865919,
+                "wof:parent_id": "1108830805",
+                "wof:name": "Inner Richmond",
+                "wof:placetype": "neighbourhood",
+                "wof:country": "US",
+                "wof:repo": "whosonfirst-data"
+            },
+            "continent": {
+                "wof:id": 102191575,
+                "wof:parent_id": "-1",
+                "wof:name": "North America",
+                "wof:placetype": "continent",
+                "wof:country": "",
+                "wof:repo": "whosonfirst-data"
+            },
+            "macrohood": {
+                "wof:id": 1108830805,
+                "wof:parent_id": "85922583",
+                "wof:name": "Richmond District",
+                "wof:placetype": "macrohood",
+                "wof:country": "US",
+                "wof:repo": "whosonfirst-data"
+            },
+            "country": {
+                "wof:id": 85633793,
+                "wof:parent_id": "102191575",
+                "wof:name": "United States",
+                "wof:placetype": "country",
+                "wof:country": "US",
+                "wof:repo": "whosonfirst-data"
+            },
+            "locality": {
+                "wof:id": 85922583,
+                "wof:parent_id": "102087579",
+                "wof:name": "San Francisco",
+                "wof:placetype": "locality",
+                "wof:country": "US",
+                "wof:repo": "whosonfirst-data"
+            },
+            "county": {
+                "wof:id": 102087579,
+                "wof:parent_id": "85688637",
+                "wof:name": "San Francisco",
+                "wof:placetype": "county",
+                "wof:country": "US",
+                "wof:repo": "whosonfirst-data"
+            },
+            "region": {
+                "wof:id": 85688637,
+                "wof:parent_id": "85633793",
+                "wof:name": "California",
+                "wof:placetype": "region",
+                "wof:country": "US",
+                "wof:repo": "whosonfirst-data"
+            }
+        }
     ],
     "stat": "ok"
 }
@@ -732,18 +811,22 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getIntersects&api_key=your-mapzen-api-key&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getIntersects&api_key=your-mapzen-api-key&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=neighbourhood&per_page=1'
 
 {
     "places": [
-
+        {
+            "wof:id": 85885519,
+            "wof:parent_id": 85921923,
+            "wof:name": "Bayport",
+            "wof:placetype": "neighbourhood",
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data"
+        }
     ],
-    "next_query": null,
-    "total": null,
-    "page": null,
+    "next_query": "method=mapzen.places.getIntersects&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=neighbourhood&per_page=1&cursor=1",
     "per_page": 1,
-    "pages": null,
-    "cursor": null,
+    "cursor": 1,
     "stat": "ok"
 }
 ```
@@ -793,18 +876,22 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getNearby&api_key=your-mapzen-api-key&latitude=40.784165&longitude=-73.958110&radius=25&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getNearby&api_key=your-mapzen-api-key&latitude=40.784165&longitude=-73.958110&radius=25&placetype=neighbourhood&per_page=1'
 
 {
     "places": [
-
+        {
+            "wof:id": 85865691,
+            "wof:parent_id": 421205771,
+            "wof:name": "Upper East Side",
+            "wof:placetype": "neighbourhood",
+            "wof:country": "US",
+            "wof:repo": "whosonfirst-data"
+        }
     ],
-    "next_query": null,
-    "total": null,
-    "page": null,
+    "next_query": "method=mapzen.places.getNearby&latitude=40.784165&longitude=-73.958110&radius=25&placetype=neighbourhood&per_page=1&cursor=1",
     "per_page": 1,
-    "pages": null,
-    "cursor": null,
+    "cursor": 1,
     "stat": "ok"
 }
 ```
@@ -886,11 +973,11 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getRandom&api_ke
 
 {
     "place": {
-        "wof:id": 1108759325,
-        "wof:parent_id": "85668731",
-        "wof:name": "Bukemba",
-        "wof:placetype": "county",
-        "wof:country": "BI",
+        "wof:id": 890432191,
+        "wof:parent_id": "1108759853",
+        "wof:name": "Kasoa",
+        "wof:placetype": "locality",
+        "wof:country": "GH",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"

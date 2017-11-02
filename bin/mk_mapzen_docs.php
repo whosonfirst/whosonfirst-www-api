@@ -118,6 +118,36 @@
 					$args['access_token'] = $token;
 				}			
 
+				$has_existential = array(
+					"mapzen.places.getByLatLon",
+					"mapzen.places.getHierarchiesByLatLon",
+					"mapzen.places.getParentByLatLon",
+					"mapzen.places.getByPolyline",
+					"mapzen.places.getNearby",
+					"mapzen.places.getIntersects",
+				);
+
+				$existential_filters = array(
+					"is_current",
+					"is_ceased",
+					"is_deprecated",
+					"is_superseded",
+					"is_superseding",
+				);
+
+				if (in_array($method_name, $has_existential)){
+
+					foreach ($existential_filters as $f){
+						unset($args[$f]);
+					}
+
+				}
+
+				if ($method_name == "mapzen.places.getByPolyline"){
+					$args["placetype"] = "postalcode";
+					unset($args["precision"]);
+				}
+
 				#
 
 				$rsp = whosonfirst_api_call($method_name, $args);
