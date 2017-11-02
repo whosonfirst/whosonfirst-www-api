@@ -94,7 +94,11 @@
 			api_output_error(436);
 		}
 
-		$flags = api_whosonfirst_ensure_existential_flags();
+		$flags_more = array(
+			"prefix" => null,
+		);
+
+		$flags = api_whosonfirst_ensure_existential_flags($flags_more);
 
 		$placetypes = whosonfirst_placetypes_ancestors($pt);
 		array_unshift($placetypes, $pt);
@@ -462,7 +466,11 @@
 			$more["placetype"] = $pt;
 		}
 
-		$flags = api_whosonfirst_ensure_existential_flags();
+		$flags_more = array(
+			"prefix" => null,
+		);
+
+		$flags = api_whosonfirst_ensure_existential_flags($flags_more);
 		$more = array_merge($more, $flags);
 
 		$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
