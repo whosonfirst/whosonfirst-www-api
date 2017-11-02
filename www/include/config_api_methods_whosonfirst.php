@@ -117,7 +117,7 @@
 			),
 			array(
 				"name" => "is_current",
-				"description" => "Filter results by their 'mz:is_current' property.",
+				"description" => "Filter results by their 'mz:is_current' property. Valid options are: -1, 1, 0",
 				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
@@ -197,7 +197,7 @@
 			),
 			array(
 				"name" => "is_current",
-				"description" => "Filter results by their 'mz:is_current' property.",
+				"description" => "Filter results by their 'mz:is_current' property. Valid options are: -1, 1, 0",
 				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
