@@ -358,7 +358,7 @@
 			$args["precision"] = $p;
 		}
 
-		if (request_isset("unique")){
+		if (request_int32("unique")){
 			$args["unique"] = 1;
 		}
 
