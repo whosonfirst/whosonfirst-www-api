@@ -487,7 +487,7 @@
 			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'polyline' parameter"),
-				"433" => array("message" => "Missing 'precision' parameter"),
+				"433" => array("message" => "Invalid 'precision' parameter"),
 				"436" => array("message" => "Invalid placetype"),
 				"513" => array("message" => "Failed to perform lookup"),
 			),

@@ -351,12 +351,7 @@
 				api_output_error(433);
 			}
 
-			# in advance of updating go-whosonfirst-pip-v2
-			# (20171101/thisisaaronland)
-
-			if ($p == 6){
-				$args["valhalla"] = 1;
-			}
+			$args["precision"] = $p;
 		}
 
 		if (request_isset("unique")){
