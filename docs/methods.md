@@ -16,7 +16,7 @@ Return the list of API error responses common to all methods.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -57,7 +57,7 @@ Return the list of valid API response formats, including the default format
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -74,7 +74,6 @@ curl -X GET 'https://places.mapzen.com/v1/?method=api.spec.formats&api_key=your-
 
 {
     "formats": [
-        "chicken",
         "csv",
         "geojson",
         "json",
@@ -95,7 +94,7 @@ Return the list of available API response methods.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -172,7 +171,7 @@ A testing method which echo&#039;s all parameters back in the response.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -202,7 +201,7 @@ Return a test error from the API
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -240,7 +239,7 @@ Return a Who&#039;s On First record (and all its concordances) by another source
 | `source` | The source prefix of the concordance you are looking for |  gp:id | yes |
 | `page` | The default is 1. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -301,7 +300,7 @@ List all the sources that Who&#039;s On First holds hands with.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `page` | The default is 1. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -338,6 +337,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.concordances.get
 ### mapzen.places
 
 * [mapzen.places.getByLatLon](#mapzen.places.getByLatLon)
+* [mapzen.places.getByPolyline](#mapzen.places.getByPolyline)
 * [mapzen.places.getDescendants](#mapzen.places.getDescendants)
 * [mapzen.places.getHierarchiesByLatLon](#mapzen.places.getHierarchiesByLatLon)
 * [mapzen.places.getInfo](#mapzen.places.getInfo)
@@ -361,8 +361,13 @@ Return Who&#039;s On First places intersecting a latitude and longitude
 | `latitude` | A valid latitude coordinate. |  37.766633 | yes |
 | `longitude` | A valid longitude coordinate. |  -122.417693 | yes |
 | `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | no |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. Valid options are: -1, 1, 0 |  1 | no |
+| `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
+| `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
+| `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
+| `is_superseding` | Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0 |  1 | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -384,27 +389,73 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getByLatLon&api_key=your-mapzen-api-key&latitude=37.766633&longitude=-122.417693&placetype=neighbourhood'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getByLatLon&api_key=your-mapzen-api-key&latitude=37.766633&longitude=-122.417693&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1'
 
 {
     "places": [
-        {
-            "wof:id": 85834637,
-            "wof:parent_id": "1108830809",
-            "wof:name": "Inner Mission",
-            "wof:placetype": "neighbourhood",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data"
-        },
-        {
-            "wof:id": 85887443,
-            "wof:parent_id": "85922583",
-            "wof:name": "Mission District",
-            "wof:placetype": "neighbourhood",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data"
-        }
+
     ],
+    "stat": "ok"
+}
+```
+
+<a name="mapzen.places.getByPolyline"></a>
+#### mapzen.places.getByPolyline
+
+Return Who&#039;s On First places intersecting each point along a polyline.
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
+| `polyline` | A valid polyline-encoded string. |  e_teFdj_jV|OzS_NlRbNdRqFdHt`AdsAqWlEqAkSug@nFxMfqB`jAaOhSfvCqb@tHjMx}I | yes |
+| `precision` | The decimal precision for your polyline, for example 5 (Google) or 6 (Mapzen Valhalla) |  6 | no |
+| `unique` | Signal that results should only contain the unique set of places that intersect all steps in the polyline) |  1 | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | no |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. Valid options are: -1, 1, 0 |  1 | no |
+| `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
+| `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
+| `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
+| `is_superseding` | Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0 |  1 | no |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `page` | The default is 1. | 1 | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Missing &#039;polyline&#039; parameter |
+| `433` | Invalid &#039;precision&#039; parameter |
+| `436` | Invalid placetype |
+| `513` | Failed to perform lookup |
+
+##### Notes
+
+* If you pass the &#039;unique&#039; flag please note that the set of unique places will be for the paginated slice of the polyline rather than the entire polyline itself. This may cause pagination results to look a bit weird and why the &#039;total&#039; pagination property will be set to null (since its count will reflect the total number of points in your polyline).
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+
+##### Example
+
+```
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getByPolyline&api_key=your-mapzen-api-key&polyline=e_teFdj_jV|OzS_NlRbNdRqFdHt`AdsAqWlEqAkSug@nFxMfqB`jAaOhSfvCqb@tHjMx}I&precision=6&unique=1&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
+
+{
+    "places": [
+        [
+
+        ]
+    ],
+    "next_query": "method=mapzen.places.getByPolyline&polyline=e_teFdj_jV%7COzS_NlRbNdRqFdHt%60AdsAqWlEqAkSug%40nFxMfqB%60jAaOhSfvCqb%40tHjMx%7DI&precision=6&unique=1&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1&page=2",
+    "total": null,
+    "page": 1,
+    "per_page": 1,
+    "pages": 14,
+    "cursor": null,
     "stat": "ok"
 }
 ```
@@ -435,7 +486,7 @@ Return all the descendants for a Who&#039;s On First ID.
 | `neighbourhood_id` | Ensure places belong to this neighbourhood Who&#039;s On First ID. |  102112179 | no |
 | `brand_id` | Ensure places belong to this Who&#039;s On First brand ID. |  1126128733 | no |
 | `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
-| `is_current` | Filter results by their &#039;mz:is_current&#039; property. |  1 | no |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. Valid options are: -1, 1, 0 |  1 | no |
 | `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
 | `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
 | `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
@@ -449,7 +500,7 @@ Return all the descendants for a Who&#039;s On First ID.
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
 | `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -496,9 +547,14 @@ Return the closest set of ancestors (hierarchies) for a latitude and longitude
 | `latitude` | A valid latitude coordinate. |  37.777228 | yes |
 | `longitude` | A valid longitude coordinate. |  -122.470779 | yes |
 | `spr` | Format results as a standard place response (spr). |  1 | no |
-| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | no |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. Valid options are: -1, 1, 0 |  1 | no |
+| `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
+| `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
+| `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
+| `is_superseding` | Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0 |  1 | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -523,7 +579,14 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getHierarchiesByLatLon&api_key=your-mapzen-api-key&latitude=LATITUDE&longitude=LONGITUDE&spr=SPR&placetype=PLACETYPE'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getHierarchiesByLatLon&api_key=your-mapzen-api-key&latitude=37.777228&longitude=-122.470779&spr=1&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1'
+
+{
+    "hierarchies": [
+
+    ],
+    "stat": "ok"
+}
 ```
 
 <a name="mapzen.places.getInfo"></a>
@@ -538,7 +601,7 @@ Return a Who&#039;s On First record by ID.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `id` | A valid Who&#039;s On First ID. |  420561633 | yes |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -580,7 +643,7 @@ Return multiple Who&#039;s On First records by ID.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `ids` | A comma separated list of valid Who&#039;s On First ID. A maximum of 20 WOF IDs may be specified. |  101712565,101712563 | yes |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -635,11 +698,16 @@ Return all the Who&#039;s On First places intersecting a bounding box.
 | `min_longitude` | A valid longitude coordinate, representing the left (Western) edge of the bounding box. |  -122.34374508 | yes |
 | `max_latitude` | A valid latitude coordinate, representing the top (Northern) edge of the bounding box. |  37.85749665 | yes |
 | `max_longitude` | A valid longitude coordinate, representing the right (Eastern) edge of the bounding box. |  -122.25585446 | yes |
-| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | no |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. Valid options are: -1, 1, 0 |  1 | no |
+| `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
+| `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
+| `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
+| `is_superseding` | Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0 |  1 | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -664,7 +732,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getIntersects&api_key=your-mapzen-api-key&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=venue&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getIntersects&api_key=your-mapzen-api-key&min_latitude=37.78807088&min_longitude=-122.34374508&max_latitude=37.85749665&max_longitude=-122.25585446&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
 
 {
     "places": [
@@ -693,11 +761,16 @@ Return all the Who&#039;s On First records near a point.
 | `latitude` | A valid latitude coordinate. |  40.784165 | yes |
 | `longitude` | A valid longitude coordinate. |  -73.958110 | yes |
 | `radius` | A valid radius (in meters) to limit the query by. Default radius is 100. Maximum radius is 500. |  25 | no |
-| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | no |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. Valid options are: -1, 1, 0 |  1 | no |
+| `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
+| `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
+| `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
+| `is_superseding` | Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0 |  1 | no |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
 | `cursor` | This method uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. Please consult the [pagination documentation](pagination.md) for details. | _cXVl...c7MDs=_ | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -720,7 +793,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getNearby&api_key=your-mapzen-api-key&latitude=40.784165&longitude=-73.958110&radius=25&placetype=venue&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getNearby&api_key=your-mapzen-api-key&latitude=40.784165&longitude=-73.958110&radius=25&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1&per_page=1'
 
 {
     "places": [
@@ -749,7 +822,7 @@ Return Who&#039;s On First parent ID for a latitude and longitude and placetype
 | `latitude` | A valid latitude coordinate. |  35.655065 | yes |
 | `longitude` | A valid longitude coordinate. |  139.369640 | yes |
 | `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | yes |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -778,7 +851,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getParentByLatLo
 
 {
     "place": {
-        "wof:parent_id": 102031773
+        "wof:parent_id": null
     },
     "stat": "ok"
 }
@@ -795,7 +868,7 @@ Return a random Who&#039;s On First record.
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -813,11 +886,11 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getRandom&api_ke
 
 {
     "place": {
-        "wof:id": 1092076933,
-        "wof:parent_id": "85680321",
-        "wof:name": "Sauce",
+        "wof:id": 1108759325,
+        "wof:parent_id": "85668731",
+        "wof:name": "Bukemba",
         "wof:placetype": "county",
-        "wof:country": "UY",
+        "wof:country": "BI",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -850,7 +923,7 @@ Query for Who&#039;s On First records.
 | `neighbourhood_id` | Ensure places belong to this neighbourhood Who&#039;s On First ID. |  102112179 | no |
 | `brand_id` | Ensure places belong to this Who&#039;s On First brand ID. |  1126128733 | no |
 | `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
-| `is_current` | Filter results by their &#039;mz:is_current&#039; property. |  1 | no |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. Valid options are: -1, 1, 0 |  1 | no |
 | `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
 | `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
 | `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
@@ -864,7 +937,7 @@ Query for Who&#039;s On First records.
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
 | `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
+| `format` | The format in which to return the data. Supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta). The default format is [json](formats.md#json)</a>.| json | no |
 
 ##### Error codes
 
@@ -919,7 +992,7 @@ Query Who&#039;s On First using the Pelias autocomplete API
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `text` | A valid query string. |  Gowanu | yes |
 | `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1044,7 +1117,7 @@ Query Who&#039;s On First using the Pelias API
 | `cursor` | This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response, in the `cursor` property. | _cXVl...c7MDs=_ | no |
 | `page` | The default is 1. If this API method returns a non-empty `cursor` property as part of its response that means you should switch to using cursor-based pagination for all subsequent queries. Alternately you can simply rely on the `next_query` property to determine which parameters to include with your next request. Unfortunately it's complicated because databases are, after all these years, still complicated. Please consult the [pagination documentation](pagination.md) for details. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [csv](formats.md#csv), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1111,7 +1184,7 @@ Return details for a Who&#039;s On First placetype.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `id` | A valid Who&#039;s On First placetype ID. |  102322043 | no |
 | `name` | A valid Who&#039;s On First placetype name. |  disputed | no |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1156,7 +1229,7 @@ Return a list of Who&#039;s On First placetypes.
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `role` | Only return placetypes that are part of this role. |  common | no |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1250,7 +1323,7 @@ Return a list of Who&#039;s On First placetype roles.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1292,8 +1365,13 @@ Return a Who&#039;s On First repo name for a latitude and longitude.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `latitude` | A valid latitude coordinate. |  37.766633 | yes |
 | `longitude` | A valid longitude coordinate. |  -122.417693 | yes |
-| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  venue | no |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `placetype` | A valid Who&#039;s On First placetype to limit the query by. |  neighbourhood | no |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. Valid options are: -1, 1, 0 |  1 | no |
+| `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
+| `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
+| `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
+| `is_superseding` | Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0 |  1 | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1321,11 +1399,11 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.repos.getByLatLon&api_key=your-mapzen-api-key&latitude=37.766633&longitude=-122.417693&placetype=venue&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1'
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.repos.getByLatLon&api_key=your-mapzen-api-key&latitude=37.766633&longitude=-122.417693&placetype=neighbourhood&is_current=1&is_ceased=1&is_deprecated=1&is_superseded=1&is_superseding=1'
 
 {
-    "repo": "whosonfirst-data-venue-us-ca",
-    "url": "https:\/\/github.com\/whosonfirst-data\/whosonfirst-data-venue-us-ca",
+    "repo": "whosonfirst-data",
+    "url": "https:\/\/github.com\/whosonfirst-data\/whosonfirst-data",
     "stat": "ok"
 }
 ```
@@ -1349,7 +1427,7 @@ Return details for a Who&#039;s On First source.
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
 | `id` | A valid Who&#039;s On First source ID. |  840464301 | no |
 | `prefix` | A valid Who&#039;s On First source prefix. |  loc | no |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -1397,7 +1475,7 @@ Return the list of Who&#039;s On First sources.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -2873,7 +2951,7 @@ Return the list of prefixes for all Who&#039;s On First sources.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -3030,7 +3108,7 @@ Return the list of sources for all the tags in Who&#039;s On First.
 | Argument | Description | Example | Required |
 | :--- | :--- | :--- | :--- |
 | `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 
@@ -3067,7 +3145,7 @@ Return the list of unique tags n Who&#039;s On First.
 | `source` | Limit results to categories from this source. |  wof | no |
 | `page` | The default is 1. | 1 | no |
 | `per_page` | The default is 100 and the maximum is 500. | 100 | no |
-| `format` | The format in which to return the data. Normally supported formats are [chicken](formats.md#chicken), [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
 
 ##### Error codes
 

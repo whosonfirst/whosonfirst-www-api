@@ -10,7 +10,7 @@ In addition to any already [assigned HTTP status codes](https://www.iana.org/ass
 | `401` | KeyDisabled |
 | `403` | KeyError |
 | `404` | ApiUnknown |
-| `429` | Queries per minute/hour/day exceeded |
+| `429` | Free rate limits or monthly spending limits exceeded |
 
 <a name="client"></a>
 ### Client-side errors

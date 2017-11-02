@@ -1,51 +1,7 @@
 <a name="formats"></a>
 ## Response formats
 
-The default response format is [JSON](formats.md#json).
-
-<a name="chicken"></a>
-### CHICKEN
-
-🐔 🐔 🐔
-
-#### Example request
-
-```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getInfoMulti&api_key=your-mapzen-api-key&ids=101712565,101712563&format=chicken'
-```
-
-#### Example response
-
-```
-< HTTP/1.1 200 OK
-< Access-Control-Allow-Origin: *
-< Content-Type: text/chicken
-< Date: Tue, 25 Apr 2017 14:08:08 GMT
-{
-    "🐔": [
-        {
-            "🐔:🐔": 101712565,
-            "🐔:🐔_🐔": "404525063",
-            "🐔:🐔": "🐔 🐔",
-            "🐔:🐔": "🐔",
-            "🐔:🐔": "🐔",
-            "🐔:🐔": "🐔-🐔"
-        },
-        {
-            "🐔:🐔": 101712563,
-            "🐔:🐔_🐔": "404523697",
-            "🐔:🐔": "🐔",
-            "🐔:🐔": "🐔",
-            "🐔:🐔": "🐔",
-            "🐔:🐔": "🐔-🐔"
-        }
-    ]
-}
-```
-
-#### Notes
-
-🐔 (chicken) output is supported for all API methods.
+Response formats are listed alphabetically. The **default** response format is **[JSON](formats.md#json)**.
 
 <a name="csv"></a>
 ### CSV
@@ -257,3 +213,4 @@ bbox,cessation,country_id,deprecated,file_hash,fullname,geom_hash,geom_latitude,
 #### Notes
 
 Meta (CSV) output is not supported for all API methods.
+
