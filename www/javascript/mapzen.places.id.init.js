@@ -43,8 +43,7 @@ window.addEventListener("load", function load(event){
 
 		fetch(abs_path, onsuccess, onerror);
 
-		if (wof_placetype == "venue"){
-
+		if (wof_parent_id){
 			var abs_path = mapzen.whosonfirst.uri.id2abspath(wof_parent_id);
 			fetch(abs_path, onsuccess, onerror);
 		}
