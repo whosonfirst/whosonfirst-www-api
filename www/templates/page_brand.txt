@@ -1,0 +1,27 @@
+{capture assign="brand_name"}{if $places|@count > 0}{$places.0|@whosonfirst_places_property:"wof:name"}{/if}{/capture}
+{capture assign="page_title"}{if $brand_name}{$brand_name}{/if} | brands{/capture}
+{include file="inc_head.txt"}
+
+<div id="content" class="container">
+{if $places|@count==0}
+
+	<div class="row headroom-large">
+		<div class="col-xs-12">
+			<h2>Hrm, we can't find any places associated with that #brand</h2>
+		</div>
+	</div>
+
+{else}
+
+	<div class="row headroom-large">
+		<div class="col-xs-12">
+			<h2>Places that are a <a href="{$cfg.abs_root_url}brands/{$brand_id|@escape}">#{$brand_name|@escape}</a></h2>
+		</div>
+	</div>
+
+	{include file="inc_results.txt" results=$places pagination=$pagination}
+
+{/if}
+</div>
+
+{include file="inc_foot.txt"}
