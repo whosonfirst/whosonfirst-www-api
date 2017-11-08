@@ -242,6 +242,22 @@
 
 	########################################################################
 
+	function whosonfirst_places_get_by_brand_id($id, $more=array()){
+
+		$query = array('term' => array(
+			'wof:brand_id' => $id,
+		));
+
+		$req = array(
+			'query' => $query
+		);
+
+		$rsp = elasticsearch_spelunker_search($req, $more);
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_places_property($place, $path){
 
 		$property = null;
@@ -358,6 +374,8 @@
 		return 'unknown';
 	}
 
+	########################################################################
+
 	function whosonfirst_places_format_time($time){
 
 		if (preg_match('/^(\d\d):(\d\d)$/', $time, $matches)){
@@ -410,5 +428,7 @@
 
 		return $property;
 	}
+
+	########################################################################
 
 	# the end

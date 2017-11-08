@@ -1,0 +1,43 @@
+{capture assign="brand_name"}{if $places|@count > 0}{$places.0|@whosonfirst_places_property:"wof:name"}{/if}{/capture}
+{capture assign="page_title"}{if $brand_name}{$brand_name}{/if} | brands{/capture}
+{capture assign="extra_meta"}
+{if $places|@count>0}
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Mapzen Places" />
+<meta property="og:title" content="Places that are a #{$brand_name|@escape} ({$brand_id|@escape})" />
+<meta property="og:description" content="{if $places|@count==1}There is one of them!{else}There are {$places|@count|@number_format|@escape} of them!{/if}" />
+<meta property="og:image" content="https://mapzen.com/common/styleguide/images/favicons/favicon-32x32.png" />
+<meta property="twitter:card" value="summary" />
+<meta property="twitter:site" content="@mapzen" />
+<meta property="twitter:creator" content="@mapzen" />
+<meta property="twitter:url" content="{$cfg.abs_root_url}brands/{$brand_id|@escape}/" />
+<meta property="twitter:title" content="Places that are a #{$brand_name|@escape} ({$brand_id|@escape})" />
+<meta property="twitter:description" content="{if $places|@count==1}There is one of them!{else}There are {$places|@count|@number_format|@escape} of them!{/if}" />
+<meta property="twitter:image" content="https://mapzen.com/common/styleguide/images/favicons/favicon-32x32.png" />
+{/if}
+{/capture}
+{include file="inc_head.txt"}
+
+<div id="content" class="container">
+{if $places|@count==0}
+
+	<div class="row headroom-large">
+		<div class="col-xs-12">
+			<h2>Hrm, we can't find any places associated with that #brand</h2>
+		</div>
+	</div>
+
+{else}
+
+	<div class="row headroom-large">
+		<div class="col-xs-12">
+			<h2>Places that are a <a href="{$cfg.abs_root_url}brands/{$brand_id|@escape}">#{$brand_name|@escape}</a></h2>
+		</div>
+	</div>
+
+	{include file="inc_results.txt" results=$places pagination=$pagination}
+
+{/if}
+</div>
+
+{include file="inc_foot.txt"}

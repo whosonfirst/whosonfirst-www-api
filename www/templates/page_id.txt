@@ -3,6 +3,7 @@
 {capture assign="wof_placetype"}{$place|@whosonfirst_places_property:"wof:placetype"}{/capture}
 {capture assign="wof_country"}{$place|@whosonfirst_places_property:"wof:country"}{/capture}
 {capture assign="wof_parent_id"}{$place|@whosonfirst_places_property:"wof:parent_id"}{/capture}
+{capture assign="wof_brand_id"}{$place|@whosonfirst_places_property:"wof:brand_id"}{/capture}
 {capture assign="wof_parent_name"}{$place|@whosonfirst_places_property:"wof:parent.wof:name"}{/capture}
 {capture assign="wof_parent_placetype"}{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"}{/capture}
 {capture assign="wof_blurb_escaped"}{$wof_name|@escape} is a {$wof_placetype|@escape} and its Who's On First ID is {$wof_id|@escape}.{if $wof_country != ""} :flag-{$wof_country|@strtolower|@escape}:{/if}{/capture}
@@ -50,8 +51,10 @@
 							{foreach from=$wof_parents item="row" name="parents"}<a href="{$row|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$row|@whosonfirst_places_property:"wof:name"}</a>{if !$smarty.foreach.parents.last}, {/if}{/foreach}
 						{/if}
 					{else}
-						in <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a>
+						in <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a>.
 					{/if}
+
+					{if $wof_brand_id}See <a href="{$cfg.abs_root_url}brands/{$wof_brand_id|@escape}/">all the {$wof_name|@escape}</a> in <span class="hey-look">{$cfg.site_name|@escape}</span>.{/if}
 				</div>
 			{/if}
 		</div>
