@@ -58,7 +58,7 @@
 	</div>
 	<div class="row headroom">
 		{if $wof_placetype == "venue"}
-			<div id="venue-info" class="col-xs-6">
+			<div id="venue-info" class="col-xs-12 col-sm-6">
 				{capture assign="addr_full"}{$place|@whosonfirst_places_property:"addr:full"}{/capture}
 				{capture assign="addr_phone"}{$place|@whosonfirst_places_property:"addr:phone"}{/capture}
 				{if $addr_full != ""}<h4 itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">{$addr_full|@escape}</h4>{/if}
@@ -66,7 +66,7 @@
 				{include file="inc_venue_hours.txt"}
 				{include file="inc_venue_links.txt"}
 			</div>
-			<div class="col-xs-6">
+			<div class="col-xs-12 col-sm-6">
 				<div id="map" data-wof-id="{$wof_id|@escape}" data-wof-placetype="{$wof_placetype|@escape}" data-geom-latitude="{$place|@whosonfirst_places_property:"geom:latitude"|@escape}" data-geom-longitude="{$place|@whosonfirst_places_property:"geom:longitude"|@escape}"></div>
 			</div>
 		{else}

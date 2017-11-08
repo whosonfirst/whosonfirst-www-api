@@ -49,3 +49,12 @@ body.places #content ul li {
 	margin-top: -12px;
 	margin-bottom: 12px;
 }
+
+@media (max-width: 768px) {
+
+	#map {
+		margin-top: 1.5em;
+		height: 200px;
+	}
+
+}
