@@ -19,6 +19,7 @@ mapzen.places.map = (function(){
 				var map = L.Mapzen.map(map_id, {
 					zoomControl: false,
 					maxZoom: 20,
+					scrollWheelZoom: false,
 					// https://github.com/mapzen/mapzen.js/blob/master/src/js/components/tangram.js
 					tangramOptions: {
 						//scene: L.Mapzen.BasemapStyles.Refill,
