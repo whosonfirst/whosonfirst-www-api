@@ -242,10 +242,10 @@
 
 	########################################################################
 
-	function whosonfirst_places_get_by_brand_id($id, $more=array()){
+	function whosonfirst_places_get_by_brand(&$brand, $more=array()){
 
 		$query = array('term' => array(
-			'wof:brand_id' => $id,
+			'wof:brand_id' => $brand["wof:brand_id"],
 		));
 
 		$req = array(

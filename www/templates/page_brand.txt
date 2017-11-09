@@ -1,5 +1,6 @@
-{capture assign="brand_name"}{if $places|@count > 0}{$places.0|@whosonfirst_places_property:"wof:name"}{/if}{/capture}
-{capture assign="page_title"}{if $brand_name}{$brand_name}{/if} | brands{/capture}
+{capture assign="brand_id"}{$brand|@whosonfirst_brands_property:"wof:brand_id"}{/capture}
+{capture assign="brand_name"}{$brand|@whosonfirst_brands_property:"wof:brand_name"}{/capture}
+{capture assign="page_title"}{$brand_name} | #brands{/capture}
 {capture assign="extra_meta"}
 {if $places|@count>0}
 <meta property="og:type" content="article" />
@@ -19,15 +20,7 @@
 {include file="inc_head.txt"}
 
 <div id="content" class="container">
-{if $places|@count==0}
 
-	<div class="row headroom-large">
-		<div class="col-xs-12">
-			<h2>Hrm, we can't find any places associated with that #brand</h2>
-		</div>
-	</div>
-
-{else}
 
 	<div class="row headroom-large">
 		<div class="col-xs-12">
@@ -35,9 +28,12 @@
 		</div>
 	</div>
 
+{if $places|@count==0}
+			<h3>Hrm, we can't find any places associated with that #brand</h3>
+{else}
 	{include file="inc_results.txt" results=$places pagination=$pagination}
-
 {/if}
+
 </div>
 
 {include file="inc_foot.txt"}

@@ -12,8 +12,11 @@
 
 	$id = get_int64("id");
 
-	# FETCH BRAND HERE, we need to (re) index ES first
-	# (20171107/thisisaaronland)
+	$brand = whosonfirst_brands_get_by_id($id);
+
+	if (! $brand){
+		error_404();
+	}
 
 	$more = array();
 
@@ -21,7 +24,7 @@
 		$more["page"] = $p;
 	}	
 
-	$rsp = whosonfirst_places_get_by_brand_id($id, $more);
+	$rsp = whosonfirst_places_get_by_brand($brand, $more);
 
 	if (! $rsp["ok"]){
 		error_500();
@@ -30,7 +33,7 @@
 	$places = $rsp["rows"];
 	$pagination = $rsp["pagination"];
 
-	$GLOBALS['smarty']->assign_by_ref("brand_id", $id);
+	$GLOBALS['smarty']->assign_by_ref("brand", $brand);
 
 	$GLOBALS['smarty']->assign_by_ref("places", $places);
 	$GLOBALS['smarty']->assign_by_ref("pagination", $pagination);
