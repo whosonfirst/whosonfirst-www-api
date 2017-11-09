@@ -258,6 +258,14 @@
 
 	########################################################################
 
+	function whosonfirst_places_get_brands($more=array()){
+
+		$rsp = elasticsearch_spelunker_facet("wof:brand_id", $more);
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_places_property($place, $path){
 
 		$property = null;

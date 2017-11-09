@@ -29,7 +29,8 @@
 		$defaults = array(
 			'host' => $GLOBALS['cfg']['elasticsearch_brands_host'],
 			'port' => $GLOBALS['cfg']['elasticsearch_brands_port'],
-			'index' => $GLOBALS['cfg']['elasticsearch_brands_index']
+			'index' => $GLOBALS['cfg']['elasticsearch_brands_index'],
+			'scroll' => false,	# PLEASE PUT ME IN A CONFIG, also see notes in brands.php (20171109/thisisaaronland)
 		);
 
 		$more = array_merge($defaults, $more);
