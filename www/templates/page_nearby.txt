@@ -40,8 +40,7 @@
 		<table id="search-results" class="table hidden">
 			<thead>
 				<tr>
-					<th>ID</th>
-					<th>Name</th>
+					<th>Place</th>
 					<th>Placetype</th>
 					<th>Currentness</th>
 					<th>Country</th>
@@ -49,8 +48,7 @@
 			</thead>
 			<tbody>
 				<tr id="result-template" itemscope itemtype="http://schema.org/Place" class="results-item hidden">
-					<td><code class="id"></code></td>
-					<td><a href="#" itemprop="name" class="name"></a></td>
+					<td><a href="#" itemprop="name" class="name"></a> <code class="id"></code> <span class="not-current hidden"><em>not current</em></span></td>
 					<td class="placetype"></td>
 					<td class="currentness"></td>
 					<td class="country"></td>

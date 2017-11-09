@@ -45,6 +45,11 @@ window.addEventListener("load", function load(event){
 			}
 			tr.querySelector('.currentness').innerHTML = currentness;
 
+			if (currentness != 'current'){
+				// Remove 'hidden' class from 'not current' label
+				tr.querySelector('.not-current').className = 'not-current';
+			}
+
 			var country_code = props['iso:country'];
 			if (typeof whosonfirst_countries[country_code] != 'undefined'){
 				var country = whosonfirst_countries[country_code];

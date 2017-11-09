@@ -12,8 +12,7 @@
 				<table id="search-results" class="table">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Name</th>
+							<th>Place</th>
 							<th>Placetype</th>
 							<th>Currentness</th>
 							<th>Country</th>

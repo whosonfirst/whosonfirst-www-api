@@ -1,6 +1,11 @@
 <tr itemscope itemtype="http://schema.org/Place" class="results-item" data-wof-id="{$result|@whosonfirst_places_property:"wof:id"|@escape}" data-latitude="{$result|@whosonfirst_places_coordinate:"latitude"|@escape}" data-longitude="{$result|@whosonfirst_places_coordinate:"longitude"|@escape}">
-	<td><code>{$result|@whosonfirst_places_property:"wof:id"|@escape}</code></td>
-	<td><a href="{$cfg.abs_root_url}id/{$result|@whosonfirst_places_property:"wof:id"|@escape}" itemprop="name">{$result|@whosonfirst_places_property:"wof:name"|@escape}</a></td>
+	<td>
+		<a href="{$cfg.abs_root_url}id/{$result|@whosonfirst_places_property:"wof:id"|@escape}" itemprop="name">{$result|@whosonfirst_places_property:"wof:name"|@escape}</a>
+		<code>{$result|@whosonfirst_places_property:"wof:id"|@escape}</code>
+		{if whosonfirst_places_currentness($result) != "current"}
+			<em>not current</em>
+		{/if}
+	</td>
 	<td>{$result|@whosonfirst_places_property:"wof:placetype"|@escape}</td>
 	<td>{$result|@whosonfirst_places_currentness|@escape}</td>
 	<td>{$result|@whosonfirst_places_country_link}</td>
