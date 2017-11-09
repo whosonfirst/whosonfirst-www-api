@@ -28,7 +28,7 @@
 							<td class="hey-look">{$brand|@whosonfirst_brands_property:"wof:brand_id"|@escape}</td>
 							<td><a href="{$brand|@whosonfirst_brands_url_for_brand}">{$brand|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a></td>
 							<!-- <td>&#8212;</td> -->
-							<td>{if $brands.places_count}<a href="{$brand|@whosonfirst_brands_url_for_brand}">{$brand.places_count|@number_format|@escape}</a>{else}&#8212;{/if}</td>
+							<td>{if $brand.places_count}<a href="{$brand|@whosonfirst_brands_url_for_brand}">{$brand.places_count|@number_format|@escape}</a>{else}&#8212;{/if}</td>
 						</tr>
 						{/foreach}
 					</tbody>
