@@ -44,8 +44,10 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h2>{$wof_name|@escape}</h2>
-			{if $wof_placetype == "venue"}
-				<div class="venue-neighbourhood">
+			<div class="place-description">
+				{if whosonfirst_places_currentness($place) != "current"}
+					<span class="not-current">This record is <strong>not current</strong></span>
+				{elseif $wof_placetype == "venue"}
 					{if $wof_parent_id < 0}
 						{if $wof_parents|@count}
 							{foreach from=$wof_parents item="row" name="parents"}<a href="{$row|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$row|@whosonfirst_places_property:"wof:name"}</a>{if !$smarty.foreach.parents.last}, {/if}{/foreach}
@@ -55,8 +57,8 @@
 					{/if}
 
 					{if $wof_brand_id}See <a href="{$cfg.abs_root_url}brands/{$wof_brand_id|@escape}/">all the {$wof_name|@escape}</a> in <span class="hey-look">{$cfg.site_name|@escape}</span>.{/if}
-				</div>
-			{/if}
+				{/if}
+			</div>
 		</div>
 	</div>
 	<div class="row headroom">

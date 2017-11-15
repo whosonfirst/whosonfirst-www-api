@@ -45,9 +45,18 @@ body.places #content ul li {
 	margin: 0;
 }
 
-.venue-neighbourhood {
+.place-description {
 	margin-top: -12px;
 	margin-bottom: 12px;
+}
+
+.not-current {
+	display: inline-block;
+	color: #fff;
+	background: #ff4947;
+	padding: 2px 6px;
+	border-radius: 3px;
+	font-style: italic;
 }
 
 @media (max-width: 768px) {
