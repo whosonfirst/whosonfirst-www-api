@@ -31,18 +31,26 @@
 	padding: 1em;
 }
 
-#go-form .btn {
-	line-height: 16px;
-	margin-top: -5px;
-	margin-left: 5px;
+#go-form .form-group {
+	margin-bottom: 0.75em;
+}
+
+#go-form .form-group:last-child {
+	margin-bottom: 0;
+}
+
+#go-form .form-group::after {
+	content: "";
+	clear: both;
+	display: table;
 }
 
 body.places #content ul li {
 	list-style: none;
 }
 
-#venue-info h4 {
-	margin: 0;
+#venue-info h5:first-child {
+	margin-top: 0;
 }
 
 .place-description {

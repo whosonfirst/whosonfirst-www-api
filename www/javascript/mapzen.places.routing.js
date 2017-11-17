@@ -40,8 +40,7 @@ mapzen.places.routing = (function(){
 		},
 
 		'setup_controls': function(){
-			document.getElementById('go-geolocate').addEventListener('click', self.geolocate_click, false);
-			document.getElementById('go-show-inputs').addEventListener('click', self.show_inputs_click, false);
+			document.getElementById('go-directions').addEventListener('click', self.directions_click, false);
 			document.getElementById('go-form').addEventListener('submit', self.form_submit, false);
 		},
 
@@ -70,7 +69,8 @@ mapzen.places.routing = (function(){
 		'start_loading': function(){
 			var btn = document.getElementById('go-btn');
 			var classes = btn.className + '';
-			btn.className = classes + ' disabled';
+			classes += ' disabled';
+			btn.className = classes;
 			btn.value = 'Loading...';
 		},
 
@@ -83,31 +83,22 @@ mapzen.places.routing = (function(){
 		'done_loading': function(){
 			var btn = document.getElementById('go-btn');
 			var classes = btn.className + '';
-			btn.className = classes.replace('disabled', '');
-			btn.value = 'Get Directions';
+			classes = classes.replace(/disabled/g, '');
+			console.log(classes);
+			btn.className = classes;
+			btn.value = 'Start';
 		},
 
-		'geolocate_click': function(e){
+		'directions_click': function(e){
 			e.preventDefault();
-			if (self.is_loading()) {
-				return;
-			}
-			self.start_loading();
-			if ("geolocation" in navigator){
-				navigator.geolocation.getCurrentPosition(function(position) {
-					var lat = position.coords.latitude.toFixed(6);
-					var lon = position.coords.longitude.toFixed(6);
-					var from = lat + ', ' + lon;
-					var type = self.get_default_type();
-					self.show_inputs(from);
-					var query = 'from=' + encodeURIComponent(from) + '&' +
-						    'directions=' + encodeURIComponent(type);
-					location.hash = '#' + query;
-				});
-			}
-			else {
-				alert('Your browser does not support geolocation.');
-				self.done_loading();
+			var btn = document.getElementById('go-directions');
+			var classes = btn.className + '';
+			if (classes.indexOf('btn-primary') != -1) {
+				self.show_inputs();
+				btn.className = classes.replace('btn-primary', 'btn-transparent');
+			} else {
+				self.hide_inputs();
+				btn.className = classes.replace('btn-transparent', 'btn-primary');
 			}
 		},
 
@@ -130,14 +121,41 @@ mapzen.places.routing = (function(){
 			document.getElementById('go-feedback').className = 'hidden';
 		},
 
+		'hide_inputs': function() {
+			document.getElementById('go-inputs').className = 'row hidden';
+		},
+
 		'form_submit': function(e){
 			e.preventDefault();
+			if (self.is_loading()) {
+				return;
+			}
+			self.start_loading();
 			var from = document.getElementById('go-from').value;
-			var select = document.getElementById('go-costing');
-			var type = select.options[select.selectedIndex].value;
-			var query = 'from=' + encodeURIComponent(from.replace(/ /g, '+')) + '&' +
-			            'directions=' + encodeURIComponent(type.replace(/ /g, '+'));
-			location.hash = '#' + query;
+			if (! from) {
+				if ("geolocation" in navigator){
+					navigator.geolocation.getCurrentPosition(function(position) {
+						var lat = position.coords.latitude.toFixed(6);
+						var lon = position.coords.longitude.toFixed(6);
+						var from = lat + ', ' + lon;
+						var type = self.get_default_type();
+
+						var query = 'from=' + encodeURIComponent(from) + '&' +
+						            'directions=' + encodeURIComponent(type);
+						location.hash = '#' + query;
+					});
+				}
+				else {
+					alert('Your browser does not support geolocation.');
+					self.done_loading();
+				}
+			} else {
+				var select = document.getElementById('go-costing');
+				var type = select.options[select.selectedIndex].value;
+				var query = 'from=' + from.replace(/ /g, '+') + '&' +
+				            'directions=' + type.replace(/ /g, '+');
+				location.hash = '#' + query;
+			}
 		},
 
 		'adjust_bounds': function(){
@@ -272,6 +290,7 @@ mapzen.places.routing = (function(){
 				formatter: new L.Mapzen.routing.formatter({
 					units: self.units
 				}),
+				itinerary: null,
 				defaultErrorHandler: self.routing_error
 			}).addTo(self.map);
 			routingControl.on('routesfound', function(){
@@ -279,20 +298,6 @@ mapzen.places.routing = (function(){
 			});
 
 			return true;
-		},
-
-		'show_inputs_click': function(e){
-			e.preventDefault();
-			setTimeout(function(){
-				var from = document.getElementById('go-from');
-				if (from.value == ''){
-					from.focus();
-				}
-				else {
-					from.select();
-				}
-			}, 0);
-			self.show_inputs();
 		},
 
 		'fetch': function(url, onsuccess, onerror){

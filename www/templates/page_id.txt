@@ -64,10 +64,7 @@
 	<div class="row headroom">
 		{if $wof_placetype == "venue"}
 			<div id="venue-info" class="col-xs-12 col-sm-6">
-				{capture assign="addr_full"}{$place|@whosonfirst_places_property:"addr:full"}{/capture}
-				{capture assign="addr_phone"}{$place|@whosonfirst_places_property:"addr:phone"}{/capture}
-				{if $addr_full != ""}<h4 itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">{$addr_full|@escape}</h4>{/if}
-				{if $addr_phone != ""}<h4 itemprop="telephone">{$addr_phone|@escape}</h4>{/if}
+				{include file="inc_venue_address.txt"}
 				{include file="inc_venue_hours.txt"}
 				{include file="inc_venue_links.txt"}
 			</div>
@@ -100,35 +97,8 @@
 					It is parented by <a href="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" itemprop="containedInPlace" content="{$place|@whosonfirst_places_property:"wof:parent"|@whosonfirst_places_url_for_place}" class="hey-look">{$wof_parent_name|@escape}</a> which is a <span class="hey-look">{$place|@whosonfirst_places_property:"wof:parent.wof:placetype"|@escape}</span>.
 				{/if}
 			</li>
-			{if "routing"|@features_is_enabled}
-			<li>
-				Get directions from
-				<a href="#" id="go-geolocate">where I am now</a> (use geolocation)
-				or <a href="#" id="go-show-inputs">from a specific location</a>.
-			</li>
-			{/if}
 		</ul>
 	</div>
-
-	{if "routing"|@features_is_enabled}
-	<div id="go-inputs" class="hidden row">
-		<div class="col-xs-12">
-			<div id="go-feedback" class="hidden"></div>
-			<form action="{$cfg.abs_root_url|escape}id/{$wof_id|@escape}" id="go-form" class="wide">
-				Get
-				<select name="directions" id="go-costing">
-					<option>driving</option>
-					<option>walking</option>
-					<option>biking</option>
-					<option>transit</option>
-				</select>
-				directions from
-				<input type="text" id="go-from" name="from" placeholder="latitude, longitude">
-				<input id="go-btn" class="btn btn-mapzen" type="submit" value="Get directions">
-			</form>
-		</div>
-	</div>
-	{/if}
 
 	<div class="row">
 		<ul class="list col-xs-12">
