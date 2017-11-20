@@ -96,7 +96,8 @@
 		$variant = request_str("variant");		# names_variant
 
 		$concordance = request_str("concordance");
-		
+		$concordance = explode(",", $concordance);
+
 		$brand = request_int64("brand_id");
 
 		$has_brand = request_str("has_brand");
@@ -562,7 +563,9 @@
 			if ($input){
 
 				$input = api_whosonfirst_utils_ensure_array($input);
-				$filters[] = api_whosonfirst_utils_enfilterify_simple($field, $input);
+				$filter = api_whosonfirst_utils_enfilterify_simple($field, $input);
+
+				$filters[] = $filter;
 			}
 		}
 		
@@ -599,13 +602,18 @@
 			)));
 		}
 
-		$must = array();
+		$cond = "must";
+		$matches = array();
 		
+		if ($field == "wof:concordances_sources"){
+			$cond = "should";
+		}
+
 		foreach ($terms as $term){
 
 			$esc_term = elasticsearch_escape($term, $more);
 			
-			$must[] = array('query' => array(
+			$matches[] = array('query' => array(
 				'match' => array($field => array(
 					'query' => $esc_term, 'operator' => 'and'
 				)
@@ -613,7 +621,7 @@
 		}
 
 		return array('bool' => array(
-			'must' => $must
+			$cond => $matches
 		));
 	}
 	
