@@ -79,6 +79,13 @@
 		{/if}
 	</div>
 
+	{if "osm"|features_is_enabled && $wof_placetype=="venue"}
+	<div class="row osm">
+	<button id="add-to-osm" data-osm-username="">Add this venue to OpenStreetMap</button>
+	<script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.id.osm.init.js"></script>	
+	</div>
+	{/if}
+	
 	<div class="row" itemprop="location" itemscope itemtype="http://schema.org/Place">
 		<ul class="list col-xs-12">
 			<li><span class="hey-look" itemprop="name">{$wof_name|@escape}</span> is a <span class="hey-look">{$wof_placetype|@escape}</span> and its Who's On First ID is <a href="{$place|@whosonfirst_places_url_for_place}" class="hey-look" itemprop="identifier">{$wof_id|@escape}</a>.</li>

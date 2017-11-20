@@ -480,6 +480,7 @@
 
 	$GLOBALS['cfg']['mapzen']['api_key'] = 'READ-FROM-SECRETS';
 
+<<<<<<< HEAD
 	# START OF flamework-redis stuff (used by the chatterbox stuff, below)
 
 	$GLOBALS['cfg']['redis_scheme'] = 'tcp';
@@ -499,3 +500,12 @@
 
 	# END OF chatterbox stuff
 
+       # START OF OSM OAuth stuff
+
+        $GLOBALS['cfg']['osm_oauth_key'] = '';
+        $GLOBALS['cfg']['osm_oauth_secret'] = '';
+
+        # (see notes in www/signin_osm_oauth.php)
+        $GLOBALS['cfg']['crypto_oauth_cookie_secret'] = 'READ-FROM-SECRETS';
+
+       # END OF OSM OAuth stuff
