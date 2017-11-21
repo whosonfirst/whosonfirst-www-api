@@ -96,7 +96,6 @@
 		$variant = request_str("variant");		# names_variant
 
 		$concordance = request_str("concordance");
-		$concordance = explode(",", $concordance);
 
 		$brand = request_int64("brand_id");
 
@@ -561,6 +560,10 @@
 		foreach ($simple as $field => $input){
 
 			if ($input){
+
+				if ($field == 'wof:concordances_sources'){
+				   $input = explode(",", $input);
+				}
 
 				$input = api_whosonfirst_utils_ensure_array($input);
 				$filter = api_whosonfirst_utils_enfilterify_simple($field, $input);
