@@ -96,7 +96,7 @@
 		$variant = request_str("variant");		# names_variant
 
 		$concordance = request_str("concordance");
-		
+
 		$brand = request_int64("brand_id");
 
 		$has_brand = request_str("has_brand");
@@ -113,20 +113,20 @@
 		$max_lastmod = request_int32("max_lastmod");
 
 		# it is assumed that these have all been validate by now
-		
+
 		$swlat = request_float("min_latitude");
 		$swlon = request_float("min_longitude");
 		$nelat = request_float("max_latitude");
 		$nelon = request_float("max_longitude");
-		
-		$swlat = trim($swlat);		
+
+		$swlat = trim($swlat);
 		$swlon = trim($swlon);
 		$nelat = trim($nelat);
 		$nelon = trim($nelon);
 
 		$nullisland = true;
 		$deprecated = false;
-		
+
 		$filters = array();
 		$must_not = array();
 
@@ -164,7 +164,7 @@
 		if (! $nullisland){
 
 			$must_not[] = array('term' => array('geom:latitude' => 0.0));
-			$must_not[] = array('term' => array('geom:longitude' => 0.0));	
+			$must_not[] = array('term' => array('geom:longitude' => 0.0));
 		}
 
 		if (request_isset("is_deprecated")){
@@ -174,7 +174,7 @@
 		if (! $deprecated){
 			$must_not[] = array('exists' => array('field' => 'edtf:deprecated'));
 		}
-			
+
 		# end of TBD... (20170722/thisisaaronland)
 		# }
 
@@ -192,7 +192,7 @@
 
 			$must_not = array(
 			      'exists' => array( 'field' => 'wof:brand_id' )
-			);			     
+			);
 
 			$filters[] = array('bool' => array(
 				'must_not' => $must_not,
@@ -203,7 +203,7 @@
 
 			$must = array(
 			      'exists' => array( 'field' => 'wof:brand_id' )
-			);			     
+			);
 
 			$filters[] = array('bool' => array(
 				'must' => $must,
@@ -220,7 +220,7 @@
 
 		else if ($is_current == "0"){
 			$filters[] = array('term' => array('mz:is_current' => 0));
-		} 
+		}
 
 		else if ($is_current == "1"){
 			$filters[] = array('term' => array('mz:is_current' => 1));
@@ -243,13 +243,13 @@
 
 			# so far as I can tell there is no way to write an ES query
 			# that says either field (x) doesn't exist or if it does exist
-			# does not have a value of (a, b, c) ... 
+			# does not have a value of (a, b, c) ...
 			# (20170724/thisisaaronland)
 
 			$should = array(
 				array("exists" => array( 'field' => 'edtf:deprecated' )),
 				array("terms" => array("edtf:deprecated" => array ("", "u", "uuuu" ) ))
-			);			     
+			);
 
 			# $filters[] = array("bool" => array(
 			# 	"should" => $should
@@ -260,7 +260,7 @@
 
 			$must = array(
 			      'exists' => array( 'field' => 'edtf:deprecated' )
-			);			     
+			);
 
 			$must_not = array(
 			  	array("terms" => array("edtf:deprecated" => array ("", "u", "uuuu" ) ))
@@ -283,7 +283,7 @@
 
 			$must = array(
 				array("terms" => array("edtf:cessation" => array ("", "u", "uuuu" ) ))
-			);			     
+			);
 
 			$must_not = array();
 
@@ -299,7 +299,7 @@
 
  			$must = array(
 			      'exists' => array( 'field' => 'edtf:cessation' )
-			);			     
+			);
 
 			$must_not = array(
 			  	array("terms" => array("edtf:cessation" => array ("", "u", "uuuu" ) ))
@@ -322,18 +322,18 @@
 
 			$must_not = array(
 			      'exists' => array( 'field' => 'wof:superseded_by' )
-			);			     
+			);
 
 			$filters[] = array('bool' => array(
 				'must_not' => $must_not,
 			));
-		} 
+		}
 
 		else if ($is_superseded == "1"){
 
 			$must = array(
 			      'exists' => array( 'field' => 'wof:superseded_by' )
-			);			     
+			);
 
 			$filters[] = array('bool' => array(
 				'must' => $must,
@@ -350,18 +350,18 @@
 
 			$must_not = array(
 			      'exists' => array( 'field' => 'wof:supersedes' )
-			);			     
+			);
 
 			$filters[] = array('bool' => array(
 				'must_not' => $must_not,
 			));
-		} 
+		}
 
 		else if ($is_superseding == "1"){
 
 			$must = array(
 			      'exists' => array( 'field' => 'wof:supersedes' )
-			);			     
+			);
 
 			$filters[] = array('bool' => array(
 				'must' => $must,
@@ -535,7 +535,7 @@
 		if (($swlat) && ($swlon) && ($nelat) && ($nelon)){
 
 			# PLEASE WRITE ME... need to index geom:bbox I think?
-			# https://github.com/whosonfirst/whosonfirst-www-api/issues/33		
+			# https://github.com/whosonfirst/whosonfirst-www-api/issues/33
 			# https://github.com/whosonfirst/whosonfirst-www-api/issues/34
 		}
 
@@ -561,18 +561,96 @@
 
 			if ($input){
 
+				/*
+				Aaron Straup Cope [5:25 PM]
+				oh, there is the problem:
+				```
+				query":{
+				    "match":{"wof:concordances_sources":{"query":"","operator":"and"}}}},
+				```
+
+				Dan Phiffer [5:25 PM]
+				Schema?
+
+				Aaron Straup Cope [5:26 PM]
+				apparently I did this somehow...
+				`"query":""`
+
+				Dan Phiffer [5:26 PM]
+				Huh
+
+				Aaron Straup Cope [5:26 PM]
+				oh god, it's probably this... https://github.com/whosonfirst/whosonfirst-www-api/commit/e10bf8429119287da33fa3f67dca48c7d73335a0#diff-f85a4221598a9839b4bf8493ec24cb03R99
+				go, me!
+
+				Dan Phiffer [5:27 PM]
+				Oh like it should be a string instead of an array?
+
+				Aaron Straup Cope [5:28 PM]
+				no, it's the test here:
+				https://github.com/whosonfirst/whosonfirst-www-api/blob/e10bf8429119287da33fa3f67dca48c7d73335a0/www/include/lib_api_whosonfirst_utils.php#L558-L563
+
+				Dan Phiffer [5:28 PM]
+				Well this does make me feel less uneasy that ES just started
+				being weird about stuff all of a sudden
+
+				Aaron Straup Cope [5:28 PM]
+				this shouldn't have anything to do with indexing
+				can you add a conditional here: https://github.com/whosonfirst/whosonfirst-www-api/blob/e10bf8429119287da33fa3f67dca48c7d73335a0/www/include/lib_api_whosonfirst_utils.php#L564
+				to the effect of: if $field == "wof:concordances_sources"
+				then $input = explode(",", $input)
+				and remnove this line: https://github.com/whosonfirst/whosonfirst-www-api/blob/e10bf8429119287da33fa3f67dca48c7d73335a0/www/include/lib_api_whosonfirst_utils.php#L99
+
+				Dan Phiffer [5:29 PM]
+				Ok will do
+
+				Aaron Straup Cope [5:29 PM]
+				and see if that fixes the problem
+				in general exploding on all (most?) of the strings would be
+				useful but one thing at  a time...
+				basically I had to do this so you can query for
+				`?concordance=osm:node,osm:way` in a single query...
+
+				Dan Phiffer [5:32 PM]
+				Got it
+				Yep, seems to do the trick: (snip)
+				Want me to commit/deploy that?
+
+				Aaron Straup Cope [5:33 PM]
+				yes, please
+				sorry about that
+
+				Dan Phiffer [5:33 PM]
+				No problem
+				This explains the bundler thing that Stephen was seeing too
+
+				Aaron Straup Cope [5:34 PM]
+				would you also copy/paste this conversation from "oh, there is
+				the problem:" onwards above the fix
+
+				Dan Phiffer [5:34 PM]
+				Sure thing
+
+				(20171121/dphiffer)
+				*/
+				if ($field == 'wof:concordances_sources'){
+					$input = explode(",", $input);
+				}
+
 				$input = api_whosonfirst_utils_ensure_array($input);
-				$filters[] = api_whosonfirst_utils_enfilterify_simple($field, $input);
+				$filter = api_whosonfirst_utils_enfilterify_simple($field, $input);
+
+				$filters[] = $filter;
 			}
 		}
-		
+
 		if (count($must_not)){
 			$filters[] = array('bool' => array('must_not' => $must_not));
 		}
 
 		return $filters;
 	}
-	
+
 	########################################################################
 
 	function api_whosonfirst_utils_enfilterify_simple($field, $terms){
@@ -599,13 +677,18 @@
 			)));
 		}
 
-		$must = array();
-		
+		$cond = "must";
+		$matches = array();
+
+		if ($field == "wof:concordances_sources"){
+			$cond = "should";
+		}
+
 		foreach ($terms as $term){
 
 			$esc_term = elasticsearch_escape($term, $more);
-			
-			$must[] = array('query' => array(
+
+			$matches[] = array('query' => array(
 				'match' => array($field => array(
 					'query' => $esc_term, 'operator' => 'and'
 				)
@@ -613,12 +696,12 @@
 		}
 
 		return array('bool' => array(
-			'must' => $must
+			$cond => $matches
 		));
 	}
-	
+
 	########################################################################
-	
+
 	function api_whosonfirst_utils_ensure_array($thing, $sep=","){
 
 		if (! is_array($thing)){
@@ -653,7 +736,7 @@
 			$extras = api_whosonfirst_utils_ensure_geojson_extras($extras);
 		}
 
-		return $extras;		
+		return $extras;
 	}
 
 	########################################################################
@@ -664,14 +747,14 @@
 
 		# these are required in order to include coordinates
 		# in lib_api_output_geojson
-		
+
 		$ensure_centroids = array(
 			"geom:latitude", "geom:longitude",
 			"lbl:latitude", "lbl:longitude",
 		);
 
 		foreach ($ensure_centroids as $ex){
-		
+
 			if (! in_array($ex, $extras)){
 				$extras[] = $ex;
 			}

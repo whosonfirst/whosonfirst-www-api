@@ -85,9 +85,18 @@
 			$links[$url] = $text;
 		}
 	}
+	if (isset($place['wof:concordances']['4sq:id'])) {
+		$id = $place['wof:concordances']['4sq:id'];
+		$url = "https://foursquare.com/v/$id";
+		$links[$url] = 'FourSquare';
+	}
 	$GLOBALS['smarty']->assign_by_ref("links", $links);
 
-	$GLOBALS['smarty']->display("page_id.txt");
+	if (get_bool('old')){
+		$GLOBALS['smarty']->display("page_id_old.txt");
+	} else {
+		$GLOBALS['smarty']->display("page_id.txt");
+	}
 
 	exit();
 ?>
