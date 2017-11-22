@@ -237,6 +237,88 @@
 
 	$GLOBALS['cfg']['api']['methods'] = array_merge(array(
 
+		'whosonfirst.brands.getInfo' => array(
+			"description" => "Return information about a specific brand",
+			"documented" => (($GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0),
+			"enabled" => 1,
+			"experimental" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_brands",
+			"parameters" => array(
+				array(
+					"name" => "id",
+					"documented" => 1,
+					"required" => 1,
+					"example" => 1125148929
+				)
+			)
+		),
+
+		'whosonfirst.brands.getList' => array(
+			"description" => "Return a list of all the known brands",
+			"documented" => (($GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0),
+			"enabled" => 1,
+			"experimental" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_brands",
+			"parameters" => array(),
+		),
+
+		'whosonfirst.brands.search' => array(
+			"description" => "Search for brands by name",
+			"documented" => (($GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0),
+			"enabled" => 1,
+			"experimental" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_brands",
+			"parameters" => array(
+				array(
+					"name" => "q",
+					"documented" => 1,
+					"required" => 1,
+					"example" => "Kroger"
+				)
+			)
+		),
+
+		'whosonfirst.brands.sizes.getInfo' => array(
+			"description" => "Return details about a specific brand size",
+			"documented" => 0,
+			"enabled" => 0,
+			"experimental" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_brands_sizes",
+			"parameters" => array(),
+		),
+
+		'whosonfirst.brands.sizes.getList' => array(
+			"description" => "Return a list of all the brand sizes",
+			"documented" => 0,
+			"enabled" => 0,
+			"experimental" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_brands_sizes",
+			"parameters" => array(),
+		),
+
+		'whosonfirst.brands.venues.getList' => array(
+			"description" => "Return a list of venues for a specific brand",
+			"documented" => (($GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0),
+			"enabled" => 1,
+			"experimental" => 1,
+			"paginated" => 1,
+			"extras" => 1,
+			"library" => "api_whosonfirst_brands_venues",
+			"parameters" => array(
+				array(
+					"name" => "brand_id",
+					"documented" => 1,
+					"required" => 1,
+					"example" => 1125148929
+				)
+			)
+		),
+
 		'whosonfirst.categories.getNamespaces' => array(
 			"description" => "Return the list of unique namespaces for all the categories in Who's On First.",
 			"documented" => 1,

@@ -53,12 +53,15 @@
 			"method" => $method,
 		);
 
-		foreach ($method_row["parameters"] as $p){
+		if (is_array($method_row["parameters"])){
 
-			$k = $p["name"];
+			foreach ($method_row["parameters"] as $p){
 
-			if ($v = request_str($k)){
-				$query[$k] = $v;
+				$k = $p["name"];
+
+				if ($v = request_str($k)){
+					$query[$k] = $v;
+				}
 			}
 		}
 

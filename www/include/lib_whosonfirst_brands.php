@@ -74,7 +74,7 @@
 		$cache = cache_get($cache_key);
 
 		if ($cache['ok']){
-			return $cache['data'];
+		 	return $cache['data'];
 		}
 
 		$query = array('ids' => array(
