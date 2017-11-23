@@ -3,10 +3,11 @@
 	loadlib("elasticsearch");
 	loadlib("elasticsearch_brands");
 
-
 	########################################################################
 
-	function whosonfirst_brands_search($q, $more=array()){
+	# this function signature _will_ change (20171123/thisisaaronland)
+
+	function whosonfirst_brands_search($q, $sz, $more=array()){
 
 		$esc_q = elasticsearch_escape($q);
 
@@ -17,9 +18,31 @@
 			)
 		));
 
-		$sort = array(
+		# please reconcile me with whosonfirst_brands_get_brands
+		# and generally put somewhere modular and abstract...
+		# (20171123/thisisaaronland)
+
+		$filter = array();
+
+		if ($sz){
+
+			$must = array('term' => array(
+				'wof:brand_size' => $sz
+			));
+
+			$filter['and'] = array(
+				array('bool' => array('must' => $must))
+			);
+		}
+
+		$sort = array(array(
 			"wof:brand_name" => array("order" => "asc")
-		);
+		));
+
+		$query = array("filtered" => array(
+			"filter" => $filter,
+			"query" => $query,
+		));
 
 		$req = array(
 			"query" => $query,
@@ -32,19 +55,36 @@
 
 	########################################################################
 
-	function whosonfirst_brands_get_brands($more=array()){
+	# this function signature _will_ change (20171123/thisisaaronland)
+
+	function whosonfirst_brands_get_brands($sz, $more=array()){
 
 		$query = array(
 			"match_all" => array()
 		);
 
+		# please reconcile me with whosonfirst_brands_search
+		# and generally put somewhere modular and abstract...
+		# (20171123/thisisaaronland)
+
 		$filter = array();
+
+		if ($sz){
+
+			$must = array('term' => array(
+				'wof:brand_size' => $sz
+			));
+
+			$filter['and'] = array(
+				array('bool' => array('must' => $must))
+			);
+		}
 
 		$sort = array(array(
 			"wof:brand_name" => array("order" => "asc")
 		));
 
-		$req = array("filtered" => array(
+		$query = array("filtered" => array(
 			"filter" => $filter,
 			"query" => $query,
 		));

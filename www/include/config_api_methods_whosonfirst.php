@@ -261,7 +261,14 @@
 			"experimental" => 1,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_brands",
-			"parameters" => array(),
+			"parameters" => array(
+				array(
+					"name" => "brand_size",
+					"documented" => 1,
+					"required" => 0,
+					"example" => "XXS"
+				)
+			),
 		),
 
 		'whosonfirst.brands.search' => array(
@@ -277,6 +284,12 @@
 					"documented" => 1,
 					"required" => 1,
 					"example" => "Kroger"
+				),
+				array(
+					"name" => "brand_size",
+					"documented" => 1,
+					"required" => 0,
+					"example" => "S"
 				)
 			)
 		),
