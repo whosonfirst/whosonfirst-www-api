@@ -306,18 +306,25 @@
 
 		'whosonfirst.brands.sizes.getInfo' => array(
 			"description" => "Return details about a specific brand size",
-			"documented" => 0,
-			"enabled" => 0,
+			"documented" => (($GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0),
+			"enabled" => 1,
 			"experimental" => 1,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_brands_sizes",
-			"parameters" => array(),
+			"parameters" => array(
+				array(
+					"name" => "brand_size",
+					"documented" => 1,
+					"required" => 1,
+					"example" => "M"
+				),
+			),
 		),
 
 		'whosonfirst.brands.sizes.getList' => array(
 			"description" => "Return a list of all the brand sizes",
-			"documented" => 0,
-			"enabled" => 0,
+			"documented" => (($GLOBALS['cfg']['environment'] == 'dev') ? 1 : 0),
+			"enabled" => 1,
 			"experimental" => 1,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_brands_sizes",
