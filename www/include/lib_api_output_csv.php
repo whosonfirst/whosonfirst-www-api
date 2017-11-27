@@ -61,14 +61,16 @@
 			$header = array();
 			$lookup = array();
 
-			if (is_array($possible[0])){
+			foreach ($possible as $p){
 
-				foreach (array_keys($possible[0]) as $k){
+				foreach (array_keys($p) as $k){
 
 					$k_clean = api_output_csv_clean_header($k);
 
-					$header[] = $k_clean;
-					$lookup[$k_clean] = $k;
+					if (! $lookup[$k_clean]){
+						$header[] = $k_clean;
+						$lookup[$k_clean] = $k;
+					}
 				}		
 			}
 
