@@ -23,31 +23,31 @@
 
 	foreach ($GLOBALS['whosonfirst_brands_sizes']['spec'] as $id => $details){
 
-		$name = $details['name'];
+		$sz = $details['size'];
 
-		$GLOBALS['whosonfirst_brands_sizes']['brands_sizes_by_id'][$id] = $name;
-		$GLOBALS['whosonfirst_brands_sizes']['brands_sizes'][$name] = $details;
+		$GLOBALS['whosonfirst_brands_sizes']['brands_sizes_by_id'][$id] = $sz;
+		$GLOBALS['whosonfirst_brands_sizes']['brands_sizes'][$sz] = $details;
 	}
 
 	########################################################################
 
 	function whosonfirst_brands_sizes_is_valid_size($sz){
 
-		$name = strtoupper($sz);
-		return isset($GLOBALS['whosonfirst_brands_sizes']['brands_sizes'][$name]);
+		$sz = strtoupper($sz);
+		return isset($GLOBALS['whosonfirst_brands_sizes']['brands_sizes'][$sz]);
 	}
 
 	########################################################################
 
 	function whosonfirst_brands_sizes_get_by_size($sz){
 
-		$name = strtoupper($sz);
+		$sz = strtoupper($sz);
 
 		if (! whosonfirst_brands_sizes_is_valid_size($sz)){
 			return null;
 		}
 
-		return $GLOBALS['whosonfirst_brands_sizes']['brands_sizes'][$name];
+		return $GLOBALS['whosonfirst_brands_sizes']['brands_sizes'][$sz];
 	}
 
 	########################################################################
@@ -102,10 +102,10 @@
 
 			$min = $details["min"];
 
-			foreach ($GLOBALS['whosonfirst_brands_sizes']['brands_sizes'] as $name => $other){
+			foreach ($GLOBALS['whosonfirst_brands_sizes']['brands_sizes'] as $other_sz => $other_details){
 
-				if ($other["max"] < $min){
-					$sizes[] = $name;
+				if ($other_details["max"] < $min){
+					$sizes[] = $other_sz;
 				}
 			}
 		}
@@ -125,10 +125,10 @@
 
 			$max = $details["max"];
 
-			foreach ($GLOBALS['whosonfirst_brands_sizes']['brands_sizes'] as $name => $other){
+			foreach ($GLOBALS['whosonfirst_brands_sizes']['brands_sizes'] as $other_sz => $other_details){
 
 				if ($other["min"] > $max){
-					$sizes[] = $name;
+					$sizes[] = $other_sz;
 				}
 			}
 		}
@@ -144,7 +144,7 @@
 		        return 0;
 		}
 
-		return ($a < $b) ? -1 : 1;
+		return ($a["min"] < $b["min"]) ? -1 : 1;
 	}
 
 	########################################################################
