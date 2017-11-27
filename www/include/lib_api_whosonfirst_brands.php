@@ -138,7 +138,7 @@
 
 			else {}
 
-				if ((! $condition) || ($inclusive)){
+			if ((! $condition) || ($inclusive)){
 				$sizes[] = $sz;
 			}
 		}

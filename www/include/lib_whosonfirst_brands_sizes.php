@@ -127,7 +127,7 @@
 
 			foreach ($GLOBALS['whosonfirst_brands_sizes']['brands_sizes'] as $other_sz => $other_details){
 
-				if ($other["min"] > $max){
+				if ($other_details["min"] > $max){
 					$sizes[] = $other_sz;
 				}
 			}

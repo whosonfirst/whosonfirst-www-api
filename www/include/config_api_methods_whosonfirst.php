@@ -190,18 +190,21 @@
 		'filter_parameters_brands_sizes' => array(
 			array(
 				"name" => "brand_size",
+				"description" => "A valid brand size to scope queries by. You may prefix the brand size with <, <=, > or >= to define simple range queries.",
 				"documented" => 1,
 				"required" => 0,
 				"example" => "XXS"
 			),
 			array(
 				"name" => "min_brand_size",
+				"description" => "A mininum (inclusive) brand size to scope queries to.",
 				"documented" => 1,
 				"required" => 0,
 				"example" => "M"
 			),
 			array(
 				"name" => "max_brand_size",
+				"description" => "A maximum (inclusive) brand size to scope queries to.",
 				"documented" => 1,
 				"required" => 0,
 				"example" => "XL"
