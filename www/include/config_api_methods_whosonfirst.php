@@ -187,6 +187,27 @@
 			),
 		),
 
+		'filter_parameters_brands_sizes' => array(
+			array(
+				"name" => "brand_size",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "XXS"
+			),
+			array(
+				"name" => "min_brand_size",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "M"
+			),
+			array(
+				"name" => "max_brand_size",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "XL"
+			),
+		),
+
 		'filter_parameters_spatial' => array(
 			array(
 				"name" => "placetype",
@@ -261,14 +282,9 @@
 			"experimental" => 1,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_brands",
-			"parameters" => array(
-				array(
-					"name" => "brand_size",
-					"documented" => 1,
-					"required" => 0,
-					"example" => "XXS"
-				)
-			),
+			"parameters" => array_merge(array(
+				# nothing else yet...
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_brands_sizes']),
 		),
 
 		'whosonfirst.brands.search' => array(
@@ -278,20 +294,14 @@
 			"experimental" => 1,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_brands",
-			"parameters" => array(
+			"parameters" => array_merge(array(
 				array(
 					"name" => "q",
 					"documented" => 1,
 					"required" => 1,
 					"example" => "Kroger"
 				),
-				array(
-					"name" => "brand_size",
-					"documented" => 1,
-					"required" => 0,
-					"example" => "S"
-				)
-			)
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_brands_sizes']),
 		),
 
 		'whosonfirst.brands.sizes.getInfo' => array(

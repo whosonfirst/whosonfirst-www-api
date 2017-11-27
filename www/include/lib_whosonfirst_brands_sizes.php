@@ -60,6 +60,38 @@
 
 	########################################################################
 
+	# is $other_sz > $sz
+
+	function whosonfirst_brands_sizes_is_larger($sz, $other_sz){
+
+		$sz_details = whosonfirst_brands_sizes_get_by_size($sz);
+		$other_details = whosonfirst_brands_sizes_get_by_size($other_sz);
+
+		if ($other_details["min"] > $sz_details["max"]){
+			return 1;
+		}
+
+		return 0;
+	}
+
+	########################################################################
+
+	# is $other_sz < $sz
+
+	function whosonfirst_brands_sizes_is_smaller($sz, $other_sz){
+
+		$sz_details = whosonfirst_brands_sizes_get_by_size($sz);
+		$other_details = whosonfirst_brands_sizes_get_by_size($other_sz);
+
+		if ($other_details["max"] < $sz_details["min"]){
+			return 1;
+		}
+
+		return 0;
+	}
+
+	########################################################################
+
 	function whosonfirst_brands_sizes_lt($sz){
 
 		$sizes = array();
