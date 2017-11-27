@@ -163,7 +163,9 @@
 
 		if ($min_sz){
 
-			foreach (whosonfirst_brands_sizes_lt($min_sz) as $other_sz){
+			foreach (whosonfirst_brands_sizes_gt($min_sz) as $other_sz){
+
+				# echo "compare {$max_sz} >? {$other_sz}\n";
 
 				if (($max_sz) && (whosonfirst_brands_sizes_is_larger($max_sz, $other_sz))){
 					continue;
@@ -181,7 +183,9 @@
 
 		if ($max_sz){
 
-			foreach (whosonfirst_brands_sizes_gt($max_sz) as $other_sz){
+			foreach (whosonfirst_brands_sizes_lt($max_sz) as $other_sz){
+
+				# echo "compare {$min_sz} <? {$other_sz}\n";
 
 				if (($min_sz) && (whosonfirst_brands_sizes_is_smaller($min_sz, $other_sz))){
 					continue;
@@ -192,7 +196,7 @@
 				}
 			}
 
-			if (! in_array($maz_sz, $sizes)){
+			if (! in_array($max_sz, $sizes)){
 				$sizes[] = $max_sz;
 			}
 		}
