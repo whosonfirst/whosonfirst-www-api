@@ -26,7 +26,7 @@
 
 		if ($sz){
 
-			$must = array('term' => array(
+			$must = array('terms' => array(
 				'wof:brand_size' => $sz
 			));
 
@@ -71,7 +71,7 @@
 
 		if ($sz){
 
-			$must = array('term' => array(
+			$must = array('terms' => array(
 				'wof:brand_size' => $sz
 			));
 

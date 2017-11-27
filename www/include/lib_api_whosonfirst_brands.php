@@ -13,7 +13,7 @@
 			api_output_error(400);
 		}
 
-		$sz = api_whosonfirst_brands_ensure_brand_size();
+		$sz = api_whosonfirst_brands_ensure_brand_sizes();
 
 		$args = array();
 		api_utils_ensure_pagination_args($args);
@@ -76,7 +76,7 @@
 		$args = array();
 		api_utils_ensure_pagination_args($args);
 
-		$sz = api_whosonfirst_brands_ensure_brand_size();
+		$sz = api_whosonfirst_brands_ensure_brand_sizes();
 
 		$rsp = whosonfirst_brands_get_brands($sz, $args);
 
@@ -102,15 +102,40 @@
 
 	########################################################################
 
-	function api_whosonfirst_brands_ensure_brand_size(){
+	function api_whosonfirst_brands_ensure_brand_sizes(){
 
 		$sz = request_str("brand_size");
+		$sz = trim($sz);
 
-		if (($sz) && (! whosonfirst_brands_sizes_is_valid_size($sz))){
+		if (! preg_match("/^(?:(>|<)(=)?)?(?:\s*)?([A-Z]+)$/i", $sz, $m)){
 			api_output_error(432);
 		}
 
-		return $sz;
+		$sizes = array();
+
+		$condition = $m[1];
+		$inclusive = $m[2];
+		$sz = $m[3];
+
+		if (! whosonfirst_brands_sizes_is_valid_size($sz)){
+			api_output_error(432);
+		}
+
+		if ($condition == "<"){
+			$sizes = whosonfirst_brands_sizes_lt($sz);
+		}
+
+		else if ($condition == ">"){
+			$sizes = whosonfirst_brands_sizes_gt($sz);
+		}
+
+		else {}
+
+		if ((! $condition) || ($inclusive)){
+			$sizes[] = $sz;
+		}
+
+		return $sizes;
 	}
 
 	########################################################################
