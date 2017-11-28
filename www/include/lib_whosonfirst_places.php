@@ -242,14 +242,38 @@
 
 	########################################################################
 
-	function whosonfirst_places_get_by_brand(&$brand, $more=array()){
+	function whosonfirst_places_get_by_brand(&$brand, $filters, $more=array()){
 
 		$query = array('term' => array(
-			'wof:brand_id' => $brand["wof:brand_id"],
+			# 'wof:brand_id' => $brand["wof:brand_id"],
+			'wof:placetype' => 'venue'
+		));
+
+		$filter_query = array('filtered' => array(
+			'query' => $query,
+			'filter' => array('and' => $filters),
+		));
+
+		$functions = array(
+			array(
+				'filter' => array('term' => array('mz:is_current' => 1)),
+				'weight' => 2.0
+			),
+			array(
+				'filter' => array('term' => array('mz:is_current' => -1)),
+				'weight' => 0.5
+			),
+		);
+
+		$es_query = array('function_score' => array(
+			'query' => $filter_query,
+			'functions' => $functions,
+			'boost_mode' => 'multiply',
+			'score_mode' => 'multiply',
 		));
 
 		$req = array(
-			'query' => $query
+			'query' => $es_query,
 		);
 
 		$rsp = elasticsearch_spelunker_search($req, $more);

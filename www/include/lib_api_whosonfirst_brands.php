@@ -10,7 +10,7 @@
 		$q = request_str("q");
 
 		if (! $q){
-			api_output_error(400);
+			api_output_error(434);
 		}
 
 		$sz = api_whosonfirst_brands_ensure_brand_sizes();
@@ -21,7 +21,7 @@
 		$rsp = whosonfirst_brands_search($q, $sz, $args);
 
 		if (! $rsp["ok"]){
-			api_output_error(500);
+			api_output_error(513);
 		}
 
 		$rows = $rsp["rows"];
@@ -47,13 +47,13 @@
 		$id = request_int64("id");
 
 		if (! $id){
-			api_output_error(432);
+			api_output_error(434);
 		}
 
 		$brand = whosonfirst_brands_get_by_id($id);
 
 		if (! $brand){
-			api_output_error(513);
+			api_output_error(435);
 		}
 
 		$out = array(
@@ -81,7 +81,7 @@
 		$rsp = whosonfirst_brands_get_brands($sz, $args);
 
 		if (! $rsp["ok"]){
-			api_output_error(500);
+			api_output_error(513);
 		}
 
 		$rows = $rsp["rows"];
@@ -157,7 +157,7 @@
 			$max_details = whosonfirst_brands_sizes_get_by_size($max_sz);
 
 			if ($min_details["max"] > $max_details["min"]){
-				api_output_error(432);
+				api_output_error(433);
 			}
 		}
 

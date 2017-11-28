@@ -10,13 +10,13 @@
 		$sz = trim($sz);
 
 		if (! $sz){
-			api_output_error(400);
+			api_output_error(432);
 		}
 
 		$details = whosonfirst_brands_sizes_get_by_size($sz);
 
 		if (! $details){
-			api_output_error(400);
+			api_output_error(404);
 		}
 
 		$out = array(

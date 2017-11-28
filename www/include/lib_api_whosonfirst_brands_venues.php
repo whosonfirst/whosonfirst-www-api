@@ -12,7 +12,7 @@
 		$brand_id = request_int64("brand_id");
 
 		if (! $brand_id){
-			api_output_error(432);
+			api_output_error(434);
 		}
 
 		$args = array();
@@ -21,10 +21,15 @@
 		$brand = whosonfirst_brands_get_by_id($brand_id);
 
 		if (! $brand){
-			api_output_error(513);
+			api_output_error(435);
 		}
 
-		$rsp = whosonfirst_places_get_by_brand($brand, $args);
+		# this is now a bit of misnomer since we're using it for brands...
+		# (201711127/thisisaaronland)
+
+		$filters = api_whosonfirst_utils_search_filters();
+
+		$rsp = whosonfirst_places_get_by_brand($brand, $filters, $args);
 
 		if (! $rsp['ok']){
 			api_output_error(513);
