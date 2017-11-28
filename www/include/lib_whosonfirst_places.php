@@ -242,6 +242,54 @@
 
 	########################################################################
 
+	function whosonfirst_places_get_by_brand(&$brand, $filters, $more=array()){
+
+		$query = array('term' => array(
+			# 'wof:brand_id' => $brand["wof:brand_id"],
+			'wof:placetype' => 'venue'
+		));
+
+		$filter_query = array('filtered' => array(
+			'query' => $query,
+			'filter' => array('and' => $filters),
+		));
+
+		$functions = array(
+			array(
+				'filter' => array('term' => array('mz:is_current' => 1)),
+				'weight' => 2.0
+			),
+			array(
+				'filter' => array('term' => array('mz:is_current' => -1)),
+				'weight' => 0.5
+			),
+		);
+
+		$es_query = array('function_score' => array(
+			'query' => $filter_query,
+			'functions' => $functions,
+			'boost_mode' => 'multiply',
+			'score_mode' => 'multiply',
+		));
+
+		$req = array(
+			'query' => $es_query,
+		);
+
+		$rsp = elasticsearch_spelunker_search($req, $more);
+		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_places_get_brands($more=array()){
+
+		$rsp = elasticsearch_spelunker_facet("wof:brand_id", $more);
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_places_property($place, $path){
 
 		$property = null;
@@ -358,6 +406,8 @@
 		return 'unknown';
 	}
 
+	########################################################################
+
 	function whosonfirst_places_format_time($time){
 
 		if (preg_match('/^(\d\d):(\d\d)$/', $time, $matches)){
@@ -410,5 +460,7 @@
 
 		return $property;
 	}
+
+	########################################################################
 
 	# the end

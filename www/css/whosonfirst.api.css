@@ -40,3 +40,21 @@
 body.places #content ul li {
 	list-style: none;
 }
+
+#venue-info h4 {
+	margin: 0;
+}
+
+.venue-neighbourhood {
+	margin-top: -12px;
+	margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+
+	#map {
+		margin-top: 1.5em;
+		height: 200px;
+	}
+
+}

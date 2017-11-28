@@ -61,16 +61,35 @@
 			$header = array();
 			$lookup = array();
 
-			if (is_array($possible[0])){
+			foreach ($possible as $p){
 
-				foreach (array_keys($possible[0]) as $k){
+				foreach (array_keys($p) as $k){
 
 					$k_clean = api_output_csv_clean_header($k);
 
-					$header[] = $k_clean;
-					$lookup[$k_clean] = $k;
+					if (! $lookup[$k_clean]){
+						$header[] = $k_clean;
+						$lookup[$k_clean] = $k;
+					}
 				}		
 			}
+
+			# so here's a thing, well two things actually:
+			#
+			# 1. if you request extras that are not in a response (say foo:*) they
+			#    will not be included (for example, how do we know what to include
+			#    for 'foo:*")
+			# 2. the list of headers may vary across paginated responses because
+			#    the records in the first set may not have the same properties as
+			#    those in the subsequent sets
+			#
+			# this is not a feature but short of getting in to a whole lot of weird
+			# session maintenance hoohah (mostly just for CSV headers...) it seems
+			# like the more appropriate course of action right now is just to convey
+			# the disconnect to api consumers and have them handle it on their end
+			# as they see fit - this makes simple and consistent piping of CSV results
+			# for anything but a default SPR response difficult but sometimes we can't
+			# have nice things... (20171127/thisisaaronland)
 
 			sort($header);
 

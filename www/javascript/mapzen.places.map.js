@@ -48,12 +48,14 @@ mapzen.places.map = (function(){
 				latlon = [lat, lon];
 			}
 
-			var icon = L.divIcon({
-				className: 'map-marker'
+			var abs_root_url = document.body.getAttribute("data-abs-root-url");
+			var icon = L.icon({
+				iconUrl: abs_root_url + 'images/pin.png',
+				iconSize: [32, 47],
+				iconAnchor: [16, 46],
 			});
 			var m = L.marker(latlon, {
-				icon: icon,
-				iconSize: [14, 14]
+				icon: icon
 			});
 			m.bindTooltip(label);
 
@@ -104,24 +106,13 @@ mapzen.places.map = (function(){
 			lon = parseFloat(lon);
 
 			var bbox = map_el.getAttribute("data-geom-bbox");
-			bbox = bbox.split(",");
+			if (bbox) {
+				bbox = bbox.split(",");
 
-			var min_lon = parseFloat(bbox[0]);
-			var min_lat = parseFloat(bbox[1]);
-			var max_lon = parseFloat(bbox[2]);
-			var max_lat = parseFloat(bbox[3]);
-
-			if (placetype == "venue"){
-
-				var parent_bbox = map_el.getAttribute("data-parent-geom-bbox");
-				parent_bbox = parent_bbox.split(",");
-
-				if (parent_bbox.length == 4){
-					min_lon = parseFloat(parent_bbox[0]);
-					min_lat = parseFloat(parent_bbox[1]);
-					max_lon = parseFloat(parent_bbox[2]);
-					max_lat = parseFloat(parent_bbox[3]);
-				}
+				var min_lon = parseFloat(bbox[0]);
+				var min_lat = parseFloat(bbox[1]);
+				var max_lon = parseFloat(bbox[2]);
+				var max_lat = parseFloat(bbox[3]);
 			}
 
 			if ((min_lat == max_lat) && (min_lon == max_lon)){
@@ -129,7 +120,7 @@ mapzen.places.map = (function(){
 				var zoom = 12;
 
 				if (placetype == "venue"){
-					zoom = 16;
+					zoom = 17;
 				}
 
 				map.setView([lat, lon], zoom);

@@ -418,6 +418,18 @@
 
 	# END OF elasticsearch-spelunker stuff
 
+	# START OF elasticsearch-brands stuff
+
+	$GLOBALS['cfg']['elasticsearch_brands_host'] = 'http://localhost';
+	$GLOBALS['cfg']['elasticsearch_brands_port'] = '9200';
+	$GLOBALS['cfg']['elasticsearch_brands_index'] = 'brands';
+
+	$GLOBALS['cfg']['elasticsearch_brands_scroll'] = 1;
+	$GLOBALS['cfg']['elasticsearch_brands_scroll_ttl'] = '2m';
+	$GLOBALS['cfg']['elasticsearch_brands_scroll_trigger'] = 10000;
+
+	# END OF elasticsearch-brands stuff
+
 	# START of wof spatial stuff
 
 	$GLOBALS['cfg']['enable_feature_spatial'] = 1;
