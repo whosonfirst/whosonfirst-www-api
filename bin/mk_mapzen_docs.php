@@ -125,6 +125,7 @@
 					"mapzen.places.getByPolyline",
 					"mapzen.places.getNearby",
 					"mapzen.places.getIntersects",
+					"mapzen.places.brands.venues.getList",
 				);
 
 				$existential_filters = array(

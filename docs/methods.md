@@ -220,6 +220,397 @@ null
 ```
 
 
+### mapzen.places.brands
+
+* [mapzen.places.brands.getInfo](#mapzen.places.brands.getInfo) _experimental_
+* [mapzen.places.brands.getList](#mapzen.places.brands.getList) _experimental_
+* [mapzen.places.brands.search](#mapzen.places.brands.search) _experimental_
+
+<a name="mapzen.places.brands.getInfo"></a>
+#### mapzen.places.brands.getInfo
+
+Return information about a specific brand
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
+| `id` |  |  1125148929 | yes |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `434` | Missing brand ID |
+| `435` | Invalid brand ID |
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta)
+* This API method is **experimental*. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+
+##### Example
+
+```
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.brands.getInfo&api_key=your-mapzen-api-key&id=1125148929'
+
+{
+    "brand": {
+        "wof:brand_size": "L",
+        "wof:lastmodified": 1511400709,
+        "wof:brand_name": "White Castle",
+        "wof:brand_id": 1125148929
+    },
+    "stat": "ok"
+}
+```
+
+<a name="mapzen.places.brands.getList"></a>
+#### mapzen.places.brands.getList
+
+Return a list of all the known brands
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
+| `brand_size` | A valid brand size to scope queries by. You may prefix the brand size with &lt;, &lt;=, &gt; or &gt;= to define simple range queries. |  XXS | no |
+| `min_brand_size` | A mininum (inclusive) brand size to scope queries to. |  M | no |
+| `max_brand_size` | A maximum (inclusive) brand size to scope queries to. |  XL | no |
+| `page` | The default is 1. | 1 | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Invalid brand size |
+| `433` | Invalid brand size range |
+| `513` | Unable to retrieve brands |
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta)
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+* This API method is **experimental*. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+
+##### Example
+
+```
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.brands.getList&api_key=your-mapzen-api-key&brand_size=XXS&min_brand_size=M&max_brand_size=XL&per_page=1'
+
+{
+    "brands": [
+        {
+            "wof:brand_size": "M",
+            "wof:lastmodified": 1511400661,
+            "wof:brand_name": "0 Waiting Time Locksmith Service",
+            "wof:brand_id": 1125155555
+        }
+    ],
+    "next_query": "method=mapzen.places.brands.getList&brand_size=XXS&min_brand_size=M&max_brand_size=XL&per_page=1&page=2",
+    "total": 7125,
+    "page": 1,
+    "per_page": 1,
+    "pages": 7125,
+    "cursor": null,
+    "stat": "ok"
+}
+```
+
+<a name="mapzen.places.brands.search"></a>
+#### mapzen.places.brands.search
+
+Search for brands by name
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
+| `q` |  |  Kroger | yes |
+| `brand_size` | A valid brand size to scope queries by. You may prefix the brand size with &lt;, &lt;=, &gt; or &gt;= to define simple range queries. |  XXS | no |
+| `min_brand_size` | A mininum (inclusive) brand size to scope queries to. |  M | no |
+| `max_brand_size` | A maximum (inclusive) brand size to scope queries to. |  XL | no |
+| `page` | The default is 1. | 1 | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Invalid brand size |
+| `433` | Invalid brand size range |
+| `434` | Missing query |
+| `513` | Unable to retrieve brands |
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta)
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+* This API method is **experimental*. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+
+##### Example
+
+```
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.brands.search&api_key=your-mapzen-api-key&q=Kroger&brand_size=XXS&min_brand_size=M&max_brand_size=XL&per_page=1'
+
+{
+    "brands": [
+        {
+            "wof:brand_name": "Kroger",
+            "wof:brand_id": 420574191,
+            "edtf:inception": 1883,
+            "wof:concordances": {
+                "wk:page": "Kroger"
+            },
+            "wof:brand_size": "XL",
+            "wof:lastmodified": 1511399895,
+            "mz:is_current": 1
+        }
+    ],
+    "next_query": null,
+    "total": 2,
+    "page": 1,
+    "per_page": 1,
+    "pages": 2,
+    "cursor": null,
+    "stat": "ok"
+}
+```
+
+
+### mapzen.places.brands.sizes
+
+* [mapzen.places.brands.sizes.getInfo](#mapzen.places.brands.sizes.getInfo) _experimental_
+* [mapzen.places.brands.sizes.getList](#mapzen.places.brands.sizes.getList) _experimental_
+
+<a name="mapzen.places.brands.sizes.getInfo"></a>
+#### mapzen.places.brands.sizes.getInfo
+
+Return details about a specific brand size
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
+| `brand_size` |  |  M | yes |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `432` | Invalid brand size |
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta)
+* This API method is **experimental*. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+
+##### Example
+
+```
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.brands.sizes.getInfo&api_key=your-mapzen-api-key&brand_size=M'
+
+{
+    "size": {
+        "min": 51,
+        "max": 100,
+        "label": "medium",
+        "id": 1141959927,
+        "size": "M"
+    },
+    "stat": "ok"
+}
+```
+
+<a name="mapzen.places.brands.sizes.getList"></a>
+#### mapzen.places.brands.sizes.getList
+
+Return a list of all the brand sizes
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the [default error codes](errors.md) documentation.
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta)
+* This API method is **experimental*. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+
+##### Example
+
+```
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.brands.sizes.getList&api_key=your-mapzen-api-key'
+
+{
+    "sizes": [
+        {
+            "min": 1,
+            "max": 2,
+            "label": "onesie",
+            "id": 1158862561,
+            "size": "O"
+        },
+        {
+            "min": 3,
+            "max": 5,
+            "label": "extra-extra-extra small",
+            "id": 1158864409,
+            "size": "XXXS"
+        },
+        {
+            "min": 6,
+            "max": 10,
+            "label": "extra-extra small",
+            "id": 1141959937,
+            "size": "XXS"
+        },
+        {
+            "min": 11,
+            "max": 20,
+            "label": "extra small",
+            "id": 1141959931,
+            "size": "XS"
+        },
+        {
+            "min": 21,
+            "max": 50,
+            "label": "small",
+            "id": 1141959923,
+            "size": "S"
+        },
+        {
+            "min": 51,
+            "max": 100,
+            "label": "medium",
+            "id": 1141959927,
+            "size": "M"
+        },
+        {
+            "min": 101,
+            "max": 500,
+            "label": "large",
+            "id": 1141959925,
+            "size": "L"
+        },
+        {
+            "min": 501,
+            "max": 5000,
+            "label": "extra large",
+            "id": 1141959929,
+            "size": "XL"
+        },
+        {
+            "min": 5001,
+            "max": 10000,
+            "label": "extra-extra large",
+            "id": 1141959935,
+            "size": "XXL"
+        },
+        {
+            "min": 10001,
+            "label": "extra-extra-extra large",
+            "id": 1158864411,
+            "size": "XXXL"
+        }
+    ],
+    "stat": "ok"
+}
+```
+
+
+### mapzen.places.brands.venues
+
+* [mapzen.places.brands.venues.getList](#mapzen.places.brands.venues.getList) _experimental_
+
+<a name="mapzen.places.brands.venues.getList"></a>
+#### mapzen.places.brands.venues.getList
+
+Return a list of venues for a specific brand
+
+##### Arguments
+
+| Argument | Description | Example | Required |
+| :--- | :--- | :--- | :--- |
+| `api_key` | A valid [Mapzen API key](https://mapzen.com/developers/) | your-mapzen-api-key | yes |
+| `brand_id` |  |  1125148929 | yes |
+| `is_current` | Filter results by their &#039;mz:is_current&#039; property. Valid options are: -1, 1, 0 |  1 | no |
+| `is_ceased` | Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0 |  1 | no |
+| `is_deprecated` | Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0 |  1 | no |
+| `is_superseded` | Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0 |  1 | no |
+| `is_superseding` | Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0 |  1 | no |
+| `iso` | Ensure places belong to this (ISO) country code. |  CA | no |
+| `country_id` | Ensure places belong to this country Who&#039;s On First ID. |  85633147 | no |
+| `region_id` | Ensure places belong to this region Who&#039;s On First ID. |  85669831 | no |
+| `locality_id` | Ensure places belong to this locality Who&#039;s On First ID. |  101736545 | no |
+| `neighbourhood_id` | Ensure places belong to this neighbourhood Who&#039;s On First ID. |  102112179 | no |
+| `concordance` | Query for places that have been concordified with this source. |  loc:id | no |
+| `min_lastmod` | Limit results to places that have been modified on or since this date (encoded as a Unix timestamp). |  1493855252 | no |
+| `max_lastmod` | Limit results to places that have been modified on or before this date (encoded as a Unix timestamp). |  1496783757 | no |
+| `extras` | A comma-separated list of additional fields to include with each result. Valid fields are anything that might be found at the top level of WOF properties dictionary. You can also fetch all the fields for a given namespace by passing its prefix followed by a colon (for example `mz:`) | mz:uri | no |
+| `page` | The default is 1. | 1 | no |
+| `per_page` | The default is 100 and the maximum is 500. | 100 | no |
+| `format` | The format in which to return the data. Normally supported formats are [csv](formats.md#csv), [geojson](formats.md#geojson), [json](formats.md#json), [meta](formats.md#meta) however the following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta). The default format is [json](formats.md#json). | json | no |
+
+##### Error codes
+
+In addition to [default error codes](errors.md) common to all methods this API method defines the following additional error codes:
+
+| Error code | Error message |
+| :--- | :--- |
+| `434` | Missing brand ID |
+| `435` | Invalid brand ID |
+| `513` | Unable to retrieve venues |
+
+##### Notes
+
+* The following output formats are **disallowed** for this API method: [geojson](formats.md#geojson), [meta](formats.md#meta)
+* This API method uses [plain](pagination.md#plain) or [next-query](pagination.md#next-query) pagination. Please consult the [pagination documentation](pagination.md) for details.
+* This API method is **experimental*. Both its inputs and outputs _may_ change without warning. We'll try not to introduce any backwards incompatible changes but you should approach this API method defensively.
+
+##### Example
+
+```
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.brands.venues.getList&api_key=your-mapzen-api-key&brand_id=1125148929&iso=CA&country_id=85633147&region_id=85669831&locality_id=101736545&neighbourhood_id=102112179&concordance=loc:id&min_lastmod=1493855252&max_lastmod=1496783757&per_page=1'
+
+{
+    "places": [
+
+    ],
+    "next_query": null,
+    "total": 0,
+    "page": 1,
+    "per_page": 1,
+    "pages": 0,
+    "cursor": null,
+    "stat": "ok"
+}
+```
+
+
 ### mapzen.places.concordances
 
 * [mapzen.places.concordances.getById](#mapzen.places.concordances.getById)
@@ -272,6 +663,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.concordances.get
             "qs:id": "239659",
             "loc:id": "n80132975",
             "tgn:id": "7013051",
+            "qs_pg:id": "239659",
             "nyt:id": "N59179828586486930801",
             "gn:id": 6077243,
             "dbp:id": "Montreal",
@@ -320,14 +712,14 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.concordances.get
     "sources": [
         {
             "source": "sg:id",
-            "concordances": 20584083
+            "concordances": 21674066
         }
     ],
     "next_query": "method=mapzen.places.concordances.getSources&per_page=1&page=2",
-    "total": 31,
+    "total": 57,
     "page": 1,
     "per_page": 1,
-    "pages": 31,
+    "pages": 57,
     "cursor": null,
     "stat": "ok"
 }
@@ -394,17 +786,17 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getByLatLon&api_
 {
     "places": [
         {
-            "wof:id": 85887443,
-            "wof:parent_id": "85922583",
-            "wof:name": "Mission District",
+            "wof:id": 85834637,
+            "wof:parent_id": "1108830809",
+            "wof:name": "Inner Mission",
             "wof:placetype": "neighbourhood",
             "wof:country": "US",
             "wof:repo": "whosonfirst-data"
         },
         {
-            "wof:id": 85834637,
-            "wof:parent_id": "1108830809",
-            "wof:name": "Inner Mission",
+            "wof:id": 85887443,
+            "wof:parent_id": "85922583",
+            "wof:name": "Mission District",
             "wof:placetype": "neighbourhood",
             "wof:country": "US",
             "wof:repo": "whosonfirst-data"
@@ -816,9 +1208,9 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getIntersects&ap
 {
     "places": [
         {
-            "wof:id": 85885519,
-            "wof:parent_id": 85921923,
-            "wof:name": "Bayport",
+            "wof:id": 1108785883,
+            "wof:parent_id": 1108794093,
+            "wof:name": "Broadway Auto Row",
             "wof:placetype": "neighbourhood",
             "wof:country": "US",
             "wof:repo": "whosonfirst-data"
@@ -973,11 +1365,11 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.getRandom&api_ke
 
 {
     "place": {
-        "wof:id": 890432191,
-        "wof:parent_id": "1108759853",
-        "wof:name": "Kasoa",
+        "wof:id": 1125810213,
+        "wof:parent_id": "85667945",
+        "wof:name": "Bixessarri",
         "wof:placetype": "locality",
-        "wof:country": "GH",
+        "wof:country": "AD",
         "wof:repo": "whosonfirst-data"
     },
     "stat": "ok"
@@ -1098,84 +1490,84 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.pelias.autocompl
 {
     "places": [
         {
-            "wof:id": 85865587,
-            "wof:parent_id": "421205765",
-            "wof:name": "Gowanus",
-            "wof:placetype": "neighbourhood",
-            "wof:country": "US",
+            "wof:id": 85632643,
+            "wof:parent_id": "102191573",
+            "wof:name": "Democratic Republic of the Congo",
+            "wof:placetype": "country",
+            "wof:country": "CD",
             "wof:repo": "whosonfirst-data"
         },
         {
-            "wof:id": 353784235,
-            "wof:parent_id": "-3",
-            "wof:name": "Gowanus Nursery",
-            "wof:placetype": "venue",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data-venue-us-ny"
-        },
-        {
-            "wof:id": 370860425,
-            "wof:parent_id": "-3",
-            "wof:name": "Gowanus Laundromat",
-            "wof:placetype": "venue",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data-venue-us-ny"
-        },
-        {
-            "wof:id": 337285451,
-            "wof:parent_id": "85892923",
-            "wof:name": "Gowanus Nursery",
-            "wof:placetype": "venue",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data-venue-us-ny"
-        },
-        {
-            "wof:id": 102061079,
-            "wof:parent_id": "421205765",
-            "wof:name": "Gowanus Heights",
-            "wof:placetype": "neighbourhood",
-            "wof:country": "US",
+            "wof:id": 1126024693,
+            "wof:parent_id": "102088069",
+            "wof:name": "Mizhhir\u2019ya",
+            "wof:placetype": "locality",
+            "wof:country": "UA",
             "wof:repo": "whosonfirst-data"
         },
         {
-            "wof:id": 185662657,
-            "wof:parent_id": "102061079",
-            "wof:name": "Gowanus Canal",
-            "wof:placetype": "venue",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data-venue-us-ny"
+            "wof:id": 101859789,
+            "wof:parent_id": "102088069",
+            "wof:name": "\u041c\u0456\u0436\u0433\u0456\u0440'\u044f",
+            "wof:placetype": "locality",
+            "wof:country": "UA",
+            "wof:repo": "whosonfirst-data"
         },
         {
-            "wof:id": 185645989,
-            "wof:parent_id": "85865587",
-            "wof:name": "Gowanus Ballroom",
-            "wof:placetype": "venue",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data-venue-us-ny"
+            "wof:id": 101752861,
+            "wof:parent_id": "1108815855",
+            "wof:name": "\u0414\u043d\u0456\u043f\u0440\u043e\u043f\u0435\u0442\u0440\u043e\u0432\u0441\u044c\u043a",
+            "wof:placetype": "locality",
+            "wof:country": "UA",
+            "wof:repo": "whosonfirst-data"
         },
         {
-            "wof:id": 571487473,
-            "wof:parent_id": "420782915",
-            "wof:name": "Gowanus Canal Community Devmnt",
-            "wof:placetype": "venue",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data-venue-us-ny"
+            "wof:id": 101752847,
+            "wof:parent_id": "1108815977",
+            "wof:name": "\u041a\u0456\u0440\u043e\u0432\u043e\u0433\u0440\u0430\u0434",
+            "wof:placetype": "locality",
+            "wof:country": "UA",
+            "wof:repo": "whosonfirst-data"
         },
         {
-            "wof:id": 269610847,
-            "wof:parent_id": "-3",
-            "wof:name": "Ny City Gowanus Houses",
-            "wof:placetype": "venue",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data-venue-us-ny"
+            "wof:id": 890460455,
+            "wof:parent_id": "1108709503",
+            "wof:name": "\u0130stanbul",
+            "wof:placetype": "locality",
+            "wof:country": "TR",
+            "wof:repo": "whosonfirst-data"
         },
         {
-            "wof:id": 286656437,
-            "wof:parent_id": "-3",
-            "wof:name": "NYC Housing Gowanus Houses",
-            "wof:placetype": "venue",
-            "wof:country": "US",
-            "wof:repo": "whosonfirst-data-venue-us-ny"
+            "wof:id": 1125842541,
+            "wof:parent_id": "890461365",
+            "wof:name": "\u015eanl\u0131urfa",
+            "wof:placetype": "locality",
+            "wof:country": "TR",
+            "wof:repo": "whosonfirst-data"
+        },
+        {
+            "wof:id": 101911225,
+            "wof:parent_id": "890461365",
+            "wof:name": "Sanliurfa",
+            "wof:placetype": "locality",
+            "wof:country": "TR",
+            "wof:repo": "whosonfirst-data"
+        },
+        {
+            "wof:id": 421186263,
+            "wof:parent_id": "85680525",
+            "wof:name": "Santiago Mari\u00f1o",
+            "wof:placetype": "county",
+            "wof:country": "VE",
+            "wof:repo": "whosonfirst-data"
+        },
+        {
+            "wof:id": 102016717,
+            "wof:parent_id": "1108737197",
+            "wof:name": "Gekhi",
+            "wof:placetype": "locality",
+            "wof:country": "RU",
+            "wof:repo": "whosonfirst-data"
         }
     ],
     "stat": "ok"
@@ -1533,23 +1925,7 @@ In addition to [default error codes](errors.md) common to all methods this API m
 ##### Example
 
 ```
-curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getInfo&api_key=your-mapzen-api-key&id=840464301&prefix=loc'
-
-{
-    "source": {
-        "description": "The Library of Congress is the largest library in the world, with millions of books, recordings, photographs, newspapers, maps and manuscripts in its collections. The Library is the main research arm of the U.S. Congress and the home of the U.S. Copyright Office.",
-        "fullname": "Library of Congress",
-        "id": 840464301,
-        "key": "id",
-        "license": "https:\/\/www.usa.gov\/government-works",
-        "license_text": "Most U.S. government creative works such as writing or images are copyright-free.",
-        "license_type": "CC0",
-        "name": "loc",
-        "prefix": "loc",
-        "url": "http:\/\/www.loc.gov"
-    },
-    "stat": "ok"
-}
+curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getInfo&api_key=your-mapzen-api-key&id=ID&prefix=PREFIX'
 ```
 
 <a name="mapzen.places.sources.getList"></a>
@@ -1633,8 +2009,8 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "id": 1108802967,
             "key": "",
             "license": "https:\/\/kaart.amsterdam.nl\/datasets",
-            "license_text": "",
-            "license_type": "",
+            "license_text": "N\/A",
+            "license_type": "CC BY (assumed)",
             "name": "amsgis",
             "prefix": "amsgis",
             "url": "https:\/\/kaart.amsterdam.nl"
@@ -1730,7 +2106,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "id",
             "license": "http:\/\/www.geopunt.be\/nl\/over-geopunt\/disclaimer",
             "license_text": "The licensee is given the non-exclusive, worldwide right to reuse the product for each legitimate purpose, including reproducing, transmitting, publishing, adapting and commercial exploitation of the product.",
-            "license_type": "Free Open Data License Flanders v.1.0",
+            "license_type": "Free Open Data License Flanders v1.0",
             "name": "begov",
             "prefix": "begov",
             "url": "http:\/\/www.geopunt.be\/download?container=referentiebestand-gemeenten&title=Voorlopig%20referentiebestand%20gemeentegrenzen"
@@ -1766,7 +2142,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "id",
             "license": "http:\/\/geosprocket.blogspot.com\/2012\/10\/results-of-burlington-neighborhoods.html",
             "license_text": "The person who associated a work with this deed has dedicated the work to the public domain by waiving all of his or her rights to the work worldwide under copyright law, including all related and neighboring rights, to the extent allowed by law. You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.",
-            "license_type": "CC0 equivalent",
+            "license_type": "CC0 (equivalent)",
             "name": "btvneighborhoods",
             "prefix": "btv",
             "url": "https:\/\/gist.github.com\/wboykinm\/dfe44481d8ff759c4f1afea223a7c070"
@@ -1802,7 +2178,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "https:\/\/www.burnaby.ca\/opendata\/licence.html",
             "license_text": "you are free to copy, modify, publish, translate, adapt, distribute or otherwise use the Information in any medium, mode or format for any lawful purpose.",
-            "license_type": "Open Government License, British Columbia, v2.0",
+            "license_type": "Open Government License - British Columbia, v2.0",
             "name": "can-bbygov",
             "prefix": "can-bbygov",
             "url": "http:\/\/data.burnaby.ca\/datasets\/0023da089ff746bfb688e2531d1f2beb_9"
@@ -1814,7 +2190,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "https:\/\/data.calgary.ca\/stories\/s\/u45n-7awa",
             "license_text": "Copy, modify, publish, translate, adapt, distribute or otherwise use the Information in any medium, mode or format for any lawful purpose...Acknowledge the source of the Information by including any attribution statement specified by the Information Provider(s) and, where possible, provide a link to this license.",
-            "license_type": "Open Government License - City of Calgary",
+            "license_type": "Open Government Licence - City of Calgary",
             "name": "can-calcai",
             "prefix": "can-calcai",
             "url": "https:\/\/data.calgary.ca\/Base-Maps\/Community-Boundaries\/ab7m-fwn6"
@@ -1826,7 +2202,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "http:\/\/geoweb.dnv.org\/data\/metadata.php?dataset=RegNeighbourhood",
             "license_text": "you are free to copy, modify, publish, translate, adapt, distribute or otherwise use the Information in any medium, mode or format for any lawful purpose.",
-            "license_type": "Open Government License, British Columbia, v2.0",
+            "license_type": "Open Government Licence - British Columbia, v2.0",
             "name": "can-dnvgov",
             "prefix": "can-dnvgov",
             "url": "http:\/\/geoweb.dnv.org\/Products\/Data\/SHP\/RegNeighbourhood_shp.zip"
@@ -1838,7 +2214,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "https:\/\/www.edmonton.ca\/city_government\/documents\/Web-version2.1-OpenDataAgreement.pdf",
             "license_text": "The City of Edmonton (the City) grants you a worldwide, royalty-free, non-exclusive licence to use, modify, and distribute the datasets in all current and future media and formats for any lawful purpose, including for commercial purposes. You are free to copy, modify, publish, translate, adapt, distribute or otherwise use the datasets in any medium, mode or format for any lawful purpose.",
-            "license_type": "Open Government License - Edmonton",
+            "license_type": "Open Government Licence - Edmonton",
             "name": "can-edmdsd",
             "prefix": "can-edmdsd",
             "url": "https:\/\/data.edmonton.ca\/Geospatial-Boundaries\/City-of-Edmonton-Neighbourhood-Boundaries-with-War\/jfvj-x253"
@@ -1850,7 +2226,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "http:\/\/www3.gatineau.ca\/Infoterritoire\/WebInterface\/help\/fr\/Content\/1_About\/1_About_FR.htm",
             "license_text": "Confirmed open source availability by Maurin Dabbadie of the Gatineau Department of Planning and Sustainable Development on 2017-06-07 <dabbadie.maurin@gatineau.ca>.",
-            "license_type": "CC BY equivalent",
+            "license_type": "CC BY (equivalent)",
             "name": "can-gatsudd",
             "prefix": "can-gatsudd",
             "url": "http:\/\/www3.gatineau.ca\/Infoterritoire\/WebInterface\/views\/index.aspx"
@@ -1898,7 +2274,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "http:\/\/neighbourhoodstudy.ca\/ons-terms-of-use\/",
             "license_text": "....publicly available and accessible data...must give ONS credit for each use or reproduction of the datasets...",
-            "license_type": "CC BY equivalent",
+            "license_type": "CC BY (equivalent)",
             "name": "can-ons",
             "prefix": "can-ons",
             "url": "Data provided by request at http:\/\/neighbourhoodstudy.ca\/contact\/"
@@ -1934,7 +2310,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "http:\/\/opendata-saskatoon.cloudapp.net\/TermsOfUse\/TermsOfUse",
             "license_text": "...a broad license to use the currently published data on the City of Saskatoon website (\u201cInformation\u201d) for your own analysis and applications...appreciate credit for provision of the Information, this is not a strict requirement.",
-            "license_type": "CC0 equivalent",
+            "license_type": "CC0 (equivalent)",
             "name": "can-saskodp",
             "prefix": "can-saskodp",
             "url": "http:\/\/opendata-saskatoon.cloudapp.net\/DataBrowser\/SaskatoonOpenDataCatalogueBeta\/NeighbourhoodArea#param=NOFILTER--DataView--Results"
@@ -1958,7 +2334,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "http:\/\/www.victoria.ca\/EN\/main\/online-services\/open-data-catalogue\/open-data-licence.html",
             "license_text": "Copy, modify, publish, translate, adapt, distribute or otherwise use the Information in any medium, mode or format for any lawful purpose...Acknowledge the source of the Information by including any attribution statement specified by the Information Provider and, where possible, provide a link to this licence.",
-            "license_type": "Open Government Licence \u2013 City of Victoria",
+            "license_type": "Open Government Licence - City of Victoria",
             "name": "can-vicodc",
             "prefix": "can-vicodc",
             "url": "http:\/\/www.victoria.ca\/EN\/main\/online-services\/open-data-catalogue.html"
@@ -1982,7 +2358,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "http:\/\/open.canada.ca\/en\/open-government-licence-canada",
             "license_text": "You are free to copy, modify, publish, translate, adapt, distribute or otherwise use the Information in any medium, mode or format for any lawful purpose.",
-            "license_type": "Open Government Licence, Canada",
+            "license_type": "Open Government Licence - Canada",
             "name": "canvec-hydro",
             "prefix": "canvec-hydro",
             "url": "http:\/\/open.canada.ca\/data\/en\/dataset\/9d96e8c9-22fe-4ad2-b5e8-94a6991b744b"
@@ -2012,13 +2388,13 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "url": "http:\/\/data.geo.admin.ch"
         },
         {
-            "description": "",
+            "description": "A directory of business listings in London.",
             "fullname": "City of London Companies House",
             "id": 1158784151,
             "key": "number",
-            "license": "",
-            "license_text": "",
-            "license_type": "",
+            "license": "https:\/\/data.london.gov.uk\/about\/terms-and-conditions\/",
+            "license_text": "May use the data contained in this site for any purpose, providing it does not infringe the terms and conditions.",
+            "license_type": "CC0",
             "name": "companieshouse",
             "prefix": "companieshouse",
             "url": "https:\/\/data.london.gov.uk\/dataset\/directory-of-london-businesses"
@@ -2048,6 +2424,30 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "url": "https:\/\/www.denvergov.org\/opendata\/dataset\/city-and-county-of-denver-statistical-neighborhoods"
         },
         {
+            "description": "In most places that allow direct-dialed international calls, you must first dial an international access code. These access codes are maintained for the member countries or regions by the International Telecommunication Union (ITU).",
+            "fullname": "Dial Codes",
+            "id": 1158832839,
+            "key": "",
+            "license": "https:\/\/www.itu.int\/en\/Pages\/copyright.aspx",
+            "license_text": "ITU holds copyright in the information available on this Web site, unless otherwise stated. Copyright in any third-party materials found on this Web site must also be respected.",
+            "license_type": "Restricted",
+            "name": "dial",
+            "prefix": "dial",
+            "url": "https:\/\/www.itu.int\/itudoc\/itu-t\/ob-lists\/icc\/e164_763.html"
+        },
+        {
+            "description": "These codes are provided for by Article 20 of the Convention on Road Traffic (Geneva, 1949). Therein, they are called 'distinguishing signs of the place of registration' of vehicles.",
+            "fullname": "Distinguishing Signs - United Nations Economic Commission for Europe",
+            "id": 1158832831,
+            "key": "",
+            "license": "http:\/\/www.unece.org\/legal_notice\/copyrightnotice.html",
+            "license_text": "All rights reserved.",
+            "license_type": "Restricted",
+            "name": "ds",
+            "prefix": "ds",
+            "url": "https:\/\/www.unece.org\/trans\/roadsafe\/distinguishing_signs.html"
+        },
+        {
             "description": "Elections BC is an independent and non-partisan Office of the Legislature, British Colombia.",
             "fullname": "Elections BC",
             "id": 1108962955,
@@ -2070,6 +2470,30 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "name": "edtf",
             "prefix": "edtf",
             "url": "http:\/\/loc.gov\/standards\/datetime\/"
+        },
+        {
+            "description": "Neighbourhood and district data provided by the City of Madrid.",
+            "fullname": "Portal de datos abiertos del Ayuntamiento de Madrid",
+            "id": 1158844927,
+            "key": "",
+            "license": "http:\/\/datos.madrid.es\/egob\/catalogo\/aviso-legal",
+            "license_text": "Las condiciones generales permiten la reutilizaci\u00f3n de los documentos para fines comerciales y no comerciales. Se entiende por reutilizaci\u00f3n el uso de documentos que obran en poder del Ayuntamiento de Madrid, siempre que dicho uso no constituya una actividad administrativa p\u00fablica.",
+            "license_type": "CC0 (equivalent)",
+            "name": "esp-aytomad",
+            "prefix": "esp-aytomad",
+            "url": "http:\/\/datos.madrid.es\/portal\/site\/egob\/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0\/?vgnextoid=46b55cde99be2410VgnVCM1000000b205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD&vgnextfmt=default"
+        },
+        {
+            "description": "Neighbourhood (district) data as provided by the Barcelona City Council (CartoBCN).",
+            "fullname": "CartoBCN",
+            "id": 1158844413,
+            "key": "",
+            "license": "http:\/\/w133.bcn.cat\/geoportal\/descargas\/en_gb_cond_us_carto.pdf",
+            "license_text": "...their use for commercial and non-commercial purposes...their modification, transformation and adaptation...so long as reference is made to Barcelona City Council's authorship...",
+            "license_type": "CC BY",
+            "name": "esp-cartobcn",
+            "prefix": "esp-cartobcn",
+            "url": "http:\/\/w20.bcn.cat\/cartobcn\/"
         },
         {
             "description": "Homepage for the Federal Aviation Administration.",
@@ -2108,13 +2532,25 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "url": "https:\/\/github.com\/Factual\/places"
         },
         {
-            "description": "",
+            "description": "Country codes for each member (and non-member) country, used by FIFA during competition.",
+            "fullname": "Federation Internationale de Football Association",
+            "id": 1158832829,
+            "key": "id",
+            "license": "http:\/\/www.rsssf.com\/miscellaneous\/fifa-codes.html",
+            "license_text": "You are free to copy this document in whole or part provided that proper acknowledgement is given to the author. All rights reserved.",
+            "license_type": "CC BY 1.0",
+            "name": "fifa",
+            "prefix": "fifa",
+            "url": "http:\/\/www.rsssf.com\/miscellaneous\/fifa-codes.html"
+        },
+        {
+            "description": "National Land Survey of Finland performs various kinds of cadastral surveys such as parcelling and reallocations of pieces of land, produces map data and promotes the joint use of such data.",
             "fullname": "NLS National Land Survey of Finland",
             "id": 857125801,
             "key": "id",
-            "license": "http:\/\/www.maanmittauslaitos.fi\/en\/professionals\/digital-products\/datasets-free-charge\/open-data-licence.zip",
-            "license_text": "",
-            "license_type": "",
+            "license": "http:\/\/www.maanmittauslaitos.fi\/en\/opendata-licence-cc40",
+            "license_text": "Mention the name of the Licensor, the name of the dataset(s) and the time when the National Land Survey has delivered the dataset(s) (e.g.: contains data from the National Land Survey of Finland Topographic Database",
+            "license_type": "CC BY 4.0",
             "name": "figov",
             "prefix": "figov",
             "url": "http:\/\/www.maanmittauslaitos.fi\/en\/digituotteet\/municipal-division-finland"
@@ -2142,6 +2578,30 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "name": "frgov",
             "prefix": "frgov",
             "url": "https:\/\/www.data.gouv.fr\/en\/datasets\/fond-de-carte-des-codes-postaux\/"
+        },
+        {
+            "description": "Country codes used be the Global Administrative Unit Layers from the Food and Agriculture Organization. The entity codes are integers, assigned sequentially, with no duplication between layers; that is, no country has the same code as any primary subdivision, and so on.",
+            "fullname": "Global Administrative Unit Layers - Food and Agriculture Organization",
+            "id": 1158832835,
+            "key": "id",
+            "license": "http:\/\/www.fao.org\/contact-us\/terms\/en\/",
+            "license_text": "FAO encourages unrestricted use of news releases provided on the FAO website, and no formal permission is required to reproduce these materials.",
+            "license_type": "CC0",
+            "name": "gaul",
+            "prefix": "gaul",
+            "url": "http:\/\/www.fao.org\/countryprofiles\/iso3list\/en\/"
+        },
+        {
+            "description": "Formerly FIPS PUB 10-4, these country codes were used by the National Geospatial-Intelligence Agency (NGA) to define 'Countries, Dependencies, Areas of Special Sovereignty, and Their Principal Administrative Divisions'. GEC maintenance was discontinued on 31 December 2014.",
+            "fullname": "Geopolitical Entities and Codes",
+            "id": 1158832823,
+            "key": "",
+            "license": "http:\/\/geonames.nga.mil\/gns\/html\/namefiles.html",
+            "license_text": "Foreign geographic names data is freely available.",
+            "license_type": "CC0",
+            "name": "gec",
+            "prefix": "gec",
+            "url": "http:\/\/geonames.nga.mil\/gns\/html\/countrycodes.html"
         },
         {
             "description": "Property prefix.",
@@ -2180,7 +2640,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "url": "http:\/\/developer.yahoo.com\/geo\/geoplanet\/"
         },
         {
-            "description": "Administrative subdivisions of countries; a comprehensive world reference, 1900 to 1998. Gwillim Law: 'As far as I'm concerned, HASC codes are in the public domain - to encourage people or organizations to use them for data communication.'",
+            "description": "Administrative subdivisions of countries; a comprehensive world reference, 1900 to 1998. Gwillim Law: 'As far as I'm concerned, HASC codes are in the public domain - to encourage people or organizations to use them for data communication.' The 'hasc:id' is a variable property mapping, depending on the placetype of a record.",
             "fullname": "Statoids HASC",
             "id": 1108827445,
             "key": "id",
@@ -2240,6 +2700,30 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "url": "http:\/\/www.icao.int\/"
         },
         {
+            "description": "The public body responsible for regulating and coordinating the National Statistical System and Geographic Information, as well as to capture and disseminate information of Mexico.",
+            "fullname": "Instituto Nacional de Estad\u00edstica y Geograf\u00eda (INEGI)",
+            "id": 1158808187,
+            "key": "id",
+            "license": "http:\/\/www.beta.inegi.org.mx\/inegi\/terminos.html",
+            "license_text": "You can make and distribute copies of the information, without altering or deleting metadata. You can disseminate and publish the information.",
+            "license_type": "CC BY (equivalent)",
+            "name": "inegi",
+            "prefix": "inegi",
+            "url": "http:\/\/http:\/\/www.inegi.org.mx\/"
+        },
+        {
+            "description": "These codes identify the nationality of athletes and teams during Olympic events.",
+            "fullname": "International Olympics Committee",
+            "id": 1158832825,
+            "key": "id",
+            "license": "https:\/\/www.olympic.org\/terms-of-service",
+            "license_text": "All elements of the Site, including the IOC Content, are protected by copyright, trade dress, moral rights, trademark and other laws relating to the protection of intellectual property.",
+            "license_type": "Restricted",
+            "name": "ioc",
+            "prefix": "ioc",
+            "url": "https:\/\/www.olympic.org\/the-ioc"
+        },
+        {
             "description": "ISO is an independent, non-governmental international organization with a membership of 163 national standards bodies.",
             "fullname": "International Organization for Standardization",
             "id": 1108931861,
@@ -2250,6 +2734,18 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "name": "iso",
             "prefix": "iso",
             "url": "http:\/\/www.iso.org\/"
+        },
+        {
+            "description": "ITU country codes are used to identify radio transmitter locations.",
+            "fullname": "International Telecommunications Union",
+            "id": 1158832821,
+            "key": "id",
+            "license": "https:\/\/www.itu.int\/en\/Pages\/copyright.aspx",
+            "license_text": "ITU holds copyright in the information available on this Web site, unless otherwise stated. Copyright in any third-party materials found on this Web site must also be respected.",
+            "license_type": "Restricted",
+            "name": "itu",
+            "prefix": "itu",
+            "url": "https:\/\/www.itu.int\/online\/mm\/scripts\/gensel8"
         },
         {
             "description": "Official website for the City of Kuopio, Finland.",
@@ -2324,12 +2820,48 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "fullname": "Library of Congress",
             "id": 840464301,
             "key": "id",
-            "license": "https:\/\/www.usa.gov\/government-works",
-            "license_text": "Most U.S. government creative works such as writing or images are copyright-free.",
+            "license": "https:\/\/www.loc.gov\/legal\/",
+            "license_text": "Unless otherwise indicated on this site, the Library of Congress has no objection to the international use and reuse of Library U.S. Government works on loc.gov. These works are also available for worldwide use and reuse under CC0 1.0 Universal.",
             "license_type": "CC0",
             "name": "loc",
             "prefix": "loc",
             "url": "http:\/\/www.loc.gov"
+        },
+        {
+            "description": "LocalWiki is a grassroots effort to collect, share and open the world\u2019s local knowledge. Includes data on local governments, neighborhoods, streets, social movements, noteworthy local figures, social services, schools, etc.",
+            "fullname": "LocalWiki",
+            "id": 1158844639,
+            "key": "",
+            "license": "https:\/\/localwiki.org\/main\/Copyrights",
+            "license_text": "All of the media and written content in LocalWiki is licensed under the Creative Commons Attribution 4.0 license (CC BY 4.0), unless noted otherwise.",
+            "license_type": "CC BY 4.0",
+            "name": "localwiki",
+            "prefix": "localwiki",
+            "url": "https:\/\/localwiki.org\/"
+        },
+        {
+            "description": "The United Nations Statistics Division compiles and disseminates global statistical information, develops standards and norms for statistical activities, and supports efforts to strengthen national statistical systems.",
+            "fullname": "UNSD (United Nations Statistics Division)",
+            "id": 1158856069,
+            "key": "code",
+            "license": "http:\/\/www.un.org\/en\/sections\/about-website\/terms-use\/",
+            "license_text": "The United Nations reserves the right to deny in its sole discretion any user access to this Site or any portion thereof without notice.",
+            "license_type": "Restricted",
+            "name": "unsd",
+            "prefix": "m49",
+            "url": "https:\/\/unstats.un.org\/unsd\/methodology\/m49\/"
+        },
+        {
+            "description": "MARC is a standard for encoding bibliographic materials in electronic form. The Library of Congress maintains the MARC code list for countries.",
+            "fullname": "Machine-Readable Cataloging - Library of Congress",
+            "id": 1158832837,
+            "key": "id",
+            "license": "https:\/\/www.loc.gov\/legal\/",
+            "license_text": "Unless otherwise indicated on this site, the Library of Congress has no objection to the international use and reuse of Library U.S. Government works on loc.gov. These works are also available for worldwide use and reuse under CC0 1.0 Universal.",
+            "license_type": "CC0",
+            "name": "marc",
+            "prefix": "marc",
+            "url": "http:\/\/www.loc.gov\/marc\/countries\/cou_home.html"
         },
         {
             "description": "Mesoshapes are a product of Mapzen for Who's On First.",
@@ -2540,6 +3072,16 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "url": "https:\/\/www.ordnancesurvey.co.uk"
         },
         {
+            "description": "Property prefix (for concordances).",
+            "fullname": "OpenStreetMap",
+            "id": 1158861161,
+            "key": "id",
+            "license": "ODbL",
+            "name": "osm",
+            "prefix": "osm",
+            "url": "https:\/\/openstreetmap.org"
+        },
+        {
             "description": "Official website for the City of Oulu, Finland.",
             "fullname": "City of Oulu",
             "id": 1108728833,
@@ -2604,13 +3146,25 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "description": "The Quattroshapes point gazetteer. A big list of point locations that supplements the polygons gazetteer.",
             "fullname": "Quattroshapes Point Gazetteer",
             "id": 1108970625,
-            "key": "",
+            "key": "id",
             "license": "https:\/\/github.com\/foursquare\/quattroshapes\/blob\/master\/LICENSE.md",
             "license_text": "Please include attribution in your app, site, or printed work.",
             "license_type": "CC BY 2.0",
             "name": "quattroshapes_pg",
             "prefix": "qs_pg",
             "url": "http:\/\/www.quattroshapes.com\/"
+        },
+        {
+            "description": "Open Data portal for the City of Santa Barbara, CA.",
+            "fullname": "The City of Santa Barbara",
+            "id": 1158846735,
+            "key": "",
+            "license": "https:\/\/www.santabarbaraca.gov\/howdoi\/get\/webhelp\/policy.asp",
+            "license_text": "",
+            "license_type": "Public Domain",
+            "name": "santabar",
+            "prefix": "santabar",
+            "url": "https:\/\/maps.santabarbaraca.gov\/Html5Viewer\/Index.html?configBase=\/Geocortex\/Essentials\/REST\/sites\/City_of_Santa_Barbara__Public\/viewers\/SantaBarbaraPublic\/virtualdirectory\/Resources\/Config\/Default"
         },
         {
             "description": "The San Diego Geographic Information Source (SanGIS) is a Joint Powers Authority (JPA) of the City of San Diego and the County of San Diego responsible for maintaining a regional geographic information system (GIS) landbase and data warehouse.",
@@ -2727,10 +3281,22 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "http:\/\/www.statcan.gc.ca\/eng\/reference\/licence-eng",
             "license_text": "Subject to this agreement, Statistics Canada grants you a worldwide, royalty-free, non-exclusive licence to: use, reproduce, publish, freely distribute, or sell the Information; use, reproduce, publish, freely distribute, or sell Value-added Products; and, sublicence any or all such rights, under terms consistent with this agreement.",
-            "license_type": "CC-BY (assumed)",
+            "license_type": "CC BY (assumed)",
             "name": "statcan",
             "prefix": "statcan",
             "url": "http:\/\/statcan.gc.ca\/"
+        },
+        {
+            "description": "Statoids is an online database that organizes the primary and secondary administrative divisions for all countries, dependencies, and disputed areas of the world. Properties imported under CC-BY license from Statoids via special arrangement with the author.",
+            "fullname": "Statoids",
+            "id": 1158818289,
+            "key": "",
+            "license": "Data provided under special license agreement with http:\/\/www.statoids.com",
+            "license_text": "The Licensed Materials are licensed, not sold to Mapzen. Statoids grants to Mapzen world-wide, fully-paid, perpetual, non-exclusive right to use the Licensed Materials for any purpose. The parties acknowledge and agree that such rights include, but are not limited to the right to (a) copy, duplicate, reproduce or publish the Licensed Materials or any of their contents; (b) distribute, assign transfer, sub-license the Licensed Materials, the contents of the Licensed Materials or copies thereof, to third parties by any means whatsoever; (d) change, modify, adapt, translate, reverse engineer, disassemble or decompile the Licensed Materials or create derivative works based on the Licensed Materials, or copies thereof, or (e) bundle, repackage, or include the Licensed Materials with any software in any way. By way of explanation, and not limitation, the parties acknowledge that the intent of this license is to give Mapzen all rights in the data other than title. Mapzen agrees that it shall use commercially reasonable efforts to attribute Statoids' ownership of the Licensed Material whenever it publishes the Licensed Materials.",
+            "license_type": "CC BY",
+            "name": "statoids",
+            "prefix": "statoids",
+            "url": "http:\/\/www.statoids.com"
         },
         {
             "description": "The Open Information portal for the Saint Paul, MN government.",
@@ -2763,7 +3329,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "id",
             "license": "http:\/\/opendatacommons.org\/licenses\/by\/1-0\/",
             "license_text": "The Open Data Commons Attribution License is a license agreement intended to allow users to freely share, modify, and use this Database subject only to the attribution requirements set out in Section 4.",
-            "license_type": "ODC-By v1.0",
+            "license_type": "ODC-By, v1.0",
             "name": "tgn",
             "prefix": "tgn",
             "url": "https:\/\/www.getty.edu\/research\/tools\/vocabularies\/tgn\/index.html"
@@ -2811,7 +3377,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "http:\/\/www1.toronto.ca\/wps\/portal\/contentonly?vgnextoid=4a37e03bb8d1e310VgnVCM10000071d60f89RCRD",
             "license_text": "You are free to copy, modify, publish, translate, adapt, distribute or otherwise use the Information in any medium, mode or format for any lawful purpose.",
-            "license_type": "Open Government Licence, Ontario, v1.0",
+            "license_type": "Open Government Licence - Ontario, v1.0",
             "name": "torsdfa",
             "prefix": "torsdfa",
             "url": "http:\/\/www1.toronto.ca\/wps\/portal\/contentonly?vgnextoid=04b489fe9c18b210VgnVCM1000003dd60f89RCRD&vgnextchannel=75d6e03bb8d1e310VgnVCM10000071d60f89RCRD"
@@ -2829,13 +3395,25 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "url": "https:\/\/transit.land\/"
         },
         {
-            "description": "Unknown.",
+            "description": "The internation organization that manages the distinguishing signs of the place of registration of vehicles.",
+            "fullname": "United Nations Convention for Road Traffic",
+            "id": 1158860607,
+            "key": "id",
+            "license": "http:\/\/www.un.org\/en\/sections\/about-website\/copyright\/index.html",
+            "license_text": "All rights reserved. None of the materials provided on this web site may be used, reproduced or transmitted, in whole or in part, in any form or by any means, electronic or mechanical, including photocopying, recording or the use of any information storage and retrieval system, except as provided for in the Terms and Conditions of Use of United Nations Web Sites, without permission in writing from the publisher.",
+            "license_type": "Restricted",
+            "name": "United Nations Convention for Road Traffic",
+            "prefix": "uncrt",
+            "url": "https:\/\/treaties.un.org\/doc\/Publication\/MTDSG\/Volume%20I\/Chapter%20XI\/xi-b-1.en.pdf"
+        },
+        {
+            "description": "Used when a property value is not known. A placeholder for 'we do not know'.",
             "fullname": "unknown",
             "id": 1108830757,
             "key": "id",
             "license": "N\/A",
-            "license_text": "",
-            "license_type": "",
+            "license_text": "N\/A",
+            "license_type": "N\/A",
             "name": "unknown",
             "prefix": "unknown",
             "url": ""
@@ -2898,7 +3476,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "key": "",
             "license": "http:\/\/vancouver.ca\/your-government\/open-data-catalogue.aspx#tab19099",
             "license_text": "you are free to copy, modify, publish, translate, adapt, distribute or otherwise use the Information in any medium, mode or format for any lawful purpose.",
-            "license_type": "Open Government Licence, British Columbia, v2.0",
+            "license_type": "Open Government Licence - British Columbia, v2.0",
             "name": "vanpds",
             "prefix": "vanpds",
             "url": "http:\/\/data.vancouver.ca\/datacatalogue\/localAreaBoundary.htm"
@@ -2939,6 +3517,18 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "url": "http:\/\/www.wikipedia.org\/"
         },
         {
+            "description": "Country abbreviations used in weather reports from the World Meteorological Organization.",
+            "fullname": "World Meteorological Organization",
+            "id": 1158832833,
+            "key": "id",
+            "license": "https:\/\/public.wmo.int\/en\/copyright",
+            "license_text": "Reproduction of short excerpts of WMO materials, figures and photographs on this website is authorized free of charge and without formal written permission provided that the original source is acknowledged. Reproduction of videos files are authorized free of charge and without formal written permission provided that the original source is acknowledged and subject to the standard creative commons licensing conditions Creative Commons License.",
+            "license_type": "CC BY-NC-ND 4.0",
+            "name": "wmo",
+            "prefix": "wmo",
+            "url": "http:\/\/icoads.noaa.gov\/metadata\/wmo47\/wmo_quarterly\/47CodeTables9903.html"
+        },
+        {
             "description": "Cached, accessed: 2017-05-11, via: https:\/\/web.archive.org\/web\/20111028163611\/http:\/\/developer.yahoo.com\/geo\/geoplanet\/data\/.",
             "fullname": "Yahoo! GeoPlanet (formerly Where On Earth)",
             "id": 404734187,
@@ -2975,16 +3565,16 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getList&
             "url": "http:\/\/whosonfirst.mapzen.com\/"
         },
         {
-            "description": "Missing - as in a placeholder for WOF records without a geometry.",
+            "description": "The source for this property is missing. For example, if a record in Who's On First was imported without a src:geom property, the source would be considered 'missing'.",
             "fullname": "Missing",
             "id": 404734213,
             "key": "",
             "license": "N\/A",
-            "license_text": "",
-            "license_type": "",
+            "license_text": "N\/A",
+            "license_type": "N\/A",
             "name": "missing",
             "prefix": "xx",
-            "url": ""
+            "url": "N\/A"
         },
         {
             "description": "Weighted means from Quattroshapes. Yerbashapes are a product of Mapzen for Who's On First.",
@@ -3094,14 +3684,21 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getPrefi
         "companieshouse",
         "dbp",
         "denvercpd",
+        "dial",
+        "ds",
         "ebc",
         "edtf",
+        "esp-aytomad",
+        "esp-cartobcn",
         "faa",
         "fb",
         "fct",
+        "fifa",
         "figov",
         "fips",
         "frgov",
+        "gaul",
+        "gec",
         "geom",
         "gn",
         "gp",
@@ -3110,7 +3707,10 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getPrefi
         "hsgov",
         "iata",
         "icao",
+        "inegi",
+        "ioc",
         "iso",
+        "itu",
         "kuogov",
         "lacity",
         "lacity_oof",
@@ -3118,6 +3718,9 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getPrefi
         "lbl",
         "lieu",
         "loc",
+        "localwiki",
+        "m49",
+        "marc",
         "meso",
         "ms",
         "mt",
@@ -3135,12 +3738,14 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getPrefi
         "oa",
         "oakced",
         "os",
+        "osm",
         "oulugov",
         "out",
         "pedia",
         "porbps",
         "qs",
         "qs_pg",
+        "santabar",
         "sdgis",
         "seagv",
         "sfac",
@@ -3151,6 +3756,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getPrefi
         "smcgov",
         "ssuberlin",
         "statcan",
+        "statoids",
         "stpaulgov",
         "svn-sma",
         "tgn",
@@ -3159,6 +3765,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getPrefi
         "tmpgov",
         "torsdfa",
         "transitland",
+        "uncrt",
         "unknown",
         "unlc",
         "uscensus",
@@ -3167,6 +3774,7 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.sources.getPrefi
         "wapo",
         "wd",
         "wk",
+        "wmo",
         "woe",
         "woedb",
         "wof",
@@ -3256,15 +3864,15 @@ curl -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.tags.getTags&api
 {
     "tags": [
         {
-            "count": 768015,
+            "count": 837015,
             "tag": "contractor"
         }
     ],
     "next_query": "method=mapzen.places.tags.getTags&source=wof&per_page=1&page=2",
-    "total": 38151,
+    "total": 39773,
     "page": 1,
     "per_page": 1,
-    "pages": 38151,
+    "pages": 39773,
     "cursor": null,
     "stat": "ok"
 }
