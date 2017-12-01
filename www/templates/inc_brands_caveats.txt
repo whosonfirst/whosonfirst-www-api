@@ -1,3 +1,3 @@
-<div class="row caveat" style="font-size:small; font-style:italic;">
+<div class="row caveat" style="font-size:small; font-style:italic;margin-top:3em;">
 <p>Brands (and to a lesser extent all venues) are still <a href="https://mapzen.com/blog/whosonfirst-sotmus-2017">a work in progress</a>. It's early days and we're still completing the first pass at reviewing and cleaning up the data. If you see something weird or just plain wrong we'd love for you to file an issue in the <a href="https://github.com/whosonfirst-data/whosonfirst-brands/issues">whosonfirst-brands GitHub repository.</p>
 </div>

@@ -25,17 +25,39 @@
 	<div class="row headroom-large">
 		<div class="col-xs-12">
 			<h2>Places that are a <a href="{$cfg.abs_root_url}brands/{$brand_id|@escape}">#{$brand_name|@escape}</a></h2>
+
+		{if $superseded_by|@count and $supersedes|@count}
+		{elseif $superseded_by|@count}
+
+		{if $superseded_by|@count == 1}
+		<p>This #brand has been superseded by <a href="{$superseded_by.0|@whosonfirst_brands_url_for_brand}">{$superseded_by.0|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>.</p>
+		{else}
+		<p>This #brand has been superseded a number of times by {foreach from=$superseded_by item="row" name="superseded"}<a href="{$row.0|@whosonfirst_brands_url_for_brand}">{$row.0|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>{if $smarty.foreach.superseded.last}{else} and {/if}{/foreach}.</p>
+		{/if}
+
+		{elseif $supersedes|@count}
+
+		{if $supersedes|@count == 1}
+		<p><span class="hey-look">{$brand_name|@escape}</span> supersedes the #brand formerly known as <a href="{$supersedes.0|@whosonfirst_brands_url_for_brand}">{$supersedes.0|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>.</p>
+		{else}
+		<p><span class="hey-look">{$brand_name|@escape}</span> supersedes the #brands formerly known as {foreach from=$supersedes item="row" name="superseded"}<a href="{$row.0|@whosonfirst_brands_url_for_brand}">{$row.0|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>{if $smarty.foreach.superseded.last}{else} and {/if}{/foreach}.</p>
+		{/if}
+
+		{else}{/if}
+
 		</div>
 	</div>
 
-{if $places|@count==0}
-			<h3>Hrm, we can't find any places associated with that #brand</h3>
-{else}
+
+		{if $places|@count==0}
+		    {if $superseded_by|@count == 0}<h3>Hrm, we can't find any places associated with that #brand</h3>{/if}
+		{else}
+
+		{include file="inc_results.txt" results=$places pagination=$pagination}
+
+		{/if}
 
 	{include file="inc_brands_caveats.txt"}
-	{include file="inc_results.txt" results=$places pagination=$pagination}
-{/if}
-
 </div>
 
 {include file="inc_foot.txt"}
