@@ -6,14 +6,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Mapzen Places" />
 <meta property="og:title" content="Places that are a #{$brand_name|@escape} ({$brand_id|@escape})" />
-<meta property="og:description" content="{if $places|@count==1}There is one of them!{else}There are {$places|@count|@number_format|@escape} of them!{/if}" />
+<meta property="og:description" content="{if $pagination.total_count==1}There is one of them!{elseif $pagination.total_count}There are {$pagination.total_count|number_format|@escape} of them!{else}{/if}" />
 <meta property="og:image" content="https://mapzen.com/common/styleguide/images/favicons/favicon-32x32.png" />
 <meta property="twitter:card" value="summary" />
 <meta property="twitter:site" content="@mapzen" />
 <meta property="twitter:creator" content="@mapzen" />
 <meta property="twitter:url" content="{$cfg.abs_root_url}brands/{$brand_id|@escape}/" />
 <meta property="twitter:title" content="Places that are a #{$brand_name|@escape} ({$brand_id|@escape})" />
-<meta property="twitter:description" content="{if $places|@count==1}There is one of them!{else}There are {$places|@count|@number_format|@escape} of them!{/if}" />
+<meta property="twitter:description" content="{if $pagination.total_count==1}There is one of them!{elseif $pagination.total_count}There are {$pagination.total_count|number_format|@escape} of them!{else}{/if}" />
 <meta property="twitter:image" content="https://mapzen.com/common/styleguide/images/favicons/favicon-32x32.png" />
 {/if}
 {/capture}
