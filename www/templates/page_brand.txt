@@ -40,7 +40,7 @@
 		{if $supersedes|@count == 1}
 		<p><span class="hey-look">{$brand_name|@escape}</span> supersedes the #brand formerly known as <a href="{$supersedes.0|@whosonfirst_brands_url_for_brand}">{$supersedes.0|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>.</p>
 		{else}
-		<p><span class="hey-look">{$brand_name|@escape}</span> supersedes the #brands formerly known as {foreach from=$supersedes item="row" name="superseded"}<a href="{$row.0|@whosonfirst_brands_url_for_brand}">{$row.0|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>{if $smarty.foreach.superseded.last}{else} and {/if}{/foreach}.</p>
+		<p><span class="hey-look">{$brand_name|@escape}</span> supersedes the #brands formerly known as {foreach from=$supersedes item="row" name="superseded"}<a href="{$row|@whosonfirst_brands_url_for_brand}">{$row|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>{if $smarty.foreach.superseded.last}{else} and {/if}{/foreach}.</p>
 		{/if}
 
 		{else}{/if}
