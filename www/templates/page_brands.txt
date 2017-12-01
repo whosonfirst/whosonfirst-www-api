@@ -9,7 +9,8 @@
 		</div>
 	</div>
 
-{include file="inc_brands_list.txt"}
+	{include file="inc_brands_caveats.txt"}
+	{include file="inc_brands_list.txt"}
 </div>
 
 {include file="inc_foot.txt}

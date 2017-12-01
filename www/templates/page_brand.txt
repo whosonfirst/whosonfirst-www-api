@@ -31,6 +31,8 @@
 {if $places|@count==0}
 			<h3>Hrm, we can't find any places associated with that #brand</h3>
 {else}
+
+	{include file="inc_brands_caveats.txt"}
 	{include file="inc_results.txt" results=$places pagination=$pagination}
 {/if}
 
