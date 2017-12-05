@@ -48,6 +48,29 @@
 		</div>
 	</div>
 
+	{if 0}
+	<div class="categories machinetags">
+		<ul class="machinetags-namespaces">
+		{foreach from=$categories_tree item="predicates" key="namespace"}
+		<li>	
+			<a href="{$cfg.abs_root_url}brands/categories/{$namespace|@escape}/" class="namespace">{$namespace|@escape}</a>
+			<ul class="machinetags-predicates">
+			{foreach from=$predicates item="values" key="predicate"}
+			<li>
+			<a href="{$cfg.abs_root_url}brands/categories/{$namespace|@escape}:{$predicate|@escape}=/" class="predicate">{$predicate|escape}</a>
+			<ul class="machinetags-values">
+				{foreach from=$values item="value"}
+				<li class="value"><a href="{$cfg.abs_root_url}brands/categories/{$namespace|@escape}:{$predicate|@escape}={$value|@escape}/">{$value|@escape}</a></li>
+				{/foreach}
+			</ul>
+			</li>
+			{/foreach}
+			</ul>
+		</li>
+		{/foreach}
+		</ul>
+	</div>
+	{/if}
 
 		{if $places|@count==0}
 		    {if $superseded_by|@count == 0}<h3>Hrm, we can't find any places associated with that #brand</h3>{/if}

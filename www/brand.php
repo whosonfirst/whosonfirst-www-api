@@ -2,6 +2,7 @@
 
 	include("include/init.php");
 
+	loadlib("machinetags");
 	loadlib("whosonfirst_brands");
 	loadlib("whosonfirst_places");
 
@@ -16,6 +17,39 @@
 
 	if (! $brand){
 		error_404();
+	}
+
+	$categories = $brand["wof:categories"];
+
+	if (! is_array($categories)){
+		$categories = array();
+	}
+
+	sort($categories);
+
+	$tree = array();
+
+	foreach ($categories as $mt){
+
+		$rsp = machinetags_parse_machinetag($mt);
+
+		if (! $rsp['ok']){
+			continue;
+		}
+
+		$ns = $rsp["namespace"];
+		$pred = $rsp["predicate"];
+		$value = $rsp["value"];
+
+		if (! is_array($tree[$ns])){
+			$tree[$ns] = array();
+		}
+
+		if (! is_array($tree[$ns][$pred])){
+			$tree[$ns][$pred] = array();
+		}
+
+		$tree[$ns][$pred][] = $value;
 	}
 
 	$supersedes = array();
@@ -68,6 +102,9 @@
 	$GLOBALS['smarty']->assign_by_ref("brand", $brand);
 	$GLOBALS['smarty']->assign_by_ref("superseded_by", $superseded_by);
 	$GLOBALS['smarty']->assign_by_ref("supersedes", $supersedes);
+
+	$GLOBALS['smarty']->assign_by_ref("categories", $categories);
+	$GLOBALS['smarty']->assign_by_ref("categories_tree", $tree);
 
 	$GLOBALS['smarty']->assign_by_ref("places", $places);
 	$GLOBALS['smarty']->assign_by_ref("pagination", $pagination);
