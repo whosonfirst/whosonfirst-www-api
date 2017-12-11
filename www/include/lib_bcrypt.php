@@ -3,7 +3,7 @@
 # lib_bcrypt - bcrypt hashing in PHP
 #
 # Based on Portable PHP password hashing framework:
-# 
+#
 #	http://www.openwall.com/phpass/
 #
 # There's absolutely no warranty.
@@ -11,7 +11,7 @@
 class BCryptHasher {
 	private $random_state;
 
-	function BCryptHasher()
+	function __construct()
 	{
 		if (CRYPT_BLOWFISH != 1) die("lib_bcyrpt requires CRYPT_BLOWFISH PHP support!");
 
@@ -101,4 +101,3 @@ class BCryptHasher {
 		return $hash == $stored_hash;
 	}
 }
-
