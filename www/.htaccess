@@ -118,7 +118,7 @@ RewriteRule  ^tags/([a-z]+)/?$		tag.php?tag=$1&%{QUERY_STRING} [L]
 # This all (especially the oauth2 auth/token stuff) relies on the
 # HTTPS rules for logged in users (20121024/straup)
 
-RewriteRule  ^(api)?/?$				api_index.php		[L]
+RewriteRule  ^(api)?/?$				api.php		[L]
 RewriteRule  ^(api/)?methods/?$			api_methods.php	[L]
 RewriteRule  ^(api/)?methods/print/?$		api_methods.php?print=2	[L]
 RewriteRule  ^(api/)?methods/explore/?$		api_methods.php	[L]
@@ -163,8 +163,8 @@ RewriteRule  ^ping/?$								ping.php?%{QUERY_STRING}  [L]
 
 # START OF flamework-mapzen-sso stuff
 
-RewriteRule  ^signin/?$					/signin_mapzen_oauth.php	[L]
-RewriteRule  ^auth/?$					/auth_callback_mapzen_oauth.php?%{QUERY_STRING} [L]
+RewriteRule  ^signin/?$					/signin_github_oauth.php	[L]
+RewriteRule  ^auth/?$					/auth_callback_github_oauth.php?%{QUERY_STRING} [L]
 
 # END OF flamework-mapzen-sso stuff
 

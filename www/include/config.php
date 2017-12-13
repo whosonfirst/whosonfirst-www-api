@@ -3,7 +3,7 @@
 
 	# Things you may want to change in a hurry
 
-	$GLOBALS['cfg']['site_name'] = 'Mapzen Places';
+	$GLOBALS['cfg']['site_name'] = 'Who\'s On First API';
 	$GLOBALS['cfg']['environment'] = 'dev';
 
 	$GLOBALS['cfg']['site_disabled'] = 0;
@@ -453,3 +453,8 @@
 	# END OF chicken/rooster stuff
 
 	$GLOBALS['cfg']['mapzen']['api_key'] = 'READ-FROM-SECRETS';
+
+	$GLOBALS['cfg']['github_oauth_key'] = 'READ-FROM-SECRETS';
+	$GLOBALS['cfg']['github_oauth_secret'] = 'READ-FROM-SECRETS';
+	$GLOBALS['cfg']['github_api_scope'] = 'repo, user';
+	$GLOBALS['cfg']['github_oauth_callback'] = 'auth/';

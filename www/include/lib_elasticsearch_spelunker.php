@@ -33,7 +33,6 @@
 		);
 
 		$more = array_merge($defaults, $more);
-	
 		# pass by ref
 	}	
 
