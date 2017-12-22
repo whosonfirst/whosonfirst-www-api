@@ -21,6 +21,14 @@ setup:
 	bin/configure_secrets.sh .
 	ubuntu/setup-db.sh wof_api wof_api
 
+setup-nossl:
+	if test ! -f www/include/secrets.php; then cp www/include/secrets.php.example www/include/secrets.php; fi
+	ubuntu/setup-ubuntu.sh
+	ubuntu/setup-flamework.sh
+	bin/configure_secrets.sh .
+	ubuntu/setup-db.sh wof_api wof_api
+	ubuntu/setup-apache-conf.sh nossl
+
 mapzen:	styleguide mapzenjs refill
 
 styleguide:

@@ -18,39 +18,36 @@ WHOAMI=`python -c 'import os, sys; print os.path.realpath(sys.argv[1])' $0`
 PARENT=`dirname $WHOAMI`
 PROJECT=`dirname $PARENT`
 
-# see also: https://github.com/whosonfirst/whosonfirst-www-spelunker/issues/18
+CONF_DIR="${PROJECT}/config"
+CONF="${CONF_DIR}/${PROJECT_NAME}-elasticsearch.yml"
 
-# https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-service.html
+if [ ! -f ${CONF}.example ]
+then
+    echo "missing example ${CONF}"
+    exit 1
+fi
+
+if [ -f ${CONF} ]
+then
+    cp ${CONF} ${CONF}.bak
+fi
+
+cp ${CONF}.example ${CONF}
 
 sudo add-apt-repository ppa:webupd8team/java -y
-
 sudo apt-get update
 sudo apt-get install oracle-java8-installer -y
 
-# https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html
+cd /tmp
+wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.4.6/elasticsearch-2.4.6.deb
+sudo dpkg -i elasticsearch-2.4.6.deb
+rm /tmp/elasticsearch-2.4.6.deb
+cd -
 
-wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-1.7.list
-
-sudo apt-get update
-sudo apt-get install elasticsearch
-
-sudo update-rc.d elasticsearch defaults 95 10
-
-if [ ! -f /var/run/elasticsearch/elasticsearch.pid ]
-then
-     sudo /etc/init.d/elasticsearch start
-     sleep 10
-else
-
-	PID=`cat /var/run/elasticsearch/elasticsearch.pid`
-	COUNT=`ps -p ${PID} | grep java | wc -l`
-
-	if [ ${COUNT} = 0 ]
-	then
-
-	    echo "Elasticsearch isn't running BECAUSE COMPUTERS so trying to restart"
-	    sudo /etc/init.d/elasticsearch start
-	    sleep 10	
-	fi
+if [ -f /etc/elasticsearch/elasticsearch.yml ]
+	sudo rm /etc/elasticsearch/elasticsearch.yml
 fi
+sudo ln -s ${CONF} /etc/elasticsearch/elasticsearch.yml
+
+sudo systemctl enable elasticsearch.service
+sudo systemctl start elasticsearch

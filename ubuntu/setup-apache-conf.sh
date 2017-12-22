@@ -6,13 +6,19 @@ UBUNTU=`dirname $WHOAMI`
 PROJECT=`dirname $UBUNTU`
 
 PROJECT_NAME=`basename ${PROJECT}`
+CONF_DIR="${PROJECT}/config"
+CONF="${CONF_DIR}/${PROJECT_NAME}-apache.conf"
 
-APACHE="${PROJECT}/apache"
-CONF="${APACHE}/${PROJECT_NAME}.conf"
-
-if [ ! -f ${CONF}.example ]
+if [ $1 = "nossl" ]
 then
-    echo "missing example ${CONF}"
+	EXAMPLE_CONF="${CONF_DIR}/${PROJECT_NAME}-apache-nossl.conf.example"
+else
+	EXAMPLE_CONF="${CONF_DIR}/${PROJECT_NAME}-apache.conf.example"
+fi
+
+if [ ! -f ${EXAMPLE_CONF} ]
+then
+    echo "missing example ${EXAMPLE_CONF}"
     exit 1
 fi
 
@@ -21,7 +27,7 @@ then
     cp ${CONF} ${CONF}.bak
 fi
 
-cp ${CONF}.example ${CONF}
+cp ${EXAMPLE_CONF} ${CONF}
 
 perl -p -i -e "s!__PROJECT_ROOT__!${PROJECT}!" ${CONF}
 perl -p -i -e "s!__PROJECT_NAME__!${PROJECT_NAME}!" ${CONF}
