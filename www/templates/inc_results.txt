@@ -1,0 +1,39 @@
+<div class="row">
+	<div class="col-md-12">
+		{if $pagination.total_count > 0}
+			<div id="map" class="headroom"></div>
+			<h4>
+				{$pagination.total_count|number_format} result{if $pagination.total_count > 1}s{/if}
+				{if $pagination.total_count > 0}
+					<small class="current-page">page {$pagination.page|escape} of {$pagination.page_count|number_format|escape}</small>
+				{/if}
+			</h4>
+			<div class="table-wrapper">
+				<table id="search-results" class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Placetype</th>
+							<th>Currentness</th>
+							<th>Country</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach from=$results item=result}
+							{include file="inc_results_item.txt"}
+						{/foreach}
+					</tbody>
+				</table>
+			</div>
+		{else}
+			<h4>No results found.</h4>
+		{/if}
+	</div>
+</div>
+
+{if $pagination.total_count > $pagination.results_start + $pagination.per_page}
+	{include file="inc_pagination.txt"}
+{/if}
+
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.results.init.js"></script>

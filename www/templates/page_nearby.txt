@@ -1,0 +1,66 @@
+{capture assign="page_title"}Nearby{/capture}
+{include file="inc_head.txt"}
+{if $place}
+	{capture assign="wof_id"}{$place|@whosonfirst_places_property:"wof:id"}{/capture}
+	{capture assign="wof_name"}{$place|@whosonfirst_places_property:"wof:name"}{/capture}
+{/if}
+<div id="content" class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<ol class="breadcrumb">
+				<li>
+					<a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a>
+				</li>
+				{if $place}
+				<li>
+					<a href="{$cfg.abs_root_url|escape}id/{$wof_id|escape}">{$wof_name|escape}</a>
+				</li>
+				{/if}
+				<li class="active">Nearby Places</li>
+			</ol>
+		</div>
+	</div>
+	<div class="row headroom">
+		<div class="col-sm-8">
+			<h1>nearby places</h1>
+		</div>
+		<div class="col-sm-4 text-right hidden-xs">
+			<a href="#" id="nearby-find" class="btn btn-transparent">Find my location</a>
+		</div>
+	</div>
+	{if $place}
+		<div id="map" data-wof-id="{$wof_id|@escape}" data-wof-parent-id="{$wof_parent_id|@escape}" data-wof-placetype="{$wof_placetype|@escape}" data-geom-latitude="{$place|@whosonfirst_places_property:"geom:latitude"|@escape}" data-geom-longitude="{$place|@whosonfirst_places_property:"geom:longitude"|@escape}" data-geom-bbox="{$place|@whosonfirst_places_property:"geom:bbox"|@escape}" data-parent-geom-bbox="{$place|@whosonfirst_places_property:"wof:parent.geom:bbox"}"></div>
+	{else}
+		<div id="map"></div>
+	{/if}
+	<h4 id="no-results">No results found.</h4>
+	<h4 id="loading-results" class="hidden">Loading results...</h4>
+	<h4 id="num-results" class="hidden"></h4>
+	<div class="table-wrapper">
+		<table id="search-results" class="table hidden">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Placetype</th>
+					<th>Currentness</th>
+					<th>Country</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="result-template" itemscope itemtype="http://schema.org/Place" class="results-item hidden">
+					<td><code class="id"></code></td>
+					<td><a href="#" itemprop="name" class="name"></a></td>
+					<td class="placetype"></td>
+					<td class="currentness"></td>
+					<td class="country"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.api.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.nearby.init.js"></script>
+
+{include file="inc_foot.txt"}

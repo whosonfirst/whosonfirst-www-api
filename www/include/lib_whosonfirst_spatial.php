@@ -56,19 +56,24 @@
 
 		$cmd = implode(" ", $cmd);
 
-		$rsp = whosonfirst_spatial_do($cmd, $more);
+		foreach ($GLOBALS['cfg']['spatial_tile38_endpoints'] as $endpoint){
 
-		if (! $rsp['ok']){
-			return $rsp;
+			$more['endpoint'] = $endpoint;
+
+			$rsp = whosonfirst_spatial_do($cmd, $more);
+
+			if (! $rsp['ok']){
+				return $rsp;
+			}
+
+			$rsp2 = whosonfirst_spatial_index_meta($props, $more);
+
+			if (! $rsp2['ok']){
+				return $rsp2;
+			}
 		}
 
-		$rsp2 = whosonfirst_spatial_index_meta($props, $more);
-
-		if (! $rsp2['ok']){
-			return $rsp2;
-		}
-
-		return $rsp;
+		return array('ok' => 1);
 	}
 
 	########################################################################
@@ -99,6 +104,8 @@
 		$more = array_merge($defaults, $more);
 
 		$where = array();
+
+		# see also: api_whosonfirst_ensure_existential_flags()
 
 		$possible = array(
 			"wof:id",
@@ -315,9 +322,10 @@
 
 	function whosonfirst_spatial_do($cmd, $more=array()){
 
+		$endpoint = whosonfirst_spatial_endpoint();
+
 		$defaults = array(
-			'host' => $GLOBALS['cfg']['spatial_tile38_host'],
-			'port' => $GLOBALS['cfg']['spatial_tile38_port'],
+			'endpoint' => $endpoint,
 			'collection' => $GLOBALS['cfg']['spatial_tile38_collection'],
 		);
 
@@ -403,6 +411,16 @@
 		}
 
 		return $results;
+	}
+
+	########################################################################
+
+	function whosonfirst_spatial_endpoint(){
+
+		shuffle($GLOBALS['cfg']['spatial_tile38_endpoints']);
+		$endpoint = $GLOBALS['cfg']['spatial_tile38_endpoints'][0];
+
+		return $endpoint;
 	}
 
 	########################################################################

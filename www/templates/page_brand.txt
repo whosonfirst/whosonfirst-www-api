@@ -1,0 +1,63 @@
+{capture assign="brand_id"}{$brand|@whosonfirst_brands_property:"wof:brand_id"}{/capture}
+{capture assign="brand_name"}{$brand|@whosonfirst_brands_property:"wof:brand_name"}{/capture}
+{capture assign="page_title"}{$brand_name} | #brands{/capture}
+{capture assign="extra_meta"}
+{if $places|@count>0}
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Mapzen Places" />
+<meta property="og:title" content="Places that are a #{$brand_name|@escape} ({$brand_id|@escape})" />
+<meta property="og:description" content="{if $pagination.total_count==1}There is one of them!{elseif $pagination.total_count}There are {$pagination.total_count|number_format|@escape} of them!{else}{/if}" />
+<meta property="og:image" content="https://mapzen.com/common/styleguide/images/favicons/favicon-32x32.png" />
+<meta property="twitter:card" value="summary" />
+<meta property="twitter:site" content="@mapzen" />
+<meta property="twitter:creator" content="@mapzen" />
+<meta property="twitter:url" content="{$cfg.abs_root_url}brands/{$brand_id|@escape}/" />
+<meta property="twitter:title" content="Places that are a #{$brand_name|@escape} ({$brand_id|@escape})" />
+<meta property="twitter:description" content="{if $pagination.total_count==1}There is one of them!{elseif $pagination.total_count}There are {$pagination.total_count|number_format|@escape} of them!{else}{/if}" />
+<meta property="twitter:image" content="https://mapzen.com/common/styleguide/images/favicons/favicon-32x32.png" />
+{/if}
+{/capture}
+{include file="inc_head.txt"}
+
+<div id="content" class="container">
+
+
+	<div class="row headroom-large">
+		<div class="col-xs-12">
+			<h2>Places that are a <a href="{$cfg.abs_root_url}brands/{$brand_id|@escape}">#{$brand_name|@escape}</a></h2>
+
+		{if $superseded_by|@count and $supersedes|@count}
+		{elseif $superseded_by|@count}
+
+		{if $superseded_by|@count == 1}
+		<p>This #brand has been superseded by <a href="{$superseded_by.0|@whosonfirst_brands_url_for_brand}">{$superseded_by.0|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>.</p>
+		{else}
+		<p>This #brand has been superseded a number of times by {foreach from=$superseded_by item="row" name="superseded"}<a href="{$row.0|@whosonfirst_brands_url_for_brand}">{$row.0|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>{if $smarty.foreach.superseded.last}{else} and {/if}{/foreach}.</p>
+		{/if}
+
+		{elseif $supersedes|@count}
+
+		{if $supersedes|@count == 1}
+		<p><span class="hey-look">{$brand_name|@escape}</span> supersedes the #brand formerly known as <a href="{$supersedes.0|@whosonfirst_brands_url_for_brand}">{$supersedes.0|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>.</p>
+		{else}
+		<p><span class="hey-look">{$brand_name|@escape}</span> supersedes the #brands formerly known as {foreach from=$supersedes item="row" name="superseded"}<a href="{$row|@whosonfirst_brands_url_for_brand}">{$row|@whosonfirst_brands_property:"wof:brand_name"|@escape}</a>{if $smarty.foreach.superseded.last}{else} and {/if}{/foreach}.</p>
+		{/if}
+
+		{else}{/if}
+
+		</div>
+	</div>
+
+
+		{if $places|@count==0}
+		    {if $superseded_by|@count == 0}<h3>Hrm, we can't find any places associated with that #brand</h3>{/if}
+		{else}
+
+		{include file="inc_results.txt" results=$places pagination=$pagination}
+
+		{/if}
+
+	{include file="inc_brands_caveats.txt"}
+</div>
+
+{include file="inc_foot.txt"}

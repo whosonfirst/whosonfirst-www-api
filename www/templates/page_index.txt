@@ -1,7 +1,31 @@
 {include file='inc_head.txt' nav_tab='home'}
-<div class="container">
 
-<p><span class="hey-look">{$cfg.site_name|@escape}</span> is a gazetteer. <q>Gazetteer</q> is a fancy word for <q>a big list of places</q> where each place has a stable, unique identifier and pointers to all the other places that it has a relationship with.</p>
+<div id="content" class="container">
+	<div class="row headroom-large">
+		<div class="col-xs-12">
+			<h1>{$cfg.site_name|@escape}</h1>
+			<p><span class="hey-look">{$cfg.site_name|@escape}</span> is a gazetteer. <q>Gazetteer</q> is a fancy word for <q>a big list of places</q> where each place has a stable, unique identifier and pointers to all the other places that it has a relationship with. <a href="{$cfg.abs_root_url}nearby/">Browse nearby places &raquo;</a></p>
+		</div>
+	</div>
+
+	<div class="headroom">
+		{include file="inc_search_form.txt"}
+	</div>
+
+	{if "places"|@features_is_enabled}
+
+	<div class="row headroom">
+		<div class="col-xs-12">
+			<h3>See also</h3>
+			<ul>
+				<li><a href="https://mapzen.com/documentation/places/">Mapzen Places API documentation</a></li>
+				<li><a href="https://whosonfirst.mapzen.com/">Who’s On First project</a></li>
+				<li><a href="https://mapzen.com/tag/whosonfirst/">Blog posts about Who’s On First</a></li>
+			</ul>
+		</div>
+	</div>
+	{/if}
 
 </div>
+
 {include file='inc_foot.txt'}

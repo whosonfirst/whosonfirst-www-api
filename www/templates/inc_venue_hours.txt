@@ -1,0 +1,26 @@
+{if !$mz_hours}
+	<h5>Hours</h5> <i>We don’t know the hours for this place</i>
+{else}
+	<h5>Hours</h5>
+	{if $mz_hours.sun && $mz_hours.sun.open && $mz_hours.sun.close}
+		<div>Sunday: {$mz_hours.sun.open|whosonfirst_places_format_time}&ndash;{$mz_hours.sun.close|whosonfirst_places_format_time}</div>
+	{/if}
+	{if $mz_hours.mon && $mz_hours.mon.open && $mz_hours.mon.close}
+		<div>Monday: {$mz_hours.mon.open|whosonfirst_places_format_time}&ndash;{$mz_hours.mon.close|whosonfirst_places_format_time}</div>
+	{/if}
+	{if $mz_hours.tue && $mz_hours.tue.open && $mz_hours.tue.close}
+		<div>Tuesday: {$mz_hours.tue.open|whosonfirst_places_format_time}&ndash;{$mz_hours.tue.close|whosonfirst_places_format_time}</div>
+	{/if}
+	{if $mz_hours.wed && $mz_hours.wed.open && $mz_hours.wed.close}
+		<div>Wednesday: {$mz_hours.wed.open|whosonfirst_places_format_time}&ndash;{$mz_hours.wed.close|whosonfirst_places_format_time}</div>
+	{/if}
+	{if $mz_hours.thu && $mz_hours.thu.open && $mz_hours.thu.close}
+		<div>Thursday: {$mz_hours.thu.open|whosonfirst_places_format_time}&ndash;{$mz_hours.thu.close|whosonfirst_places_format_time}</div>
+	{/if}
+	{if $mz_hours.fri && $mz_hours.fri.open && $mz_hours.fri.close}
+		<div>Friday: {$mz_hours.fri.open|whosonfirst_places_format_time}&ndash;{$mz_hours.fri.close|whosonfirst_places_format_time}</div>
+	{/if}
+	{if $mz_hours.sat && $mz_hours.sat.open && $mz_hours.sat.close}
+		<div>Saturday: {$mz_hours.sat.open|whosonfirst_places_format_time}&ndash;{$mz_hours.sat.close|whosonfirst_places_format_time}</div>
+	{/if}
+{/if}

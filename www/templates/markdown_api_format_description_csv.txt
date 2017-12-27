@@ -3,7 +3,7 @@ CSV (Comma Separated Value)
 #### Example request
 
 ```
-curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=csv'
+curl -X GET 'https://places.mapzen.com/v1?method=mapzen.places.search&api_key=your-mapzen-api-key&q=poutine&page=1&per_page=1&format=csv'
 ```
 
 #### Example response
@@ -15,7 +15,7 @@ curl -X GET 'https://whosonfirst-api.mapzen.com?method=whosonfirst.places.search
 < Date: Tue, 28 Feb 2017 21:13:37 GMT
 < Status: 200 OK
 < X-api-pagination-cursor: 
-< X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
+< X-api-pagination-next-query: method=mapzen.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
 < X-api-pagination-page: 1
 < X-api-pagination-pages: 13
 < X-api-pagination-per-page: 1

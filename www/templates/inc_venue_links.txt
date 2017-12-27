@@ -1,0 +1,8 @@
+{if !$links}
+	<h5>Links</h5> <i>We don’t have any links for this place</i>
+{else}
+	<h5>Links</h5>
+	{foreach from=$links item='text' key='url'}
+		<div><a href="{$url|escape}">{$text|escape}</a></div>
+	{/foreach}
+{/if}

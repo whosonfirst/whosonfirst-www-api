@@ -94,6 +94,12 @@
 			api_output_error(436);
 		}
 
+		$flags_more = array(
+			"prefix" => null,
+		);
+
+		$flags = api_whosonfirst_ensure_existential_flags($flags_more);
+
 		$placetypes = whosonfirst_placetypes_ancestors($pt);
 		array_unshift($placetypes, $pt);
 
@@ -102,6 +108,8 @@
 		foreach ($placetypes as $pt){
 
 			$more = array("placetype" => $pt);
+			$more = array_merge($more, $flags);
+
 			$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
 
 			if (! $rsp["ok"]){
@@ -119,7 +127,7 @@
 
 		foreach ($possible as $pip_row) {
 
-			$row = whosonfirst_places_get_by_id($pip_row["Id"]);
+			$row = whosonfirst_places_get_by_id($pip_row["wof:id"]);
 
 			foreach ($row["wof:hierarchy"] as $hier){
 
@@ -187,8 +195,11 @@
 
 			api_whosonfirst_output_enpublicify($places['rows'], $more);
 
-			foreach ($places['rows'] as $row){
-				$lookup[$row['wof:id']] = $row;
+			if (is_array($places['rows'])){
+
+				foreach ($places['rows'] as $row){
+					$lookup[$row['wof:id']] = $row;
+				}
 			}
 
 			$results_spr = array();
@@ -323,6 +334,101 @@
 
 	########################################################################
 
+	function api_whosonfirst_places_getByPolyline($method_row){
+
+		api_utils_features_ensure_enabled(array(
+			"pip",
+			"pip_polyline"
+		));
+
+		$polyline = request_str("polyline");
+		
+		if (! $polyline){
+			api_output_error(432);
+		}
+
+		$args = array();
+
+		if ($p = request_int32("precision")){
+
+			if (! in_array($p, array(5, 6))){
+				api_output_error(433);
+			}
+
+			$args["precision"] = $p;
+		}
+
+		if (request_int32("unique")){
+			$args["unique"] = 1;
+		}
+
+		if ($placetype = request_str("placetype")){
+			api_whosonfirst_places_ensure_valid_placetype($placetype);
+			$args["placetype"] = $placetype;
+		}
+
+		$flags_more = array(
+			"prefix" => null,
+		);
+
+		$flags = api_whosonfirst_ensure_existential_flags($flags_more);
+		$args = array_merge($args, $flags);
+
+		api_utils_ensure_pagination_args($args, $method_row);
+
+		$rsp = whosonfirst_pip_get_by_polyline($polyline, $args);
+
+		if (! $rsp["ok"]){
+			api_output_error(513);
+		}
+
+		$more = array();
+
+		if ($extras = api_whosonfirst_utils_get_extras()){
+			$more["extras"] = $extras;
+		}
+
+		$results = array();
+
+		foreach ($rsp["rows"] as $step){
+
+			$places = array();
+
+			foreach ($step as $pip_row){
+
+				$row = whosonfirst_places_get_by_id($pip_row["wof:id"]);
+
+				$public = api_whosonfirst_output_enpublicify_single($row, $more);
+				$places[] = $public;
+			}
+
+			$results[] = $places;
+		}
+
+		$pagination = $rsp["pagination"];
+
+		$out = array(
+			"places" => $results,
+		);
+
+		# see notes in method spec in config_api_methods_whosonfirst.php
+		# (20171101/thisisaaronland)
+
+		if ($args["unique"]){
+			$pagination["total_count"] = null;
+		}
+
+		api_utils_ensure_pagination_results($out, $pagination);
+
+		$more = array(
+			'key' => 'places',
+		);
+
+		api_output_ok($out, $more);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_places_getByLatLon(){
 
 		api_utils_features_ensure_enabled(array(
@@ -360,6 +466,13 @@
 			$more["placetype"] = $pt;
 		}
 
+		$flags_more = array(
+			"prefix" => null,
+		);
+
+		$flags = api_whosonfirst_ensure_existential_flags($flags_more);
+		$more = array_merge($more, $flags);
+
 		$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
 
 		if (! $rsp["ok"]){
@@ -373,12 +486,12 @@
 		}
 
 		$results = array();
-
+		
 		foreach ($rsp["rows"] as $pip_row){
-			
-			$row = whosonfirst_places_get_by_id($pip_row["Id"]);
-			$public = api_whosonfirst_output_enpublicify_single($row, $more);
 
+			$row = whosonfirst_places_get_by_id($pip_row["wof:id"]);
+
+			$public = api_whosonfirst_output_enpublicify_single($row, $more);
 			$results[] = $public;
 		}
 
@@ -861,8 +974,12 @@
 				}
 			}
 
-			$fq_k = $more["prefix"] . ":" . $k;
+			$fq_k = $k;
 
+			if ($more["prefix"]){
+				$fq_k = $more["prefix"] . ":" . $k;
+			}
+			
 			$flags[ $fq_k ] = $v;
 		}
 

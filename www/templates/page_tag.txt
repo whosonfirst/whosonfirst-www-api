@@ -1,22 +1,30 @@
 {capture assign="page_title"}Places tagged {$tag}{if $place} (in {$place|@whosonfirst_places_property:"wof:name"|@escape}){/if}{/capture}
 {include file="inc_head.txt"}
 
-<div class="container">
-
-<div class="row">
-
-<h2>Places tagged {$tag|@escape}{if $place}<small> in <a href="{$place|@whosonfirst_places_url_for_place}">{$place|@whosonfirst_places_property:"wof:name"|@escape}<a></small>{/if}</h2>
-
-<ul class="list">
-{foreach from=$places item="row"}
-<li><a href="{$row|@whosonfirst_places_url_for_place}" class="hey-look">{$row|@whosonfirst_places_property:"wof:name"|@escape}</a> {$row|@whosonfirst_places_property:"addr:full"|@escape}</li>
-{/foreach}
-</ul>
-
-</div>
-
-{include file="inc_pagination.txt"}
-
+<div id="content" class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<ol class="breadcrumb">
+				<li>
+					<a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a>
+				</li>
+				<li class="active">Places tagged {$tag|@escape}</li>
+			</ol>
+		</div>
+	</div>
+	<div class="row headroom-large">
+		<div class="col-xs-12">
+			<h2>places tagged {$tag|@escape}{if $place}<small> in <a href="{$place|@whosonfirst_places_url_for_place}">{$place|@whosonfirst_places_property:"wof:name"|@escape}</a></small>{/if}</h2>
+		</div>
+	</div>
+	{if $debug}
+		<div class="row headroom">
+			<div class="col-xs-12">
+				<pre><code>{$debug|escape}</code></pre>
+			</div>
+		</div>
+	{/if}
+	{include file="inc_results.txt"}
 </div>
 
 {include file="inc_foot.txt"}

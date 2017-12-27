@@ -4,6 +4,8 @@
 
 	loadlib("elasticsearch");
 	loadlib("elasticsearch_spelunker");
+	loadlib("whosonfirst_countries");
+	loadlib("whosonfirst_existential");
 
 	########################################################################
 
@@ -41,7 +43,7 @@
 
 	function whosonfirst_places_get_by_id_multi($ids, $more=array()){
 
-		return elasticsearch_spelunker_mget($ids, $more);	
+		return elasticsearch_spelunker_mget($ids, $more);
 	}
 
 	########################################################################
@@ -116,7 +118,7 @@
 
 		else {
 			$esc_q = elasticsearch_escape($q);
-		
+
 			$query = array(
 				'match' => array( '_all' => array(
 					'operator' => 'and',
@@ -220,6 +222,11 @@
 
 		$esc_tag = elasticsearch_escape($tag);
 
+		$defaults = array(
+			'per_page' => 36
+		);
+		$more = array_merge($defaults, $more);
+
 		$query = array("match" => array(
 			"wof:tags" => $esc_tag
 		));
@@ -235,12 +242,60 @@
 
 	########################################################################
 
+	function whosonfirst_places_get_by_brand(&$brand, $filters, $more=array()){
+
+		$query = array('term' => array(
+			# 'wof:brand_id' => $brand["wof:brand_id"],
+			'wof:placetype' => 'venue'
+		));
+
+		$filter_query = array('filtered' => array(
+			'query' => $query,
+			'filter' => array('and' => $filters),
+		));
+
+		$functions = array(
+			array(
+				'filter' => array('term' => array('mz:is_current' => 1)),
+				'weight' => 2.0
+			),
+			array(
+				'filter' => array('term' => array('mz:is_current' => -1)),
+				'weight' => 0.5
+			),
+		);
+
+		$es_query = array('function_score' => array(
+			'query' => $filter_query,
+			'functions' => $functions,
+			'boost_mode' => 'multiply',
+			'score_mode' => 'multiply',
+		));
+
+		$req = array(
+			'query' => $es_query,
+		);
+
+		$rsp = elasticsearch_spelunker_search($req, $more);
+		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_places_get_brands($more=array()){
+
+		$rsp = elasticsearch_spelunker_facet("wof:brand_id", $more);
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_places_property($place, $path){
 
 		$property = null;
 
 		foreach (explode(".", $path) as $p){
-		
+
 			if (! isset($place[$p])){
 				return null;
 			}
@@ -257,6 +312,118 @@
 
 	########################################################################
 
+	function whosonfirst_places_placetype_pronoun($place) {
+
+		$an_placetypes = array(
+			'address',
+			'empire',
+			'intersection',
+			'ocean'
+		);
+		if (in_array($place['wof:placetype'], $an_placetypes)) {
+			return 'an';
+		} else {
+			return 'a';
+		}
+
+	}
+
+	########################################################################
+
+	function whosonfirst_places_country_link($place) {
+
+		$code = strtoupper($place['iso:country']);
+		$country = $GLOBALS['whosonfirst_countries'][$code];
+
+		if ($country) {
+			$esc_id = htmlspecialchars($country['wof:id']);
+			$esc_name = htmlspecialchars($country['wof:name']);
+			$url = $GLOBALS['cfg']['abs_root_url'] . "id/$esc_id/";
+			return "<a href=\"$url\">$esc_name</a>";
+		} else {
+			return $code;
+		}
+
+	}
+
+	########################################################################
+
+	function whosonfirst_places_search_referer_url() {
+
+		// This is used to link back to search results from id.php.
+		// We'll inspect the HTTP Referer header and if it looks exactly
+		// like a search results URL, we reconstruct our own version
+		// of it using a whitelist of acceptable query args.
+		// If not, we return null. (20170927/dphiffer)
+
+		$referer = $_SERVER['HTTP_REFERER'];
+		$referer_url = parse_url($referer);
+		$referer_query = array();
+		parse_str($referer_url['query'], $referer_query);
+
+		$allowable_args = array(
+			'q',
+			'scope',
+			'page'
+		);
+
+		$args = array();
+		if ($referer_query) {
+			foreach ($referer_query as $arg => $val) {
+				if (in_array($arg, $allowable_args)) {
+					$args[$arg] = $val;
+				}
+			}
+		}
+
+		if (preg_match('/^\/search\/?$/', $referer_url['path']) &&
+		    $args) {
+			$query = http_build_query($args);
+			$search_url = $GLOBALS['cfg']['abs_root_url'] . "search/?$query";
+			return $search_url;
+		}
+
+		return null;
+
+	}
+
+	########################################################################
+
+	function whosonfirst_places_currentness($place){
+
+		if (whosonfirst_existential_is_current($place) == 1){
+			return 'current';
+		}
+		else if (whosonfirst_existential_is_ceased($place) == 1){
+			return 'ceased';
+		}
+		else if (whosonfirst_existential_is_superseded($place) == 1){
+			return 'superseded';
+		}
+		else if (whosonfirst_existential_is_deprecated($place) == 1){
+			return 'deprecated';
+		}
+		return 'unknown';
+	}
+
+	########################################################################
+
+	function whosonfirst_places_format_time($time){
+
+		if (preg_match('/^(\d\d):(\d\d)$/', $time, $matches)){
+			$hh = intval($matches[1]);
+			$mm = $matches[2];
+			if ($hh > 12){
+				return ($hh - 12) . ":{$mm}pm";
+			} else {
+				return "$hh:{$mm}am";
+			}
+		}
+		return $time;
+	}
+
+	########################################################################
+
 	function whosonfirst_places_url_for_place($place){
 
 		$enc_id = urlencode($place["wof:id"]);
@@ -265,10 +432,33 @@
 
 	########################################################################
 
+	function whosonfirst_places_nearby_url_for_place($place){
+
+		$enc_id = urlencode($place["wof:id"]);
+		return $GLOBALS["cfg"]["abs_root_url"] . "nearby/{$enc_id}/";
+	}
+
+	########################################################################
+
 	function whosonfirst_places_data_url_for_place($place){
 
 		loadlib("whosonfirst_uri");
 		return whosonfirst_uri_id2abspath("https://whosonfirst.mapzen.com/data", $place["wof:id"]);
+	}
+
+	########################################################################
+
+	function whosonfirst_places_coordinate($place, $coord){
+
+		$property = null;
+
+		if ($place["lbl:$coord"]) {
+			$property = $place["lbl:$coord"];
+		} else if ($place["geom:$coord"]) {
+			$property = $place["geom:$coord"];
+		}
+
+		return $property;
 	}
 
 	########################################################################

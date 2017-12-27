@@ -1,0 +1,60 @@
+#map {
+	width: 100%;
+	height: 400px;
+	border: 5px solid #000;
+	margin-bottom: 1em;
+}
+
+.map-marker {
+	border: 2px solid #000;
+	width: 12px;
+	height: 12px;
+	margin-left: -6px;
+	margin-top: -6px;
+	background: #0BBDFF;
+	border-radius: 12px;
+}
+
+.current-page {
+	font-weight: normal;
+	margin-left: 0.5em;
+}
+
+#nearby-find {
+	margin-top: 56px;
+}
+
+#go-form {
+	border: 1px solid rgba(0,0,0,.1);
+	border-radius: 0.3em;
+	margin: 1em 0 1.5em 0;
+	padding: 1em;
+}
+
+#go-form .btn {
+	line-height: 16px;
+	margin-top: -5px;
+	margin-left: 5px;
+}
+
+body.places #content ul li {
+	list-style: none;
+}
+
+#venue-info h4 {
+	margin: 0;
+}
+
+.venue-neighbourhood {
+	margin-top: -12px;
+	margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+
+	#map {
+		margin-top: 1.5em;
+		height: 200px;
+	}
+
+}

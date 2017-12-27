@@ -1,0 +1,16 @@
+{capture assign="page_title"}Brands{/capture}
+{include file="inc_head.txt}
+
+<div class="container">
+
+	<div class="row headroom-large">
+		<div class="col-xs-12">
+			<h2>Brands</h2>
+		</div>
+	</div>
+
+	{include file="inc_brands_list.txt"}
+	{include file="inc_brands_caveats.txt"}
+</div>
+
+{include file="inc_foot.txt}

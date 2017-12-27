@@ -1,6 +1,113 @@
 <?php
 
 	$GLOBALS['api_methods_whosonfirst'] = array(
+
+		'filter_parameters_lastmod' => array(
+			array(
+				"name" => "min_lastmod",
+				"description" => "Limit results to places that have been modified on or since this date (encoded as a Unix timestamp).",
+				"documented" => 1,
+				"required" => 0,
+				"example" => 1493855252
+			),
+			array(
+				"name" => "max_lastmod",
+				"description" => "Limit results to places that have been modified on or before this date (encoded as a Unix timestamp).",
+				"documented" => 1,
+				"required" => 0,
+				"example" => 1496783757
+			),
+		),
+
+		'filter_parameters_concordances' => array(
+			array(
+				"name" => "concordance",
+				"description" => "Query for places that have been concordified with this source.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "loc:id"
+			),
+		),
+
+		'filter_parameters_existential' => array(
+			array(
+				"name" => "is_current",
+				"description" => "Filter results by their 'mz:is_current' property. Valid options are: -1, 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
+				"name" => "is_ceased",
+				"description" => "Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
+				"name" => "is_deprecated",
+				"description" => "Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
+				"name" => "is_superseded",
+				"description" => "Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
+				"name" => "is_superseding",
+				"description" => "Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+		),
+
+		'filter_parameters_hierarchy' => array(
+			array(
+				"name" => "iso",
+				"description" => "Ensure places belong to this (ISO) country code.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "CA"
+			),
+			array(
+				"name" => "country_id",
+				"description" => "Ensure places belong to this country Who's On First ID.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "85633147"
+			),
+			array(
+				"name" => "region_id",
+				"description" => "Ensure places belong to this region Who's On First ID.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "85669831"
+			),
+			array(
+				"name" => "locality_id",
+				"description" => "Ensure places belong to this locality Who's On First ID.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "101736545"
+			),
+			array(
+				"name" => "neighbourhood_id",
+				"description" => "Ensure places belong to this neighbourhood Who's On First ID.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "102112179"
+			),
+		),
+
+		# this is the set of parameters we use for search-type things - it used to be the only one and then there
+		# were all these others... (20171127/thisisaaronland)
+
 		'filter_parameters' => array(
 			array(
 				"name" => "name",
@@ -117,7 +224,7 @@
 			),
 			array(
 				"name" => "is_current",
-				"description" => "Filter results by their 'mz:is_current' property.",
+				"description" => "Filter results by their 'mz:is_current' property. Valid options are: -1, 1, 0",
 				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
@@ -187,46 +294,70 @@
 			),
 		),
 
-		'filter_parameters_tile38' => array(
+		'filter_parameters_brands_sizes' => array(
+			array(
+				"name" => "brand_size",
+				"description" => "A valid brand size to scope queries by. You may prefix the brand size with <, <=, > or >= to define simple range queries.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "XXS"
+			),
+			array(
+				"name" => "min_brand_size",
+				"description" => "A mininum (inclusive) brand size to scope queries to.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "M"
+			),
+			array(
+				"name" => "max_brand_size",
+				"description" => "A maximum (inclusive) brand size to scope queries to.",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "XL"
+			),
+		),
+
+		'filter_parameters_spatial' => array(
 			array(
 				"name" => "placetype",
 				"description" => "A valid Who's On First placetype to limit the query by.",
 				"documented" => 1,
 				"required" => 0,
-				"example" => "venue"
+				"example" => "neighbourhood"
 			),
 			array(
 				"name" => "is_current",
-				"description" => "Filter results by their 'mz:is_current' property.",
-				"documented" => 0,
+				"description" => "Filter results by their 'mz:is_current' property. Valid options are: -1, 1, 0",
+				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_ceased",
 				"description" => "Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0",
-				"documented" => 0,
+				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_deprecated",
 				"description" => "Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0",
-				"documented" => 0,
+				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_superseded",
 				"description" => "Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0",
-				"documented" => 0,
+				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
 			),
 			array(
 				"name" => "is_superseding",
 				"description" => "Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0",
-				"documented" => 0,
+				"documented" => 1,
 				"required" => 0,
 				"example" => "1"
 			),
@@ -236,6 +367,134 @@
 	########################################################################
 
 	$GLOBALS['cfg']['api']['methods'] = array_merge(array(
+
+		'whosonfirst.brands.getInfo' => array(
+			"description" => "Return information about a specific brand",
+			"documented" => 1,
+			"enabled" => 1,
+			"experimental" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_brands",
+			"parameters" => array(
+				array(
+					"name" => "id",
+					"documented" => 1,
+					"required" => 1,
+					"example" => 1125148929
+				)
+			),
+			"errors" => array(
+				"434" => array("message" => "Missing brand ID"),
+				"435" => array("message" => "Invalid brand ID"),
+			),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
+		'whosonfirst.brands.getList' => array(
+			"description" => "Return a list of all the known brands",
+			"documented" => 1,
+			"enabled" => 1,
+			"experimental" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_brands",
+			"parameters" => array_merge(array(
+				# nothing else yet...
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_brands_sizes']),
+			"errors" => array(
+				"432" => array("message" => "Invalid brand size"),
+				"433" => array("message" => "Invalid brand size range"),
+				"513" => array("message" => "Unable to retrieve brands"),
+			),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
+		'whosonfirst.brands.search' => array(
+			"description" => "Search for brands by name",
+			"documented" => 1,
+			"enabled" => 1,
+			"experimental" => 1,
+			"paginated" => 1,
+			"library" => "api_whosonfirst_brands",
+			"parameters" => array_merge(array(
+				array(
+					"name" => "q",
+					"documented" => 1,
+					"required" => 1,
+					"example" => "Kroger"
+				),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_brands_sizes']),
+			"errors" => array(
+				"432" => array("message" => "Invalid brand size"),
+				"433" => array("message" => "Invalid brand size range"),
+				"434" => array("message" => "Missing query"),
+				"513" => array("message" => "Unable to retrieve brands"),
+			),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
+		'whosonfirst.brands.sizes.getInfo' => array(
+			"description" => "Return details about a specific brand size",
+			"documented" => 1,
+			"enabled" => 1,
+			"experimental" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_brands_sizes",
+			"parameters" => array(
+				array(
+					"name" => "brand_size",
+					"documented" => 1,
+					"required" => 1,
+					"example" => "M"
+				),
+			),
+			"errors" => array(
+				"432" => array("message" => "Invalid brand size"),
+			),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
+		'whosonfirst.brands.sizes.getList' => array(
+			"description" => "Return a list of all the brand sizes",
+			"documented" => 1,
+			"enabled" => 1,
+			"experimental" => 1,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_brands_sizes",
+			"parameters" => array(
+				# none right now
+			),
+			"errors" => array(
+			),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
+		'whosonfirst.brands.venues.getList' => array(
+			"description" => "Return a list of venues for a specific brand",
+			"documented" => 1,
+			"enabled" => 1,
+			"experimental" => 1,
+			"paginated" => 1,
+			"extras" => 1,
+			"library" => "api_whosonfirst_brands_venues",
+			"parameters" => array_merge(array(
+				array(
+					"name" => "brand_id",
+					"documented" => 1,
+					"required" => 1,
+					"example" => 1125148929
+				)),
+				$GLOBALS['api_methods_whosonfirst']['filter_parameters_existential'],
+				$GLOBALS['api_methods_whosonfirst']['filter_parameters_hierarchy'],
+				$GLOBALS['api_methods_whosonfirst']['filter_parameters_concordances'],
+				$GLOBALS['api_methods_whosonfirst']['filter_parameters_lastmod']
+			),
+			"errors" => array(
+				"434" => array("message" => "Missing brand ID"),
+				"435" => array("message" => "Invalid brand ID"),
+				"513" => array("message" => "Unable to retrieve venues"),
+			),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
 
 		'whosonfirst.categories.getNamespaces' => array(
 			"description" => "Return the list of unique namespaces for all the categories in Who's On First.",
@@ -453,11 +712,10 @@
 			"pagination" => "cursor",
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
-                        "parameters" => array(
+                        "parameters" => array_merge(array(
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.766633"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.417693"),
-				array("name" => "placetype", "description" => "A valid Who's On First placetype to limit the query by.", "documented" => 1, "required" => 0, "example" => "neighbourhood"),
-			),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
 				"433" => array("message" => "Missing 'longitude' parameter"),
@@ -468,6 +726,32 @@
 			),
 			"notes" => array(
 				"This method differs from the whosonfirst.places.getAncestorsByLatLon method in two ways: 1. It returns a list of WOF places rather than hierarchies and 2. If a placetype filter is specified and no matching records are found no attempt will be made to find ancestors higher up the hierarchy. For example looking for an intersecting county or region if no locality is found."
+			)
+		),
+
+		'whosonfirst.places.getByPolyline' => array(
+			"description" => "Return Who's On First places intersecting each point along a polyline.",
+			"documented" => 1,
+			"enabled" => ($GLOBALS['cfg']['enable_feature_pip'] && $GLOBALS['cfg']['enable_feature_pip_polyline']),
+			"paginated" => 1,
+			"pagination" => "default",
+			"pagination_per_page_max" => 100,
+			"extras" => 1,
+			"library" => "api_whosonfirst_places",
+                        "parameters" => array_merge(array(
+				array("name" => "polyline", "description" => "A valid polyline-encoded string.", "documented" => 1, "required" => 1, "example" => "e_teFdj_jV|OzS_NlRbNdRqFdHt`AdsAqWlEqAkSug@nFxMfqB`jAaOhSfvCqb@tHjMx}I"),
+				array("name" => "precision", "description" => "The decimal precision for your polyline, for example 5 (Google) or 6 (Mapzen Valhalla)", "documented" => 1, "required" => 0, "example" => "6", "default" => 5),
+				array("name" => "unique", "description" => "Signal that results should only contain the unique set of places that intersect all steps in the polyline)", "documented" => 1, "required" => 0, "example" => "1"),
+
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
+			"errors" => array(
+				"432" => array("message" => "Missing 'polyline' parameter"),
+				"433" => array("message" => "Invalid 'precision' parameter"),
+				"436" => array("message" => "Invalid placetype"),
+				"513" => array("message" => "Failed to perform lookup"),
+			),
+			"notes" => array(
+				"If you pass the 'unique' flag please note that the set of unique places will be for the paginated slice of the polyline rather than the entire polyline itself. This may cause pagination results to look a bit weird and why the 'total' pagination property will be set to null (since its count will reflect the total number of points in your polyline)."
 			)
 		),
 
@@ -482,7 +766,7 @@
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.777228"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.470779"),
 				array("name" => "spr", "description" => "Format results as a standard place response (spr).", "documented" => 1, "required" => 0, "example" => 1),
-			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_tile38']),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
 				"433" => array("message" => "Missing 'longitude' parameter"),
@@ -591,7 +875,7 @@
 				array("name" => "min_longitude", "description" => "A valid longitude coordinate, representing the left (Western) edge of the bounding box.", "documented" => 1, "required" => 1, "example" => "-122.34374508"),
 				array("name" => "max_latitude", "description" => "A valid latitude coordinate, representing the top (Northern) edge of the bounding box.", "documented" => 1, "required" => 1, "example" => "37.85749665"),
 				array("name" => "max_longitude", "description" => "A valid longitude coordinate, representing the right (Eastern) edge of the bounding box.", "documented" => 1, "required" => 1, "example" => "-122.25585446"),
-			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_tile38']),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'min_latitude' parameter"),
 				"433" => array("message" => "Missing 'min_longitude' parameter"),
@@ -619,7 +903,7 @@
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "40.784165"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-73.958110"),
 				array("name" => "radius", "description" => "A valid radius (in meters) to limit the query by. Default radius is 100. Maximum radius is 500.", "documented" => 1, "required" => 0, "example" => 25, "default" => 100, "max" => 500),
-			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_tile38']),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
 				"433" => array("message" => "Missing 'longitude' parameter"),
@@ -723,7 +1007,7 @@
                   	"parameters" => array_merge(array(
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.766633"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.417693"),
-			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_tile38']),
+			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
 				"433" => array("message" => "Missing 'longitude' parameter"),

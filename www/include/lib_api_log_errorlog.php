@@ -1,6 +1,6 @@
 <?php
 
-	$GLOBALS['cfg']['api_log_hooks'] = 'api_log_errorlog_dispatch';
+	$GLOBALS['cfg']['api_log_hooks']['dispatch'] = 'api_log_errorlog_dispatch';
 
 	########################################################################
 

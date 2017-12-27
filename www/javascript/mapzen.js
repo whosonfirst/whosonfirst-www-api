@@ -4716,7 +4716,7 @@ module.exports={
 	'use strict';
 
 	var L = require('leaflet');
-	
+
 	module.exports = L.LayerGroup.extend({
 		includes: L.Mixin.Events,
 
@@ -4750,7 +4750,7 @@ module.exports={
 				this.options.styles,
 				this.options.addWaypoints);
 		},
-		
+
 		getBounds: function() {
 			return L.latLngBounds(this._route.coordinates);
 		},
@@ -5128,7 +5128,7 @@ module.exports={
 
 		'es': spanish,
 		'sp': spanish,
-		
+
 		'nl': {
 			directions: {
 				N: 'noordelijke',
@@ -20601,12 +20601,30 @@ if (typeof module === 'object' && module.exports) {
         wps.push(new Waypoint(L.latLng(wp.latLng), wp.name || "", wp.options || {}))
       }
 
+      // Before we hit the Valhalla API, let's make sure we don't have the
+      // route cached already. (20171006/dphiffer)
+      if ('cacheCheck' in routingOptions) {
+        var data = routingOptions.cacheCheck(url);
+        if (data) {
+          var cb = L.bind(this._routeDone, this);
+          setTimeout(function(){
+            cb(data, wps, routingOptions, callback, context);
+          }, 0);
+          return this;
+        }
+      }
+
       corslite(url, L.bind(function(err, resp) {
         var data;
         clearTimeout(timer);
         if (!timedOut) {
           if (!err) {
             data = JSON.parse(resp.responseText);
+
+            if ('cacheStore' in routingOptions) {
+              routingOptions.cacheStore(url, data);
+            }
+
             this._routeDone(data, wps, routingOptions, callback, context);
           } else {
             console.log("Error : " + err.response);
@@ -21099,7 +21117,7 @@ var MapzenScarab = (function () {
   function _buildDescription(id, container) {
     var infoBox = document.createElement('div')
     infoBox.className = "mz-bug-" + id
-    infoBox.textContent = opts.description 
+    infoBox.textContent = opts.description
     infoBox.style.width = container.offsetWidth + 'px'
     infoBox.style.marginLeft = container.style.marginLeft
 
@@ -21108,7 +21126,7 @@ var MapzenScarab = (function () {
   }
 
   function resizeDescription(container) {
-    var containerWidth = container.offsetWidth 
+    var containerWidth = container.offsetWidth
     infoDescriptionEl.style.width = containerWidth + 'px'
     infoDescriptionEl.style.marginLeft = container.style.marginLeft
   }

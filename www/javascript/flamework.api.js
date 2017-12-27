@@ -18,7 +18,7 @@ flamework.api = function(){
 
 	'_handlers': {
 	    'endpoint': null_handler,
-	    'accesstoken': null_handler,
+	    'authentication': null_handler,
 	},
 
 	'set_handler': function(target, handler){
@@ -90,18 +90,12 @@ flamework.api = function(){
 
 	    form_data.append('method', method);
 		
-	    if (! form_data.has('access_token')){
+	    var set_auth = self.get_handler('authentication');
 
-		var get_accesstoken = self.get_handler('accesstoken');
-
-		if (! get_accesstoken){
-		    dothis_onerror(self.destruct("there is no accesstoken handler"));
-		    return false;
-		}
-
-		form_data.append('access_token', get_accesstoken());
+	    if (set_auth){
+		form_data = set_auth(form_data);
 	    }
-		
+	    
 	    var onload = function(rsp){
 
 		var target = rsp.target;

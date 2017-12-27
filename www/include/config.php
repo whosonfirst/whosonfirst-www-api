@@ -4,10 +4,15 @@
 	# Things you may want to change in a hurry
 
 	$GLOBALS['cfg']['site_name'] = 'Who\'s On First API';
-	$GLOBALS['cfg']['environment'] = 'dev';
+	$GLOBALS['cfg']['environment'] = 'prod';
 
 	$GLOBALS['cfg']['site_disabled'] = 0;
 	$GLOBALS['cfg']['site_disabled_retry_after'] = 0;	# seconds; if set will return HTTP Retry-After header
+
+	# See also init.php customizations for Mapzen Places
+	$GLOBALS['cfg']['enable_feature_places'] = 0;
+
+	$GLOBALS['cfg']['enable_feature_routing'] = 0;
 
 	# Message is displayed in the nav header in inc_head.txt
 
@@ -50,11 +55,11 @@
 	# hard coding this URL will ensure it works in cron mode too
 
 	$GLOBALS['cfg']['server_scheme'] = 'https';                     # (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https' : 'http';
-	$GLOBALS['cfg']['server_name'] = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'whosonfirst.mapzen.com';                           
+	$GLOBALS['cfg']['server_name'] = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'whosonfirst.mapzen.com';
 	$GLOBALS['cfg']['server_force_https'] = 1;                      # for example, when you're running a Flamework app on port 80 behind a proxy on port 443; it happens...
 	$GLOBALS['cfg']['server_ignore_port'] = 1;
 
-        $GLOBALS['cfg']['abs_root_url']         = '';                   # "{$GLOBALS['cfg']['server_scheme']}://{$GLOBALS['cfg']['server_name']}/"; 
+        $GLOBALS['cfg']['abs_root_url']         = '';                   # "{$GLOBALS['cfg']['server_scheme']}://{$GLOBALS['cfg']['server_name']}/";
 	$GLOBALS['cfg']['safe_abs_root_url']	= $GLOBALS['cfg']['abs_root_url'];
 
 	# See notes in include/init.php
@@ -89,7 +94,7 @@
         $GLOBALS['cfg']['enable_feature_cache_prefixes'] = 1;
         $GLOBALS['cfg']['cache_prefix'] = $GLOBALS['cfg']['environment'];
 
-	# Note: memcache stuff is not enabled by default but is 
+	# Note: memcache stuff is not enabled by default but is
 	# available in the 'extras' directory
 
 	$GLOBALS['cfg']['auth_cookie_domain'] = parse_url($GLOBALS['cfg']['abs_root_url'], 1);
@@ -162,7 +167,7 @@
 	# This will assign $pagination automatically for Smarty but
 	# you probably don't want to do this for anything resembling
 	# a complex application...
-	
+
 	$GLOBALS['cfg']['pagination_assign_smarty_variable'] = 0;
 
 	$GLOBALS['cfg']['pagination_per_page'] = 10;
@@ -197,7 +202,7 @@
 
 	# THINGS YOU SHOULD DEFINE IN YOUR secrets.php FILE WHICH IS NOT
 	# MEANT TO BE CHECKED IN EVER. DON'T DO IT. AND DON'T DEFINE THESE
-	# THINGS HERE. REALLY. 
+	# THINGS HERE. REALLY.
 
 	$GLOBALS['cfg']['crypto_use_module'] = 'mcrypt';
 
@@ -222,17 +227,16 @@
 	$GLOBALS['cfg']['enable_feature_api_logging'] = 1;
 	$GLOBALS['cfg']['enable_feature_api_throttling'] = 0;
 
-	$GLOBALS['cfg']['enable_feature_api_method_aliases'] = 0;
-
-	# WET PAINT - don't be surprised if it all changes...
-	# (20170829/thisisaaronland)
-
-
 	$GLOBALS['cfg']['enable_feature_api_require_keys'] = 0;		# because oauth2...
 	$GLOBALS['cfg']['enable_feature_api_register_keys'] = 1;
 
 	$GLOBALS['cfg']['enable_feature_api_delegated_auth'] = 1;
 	$GLOBALS['cfg']['enable_feature_api_authenticate_self'] = 1;
+
+	# PLEASE DISCUSS OVERRIDES AND ALIASES HERE...
+
+	$GLOBALS['cfg']['enable_feature_api_method_overrides'] = 0;
+	$GLOBALS['cfg']['enable_feature_api_method_aliases'] = 0;
 
 	# API URLs and endpoints
 
@@ -304,7 +308,7 @@
 		'formats' => array(
 			'chicken' => array('enabled' => 1, 'documented' => 1, 'alt' => array('🐔')),		# no, really...
 			'csv' => array('enabled' => 1, 'documented' => 1),
-			'geojson' => array('enabled' => 1, 'documented' => 1),			
+			'geojson' => array('enabled' => 1, 'documented' => 1),
 			'json' => array('enabled' => 1, 'documented' => 1),
 			'meta' => array('enabled' => 1, 'documented' => 1),
 		),
@@ -321,7 +325,7 @@
 		# this is toggled on/off above with following config:
 		# $GLOBALS['cfg']['enable_feature_api_method_aliases']
 		#
-		# and get slotted in to the general config with the 
+		# and get slotted in to the general config with the
 		# api_config_init_aliases() function which is in turn
 		# invoked by the general api_config_init() function
 
@@ -393,8 +397,8 @@
 	# START OF flamework-mapzen-sso stuff
 
 	$GLOBALS['cfg']['mapzen_oauth_key'] = 'READ-FROM-SECRETS';
-	$GLOBALS['cfg']['mapzen_oauth_secret'] = 'READ-FROM-SECRETS';	
-	$GLOBALS['cfg']['mapzen_oauth_callback'] = 'auth/';	
+	$GLOBALS['cfg']['mapzen_oauth_secret'] = 'READ-FROM-SECRETS';
+	$GLOBALS['cfg']['mapzen_oauth_callback'] = 'auth/';
 	$GLOBALS['cfg']['crypto_oauth_cookie_secret'] = 'READ-FROM-SECRETS';	# (see notes in www/sign_oauth.php)
 	$GLOBALS['cfg']['mapzen_api_perms'] = 'read';
 
@@ -414,6 +418,18 @@
 
 	# END OF elasticsearch-spelunker stuff
 
+	# START OF elasticsearch-brands stuff
+
+	$GLOBALS['cfg']['elasticsearch_brands_host'] = 'http://localhost';
+	$GLOBALS['cfg']['elasticsearch_brands_port'] = '9200';
+	$GLOBALS['cfg']['elasticsearch_brands_index'] = 'brands';
+
+	$GLOBALS['cfg']['elasticsearch_brands_scroll'] = 1;
+	$GLOBALS['cfg']['elasticsearch_brands_scroll_ttl'] = '2m';
+	$GLOBALS['cfg']['elasticsearch_brands_scroll_trigger'] = 10000;
+
+	# END OF elasticsearch-brands stuff
+
 	# START of wof spatial stuff
 
 	$GLOBALS['cfg']['enable_feature_spatial'] = 1;
@@ -426,15 +442,25 @@
 	$GLOBALS['cfg']['spatial_nearby_default_radius'] = 100;
 	$GLOBALS['cfg']['spatial_nearby_max_radius'] = 80467;	# 50 miles because I miss Dopplr (20170707/thisisaaronland)
 
+	$GLOBALS['cfg']['spatial_tile38_endpoints'] = array(
+		'localhost:9851'
+	);
+
+	$GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst';
+
+	# THESE TWO VARIABLES ARE DEPRECATED - PLEASE USE 'spatial_tile38_endpoints'
+
 	$GLOBALS['cfg']['spatial_tile38_host'] = 'localhost';
 	$GLOBALS['cfg']['spatial_tile38_port'] = '9851';
-	$GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst';
+
 
 	# END of wof spatial stuff
 
 	# START OF pip stuff
+	# this assumes https://github.com/whosonfirst/go-whosonfirst-pip-v2
 
 	$GLOBALS['cfg']['enable_feature_pip'] = 1;
+	$GLOBALS['cfg']['enable_feature_pip_polyline'] = 0;
 	$GLOBALS['cfg']["whosonfirst_pip_endpoint"] = '';
 
 	# END OF pip stuff
@@ -458,3 +484,22 @@
 	$GLOBALS['cfg']['github_oauth_secret'] = 'READ-FROM-SECRETS';
 	$GLOBALS['cfg']['github_api_scope'] = 'repo, user';
 	$GLOBALS['cfg']['github_oauth_callback'] = 'auth/';
+
+	# START OF flamework-redis stuff (used by the chatterbox stuff, below)
+
+	$GLOBALS['cfg']['redis_scheme'] = 'tcp';
+	$GLOBALS['cfg']['redis_host'] = 'localhost';
+	$GLOBALS['cfg']['redis_port'] = 6379;
+
+	# END OF flamework-redis stuff
+
+	# START OF chatterbox stuff / https://github.com/whosonfirst/go-whosonfirst-chatterbox
+
+	$GLOBALS['cfg']['enable_feature_chatterbox'] = 0;
+
+	$GLOBALS['cfg']['chatterbox_host'] = '127.0.0.1';
+	$GLOBALS['cfg']['chatterbox_port'] = '6379';
+	$GLOBALS['cfg']['chatterbox_channel'] = 'chatterbox';
+	$GLOBALS['cfg']['chatterbox_destination'] = '';
+
+	# END OF chatterbox stuff

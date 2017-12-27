@@ -19,7 +19,7 @@ For example, let's say you wanted to use the API to fetch all the places with a 
 ```{literal}
 {
 	"places": [ ... ],
-	"next_query": "method=whosonfirst.places.search&alt=Paris&per_page=5&page=2",
+	"next_query": "method=mapzen.places.search&alt=Paris&per_page=5&page=2",
 	"total": 7,
 	"page": 1,
 	"per_page": 5,
@@ -41,7 +41,7 @@ For example, let's say you wanted to use the API to fetch all of the venues near
 ```{literal}
 {
 	"places": [ ... ],
-	"next_query": "method=whosonfirst.places.getNearby&latitude=40.784165&longitude=-73.958110&placetype=venue&per_page=10&cursor={CURSOR}",
+	"next_query": "method=mapzen.places.getNearby&latitude=40.784165&longitude=-73.958110&placetype=venue&per_page=10&cursor={CURSOR}",
 	"per_page": 10,
 	"cursor": {CURSOR},
 	"stat": "ok"
@@ -62,7 +62,7 @@ For example, let's say you wanted to use the API to fetch all the <code>microhoo
 ```{literal}
 {
 	"places": [ ... ],
-	"next_query": "method=whosonfirst.places.search&placetype=microhood&page=2&per_page=5",
+	"next_query": "method=mapzen.places.search&placetype=microhood&page=2&per_page=5",
 	"total": 186,
 	"page": 1,
 	"per_page": 5,
@@ -77,7 +77,7 @@ But if you then asked the API to fetch all of the <code>neighbourhoods</code>, a
 ```{literal}
 {
 	"places": [ ... ],
-	"next_query": "method=whosonfirst.places.search&placetype=neighbourhood&per_page=5&cursor={CURSOR}",
+	"next_query": "method=mapzen.places.search&placetype=neighbourhood&per_page=5&cursor={CURSOR}",
 	"total": 81065,
 	"page": null,
 	"pages": 16213,
@@ -101,7 +101,7 @@ For example, let's say you wanted to use the API to fetch all the localities (th
 ```{literal}
 {
 	"places": [ ... ],
-	"next_query": "method=whosonfirst.places.search&placetype=locality&per_page=5&cursor={CURSOR}",
+	"next_query": "method=mapzen.places.search&placetype=locality&per_page=5&cursor={CURSOR}",
 	"total": 208214,
 	"page": null,
 	"pages": 41643,
@@ -129,7 +129,7 @@ Pagination properties are also returned as HTTP response headers. This is useful
 For example: 
 
 ```
-$> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.places.search&api_key=API_KEY&q=poutine&extras=geom:bbox&page=1&format=csv&per_page=1'
+$> curl -s -v -X GET 'https://places.mapzen.com/v1/?method=mapzen.places.search&api_key=API_KEY&q=poutine&extras=geom:bbox&page=1&format=csv&per_page=1'
 
 < HTTP/1.1 200 OK
 < Access-Control-Allow-Origin: *
@@ -137,7 +137,7 @@ $> curl -s -v -X GET 'https://whosonfirst-api.mapzen.com/?method=whosonfirst.pla
 < Date: Tue, 28 Feb 2017 21:13:37 GMT
 < Status: 200 OK
 < X-api-pagination-cursor: 
-< X-api-pagination-next-query: method=whosonfirst.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
+< X-api-pagination-next-query: method=mapzen.places.search&amp;q=poutine&amp;extras=geom%3Abbox&amp;per_page=1&amp;page=2&amp;format=csv
 < X-api-pagination-page: 1
 < X-api-pagination-pages: 13
 < X-api-pagination-per-page: 1
