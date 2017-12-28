@@ -10,7 +10,7 @@
 <li><a href="{$cfg.abs_root_url}api/keys/">Your API keys</a></li>
 <li><a href="{$cfg.abs_root_url}api/oauth2/tokens/">Your access tokens</a></li>
 {/if}
-<li><a href="{$cfg.abs_root_url}">API documentation</a></li>
+<li><a href="{$cfg.abs_root_url}api/">API documentation</a></li>
 <li><a href="{$cfg.abs_root_url}methods/">API methods</a></li>
 <li><a href="{$cfg.abs_root_url}formats/">API formats</a></li>
 <li><a href="{$cfg.abs_root_url}errors/">API errors</a></li>
