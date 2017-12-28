@@ -11,7 +11,7 @@
 	      </button>
     	      <a class="navbar-brand" href="{$cfg.abs_root_url}">{$cfg.site_name|escape}</a>
           </div>
-	
+
         {if !$cfg.site_disabled}
 	<div class="collapse navbar-collapse navbar-head-collapse">
 
@@ -25,6 +25,7 @@
 		<ul class="dropdown-menu" aria-labelledby="account-navi" role="menu">
 		<li><a href="#" onclick="return false;">Hi <span class="hey-look">{$cfg.user.username|escape}</span></a></li>
 		<li class="divider"></li>
+		{if "api"|@features_is_enabled}<li><a href="{$cfg.abs_root_url}api/">Application Programming Interface</a></li>{/if}
 		{if 0}<li id="account"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">Your account</a></li>{/if}
 		<li id="signout"><a href="{$cfg.abs_root_url}signout/">Sign out</a></li>
 		{if "admin"|@auth_has_role:$cfg.user.id}
