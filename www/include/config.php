@@ -51,6 +51,8 @@
 		),
 	);
 
+	// See also: remote_addr() in init.php
+	$GLOBALS['cfg']['remote_addr_index'] = 0;
 
 	# hard coding this URL will ensure it works in cron mode too
 

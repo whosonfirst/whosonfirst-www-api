@@ -95,7 +95,7 @@
 			$key,
 			$GLOBALS['_SERVER']['HTTP_USER_AGENT'],
 			$target,
-			$GLOBALS['_SERVER']['REMOTE_ADDR'],	# check if mobile?
+			remote_addr(),	# check if mobile?
 		);
 
 		# if they're signed in, use their account
