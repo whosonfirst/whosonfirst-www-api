@@ -83,8 +83,4 @@
 
   <body {if "places"|@features_is_enabled}class="places" {/if}data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
 
-  {if "places"|@features_is_enabled}
-    {include file="inc_head_navi_mapzen.txt"}
-  {else}
-    {include file="inc_head_navi.txt"}
-  {/if}
+  {include file="inc_head_navi.txt"}

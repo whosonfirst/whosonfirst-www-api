@@ -1,40 +1,15 @@
-var mapzen = mapzen || {};
-mapzen.places = mapzen.places || {};
+var whosonfirst = whosonfirst || {};
+whosonfirst.map = whosonfirst.map || {};
 
-mapzen.places.map = (function(){
+whosonfirst.map.utils = (function(){
 
 	var maps = {};
 
 	var self = {
 
 		'get_map': function(map_id){
-
-			if (! maps[map_id]){
-
-				var api_key = document.body.getAttribute("data-mapzen-api-key");
-				var abs_root_url = document.body.getAttribute("data-abs-root-url");
-
-				L.Mapzen.apiKey = api_key;
-
-				var map = L.Mapzen.map(map_id, {
-					zoomControl: false,
-					maxZoom: 20,
-					// https://github.com/mapzen/mapzen.js/blob/master/src/js/components/tangram.js
-					tangramOptions: {
-						//scene: L.Mapzen.BasemapStyles.Refill,
-						scene: abs_root_url + "tangram/refill-style.zip",
-						tangramURL: abs_root_url + "javascript/tangram.min.js"
-					}
-				});
-
-				L.control.zoom({
-					position: 'topleft'
-				}).addTo(map);
-
-				maps[map_id] = map;
-			}
-
-			return maps[map_id];
+		    	// HACK (20180427/thisisaaronland)
+		    	return whosonfirst.nextzen.map.get_map(map_id);
 		},
 
 		'get_marker': function(feature, latlon){
@@ -49,16 +24,18 @@ mapzen.places.map = (function(){
 			}
 
 			var abs_root_url = document.body.getAttribute("data-abs-root-url");
+
 			var icon = L.icon({
 				iconUrl: abs_root_url + 'images/pin.png',
 				iconSize: [32, 47],
 				iconAnchor: [16, 46],
 			});
+
 			var m = L.marker(latlon, {
 				icon: icon
 			});
-			m.bindTooltip(label);
 
+			m.bindTooltip(label);
 			return m;
 		},
 
@@ -76,20 +53,6 @@ mapzen.places.map = (function(){
 
 				location.href = url;
 			});
-		},
-
-		'draw_nearby_map': function(map_id, cb){
-
-			var map_el = document.getElementById(map_id);
-			var map = self.get_map(map_id);
-
-			if (map_el.getAttribute("data-wof-id")){
-				return self.draw_place_map(map_id, cb);
-			}
-
-			map.setView([37.7749, -122.4194], 12);
-
-			cb(map);
 		},
 
 		'draw_place_map': function(map_id, cb){
@@ -135,21 +98,6 @@ mapzen.places.map = (function(){
 
 				map.fitBounds(bounds, opts);
 			}
-
-			// this doesn't work well enough to use yet...
-
-			/*
-			var abs_root_url = document.body.getAttribute("data-abs-root-url");
-
-			var opts = {
-				"url": abs_root_url + "pelias/v1",
-				"focus": false,
-				"panToPoint": false,
-			};
-
-			var geocoder = L.Mapzen.geocoder(opts);
-			geocoder.addTo(map);
-			*/
 
 			cb(map);
 		},

@@ -18,6 +18,7 @@ setup:
 	if test ! -f www/include/secrets.php; then cp www/include/secrets.php.example www/include/secrets.php; fi
 	ubuntu/setup-ubuntu.sh
 	ubuntu/setup-flamework.sh
+
 	ubuntu/setup-certified.sh
 	sudo ubuntu/setup-certified-ca.sh
 	sudo ubuntu/setup-certified-certs.sh
@@ -32,32 +33,26 @@ setup-nossl:
 	ubuntu/setup-db.sh wof_api wof_api
 	ubuntu/setup-apache-conf.sh nossl
 
-mapzen:	styleguide favicons mapzenjs refill
-
-styleguide:
-	curl -s -o www/css/mapzen.styleguide.css https://mapzen.com/common/styleguide/styles/styleguide.css
-	curl -s -o www/css/mapzen.website.css https://mapzen.com/common/styleguide/styles/website.css
-	curl -s -o www/javascript/mapzen.styleguide.min.js https://mapzen.com/common/styleguide/scripts/mapzen-styleguide.min.js
-	curl -s -o www/common/styleguide/images/background/contour_darkpurple2_lg.png https://mapzen.com/common/styleguide/images/background/contour_darkpurple2_lg.png
-
-favicons:
-	curl -s -o www/images/favicons/apple-touch-icon.png https://mapzen.com/common/styleguide/images/favicons/apple-touch-icon.png
-	curl -s -o www/images/favicons/favicon-16x16.png https://mapzen.com/common/styleguide/images/favicons/favicon-16x16.png
-	curl -s -o www/images/favicons/favicon-32x32.png https://mapzen.com/common/styleguide/images/favicons/favicon-32x32.png
-	curl -s -o www/images/favicons/manifest.json https://mapzen.com/common/styleguide/images/favicons/manifest.json
-	curl -s -o www/images/favicons/safari-pinned-tab.svg https://mapzen.com/common/styleguide/images/favicons/safari-pinned-tab.svg
+nextzen: tangram styles mapzenjs
 
 tangram:
-	curl -s -o www/javascript/tangram.js https://mapzen.com/tangram/tangram.debug.js
-	curl -s -o www/javascript/tangram.min.js https://mapzen.com/tangram/tangram.min.js
+	curl -s -o www/javascript/tangram.js https://www.nextzen.org/tangram/tangram.debug.js
+	curl -s -o www/javascript/tangram.min.js https://www.nextzen.org/tangram/tangram.min.js
+
+styles: refill walkabout
 
 refill:
-	curl -s -o www/tangram/refill-style.zip https://mapzen.com/carto/refill-style/refill-style.zip
+	curl -s -o www/tangram/refill-style.zip https://www.nextzen.org/carto/refill-style/10/refill-style.zip
+	curl -s -o www/tangram/refill-style-themes-label.zip https://www.nextzen.org/carto/refill-style/10/themes/label-10.zip
+
+walkabout:
+	curl -s -o www/tangram/walkabout-style.zip https://www.nextzen.org/carto/refill-style/walkabout-style.zip
 
 mapzenjs:
-	#curl -s -o www/css/mapzen.js.css https://mapzen.com/js/mapzen.css
-	#curl -s -o www/javascript/mapzen.js https://mapzen.com/js/mapzen.js
-	#curl -s -o www/javascript/mapzen.min.js https://mapzen.com/js/mapzen.min.js
+	@echo "waiting for nextzen.js..."
+	# curl -s -o www/css/mapzen.js.css https://mapzen.com/js/mapzen.css
+	# curl -s -o www/javascript/mapzen.js https://mapzen.com/js/mapzen.js
+	# curl -s -o www/javascript/mapzen.min.js https://mapzen.com/js/mapzen.min.js
 
 whosonfirstjs:
 	curl -s -o www/javascript/mapzen.whosonfirst.uri.js https://raw.githubusercontent.com/whosonfirst/js-mapzen-whosonfirst/master/src/mapzen.whosonfirst.uri.js
@@ -94,11 +89,3 @@ leaflet-markercluster:
 	cp /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)/dist/MarkerCluster.Default.css www/css/leaflet.markercluster.default.css
 	rm -rf /tmp/Leaflet.markercluster-$(LEAFLET_MARKERCLUSTER_VERSION)
 	rm /tmp/leaflet-markercluster.zip
-
-dev-to-master:
-	git checkout master
-	git pull origin dev
-	git push origin master
-	git checkout dev
-
-d2m: dev-to-master

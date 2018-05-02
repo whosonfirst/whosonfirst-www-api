@@ -134,7 +134,7 @@ RewriteRule  ^search/?$		search.php?%{QUERY_STRING} [L]
 # This all (especially the oauth2 auth/token stuff) relies on the
 # HTTPS rules for logged in users (20121024/straup)
 
-RewriteRule  ^(api/)?api/?$				api.php		[L]
+RewriteRule  ^(api/)?api/?$			api.php		[L]
 RewriteRule  ^(api/)?methods/?$			api_methods.php	[L]
 RewriteRule  ^(api/)?methods/print/?$		api_methods.php?print=2	[L]
 RewriteRule  ^(api/)?methods/explore/?$		api_methods.php	[L]
@@ -177,9 +177,9 @@ RewriteRule    ^(api/)?restpelias/(v1)/((alt|name|names|preferred|variant)/)?sea
 
 RewriteRule  ^ping/?$								ping.php?%{QUERY_STRING}  [L]
 
-# START OF flamework-mapzen-sso stuff
+# START OF flamework-github-sso stuff
 
 RewriteRule  ^signin/?$					/signin_github_oauth.php	[L]
 RewriteRule  ^auth/?$					/auth_callback_github_oauth.php?%{QUERY_STRING} [L]
 
-# END OF flamework-mapzen-sso stuff
+# END OF flamework-github-sso stuff

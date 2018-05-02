@@ -3,8 +3,7 @@
 	loadlib("whosonfirst_placetypes");
 	
 	loadlib("whosonfirst_places");
-	loadlib("whosonfirst_spatial");
-	loadlib("whosonfirst_pip");
+	loadlib("whosonfirst_spatial_mysql");
 
 	loadlib("api_whosonfirst_output");
 	loadlib("api_whosonfirst_utils");
@@ -63,7 +62,7 @@
 	function api_whosonfirst_places_getHierarchiesByLatLon(){
 
 		api_utils_features_ensure_enabled(array(
-			"pip"
+			"spatial", "spatial_pip"
 		));
 
 		$lat = request_float("latitude");
@@ -110,7 +109,7 @@
 			$more = array("placetype" => $pt);
 			$more = array_merge($more, $flags);
 
-			$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
+			$rsp = whosonfirst_spatial_mysql_point_in_polygon($lat, $lon, $more);
 
 			if (! $rsp["ok"]){
 				api_output_error(513);
@@ -287,7 +286,7 @@
 			$last_parent = $a;
 
 			$more = array("placetype" => $a);
-			$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
+			$rsp = whosonfirst_spatial_mysql_point_in_polygon($lat, $lon, $more);
 
 			if (! $rsp["ok"]){
 				api_output_error(513);
@@ -376,7 +375,7 @@
 
 		api_utils_ensure_pagination_args($args, $method_row);
 
-		$rsp = whosonfirst_pip_get_by_polyline($polyline, $args);
+		$rsp = whosonfirst_spatial_mysql_polyline($polyline, $args);
 
 		if (! $rsp["ok"]){
 			api_output_error(513);
@@ -432,7 +431,8 @@
 	function api_whosonfirst_places_getByLatLon(){
 
 		api_utils_features_ensure_enabled(array(
-			"pip"
+			"spatial",
+			"spatial_pip"
 		));
 
 		$lat = request_float("latitude");
@@ -463,7 +463,7 @@
 				api_output_error(436);
 			}
 
-			$more["placetype"] = $pt;
+			$more["wof:placetype"] = $pt;
 		}
 
 		$flags_more = array(
@@ -473,7 +473,7 @@
 		$flags = api_whosonfirst_ensure_existential_flags($flags_more);
 		$more = array_merge($more, $flags);
 
-		$rsp = whosonfirst_pip_get_by_latlon($lat, $lon, $more);
+		$rsp = whosonfirst_spatial_mysql_point_in_polygon($lat, $lon, $more);
 
 		if (! $rsp["ok"]){
 			api_output_error(513);
@@ -487,9 +487,9 @@
 
 		$results = array();
 		
-		foreach ($rsp["rows"] as $pip_row){
+		foreach ($rsp["rows"] as $row){
 
-			$row = whosonfirst_places_get_by_id($pip_row["wof:id"]);
+			$row = whosonfirst_places_get_by_id($row["wof:id"]);
 
 			$public = api_whosonfirst_output_enpublicify_single($row, $more);
 			$results[] = $public;
@@ -672,16 +672,12 @@
 
 		$more = array();
 
-		if ($cursor = request_str("cursor")){
-
-			api_whosonfirst_places_ensure_valid_cursor($cursor);
-			$more['cursor'] = $cursor;
-		}
-
 		if ($placetype = request_str("placetype")){
 
 			api_whosonfirst_places_ensure_valid_placetype($placetype);
-			$more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
+			# $more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
+
+			$more['wof:placetype'] = $placetype;
 		}
 
 		$flags = api_whosonfirst_ensure_existential_flags();
@@ -693,18 +689,27 @@
 
 		api_utils_ensure_pagination_args($more);
 
-		$rsp = whosonfirst_spatial_intersects($swlat, $swlon, $nelat, $nelon, $more);
+		$rsp = whosonfirst_spatial_mysql_intersects($swlat, $swlon, $nelat, $nelon, $more);
 
 		if (! $rsp['ok']){
 			api_output_error(513);
 		}
 
-		$results = whosonfirst_spatial_inflate_results($rsp);
+		$more = array();
 
-		$pagination = $rsp['pagination'];
+		if ($extras = api_whosonfirst_utils_get_extras()){
+			$more["extras"] = $extras;
+		}
 
-		$more['is_tile38'] = 1;	# because this: https://github.com/whosonfirst/whosonfirst-www-api/issues/8
-		api_whosonfirst_output_enpublicify($results, $more);
+		$results = array();
+		
+		foreach ($rsp["rows"] as $row){
+
+			$row = whosonfirst_places_get_by_id($row["wof:id"]);
+
+			$public = api_whosonfirst_output_enpublicify_single($row, $more);
+			$results[] = $public;
+		}
 
 		$out = array(
 			'places' => $results
@@ -714,6 +719,7 @@
 			$out['_query'] = $rsp['command'];
 		}
 
+		$pagination = $rsp['pagination'];
 		api_utils_ensure_pagination_results($out, $pagination);
 
 		$more = array(
@@ -777,7 +783,7 @@
 		if ($placetype = request_str("placetype")){
 
 			api_whosonfirst_places_ensure_valid_placetype($placetype);
-			$more['wof:placetype_id'] = whosonfirst_placetypes_name_to_id($placetype);
+			$more['wof:placetype'] = $placetype;
 		}
 
 		$flags = api_whosonfirst_ensure_existential_flags();
@@ -795,27 +801,31 @@
 		
 		api_utils_ensure_pagination_args($more);
 
-		$rsp = whosonfirst_spatial_nearby_latlon($lat, $lon, $r, $more);
+		$rsp = whosonfirst_spatial_mysql_nearby($lat, $lon, $r, $more);
 
 		if (! $rsp['ok']){
 			api_output_error(513);
 		}
 
-		$results = whosonfirst_spatial_inflate_results($rsp);
+		$results = array();
+		
+		foreach ($rsp["rows"] as $row){
 
-		$pagination = $rsp['pagination'];
+			$row = whosonfirst_places_get_by_id($row["wof:id"]);
 
-		$more['is_tile38'] = 1;	# because this: https://github.com/whosonfirst/whosonfirst-www-api/issues/8
-		api_whosonfirst_output_enpublicify($results, $more);
+			$public = api_whosonfirst_output_enpublicify_single($row, $more);
+			$results[] = $public;
+		}
 
 		$out = array(
-			'places' => $results
+			"places" => $results,
 		);
 
 		if ($GLOBALS['cfg']['environment'] == 'dev'){
 			$out['_query'] = $rsp['command'];
 		}
 
+		$pagination = $rsp['pagination'];
 		api_utils_ensure_pagination_results($out, $pagination);
 
 		$more = array(

@@ -172,6 +172,39 @@ flamework.api = function(){
 	    return false;
 	},
 
+	'call_paginated': function(method, data, on_page, on_error, on_complete){
+
+	    var results = [];
+	    
+	    var dothis_oncomplete = function(rsp) {
+		
+		results.push(rsp);
+		
+		if (on_page) {
+		    on_page(rsp);
+		}
+		
+		if (rsp.next_query) {
+		    
+		    var args = rsp.next_query.split('&');
+		    
+		    for (var i = 0; i < args.length; i++) {
+			var arg = args[i].split('=');
+			var key = decodeURIComponent(arg[0]);
+			var value = decodeURIComponent(arg[1]);
+			data[key] = value;
+		    }
+		    
+		    self.call(method, data, dothis_oncomplete, on_error);
+		    
+		}  else if (on_complete) {
+		    on_complete(results);
+		}
+	    };
+	    
+	    self.call(method, data, dothis_oncomplete, on_error);
+	},
+
 	'destruct': function(msg){
 
 	    return {

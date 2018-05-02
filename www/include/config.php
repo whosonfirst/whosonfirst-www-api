@@ -206,7 +206,7 @@
 	# MEANT TO BE CHECKED IN EVER. DON'T DO IT. AND DON'T DEFINE THESE
 	# THINGS HERE. REALLY.
 
-	$GLOBALS['cfg']['crypto_use_module'] = 'mcrypt';
+	$GLOBALS['cfg']['crypto_use_module'] = 'defuse';
 
 	# $GLOBALS['cfg']['crypto_cookie_secret'] = '';
 	# $GLOBALS['cfg']['crypto_password_secret'] = '';
@@ -434,8 +434,9 @@
 
 	# START of wof spatial stuff
 
-	$GLOBALS['cfg']['enable_feature_spatial'] = 1;
+	$GLOBALS['cfg']['enable_feature_spatial'] = 1;			# requires mysql 5.7
 	$GLOBALS['cfg']['enable_feature_spatial_api_docs'] = 1;
+	$GLOBALS['cfg']['enable_feature_spatial_pip'] = 1;
 	$GLOBALS['cfg']['enable_feature_spatial_nearby'] = 1;
 	$GLOBALS['cfg']['enable_feature_spatial_intersects'] = 1;
 
@@ -444,28 +445,7 @@
 	$GLOBALS['cfg']['spatial_nearby_default_radius'] = 100;
 	$GLOBALS['cfg']['spatial_nearby_max_radius'] = 80467;	# 50 miles because I miss Dopplr (20170707/thisisaaronland)
 
-	$GLOBALS['cfg']['spatial_tile38_endpoints'] = array(
-		'localhost:9851'
-	);
-
-	$GLOBALS['cfg']['spatial_tile38_collection'] = 'whosonfirst';
-
-	# THESE TWO VARIABLES ARE DEPRECATED - PLEASE USE 'spatial_tile38_endpoints'
-
-	$GLOBALS['cfg']['spatial_tile38_host'] = 'localhost';
-	$GLOBALS['cfg']['spatial_tile38_port'] = '9851';
-
-
 	# END of wof spatial stuff
-
-	# START OF pip stuff
-	# this assumes https://github.com/whosonfirst/go-whosonfirst-pip-v2
-
-	$GLOBALS['cfg']['enable_feature_pip'] = 1;
-	$GLOBALS['cfg']['enable_feature_pip_polyline'] = 0;
-	$GLOBALS['cfg']["whosonfirst_pip_endpoint"] = '';
-
-	# END OF pip stuff
 
 	# START OF machinetags/categories stuff
 
@@ -473,14 +453,6 @@
 	$GLOBALS['cfg']['enable_feature_categories'] = 0;
 
 	# END OF machinetags/categories stuff
-
-	# START OF chicken/rooster stuff
-
-	$GLOBALS['cfg']['chicken_api']['endpoint'] = 'http://localhost:1280';
-
-	# END OF chicken/rooster stuff
-
-	$GLOBALS['cfg']['mapzen']['api_key'] = 'READ-FROM-SECRETS';
 
 	$GLOBALS['cfg']['github_oauth_key'] = 'READ-FROM-SECRETS';
 	$GLOBALS['cfg']['github_oauth_secret'] = 'READ-FROM-SECRETS';

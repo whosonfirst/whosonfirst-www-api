@@ -1,7 +1,6 @@
-var mapzen = mapzen || {};
-mapze.whosonfirst = whosonfirst.mapzen || {};
+var whosonfirst = whosonfirst || {};
 
-mapzen.whosonfirst.api = (function(){
+whosonfirst.api = (function(){
 
     var _api = undefined;
 
@@ -10,23 +9,20 @@ mapzen.whosonfirst.api = (function(){
         'init': function(){
 
             _api = new flamework.api();
-            _api.set_handler('endpoint', mapzen.whosonfirst.api.endpoint);
-            _api.set_handler('accesstoken', mapzen.whosonfirst.api.accesstoken);	// DEPRECATED
-            _api.set_handler('authentication', mapzen.whosonfirst.api.authentication);
+            _api.set_handler('endpoint', whosonfirst.api.endpoint);
+            _api.set_handler('authentication', whosonfirst.api.authentication);
         },
 
         'call': function(method, data, on_success, on_error){
             _api.call(method, data, on_success, on_error);
         },
+
+        'call_paginated': function(method, data, on_success, on_error, on_complete){
+            _api.call_paginated(method, data, on_success, on_error, on_complete);
+        },
 	
         'endpoint': function(){
             return document.body.getAttribute("data-api-endpoint");
-        },
-
-	// 'accesstoken' IS DEPRECATED AND 'authentication' IS THE NEW SHINY
-
-        'accesstoken': function(){
-            return document.body.getAttribute("data-api-access-token");
         },
 
         'authentication': function(form_data){
@@ -46,5 +42,5 @@ mapzen.whosonfirst.api = (function(){
 })();
 
 window.addEventListener('load', function(e){
-    mapzen.whosonfirst.api.init();
+    whosonfirst.api.init();
 });
