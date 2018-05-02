@@ -1,0 +1,17 @@
+{if $pagination.page_count > 1}
+	{include file="inc_pagination.txt"}
+{/if}
+
+<div style="text-align:center;">
+
+{if $pagination.total_count == 1}
+	there is one {$singleton|@escape}
+{elseif $pagination.total_count > 1}
+	there are {$pagination.total_count|number_format} {$multiple|@escape}
+{else}{/if}
+
+{if $pagination.page_count > 1}
+	and this is page {$pagination.page|escape} of {$pagination.page_count|number_format|escape}
+{/if}
+
+</div>		

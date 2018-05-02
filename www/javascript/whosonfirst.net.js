@@ -207,7 +207,7 @@ whosonfirst.net = (function(){
 	    
 	    'log': function(level, message){
 		
-		if (typeof(whosonfirst.log) != object){
+		if (typeof(whosonfirst.log) != 'object'){
 		    console.log(level, message);
 		    return;
 		}

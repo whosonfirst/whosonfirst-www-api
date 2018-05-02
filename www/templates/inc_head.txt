@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {if $extra_meta}{$extra_meta}{/if}
 
-    <!-- Le styles -->
     <link href="{$cfg.abs_root_url}css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="{$cfg.abs_root_url}css/whosonfirst.css" rel="stylesheet">
     <link href="{$cfg.abs_root_url}css/whosonfirst.api.css" rel="stylesheet">
 
     <script src="{$cfg.abs_root_url}javascript/jquery-3.3.1.min.js"></script>
@@ -22,13 +20,19 @@
 
     <script src="{$cfg.abs_root_url}javascript/whosonfirst_countries.js"></script>
 
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst.geojson.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst.net.js"></script>
+
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst.uri.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst.uri.init.js"></script>
+
+    <!-- total hot mess... waiting for nextzen.js to sort itself out -->
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/mapzen.js.css" />
+    <script src="{$cfg.abs_root_url}javascript/tangram.min.js"></script>
     <script src="{$cfg.abs_root_url}javascript/mapzen.js"></script>
 
-    <script src="{$cfg.abs_root_url}javascript/whosonfirst.geojson.js"></script>
-    <script src="{$cfg.abs_root_url}javascript/whosonfirst.uri.js"></script>
-    <script src="{$cfg.abs_root_url}javascript/whosonfirst.net.js"></script>
-    <script src="{$cfg.abs_root_url}javascript/whosonfirst.flags.existential.js"></script>
+    <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.map.nextzen.js"></script>
+    <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.map.features.js"></script>
 
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/L.Control.Locate.css" />
     <script src="{$cfg.abs_root_url}javascript/L.Control.Locate.min.js"></script>
@@ -41,14 +45,16 @@
       <script src="{$cfg.abs_root_url}javascript/html5.js"></script>
     <![endif]-->
 
-    {if "places"|@features_is_enabled}
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="{$cfg.abs_root_url}sitemaps/index.xml" />
-    {/if}
-
   </head>
 
     {assign var="api_endpoint" value=$cfg.api_abs_root_url|cat:$cfg.api_endpoint}
 
-  <body data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
+  <body data-abs-root-url="{$cfg.abs_root_url}" {if $cfg.data_abs_root_url} data-abs-root-url-data="{$cfg.data_abs_root_url}" {/if} {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-nextzen-api-key="{$cfg.nextzen.api_key|@escape}">
 
-  {include file="inc_head_navi.txt"}
+    {include file="inc_head_navi.txt"}
+
+    <div class="container">
+	<div class="headroom">
+		{include file="inc_search_form.txt"}
+	</div>
+    </div>
