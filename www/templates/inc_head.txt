@@ -8,42 +8,26 @@
 
     <!-- Le styles -->
     <link href="{$cfg.abs_root_url}css/bootstrap.min.css" rel="stylesheet">
-    <link href="{$cfg.abs_root_url}css/mapzen.styleguide.css" rel="stylesheet">
-    <link href="{$cfg.abs_root_url}css/mapzen.styleguide.whosonfirst.css" rel="stylesheet">
 
     <link href="{$cfg.abs_root_url}css/whosonfirst.api.css" rel="stylesheet">
 
-    {if "places"|@features_is_enabled}
-    <link href="{$cfg.abs_root_url}css/mapzen.website.css" rel="stylesheet">
-    <link href="{$cfg.abs_root_url}css/mapzen.places.api.css" rel="stylesheet">
-    {/if}
-
-    <script src="{$cfg.abs_root_url}javascript/jquery-2.1.0.min.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/jquery-3.3.1.min.js"></script>
     <script src="{$cfg.abs_root_url}javascript/bootstrap.min.js"></script>
 
     <script src="{$cfg.abs_root_url}javascript/htmlspecialchars.min.js"></script>
 
-    {if "places"|@features_is_enabled}
-    <script src="{$cfg.abs_root_url}javascript/mapzen.places.api.js"></script>
-    <script src="{$cfg.abs_root_url}javascript/mapzen.places.api.init.js"></script>
-    {else}
     <script src="{$cfg.abs_root_url}javascript/flamework.api.js"></script>
-    <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.js"></script>
-    {/if}
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst.api.js"></script>
 
     <script src="{$cfg.abs_root_url}javascript/whosonfirst_countries.js"></script>
 
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/mapzen.js.css" />
     <script src="{$cfg.abs_root_url}javascript/mapzen.js"></script>
 
-    <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.geojson.js"></script>
-    <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.uri.js"></script>
-    <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.existential.js"></script>
-    <script src="{$cfg.abs_root_url}javascript/mapzen.places.map.js"></script>
-
-    {if "routing"|@features_is_enabled}
-    <script src="{$cfg.abs_root_url}javascript/mapzen.places.routing.js"></script>
-    {/if}
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst.geojson.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst.uri.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst.net.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/whosonfirst.flags.existential.js"></script>
 
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/L.Control.Locate.css" />
     <script src="{$cfg.abs_root_url}javascript/L.Control.Locate.min.js"></script>
@@ -52,11 +36,6 @@
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/leaflet.markercluster.mapzen.css" />
     <script src="{$cfg.abs_root_url}javascript/leaflet.markercluster.min.js"></script>
 
-    <link href="{$cfg.abs_root_url}css/mapzen.whosonfirst.chrome.css" rel="stylesheet">
-    <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.chrome.js"></script>
-    <script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.chrome.init.js"></script>
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="{$cfg.abs_root_url}javascript/html5.js"></script>
     <![endif]-->
@@ -65,22 +44,10 @@
     <link rel="sitemap" type="application/xml" title="Sitemap" href="{$cfg.abs_root_url}sitemaps/index.xml" />
     {/if}
 
-    {if "places"|@features_is_enabled}
-    <link rel="apple-touch-icon" href="/images/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
-    <link rel="manifest" href="/images/favicons/manifest.json">
-    <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#2C1E3F">
-    {/if}
-
   </head>
 
-  {if "places"|@features_is_enabled}
-    {assign var="api_endpoint" value="https://places.mapzen.com/v1/"}
-  {else}
     {assign var="api_endpoint" value=$cfg.api_abs_root_url|cat:$cfg.api_endpoint}
-  {/if}
 
-  <body {if "places"|@features_is_enabled}class="places" {/if}data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
+  <body data-abs-root-url="{$cfg.abs_root_url}" {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-mapzen-api-key="{$cfg.mapzen.api_key|@escape}">
 
   {include file="inc_head_navi.txt"}

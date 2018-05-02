@@ -33,6 +33,10 @@ setup-nossl:
 	ubuntu/setup-db.sh wof_api wof_api
 	ubuntu/setup-apache-conf.sh nossl
 
+jquery:
+	curl -s -o www/javascript/jquery-3.3.1.min.js https://code.jquery.com/jquery-3.3.1.min.js
+	curl -s -o www/javascript/jquery-3.3.1.js https://code.jquery.com/jquery-3.3.1.js
+
 nextzen: tangram styles mapzenjs
 
 tangram:

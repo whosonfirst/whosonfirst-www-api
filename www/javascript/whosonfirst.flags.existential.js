@@ -1,11 +1,11 @@
-var mapzen = mapzen || {};
-mapzen.whosonfirst = mapzen.whosonfirst || {};
+var whosonfirst = whosonfirst || {};
+whosonfirst.flags = whosonfirst.flags || {};
 
 // This library is an adaptation of https://github.com/whosonfirst/go-whosonfirst-geojson-v2/blob/master/properties/whosonfirst/whosonfirst.go#L160-L265
 // It is designed to work with SPR results, not with full WOF feature
 // records. (20171004/dphiffer)
 
-mapzen.whosonfirst.existential = (function(){
+whosonfirst.flags.existential = (function(){
 
 	var self = {
 
