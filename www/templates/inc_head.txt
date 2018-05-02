@@ -8,6 +8,7 @@
 
     <link href="{$cfg.abs_root_url}css/bootstrap.min.css" rel="stylesheet">
 
+    <link href="{$cfg.abs_root_url}css/whosonfirst.css" rel="stylesheet">
     <link href="{$cfg.abs_root_url}css/whosonfirst.api.css" rel="stylesheet">
 
     <script src="{$cfg.abs_root_url}javascript/jquery-3.3.1.min.js"></script>
@@ -34,8 +35,10 @@
     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.map.nextzen.js"></script>
     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.map.features.js"></script>
 
+    <!--
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/L.Control.Locate.css" />
     <script src="{$cfg.abs_root_url}javascript/L.Control.Locate.min.js"></script>
+    -->
 
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/leaflet.markercluster.css" />
     <link rel="stylesheet" href="{$cfg.abs_root_url}css/leaflet.markercluster.mapzen.css" />
@@ -52,9 +55,3 @@
   <body data-abs-root-url="{$cfg.abs_root_url}" {if $cfg.data_abs_root_url} data-abs-root-url-data="{$cfg.data_abs_root_url}" {/if} {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-nextzen-api-key="{$cfg.nextzen.api_key|@escape}">
 
     {include file="inc_head_navi.txt"}
-
-    <div class="container">
-	<div class="headroom">
-		{include file="inc_search_form.txt"}
-	</div>
-    </div>

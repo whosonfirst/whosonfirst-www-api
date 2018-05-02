@@ -64,6 +64,8 @@
         $GLOBALS['cfg']['abs_root_url']         = '';                   # "{$GLOBALS['cfg']['server_scheme']}://{$GLOBALS['cfg']['server_name']}/";
 	$GLOBALS['cfg']['safe_abs_root_url']	= $GLOBALS['cfg']['abs_root_url'];
 
+	$GLOBALS['cfg']['data_abs_root_url'] = '';			# if you need to point to something other than https://data.whosonfirst.org/
+
 	# See notes in include/init.php
 
 	$GLOBALS['cfg']['enable_feature_abs_root_suffix'] = 1;

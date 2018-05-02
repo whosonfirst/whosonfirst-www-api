@@ -7,7 +7,7 @@ whosonfirst.uri = (function(){
     var self = {
 	
 	'endpoint': function(e){
-	    
+
 	    if (e){
 		self.log("info","set uri endpoint to " + e);
 		_endpoint = e;
@@ -102,7 +102,7 @@ whosonfirst.uri = (function(){
 	
 	'log': function(level, message){
 	    
-	    if (typeof(whosonfirst.log) != object){
+	    if (typeof(whosonfirst.log) != 'object'){
 		console.log(level, message);
 		return;
 	    }

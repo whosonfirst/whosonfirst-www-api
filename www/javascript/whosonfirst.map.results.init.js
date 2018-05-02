@@ -5,8 +5,6 @@ window.addEventListener("load", function load(event){
     }
     
     var map = whosonfirst.map.nextzen.get_map("map");
-
-    whosonfirst.map.results.init(map);
-    whosonfirst.map.results.draw();
+    whosonfirst.map.results.draw(map);
 
 }, false);

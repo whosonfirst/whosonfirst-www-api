@@ -70,6 +70,8 @@ whosonfirst.map.features = (function(){
 		var z = layer.setZIndex(more["z-index"]);
 	    }
 	    
+	    self.fit_map(map, geojson);
+
 	    return layer.addTo(map);
 	},
 	
@@ -160,7 +162,7 @@ whosonfirst.map.features = (function(){
 	    var bbox = whosonfirst.geojson.derive_bbox(geojson);
 	    
 	    if (! bbox){
-		console.log("no bounding box");
+		self.log("error", "no bounding box");
 		return false;
 	    }
 	    
@@ -176,11 +178,12 @@ whosonfirst.map.features = (function(){
 	    var redraw = true;
 
 	    try {
+
 		var current = map.getBounds();
 	    
 		if (! force){
 		
-		    var redraw = false;
+		    redraw = false;
 		    
 		    /*
 		      console.log("south bbox: " + bounds.getSouth() + " current: " + current.getSouth().toFixed(6));
@@ -210,10 +213,20 @@ whosonfirst.map.features = (function(){
 	    }
 
 	    catch (e) {
-		self.log("error", e);
+		// self.log("error", e);
+		redraw = true;
 	    }
 	    
 	    if (redraw){
+
+		var ne = bounds.getNorthEast();
+		var sw = bounds.getSouthWest();
+
+		if (ne.equals(sw)){
+		    map.setView(ne, 16);
+		    return;
+		}
+
 		map.fitBounds(bounds);
 	    }
 	},

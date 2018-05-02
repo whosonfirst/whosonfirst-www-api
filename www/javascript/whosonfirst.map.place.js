@@ -3,39 +3,52 @@ whosonfirst.map = whosonfirst.map || {};
 
 whosonfirst.map.place = (function(){
 
-    var map;
-
     var self = {
 
-	'init': function(with_map){
-	    map = with_map;
+	'init': function(){
 	},
 
-	'draw': function(map_el){
+	'draw': function(map){
+
+	    var map_el = whosonfirst.map.nextzen.get_map_element(map);
 
 	    var wof_id = map_el.getAttribute("data-wof-id");
 	    var wof_parent_id = map_el.getAttribute("data-wof-parent-id");
 	    var wof_placetype = map_el.getAttribute("data-wof-placetype");
 	    
-	    var abs_path = mapzen.whosonfirst.uri.id2abspath(wof_id);
+	    var uri = whosonfirst.uri.id2abspath(wof_id);
 	    
-	    var onsuccess = function(feature){
-		var layer = mapzen.places.map.add_geojson_to_map(map, feature);
+	    var on_success = function(feature){
+		whosonfirst.map.features.add_geojson_to_map(map, feature);
 	    };
 	    
-	    var onerror = function(rsp){
-		console.log("ERROR", rsp);
+	    var on_error = function(rsp){
+		self.log("error", uri, rsp);
 	    };
 	    
-	    whosonfirst.net.fetch(abs_path, onsuccess, onerror);
+	    whosonfirst.net.fetch(uri, on_success, on_error);
 	    
 	    if (wof_parent_id){
-		var abs_path = mapzen.whosonfirst.uri.id2abspath(wof_parent_id);
-		whosonfirst.net.fetch(abs_path, onsuccess, onerror);
+		var parent_uri = whosonfirst.uri.id2abspath(wof_parent_id);
+		whosonfirst.net.fetch(parent_uri, on_success, on_error);
 	    }
 	    
-	};
+	},
 
-	mapzen.places.map.draw_place_map("map", cb);
+	'log': function(level, message){
+	    
+	    ctx = "[whosonfirst.map.place]";
 
-});
+	    if (typeof(whosonfirst.log) != 'object'){
+		console.log(ctx, level, message);
+		return;
+	    }
+	    
+	    whosonfirst.log.dispatch(ctx + ' ' + message, level);
+	}
+
+    };
+
+    return self;
+
+})();
