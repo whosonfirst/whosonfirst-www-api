@@ -1,21 +1,36 @@
 window.addEventListener("load", function load(event){
 
-    var map_id = "map";
-    var map = whosonfirst.map.nextzen.get_map(map_id);
+    var map = whosonfirst.map.nextzen.get_map("map");
+    var map_el = whosonfirst.map.nextzen.get_map_element(map);
 
-    map.setMaxZoom(18);		// required by leaflet cluster
+    map.setMaxZoom(15);		// required by leaflet cluster
 
-    var map_el = document.getElementById(map_id);
-      
-    if (map_el.getAttribute("data-wof-id")){
-	// return self.draw_place_map(map_id, cb);
+    var wof_id = map_el.getAttribute("data-wof-id");
+
+    if (wof_id){
+
+	var uri = whosonfirst.uri.id2abspath(wof_id);
+	
+	var on_success = function(feature){
+	    whosonfirst.map.features.add_geojson_to_map(map, feature);
+	};
+	
+	var on_error = function(rsp){
+	    self.log("error", uri, rsp);
+	};
+	
+	whosonfirst.net.fetch(uri, on_success, on_error);	
     }
 
-    var lat = 37.616198;
-    var lon = -122.389979;
-    var zoom = 17;
+    else {
+	
+	var lat = 37.781569;
+	var lon = -122.433014;
+	var zoom = 14;
+	
+	map.setView([lat, lon], zoom);
+    }
 
-    map.setView([lat, lon], zoom);
     whosonfirst.map.nearby.init(map);
 
 });

@@ -113,7 +113,7 @@ whosonfirst.map.nearby = (function(){
 		    
 		    var name = place["wof:name"];
 		    
-		    var coords = whosonfirst.map.utils.get_place_coords(place);
+		    var coords = whosonfirst.map.features.get_place_coords(place);
 
 		    var geom = {
 			"type": "Point",
@@ -136,7 +136,7 @@ whosonfirst.map.nearby = (function(){
 		    "features": features,
 		};
 		
-		nearby_layer = whosonfirst.map.utils.add_geojson_clusters_to_map(map, feature_collection);
+		nearby_layer = whosonfirst.map.features.add_geojson_clusters_to_map(map, feature_collection);
 		self.add_geojson_to_results_table(feature_collection);
 	    };
 
@@ -190,20 +190,25 @@ whosonfirst.map.nearby = (function(){
 		
 		var currentness = 'unknown';
 		
-		if (mapzen.whosonfirst.existential.is_current(props)){
-		    currentness = 'current';
-		}
+		if (typeof(whosonfirst.flags.existential) == "object"){
 
-		else if (mapzen.whosonfirst.existential.is_deprecated(props)){
-		    currentness = 'deprecated';
-		}
-
-		else if (mapzen.whosonfirst.existential.is_ceased(props)){
-		    currentness = 'ceased';
-		}
-
-		else if (mapzen.whosonfirst.existential.is_superseded(props)){
-		    currentness = 'superseded';
+		    if (whosonfirst.flags.existential.is_current(props)){
+			currentness = 'current';
+		    }
+		    
+		    else if (whosonfirst.flags.existential.is_deprecated(props)){
+			currentness = 'deprecated';
+		    }
+		    
+		    else if (whosonfirst.flags.existential.is_ceased(props)){
+			currentness = 'ceased';
+		    }
+		    
+		    else if (whosonfirst.flags.existential.is_superseded(props)){
+			currentness = 'superseded';
+		    }
+		    
+		    else {}
 		}
 
 		tr.querySelector('.currentness').innerHTML = currentness;

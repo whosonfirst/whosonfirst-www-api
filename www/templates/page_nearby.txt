@@ -8,21 +8,16 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<ol class="breadcrumb">
-				<li>
-					<a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a>
-				</li>
+				<li><a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a></li>
 				{if $place}
-				<li>
-					<a href="{$cfg.abs_root_url|escape}id/{$wof_id|escape}">{$wof_name|escape}</a>
-				</li>
+				<li><a href="{$cfg.abs_root_url|escape}id/{$wof_id|escape}">{$wof_name|escape}</a></li>
 				{/if}
-				<li class="active">Nearby Places</li>
+				<li class="active">Nearby</li>
 			</ol>
 		</div>
 	</div>
 	<div class="row headroom">
 		<div class="col-sm-8">
-			<h1>nearby places</h1>
 		</div>
 		<div class="col-sm-4 text-right hidden-xs">
 			<a href="#" id="nearby-find" class="btn btn-transparent">Find my location</a>
@@ -33,9 +28,11 @@
 	{else}
 		<div id="map"></div>
 	{/if}
+
 	<h4 id="no-results">No results found.</h4>
 	<h4 id="loading-results" class="hidden">Loading results...</h4>
 	<h4 id="num-results" class="hidden"></h4>
+
 	<div class="table-wrapper">
 		<table id="search-results" class="table hidden">
 			<thead>
@@ -60,7 +57,9 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.api.js"></script>
-<script type="text/javascript" src="{$cfg.abs_root_url}javascript/mapzen.places.nearby.init.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.flags.existential.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.map.features.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.map.nearby.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.map.nearby.init.js"></script>
 
 {include file="inc_foot.txt"}
