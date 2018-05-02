@@ -1,16 +1,12 @@
 
-    {if "places"|@features_is_enabled}
-        {include file="inc_foot_mapzen.txt"}
-    {else}
         <div class="container">
             <hr>
 
             <footer>
-                <p>this is a <a href="http://www.mapzen.com/">mapzen</a> gig</p>
+                <p>this is a <a href="http://www.whosonfirst.org/">who's on first</a> gig</p>
             </footer>
 
         </div> <!-- /container -->
-    {/if}
 
   </body>
 </html>
