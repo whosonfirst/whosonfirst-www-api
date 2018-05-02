@@ -1,0 +1,5 @@
+{capture assign="wof_id"}{$place|@whosonfirst_places_property:"wof:id"}{/capture}
+{capture assign="wof_placetype"}{$place|@whosonfirst_places_property:"wof:placetype"}{/capture}
+{capture assign="wof_parent_id"}{$place|@whosonfirst_places_property:"wof:parent_id"}{/capture}
+
+<div id="map" data-wof-id="{$wof_id|@escape}" data-wof-parent-id="{$wof_parent_id|@escape}" data-wof-placetype="{$wof_placetype|@escape}" data-geom-latitude="{$place|@whosonfirst_places_property:"geom:latitude"|@escape}" data-geom-longitude="{$place|@whosonfirst_places_property:"geom:longitude"|@escape}" data-geom-bbox="{$place|@whosonfirst_places_property:"geom:bbox"|@escape}" data-parent-geom-bbox="{$place|@whosonfirst_places_property:"wof:parent.geom:bbox"}"></div>
