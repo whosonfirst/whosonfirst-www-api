@@ -310,8 +310,6 @@
 	$GLOBALS['cfg']['api'] = array(
 
 		'formats' => array(
-			'chicken' => array('enabled' => 1, 'documented' => 1, 'alt' => array('🐔')),		# no, really...
-			'csv' => array('enabled' => 1, 'documented' => 1),
 			'geojson' => array('enabled' => 1, 'documented' => 1),
 			'json' => array('enabled' => 1, 'documented' => 1),
 			'meta' => array('enabled' => 1, 'documented' => 1),
@@ -392,19 +390,12 @@
 	$GLOBALS['cfg']['api_method_definitions'] = array(
 		'common',
 		'whosonfirst',
+		'uploads',
 	);
 
 	$GLOBALS['cfg']['api_errors_definitions'] = array(
 		'common',
 	);
-
-	# START OF flamework-mapzen-sso stuff
-
-	$GLOBALS['cfg']['mapzen_oauth_key'] = 'READ-FROM-SECRETS';
-	$GLOBALS['cfg']['mapzen_oauth_secret'] = 'READ-FROM-SECRETS';
-	$GLOBALS['cfg']['mapzen_oauth_callback'] = 'auth/';
-	$GLOBALS['cfg']['crypto_oauth_cookie_secret'] = 'READ-FROM-SECRETS';	# (see notes in www/sign_oauth.php)
-	$GLOBALS['cfg']['mapzen_api_perms'] = 'read';
 
 	$GLOBALS['cfg']['enable_feature_mapzen_require_admin'] = 1;
 
@@ -479,3 +470,9 @@
 	$GLOBALS['cfg']['chatterbox_destination'] = '';
 
 	# END OF chatterbox stuff
+
+        # START OF uploads stuff                                                                                                                                                                                                                                  
+        $GLOBALS['cfg']['enable_feature_uploads'] = 0;
+        $GLOBALS['cfg']['uploads_pending_dir'] = 'READ-FROM-SECRETS-OR-CONFIG-LOCAL';
+
+        # END OF uploads stuff

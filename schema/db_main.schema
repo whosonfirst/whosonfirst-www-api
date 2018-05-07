@@ -67,3 +67,25 @@ CREATE TABLE `GithubUsers` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `by_githubid` (`github_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `Uploads`;
+
+CREATE TABLE `Uploads` (
+       id BIGINT UNSIGNED PRIMARY KEY,
+       user_id BIGINT UNSIGNED NOT NULL,
+       fingerprint CHAR(40) NOT NULL,
+       remote_addr INT UNSIGNED NOT NULL,
+       created INT UNSIGNED NOT NULL,
+       lastmodified INT UNSIGNED NOT NULL,
+       completed INT UNSIGNED NOT NULL DEFAULT 0,
+       processing TINYINT UNSIGNED NOT NULL DEFAULT 0,
+       status_id TINYINT UNSIGNED NOT NULL DEFAULT 1,
+       file JSON NOT NULL,
+       properties JSON NOT NULL,
+       error JSON,
+       context VARCHAR(64) GENERATED ALWAYS AS (JSON_UNQUOTE(JSON_EXTRACT(properties, '$.context'))) VIRTUAL,
+       KEY `by_fingerprint` (`fingerprint`, `user_id`),
+       KEY `by_user` (`user_id`, `lastmodified`),
+       KEY `by_status` (`status_id`, `lastmodified`),
+       KEY `by_context` (`context`, `status_id`, `lastmodified`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
