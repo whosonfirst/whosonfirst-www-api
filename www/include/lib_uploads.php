@@ -54,7 +54,7 @@
 			return array("ok" => 0, "error" => "Upload already exists");
 		}
 
-		if (! rename($tmp_file, $pending_file)){
+		if (! move_uploaded_file($tmp_file, $pending_file)){
 			return array("ok" => 0, "error" => "Failed to move pending file");
 		}
 
