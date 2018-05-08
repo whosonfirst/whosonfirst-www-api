@@ -84,8 +84,6 @@
 
 		$rsp = db_insert("Uploads", $insert);
 
-		dumper($rsp);
-
 		if (!$rsp["ok"]){
 			unlink($pending_file);
 			return $rsp;
@@ -93,6 +91,121 @@
 
 		$rsp["upload"] = $upload;
 		return $rsp;
+	}
+
+	########################################################################
+
+	function uploads_update_upload(&$upload, $to_update){
+
+		$now = time();
+		$to_update["lastmodified"] = $now;
+
+		$update = array();
+
+		foreach ($to_update as $k => $v){
+			$update[$k] = AddSlashes($v);
+		}
+
+		$enc_id = AddSlashes($upload["id"]);
+		$where = "id='{$enc_id}'";
+
+		$rsp = db_update("Uploads", $update, $where);
+
+		if ($rsp["ok"]){
+			$upload = array_merge($upload, $update);
+			$rsp["upload"] = $upload;
+		}
+
+		return $rsp;
+	}
+
+	########################################################################
+
+	function uploads_set_processing(&$upload){
+
+		$status_map = uploads_status_map("string keys");
+
+		$update = array(
+			"status_id" => $status_map["processing"]
+		);
+
+		return uploads_update_upload($upload, $update);
+	}
+
+	########################################################################
+
+	function uploads_set_completed(&$upload){
+
+		$status_map = uploads_status_map("string keys");
+
+		$update = array(
+			"status_id" => $status_map["completed"]
+		);
+
+		return uploads_update_upload($upload, $update);
+	}
+
+	########################################################################
+
+	function uploads_set_failed(&$upload, $error){
+
+		$status_map = uploads_status_map("string keys");
+
+		$update = array(
+			"status_id" => $status_map["failed"],
+			"error" => json_encode($error),
+		);
+
+		return uploads_update_upload($upload, $update);
+	}
+
+	########################################################################
+
+	function uploads_can_process(&$upload){
+
+		if (uploads_is_processing($upload)){
+			return 0;
+		}
+
+		if (uploads_is_completed($upload)){
+			return 0;
+		}
+
+		if (uploads_is_failed($upload)){
+			return 0;
+		}
+
+		return 1;
+	}
+
+	########################################################################
+
+	function uploads_is_processing(&$upload){
+
+		$status_map = uploads_status_map();
+		$status_id = $upload["status_id"];
+
+		return ($status_map[$status_id] == "processing") ? 1 : 0;
+	}
+
+	########################################################################
+
+	function uploads_is_completed(&$upload){
+
+		$status_map = uploads_status_map();
+		$status_id = $upload["status_id"];
+
+		return ($status_map[$status_id] == "completed") ? 1 : 0;
+	}
+
+	########################################################################
+
+	function uploads_is_failed(&$upload){
+
+		$status_map = uploads_status_map();
+		$status_id = $upload["status_id"];
+
+		return ($status_map[$status_id] == "failed") ? 1 : 0;
 	}
 
 	########################################################################
@@ -105,6 +218,26 @@
 		$upload = db_single($rsp);
 
 		return $upload;
+	}
+
+	########################################################################
+
+	function uploads_id2abspath($id){
+
+		$pending = $GLOBALS["cfg"]["uploads_pending_dir"];
+		$rel_path = uploads_id2relpath($id);
+
+		return $pending . DIRECTORY_SEPARATOR . $rel_path;
+	}
+
+	########################################################################
+
+	function uploads_id2relpath($id){
+
+		 $tree = uploads_id2tree($id);
+		 $fname = $id;
+
+		 return $tree . DIRECTORY_SEPARATOR . $id;
 	}
 
 	########################################################################
