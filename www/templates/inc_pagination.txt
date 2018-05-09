@@ -8,15 +8,15 @@
 	{if $pagination.page > 1}
 		{if $pagination_page_as_queryarg}
 			{if $pagination_url|strpos:"?" === false}
-				<li><a href="{$pagination_url}?page={$pagination.page-1}">previous page</a></li>
+				<li class="page-item"><a href="{$pagination_url}?page={$pagination.page-1}" class="page-link">previous page</a></li>
 			{else}
-				<li><a href="{$pagination_url}&amp;page={$pagination.page-1}">previous page</a></li>
+				<li class="page-item"><a href="{$pagination_url}&amp;page={$pagination.page-1}" class="page-link">previous page</a></li>
 			{/if}
 		{else}
-		<li><a href="{$pagination_url}page{$pagination.page-1}">previous page</a></li>
+		<li class="page-item"><a href="{$pagination_url}page{$pagination.page-1}" class="page-link">previous page</a></li>
 		{/if}
 	{else}
-		<li class="disabled"><a href="#">you are here</a></li>
+		<li class="page-item disabled"><a href="#" class="page-link">you are here</a></li>
 	{/if}
 
 	{* middle *}
@@ -48,25 +48,25 @@
 			{assign var=i value=$smarty.section.paglp.index}
 
 			{if $range.0 > 2 && $i == $range.0}
-				<li class="disabled pagination-numbered"><a href="#">...</a></li>
+				<li class="page-item disabled pagination-numbered"><a href="#" class="page-link">...</a></li>
 			{/if}
 
 			{if $i == 1 || $i == $pagination.page_count || $i|in_array:$range}
 				{if $i == $pagination.page}
-					<li class="active pagination-numbered"><a href="#">{$i}</a></li>
+					<li class="page-item active pagination-numbered"><a href="#" class="page-link">{$i}</a></li>
 				{elseif $pagination_page_as_queryarg}
 					{if $pagination_url|strpos:"?" === false}
-						<li class="pagination-numbered"><a href="{$pagination_url}?page={$i}">{$i}</a></li>
+						<li class="page-item pagination-numbered"><a href="{$pagination_url}?page={$i}" class="page-link">{$i}</a></li>
 					{else}
-						<li class="pagination-numbered"><a href="{$pagination_url}&amp;page={$i}">{$i}</a></li>
+						<li class="page-item pagination-numbered"><a href="{$pagination_url}&amp;page={$i}" class="page-link">{$i}</a></li>
 					{/if}
 				{else}
-					<li class="pagination-numbered"><a href="{$pagination_url}page{$i}">{$i}</a></li>
+					<li class="page-item pagination-numbered"><a href="{$pagination_url}page{$i}" class="page-link">{$i}</a></li>
 				{/if}
 			{/if}
 
 			{if $range.$rlen < $pagination.page_count-1 && $i == $range.$rlen}
-			<li class="disabled pagination-numbered"><a href="#">...</a></li>
+			<li class="page-item disabled pagination-numbered"><a href="#" class="page-link">...</a></li>
 			{/if}
 
 		{/section}
@@ -77,16 +77,16 @@
 			{assign var=i value=$smarty.section.paglp.index}
 
 			{if $i == $pagination.page}
-				<li class="active pagination-numbered"><a href="#">{$i}</a></li>
+				<li class="active pagination-numbered"><a href="#" class="page-link">{$i}</a></li>
 			{else}
 				{if $pagination_page_as_queryarg}
 					{if $pagination_url|strpos:"?" === false}
-						<li class="pagination-numbered"><a href="{$pagination_url}?page={$i}">{$i}</a></li>
+						<li class="page-item pagination-numbered"><a href="{$pagination_url}?page={$i}" class="page-link">{$i}</a></li>
 					{else}
-						<li class="pagination-numbered"><a href="{$pagination_url}&amp;page={$i}">{$i}</a></li>
+						<li class="page-item pagination-numbered"><a href="{$pagination_url}&amp;page={$i}" class="page-link">{$i}</a></li>
 					{/if}
 				{else}
-					<li class="pagination-numbered"><a href="{$pagination_url}page{$i}">{$i}</a></li>
+					<li class="page-item pagination-numbered"><a href="{$pagination_url}page{$i}" class="page-link">{$i}</a></li>
 				{/if}
 			{/if}
 
@@ -98,20 +98,18 @@
 	{if $pagination.page < $pagination.page_count}
 		{if $pagination_page_as_queryarg}
 			{if $pagination_url|strpos:"?" === false}
-				<li><a href="{$pagination_url}?page={$pagination.page+1}">next page</a></li>
+				<li class="page-item"><a href="{$pagination_url}?page={$pagination.page+1}" class="page-link">next page</a></li>
 			{else}
-				<li><a href="{$pagination_url}&amp;page={$pagination.page+1}">next page</a></li>
+				<li class="page-item"><a href="{$pagination_url}&amp;page={$pagination.page+1}" class="page-link">next page</a></li>
 			{/if}
 		{else}
-			<li><a href="{$pagination_url}page{$pagination.page+1}">next page</a></li>
+			<li><a href="{$pagination_url}page{$pagination.page+1}" class="page-link">next page</a></li>
 		{/if}
 	{else}
-		<li class="disabled"><a href="#">you are here</a></li>
+		<li class="page-item disabled"><a href="#" class="page-link">you are here</a></li>
 	{/if}
 
 </ul>
-
-{if 0}<p class="lead"><small>Page {$pagination.page|number_format|escape} of {$pagination.page_count|number_format|escape}</small></p>{/if}
 
 {include file="inc_pagination_shortcuts.txt"}
 
