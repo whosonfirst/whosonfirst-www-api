@@ -476,3 +476,14 @@
         $GLOBALS['cfg']['uploads_pending_dir'] = 'READ-FROM-SECRETS-OR-CONFIG-LOCAL';
 
         # END OF uploads stuff
+
+	# START of users_acl/roles stuff
+        # really you want to define this in config_local.php rather than config.php
+
+	$GLOBALS['cfg']['users_acl'] = array(
+		# 'staff' => array(                                                                                                                                                                      
+		#	'can_do_something'
+		# )
+	);
+
+        # END OF users_acl/roles stuff

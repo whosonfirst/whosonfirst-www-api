@@ -25,3 +25,9 @@ CREATE TABLE `users_password_reset` (
   KEY `by_user` (`user_id`),
   KEY `by_timestamp` (`created`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `users_roles` (
+  `user_id` int(11) unsigned NOT NULL,
+  `user_role` varchar(255) DEFAULT NULL,
+  UNIQUE KEY `unique_user_roles` (`user_id`,`user_role`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
