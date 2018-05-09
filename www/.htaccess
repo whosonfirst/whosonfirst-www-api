@@ -93,6 +93,9 @@ RewriteRule  ^tags/([a-z]+)/?$		tag.php?tag=$1&%{QUERY_STRING} [L]
 
 RewriteRule  ^search/?$		search.php?%{QUERY_STRING} [L]
 
+# Assuming that you have a geojson table indexed by https://github.com/whosonfirst/go-whosonfirst-mysql
+# RewriteRule  ^data/([0-9/]+)/([0-9]+)\.geojson$            geojson.php?id=$2 [L]
+
 # See all this stuff that's been commented out? It's a lot of hoop-jumping
 # to separate API calls (api.example.com/rest) from all the other user-level
 # administrative pages (example.com/api/methods) and to make sure things that
