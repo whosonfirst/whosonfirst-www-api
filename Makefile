@@ -33,6 +33,15 @@ setup-nossl:
 	ubuntu/setup-db.sh wof_api wof_api
 	ubuntu/setup-apache-conf.sh nossl
 
+# in advance of 7.2.x being widely deployed/adopted
+# https://github.com/defuse/php-encryption
+# https://github.com/defuse/php-encryption/releases
+# https://github.com/defuse/php-encryption/blob/master/docs/InstallingAndVerifying.md
+
+defuse:
+	curl -L -s -o www/include/defuse-crypto/defuse-crypto.2.2.0.phar https://github.com/defuse/php-encryption/releases/download/v2.2.0/defuse-crypto.phar
+	curl -L -s -o www/include/defuse-crypto/defuse-crypto.2.2.0.phar.sig https://github.com/defuse/php-encryption/releases/download/v2.2.0/defuse-crypto.phar.sig
+
 # https://getbootstrap.com/docs/4.1/getting-started/download/
 
 bootstrap:

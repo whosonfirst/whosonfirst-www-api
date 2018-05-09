@@ -1,6 +1,7 @@
 {assign var='page_title' value='Sign in' nav_tab='signin'}
 {include file='inc_head.txt'}
 
+<div class="container">
 <div class="col-md-8 col-md-offset-2">
 
 	{if $error_missing}	<p class="alert alert-danger">Please enter your email address and password.</p>{/if}
@@ -37,6 +38,7 @@
 			</small></p>
 </div>
 
+</div>
 </div>
 
 {include file='inc_foot.txt'}

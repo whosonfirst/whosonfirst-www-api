@@ -41,11 +41,9 @@
 
 	</form>
 
-<div class="text-center">
-			<p><small>	     
-			Do you already have an account? <a href="{$cfg.abs_root_url}signin/">Sign in here</a>. 
-			</small></p>
-</div>
+	<div class="text-center">
+	     <p><small>Do you already have an account? <a href="{$cfg.abs_root_url}signin/">Sign in here</a>.</small></p>
+	</div>
 
 </div>
 </div>
@@ -54,15 +52,17 @@
 {literal}
 $(document).ready(function(){
 
-	$("#signup").submit(function(){
+	var signup = document.getElementById("signup");
 
-		var tos = $("#tos");
+	signup.onsubmit = function(){
 
-		if (! tos.attr("checked")){
+		var tos = document.getElementById("tos");
+
+		if (! tos.checked){
 			alert("You forgot to agree to the terms of service!");
 			return false;
 		}
-	});
+	};
 });
 {/literal}
 </script>

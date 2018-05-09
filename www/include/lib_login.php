@@ -96,7 +96,14 @@
 		$expires = ($GLOBALS['cfg']['enable_feature_persistent_login']) ? strtotime('now +10 years') : 0;
 
 		$auth_cookie = login_generate_auth_cookie($user);
-		login_set_cookie($GLOBALS['cfg']['auth_cookie_name'], $auth_cookie, $expires);
+
+		if ($auth_cookie){
+			login_set_cookie($GLOBALS['cfg']['auth_cookie_name'], $auth_cookie, $expires);
+		}
+
+		else {
+			error_log("Failed to generate auth cookie for user");
+		}
 
 		$url = "{$GLOBALS['cfg']['abs_root_url']}checkcookie/";
 
