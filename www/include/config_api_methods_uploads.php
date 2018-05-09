@@ -20,7 +20,7 @@
 		"uploads.states.getList" => array(
 			"description" => "Get information about a specific upload.",
 			"documented" => 1,
-			"enabled" => features_is_enabled("uploads")
+			"enabled" => features_is_enabled("uploads"),
 			"extras" => 0,
 			"paginated" => 0,
 			"library" => "api_uploads_states",
@@ -30,6 +30,8 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
+	), $GLOBALS['cfg']['api']['methods']);
+	
 	########################################################################
 
 	# the end

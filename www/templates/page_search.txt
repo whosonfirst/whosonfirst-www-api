@@ -4,10 +4,10 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<ol class="breadcrumb">
-				<li>
+				<li class="breadcrumb-item">
 					<a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a>
 				</li>
-				<li class="active">Search Results</li>
+				<li class="breadcrumb-item active">Search Results</li>
 			</ol>
 		</div>
 	</div>

@@ -33,6 +33,14 @@ setup-nossl:
 	ubuntu/setup-db.sh wof_api wof_api
 	ubuntu/setup-apache-conf.sh nossl
 
+# https://getbootstrap.com/docs/4.1/getting-started/download/
+
+bootstrap:
+	curl -s -o www/css/bootstrap.4.1.1.min.css https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css
+	curl -s -o www/javascript/bootstrap.4.1.1.min.js https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js
+	curl -s -o www/javascript/jquery-3.3.1.slim.min.js https://code.jquery.com/jquery-3.3.1.slim.min.js
+	curl -s -o www/javascript/popper.1.14.3.min.js https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js
+
 jquery:
 	curl -s -o www/javascript/jquery-3.3.1.min.js https://code.jquery.com/jquery-3.3.1.min.js
 	curl -s -o www/javascript/jquery-3.3.1.js https://code.jquery.com/jquery-3.3.1.js

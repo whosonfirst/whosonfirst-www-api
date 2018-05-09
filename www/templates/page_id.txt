@@ -30,11 +30,11 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<ol class="breadcrumb">
-				<li><a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a></li>
+				<li class="breadcrumb-item"><a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a></li>
 				{if $search_url}
-				<li><a href="{$search_url|escape}">Search Results</a></li>
+				<li class="breadcrumb-item"><a href="{$search_url|escape}">Search Results</a></li>
 				{/if}
-				<li class="active">{$wof_name|@escape}</li>
+				<li class="breadcrumb-item active">{$wof_name|@escape}</li>
 			</ol>
 		</div>
 	</div>

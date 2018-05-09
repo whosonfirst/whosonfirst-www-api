@@ -1,57 +1,37 @@
+<!-- https://getbootstrap.com/docs/4.1/components/navbar/ -->
 <div class="container">
 
-<nav class="navbar" role="navigation" id="header">
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="{$cfg.abs_root_url}">{$cfg.site_name|@escape}</a>
 
-	  <div class="navbar-header">
-	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-head-collapse">
-	            <span class="sr-only">Toggle navigation</span>
-		    <span class="icon-bar"></span>
-      		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
-	      </button>
-    	      <a class="navbar-brand" href="{$cfg.abs_root_url}">{$cfg.site_name|escape}</a>
-          </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        {if !$cfg.site_disabled}
-	<div class="collapse navbar-collapse navbar-head-collapse">
+  {if !$cfg.site_disabled}
+  <div class="collapse navbar-collapse">
 
-	     <ul class="nav navbar-nav pull-right">
+     <ul class="navbar-nav">
 
-		{if "signin"|@features_is_enabled}
-		{if $cfg.user}
-		<li class="dropdown">
-		<a href="#" id="navi-account" class="dropdown-toggle navi-label" data-toggle="dropdown" role="button">Hi, {$cfg.user.username|escape} <b class="caret caret-ch"></b></a>
-
-		<ul class="dropdown-menu" aria-labelledby="account-navi" role="menu">
-		<li><a href="#" onclick="return false;">Hi <span class="hey-look">{$cfg.user.username|escape}</span></a></li>
-		<li class="divider"></li>
-		{if "api"|@features_is_enabled}<li><a href="{$cfg.abs_root_url}api/">Developer</a></li>{/if}
-		{if 0}<li id="account"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">Your account</a></li>{/if}
-		<li id="signout"><a href="{$cfg.abs_root_url}signout/">Sign out</a></li>
-		{if "admin"|@auth_has_role:$cfg.user.id}
-		<li class="divider"></li>
-		<li id="admin"><a href="{$cfg.abs_root_url}admin/">Admin</a></li>
-		{/if}
-		</ul>
-		</li>
-		{else}
-		<li class="dropdown">
-		<a href="#" id="navi-account" class="dropdown-toggle navi-label" data-toggle="dropdown" role="button">You <b class="caret caret-ch"></b></a>
-
-		<ul class="dropdown-menu" aria-labelledby="account-navi" role="menu">
-		{if 0}{if "signup"|@features_is_enabled}<li id="signup"><a href="{$cfg.abs_root_url}signup/">Create an account</a></li>{/if}{/if}
-		<li id="signin"><a href="{$cfg.abs_root_url}signin/">Sign in</a></li>
-		</ul>
-
-		</li>
-		{/if}
-		{/if}
-
-
-	      </ul>
+     {if "signin"|@features_is_enabled}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">You</a>
+	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	  {if $cfg.user}
+          <a class="dropdown-item" href="{$cfg.abs_root_url}signout/">Sign out</a>
+	  {if "admin"|@auth_has_role:$cfg.user.id}
+          <a class="dropdown-item" href="{$cfg.abs_root_url}admin/">Admin</a>
+	  {/if}
+	  {else}
+	  <a class="dropdown-item" href="{$cfg.abs_root_url}signin/">Sign in</a>
+	  {/if}
 	</div>
+      </li>
       {/if}
 
-</nav>
+     </ul>
+  </div>
+  {/if}
 
+</nav>
 </div>
