@@ -7,13 +7,16 @@
 <div class="row">
 <p class="lead">The default API response format is <span class="hey-look"><a href="{$cfg.abs_root_url}formats/{$default|escape}/">{$default|escape}</a>.</p>
 </div>
-</div>
 
 {foreach from=$formats item="details" key="format"}
 {if $details.enabled and $details.documented}
+<div class="row">
 <a name="{$format|escape}"></a>
 {include file="inc_api_format_description.txt" format=$format}
+</div>
 {/if}
 {/foreach}
+
+</div>
 
 {include file="inc_foot.txt"}
