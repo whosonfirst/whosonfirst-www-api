@@ -1,12 +1,10 @@
-
         <div class="container">
-            <hr>
 
-            <footer>
+		<hr />
+		<footer>
                 <p>this is a <a href="http://www.whosonfirst.org/">who's on first</a> gig</p>
-            </footer>
-
-        </div> <!-- /container -->
-
+		</footer>
+        </div> 
+	
   </body>
 </html>

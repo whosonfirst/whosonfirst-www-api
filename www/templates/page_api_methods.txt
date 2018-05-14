@@ -9,25 +9,29 @@
 {capture assign="count_split"}{$count_classes/2|@floor}{/capture}
 
 <div style="font-size:small;">
-<h3>Table of Contents</h3>
+	<h3>Table of Contents</h3>
 
-<div class="row">
+	<div class="row">
 
-<div class="api-methods col">	
+	<div class="api-methods col">
 
-<ul>
-{foreach from=$method_classes item="class_details" key="class" name="classes"}
-<li><a href="#{$class|@escape}">{$class|escape}</a></li>
+	<ul>
+	{foreach from=$method_classes item="class_details" key="class" name="classes"}
+	<li><a href="#{$class|@escape}">{$class|escape}</a></li>
 
-{if $smarty.foreach.classes.index+1==$count_split}
-</ul>
-</div>
-<div class="api-methods col">
-<ul>
-{/if}
+	{if $smarty.foreach.classes.index+1==$count_split}
+	</ul>
+	</div>
+	<div class="api-methods col">
+	<ul>
+	{/if}
 
-{/foreach}
-</div>
+	{/foreach}
+	
+	</ul>
+	</div>
+	
+	</div>
 </div>
 
 <br /><br />

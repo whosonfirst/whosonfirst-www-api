@@ -1017,9 +1017,11 @@ article div.whosonfirst-fulltabs-container p a, article div.whosonfirst-tabs-con
 /* Footer Styling */
 
 footer {
+    /*
 	position: absolute;
 	width: 100%;
 	margin-top: -58px;
+	*/
 }
 
 ul.whosonfirst-footer li a.whosonfirst-nav-link {
