@@ -13,40 +13,55 @@
 
      <ul class="navbar-nav">
 
-      {if $cfg.user}
+      {if !$cfg.site_disabled}
       <li class="nav-item dropdown">
 
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{$cfg.abs_root_url}account/">🤳 You</a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{$cfg.abs_root_url}account/">You</a>
 	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+	  {if $cfg.user}	
 	  <span class="dropdown-item">Hello {$cfg.user.username|@escape}</span>
-          <a class="dropdown-item" href="#">Sign out</a>
+          <a class="dropdown-item" href="{$cfg.abs_root_url}signout/">Sign out</a>
+	  {else}
+
+	  {if "signin"|@features_is_enabled}
+          <a class="dropdown-item" href="{$cfg.abs_root_url}signin/">Sign in</a>
+	  {/if}
+
+	  {if "signin"|@features_is_enabled}
+          <a class="dropdown-item" href="{$cfg.abs_root_url}signup/">Create a new account</a>
+	  {/if}
+
+	  {/if}
+	  
 	</div>
 	</li>
-	{/if}
-
-
-      <li class="nav-item dropdown">
+       {/if}
+	
+	{if !$cfg.site_disabled && "api"|@features_is_enabled && "api_documentation"|@features_is_enabled}
+        <li class="nav-item dropdown">
 
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">API</a>
 	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{$cfg.abs_root_url}methods/">Methods</a>
-          <a class="dropdown-item" href="{$cfg.abs_root_url}format/">Formats</a>
+          <a class="dropdown-item" href="{$cfg.abs_root_url}formats/">Formats</a>
           <a class="dropdown-item" href="{$cfg.abs_root_url}errors/">Errors</a>
+
+	  {if $cfg.user}
+          <a class="dropdown-item" href="{$cfg.abs_root_url}oauth2/authenticate/like-magic/">New Access Token</a>
+          <a class="dropdown-item" href="{$cfg.abs_root_url}oauth2/tokens/">All your access tokens</a>	  	  	  	  
+          <a class="dropdown-item" href="{$cfg.abs_root_url}keys/register/">New API key</a>
+          <a class="dropdown-item" href="{$cfg.abs_root_url}keys/">All your API key</a>
+	  {/if}
 	</div>
 	</li>
-	
-      <li class="nav-item"><a class="nav-link" href="{$cfg.abs_root_url}api/">API</a></li>
+	{/if}
+
      </ul>
   </div>
 
-  {if 0}
-  <form class="form-inline pull-right" action="{$cfg.abs_root_url}search">
-    <input type="search" name="q" value="{$query|escape}" placeholder="Search the Who's On First API" class="form-control mr-sm-2">
-    <input type="hidden" name="scope" value="names" />
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-  {/if}
-  
-</nav>
+   {include file="inc_search_form.txt"}
+
+  </nav>
 
 </div>
