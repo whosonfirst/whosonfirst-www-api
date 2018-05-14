@@ -112,7 +112,7 @@
 
 	$GLOBALS['cfg']['auth_cookie_domain'] = parse_url($GLOBALS['cfg']['abs_root_url'], 1);
 	$GLOBALS['cfg']['auth_cookie_name'] = 'ap';
-	$GLOBALS['cfg']['auth_cookie_require_https'] = 0;
+	$GLOBALS['cfg']['auth_cookie_require_https'] = 1;
 
 	$GLOBALS['cfg']['crumb_ttl_default'] = 300;	# seconds
 
@@ -233,7 +233,7 @@
 	# API feature flags
 
 	$GLOBALS['cfg']['enable_feature_api'] = 1;
-	$GLOBALS['cfg']['api_require_loggedin'] = 1;
+	$GLOBALS['cfg']['api_require_loggedin'] = 0;
 
 	$GLOBALS['cfg']['enable_feature_api_documentation'] = 1;
 	$GLOBALS['cfg']['enable_feature_api_explorer'] = 1;
@@ -441,6 +441,7 @@
 	$GLOBALS['cfg']['enable_feature_spatial_pip'] = 1;
 	$GLOBALS['cfg']['enable_feature_spatial_nearby'] = 1;
 	$GLOBALS['cfg']['enable_feature_spatial_intersects'] = 1;
+	$GLOBALS['cfg']['enable_feature_spatial_polyline'] = 0;	
 
 	# see also: https://github.com/whosonfirst/whosonfirst-www-api/issues/56
 

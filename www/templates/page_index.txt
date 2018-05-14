@@ -12,20 +12,6 @@
 		{include file="inc_search_form.txt"}
 	</div>
 
-	{if "places"|@features_is_enabled}
-
-	<div class="row headroom">
-		<div class="col-xs-12">
-			<h3>See also</h3>
-			<ul>
-				<li><a href="https://mapzen.com/documentation/places/">Mapzen Places API documentation</a></li>
-				<li><a href="https://whosonfirst.mapzen.com/">Who’s On First project</a></li>
-				<li><a href="https://mapzen.com/tag/whosonfirst/">Blog posts about Who’s On First</a></li>
-			</ul>
-		</div>
-	</div>
-	{/if}
-
 </div>
 
 {include file='inc_foot.txt'}

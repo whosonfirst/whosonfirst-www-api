@@ -707,7 +707,7 @@
 		'whosonfirst.places.getByLatLon' => array(
 			"description" => "Return Who's On First places intersecting a latitude and longitude",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
+			"enabled" => $GLOBALS['cfg']['enable_feature_spatial_pip'],
 			"paginated" => 0,
 			"pagination" => "cursor",
 			"extras" => 1,
@@ -732,7 +732,7 @@
 		'whosonfirst.places.getByPolyline' => array(
 			"description" => "Return Who's On First places intersecting each point along a polyline.",
 			"documented" => 1,
-			"enabled" => ($GLOBALS['cfg']['enable_feature_pip'] && $GLOBALS['cfg']['enable_feature_pip_polyline']),
+			"enabled" => $GLOBALS['cfg']['enable_feature_spatial_polyline'],
 			"paginated" => 1,
 			"pagination" => "default",
 			"pagination_per_page_max" => 100,

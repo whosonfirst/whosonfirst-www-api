@@ -11,7 +11,9 @@
 <div style="font-size:small;">
 <h3>Table of Contents</h3>
 
-<div class="api-methods col-md-5" style="margin-bottom:em;">	
+<div class="row">
+
+<div class="api-methods col">	
 
 <ul>
 {foreach from=$method_classes item="class_details" key="class" name="classes"}
@@ -20,24 +22,27 @@
 {if $smarty.foreach.classes.index+1==$count_split}
 </ul>
 </div>
-<div class="api-methods col-md-5 col-md-offset-2" style="margin-bottom:3em;" >
+<div class="api-methods col col-md-offset-2" style="margin-bottom:3em;" >
 <ul>
 {/if}
 
 {/foreach}
 </div>
+</div>
 
 <br /><br />
 
-<div class="api-methods col-md-5">
+<div class="row">
+
+<div class="api-methods col">
 
 {foreach from=$method_classes item="class_details" key="class" name="classes"}
-<div class="row api-sect api-sect-{$class_details.prefix|escape} api-sect-{$class|replace:".":"-"|escape}">
+<div class="card api-sect api-sect-{$class_details.prefix|escape} api-sect-{$class|replace:".":"-"|escape}" style="margin-bottom:1em;">
 
 <a name="{$class|@escape}"></a>
-<h3>{$class|escape}{if 0} {$smarty.foreach.classes.index+1} / {$count_split}{/if}</h3>
+<h3 class="card-header" style="width:100%;">{$class|escape}{if 0} {$smarty.foreach.classes.index+1} / {$count_split}{/if}</h3>
 
-<ul class="list api-list-o-things">
+<ul class="list api-list-o-things card-body">
 {foreach from=$class_details.methods item="method"}
 	<li class="api-method{if !$method.documented} api-method-undocumented{/if}{if !$method.enabled} api-method-disabled{/if}">
 
@@ -61,11 +66,12 @@
 
 {if $smarty.foreach.classes.index+1==$count_split}
 </div>
-<div class="api-methods col-md-5 col-md-offset-2">
+<div class="api-methods col">
 {/if}
 
 {/foreach}
 
+</div>
 </div>
 </div>
 </div>
