@@ -15,11 +15,11 @@
 	
 	<div class="row headroom-large">
 		<div class="col-xs-12">
-			<h1>search</h1>
+			<h2>search results for <q>{$query|@escape}</q></h2>
 		</div>
 	</div>
 	
-	{include file="inc_search_form.txt"}
+	{include file="inc_results.txt"}
 </div>
 
 {include file='inc_foot.txt'}

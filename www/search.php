@@ -1,6 +1,7 @@
 <?php
 
 	include('include/init.php');
+	
 	loadlib('elasticsearch_spelunker');
 	loadlib('whosonfirst_places');
 	loadlib('search_utils');
@@ -42,16 +43,19 @@
 		}
 
 		$pagination = $rsp['pagination'];
+		
 		$args = http_build_query(array(
 			'q' => $query,
 			'scope' => $scope
 		));
+		
 		$GLOBALS['smarty']->assign('pagination_page_as_queryarg', true);
 		$GLOBALS['smarty']->assign('pagination_url', $GLOBALS['cfg']['abs_root_url'] . "search/?$args");
 
 		$more = array(
 			'extras' => 'addr:full,geom:latitude,geom:longitude,iso:country,mz:is_current,edtf:'
 		);
+		
 		api_whosonfirst_output_enpublicify($rsp['rows'], $more);
 
 		$out = array(
@@ -63,13 +67,12 @@
 
 		$GLOBALS['smarty']->assign_by_ref('results', $out['places']);
 		$GLOBALS['smarty']->assign_by_ref('pagination', $pagination);
+
+		$GLOBALS['smarty']->display('page_search_results.txt');
 	}
 
-	$debug = request_bool("debug");
-	if ($debug) {
-		$query_json = json_encode($rsp['_query'], JSON_PRETTY_PRINT);
-		$GLOBALS['smarty']->assign('debug', $query_json);
+	else {
+		$GLOBALS['smarty']->display('page_search.txt');
 	}
-
-	$GLOBALS['smarty']->display('page_search.txt');
+	
 	exit();
