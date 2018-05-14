@@ -1,3 +1,13 @@
+.card {
+    margin-bottom: 2em;
+    // border:solid thin;
+    width:100%;
+}
+
+.card-header {
+    margin-top: 0px !important;
+}
+
 #map {
 	width: 100%;
 	height: 400px;

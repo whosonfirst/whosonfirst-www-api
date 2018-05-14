@@ -1,38 +1,35 @@
 {capture assign="api_request_method"}{if $cfg.api_auth_type=='oauth2' and !$cfg.api_oauth2_allow_get_parameters}POST{elseif $details.request_method}{$details.request_method|escape}{else}GET{/if}{/capture}
 
-
 <a name="{$method|escape}"></a>
 
-<div class="api-method">
+<div class="api-method row">
 
-<div class="row api-sect" id="description">
-<h2 class="api-method-name{if $details.requires_blessing} api-method-blessed{/if}{if !$details.documented} api-method-undocumented{/if}">
-{$method|escape}
-</h2>
+<div class="card api-sect" id="description">
+	<h2 class="card-header api-method-name{if $details.requires_blessing} api-method-blessed{/if}{if !$details.documented} api-method-undocumented{/if}">{$method|escape}</h2>
 
-<p>{$details.description|escape}</p>
+	<div class="card-body">
+	<p>{$details.description|escape}</p>
+
+	{if $details.requires_auth || $details.requires_blessing || !$details.documented || !$details.enabled}
+	<ul class="api-method-details">
+	{if $details.requires_auth}<li>This method requires <strong>authentication</strong>.</li>{/if}
+	{if $details.requires_blessing}<li>This method requires additional <strong>authorization</strong>.</li>{/if}
+	{if !$details.documented}<li>This method is <strong>undocumented</strong>.</li>{/if}
+	{if !$details.enabled}<li>This method is <strong>disabled</strong>.</li>{/if}
+	</ul>
+	{/if}
+	</div>
 </div>
 
-{if $details.requires_auth || $details.requires_blessing || !$details.documented || !$details.enabled}
-<div class="row api-sect">
-<ul class="api-method-details">
-{if $details.requires_auth}<li>This method requires <strong>authentication</strong>.</li>{/if}
-{if $details.requires_blessing}<li>This method requires additional <strong>authorization</strong>.</li>{/if}
-{if !$details.documented}<li>This method is <strong>undocumented</strong>.</li>{/if}
-{if !$details.enabled}<li>This method is <strong>disabled</strong>.</li>{/if}
-</ul>
-</div>
-{/if}
-
-<div class="row api-sect">
-<h3>Method</h3>
-
-<p>{$api_request_method|escape}</p>
+<div class="card api-sect">
+	<h3 class="card-header">Method</h3>
+	<p class="card-body">{$api_request_method|escape}</p>
 </div>
 
-<div class="row api-sect" id="arguments">
-<h3>Arguments</h3>
+<div class="card api-sect" id="arguments">
+	<h3 class="card-header">Arguments</h3>
 
+	<div class="card-body">
 {if $details.parameters|@count or $cfg.api_auth_type=='oauth2' or $cfg.paginated}
 <ul class="api-list-o-things">
 <li><strong>access_token <span class="text-danger">(required)</span></strong> &#8212; A valid <a href="{$cfg.abs_root_url}oauth2/">OAuth2 access token</a></li>
@@ -85,10 +82,12 @@
 {/if}
 
 </div>
+</div>
 
-<div class="row api-sect" id="errors">
-<h3>Errors</h3>
+<div class="card api-sect" id="errors">
+<h3 class="card-header">Errors</h3>
 
+<div class="card-body">
 {if $details.errors|@count}
 
 <p>In addition to <a href="{$cfg.abs_root_url}api/errors/">default error codes</a> common to all methods this API method defines the following additional error codes:</p>
@@ -103,11 +102,13 @@
 <p>This API method does not define any custom error codes. For the list of error codes common to all API methods please consult the <a href="{$cfg.abs_root_url}api/errors/">default error codes</a> documentation.</p>
 {/if}
 </div>
+</div>
 
 {if $details.notes|@count or $details.paginated or $details.experimental or $details.disallow_formats|@count}
-<div class="row api-sect" id="notes">
-<h3>Notes</h3>
+<div class="card api-sect" id="notes">
+<h3 class="card-header">Notes</h3>
 
+<div class="card-body">
 <ul class="api-list-o-things">
 {foreach from=$details.notes item="note"}
 <li>{$note|escape}</li>
@@ -134,11 +135,13 @@
 </ul>
 </div>
 {/if}
+</div>
 
-<div class="row api-sect" id="example">
+<div class="card api-sect" id="example">
 
-<h3>Example request {if "api_explorer"|@features_is_enabled}<small style="display:inline !important;"> {if $details.requires_blessing} This method requires extra-special permissions so it's easiest just to image that it will work with the API explorer{else}&#8212; <a href="{$cfg.abs_root_url}methods/{$method|escape}/explore/" style="color:#FF5700">or take this API method for a spin</a>{/if}</small>{/if}</h3>
+<h3 class="card-header">Example request {if "api_explorer"|@features_is_enabled}<small style="display:inline !important;"> {if $details.requires_blessing} This method requires extra-special permissions so it's easiest just to image that it will work with the API explorer{else}&#8212; <a href="{$cfg.abs_root_url}methods/{$method|escape}/explore/" style="color:#FF5700">or take this API method for a spin</a>{/if}</small>{/if}</h3>
 
+<div class="card-body">
 {if $api_request_method=='GET' and ($cfg.api_auth_type!='oauth2' or $cfg.api_oauth2_allow_get_parameters)}
 <pre class="api-example-request">curl -X <strong>{$api_request_method|escape}</strong> '{$cfg.api_abs_root_url}<strong>{$cfg.api_endpoint}</strong>?method=<strong class="api-param-required">{$method|escape}</strong>{if $cfg.api_auth_type=='oauth2'}&access_token=<strong class="api-param-required">&lt;TOKEN&gt;</strong>{/if}{if $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;</strong>{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'</pre>
 {else}
@@ -154,13 +157,15 @@
 {/if}
 
 </div>
+</div>
 
 {if $api_request_method=='GET' and ($cfg.api_auth_type!='oauth2' or $cfg.api_oauth2_allow_get_parameters)}
 
-<div class="api-caveat row api-sect" id="caveat">
+<div class="api-caveat card api-sect" id="caveat">
 
-<h3>Important</h3>
+<h3 class="card-header">Important</h3>
 
+<div class="card-body">
 <p>This API method uses <a href="{$cfg.abs_root_url}oauth2/">OAuth2</a> and allows you to pass parameters as part of the URL (or as <code>GET</code> requests). One of those parameters is your <a href="{$cfg.abs_root_url}oauth2/tokens/">access token</a> which is extra special and has super-powers. Requests to and from the API are done over an encrypted channel so no one can see what's going on <strong>BUT</strong> that also means there are a couple things you need to be conscious of:</p>
 
 <ol class="api-list-o-things">
@@ -169,6 +174,7 @@
 <li>If you are copy-paste-ing those URLs in to an email or some other place where someone else might be able to read them you should make sure to remove the access token &#8212; remember the access token is what links your account to <a href="{$cfg.abs_root_url}">{$cfg.site_name|escape}</a> on behalf of an application and has super-powers.</li>
 </ol>
 
+</div>
 </div>
 
 {/if}

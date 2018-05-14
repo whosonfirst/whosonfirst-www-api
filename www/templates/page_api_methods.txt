@@ -22,7 +22,7 @@
 {if $smarty.foreach.classes.index+1==$count_split}
 </ul>
 </div>
-<div class="api-methods col col-md-offset-2" style="margin-bottom:3em;" >
+<div class="api-methods col">
 <ul>
 {/if}
 
