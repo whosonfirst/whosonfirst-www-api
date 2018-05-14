@@ -44,8 +44,7 @@ fi
 
 echo "DROP DATABASE IF EXISTS ${DBNAME};" >> /tmp/${DBNAME}.sql;
 echo "CREATE DATABASE ${DBNAME};" >> /tmp/${DBNAME}.sql
-# this doesn't work on older versions of mysql but I don't remember which version that is... (20160608/thisisaaronland)
-# echo "DROP user '${USERNAME}'@'localhost';" >> /tmp/${DBNAME}.sql
+# echo "DROP user IF EXISTS '${USERNAME}'@'localhost';" >> /tmp/${DBNAME}.sql
 echo "CREATE user '${USERNAME}'@'localhost' IDENTIFIED BY '${PASSWORD}';" >> /tmp/${DBNAME}.sql
 echo "GRANT SELECT,UPDATE,DELETE,INSERT ON ${DBNAME}.* TO '${USERNAME}'@'localhost' IDENTIFIED BY '${PASSWORD}';" >> /tmp/${DBNAME}.sql
 echo "FLUSH PRIVILEGES;" >> /tmp/${DBNAME}.sql
@@ -61,7 +60,7 @@ done
 echo "Please enter your MySQL root password."
 mysql -u root -p < /tmp/${DBNAME}.sql
 
-unlink /tmp/${DBNAME}.sql
+# unlink /tmp/${DBNAME}.sql
 
 perl -p -i -e "s/GLOBALS\['cfg'\]\['db_main'\]\['pass'\] = '[^']*'/GLOBALS\['cfg'\]\['db_main'\]\['pass'\] = '${PASSWORD}'/" ${SECRETS};
 perl -p -i -e "s/GLOBALS\['cfg'\]\['db_users'\]\['pass'\] = '[^']*'/GLOBALS\['cfg'\]\['db_users'\]\['pass'\] = '${PASSWORD}'/" ${SECRETS};

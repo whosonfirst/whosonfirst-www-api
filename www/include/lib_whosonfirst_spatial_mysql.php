@@ -140,7 +140,7 @@
 
 	function whosonfirst_spatial_mysql_fetch($sql, $more=array()){
 
-		$rsp = db_fetch_paginated($sql, $more);
+		$rsp = db_fetch_whosonfirst_paginated($sql, $more);
 
 		# dumper($sql);
 		# dumper($rsp);

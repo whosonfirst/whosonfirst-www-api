@@ -12,7 +12,8 @@
 		$enc_id = AddSlashes($id);
 
 		$sql = "SELECT * FROM geojson WHERE id='{$enc_id}'";
-	     	$rsp = db_fetch($sql);
+		
+	     	$rsp = db_fetch_whosonfirst($sql);
 		$rsp = db_single($rsp);
 
 		return $rsp;

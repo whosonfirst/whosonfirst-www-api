@@ -54,32 +54,39 @@
 	function db_insert($tbl, $hash){						return _db_insert($tbl, $hash, 'main', null); }
 	function db_insert_accounts($tbl, $hash){					return _db_insert($tbl, $hash, 'accounts', null); }
 	function db_insert_users($k, $tbl, $hash){					return _db_insert($tbl, $hash, 'users', $k); }
-
+	function db_insert_whosonfirst($tbl, $hash){					return _db_insert($tbl, $hash, 'whosonfirst', null); }
+	
 	function db_insert_bulk($tbl, $rows, $batch=100){				return _db_insert_bulk($tbl, $rows, $batch, 'main', null); }
 	function db_insert_bulk_accounts($tbl, $rows, $batch=100){	       		return _db_insert_bulk($tbl, $rows, $batch, 'accounts', null); }
 	function db_insert_bulk_users($tbl, $rows, $batch=100){				return _db_insert_bulk($tbl, $rows, $batch, 'users', $k); }
-
+	function db_insert_bulk_whosonfirst($tbl, $rows, $batch=100){	       		return _db_insert_bulk($tbl, $rows, $batch, 'whosonfirst', null); }
+	
 	function db_insert_dupe($tbl, $hash, $hash2, $more=array()){			return _db_insert_dupe($tbl, $hash, $hash2, 'main', null, $more); }
 	function db_insert_dupe_accounts($tbl, $hash, $hash2, $more=array()){		return _db_insert_dupe($tbl, $hash, $hash2, 'accounts', null, $more); }
 	function db_insert_dupe_users($k, $tbl, $hash, $hash2, $more=array()){		return _db_insert_dupe($tbl, $hash, $hash2, 'users', $k, $more); }
+	function db_insert_dupe_whosonfirst($k, $tbl, $hash, $hash2, $more=array()){	return _db_insert_dupe($tbl, $hash, $hash2, 'whosonfirst', $k, $more); }	
 
 	function db_update($tbl, $hash, $where){					return _db_update($tbl, $hash, $where, 'main', null); }
 	function db_update_accounts($tbl, $hash, $where){				return _db_update($tbl, $hash, $where, 'accounts', null); }
 	function db_update_users($k, $tbl, $hash, $where){				return _db_update($tbl, $hash, $where, 'users', $k); }
+	function db_update_whosonfirst($k, $tbl, $hash, $where){			return _db_update($tbl, $hash, $where, 'whosonfirst', $k); }	
 
 	function db_fetch($sql){							return _db_fetch($sql, 'main', null); }
 	function db_fetch_slave($sql){							return _db_fetch_slave($sql, 'main_slaves'); }
 	function db_fetch_accounts($sql){						return _db_fetch($sql, 'accounts', null); }
+	function db_fetch_whosonfirst($sql){						return _db_fetch($sql, 'whosonfirst', null); }	
 	# function db_fetch_accounts_slave($sql){					return _db_fetch($sql, 'accounts_slave', null); }
 	function db_fetch_users($k, $sql){						return _db_fetch($sql, 'users', $k); }
 
 	function db_fetch_paginated($sql, $args){					return _db_fetch_paginated($sql, $args, 'main', null); }
 	function db_fetch_paginated_accounts($sql, $args){				return _db_fetch_paginated($sql, $args, 'accounts', null); }
+	function db_fetch_paginated_whosonfirst($sql, $args){				return _db_fetch_paginated($sql, $args, 'whosonfirst', null); }	
 	function db_fetch_paginated_users($k, $sql, $args){				return _db_fetch_paginated($sql, $args, 'users', $k); }
 
 	function db_write($sql){							return _db_write($sql, 'main', null); }
 	function db_write_accounts($sql){						return _db_write($sql, 'accounts', null); }
-	function db_write_users($k, $sql){						return _db_write($sql, 'users', $k); }
+	function db_write_users($k, $sql){						return _db_write($sql, 'users', $k); }	
+	function db_write_whosonfirst($k, $sql){					return _db_write($sql, 'whosonfirst', $k); }
 
 	function db_tickets_write($sql){						return _db_write($sql, 'tickets', null); }
 

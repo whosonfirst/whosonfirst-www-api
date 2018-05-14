@@ -4,7 +4,7 @@
 	# Things you may want to change in a hurry
 
 	$GLOBALS['cfg']['site_name'] = 'Who\'s On First API';
-	$GLOBALS['cfg']['environment'] = 'prod';
+	$GLOBALS['cfg']['environment'] = 'dev';
 
 	$GLOBALS['cfg']['site_disabled'] = 0;
 	$GLOBALS['cfg']['site_disabled_retry_after'] = 0;	# seconds; if set will return HTTP Retry-After header
@@ -12,7 +12,9 @@
 	# See also init.php customizations for Mapzen Places
 	$GLOBALS['cfg']['enable_feature_places'] = 0;
 
-	$GLOBALS['cfg']['enable_feature_routing'] = 0;
+	# Keeping this around for a day when routing is available again
+	# (20180513/thisisaaronland)
+	# $GLOBALS['cfg']['enable_feature_routing'] = 0;
 
 	# Message is displayed in the nav header in inc_head.txt
 
@@ -24,15 +26,22 @@
 
 	$GLOBALS['cfg']['db_main'] = array(
 		'host'	=> 'localhost',
-		'name'	=> 'wof_api',		# database name
-		'user'	=> 'wof_api',		# database username
+		'name'	=> 'wof',		# database name
+		'user'	=> 'wof',		# database username
 		'auto_connect' => 0,
 	);
 
 	$GLOBALS['cfg']['db_accounts'] = array(
 		'host'	=> 'localhost',
-		'name'	=> 'wof_api',		# database name
-		'user'	=> 'wof_api',		# database username
+		'name'	=> 'wof',		# database name
+		'user'	=> 'wof',		# database username
+		'auto_connect' => 0,
+	);
+
+	$GLOBALS['cfg']['db_whosonfirst'] = array(
+		'host'	=> 'localhost',
+		'name'	=> 'wof',		# database name
+		'user'	=> 'wof',		# database username
 		'auto_connect' => 0,
 	);
 
