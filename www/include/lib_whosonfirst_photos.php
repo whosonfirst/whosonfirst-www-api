@@ -154,7 +154,7 @@
 				"destination" => $destination,
 			);
 
-			$details["sizes"][$sz]["secret"] = $secret;
+			$details["sizes"][$sz]["secret"] = $s;
 			$details["sizes"][$sz]["extension"] = $ext;
 		}
 
