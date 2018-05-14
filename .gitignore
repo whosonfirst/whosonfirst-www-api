@@ -10,3 +10,5 @@ certified
 *.bak
 bin/mk-docs.sh
 .remote-sync.json
+.#*
+#*
