@@ -43,6 +43,8 @@
 
 	########################################################################
 
+	# see below... (20180515/thisisaaronland)
+
 	function whosonfirst_photos_get_photos_actually($viewer_id, $more=array()){
 
 		$sql = "SELECT * FROM Photos";
@@ -55,6 +57,8 @@
 	}
 
 	########################################################################
+
+	# PLEASE RENAME ME... (20180515/thisisaaronland)
 
 	function whosonfirst_photos_get_photos(&$record, $more=array()){
 
@@ -75,6 +79,8 @@
 
 	########################################################################
 
+	# PLEASE RENAME ME... (20180515/thisisaaronland)
+
 	function whosonfirst_photos_get_photo(&$record, $photo_id, $more=array()){
 
 		$enc_exh = AddSlashes($record["whosonfirst:id"]);
@@ -86,6 +92,33 @@
 		$photo = db_single($rsp);
 
 		return $photo;
+	}
+
+	########################################################################
+
+	function whosonfirst_photos_update_photo(&$photo, $update){
+
+		$now = time();
+
+		$update["lastmodified"] = $now;
+
+		$insert = array();
+
+		foreach ($update as $k => $v){
+			$insert[$k] = AddSlashes($v);
+		}
+
+		$enc_id = AddSlashes($photo["id"]);
+		$where = "id='{$enc_id}'";
+
+		$rsp = db_update("Photos", $insert, $where);
+
+		if ($rsp["ok"]){
+			$photo = array_merge($photo, $update);
+			$rsp["photo"] = $photo;
+		}
+
+		return $rsp;
 	}
 
 	########################################################################

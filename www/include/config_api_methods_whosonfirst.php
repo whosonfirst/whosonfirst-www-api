@@ -29,6 +29,23 @@
 			),
 		),
 
+		'filter_parameters_date' => array(
+			array(
+				"name" => "date_start",
+				"description" => "Filter results to include only those places whose date:inception_lower value is greater than or equal to this value",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+			array(
+				"name" => "date_end",
+				"description" => "Filter results to include only those places whose date:cessation_upper value is equal to or lower than this value",
+				"documented" => 1,
+				"required" => 0,
+				"example" => "1"
+			),
+		),
+
 		'filter_parameters_existential' => array(
 			array(
 				"name" => "is_current",
@@ -325,43 +342,8 @@
 				"documented" => 1,
 				"required" => 0,
 				"example" => "neighbourhood"
-			),
-			array(
-				"name" => "is_current",
-				"description" => "Filter results by their 'mz:is_current' property. Valid options are: -1, 1, 0",
-				"documented" => 1,
-				"required" => 0,
-				"example" => "1"
-			),
-			array(
-				"name" => "is_ceased",
-				"description" => "Filter results to include only those places that have a valid EDTF cessation date or not. Valid options are: 1, 0",
-				"documented" => 1,
-				"required" => 0,
-				"example" => "1"
-			),
-			array(
-				"name" => "is_deprecated",
-				"description" => "Filter results to include only those places that have a valid EDTF deprecated date or not. Valid options are: 1, 0",
-				"documented" => 1,
-				"required" => 0,
-				"example" => "1"
-			),
-			array(
-				"name" => "is_superseded",
-				"description" => "Filter results to include only those places that have (or have not) been superseded. Valid options are: 1, 0",
-				"documented" => 1,
-				"required" => 0,
-				"example" => "1"
-			),
-			array(
-				"name" => "is_superseding",
-				"description" => "Filter results to include only those places that have (or have not) superseded other places. Valid options are: 1, 0",
-				"documented" => 1,
-				"required" => 0,
-				"example" => "1"
-			),
-		)
+			), 
+		),
 	);
 
 	########################################################################
@@ -371,7 +353,7 @@
 		'whosonfirst.brands.getInfo' => array(
 			"description" => "Return information about a specific brand",
 			"documented" => 1,
-			"enabled" => 1,
+			"enabled" => 0,
 			"experimental" => 1,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_brands",
@@ -393,7 +375,7 @@
 		'whosonfirst.brands.getList' => array(
 			"description" => "Return a list of all the known brands",
 			"documented" => 1,
-			"enabled" => 1,
+			"enabled" => 0,
 			"experimental" => 1,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_brands",
@@ -411,7 +393,7 @@
 		'whosonfirst.brands.search' => array(
 			"description" => "Search for brands by name",
 			"documented" => 1,
-			"enabled" => 1,
+			"enabled" => 0,
 			"experimental" => 1,
 			"paginated" => 1,
 			"library" => "api_whosonfirst_brands",
@@ -435,7 +417,7 @@
 		'whosonfirst.brands.sizes.getInfo' => array(
 			"description" => "Return details about a specific brand size",
 			"documented" => 1,
-			"enabled" => 1,
+			"enabled" => 0,
 			"experimental" => 1,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_brands_sizes",
@@ -456,7 +438,7 @@
 		'whosonfirst.brands.sizes.getList' => array(
 			"description" => "Return a list of all the brand sizes",
 			"documented" => 1,
-			"enabled" => 1,
+			"enabled" => 0,
 			"experimental" => 1,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_brands_sizes",
@@ -471,7 +453,7 @@
 		'whosonfirst.brands.venues.getList' => array(
 			"description" => "Return a list of venues for a specific brand",
 			"documented" => 1,
-			"enabled" => 1,
+			"enabled" => 0,
 			"experimental" => 1,
 			"paginated" => 1,
 			"extras" => 1,
@@ -643,7 +625,7 @@
 		'whosonfirst.pelias.autocomplete' => array(
 			"description" => "Query Who's On First using the Pelias autocomplete API",
 			"documented" => 0,
-			"enabled" => 1,
+			"enabled" => 0,
 			"paginated" => 0,
 			"extras" => 1,
 			"library" => "api_whosonfirst_pelias",
@@ -659,7 +641,7 @@
 		'whosonfirst.pelias.search' => array(
 			"description" => "Query Who's On First using the Pelias API",
 			"documented" => 1,
-			"enabled" => 1,
+			"enabled" => 0,
 			"paginated" => 1,
 			"pagination" => "mixed",
 			"extras" => 1,
@@ -704,18 +686,51 @@
 			"disallow_formats" => array( "csv", "meta" ),
 		),
 		
+		'whosonfirst.photos.setStatus' => array(
+			"description" => "Set the status for a photo",
+			"documented" => 1,
+			"enabled" => $GLOBALS['cfg']['enable_feature_whosonfirst_photos'],
+			"paginated" => 0,
+			"extras" => 0,
+			"library" => "api_whosonfirst_photos",
+			"requires_perms" => 2,	# write
+			"parameters" => array(
+				array(
+					"name" => "photo_id",
+					"description" => "A valid photo ID",
+					"required" => 1,
+					"documented" => 1,
+					"example" => "",
+				),
+				array(
+					"name" => "status_id",
+					"description" => "A valid status ID",
+					"required" => 1,
+					"documented" => 1,
+					"example" => "",
+				),
+			),
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
 		'whosonfirst.places.getByLatLon' => array(
 			"description" => "Return Who's On First places intersecting a latitude and longitude",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_spatial_pip'],
+			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_pip'])),
 			"paginated" => 0,
-			"pagination" => "cursor",
+			"pagination" => "default",
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
                         "parameters" => array_merge(array(
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "37.766633"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-122.417693"),
-			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
+			),
+			$GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial'],
+			$GLOBALS['api_methods_whosonfirst']['filter_parameters_existential'],
+			$GLOBALS['api_methods_whosonfirst']['filter_parameters_date']
+			),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
 				"433" => array("message" => "Missing 'longitude' parameter"),
@@ -732,7 +747,7 @@
 		'whosonfirst.places.getByPolyline' => array(
 			"description" => "Return Who's On First places intersecting each point along a polyline.",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_spatial_polyline'],
+			"enabled" => ($GLOBALS['cfg']['enable_feature_spatial'] && $GLOBALS['cfg']['enable_feature_spatial_polyline']),
 			"paginated" => 1,
 			"pagination" => "default",
 			"pagination_per_page_max" => 100,
@@ -758,7 +773,7 @@
 		'whosonfirst.places.getHierarchiesByLatLon' => array(
 			"description" => "Return the closest set of ancestors (hierarchies) for a latitude and longitude",
 			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_pip'],
+			"enabled" => (($GLOBALS['cfg']['enable_feature_spatial']) && ($GLOBALS['cfg']['enable_feature_spatial_pip'])),
 			"paginated" => 0,
 			"extras" => 1,
 			"library" => "api_whosonfirst_places",
@@ -903,7 +918,11 @@
 				array("name" => "latitude", "description" => "A valid latitude coordinate.", "documented" => 1, "required" => 1, "example" => "40.784165"),
 				array("name" => "longitude", "description" => "A valid longitude coordinate.", "documented" => 1, "required" => 1, "example" => "-73.958110"),
 				array("name" => "radius", "description" => "A valid radius (in meters) to limit the query by. Default radius is 100. Maximum radius is 500.", "documented" => 1, "required" => 0, "example" => 25, "default" => 100, "max" => 500),
-			), $GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial']),
+			),
+			$GLOBALS['api_methods_whosonfirst']['filter_parameters_spatial'],
+			$GLOBALS['api_methods_whosonfirst']['filter_parameters_existential'],
+			$GLOBALS['api_methods_whosonfirst']['filter_parameters_date']
+			),
 			"errors" => array(
 				"432" => array("message" => "Missing 'latitude' parameter"),
 				"433" => array("message" => "Missing 'longitude' parameter"),

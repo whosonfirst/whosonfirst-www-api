@@ -1,0 +1,11 @@
+<div class="card">
+     <h4 class="card-title">Photos</h4>
+     <div class="card-body">
+     {include file="inc_photos_deck.txt"}
+     </div>
+     {if $photos_total_count > $photos|@count}
+     <div class="card-footer">
+     <a href="#">See all the photos</a>
+     </div>
+     {/if}
+</div>

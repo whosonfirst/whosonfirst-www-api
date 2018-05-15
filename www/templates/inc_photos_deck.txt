@@ -1,0 +1,7 @@
+<div class="card-deck">
+{foreach from=$photos item="ph"}
+{include file="inc_photo_card.txt" photo=$ph}
+{/foreach}
+</div>
+
+{include file="inc_js_photos.txt"}

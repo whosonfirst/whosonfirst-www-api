@@ -1,0 +1,2 @@
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.html.css.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.photos.init.js"></script>
