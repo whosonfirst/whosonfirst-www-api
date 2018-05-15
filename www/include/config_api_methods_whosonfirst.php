@@ -1119,6 +1119,59 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
+		'whosonfirst.uploads.uploadPhoto' => array(
+			"description" => "Upload an image for an exhibition",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"requires_perms" => 2,	# write
+			"requires_capability" => array("can_upload"),
+			"extras" => 0,
+			"library" => "api_whosonfirst_uploads",
+                        "parameters" => array(
+				array(
+					"name" => "whosonfirst_id",
+					"description" => "",
+					"required" => 1,
+					"documented" => 1,
+					"example" => ""
+				)
+			), 
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
+		'whosonfirst.uploads.uploadFlickrPhoto' => array(
+			"description" => "Upload an image for an exhibition",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"requires_perms" => 2,	# write
+			"requires_capability" => array("can_upload"),
+			"extras" => 0,
+			"library" => "api_whosonfirst_uploads",
+                        "parameters" => array(
+				array(
+					"name" => "whosonfirst_id",
+					"description" => "",
+					"required" => 1,
+					"documented" => 1,
+					"example" => ""
+				),
+				array(
+					"name" => "photo_id",
+					"description" => "",
+					"required" => 1,
+					"documented" => 1,
+					"example" => ""
+				)
+			), 
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
 	), $GLOBALS['cfg']['api']['methods']);
 
 	########################################################################

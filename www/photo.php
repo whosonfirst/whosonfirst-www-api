@@ -22,6 +22,9 @@
 		error_403();	  
 	}
 
+	# this makes the URL decoding unhappy - please fix me (20180515/thisisaaronland)
+	# $photo["details"] = json_decode($photo["details"], "as hash");
+
 	$place = whosonfirst_places_get_by_id($photo["whosonfirst_id"]);
 
 	$GLOBALS['smarty']->assign_by_ref("place", $place);

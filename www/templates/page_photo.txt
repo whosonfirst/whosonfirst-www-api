@@ -9,6 +9,16 @@
      <div class="card-body">{include file="inc_photo_card.txt"}</div>
 </div>
 
+{if $cfg.user && $cfg.user|@users_roles_has_role:"admin"}
+<div class="card admin">
+     <div class="card-title">Details</div>
+     <div class="card-body">
+     {$photo|@dumper}
+     </div>
+</div>
+{/if}
+
 </div>
 
+{include file="inc_js_photos.txt"}
 {include file="inc_foot.txt"}

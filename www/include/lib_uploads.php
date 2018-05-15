@@ -54,8 +54,18 @@
 			return array("ok" => 0, "error" => "Upload already exists");
 		}
 
-		if (! move_uploaded_file($tmp_file, $pending_file)){
-			return array("ok" => 0, "error" => "Failed to move pending file");
+		if ($file["isnot_upload"]){
+
+			if (! rename($tmp_file, $pending_file)){
+				return array("ok" => 0, "error" => "Failed to move pending file FOO");
+			}
+		}
+
+		else {
+
+			if (! move_uploaded_file($tmp_file, $pending_file)){
+				return array("ok" => 0, "error" => "Failed to move pending file WHAT");
+			}
 		}
 
 		$fingerprint = sha1_file($pending_file);
