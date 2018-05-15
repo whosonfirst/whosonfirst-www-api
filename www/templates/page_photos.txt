@@ -1,0 +1,20 @@
+{capture assign="page_title"}Photos{/capture}
+{include file="inc_head.txt"}
+
+<div class="container">
+
+<div class="card">
+     <h2 class="card-title">Photos</h2>
+
+     <div class="card-body">
+     {include file="inc_photos_deck.txt"}
+     </div>
+
+     <div class="card-footer">
+     {include file="inc_pagination.txt"}
+     </div>
+</div>
+
+</div>
+
+{include file="inc_foot.txt"}

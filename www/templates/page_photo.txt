@@ -1,0 +1,14 @@
+{capture assign="wof_id"}{$place|@whosonfirst_places_property:"wof:id"}{/capture}
+{capture assign="wof_name"}{$place|@whosonfirst_places_property:"wof:name"}{/capture}
+{include file="inc_head.txt"}
+
+<div id="content" class="container">
+
+<div class="card">
+     <div class="card-title">This photo is associated with <q><a href="{$cfg.abs_root_url}id/{$wof_id|@escape}/">{$wof_name|@escape}</a></q> (<code>{$wof_id|@escape}</code>)</code>
+     <div class="card-body">{include file="inc_photo_card.txt"}</div>
+</div>
+
+</div>
+
+{include file="inc_foot.txt"}

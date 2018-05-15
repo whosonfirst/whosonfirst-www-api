@@ -22,6 +22,40 @@
 
 	########################################################################
 
+	function whosonfirst_photos_status_id_to_label($id){
+
+		$map = whosonfirst_photos_status_map();
+		return (isset($map[$id])) ? $map[$id] : "unknown";
+	}
+
+	########################################################################
+
+	function whosonfirst_photos_get_by_id($id){
+
+		$enc_id = AddSlashes($id);
+
+		$sql = "SELECT * FROM Photos WHERE id='{$enc_id}'";
+		$rsp = db_fetch($sql);
+		$rsp = db_single($rsp);
+
+		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_photos_get_photos_actually($viewer_id, $more=array()){
+
+		$sql = "SELECT * FROM Photos";
+
+		if ($where = whosonfirst_photos_permissions_get_photos_where($viewer_id)){
+			$sql = "{$sql} WHERE {$where}";
+		}  
+
+		return db_fetch($sql, $more);
+	}
+
+	########################################################################
+
 	function whosonfirst_photos_get_photos(&$record, $more=array()){
 
 		$status_map = whosonfirst_photos_status_map("string keys");
