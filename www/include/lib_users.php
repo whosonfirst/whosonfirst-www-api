@@ -200,7 +200,7 @@
 
 	function users_purge_password_reset_codes(&$user){
 
-		$enc_user = intval($user[id]);
+		$enc_user = intval($user['id']);
 		$sql = "DELETE FROM users_password_reset WHERE user_id=$enc_user";
 
 		$rsp = db_write_accounts($sql);
