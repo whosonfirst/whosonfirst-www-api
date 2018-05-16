@@ -1,9 +1,9 @@
 <?php
 
 	include("include/init.php");
-	loadlib("admin");
-	loadlib("uploads");
+	loadlib("whosonfirst_uploads");
 
+	loadlib("admin");
 	admin_ensure_admin();
 
 	$args = array();
@@ -12,14 +12,14 @@
 		$args["page"] = $page;
 	}
 
-	$rsp = uploads_get_uploads($args);
+	$rsp = whosonfirst_uploads_get_uploads($args);
 
 	if ($rsp["ok"]){
 
 		$uploads = $rsp["rows"];
 		$pagination = $rsp["pagination"];
 
-		uploads_inflate_uploads($uploads);
+		whosonfirst_uploads_inflate_uploads($uploads);
 
 		$GLOBALS["smarty"]->assign_by_ref("uploads", $uploads);
 		$GLOBALS["smarty"]->assign_by_ref("pagination", $pagination);

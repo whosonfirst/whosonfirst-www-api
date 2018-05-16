@@ -1,0 +1,1 @@
+This <a href="https://www.flickr.com/photos/{$info.owner.path_alias|@escape}/{$info.id|@escape}/">photo</a> is titled <q>{$info.title._content|@escape}</q	> and was taken by Flickr user <a href="https://www.flickr.com/photos/{$info.owner.path_alias|@escape}">{$info.owner.username|@escape}</a>.

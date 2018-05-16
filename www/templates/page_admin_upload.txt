@@ -14,8 +14,9 @@
       <th scope="col">ID</th>
       <th scope="col">User</th>
       <th scope="col">IP</th>
-      <th scope="col">Context</th>
       <th scope="col">Source</th>
+      <th scope="col">Type</th>
+      <th scope="col">Size</th>
       <th scope="col">Created</th>
       <th scope="col">Completed</th>
       <th scope="col">Last modified</th>
@@ -25,13 +26,14 @@
   </thead>
   <tbody>
 
-  {capture assign="status"}{$upload.status_id|@uploads_status_id_to_label}{/capture}
+  {capture assign="status"}{$upload.status_id|@whosonfirst_uploads_status_id_to_label}{/capture}
   	<tr class="admin-upload-status-{$status|@escape}">
 		<th scope="row"><a href="{$cfg.abs_root_url}admin/uploads/{$upload.id|@escape}/">{$upload.id|@escape}</a></th>
 		<td><a href="#">{$upload.user.username|@escape}</a></td>
 		<td>{$upload.remote_addr|@long2ip|@escape}</td>
-		<td>{$upload.properties.context|@escape}</td>
 		<td>{$upload.properties.source|@escape}</td>
+		<td>{$upload.file.type|@escape}</td>
+		<td>{$upload.file.size|@escape}</td>
 		<td>{$upload.created|@date_format|@escape}</td>
 		<td>{if $upload.completed}{$upload.completed|@date_format|@escape}{else}&#8212;{/if}</td>
 		<td>{$upload.lastmodified|@date_format|@escape}</td>

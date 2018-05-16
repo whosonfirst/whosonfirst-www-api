@@ -482,18 +482,39 @@
 	# END OF chatterbox stuff
 
         # START OF uploads stuff                                                                                                                                                                                                                                  
-        $GLOBALS['cfg']['enable_feature_uploads'] = 0;
-        $GLOBALS['cfg']['uploads_pending_dir'] = 'READ-FROM-SECRETS-OR-CONFIG-LOCAL';
+        $GLOBALS['cfg']['enable_feature_whosonfirst_uploads'] = 0;
+        $GLOBALS['cfg']['whosonfirst_uploads_pending_dir'] = 'READ-FROM-SECRETS-OR-CONFIG-LOCAL';
 
         # END OF uploads stuff
+
+	# START OF photos stuff
+
+	$GLOBALS['cfg']['enable_feature_whosonfirst_photos'] = 0;	  
+	$GLOBALS['cfg']['whosonfirst_photos_root'] = 'READ-FROM-SECRETS-OR-CONFIG-LOCAL';
+
+	$GLOBALS['cfg']['enable_feature_whosonfirst_photos_flickr'] = 0;
+	$GLOBALS['cfg']['flickr_pending_dir'] = 'READ-FROM-SECRETS-OR-CONFIG-LOCAL';
+	$GLOBALS['cfg']['flickr_api_key'] = 'READ-FROM-SECRETS';
+	$GLOBALS['cfg']['flickr_api_secret'] = 'READ-FROM-SECRETS';
+
+	# END OF photos stuff
 
 	# START of users_acl/roles stuff
         # really you want to define this in config_local.php rather than config.php
 
 	$GLOBALS['cfg']['users_acl'] = array(
-		# 'staff' => array(                                                                                                                                                                      
-		#	'can_do_something'
-		# )
+
+		/*
+		'staff' => array(
+			'can_upload',
+			'can_delete_uploads',
+			'can_edit_photos',
+			'can_delete_photos',
+			'can_process_photos',
+			'can_upload'
+		)
+		*/
+
 	);
 
         # END OF users_acl/roles stuff

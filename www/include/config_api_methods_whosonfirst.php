@@ -1172,6 +1172,44 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
+		"whosonfirst.uploads.deleteUpload" => array(
+			"description" => "Get information about a specific upload.",
+			"documented" => 1,
+			"enabled" => features_is_enabled("uploads"),
+			"extras" => 0,
+			"paginated" => 0,
+			"library" => "api_whosonfirst_uploads",
+			"requires_perms" => 2,	# write
+			"requires_capability" => array("can_delete_uploads"),
+                        "parameters" => array(
+				array(
+					"name" => "upload_id",
+					"description" => "A valid upload ID",
+					"required" => 1,
+					"documented" => 1,
+					"example" => "",
+				),
+			),
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
+		"whosonfirst.uploads.getInfo" => array(
+			"description" => "Get information about a specific upload.",
+			"documented" => 1,
+			"enabled" => features_is_enabled("uploads"),
+			"extras" => 0,
+			"paginated" => 0,
+			"requires_perms" => 1,
+			"requires_capability" => array("can_upload"),
+			"library" => "api_whosonfirst_uploads",
+                        "parameters" => array(),
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
 	), $GLOBALS['cfg']['api']['methods']);
 
 	########################################################################

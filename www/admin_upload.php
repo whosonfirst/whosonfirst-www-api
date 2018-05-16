@@ -1,9 +1,9 @@
 <?php
 
 	include("include/init.php");
-	loadlib("admin");
-	loadlib("uploads");
+	loadlib("whosonfirst_uploads");
 
+	loadlib("admin");
 	admin_ensure_admin();
 
 	$id = get_int64("id");
@@ -12,13 +12,13 @@
 		error_404();
 	}
 
-	$upload = uploads_get_by_id($id);
+	$upload = whosonfirst_uploads_get_by_id($id);
 
 	if (! $upload){
 		error_404();
 	}
 
-	uploads_inflate_upload($upload);
+	whosonfirst_uploads_inflate_upload($upload);
 
 	$GLOBALS["smarty"]->assign_by_ref("upload", $upload);
 

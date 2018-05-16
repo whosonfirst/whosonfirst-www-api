@@ -1,7 +1,7 @@
 <?php
 
 	loadlib("whosonfirst_places");
-	loadlib("uploads");
+	loadlib("whosonfirst_uploads");
 
 	loadlib("whosonfirst_photos");
 	loadlib("whosonfirst_photos_flickr");
@@ -12,7 +12,8 @@
 	function api_whosonfirst_photos_uploadPhoto() {
 
 		api_utils_features_ensure_enabled(array(
-			"uploads",
+			"whosonfirst_uploads",
+			"whosonfirst_photos",
 		));
 
 		$user = $GLOBALS["cfg"]["user"];
@@ -36,7 +37,8 @@
 	function api_whosonfirst_photos_uploadFlickrPhoto() {
 
 		api_utils_features_ensure_enabled(array(
-			"uploads",
+			"whosonfirst_uploads",
+			"whosonfirst_photos",
 		));
 
 		$user = $GLOBALS["cfg"]["user"];
@@ -78,7 +80,7 @@
 
 		foreach ($files as $f){
 
-			$rsp = uploads_create($user, $f, $props);
+			$rsp = whosonfirst_uploads_create($user, $f, $props);
 
 			if (! $rsp["ok"]){
 				api_output_error(500);
@@ -133,6 +135,8 @@
 			if ($f["error"]) {
 				api_output_error(512);			
 			}
+
+			# check type here...
 		}
 
 	}

@@ -75,19 +75,20 @@ CREATE TABLE `Uploads` (
        user_id BIGINT UNSIGNED NOT NULL,
        fingerprint CHAR(40) NOT NULL,
        remote_addr INT UNSIGNED NOT NULL,
-       created INT UNSIGNED NOT NULL,
-       lastmodified INT UNSIGNED NOT NULL,
+       created INT UNSIGNED NOT NULL DEFAULT 0,
+       lastmodified INT UNSIGNED NOT NULL DEFAULT 0,
        completed INT UNSIGNED NOT NULL DEFAULT 0,
+       deleted INT UNSIGNED NOT NULL DEFAULT 0,
        processing TINYINT UNSIGNED NOT NULL DEFAULT 0,
        status_id TINYINT UNSIGNED NOT NULL DEFAULT 1,
        file JSON NOT NULL,
        properties JSON NOT NULL,
        error JSON,
-       context VARCHAR(64) GENERATED ALWAYS AS (JSON_UNQUOTE(JSON_EXTRACT(properties, '$.context'))) VIRTUAL,
+       type VARCHAR(128) GENERATED ALWAYS AS (JSON_UNQUOTE(JSON_EXTRACT(file, '$.type'))) VIRTUAL,
        KEY `by_fingerprint` (`fingerprint`, `user_id`),
        KEY `by_user` (`user_id`, `lastmodified`),
        KEY `by_status` (`status_id`, `lastmodified`),
-       KEY `by_context` (`context`, `status_id`, `lastmodified`)
+       KEY `by_type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `Photos`;
@@ -100,8 +101,9 @@ CREATE TABLE `Photos` (
        status_id TINYINT NOT NULL DEFAULT 0 COMMENT 'NOT UNSIGNED BECAUSE -1 MEANS PENDING',
        fingerprint CHAR(40) NOT NULL,
        details JSON COMMENT 'THIS IS WHERE WE PUT THINGS LIKE DIMENSIONS AND MIMETYPE AND WHATEVER ELSE',
-       created INT UNSIGNED NOT NULL,
-       lastmodified INT UNSIGNED NOT NULL,
+       created INT UNSIGNED NOT NULL DEFAULT 0,
+       lastmodified INT UNSIGNED NOT NULL DEFAULT 0,
+       deleted INT UNSIGNED NOT NULL DEFAULT 0,
        UNIQUE KEY `by_fingerprint` (`whosonfirst_id`, `fingerprint`),
        KEY `by_status` (`status_id`),
        KEY `by_upload` (`upload_id`),

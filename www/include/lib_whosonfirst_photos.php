@@ -1,6 +1,7 @@
 <?php
 
 	loadlib("whosonfirst_places");
+	loadlib("whosonfirst_uploads");
 	loadlib("random");
 
 	########################################################################
@@ -127,7 +128,7 @@
 
 	function whosonfirst_photos_import_photo_with_upload_id($id, $photo_path, $derivatives=array(), $more=array()) {
 
-		$upload = uploads_get_by_id($id);
+		$upload = whosonfirst_uploads_get_by_id($id);
 
 		if (! $upload){
 			return array("ok" => 0, "error" => "Invalid upload ID");
@@ -161,7 +162,7 @@
 
 		$more = array_merge($defaults, $more);
 
-		if (uploads_is_completed($upload)){
+		if (whosonfirst_uploads_is_completed($upload)){
 			return array("ok" => 0, "error" => "Upload is already completed");
 		}
 

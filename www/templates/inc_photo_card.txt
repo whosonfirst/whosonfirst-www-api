@@ -3,6 +3,11 @@
      <a href="{$cfg.abs_root_url}photos/{$photo.id|@escape}/"><img id="photo-img-{$photo.id|@escape}" class="card-img-top photo-{$photo.status_id|@whosonfirst_photos_status_id_to_label}" src="{$cfg.abs_root_url}static/{$photo|@whosonfirst_photos_photo_to_relpath}" alt="" /></a>
      <div class="card-body">
 
+     	  {assign var="details" value=$photo.details|@json_decode:"as hash"}
+        {if $details.source == "flickr"}
+	<div class="card-text">{include file="inc_photo_flickr_attribution.txt" info=$details.photo_info}</div>
+	{/if}     	  
+
      	{if 0}
      	<form>
 	  <div class="form-group">
@@ -19,17 +24,9 @@
      </div>
      <div class="card-footer">
 
+        {if $cfg.user|@users_roles_has_role:"admin"}
+     	<div class="admin">
           <div class="card-text">This photo (<code>{$photo.id|@escape}</code>) was uploaded on {$photo.created|@date_format|@escape} by <a href="#">[USER ID {$photo.user_id|@escape}]</a>.</div>
-
-	  {if 0}
-	  <div class="card-text">
-	  {if $photo.status_id==0}
-	  This photo is private. 
- 	  {elseif $photo.status_id==1}
-	  This photo is public.
-	  {else}{/if}
-	  </div>
-	  {/if}
 		
 	  {if $cfg.user|@users_acl_has_capability:"can_edit_photos" || $cfg.user|@users_acl_has_capability:"can_delete_photos"}
 	  <div>
@@ -48,6 +45,8 @@
 
 	  </div>
 	  {/if}
+       </div>
+       {/if}
 
      </div>
 

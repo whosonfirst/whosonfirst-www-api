@@ -1,147 +1,107 @@
 <?php
 
-	loadlib("whosonfirst_places");
-	loadlib("whosonfirst_photos");
-	loadlib("whosonfirst_photos_flickr");
-	loadlib("uploads");
+	loadlib("whosonfirst_uploads");
 
 	########################################################################
 
-	function api_whosonfirst_uploads_uploadPhoto() {
+	function api_whosonfirst_uploads_getInfo() {
 
 		api_utils_features_ensure_enabled(array(
-			"uploads",
+			"whosonfirst_uploads",
 		));
 
-		$user = $GLOBALS["cfg"]["user"];
-
-		api_whosonfirst_uploads_ensure_capability($user, "can_upload");
-
-		api_whosonfirst_uploads_ensure_files();
-
-		$pl = api_whosonfirst_uploads_ensure_place();
-
-		$props = array(
-			"context" => "photo",
-			"whosonfirst_id" => $pl["wof:id"],
-		);
-
-		api_whosonfirst_uploads_upload_files($user, $_FILES, $props);
-	}
-
-	########################################################################
-
-	function api_whosonfirst_uploads_uploadFlickrPhoto() {
-
-		api_utils_features_ensure_enabled(array(
-			"uploads",
-		));
-
-		$user = $GLOBALS["cfg"]["user"];
-
-		api_whosonfirst_uploads_ensure_capability($user, "can_upload");
-
-		$pl = api_whosonfirst_uploads_ensure_place();
-
-		$photo_id = request_int64("photo_id");
-
-		if (! $photo_id){
-			api_output_error(400);
-		}
-
-		$rsp = whosonfirst_photos_flickr_fetch_photo_id($photo_id);
-
-		if (! $rsp["ok"]){
-			api_output_error(500);
-		}
-		
-		$files = $rsp["files"];
-
-		$props = array(
-			"context" => "photo",
-			"source" => "flickr",
-			"whosonfirst_id" => $pl["wof:id"],
-			"photo_id" => $photo_id,
-			"photo_info" => $rsp["info"],
-		);
-
-		api_whosonfirst_uploads_upload_files($user, $files, $props);
-	}
-
-	########################################################################
-	
-	function api_whosonfirst_uploads_upload_files($user, $files, $props){
-
-		$uploads = array();
-
-		foreach ($files as $f){
-
-			$rsp = uploads_create($user, $f, $props);
-
-			if (! $rsp["ok"]){
-				api_output_error(500);
-			}
-
-			$fname = $f["name"];
-			$uploads[$fname] = $rsp["upload"]["id"];
-		}
-
-		$out = array(
-			"uploads" => $uploads,
-		);
-
-		$more = array(
-			"key" => "uploads",
-		);
-
-		api_output_ok($out, $more);
-	}
-
-	########################################################################
-
-	function api_whosonfirst_uploads_ensure_place(){
-
-		$id = request_int64("whosonfirst_id");
+		$id = request_int64("id");
 
 		if (! $id){
 			api_output_error(404);
 		}
 
-		$pl = whosonfirst_places_get_by_id($id);
-		
-		if (! $pl){
+		$upload = whosonfirst_uploads_get_by_id($id);
+
+		if (! $upload){
 			api_output_error(404);
 		}
 
-		return $pl;
+		$user = $GLOBALS['cfg']['user'];
+
+		if ($upload["user_id"] != $user["id"]){
+			api_output_error(404);
+		}
+
+		$public = whosonfirst_uploads_enpublicify_upload($upload);
+
+		$more = array(
+			"key" => "upload",
+			"is_singleton" => 1,
+		);
+
+		$out = array(
+			"upload" => $public,
+		);
+
+		api_output_ok($out);
 	}
 
 	########################################################################
 
-	function api_whosonfirst_uploads_ensure_files(){
+	function api_whosonfirst_uploads_deleteUpload(){
 
-		if (count($_FILES) == 0){
-			api_output_error(500);
-		}
+		api_utils_features_ensure_enabled(array(
+			"whosonfirst_uploads",
+		));
 
-		foreach ($_FILES as $f){
+		$user = $GLOBALS['cfg']['user'];
 
-			# http://php.net/manual/en/features.file-upload.errors.php
-
-			if ($f["error"]) {
-				api_output_error(512);			
-			}
-		}
-
-	}
-
-	########################################################################
-
-	function api_whosonfirst_uploads_ensure_capability(&$user, $cap){
-
-		if (! users_acl_has_capability($user, $cap)){
+		if (! users_acl_has_capability($user, "can_delete_uploads")){
 			api_output_error(403);
 		}
+
+		$id = request_int64("upload_id");
+
+		if (! $id){
+			api_output_error(404);
+		}
+
+		$upload = whosonfirst_uploads_get_by_id($id);
+
+		if (! $upload){
+			api_output_error(404);
+		}
+
+		$status_map = whosonfirst_uploads_status_map("string keys");
+
+		if ($upload["status_id"] == $status_map["processing"]){
+			api_output_error(400);
+		}
+
+		if ($upload["status_id"] == $status_map["completed"]){
+			api_output_error(400);
+		}
+
+		if ($upload["status_id"] == $status_map["deleted"]){
+			api_output_error(400);
+		}
+
+		$rsp = whosonfirst_uploads_delete_upload($upload);
+
+		if (! $rsp["ok"]){
+			api_output_error(500);
+		}
+		
+		$upload = $rsp["upload"];
+
+		$public = whosonfirst_uploads_enpublicify_upload($upload);
+
+		$more = array(
+			"key" => "upload",
+			"is_singleton" => 1,
+		);
+
+		$out = array(
+			"upload" => $public,
+		);
+
+		api_output_ok($out);
 	}
 
 	########################################################################

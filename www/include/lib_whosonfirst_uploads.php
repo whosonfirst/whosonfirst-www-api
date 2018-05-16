@@ -4,13 +4,14 @@
 
 	########################################################################
 
-	function uploads_status_map($string_keys="") {
+	function whosonfirst_uploads_status_map($string_keys="") {
 
 		$map = array(
 			0 => "failed",
 			1 => "pending",
 			2 => "processing",
 			3 => "completed",
+			4 => "deleted",
 		);
 
 		if ($string_keys){
@@ -22,15 +23,15 @@
 
 	########################################################################
 
-	function uploads_status_id_to_label($id){
+	function whosonfirst_uploads_status_id_to_label($id){
 
-		$map = uploads_status_map();
+		$map = whosonfirst_uploads_status_map();
 		return (isset($map[$id])) ? $map[$id] : "unknown";
 	}
 
 	########################################################################
 
-	function uploads_get_uploads($more=array()){
+	function whosonfirst_uploads_get_uploads($more=array()){
 
 		$sql = "SELECT * FROM Uploads ORDER BY created DESC";
 		$rsp = db_fetch($sql, $more);
@@ -40,9 +41,40 @@
 
 	########################################################################
 
-	function uploads_create($user, $file, $props){
+	function whosonfirst_uploads_delete_upload(&$upload){
 
-		$pending = $GLOBALS["cfg"]["uploads_pending_dir"];
+		$status_map = whosonfirst_uploads_status_map("string keys");
+
+		$now = time();
+
+		$update = array(
+			"deleted" => $now,
+			"status_id" => $status_map["deleted"],
+		);
+
+		$rsp = whosonfirst_uploads_update_upload($upload, $update);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$path = whosonfirst_uploads_id2abspath($upload["id"]);
+
+		if (file_exists($path)){
+
+			if (! unlink($path)){
+				return array("ok" => 0, "error" => "Failed to unlink upload");
+			}
+		}
+
+		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_uploads_create($user, $file, $props){
+
+		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
 
 		if ((! $pending) || (! is_dir($pending))){
 			return array("ok" => 0, "error" => "Invalid pending directory");
@@ -56,7 +88,7 @@
 
 		$id = dbtickets_create(64);
 
-		$root = uploads_id2tree($id);
+		$root = whosonfirst_uploads_id2tree($id);
 		$root = $pending . DIRECTORY_SEPARATOR . $root;
 
 		if (! is_dir($root)){
@@ -91,7 +123,7 @@
 		$fingerprint = sha1_file($pending_file);
 		$remote_addr = remote_addr_as_int();
 
-		$status_map = uploads_status_map("string keys");
+		$status_map = whosonfirst_uploads_status_map("string keys");
 		$now = time();
 
 		$upload = array(
@@ -125,7 +157,7 @@
 
 	########################################################################
 
-	function uploads_update_upload(&$upload, $to_update){
+	function whosonfirst_uploads_update_upload(&$upload, $to_update){
 
 		$now = time();
 		$to_update["lastmodified"] = $now;
@@ -151,22 +183,22 @@
 
 	########################################################################
 
-	function uploads_set_processing(&$upload){
+	function whosonfirst_uploads_set_processing(&$upload){
 
-		$status_map = uploads_status_map("string keys");
+		$status_map = whosonfirst_uploads_status_map("string keys");
 
 		$update = array(
 			"status_id" => $status_map["processing"]
 		);
 
-		return uploads_update_upload($upload, $update);
+		return whosonfirst_uploads_update_upload($upload, $update);
 	}
 
 	########################################################################
 
-	function uploads_set_completed(&$upload){
+	function whosonfirst_uploads_set_completed(&$upload){
 
-		$status_map = uploads_status_map("string keys");
+		$status_map = whosonfirst_uploads_status_map("string keys");
 
 		$now = time();
 
@@ -175,36 +207,36 @@
 			"completed" => $now,
 		);
 
-		return uploads_update_upload($upload, $update);
+		return whosonfirst_uploads_update_upload($upload, $update);
 	}
 
 	########################################################################
 
-	function uploads_set_failed(&$upload, $error){
+	function whosonfirst_uploads_set_failed(&$upload, $error){
 
-		$status_map = uploads_status_map("string keys");
+		$status_map = whosonfirst_uploads_status_map("string keys");
 
 		$update = array(
 			"status_id" => $status_map["failed"],
 			"error" => json_encode($error),
 		);
 
-		return uploads_update_upload($upload, $update);
+		return whosonfirst_uploads_update_upload($upload, $update);
 	}
 
 	########################################################################
 
-	function uploads_can_process(&$upload){
+	function whosonfirst_uploads_can_process(&$upload){
 
-		if (uploads_is_processing($upload)){
+		if (whosonfirst_uploads_is_processing($upload)){
 			return 0;
 		}
 
-		if (uploads_is_completed($upload)){
+		if (whosonfirst_uploads_is_completed($upload)){
 			return 0;
 		}
 
-		if (uploads_is_failed($upload)){
+		if (whosonfirst_uploads_is_failed($upload)){
 			return 0;
 		}
 
@@ -213,9 +245,9 @@
 
 	########################################################################
 
-	function uploads_is_processing(&$upload){
+	function whosonfirst_uploads_is_processing(&$upload){
 
-		$status_map = uploads_status_map();
+		$status_map = whosonfirst_uploads_status_map();
 		$status_id = $upload["status_id"];
 
 		return ($status_map[$status_id] == "processing") ? 1 : 0;
@@ -223,9 +255,9 @@
 
 	########################################################################
 
-	function uploads_is_completed(&$upload){
+	function whosonfirst_uploads_is_completed(&$upload){
 
-		$status_map = uploads_status_map();
+		$status_map = whosonfirst_uploads_status_map();
 		$status_id = $upload["status_id"];
 
 		return ($status_map[$status_id] == "completed") ? 1 : 0;
@@ -233,9 +265,9 @@
 
 	########################################################################
 
-	function uploads_is_failed(&$upload){
+	function whosonfirst_uploads_is_failed(&$upload){
 
-		$status_map = uploads_status_map();
+		$status_map = whosonfirst_uploads_status_map();
 		$status_id = $upload["status_id"];
 
 		return ($status_map[$status_id] == "failed") ? 1 : 0;
@@ -243,7 +275,7 @@
 
 	########################################################################
 
-	function uploads_get_by_id($id){
+	function whosonfirst_uploads_get_by_id($id){
 
 		$sql = "SELECT * FROM Uploads WHERE id=" . intval($id);
 
@@ -255,19 +287,19 @@
 
 	########################################################################
 
-	function uploads_id2abspath($id){
+	function whosonfirst_uploads_id2abspath($id){
 
-		$pending = $GLOBALS["cfg"]["uploads_pending_dir"];
-		$rel_path = uploads_id2relpath($id);
+		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
+		$rel_path = whosonfirst_uploads_id2relpath($id);
 
 		return $pending . DIRECTORY_SEPARATOR . $rel_path;
 	}
 
 	########################################################################
 
-	function uploads_id2relpath($id){
+	function whosonfirst_uploads_id2relpath($id){
 
-		 $tree = uploads_id2tree($id);
+		 $tree = whosonfirst_uploads_id2tree($id);
 		 $fname = $id;
 
 		 return $tree . DIRECTORY_SEPARATOR . $id;
@@ -275,7 +307,7 @@
 
 	########################################################################
 
-	function uploads_id2tree($id){
+	function whosonfirst_uploads_id2tree($id){
 
 		$tree = array();
 		$tmp = $id;
@@ -293,7 +325,7 @@
 
 	########################################################################
 
-	function uploads_enpublicify_upload(&$upload){
+	function whosonfirst_uploads_enpublicify_upload(&$upload){
 
 		$public = array(
 			"id" => $upload["id"],
@@ -313,16 +345,16 @@
 
 	########################################################################
 
-	function uploads_inflate_uploads(&$uploads){
+	function whosonfirst_uploads_inflate_uploads(&$uploads){
 
 		foreach ($uploads as &$u){
-			uploads_inflate_upload($u);
+			whosonfirst_uploads_inflate_upload($u);
 		}
 	}
 
 	########################################################################
 
-	function uploads_inflate_upload(&$upload){
+	function whosonfirst_uploads_inflate_upload(&$upload){
 
 		$upload["user"] = users_get_by_id($upload["user_id"]);
 
