@@ -53,6 +53,8 @@
 			$sql = "{$sql} WHERE {$where}";
 		}  
 
+		$sql .= " ORDER BY created DESC";
+
 		return db_fetch($sql, $more);
 	}
 

@@ -3,6 +3,8 @@
 	include("include/init.php");
 	loadlib("whosonfirst_photos");
 	loadlib("whosonfirst_photos_permissions");
+
+	features_ensure_enabled("whosonfirst_photos");
 	
 	$viewer_id = ($GLOBALS['cfg']['user']) ? $GLOBALS['cfg']['user']['id'] : 0;
 

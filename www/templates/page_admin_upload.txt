@@ -1,0 +1,66 @@
+{capture assign="page_title"}Uploads | {$upload.id}{/capture}
+{include file="inc_head.txt"}
+<div class="container">
+
+<div class="card">
+     <h2 class="card-title">Upload #{$upload.id|@escape}</h2>
+     <div class="card-body">
+
+     <div class="table-responsive">
+       <table class="table">
+
+         <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">User</th>
+      <th scope="col">IP</th>
+      <th scope="col">Context</th>
+      <th scope="col">Source</th>
+      <th scope="col">Created</th>
+      <th scope="col">Completed</th>
+      <th scope="col">Last modified</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {capture assign="status"}{$upload.status_id|@uploads_status_id_to_label}{/capture}
+  	<tr class="admin-upload-status-{$status|@escape}">
+		<th scope="row"><a href="{$cfg.abs_root_url}admin/uploads/{$upload.id|@escape}/">{$upload.id|@escape}</a></th>
+		<td><a href="#">{$upload.user.username|@escape}</a></td>
+		<td>{$upload.remote_addr|@long2ip|@escape}</td>
+		<td>{$upload.properties.context|@escape}</td>
+		<td>{$upload.properties.source|@escape}</td>
+		<td>{$upload.created|@date_format|@escape}</td>
+		<td>{if $upload.completed}{$upload.completed|@date_format|@escape}{else}&#8212;{/if}</td>
+		<td>{$upload.lastmodified|@date_format|@escape}</td>
+		<td>{$status|@escape}</td>
+	</tr>
+
+  </tbody>
+  </table>
+</div>
+
+	</div>
+
+</div>
+
+{if $upload.error}
+<div class="card">
+<h3 class="card-title">Error</h3>
+<div class="card-body">{$upload.error|@dumper}</div>
+</div>
+{/if}
+
+<div class="card">
+<h3 class="card-title">File</h3>
+<div class="card-body">{$upload.file|@dumper}</div>
+</div>
+
+<div class="card">
+<h3 class="card-title">Properties</h3>
+<div class="card-body">{$upload.properties|@dumper}</div>
+</div>
+
+</div>
+{include file="inc_foot.txt"}

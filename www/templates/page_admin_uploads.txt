@@ -1,0 +1,52 @@
+{capture assign="page_title"}Uploads{/capture}
+{include file="inc_head.txt"}
+<div class="container">
+
+<div class="card">
+     <h2 class="card-header">Uploads</h2>
+     <div class="card-body">
+
+     <div class="table-responsive">
+       <table class="table">
+
+         <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">User</th>
+      <th scope="col">IP</th>
+      <th scope="col">Context</th>
+      <th scope="col">Source</th>
+      <th scope="col">Created</th>
+      <th scope="col">Completed</th>
+      <th scope="col">Last modified</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {foreach from=$uploads item="row"}
+  {capture assign="status"}{$row.status_id|@uploads_status_id_to_label}{/capture}
+  	<tr class="admin-upload-status-{$status|@escape}">
+		<th scope="row"><a href="{$cfg.abs_root_url}admin/uploads/{$row.id|@escape}/">{$row.id|@escape}</a></th>
+		<td><a href="#">{$row.user.username|@escape}</a></td>
+		<td>{$row.remote_addr|@long2ip|@escape}</td>
+		<td>{$row.properties.context|@escape}</td>
+		<td>{$row.properties.source|@escape}</td>
+		<td>{$row.created|@date_format|@escape}</td>
+		<td>{if $row.completed}{$row.completed|@date_format|@escape}{else}&#8212;{/if}</td>
+		<td>{$row.lastmodified|@date_format|@escape}</td>
+		<td>{$status|@escape}</td>
+	</tr>
+  {/foreach}
+
+  </tbody>
+  </table>
+</div>
+
+	</div>
+	<div class="card-footer">
+	{include file="inc_pagination.txt"}
+	</div>
+      </div>
+</div>
+{include file="inc_foot.txt"}

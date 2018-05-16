@@ -186,3 +186,13 @@ RewriteRule  ^signin/?$					/signin_github_oauth.php	[L]
 RewriteRule  ^auth/?$					/auth_callback_github_oauth.php?%{QUERY_STRING} [L]
 
 # END OF flamework-github-sso stuff
+
+# START OF uploads / photos stuff
+
+RewriteRule  ^photos(/page([0-9]+))?/?$                                 photos.php?page=$2&%{QUERY_STRING} [L]
+RewriteRule  ^photos/([0-9]+)/?$                                        photo.php?id=$1&%{QUERY_STRING} [L]
+
+RewriteRule  ^admin/uploads/([0-9]+)/?                                          admin_upload.php?id=$1&%{QUERY_STRING} [L]
+RewriteRule  ^admin/uploads(/page([0-9]+))?/?                                   admin_uploads.php?page=$3&%{QUERY_STRING} [L]
+
+# END OF uploads / photos stuff

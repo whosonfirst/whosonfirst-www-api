@@ -20,6 +20,24 @@
 
 	########################################################################
 
+	function uploads_status_id_to_label($id){
+
+		$map = uploads_status_map();
+		return (isset($map[$id])) ? $map[$id] : "unknown";
+	}
+
+	########################################################################
+
+	function uploads_get_uploads($more=array()){
+
+		$sql = "SELECT * FROM Uploads ORDER BY created DESC";
+		$rsp = db_fetch($sql, $more);
+
+		return $rsp;
+	}
+
+	########################################################################
+
 	function uploads_create($user, $file, $props){
 
 		$pending = $GLOBALS["cfg"]["uploads_pending_dir"];
@@ -286,6 +304,31 @@
 		}
 		
 		return $public;
+	}
+
+	########################################################################
+
+	function uploads_inflate_uploads(&$uploads){
+
+		foreach ($uploads as &$u){
+			uploads_inflate_upload($u);
+		}
+	}
+
+	########################################################################
+
+	function uploads_inflate_upload(&$upload){
+
+		$upload["user"] = users_get_by_id($upload["user_id"]);
+
+		$upload["file"] = json_decode($upload["file"], "as hash");
+		$upload["properties"] = json_decode($upload["properties"], "as hash");
+
+		if ($upload["error"]){
+			$upload["error"] = json_decode($upload["error"], "as hash");			
+		}
+
+		# pass-by-ref
 	}
 
 	########################################################################

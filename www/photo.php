@@ -4,6 +4,8 @@
 	loadlib("whosonfirst_photos");
 	loadlib("whosonfirst_photos_permissions");
 
+	features_ensure_enabled("whosonfirst_photos");
+
 	$id = get_int64("id");
 
 	if (! $id){
