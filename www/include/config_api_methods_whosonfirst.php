@@ -1119,7 +1119,7 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
-		'whosonfirst.uploads.uploadPhoto' => array(
+		'whosonfirst.photos.uploadPhoto' => array(
 			"description" => "Upload an image for an exhibition",
 			"documented" => 1,
 			"enabled" => 1,
@@ -1127,7 +1127,7 @@
 			"requires_perms" => 2,	# write
 			"requires_capability" => array("can_upload"),
 			"extras" => 0,
-			"library" => "api_whosonfirst_uploads",
+			"library" => "api_whosonfirst_photos",
                         "parameters" => array(
 				array(
 					"name" => "whosonfirst_id",
@@ -1142,7 +1142,7 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
-		'whosonfirst.uploads.uploadFlickrPhoto' => array(
+		'whosonfirst.photos.uploadFlickrPhoto' => array(
 			"description" => "Upload an image for an exhibition",
 			"documented" => 1,
 			"enabled" => 1,
@@ -1150,7 +1150,7 @@
 			"requires_perms" => 2,	# write
 			"requires_capability" => array("can_upload"),
 			"extras" => 0,
-			"library" => "api_whosonfirst_uploads",
+			"library" => "api_whosonfirst_photos",
                         "parameters" => array(
 				array(
 					"name" => "whosonfirst_id",

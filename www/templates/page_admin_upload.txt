@@ -20,6 +20,7 @@
       <th scope="col">Completed</th>
       <th scope="col">Last modified</th>
       <th scope="col">Status</th>
+      <th scope="col">Relation</th>
     </tr>
   </thead>
   <tbody>
@@ -35,6 +36,7 @@
 		<td>{if $upload.completed}{$upload.completed|@date_format|@escape}{else}&#8212;{/if}</td>
 		<td>{$upload.lastmodified|@date_format|@escape}</td>
 		<td>{$status|@escape}</td>
+		<td>{if $upload.relation}<a href="{$cfg.abs_root_url}id/{$upload.relation|@whosonfirst_places_property:"wof:id"|@escape}/">{$upload.relation|@whosonfirst_places_property:"wof:name"|@escape}</a>{else}&#8212;{/if}</td>
 	</tr>
 
   </tbody>

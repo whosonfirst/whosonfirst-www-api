@@ -1,7 +1,6 @@
 window.addEventListener("load", function load(event){
 
     var btn = document.getElementById("flickr-photo-button");
-    console.log("BTN", btn);
 
     btn.onclick = function(e){
 
@@ -24,12 +23,17 @@ window.addEventListener("load", function load(event){
 
 	var photo_id = m[1];
 
+	// it would be nice to be able to check the licensing of the photo
+	// here but that doesn't appear to be possible absent an API key
+	// and the oembed endpoint doesn't return that information
+	// (20180516/thisisaaronland)
+
 	var args = {
 	    "whosonfirst_id": whosonfirst_id,
 	    "photo_id": photo_id,
 	}
 
-	var method = "whosonfirst.uploads.uploadFlickrPhoto";
+	var method = "whosonfirst.photos.uploadFlickrPhoto";
 
 	var on_success = function(rsp){
 	    console.log("SUCCESS", rsp);

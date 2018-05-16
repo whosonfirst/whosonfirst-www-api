@@ -1,5 +1,7 @@
 <?php
 
+	loadlib("whosonfirst_places");
+
 	########################################################################
 
 	function uploads_status_map($string_keys="") {
@@ -166,8 +168,11 @@
 
 		$status_map = uploads_status_map("string keys");
 
+		$now = time();
+
 		$update = array(
-			"status_id" => $status_map["completed"]
+			"status_id" => $status_map["completed"],
+			"completed" => $now,
 		);
 
 		return uploads_update_upload($upload, $update);
@@ -326,6 +331,13 @@
 
 		if ($upload["error"]){
 			$upload["error"] = json_decode($upload["error"], "as hash");			
+		}
+
+		$wof_id = $upload["properties"]["whosonfirst_id"];
+
+		if (($wof_id) && ($wof_id > 0)){	
+			$place = whosonfirst_places_get_by_id($wof_id);
+			$upload["relation"] = $place;
 		}
 
 		# pass-by-ref

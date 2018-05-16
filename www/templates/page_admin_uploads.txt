@@ -20,6 +20,7 @@
       <th scope="col">Completed</th>
       <th scope="col">Last modified</th>
       <th scope="col">Status</th>
+      <th scope="col">Relation</th>
     </tr>
   </thead>
   <tbody>
@@ -31,11 +32,12 @@
 		<td><a href="#">{$row.user.username|@escape}</a></td>
 		<td>{$row.remote_addr|@long2ip|@escape}</td>
 		<td>{$row.properties.context|@escape}</td>
-		<td>{$row.properties.source|@escape}</td>
+		<td>{if $row.properties.source}{$row.properties.source|@escape}{else}&#8212;{/if}</td>
 		<td>{$row.created|@date_format|@escape}</td>
 		<td>{if $row.completed}{$row.completed|@date_format|@escape}{else}&#8212;{/if}</td>
 		<td>{$row.lastmodified|@date_format|@escape}</td>
 		<td>{$status|@escape}</td>
+		<td>{if $row.relation}<a href="{$cfg.abs_root_url}id/{$row.relation|@whosonfirst_places_property:"wof:id"|@escape}/">{$row.relation|@whosonfirst_places_property:"wof:name"|@escape}</a>{else}&#8212;{/if}</td>
 	</tr>
   {/foreach}
 
