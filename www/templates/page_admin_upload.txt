@@ -48,18 +48,18 @@
 {if $upload.error}
 <div class="card">
 <h3 class="card-title">Error</h3>
-<div class="card-body">{$upload.error|@dumper}</div>
+<div class="card-body">{include file="inc_dumper_pretty.txt" data=$upload.error}</div>
 </div>
 {/if}
 
 <div class="card">
 <h3 class="card-title">File</h3>
-<div class="card-body">{$upload.file|@dumper}</div>
+<div class="card-body">{include file="inc_dumper_pretty.txt" data=$upload.file}</div>
 </div>
 
 <div class="card">
 <h3 class="card-title">Properties</h3>
-<div class="card-body">{$upload.properties|@dumper}</div>
+<div class="card-body">{include file="inc_dumper_pretty.txt" data=$upload.properties}</div>
 </div>
 
 </div>
