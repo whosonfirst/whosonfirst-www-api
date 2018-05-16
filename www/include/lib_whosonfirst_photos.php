@@ -44,6 +44,20 @@
 
 	########################################################################
 
+	function whosonfirst_photos_get_by_fingerprint_and_whosonfirst_id($fp, $wof_id){
+
+		$enc_fp = AddSlashes($fp);
+		$enc_id = AddSlashes($wof_id);
+
+		$sql = "SELECT * FROM Photos WHERE fingerprint='{$enc_fp}' AND whosonfirst_id='{$enc_id}'";
+		$rsp = db_fetch($sql);
+		$rsp = db_single($rsp);
+
+		return $rsp;
+	}
+
+	########################################################################
+
 	# see below... (20180515/thisisaaronland)
 
 	function whosonfirst_photos_get_photos_actually($viewer_id, $more=array()){
@@ -126,19 +140,6 @@
 
 	########################################################################
 
-	function whosonfirst_photos_import_photo_with_upload_id($id, $photo_path, $derivatives=array(), $more=array()) {
-
-		$upload = whosonfirst_uploads_get_by_id($id);
-
-		if (! $upload){
-			return array("ok" => 0, "error" => "Invalid upload ID");
-		}
-
-		return whosonfirst_photos_import_upload($upload, $photo_path, $derivatives, $more);
-	}
-
-	########################################################################
-
 	# $photo_path is the path to the "original" (or fullsize) photo
 	# $derivatives is a dictionary of "label" => "path" pairs for derivative
 	# photos that were produced from $photo_path
@@ -167,7 +168,10 @@
 		}
 
 		$props = $upload["properties"];
-		$props = json_decode($props, "as hash");
+
+		if (! is_array($props)){
+			$props = json_decode($props, "as hash");
+		}
 
 		if (! $props){
 			return array("ok" => 0, "error" => "Unable to parse properties");
@@ -185,6 +189,12 @@
 			return array("ok" => 0, "Invalid record");
 		}
 
+		$fp = $upload["fingerprint"];
+
+		if (whosonfirst_photos_get_by_fingerprint_and_whosonfirst_id($fp, $whosonfirst_id)){
+			return array("ok" => 0, "Photo with matching fingerprint already exists");
+		}
+
 		$rsp = whosonfirst_photos_mkroot($whosonfirst_id);
 
 		if (! $rsp["ok"]){
@@ -193,7 +203,7 @@
 
 		$root = $rsp["root"];
 
-		$photo_id = dbtickets_create(64);
+		$photo_id = whosonfirst_photos_generate_id();
 		
 		$secret_o = random_string();
 		$secret = random_string();
@@ -372,6 +382,12 @@
 		}
 
 		return implode(DIRECTORY_SEPARATOR, $tree);
+	}
+
+	########################################################################
+
+	function whosonfirst_photos_generate_id(){
+		return dbtickets_create(64);
 	}
 
 	########################################################################

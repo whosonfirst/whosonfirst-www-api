@@ -1175,7 +1175,7 @@
 		"whosonfirst.uploads.deleteUpload" => array(
 			"description" => "Get information about a specific upload.",
 			"documented" => 1,
-			"enabled" => features_is_enabled("uploads"),
+			"enabled" => features_is_enabled("whosonfirst_uploads"),
 			"extras" => 0,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_uploads",
@@ -1198,7 +1198,7 @@
 		"whosonfirst.uploads.getInfo" => array(
 			"description" => "Get information about a specific upload.",
 			"documented" => 1,
-			"enabled" => features_is_enabled("uploads"),
+			"enabled" => features_is_enabled("whosonfirst_uploads"),
 			"extras" => 0,
 			"paginated" => 0,
 			"requires_perms" => 1,

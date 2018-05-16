@@ -17,6 +17,7 @@
       <th scope="col">Source</th>
       <th scope="col">Type</th>
       <th scope="col">Size</th>
+      <th scope="col">Fingerprint</th>
       {if 0}
       <th scope="col">Created</th>
       <th scope="col">Completed</th>
@@ -37,6 +38,7 @@
 		<td>{$row.properties.source|@escape}</td>
 		<td>{$row.file.type|@escape}</td>
 		<td>{$row.file.size|@escape}</td>
+		<td>{$row.fingerprint|@escape}</td>
 		{if 0}
 		<td>{$row.created|@date_format|@escape}</td>
 		<td>{if $row.completed}{$row.completed|@date_format|@escape}{else}&#8212;{/if}</td>

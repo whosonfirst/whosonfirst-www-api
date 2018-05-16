@@ -86,7 +86,13 @@
 			return array("ok" => 0, "error" => "Upload has vanished");		
 		}
 
-		$id = dbtickets_create(64);
+		# something something something it might be tempting to check whether
+		# fingerprint + props.whosonfirst_id + status_id='completed' and reject
+		# new uploads if true until we have to deal with someone replacing a
+		# file that's been deleted post-upload... so today we won't do that
+		# (20180516/thisisaaronland) 
+
+		$id = whosonfirst_uploads_generate_id();
 
 		$root = whosonfirst_uploads_id2tree($id);
 		$root = $pending . DIRECTORY_SEPARATOR . $root;
@@ -373,6 +379,51 @@
 		}
 
 		# pass-by-ref
+	}
+
+	########################################################################
+
+	function whosonfirst_uploads_process_upload_id($upload_id, $func){
+
+		if ((! $func) || (! function_exists($func))){
+			return array("ok" => 0, "error" => "Invalid processing function");
+		}  
+
+		$upload = whosonfirst_uploads_get_by_id($upload_id);
+
+		if (! $upload){
+			return array("ok" => 0, "error" => "Invalid upload ID");
+		}
+
+		whosonfirst_uploads_inflate_upload($upload);
+
+		if (! whosonfirst_uploads_can_process($upload)){
+			return array("ok" => 0, "error" => "Upload can not be processed");
+		}
+
+		$rsp = whosonfirst_uploads_set_processing($upload);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$rsp = call_user_func_array($func, array($upload));
+
+ 		if (! $rsp["ok"]){
+			whosonfirst_uploads_set_failed($upload, $rsp);
+		}  
+
+		else {
+			whosonfirst_uploads_set_completed($upload);
+		}
+
+		return $rsp;		
+	}
+
+	########################################################################
+
+	function whosonfirst_uploads_generate_id(){
+		return dbtickets_create(64);
 	}
 
 	########################################################################
