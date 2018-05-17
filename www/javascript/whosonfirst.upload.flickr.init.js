@@ -14,6 +14,9 @@ window.addEventListener("load", function load(event){
 	    return false;
 	}
 
+	// please make this work with the various "-in-whatever" flickr
+	// URLs that exist out there... (20180517/thisisaaronland)
+
 	var m = input.match(/(?:.*\/)?(\d+)\/?$/);
 
 	if (! m){
@@ -33,7 +36,7 @@ window.addEventListener("load", function load(event){
 	    "photo_id": photo_id,
 	}
 
-	var method = "whosonfirst.photos.uploadFlickrPhoto";
+	var method = "whosonfirst.media.uploadFlickrPhoto";
 
 	var on_success = function(rsp){
 	    console.log("SUCCESS", rsp);

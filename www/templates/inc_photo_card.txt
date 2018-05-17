@@ -1,11 +1,11 @@
 <div class="card sfomuseum-photo-card" data-photo-id="{$photo.id|@escape}" id="photo-card-{$photo.id|@escape}">
 
-     <a href="{$cfg.abs_root_url}photos/{$photo.id|@escape}/"><img id="photo-img-{$photo.id|@escape}" class="card-img-top photo-{$photo.status_id|@whosonfirst_photos_status_id_to_label}" src="{$cfg.abs_root_url}static/{$photo|@whosonfirst_photos_photo_to_relpath}" alt="" /></a>
+     <a href="{$cfg.abs_root_url}photos/{$photo.id|@escape}/"><img id="media-img-{$photo.id|@escape}" class="card-img-top media-{$photo.status_id|@whosonfirst_media_status_id_to_label}" src="{$cfg.abs_root_url}static/{$photo|@whosonfirst_media_media_to_relpath}" alt="" /></a>
      <div class="card-body">
 
-     	  {assign var="details" value=$photo.details|@json_decode:"as hash"}
-        {if $details.source == "flickr"}
-	<div class="card-text">{include file="inc_photo_flickr_attribution.txt" info=$details.photo_info}</div>
+     	  {assign var="properties" value=$photo.properties|@json_decode:"as hash"}
+        {if $photo.source == "flickr"}
+	<div class="card-text">{include file="inc_photo_flickr_attribution.txt" info=$properties.photo_info}</div>
 	{/if}     	  
 
      	{if 0}
@@ -22,32 +22,17 @@
 	 {/if}
 
      </div>
-     <div class="card-footer">
 
+     <div class="card-footer">
         {if $cfg.user|@users_roles_has_role:"admin"}
      	<div class="admin">
+
           <div class="card-text">This photo (<code>{$photo.id|@escape}</code>) was uploaded on {$photo.created|@date_format|@escape} by <a href="#">[USER ID {$photo.user_id|@escape}]</a>.</div>
-		
-	  {if $cfg.user|@users_acl_has_capability:"can_edit_photos" || $cfg.user|@users_acl_has_capability:"can_delete_photos"}
-	  <div>
 
-	  {if $cfg.user|@users_acl_has_capability:"can_edit_photos"}
-	  
-	  <button class="btn btn-sm btn-info photo-mk-public" id="photo-mk-public-{$photo.id|@escape}" data-photo-id="{$photo.id|@escape}" {if $photo.status_id==1}style="display:none;"{/if}>Make this photo public</button>
+	  {include file="inc_media_controls.txt" media=$photo}
 
-	  <button class="btn btn-sm btn-warning photo-mk-private" id="photo-mk-private-{$photo.id|@escape}" data-photo-id="{$photo.id|@escape}" {if $photo.status_id==0}style="display:none;"{/if}>Make this photo private</button>
-
-	  {/if}
-
-	  {if $cfg.user|@users_acl_has_capability:"can_delete_photos"}
-	  <button class="btn btn-sm btn-danger photo-delete" data-photo-id="{$photo.id|@escape}">Delete this photo</button>
-	  {/if}
-
-	  </div>
-	  {/if}
        </div>
        {/if}
-
      </div>
 
 </div>

@@ -1,0 +1,4 @@
+{if !$upload.error && $cfg.user|@users_acl_has_capability:"can_delete_uploads"}
+	<button class="btn btn-danger pull-right" id="upload-delete-button" data-upload-id="{$upload.id|@escape}">Delete this upload</button>
+	<script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.upload.delete.init.js"></script>
+{/if}

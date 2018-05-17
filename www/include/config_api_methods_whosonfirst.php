@@ -686,35 +686,6 @@
 			"disallow_formats" => array( "csv", "meta" ),
 		),
 		
-		'whosonfirst.photos.setStatus' => array(
-			"description" => "Set the status for a photo",
-			"documented" => 1,
-			"enabled" => $GLOBALS['cfg']['enable_feature_whosonfirst_photos'],
-			"paginated" => 0,
-			"extras" => 0,
-			"library" => "api_whosonfirst_photos",
-			"requires_perms" => 2,	# write
-			"parameters" => array(
-				array(
-					"name" => "photo_id",
-					"description" => "A valid photo ID",
-					"required" => 1,
-					"documented" => 1,
-					"example" => "",
-				),
-				array(
-					"name" => "status_id",
-					"description" => "A valid status ID",
-					"required" => 1,
-					"documented" => 1,
-					"example" => "",
-				),
-			),
-                        "errors" => array(),
-                        "notes" => array(),
-			"disallow_formats" => array( "geojson", "meta" ),
-		),
-
 		'whosonfirst.places.getByLatLon' => array(
 			"description" => "Return Who's On First places intersecting a latitude and longitude",
 			"documented" => 1,
@@ -1119,20 +1090,27 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
-		'whosonfirst.photos.uploadPhoto' => array(
+		'whosonfirst.media.uploadFile' => array(
 			"description" => "Upload an image for an exhibition",
-			"documented" => 1,
+			"documented" => (($GLOBALS['cfg']['enable_feature_whosonfirst_uploads']) && ($GLOBALS['cfg']['enable_feature_whosonfirst_media'])) ? 1 : 0,
 			"enabled" => 1,
 			"paginated" => 0,
 			"requires_perms" => 2,	# write
 			"requires_capability" => array("can_upload"),
 			"extras" => 0,
-			"library" => "api_whosonfirst_photos",
+			"library" => "api_whosonfirst_media",
                         "parameters" => array(
 				array(
 					"name" => "whosonfirst_id",
 					"description" => "",
 					"required" => 1,
+					"documented" => 1,
+					"example" => ""
+				),
+				array(
+					"name" => "medium",
+					"description" => "",
+					"required" => 0,
 					"documented" => 1,
 					"example" => ""
 				)
@@ -1142,15 +1120,18 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
-		'whosonfirst.photos.uploadFlickrPhoto' => array(
+		'whosonfirst.media.uploadFlickrPhoto' => array(
 			"description" => "Upload an image for an exhibition",
+			"documented" => (($GLOBALS['cfg']['enable_feature_whosonfirst_uploads']) &&
+					 ($GLOBALS['cfg']['enable_feature_whosonfirst_media']) &&
+					 ($GLOBALS['cfg']['enable_feature_whosonfirst_media_flickr'])) ? 1 : 0,
 			"documented" => 1,
 			"enabled" => 1,
 			"paginated" => 0,
 			"requires_perms" => 2,	# write
 			"requires_capability" => array("can_upload"),
 			"extras" => 0,
-			"library" => "api_whosonfirst_photos",
+			"library" => "api_whosonfirst_media",
                         "parameters" => array(
 				array(
 					"name" => "whosonfirst_id",
@@ -1167,6 +1148,35 @@
 					"example" => ""
 				)
 			), 
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
+		'whosonfirst.media.setStatus' => array(
+			"description" => "Set the status for a photo",
+			"documented" => 1,
+			"enabled" => $GLOBALS['cfg']['enable_feature_whosonfirst_media'],
+			"paginated" => 0,
+			"extras" => 0,
+			"library" => "api_whosonfirst_media",
+			"requires_perms" => 2,	# write
+			"parameters" => array(
+				array(
+					"name" => "id",
+					"description" => "A valid whosonfirst media ID",
+					"required" => 1,
+					"documented" => 1,
+					"example" => "",
+				),
+				array(
+					"name" => "status_id",
+					"description" => "A valid status ID",
+					"required" => 1,
+					"documented" => 1,
+					"example" => "",
+				),
+			),
                         "errors" => array(),
                         "notes" => array(),
 			"disallow_formats" => array( "geojson", "meta" ),
@@ -1205,6 +1215,29 @@
 			"requires_capability" => array("can_upload"),
 			"library" => "api_whosonfirst_uploads",
                         "parameters" => array(),
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
+		'whosonfirst.uploads.processUpload' => array(
+			"description" => "Process a pending upload",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"requires_perms" => 2,	# write
+			"requires_capability" => array("can_process_uploads"),
+			"extras" => 0,
+			"library" => "api_whosonfirst_uploads",
+                        "parameters" => array(
+				array(
+					"name" => "upload_id",
+					"description" => "A valid upload ID",
+					"required" => 1,
+					"documented" => 1,
+					"example" => "",
+				),
+			), 
                         "errors" => array(),
                         "notes" => array(),
 			"disallow_formats" => array( "geojson", "meta" ),

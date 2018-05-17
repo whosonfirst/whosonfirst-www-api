@@ -1,15 +1,15 @@
 <?php
 
-	loadlib("whosonfirst_photos");
+	loadlib("whosonfirst_media");
 	loadlib("users_roles");
 
 	########################################################################
 
-	function whosonfirst_photos_permissions_can_view_photo(&$photo, $viewer_id=0){
+	function whosonfirst_media_permissions_can_view_media(&$media, $viewer_id=0){
 
-		$status_map = whosonfirst_photos_status_map("string keys");
+		$status_map = whosonfirst_media_status_map("string keys");
 
-		if ($photo["status_id"] == $status_map["public"]){
+		if ($media["status_id"] == $status_map["public"]){
 			return 1;
 		}
 
@@ -27,7 +27,7 @@
 			return 0;
 		}
 
-		if ($user["id"] == $photo["user_id"]){
+		if ($user["id"] == $media["user_id"]){
 			return 1;
 		}
 
@@ -40,9 +40,9 @@
 
 	########################################################################
 
-	function whosonfirst_photos_permissions_get_photos_where($viewer_id){
+	function whosonfirst_media_permissions_get_media_where($viewer_id){
 
-		$status_map = whosonfirst_photos_status_map("string keys");
+		$status_map = whosonfirst_media_status_map("string keys");
 
 		$user = null;
 		$where = null;

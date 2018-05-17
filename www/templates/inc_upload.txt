@@ -1,0 +1,35 @@
+{if $cfg.user && $cfg.user|@users_acl_has_capability:"can_upload"}
+    <div class="card admin">
+    	<h4 class="card-header">Upload</h4>
+
+    	<div class="card-body">
+    	<div class="row" id="dropbox-preview"></div>
+
+	<div class="row">
+		<div class="col" id="dropbox-target" data-whosonfirst-id="{$wof_id|@escape}" ondrop="whosonfirst.dropbox.ondrop(event);" ondragover="whosonfirst.dropbox.ondrag(event);">
+			drag files here to upload
+		</div>
+
+		<!-- please to add a select menu with valid medium values (derived from the API) -->
+	</div>
+	</div>
+     </div>
+
+     <div class="card admin">
+     <h4 class="card-header">Upload a Flickr photo</h4>
+     <div class="card-body">
+
+     <form class="form-inline">
+     	 <label class="sr-only" for="photo_id">Flickr photo ID or URL</label>
+  	 <input type="text" class="form-control mb-2 mr-sm-2" id="flickr-photo-id" data-whosonfirst-id="{$wof_id|@escape}" placeholder="Enter a valid Flickr photo ID or URL">
+	 <button type="submit" class="btn btn-primary mb-2" id="flickr-photo-button">Fetch</button>
+     </form>
+
+     </div>
+     </div>
+
+     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.dropbox.js"></script>
+     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.upload.files.init.js"></script>
+     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.upload.flickr.init.js"></script>
+
+{/if}

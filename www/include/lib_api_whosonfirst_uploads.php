@@ -44,6 +44,51 @@
 
 	########################################################################
 
+	function api_whosonfirst_uploads_processUpload(){
+
+		api_utils_features_ensure_enabled(array(
+			"whosonfirst_uploads",
+			"whosonfirst_media",
+		));
+
+		$user = $GLOBALS["cfg"]["user"];
+
+		if (! users_acl_has_capability($user, "can_process_uploads")){
+			api_output_error(403);
+		}
+
+		$upload_id = request_int64("upload_id");
+
+		if (! $upload_id){
+			api_output_error(404);
+		}
+
+		$process_func = "whosonfirst_uploads_process_upload";
+
+		$rsp = whosonfirst_uploads_process_upload_id($upload_id, $process_func);
+
+		if (! $rsp["ok"]){
+			api_output_error(500);
+		}
+
+		$media = array(
+			"id" => $rsp["media"]["id"],
+		);
+		
+		$out = array(
+			"media" => $media,
+		);
+
+		$more = array(
+			"key" => "media",
+			"singleton" => 1,
+		);
+
+		api_output_ok($out);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_uploads_deleteUpload(){
 
 		api_utils_features_ensure_enabled(array(

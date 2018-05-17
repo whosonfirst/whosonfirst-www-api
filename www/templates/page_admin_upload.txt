@@ -47,6 +47,11 @@
 
 	</div>
 
+	<div class="card-footer">
+	{if $status=="pending"}{include file="inc_js_upload_process.txt"}{/if}
+	{if $status != "deleted" && $status != "completed" && $status != "processing"}{include file="inc_js_upload_delete.txt"}{/if}
+	</button>
+
 </div>
 
 {if $upload.error}

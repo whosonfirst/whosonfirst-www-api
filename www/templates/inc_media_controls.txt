@@ -1,0 +1,17 @@
+{if $cfg.user|@users_acl_has_capability:"can_edit_media" || $cfg.user|@users_acl_has_capability:"can_delete_media"}
+<div>
+
+	  {if $cfg.user|@users_acl_has_capability:"can_edit_media"}
+	  
+	  <button class="btn btn-sm btn-info media-mk-public" id="media-mk-public-{$media.id|@escape}" data-media-id="{$media.id|@escape}" {if $media.status_id==1}style="display:none;"{/if}>Make this {$media.medium|@escape} public</button>
+
+	  <button class="btn btn-sm btn-warning media-mk-private" id="media-mk-private-{$media.id|@escape}" data-media-id="{$media.id|@escape}" {if $media.status_id==0}style="display:none;"{/if}>Make this {$media.medium|@escape} private</button>
+
+	  {/if}
+
+	  {if $cfg.user|@users_acl_has_capability:"can_delete_media"}
+	  <button class="btn btn-sm btn-danger media-delete" data-media-id="{$media.id|@escape}">Delete this {$media.medium|@escape}</button>
+	  {/if}
+
+</div>
+{/if}

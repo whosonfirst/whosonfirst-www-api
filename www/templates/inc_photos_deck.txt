@@ -4,4 +4,4 @@
 {/foreach}
 </div>
 
-{include file="inc_js_photos.txt"}
+{include file="inc_js_media_controls.txt"}

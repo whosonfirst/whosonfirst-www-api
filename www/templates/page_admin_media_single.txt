@@ -1,0 +1,27 @@
+{capture assign="page_title"}Media | {$media.id}{/capture}
+{include file="inc_head.txt"}
+<div class="container">
+
+<div class="card">
+
+     <h2 class="card-title">Media #{$media.id|@escape}</h2>
+
+     <div class="card-body">
+     	{$media|@dumper}
+     </div>
+
+     <div class="card-footer">
+	{include file="inc_media_controls.txt media=$media}
+	{include file="inc_js_media_controls.txt"}
+     </div>
+
+</div>
+
+
+<div class="card">
+<h3 class="card-title">Properties</h3>
+<div class="card-body">{include file="inc_dumper_pretty.txt" data=$media.properties}</div>
+</div>
+
+</div>
+{include file="inc_foot.txt"}

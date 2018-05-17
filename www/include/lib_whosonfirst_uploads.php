@@ -2,6 +2,9 @@
 
 	loadlib("whosonfirst_places");
 
+	loadlib("whosonfirst_uploads_image");
+	loadlib("whosonfirst_uploads_pdf");
+
 	########################################################################
 
 	function whosonfirst_uploads_status_map($string_keys="") {
@@ -33,7 +36,7 @@
 
 	function whosonfirst_uploads_get_uploads($more=array()){
 
-		$sql = "SELECT * FROM Uploads ORDER BY created DESC";
+		$sql = "SELECT * FROM whosonfirst_uploads ORDER BY created DESC";
 		$rsp = db_fetch($sql, $more);
 
 		return $rsp;
@@ -150,7 +153,7 @@
 			$insert[$k] = AddSlashes($v);
 		}
 
-		$rsp = db_insert("Uploads", $insert);
+		$rsp = db_insert("whosonfirst_uploads", $insert);
 
 		if (!$rsp["ok"]){
 			unlink($pending_file);
@@ -177,7 +180,7 @@
 		$enc_id = AddSlashes($upload["id"]);
 		$where = "id='{$enc_id}'";
 
-		$rsp = db_update("Uploads", $update, $where);
+		$rsp = db_update("whosonfirst_uploads", $update, $where);
 
 		if ($rsp["ok"]){
 			$upload = array_merge($upload, $update);
@@ -283,7 +286,7 @@
 
 	function whosonfirst_uploads_get_by_id($id){
 
-		$sql = "SELECT * FROM Uploads WHERE id=" . intval($id);
+		$sql = "SELECT * FROM whosonfirst_uploads WHERE id=" . intval($id);
 
 		$rsp = db_fetch($sql);
 		$upload = db_single($rsp);
@@ -418,6 +421,39 @@
 		}
 
 		return $rsp;		
+	}
+
+	########################################################################
+
+	# this is here for some basic level of functionality - it is expected
+	# that derivative applications will implement their own logic
+	# (20180517/thisisaaronland)
+
+	function whosonfirst_uploads_process_upload($upload){
+
+		$ok_image = array("png", "jpg", "jpeg", "gif");
+
+		$type = $upload["file"]["type"];
+		list($major, $minor) = explode("/", $type, 2);
+
+		$rsp = null;
+
+		if (($major == "image") && (in_array($minor, $ok_image))){
+
+			$rsp = whosonfirst_uploads_image_process_upload($upload);
+		}
+
+		else if (($major == "application") && ($minor == "pdf")){
+
+			$rsp = whosonfirst_uploads_pdf_process_upload($upload);
+		}
+
+		else {
+
+			$rsp = array("ok" => 0, "error" => "Don't know how to process this type");
+		}
+
+		return $rsp;
 	}
 
 	########################################################################

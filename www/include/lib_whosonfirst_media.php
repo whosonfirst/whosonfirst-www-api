@@ -2,14 +2,15 @@
 
 	loadlib("whosonfirst_places");
 	loadlib("whosonfirst_uploads");
+	loadlib("whosonfirst_media_permissions");
 	loadlib("random");
 
 	########################################################################
 
-	function whosonfirst_photos_status_map($string_keys=0){
+	function whosonfirst_media_status_map($string_keys=0){
 
 		$map = array(
-			-1 => "pending",
+			-1 => "other",
 			0 => "private",
 			1 => "public",
 		);
@@ -23,19 +24,19 @@
 
 	########################################################################
 
-	function whosonfirst_photos_status_id_to_label($id){
+	function whosonfirst_media_status_id_to_label($id){
 
-		$map = whosonfirst_photos_status_map();
-		return (isset($map[$id])) ? $map[$id] : "unknown";
+		$map = whosonfirst_media_status_map();
+		return (isset($map[$id])) ? $map[$id] : "other";
 	}
 
 	########################################################################
 
-	function whosonfirst_photos_get_by_id($id){
+	function whosonfirst_media_get_by_id($id){
 
 		$enc_id = AddSlashes($id);
 
-		$sql = "SELECT * FROM Photos WHERE id='{$enc_id}'";
+		$sql = "SELECT * FROM whosonfirst_media WHERE id='{$enc_id}'";
 		$rsp = db_fetch($sql);
 		$rsp = db_single($rsp);
 
@@ -44,12 +45,12 @@
 
 	########################################################################
 
-	function whosonfirst_photos_get_by_fingerprint_and_whosonfirst_id($fp, $wof_id){
+	function whosonfirst_media_get_by_fingerprint_and_whosonfirst_id($fp, $wof_id){
 
 		$enc_fp = AddSlashes($fp);
 		$enc_id = AddSlashes($wof_id);
 
-		$sql = "SELECT * FROM Photos WHERE fingerprint='{$enc_fp}' AND whosonfirst_id='{$enc_id}'";
+		$sql = "SELECT * FROM whosonfirst_media WHERE fingerprint='{$enc_fp}' AND whosonfirst_id='{$enc_id}'";
 		$rsp = db_fetch($sql);
 		$rsp = db_single($rsp);
 
@@ -58,28 +59,51 @@
 
 	########################################################################
 
-	# see below... (20180515/thisisaaronland)
+	function whosonfirst_media_get_media($viewer_id, $more=array()){
 
-	function whosonfirst_photos_get_photos_actually($viewer_id, $more=array()){
+		$where = array();
 
-		$sql = "SELECT * FROM Photos";
+		if ($wof_id = $more["whosonfirst_id"]){
+			$enc_wof = AddSlashes($wof_id);
+			$where[] = "whosonfirst_id='{$enc_wof}'";
+		}
 
-		if ($where = whosonfirst_photos_permissions_get_photos_where($viewer_id)){
-			$sql = "{$sql} WHERE {$where}";
+		if ($medium = $more["medium"]){		
+			$enc_medium = AddSlashes($medium);
+			$where[] = "medium='{$enc_medium}'";
+		}
+
+		if ($extra = whosonfirst_media_permissions_get_media_where($viewer_id)){
+			$where[] = $extra;
 		}  
 
-		$sql .= " ORDER BY created DESC";
+		$sql = "SELECT * FROM whosonfirst_media";
 
-		return db_fetch($sql, $more);
+		if (count($where)){
+
+			$where = implode(" AND ", $where);
+			$sql = "{$sql} WHERE {$where}";
+		}
+
+		$sql .= " ORDER BY created DESC";
+		return db_fetch_paginated($sql, $more);
+	}
+
+	########################################################################
+
+	function whosonfirst_media_get_media_for_place($viewer_id, $place, $more=array()){
+
+		$more["whosonfirst_id"] = $place["wof:id"];
+		return whosonfirst_media_get_media($viewer_id, $more);
 	}
 
 	########################################################################
 
 	# PLEASE RENAME ME... (20180515/thisisaaronland)
 
-	function whosonfirst_photos_get_photos(&$record, $more=array()){
+	function whosonfirst_media_get_photos(&$record, $more=array()){
 
-		$status_map = whosonfirst_photos_status_map("string keys");
+		$status_map = whosonfirst_media_status_map("string keys");
 
 		$defaults = array(
 			"status_id" => $status_map["public"],
@@ -89,7 +113,7 @@
 
 		$enc_id = AddSlashes($record["wof:id"]);
 
-		$sql = "SELECT * FROM Photos WHERE whosonfirst_id='{$enc_id}'";
+		$sql = "SELECT * FROM whosonfirst_media WHERE whosonfirst_id='{$enc_id}'";
 
 		return db_fetch_paginated($sql, $more);
 	}
@@ -98,12 +122,12 @@
 
 	# PLEASE RENAME ME... (20180515/thisisaaronland)
 
-	function whosonfirst_photos_get_photo(&$record, $photo_id, $more=array()){
+	function whosonfirst_media_get_photo(&$record, $photo_id, $more=array()){
 
 		$enc_exh = AddSlashes($record["whosonfirst:id"]);
 		$enc_ph = AddSlashes($photo_id);
 
-		$sql = "SELECT * FROM Photos WHERE id='{$enc_ph}' AND whosonfirst_id='{$enc_exh}'";
+		$sql = "SELECT * FROM whosonfirst_media WHERE id='{$enc_ph}' AND whosonfirst_id='{$enc_exh}'";
 
 		$rsp = db_fetch($sql);
 		$photo = db_single($rsp);
@@ -113,7 +137,7 @@
 
 	########################################################################
 
-	function whosonfirst_photos_update_photo(&$photo, $update){
+	function whosonfirst_media_update_media(&$media, $update){
 
 		$now = time();
 
@@ -125,14 +149,14 @@
 			$insert[$k] = AddSlashes($v);
 		}
 
-		$enc_id = AddSlashes($photo["id"]);
+		$enc_id = AddSlashes($media["id"]);
 		$where = "id='{$enc_id}'";
 
-		$rsp = db_update("Photos", $insert, $where);
+		$rsp = db_update("whosonfirst_media", $insert, $where);
 
 		if ($rsp["ok"]){
-			$photo = array_merge($photo, $update);
-			$rsp["photo"] = $photo;
+			$media = array_merge($media, $update);
+			$rsp["media"] = $media;
 		}
 
 		return $rsp;
@@ -140,22 +164,22 @@
 
 	########################################################################
 
-	# $photo_path is the path to the "original" (or fullsize) photo
+	# $media_path is the path to the "original" (or fullsize) media
 	# $derivatives is a dictionary of "label" => "path" pairs for derivative
-	# photos that were produced from $photo_path
+	# medias that were produced from $media_path
 	#
 	# a few important things to note:
 	#
 	# 1. $upload is something produced by lib_uploads
 	# 2. it is assumed that by the time you've gotten here you have scrubbed
-	#    and sanitized all your photos
-	# 3. the label "o" is reserved for the original/fullsize photo - if you
+	#    and sanitized all your medias
+	# 3. the label "o" is reserved for the original/fullsize media - if you
 	#    assign it in $derivatives it will be overwritten
 	#
 	# see also: https://github.com/aaronland/go-iiif
 	# (20180509/thisisaaronland)
 
-	function whosonfirst_photos_import_photo_with_upload(&$upload, $photo_path, $derivatives=array(), $more=array()) {
+	function whosonfirst_media_import_media_with_upload(&$upload, $media_path, $derivatives=array(), $more=array()) {
 
 		$defaults = array(
 			"status_id" => 0,
@@ -191,11 +215,11 @@
 
 		$fp = $upload["fingerprint"];
 
-		if (whosonfirst_photos_get_by_fingerprint_and_whosonfirst_id($fp, $whosonfirst_id)){
-			return array("ok" => 0, "Photo with matching fingerprint already exists");
+		if (whosonfirst_media_get_by_fingerprint_and_whosonfirst_id($fp, $whosonfirst_id)){
+			return array("ok" => 0, "Media with matching fingerprint already exists");
 		}
 
-		$rsp = whosonfirst_photos_mkroot($whosonfirst_id);
+		$rsp = whosonfirst_media_mkroot($whosonfirst_id);
 
 		if (! $rsp["ok"]){
 			return $rsp;
@@ -203,21 +227,21 @@
 
 		$root = $rsp["root"];
 
-		$photo_id = whosonfirst_photos_generate_id();
+		$media_id = whosonfirst_media_generate_id();
 		
 		$secret_o = random_string();
 		$secret = random_string();
 
 		#
 
-		$details = array_merge($props, $more);		
-		$details["sizes"] = array();
+		$new_props = array_merge($props, $more);		
+		$new_props["sizes"] = array();
 
 		#
 
 		$to_import = array();
 
-		$derivatives["o"] = $photo_path;
+		$derivatives["o"] = $media_path;
 
 		foreach ($derivatives as $sz => $source){
 		
@@ -225,7 +249,7 @@
 
 			$ext = pathinfo($source, PATHINFO_EXTENSION);
 
-			$fname = "{$whosonfirst_id}_{$photo_id}_{$s}_{$sz}.{$ext}";
+			$fname = "{$whosonfirst_id}_{$media_id}_{$s}_{$sz}.{$ext}";
 
 			$destination = $root . DIRECTORY_SEPARATOR . $fname;
 			
@@ -234,8 +258,8 @@
 				"destination" => $destination,
 			);
 
-			$details["sizes"][$sz]["secret"] = $s;
-			$details["sizes"][$sz]["extension"] = $ext;
+			$new_props["sizes"][$sz]["secret"] = $s;
+			$new_props["sizes"][$sz]["extension"] = $ext;
 		}
 
 		#
@@ -248,17 +272,19 @@
 			# SOMETHING SOMETHING SOMETHING LIB_STORAGE...
 
 			if (file_exists($dest_path)){
-				return array("ok" => 0, "error" => "Photo already exists");
+				return array("ok" => 0, "error" => "Media already exists");
 			}
 
 			# copy and then clean up later, maybe?
 
+			error_log("RENAME {$src_path} {$dest_path}");
+
 			if (! rename($src_path, $dest_path)){
-				return array("ok" => 0, "error" => "Failed to import photo");
+				return array("ok" => 0, "error" => "Failed to import media");
 			}
 
 			if (! chmod($dest_path, 0644)){
-				return array("ok" => 0, "error" => "Failed to assign permissions for photo");
+				return array("ok" => 0, "error" => "Failed to assign permissions for media");
 			}
 
 			# maybe do this sooner with $source_path especially if (some day)
@@ -266,92 +292,91 @@
 
 			$info = getimagesize($dest_path);
 
-			if (! $info){
-				return array("ok" => 0, "error" => "Failed to determine size for photo");
+			if ($info){
+
+				$new_props["sizes"][$sz]["width"] = $info[0];
+				$new_props["sizes"][$sz]["height"] = $info[1];
+				$new_props["sizes"][$sz]["mimetype"] = $info["mime"];
 			}
-
-			$details["sizes"][$sz]["width"] = $info[0];
-			$details["sizes"][$sz]["height"] = $info[1];
-			$details["sizes"][$sz]["mime"] = $info["mime"];
 		}
-
-		$str_details = json_encode($details);
+		
+		$str_props = json_encode($new_props);
 
 		$now = time();
 
-		$photo_row = array(
-			"id" => $photo_id,
+		$media_row = array(
+			"id" => $media_id,
 			"whosonfirst_id" => $whosonfirst_id,
 			"user_id" => $upload["user_id"],
 			"upload_id" => $upload["id"],
 			"status_id" => $more["status_id"],
 			"fingerprint" => $upload["fingerprint"],
-			"details" => $str_details,
 			"created" => $now,
 			"lastmodified" => $now,
+			"properties" => $str_props,
 		);
 
 		$insert = array();
 
-		foreach ($photo_row as $k => $v){
+		foreach ($media_row as $k => $v){
 			$insert[$k] = AddSlashes($v);
 		}
 
-		$rsp = db_insert("Photos", $insert);
+		$rsp = db_insert("whosonfirst_media", $insert);
 
 		if (!$rsp["ok"]){
 			return $rsp;
 		} 
 
-		$rsp["photo"] = $photo_row;
+		$rsp["media"] = $media_row;
 		return $rsp;
 	}
 
 	########################################################################
 
-	function whosonfirst_photos_photo_to_relpath(&$photo, $sz="o"){
+	function whosonfirst_media_media_to_relpath(&$media, $sz="o"){
 
-		$root = whosonfirst_photos_id2tree($photo["whosonfirst_id"]);
-		$fname = whosonfirst_photos_fname($photo, $sz);
+		$root = whosonfirst_media_id2tree($media["whosonfirst_id"]);
+		$fname = whosonfirst_media_fname($media, $sz);
 
 		return $root . DIRECTORY_SEPARATOR . $fname;
 	}
 
 	########################################################################
 
-	function whosonfirst_photos_fname(&$photo, $sz="o"){
+	function whosonfirst_media_fname(&$media, $sz="o"){
 
-		$details = json_decode($photo["details"], "as hash");
+		$props = json_decode($media["properties"], "as hash");
 		
-		if (! $details){
+		if (! $props){
 			return null;
 		}
 
-		if (! isset($details["sizes"][$sz])){
+		if (! isset($props["sizes"][$sz])){
 			return null;
 		}
 
-		$details = $details["sizes"][$sz];
+		$props = $props["sizes"][$sz];
 
-		$wof_id = $photo["whosonfirst_id"];
-		$photo_id = $photo["id"];
-		$secret = $details["secret"];
-		$ext = $details["extension"];		
+		$wof_id = $media["whosonfirst_id"];
+		$media_id = $media["id"];
+		$secret = $props["secret"];
+		$ext = $props["extension"];		
 
-		return "{$wof_id}_{$photo_id}_{$secret}_{$sz}.{$ext}";
+		return "{$wof_id}_{$media_id}_{$secret}_{$sz}.{$ext}";
 	}
 
 	########################################################################
 
-	function whosonfirst_photos_mkroot($id){
+	function whosonfirst_media_mkroot($id){
 
-		$static = $GLOBALS["cfg"]["whosonfirst_photos_root"];
+		$static = $GLOBALS["cfg"]["whosonfirst_media_root"];
 
 		if (! is_dir($static)){
-			return array("ok" => 0, "error" => "Photos root misconfigured");
+			return array("ok" => 0, "error" => "whosonfirst_media root misconfigured");
 		}
 
-		$tree = whosonfirst_photos_id2tree($id);
+		$tree = whosonfirst_media_id2tree($id);
 		$root = $static . DIRECTORY_SEPARATOR . $tree;
 
 		if (! is_dir($root)){
@@ -368,7 +393,7 @@
 
 	########################################################################
 
-	function whosonfirst_photos_id2tree($id){
+	function whosonfirst_media_id2tree($id){
 
 		$tree = array();
 		$tmp = $id;
@@ -386,7 +411,7 @@
 
 	########################################################################
 
-	function whosonfirst_photos_generate_id(){
+	function whosonfirst_media_generate_id(){
 		return dbtickets_create(64);
 	}
 

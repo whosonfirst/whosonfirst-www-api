@@ -1,0 +1,50 @@
+{capture assign="page_title"}Uploads{/capture}
+{include file="inc_head.txt"}
+<div class="container">
+
+<div class="card">
+     <h2 class="card-header">Media</h2>
+     <div class="card-body">
+
+     <div class="table-responsive">
+       <table class="table">
+
+         <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">User</th>
+      <th scope="col">Source</th>
+      <th scope="col">Medium</th>
+      <th scope="col">Mime Type</th>
+      <th scope="col">Upload ID</th>
+      <th scope="col">Status</th>
+      <th scope="col">Relation</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {foreach from=$media item="row"}
+  {capture assign="status"}{$row.status_id|@whosonfirst_media_status_id_to_label}{/capture}
+  	<tr class="admin-upload-status-{$status|@escape}">
+		<th scope="row"><a href="{$cfg.abs_root_url}admin/media/{$row.id|@escape}/">{$row.id|@escape}</a></th>
+		<td>{if $row.user}<a href="#">{$row.user.username|@escape}</a>{else}<a href="">{$row.user_id|@escape}</a>{/if}</td>
+		<td>{$row.source|@escape}</td>
+		<td>{$row.medium|@escape}</td>
+		<td>{$row.mimetype|@escape}</td>
+		<td><a href="{$cfg.abs_root_url}admin/uploads/{$row.upload_id|@escape}/">{$row.upload_id|@escape}</a></td>
+		<td>{$status|@escape}</td>
+		<td>{if $row.relation}<a href="{$cfg.abs_root_url}id/{$row.relation|@whosonfirst_places_property:"wof:id"|@escape}/">{$row.relation|@whosonfirst_places_property:"wof:name"|@escape}</a>{else}<a href="{$cfg.abs_root_url}id/{$row.whosonfirst_id|@escape}">{$row.whosonfirst_id|@escape}</a>{/if}</td>
+	</tr>
+  {/foreach}
+
+  </tbody>
+  </table>
+</div>
+
+	</div>
+	<div class="card-footer">
+	{include file="inc_pagination.txt"}
+	</div>
+      </div>
+</div>
+{include file="inc_foot.txt"}
