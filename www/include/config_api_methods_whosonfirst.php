@@ -1220,6 +1220,21 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
+		"whosonfirst.uploads.getPending" => array(
+			"description" => "Return a list of pending uploads.",
+			"documented" => 1,
+			"enabled" => features_is_enabled("whosonfirst_uploads"),
+			"extras" => 0,
+			"paginated" => 1,
+			"requires_perms" => 2,
+			"requires_capability" => array("can_process_uploads"),
+			"library" => "api_whosonfirst_uploads",
+                        "parameters" => array(),
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
 		'whosonfirst.uploads.processUpload' => array(
 			"description" => "Process a pending upload",
 			"documented" => 1,

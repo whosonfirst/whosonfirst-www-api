@@ -44,6 +44,47 @@
 
 	########################################################################
 
+	function api_whosonfirst_uploads_getPending(){
+
+		api_utils_features_ensure_enabled(array(
+			"whosonfirst_uploads",
+		));
+
+		$user = $GLOBALS["cfg"]["user"];
+
+		if (! users_acl_has_capability($user, "can_process_uploads")){
+			api_output_error(403);
+		}
+
+		$args = array();
+		api_utils_ensure_pagination_args($args);
+
+		$rsp = whosonfirst_uploads_get_pending_uploads($args);
+
+		if (! $rsp["ok"]){
+			api_output_error(500);
+		}
+
+		$uploads = $rsp["rows"];
+		$pagination = $rsp["pagination"];
+
+		$public = whosonfirst_uploads_enpublicify_uploads($uploads);
+
+		$out = array(
+			"uploads" => $public
+		);
+
+		api_utils_ensure_pagination_results($out, $pagination);
+
+		$more = array(
+			"key" => "uploads",
+		);
+
+		api_output_ok($out);
+	}
+
+	########################################################################
+
 	function api_whosonfirst_uploads_processUpload(){
 
 		api_utils_features_ensure_enabled(array(
@@ -84,7 +125,7 @@
 			"singleton" => 1,
 		);
 
-		api_output_ok($out);
+		api_output_ok($out, $more);
 	}
 
 	########################################################################

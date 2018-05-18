@@ -34,10 +34,23 @@
 
 	########################################################################
 
+	function whosonfirst_uploads_get_pending_uploads($more=array()){
+
+		$status_map = whosonfirst_uploads_status_map("pending");
+		$enc_status = AddSlashes($status_map["pending"]);
+
+		$sql = "SELECT * FROM whosonfirst_uploads WHERE status_id='{$enc_status}' ORDER BY created ASC";
+		$rsp = db_fetch_paginated($sql, $more);
+
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_uploads_get_uploads($more=array()){
 
 		$sql = "SELECT * FROM whosonfirst_uploads ORDER BY created DESC";
-		$rsp = db_fetch($sql, $more);
+		$rsp = db_fetch_paginated($sql, $more);
 
 		return $rsp;
 	}
@@ -334,13 +347,26 @@
 
 	########################################################################
 
+	function whosonfirst_uploads_enpublicify_uploads(&$uploads){
+
+		$public = array();
+
+		foreach ($uploads as $u){
+			$public[] = whosonfirst_uploads_enpublicify_upload($u);
+		}
+		
+		return $public;		
+	}
+
+	########################################################################
+
 	function whosonfirst_uploads_enpublicify_upload(&$upload){
 
 		$public = array(
 			"id" => $upload["id"],
 			"created" => $upload["created"],
 			"lastmodified" => $upload["lastmodified"],
-			"processings" => $upload["processing"],
+			"processing" => $upload["processing"],
 			"status_id" => $upload["status_id"],
 		);
 
