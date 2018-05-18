@@ -500,6 +500,7 @@
 
 	$GLOBALS['cfg']['enable_feature_whosonfirst_media'] = 0;
 	$GLOBALS['cfg']['whosonfirst_media_root'] = 'READ-FROM-SECRETS-OR-CONFIG-LOCAL';
+        $GLOBALS['cfg']['whosonfirst_media_use_artisanal_integers'] = 0;
 
 	# END OF media stuff
 

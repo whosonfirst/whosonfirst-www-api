@@ -4,6 +4,7 @@
 	loadlib("whosonfirst_uploads");
 	loadlib("whosonfirst_media_permissions");
 	loadlib("random");
+	loadlib("brooklyn_integers");
 
 	########################################################################
 
@@ -255,6 +256,13 @@
 
 		$media_id = whosonfirst_media_generate_id();
 		
+		# because we might be using artisanal integers... no, really
+		# (20180518/thisisaaronland)
+
+		if (! $media_id){
+			return array("ok" => 0, "error" => "Failed to generate media ID");
+		}
+
 		$secret_o = random_string();
 		$secret = random_string();
 
@@ -438,6 +446,11 @@
 	########################################################################
 
 	function whosonfirst_media_generate_id(){
+
+		if ($GLOBALS["cfg"]["whosonfirst_media_use_artisanal_integers"]){
+			return brooklyn_integers_get_int();
+		}
+
 		return dbtickets_create(64);
 	}
 
