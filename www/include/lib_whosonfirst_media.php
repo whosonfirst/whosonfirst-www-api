@@ -30,7 +30,33 @@
 		return (isset($map[$id])) ? $map[$id] : "other";
 	}
 
-	########################################################################
+ 	########################################################################
+
+	function whosonfirst_media_get_random($viewer_id, $more=array()){
+	
+		if ($medium = $more["medium"]){		
+			$enc_medium = AddSlashes($medium);
+			$where[] = "medium='{$enc_medium}'";
+		}
+
+		if ($extra = whosonfirst_media_permissions_get_media_where($viewer_id)){
+			$where[] = $extra;
+		}  
+
+		$sql = "SELECT * FROM whosonfirst_media";
+
+		if (count($where)){
+
+			$where = implode(" AND ", $where);
+			$sql = "{$sql} WHERE {$where}";
+		}
+
+		$sql .= " ORDER BY RAND() LIMIT 1";
+		$rsp = db_fetch($sql);
+		return db_single($rsp);
+	}
+
+ 	########################################################################
 
 	function whosonfirst_media_get_by_id($id){
 
