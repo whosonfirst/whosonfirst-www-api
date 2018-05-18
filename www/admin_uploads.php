@@ -6,6 +6,13 @@
 	loadlib("admin");
 	admin_ensure_admin();
 
+	$rsp = whosonfirst_uploads_get_stats();
+
+	if ($rsp["ok"]){
+		$stats = $rsp["stats"];
+		$GLOBALS["smarty"]->assign_by_ref("stats", $stats);
+	}
+
 	$args = array();
 
 	if ($page = get_int32("page")){

@@ -6,6 +6,16 @@
      <h2 class="card-header">Uploads</h2>
      <div class="card-body">
 
+     {if $stats}
+     <div class="table-responsive">
+       <table class="table">
+       {foreach from=$stats item="count" key="status"}
+       <tr><th scope="col">{$status|@escape}</th><td>{$count|@number_format|@escape}</td></tr>
+       {/foreach}
+       </table>
+     </div>
+     {/if}
+
      <div class="table-responsive">
        <table class="table">
 

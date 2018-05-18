@@ -34,6 +34,28 @@
 
 	########################################################################
 
+	function whosonfirst_uploads_get_stats(){
+
+		$sql = "SELECT status_id, COUNT(id) AS counts FROM whosonfirst_uploads GROUP BY status_id ORDER BY counts DESC";
+		$rsp = db_fetch($sql);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$status_map = whosonfirst_uploads_status_map();
+		$stats = array();
+		
+		foreach ($rsp["rows"] as $row){
+			$status = $status_map[ $row["status_id"] ];
+			$stats[ $status ] = $row["counts"];
+		}
+
+		return array("ok" => 1, "stats" => $stats);
+	}
+
+	########################################################################
+
 	function whosonfirst_uploads_get_pending_uploads($more=array()){
 
 		$status_map = whosonfirst_uploads_status_map("pending");
