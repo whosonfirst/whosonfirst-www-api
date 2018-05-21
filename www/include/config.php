@@ -209,6 +209,8 @@
 
 	$GLOBALS['cfg']['autoload_libs'] = array(
 		'users',
+		'users_roles',
+		'users_acl',			
 		'cache',
 		#'cache_memcache',
 	);
