@@ -181,6 +181,10 @@
 			'sort' => $sort,
 		);
 
+		if ($aggrs = $more["aggregations"]){
+			 $req["aggregations"] = $aggrs;
+		}
+
 		$rsp = elasticsearch_spelunker_search($req, $more);
 		return $rsp;
 	}

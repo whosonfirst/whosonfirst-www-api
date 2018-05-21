@@ -34,6 +34,13 @@
 		$args = array(
 			'per_page' => 36
 		);
+
+		$args["aggregations"] = array(
+			"placetypes" => array(
+				"terms" => array("field" => "wof:placetype", "size" => 0)
+			)
+		);
+
 		api_utils_ensure_pagination_args($args);
 
 		$rsp = whosonfirst_places_search($query, $filters, $args);
