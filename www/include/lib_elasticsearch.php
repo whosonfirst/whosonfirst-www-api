@@ -204,6 +204,19 @@
 
 		$rsp['rows'] = $rows;
 		$rsp['pagination'] = $pagination;
+		$rsp['aggregations'] = array();
+
+		if ($a = $data['aggregations']){
+
+			foreach ($a as $bucket => $details){
+
+				$rsp["aggregations"][$bucket] = array();
+
+				foreach ($details["buckets"] as $b){
+					$rsp["aggregations"][$bucket][$b["key"]] = $b["doc_count"];
+				}
+			}
+		}
 
 		# log_notice('elasticsearch', $url . ' ' . $body . " HTTP {$rsp['info']['http_code']}", $rsp['info']['total_time']);
 
