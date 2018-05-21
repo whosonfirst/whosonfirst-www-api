@@ -399,7 +399,6 @@
 	$GLOBALS['cfg']['api_method_definitions'] = array(
 		'common',
 		'whosonfirst',
-		'uploads',
 	);
 
 	$GLOBALS['cfg']['api_errors_definitions'] = array(

@@ -52,8 +52,8 @@ RewriteRule   .*		- [F]
 
 # Login stuff
 
-# RewriteRule  ^signup/?$			signup.php		[L]
-# RewriteRule  ^signin/?$			signin.php		[L]
+RewriteRule  ^signup/?$			signup.php		[L]
+RewriteRule  ^signin/?$			signin.php		[L]
 RewriteRule  ^signout/?$		signout.php		[L]
 RewriteRule  ^checkcookie/?$		checkcookie.php	[L]
 
@@ -182,8 +182,8 @@ RewriteRule  ^ping/?$								ping.php?%{QUERY_STRING}  [L]
 
 # START OF flamework-github-sso stuff
 
-RewriteRule  ^signin/?$					/signin_github_oauth.php	[L]
-RewriteRule  ^auth/?$					/auth_callback_github_oauth.php?%{QUERY_STRING} [L]
+# RewriteRule  ^signin/?$					/signin_github_oauth.php	[L]
+# RewriteRule  ^auth/?$					/auth_callback_github_oauth.php?%{QUERY_STRING} [L]
 
 # END OF flamework-github-sso stuff
 
