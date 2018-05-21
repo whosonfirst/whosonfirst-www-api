@@ -1,6 +1,6 @@
 {capture assign="wof_id"}{$place|@whosonfirst_places_property:"wof:id"}{/capture}
 {capture assign="wof_name"}{$place|@whosonfirst_places_property:"wof:name"}{/capture}
-{capture assign="wof_placetype"}{$place|@whosonfirst_places_property:"sfomuseum:placetype"}{/capture}
+{capture assign="wof_placetype"}{$place|@whosonfirst_places_property:"wof:placetype"}{/capture}
 {capture assign="wof_country"}{$place|@whosonfirst_places_property:"wof:country"}{/capture}
 {capture assign="wof_parent_id"}{$place|@whosonfirst_places_property:"wof:parent_id"}{/capture}
 {capture assign="wof_brand_id"}{$place|@whosonfirst_places_property:"wof:brand_id"}{/capture}
@@ -27,45 +27,32 @@
 {assign var="wof_parents" value=$place|@whosonfirst_places_property:"wof:parents"}
 
 <div id="content" class="container">
-
-     	{if 0}
-	<div class="row">
-		<div class="col-xs-12">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a></li>
-				{if $search_url}
-				<li class="breadcrumb-item"><a href="{$search_url|escape}">Search Results</a></li>
-				{/if}
-				<li class="breadcrumb-item active">{$wof_name|@escape}</li>
-			</ol>
-		</div>
-	</div>
-	{/if}
 	
 	<div class="row">
-		<div class="col-xs-12">
-			<h1>{$wof_name|@escape}</h1>
-		</div>
-	</div>
+		<div class="card">
+			<h2 class="card-header">{$wof_name|@escape} <small><code>{$wof_id|@escape}</code></small></h2>
+			
+			<div class="card-body">
 
-	<div class="row headroom">
-		<div class="col-xs-12">
-		{include file="inc_place_map.txt"}
-		</div>
-	</div>
+			{include file="inc_place_map.txt"}
+			{include file="inc_upload.txt"}
+			</div>
 
-	<div class="row" itemprop="location" itemscope itemtype="http://schema.org/Place">
-	</div>
+			<div class="card-footer">
+		
+		     	<ul>
+			<li><div class="card-text">{$wof_name|@escape} is a {$wof_placetype|@escape}</div></li>
+			<li><span class="card-text" itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">Its current location is <span class="hey-look" itemprop="latitude">{$place|@whosonfirst_places_property:"geom:latitude"|@escape}</span>, <span itemprop="longitude">{$place|@whosonfirst_places_property:"geom:longitude"|@escape}</span></span></li>			
+			</ul>
 
-	<div class="row">
-		<ul class="list col-xs-12">
-			<li><span itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">Its current location is <span class="hey-look" itemprop="latitude">{$place|@whosonfirst_places_property:"geom:latitude"|@escape}</span>, <span itemprop="longitude">{$place|@whosonfirst_places_property:"geom:longitude"|@escape}</span></span></li>
-		</ul>
-		<ul class="list col-xs-12">
+			<ul class="list">
 			<li><a href="{$place|@whosonfirst_places_data_url_for_place}" class="hey-look">Download</a> the raw data for this {$wof_placetype|@escape}.</li>
-		</ul>
-	</div>
+			</ul>
 
+			</div>
+		</div>
+	</div>
+	
 </div>
 
 {include file="inc_js_place.js"}

@@ -15,6 +15,10 @@
 	</div>
      </div>
 
+     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.dropbox.js"></script>
+     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.upload.files.init.js"></script>
+
+     {if "whosonfirst_media_flickr"|@features_is_enabled}
      <div class="card admin">
      <h4 class="card-header">Upload a Flickr photo</h4>
      <div class="card-body">
@@ -28,8 +32,7 @@
      </div>
      </div>
 
-     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.dropbox.js"></script>
-     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.upload.files.init.js"></script>
      <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.upload.flickr.init.js"></script>
+     {/if}    
 
 {/if}
