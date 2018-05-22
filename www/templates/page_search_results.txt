@@ -1,24 +1,26 @@
+{capture assign="page_title"}Search results for {$query}{/capture}
 {include file='inc_head.txt' nav_tab='home'}
 
 <div id="content" class="container">
-
-        {if 0}     		  
-	<div class="row">
-		<div class="col-xs-12">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{$cfg.abs_root_url|escape}">{$cfg.site_name|escape}</a></li>
-				<li class="breadcrumb-item active">Search Results</li>
-			</ol>
-		</div>
-	</div>
-	{/if}
 	
 	<div class="row headroom-large">
 		<div class="col-xs-12">
 			<h2>search results for <q>{$query|@escape}</q></h2>
 		</div>
 	</div>
-	
+
+	<div class="row">
+	     <div class="col">
+		  {foreach from=$facets item="pairs" key="bucket"}	     
+	     	  <ul class="list-inline">
+		  {foreach from=$pairs item="count" key="facet"}
+		      <li class="list-inline-item"><a href="{$pagination_url}&{$bucket|@escape}={$facet|@escape}">{$facet|@escape}</a> <small>{if $count==1}one result{else}{$count|@number_format|@escape} results{/if}</small></li>
+		  {/foreach}
+		  </ul>
+		  {/foreach}
+	     </div>
+	</div>
+
 	{include file="inc_results.txt"}
 </div>
 

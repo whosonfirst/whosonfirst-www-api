@@ -781,7 +781,7 @@
 		foreach ($possible as $pt){
 
 			if (! whosonfirst_placetypes_is_valid_placetype($pt)){
-				api_output_error($err_code);
+				# api_output_error($err_code);
 			}
 		}
 

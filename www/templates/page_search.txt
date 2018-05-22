@@ -18,7 +18,7 @@
 			<h1>search</h1>
 		</div>
 	</div>
-	
+		
 	{include file="inc_search_form.txt"}
 </div>
 

@@ -31,12 +31,14 @@
 
 		$filters = api_whosonfirst_utils_search_filters();
 
+		dumper($filters);
+		
 		$args = array(
 			'per_page' => 36
 		);
 
 		$args["aggregations"] = array(
-			"placetypes" => array(
+			"placetype" => array(
 				"terms" => array("field" => "wof:placetype", "size" => 0)
 			)
 		);
@@ -48,8 +50,6 @@
 		if (! $rsp['ok']){
 			error_500();
 		}
-
-		$pagination = $rsp['pagination'];
 		
 		$args = http_build_query(array(
 			'q' => $query,
@@ -73,6 +73,7 @@
 		search_utils_ensure_pagination($query, $out, $pagination);
 
 		$GLOBALS['smarty']->assign_by_ref('results', $out['places']);
+		$GLOBALS['smarty']->assign_by_ref('facets', $rsp['aggregations']);		
 		$GLOBALS['smarty']->assign_by_ref('pagination', $pagination);
 
 		$GLOBALS['smarty']->display('page_search_results.txt');
