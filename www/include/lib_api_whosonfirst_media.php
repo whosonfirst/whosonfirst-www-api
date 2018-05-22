@@ -217,7 +217,7 @@
 			"whosonfirst_media",
 		));
 
-		$id = request_int64("media_id");
+		$id = request_int64("id");
 
 		if (! $id){
 			api_output_error(400);

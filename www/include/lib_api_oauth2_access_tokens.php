@@ -434,7 +434,7 @@
 		$expires = $now + $ttl;
 
 		$perms_map = api_oauth2_access_tokens_permissions_map('string keys');
-		$perms = ($user_id) ? $perms_map['write'] : $perms_map['login'];
+		$perms = ($user_id) ? $perms_map['delete'] : $perms_map['login'];
 
 		$row = array(
 			'id' => $id,

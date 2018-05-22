@@ -2,14 +2,14 @@ window.addEventListener("load", function load(event){
     
     var delete_media = function(media_id){
 
-	var method = "whosonfirst.media.deleteMedia";
+	var method = "whosonfirst.media.deleteFile";
 	
 	var args = {
 	    "id": media_id,
-	    };
+	};
 	
 	var on_success = function(rsp){
-
+	    window.location.reload(false); 
 	};
 
 	var on_error = function(rsp){
