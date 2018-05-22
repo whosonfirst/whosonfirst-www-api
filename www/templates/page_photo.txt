@@ -20,5 +20,4 @@
 
 </div>
 
-{include file="inc_js_photos.txt"}
 {include file="inc_foot.txt"}
