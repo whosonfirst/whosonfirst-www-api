@@ -34,6 +34,14 @@
 
 	########################################################################
 
+	function whosonfirst_uploads_status_label_to_id($label){
+
+		$map = whosonfirst_uploads_status_map("string keys");
+		return (isset($map[$label])) ? $map[$label] : -1;
+	}
+
+	########################################################################
+
 	function whosonfirst_uploads_get_stats(){
 
 		$sql = "SELECT status_id, COUNT(id) AS counts FROM whosonfirst_uploads GROUP BY status_id ORDER BY counts DESC";
@@ -71,7 +79,23 @@
 
 	function whosonfirst_uploads_get_uploads($more=array()){
 
-		$sql = "SELECT * FROM whosonfirst_uploads ORDER BY created DESC";
+		$where = array();
+
+		$sql = "SELECT * FROM whosonfirst_uploads";
+
+		if (isset($more["status_id"])){
+
+			$enc_status = AddSlashes($more["status_id"]);
+			$where[] = "status_id='{$enc_status}'";
+		}
+
+		if (count($where)){
+
+			$where = implode($where, " AND ");
+			$sql .= " WHERE {$where}";
+		}
+
+		$sql .= " ORDER BY created DESC";
 		$rsp = db_fetch_paginated($sql, $more);
 
 		return $rsp;
