@@ -2,7 +2,7 @@
 
 	loadlib("http");
 
-	$GLOBALS['brooklyn_integers_api_endpoint'] = 'http://api.brooklynintegers.com/rest/';
+	$GLOBALS['brooklyn_integers_api_endpoint'] = 'https://api.brooklynintegers.com/rest/';
 
 	########################################################################
 
