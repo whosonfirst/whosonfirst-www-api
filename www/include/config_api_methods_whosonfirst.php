@@ -1182,6 +1182,28 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
+		'whosonfirst.media.deleteFile' => array(
+			"description" => "Delete a media file (and its derivatives)",
+			"documented" => 1,
+			"enabled" => $GLOBALS['cfg']['enable_feature_whosonfirst_media'],
+			"paginated" => 0,
+			"extras" => 0,
+			"library" => "api_whosonfirst_media",
+			"requires_perms" => 3,	# delete
+			"parameters" => array(
+				array(
+					"name" => "id",
+					"description" => "A valid whosonfirst media ID",
+					"required" => 1,
+					"documented" => 1,
+					"example" => "",
+				),
+			),
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
 		"whosonfirst.uploads.deleteUpload" => array(
 			"description" => "Get information about a specific upload.",
 			"documented" => 1,
@@ -1189,7 +1211,7 @@
 			"extras" => 0,
 			"paginated" => 0,
 			"library" => "api_whosonfirst_uploads",
-			"requires_perms" => 2,	# write
+			"requires_perms" => 3,	# delete
 			"requires_capability" => array("can_delete_uploads"),
                         "parameters" => array(
 				array(

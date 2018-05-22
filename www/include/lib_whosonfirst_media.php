@@ -34,27 +34,14 @@
  	########################################################################
 
 	function whosonfirst_media_get_random($viewer_id, $more=array()){
+
+		$more["random"] = 1;
+		$more["per_page"] = 1;
 	
-		if ($medium = $more["medium"]){		
-			$enc_medium = AddSlashes($medium);
-			$where[] = "medium='{$enc_medium}'";
-		}
+		$rsp = whosonfirst_media_get_media($viewer_id, $more);
+		$row = db_single($rsp);
 
-		if ($extra = whosonfirst_media_permissions_get_media_where($viewer_id)){
-			$where[] = $extra;
-		}  
-
-		$sql = "SELECT * FROM whosonfirst_media";
-
-		if (count($where)){
-
-			$where = implode(" AND ", $where);
-			$sql = "{$sql} WHERE {$where}";
-		}
-
-		$sql .= " ORDER BY RAND() LIMIT 1";
-		$rsp = db_fetch($sql);
-		return db_single($rsp);
+		return $row;
 	}
 
  	########################################################################
@@ -101,7 +88,9 @@
 
 	function whosonfirst_media_get_media($viewer_id, $more=array()){
 
-		$where = array();
+		$where = array(
+			"deleted=0",
+		);
 
 		if ($wof_id = $more["whosonfirst_id"]){
 			$enc_wof = AddSlashes($wof_id);
@@ -125,7 +114,14 @@
 			$sql = "{$sql} WHERE {$where}";
 		}
 
-		$sql .= " ORDER BY created DESC";
+		if ($more["random"]){
+			$sql .= " ORDER BY RAND()";
+		}
+
+		else {
+			$sql .= " ORDER BY created DESC";
+		}
+
 		return db_fetch_paginated($sql, $more);
 	}
 
@@ -200,6 +196,44 @@
 		}
 
 		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_media_delete_media(&$media){
+
+		$now = time();
+
+		$update = array(
+			"deleted" => $now,		
+		);
+
+		$rsp = whosonfirst_media_update_media($media, $update);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$media = $rsp["media"];
+
+		$props = json_decode($media["properties"], "as hash");
+		$sizes = $props["sizes"];
+
+		foreach ($sizes as $sz => $ignore){
+
+			$rel_path = whosonfirst_media_media_to_relpath($media, $sz);
+			$abs_path = $GLOBALS["cfg"]["whosonfirst_media_root"] . DIRECTORY_SEPARATOR . $rel_path;
+
+			if (file_exists($abs_path)){
+
+				if (! unlink($abs_path)){
+
+					return array("ok" => 0, "error" => "Failed to delete {$abs_path}");
+				}
+			}
+		}
+
+		return array("ok" => 1);
 	}
 
 	########################################################################
@@ -465,6 +499,65 @@
 		}
 
 		return dbtickets_create(64);
+	}
+
+	########################################################################
+
+	function whosonfirst_media_enpublicify_media(&$media){
+
+		$public = array();
+
+		foreach ($media as $m){	
+			$public[] = whosonfirst_media_enpublicify_media_single($m);
+		}
+
+		return $public;
+	}
+
+	########################################################################
+
+	function whosonfirst_media_enpublicify_media_single(&$media){
+
+		$urls = array(
+			"o" => "",
+		);
+
+		foreach ($urls as $sz => $ignore){
+
+			$rel_path = whosonfirst_media_media_to_relpath($media, $sz);
+			$abs_url = "{$GLOBALS["cfg"]["abs_root_url"]}static/{$rel_path}";
+			
+			$urls[$sz] = $abs_url;
+		}	
+
+		$creditline = "";
+
+		$status_map = whosonfirst_media_status_map();
+		$status = $status_map[$media["status_id"]];
+
+		$public = array(
+			"id" => $media["id"],
+			"medium" => $media["medium"],
+			"source" => $media["source"],
+			"status" => $status,
+			"mimetype" => $media["mimetype"],
+			# "whosonfirst_id" => $media["whosonfirst_id"],
+			"urls" => $urls,
+			"creditline" => $creditline,
+		);
+
+		if ($media["source"] == "flickr"){
+
+			$props = json_decode($media["properties"], "as hash");
+			$info = $props["photo_info"];
+
+			$GLOBALS["smarty"]->assign_by_ref("info", $info);
+			$creditline = $GLOBALS["smarty"]->fetch("inc_photo_flickr_attribution.txt");
+
+			$public["creditline"] = $creditline;
+		}
+
+		return $public;	
 	}
 
 	########################################################################

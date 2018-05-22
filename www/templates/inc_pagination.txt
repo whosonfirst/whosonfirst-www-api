@@ -1,8 +1,8 @@
 {if $pagination.page_count > 1}
 
-<div class="container" style="text-align:center;">
+<nav aria-label="Pagination">
 
-<ul class="pagination">
+<ul class="pagination justify-content-center">
 
 	{* previous button *}
 	{if $pagination.page > 1}
@@ -113,6 +113,6 @@
 
 {include file="inc_pagination_shortcuts.txt"}
 
-</div>
+</nav>
 
 {/if}

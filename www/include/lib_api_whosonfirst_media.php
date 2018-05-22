@@ -209,6 +209,47 @@
 		api_output_ok($out, $more);
 	}
 
+	########################################################################
+
+	function api_whosonfirst_media_deleteFile(){
+
+		api_utils_features_ensure_enabled(array(
+			"whosonfirst_media",
+		));
+
+		$id = request_int64("media_id");
+
+		if (! $id){
+			api_output_error(400);
+		}
+
+		$media = whosonfirst_media_get_by_id($id);
+
+		if (! $media){
+			api_output_error(404);
+		}
+
+		if ($media["deleted"]){
+			api_output_error(500);
+		}
+
+		$user = $GLOBALS["cfg"]["user"];
+
+		if (($media["user_id"] != $user["id"]) && (users_roles_has_role($user, "admin"))){
+			api_output_error(403);
+		}
+
+		$rsp = whosonfirst_media_delete_media($media);
+
+		if (! $rsp){
+			api_output_error(500, $rsp["error"]);
+		}  
+
+		api_output_ok();
+	}
+
+	########################################################################
+
 	# internal / utility functions
 
 	########################################################################
@@ -304,6 +345,9 @@
 	}
 
 	########################################################################
+
+	# DEPRECATED - PLEASE USE whosonfirst_media_enpublicify
+	# (20180522/thisisaaronland)
 
 	function api_whosonfirst_media_enpublicify(&$media){
 
