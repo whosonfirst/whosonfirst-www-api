@@ -19,6 +19,15 @@
 		$args["page"] = $page;
 	}
 
+	if ($status = get_str("status")){
+
+		$status_id = whosonfirst_uploads_status_label_to_id($status);
+
+		if ($status_id != -1){
+			$args["status_id"] = $status_id;
+		}
+	}
+
 	$rsp = whosonfirst_uploads_get_uploads($args);
 
 	if ($rsp["ok"]){
@@ -30,6 +39,17 @@
 
 		$GLOBALS["smarty"]->assign_by_ref("uploads", $uploads);
 		$GLOBALS["smarty"]->assign_by_ref("pagination", $pagination);
+	}
+
+	$pagination_url = "{$GLOBALS["cfg"]["abs_root_url"]}admin/uploads/";
+
+	if (isset($args["status_id"])){
+	
+		$enc_status = urlencode($status);
+		$pagination_url .= "?status={$enc_status}";
+
+		$GLOBALS["smarty"]->assign("pagination_url", $pagination_url);
+		$GLOBALS["smarty"]->assign("pagination_page_as_queryarg", 1);
 	}
 
 	$GLOBALS["smarty"]->display("page_admin_uploads.txt");

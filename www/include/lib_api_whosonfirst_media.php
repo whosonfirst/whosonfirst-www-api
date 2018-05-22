@@ -63,6 +63,52 @@
 			api_output_error(400);
 		}
 
+		if ($upload = whosonfirst_uploads_get_by_flickr_id_pending($photo_id)){
+
+			$file = json_decode($upload["file"], "as hash");
+			$fname = $file["name"];
+
+			$uploads = array(
+				$fname => $upload["id"],
+			);
+
+			$out = array(
+				"uploads" => $uploads,
+			);
+
+			$more = array(
+				"key" => "uploads",
+			);
+
+			api_output_ok($out, $more);
+		}
+
+		# so this bit here lacks a measure of finesse - there are a bunch of
+		# conditions that might get stuck here but we'll try it for now...
+		# (20180522/thisisaaronland)
+
+		if ($media = whosonfirst_media_get_by_flickr_id($photo_id)){
+			
+			$upload = whosonfirst_uploads_get_by_id($media["upload_id"]);
+
+			$file = json_decode($upload["file"], "as hash");
+			$fname = $file["name"];
+
+			$uploads = array(
+				$fname => $upload["id"],
+			);
+
+			$out = array(
+				"uploads" => $uploads,
+			);
+
+			$more = array(
+				"key" => "uploads",
+			);
+
+			api_output_ok($out, $more);
+		}
+
  		$medium = "image";
 		api_whosonfirst_media_ensure_medium($medium);
 
@@ -163,6 +209,47 @@
 		api_output_ok($out, $more);
 	}
 
+	########################################################################
+
+	function api_whosonfirst_media_deleteFile(){
+
+		api_utils_features_ensure_enabled(array(
+			"whosonfirst_media",
+		));
+
+		$id = request_int64("id");
+
+		if (! $id){
+			api_output_error(400);
+		}
+
+		$media = whosonfirst_media_get_by_id($id);
+
+		if (! $media){
+			api_output_error(404);
+		}
+
+		if ($media["deleted"]){
+			api_output_error(500);
+		}
+
+		$user = $GLOBALS["cfg"]["user"];
+
+		if (($media["user_id"] != $user["id"]) && (users_roles_has_role($user, "admin"))){
+			api_output_error(403);
+		}
+
+		$rsp = whosonfirst_media_delete_media($media);
+
+		if (! $rsp){
+			api_output_error(500, $rsp["error"]);
+		}  
+
+		api_output_ok();
+	}
+
+	########################################################################
+
 	# internal / utility functions
 
 	########################################################################
@@ -258,6 +345,9 @@
 	}
 
 	########################################################################
+
+	# DEPRECATED - PLEASE USE whosonfirst_media_enpublicify
+	# (20180522/thisisaaronland)
 
 	function api_whosonfirst_media_enpublicify(&$media){
 

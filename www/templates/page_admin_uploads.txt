@@ -10,7 +10,7 @@
      <div class="table-responsive">
        <table class="table">
        {foreach from=$stats item="count" key="status"}
-       <tr><th scope="col">{$status|@escape}</th><td>{$count|@number_format|@escape}</td></tr>
+       <tr><th scope="col">{$status|@escape}</th><td><a href="{$cfg.abs_root_url}admin/uploads/?status={$status|@escape}">{$count|@number_format|@escape}</a></td></tr>
        {/foreach}
        </table>
      </div>
@@ -27,14 +27,15 @@
       <th scope="col">Source</th>
       <th scope="col">Type</th>
       <th scope="col">Size</th>
-      <th scope="col">Fingerprint</th>
       {if 0}
+      <th scope="col">Fingerprint</th>
       <th scope="col">Created</th>
       <th scope="col">Completed</th>
       <th scope="col">Last modified</th>
       {/if}
       <th scope="col">Status</th>
       <th scope="col">Relation</th>
+      <th scope="col">&#8212;</th>
     </tr>
   </thead>
   <tbody>
@@ -48,14 +49,15 @@
 		<td>{$row.properties.source|@escape}</td>
 		<td>{$row.file.type|@escape}</td>
 		<td>{$row.file.size|@escape}</td>
-		<td>{$row.fingerprint|@escape}</td>
 		{if 0}
+		<td>{$row.fingerprint|@escape}</td>
 		<td>{$row.created|@date_format|@escape}</td>
 		<td>{if $row.completed}{$row.completed|@date_format|@escape}{else}&#8212;{/if}</td>
 		<td>{$row.lastmodified|@date_format|@escape}</td>
 		{/if}
 		<td>{$status|@escape}</td>
 		<td>{if $row.relation}<a href="{$cfg.abs_root_url}id/{$row.relation|@whosonfirst_places_property:"wof:id"|@escape}/">{$row.relation|@whosonfirst_places_property:"wof:name"|@escape}</a>{else}&#8212;{/if}</td>
+		<td>{if $row.error}{$row.error.error|@escape}{/if}</td>
 	</tr>
   {/foreach}
 
