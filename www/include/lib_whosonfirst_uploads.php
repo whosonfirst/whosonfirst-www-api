@@ -355,6 +355,31 @@
 
 	########################################################################
 
+	function whosonfirst_uploads_get_by_flickr_id_pending($id){
+
+		$status_map = whosonfirst_uploads_status_map("string keys");
+		$status_id = $status_map["pending"];
+
+		$enc_status = AddSlashes($status_id);
+		$enc_id = AddSlashes($id);
+
+		$where = array(
+			"JSON_EXTRACT(properties, '$.source') ='flickr'",
+			"JSON_EXTRACT(properties, '$.photo_id') = '{$enc_id}'",
+			"status_id='{$enc_status}'",
+		);
+
+		$where = implode($where, " AND ");
+
+		$sql = "SELECT *  FROM whosonfirst_uploads WHERE {$where}";
+		$rsp = db_fetch($sql);
+
+		$rsp = db_single($rsp);
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_uploads_id2abspath($id){
 
 		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];

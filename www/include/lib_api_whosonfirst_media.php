@@ -63,6 +63,52 @@
 			api_output_error(400);
 		}
 
+		if ($upload = whosonfirst_uploads_get_by_flickr_id_pending($photo_id)){
+
+			$file = json_decode($upload["file"], "as hash");
+			$fname = $file["name"];
+
+			$uploads = array(
+				$fname => $upload["id"],
+			);
+
+			$out = array(
+				"uploads" => $uploads,
+			);
+
+			$more = array(
+				"key" => "uploads",
+			);
+
+			api_output_ok($out, $more);
+		}
+
+		# so this bit here lacks a measure of finesse - there are a bunch of
+		# conditions that might get stuck here but we'll try it for now...
+		# (20180522/thisisaaronland)
+
+		if ($media = whosonfirst_media_get_by_flickr_id($photo_id)){
+			
+			$upload = whosonfirst_uploads_get_by_id($media["upload_id"]);
+
+			$file = json_decode($upload["file"], "as hash");
+			$fname = $file["name"];
+
+			$uploads = array(
+				$fname => $upload["id"],
+			);
+
+			$out = array(
+				"uploads" => $uploads,
+			);
+
+			$more = array(
+				"key" => "uploads",
+			);
+
+			api_output_ok($out, $more);
+		}
+
  		$medium = "image";
 		api_whosonfirst_media_ensure_medium($medium);
 

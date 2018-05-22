@@ -72,6 +72,19 @@
 
 	########################################################################
 
+	function whosonfirst_media_get_by_flickr_id($id){
+
+		$enc_id = AddSlashes($id);
+
+		$sql = "SELECT *  FROM whosonfirst_media WHERE source='flickr' AND JSON_EXTRACT(properties, '$.photo_id') = '{$enc_id}'";
+		$rsp = db_fetch($sql);
+		$rsp = db_single($rsp);
+
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_media_get_by_fingerprint_and_whosonfirst_id($fp, $wof_id){
 
 		$enc_fp = AddSlashes($fp);
@@ -305,9 +318,9 @@
 
 			# SOMETHING SOMETHING SOMETHING LIB_STORAGE...
 
-			if (file_exists($dest_path)){
-				return array("ok" => 0, "error" => "Media already exists");
-			}
+			# if (file_exists($dest_path)){
+			# 	return array("ok" => 0, "error" => "Media already exists");
+			# }
 
 			# copy and then clean up later, maybe?
 
