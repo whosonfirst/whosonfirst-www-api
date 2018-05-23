@@ -1,12 +1,13 @@
 <div class="card sfomuseum-photo-card" data-photo-id="{$photo.id|@escape}" id="photo-card-{$photo.id|@escape}">
 
-     <a href="{$cfg.abs_root_url}photos/{$photo.id|@escape}/"><img id="media-img-{$photo.id|@escape}" class="card-img-top media-{$photo.status_id|@whosonfirst_media_status_id_to_label}" src="{$cfg.abs_root_url}static/{$photo|@whosonfirst_media_media_to_relpath}" alt="" /></a>
+    <a href="{$cfg.abs_root_url}photos/{$photo.id|@escape}/" class="sfomuseum-photo-link"><img id="media-img-{$photo.id|@escape}" class="card-img-top sfomuseum-photo media-{$photo.status_id|@whosonfirst_media_status_id_to_label}" src="{$cfg.abs_root_url}static/{$photo|@whosonfirst_media_media_to_relpath}" alt="" /></a>
      <div class="card-body">
 
-     	  {assign var="properties" value=$photo.properties|@json_decode:"as hash"}
-        {if $photo.source == "flickr"}
-	<div class="card-text">{include file="inc_photo_flickr_attribution.txt" info=$properties.photo_info}</div>
-	{/if}     	  
+     	  {assign var="properties" value=$photo.properties}
+        
+	<div class="card-text sfomuseum-photo-creditline">
+	{if $photo.source == "flickr"}{include file="inc_photo_flickr_attribution.txt" info=$properties.photo_info}{/if}
+	</div>
 
      	{if 0}
      	<form>
@@ -27,7 +28,7 @@
         {if $cfg.user|@users_roles_has_role:"admin"}
      	<div class="admin">
 
-          <div class="card-text">This photo (<code>{$photo.id|@escape}</code>) was uploaded on {$photo.created|@date_format|@escape} by <a href="#">[USER ID {$photo.user_id|@escape}]</a>.</div>
+          {if 0}<div class="card-text">This photo (<code>{$photo.id|@escape}</code>) was uploaded on {$photo.created|@date_format|@escape} by <a href="#">[USER ID {$photo.user_id|@escape}]</a>.</div>{/if}
 
 	  {include file="inc_media_controls.txt" media=$photo}
 
