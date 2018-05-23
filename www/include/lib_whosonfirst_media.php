@@ -262,6 +262,8 @@
 
 		$more = array_merge($defaults, $more);
 
+		$derivatives["o"] = $media_path;
+
 		if (whosonfirst_uploads_is_completed($upload)){
 			return array("ok" => 0, "error" => "Upload is already completed");
 		}
@@ -300,8 +302,6 @@
 			return $rsp;
 		}
 
-		$root = $rsp["root"];
-
 		$media_id = whosonfirst_media_generate_id();
 		
 		# because we might be using artisanal integers... no, really
@@ -311,77 +311,17 @@
 			return array("ok" => 0, "error" => "Failed to generate media ID");
 		}
 
-		$secret_o = random_string();
-		$secret = random_string();
+		$sizes = array();
 
-		#
+		$rsp = whosonfirst_media_import_processed($derivatives, $whosonfirst_id, $media_id, $sizes);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
 
 		$new_props = array_merge($props, $more);		
-		$new_props["sizes"] = array();
-
-		#
-
-		$to_import = array();
-
-		$derivatives["o"] = $media_path;
-
-		foreach ($derivatives as $sz => $source){
-		
-			$s = ($sz == "o") ? $secret_o : $secret;
-
-			$ext = pathinfo($source, PATHINFO_EXTENSION);
-
-			$fname = "{$whosonfirst_id}_{$media_id}_{$s}_{$sz}.{$ext}";
-
-			$destination = $root . DIRECTORY_SEPARATOR . $fname;
+		$new_props["sizes"] = $rsp["sizes"];
 			
-			$to_import[$sz] = array(
-				"source" => $source,
-				"destination" => $destination,
-			);
-
-			$new_props["sizes"][$sz]["secret"] = $s;
-			$new_props["sizes"][$sz]["extension"] = $ext;
-		}
-
-		#
-
-		foreach ($to_import as $sz => $paths){
-
-			$src_path = $paths["source"];
-			$dest_path = $paths["destination"];
-
-			# SOMETHING SOMETHING SOMETHING LIB_STORAGE...
-
-			# if (file_exists($dest_path)){
-			# 	return array("ok" => 0, "error" => "Media already exists");
-			# }
-
-			# copy and then clean up later, maybe?
-
-			error_log("RENAME {$src_path} {$dest_path}");
-
-			if (! rename($src_path, $dest_path)){
-				return array("ok" => 0, "error" => "Failed to import media");
-			}
-
-			if (! chmod($dest_path, 0644)){
-				return array("ok" => 0, "error" => "Failed to assign permissions for media");
-			}
-
-			# maybe do this sooner with $source_path especially if (some day)
-			# $dest_path is remote... (20180509/thisisaaronland)
-
-			$info = getimagesize($dest_path);
-
-			if ($info){
-
-				$new_props["sizes"][$sz]["width"] = $info[0];
-				$new_props["sizes"][$sz]["height"] = $info[1];
-				$new_props["sizes"][$sz]["mimetype"] = $info["mime"];
-			}
-		}
-		
 		$str_props = json_encode($new_props);
 
 		$now = time();
@@ -412,6 +352,218 @@
 
 		$rsp["media"] = $media_row;
 		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_media_reprocess_image(&$media){
+
+		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
+		$static = $GLOBALS["cfg"]["whosonfirst_media_root"];
+
+		whosonfirst_media_inflate_media($media);
+
+		$props = $media["properties"];
+		$sizes = $props["sizes"];
+
+		$rel_path = whosonfirst_media_media_to_relpath($media, "o");
+		$abs_path = $static . DIRECTORY_SEPARATOR . $rel_path;
+
+		$root = dirname($rel_path);
+
+		$tmp_source = $root . DIRECTORY_SEPARATOR . $id;
+
+		$tmp_file = $pending . DIRECTORY_SEPARATOR . $tmp_source;
+		$tmp_root = dirname($tmp_file);
+
+		if (! is_dir($tmp_root)){
+
+			$recursive = true;
+
+			if (! mkdir($tmp_root, 0755, $recursive)){
+				return array("ok" => 0, "error" => "Unable to create tmp dir");
+			}
+		}
+
+		if (! copy($abs_path, $tmp_file)){
+
+			return array("ok" => 0, "error" => "Unable to copy tmp file");
+		}
+
+		$ext = $sizes["o"]["extension"];
+
+		$instructions = array(
+			"o" => array("size" => "full", "format" => $ext),
+			"n" => array("size" => "!320,320", "format" => "jpg"),
+			"z" => array("size" => "!640,640", "format" => "jpg"),
+			"b" => array("size" => "!1024,1024", "format" => "jpg"),
+		);
+
+		$args = array(
+			"destination" => $pending,
+		);
+
+		$rsp = whosonfirst_media_iiif_process_image($tmp_source, $instructions, $args);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$processed = $rsp["processed"];
+
+		$whosonfirst_id = $media["whosonfirst_id"];
+		$media_id = $media["id"];
+
+		$rsp = whosonfirst_media_import_processed($processed, $whosonfirst_id, $media_id, $sizes);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$props["sizes"] = $rsp["sizes"];
+		$str_props = json_encode($props);
+	
+		$update = array(
+			"properties" => $str_props
+		);
+
+		$rsp = whosonfirst_media_update_media($media, $update);
+		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_media_import_processed($processed, $whosonfirst_id, $media_id, $sizes, $more=array()){
+
+		$defaults = array(
+			"refresh_secrets" => 0
+		);
+
+		$more = array_merge($defaults, $more);
+		
+		# setup secrets
+
+		$secret_o = null;
+		$secret = null;
+
+		if (isset($sizes["o"])){
+			$secret_o = $sizes["o"]["secret"];
+		}
+
+		foreach ($sizes as $sz => $details){
+
+			if ($sz != "o"){
+				$secret = $sizes[$sz]["secret"];
+				break;
+			}
+		}
+
+		if ((! $secret_o) || ($more["refresh_secrets"])){
+			$secret_o = random_string();
+		}
+
+		if ((! $secret) || ($more["refresh_secrets"])){
+			$secret = random_string();
+		}
+
+		$to_import = array();
+
+		foreach ($processed as $sz => $tmp_path){
+
+			$s = ($sz == "o") ? $secret_o : $secret;
+			$ext = pathinfo($tmp_path, PATHINFO_EXTENSION);
+
+			$fname = "{$whosonfirst_id}_{$media_id}_{$s}_{$sz}.{$ext}";		     
+			$root = whosonfirst_media_id2tree($whosonfirst_id);
+
+			$rel_path = $root . DIRECTORY_SEPARATOR . $fname;
+
+			$sizes[$sz] = array(
+				"secret" => $s,
+				"extension" => $ext,
+			);
+
+			$abs_path = $GLOBALS["cfg"]["whosonfirst_media_root"] . DIRECTORY_SEPARATOR . $rel_path;
+
+			$to_import[$sz] = array(
+				"source" => $tmp_path,
+				"destination" => $abs_path,
+			);
+		}
+
+		# actually move the files
+
+		foreach ($to_import as $sz => $paths){
+
+			$src_path = $paths["source"];
+			$dest_path = $paths["destination"];
+
+			# SOMETHING SOMETHING SOMETHING LIB_STORAGE...
+
+			if (! rename($src_path, $dest_path)){
+				return array("ok" => 0, "error" => "Failed to import media");
+			}
+
+			if (! chmod($dest_path, 0644)){
+				return array("ok" => 0, "error" => "Failed to assign permissions for media");
+			}
+
+			# maybe do this sooner with $source_path especially if (some day)
+			# $dest_path is remote... (20180509/thisisaaronland)
+
+			$info = getimagesize($dest_path);
+
+			if ($info){
+				$sizes[$sz]["width"] = $info[0];
+				$sizes[$sz]["height"] = $info[1];
+				$sizes[$sz]["mimetype"] = $info["mime"];
+			}
+		}
+
+		return array("ok" => 1, "sizes" => $sizes);
+	}
+
+	########################################################################
+
+	function whosonfirst_media_scrub_unknown_files(&$media){
+
+		$static = $GLOBALS["cfg"]["whosonfirst_media_root"];
+
+		whosonfirst_media_inflate_media($media);
+		$props = $media["properties"];
+		$sizes = $props["sizes"];
+
+		$known = array();
+		$scrubbed = array();
+
+		foreach ($sizes as $sz => $igore){
+
+			$rel_path = whosonfirst_media_media_to_relpath($media, $sz);
+			$abs_path = $static . DIRECTORY_SEPARATOR . $rel_path;
+
+			$known[] = $abs_path; 
+		}
+
+		$tree = whosonfirst_media_id2tree($media["whosonfirst_id"]);
+		$root = $static . DIRECTORY_SEPARATOR . $tree;
+
+		if (file_exists($root)){
+
+			foreach (glob("{$root}/*") as $path){
+
+				if (in_array($path, $known)){
+					continue;
+				}
+
+				if (! unlink($path)){
+					return array("ok" => 0, "error" => "Failed to unlink path");
+				}
+
+				$scrubbed[] = $path;
+			}
+		}
+
+		return array("ok" => 1, "scrubbed" => $scrubbed);
 	}
 
 	########################################################################
