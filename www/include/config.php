@@ -505,6 +505,13 @@
 
 	# END OF media stuff
 
+	# START OF iiif-media stuff
+
+	$GLOBALS['cfg']['enable_feature_whosonfirst_media_iiif'] = 0;
+	$GLOBALS["cfg"]["iiif_api_endpoint"] = 'READ-FROM-SECRETS-OR-CONFIG-LOCAL';
+	
+	# END OF iiif-media stuff
+
 	# START OF flickr-media stuff
 
 	$GLOBALS['cfg']['enable_feature_whosonfirst_media_flickr'] = 0;
