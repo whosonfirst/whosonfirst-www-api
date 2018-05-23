@@ -17,6 +17,11 @@
 
 		foreach ($instructions as $label => $args){
 
+			if ($args["format"] == ""){
+				$ext = pathinfo($source, PATHINFO_EXTENSION);
+				$args["format"] = $ext;
+			}
+
 			$dest_fname = "{$fname}_{$label}.{$args['format']}";
 			$dest_path = $root . DIRECTORY_SEPARATOR . $dest_fname;
 
