@@ -215,8 +215,9 @@
 		}
 
 		$media = $rsp["media"];
+		whosonfirst_media_inflate_media($media);
 
-		$props = json_decode($media["properties"], "as hash");
+		$props = $media["properties"];
 		$sizes = $props["sizes"];
 
 		foreach ($sizes as $sz => $ignore){
@@ -427,7 +428,8 @@
 
 	function whosonfirst_media_fname(&$media, $sz="o"){
 
-		$props = json_decode($media["properties"], "as hash");
+		whosonfirst_media_inflate_media($media);
+		$props = $media["properties"];
 		
 		if (! $props){
 			return null;
@@ -558,6 +560,17 @@
 		}
 
 		return $public;	
+	}
+
+	########################################################################
+
+	function whosonfirst_media_inflate_media(&$media){
+
+		if (! is_array($media["properties"])){
+			$media["properties"] = json_decode($media["properties"], "as hash");
+		}
+
+		# pass-by-ref
 	}
 
 	########################################################################

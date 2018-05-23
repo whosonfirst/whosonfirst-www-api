@@ -13,7 +13,7 @@
 <div class="card admin">
      <div class="card-title">Details</div>
      <div class="card-body">
-     {$photo|@dumper}
+     {include file="inc_dumper_pretty.txt" data=$photo}
      </div>
 </div>
 {/if}

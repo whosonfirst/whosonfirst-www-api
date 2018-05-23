@@ -32,8 +32,7 @@
 		error_403();	  
 	}
 
-	# this makes the URL decoding unhappy - please fix me (20180515/thisisaaronland)
-	# $photo["details"] = json_decode($photo["details"], "as hash");
+	whosonfirst_media_inflate_media($photo);
 
 	$place = whosonfirst_places_get_by_id($photo["whosonfirst_id"]);
 
