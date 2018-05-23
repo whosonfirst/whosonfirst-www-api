@@ -43,15 +43,13 @@
 
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">API</a>
 	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{$cfg.abs_root_url}methods/">Methods</a>
-          <a class="dropdown-item" href="{$cfg.abs_root_url}formats/">Formats</a>
-          <a class="dropdown-item" href="{$cfg.abs_root_url}errors/">Errors</a>
+          <a class="dropdown-item" href="{$cfg.abs_root_url}methods/">API Methods</a>
+          <a class="dropdown-item" href="{$cfg.abs_root_url}formats/">API Formats</a>
+          <a class="dropdown-item" href="{$cfg.abs_root_url}errors/">API Errors</a>
 
 	  {if $cfg.user}
-          <a class="dropdown-item" href="{$cfg.abs_root_url}oauth2/authenticate/like-magic/">New Access Token</a>
-          <a class="dropdown-item" href="{$cfg.abs_root_url}oauth2/tokens/">All your access tokens</a>	  	  	  	  
-          <a class="dropdown-item" href="{$cfg.abs_root_url}keys/register/">New API key</a>
-          <a class="dropdown-item" href="{$cfg.abs_root_url}keys/">All your API key</a>
+          <a class="dropdown-item" href="{$cfg.abs_root_url}keys/">Your API keys</a>
+          <a class="dropdown-item" href="{$cfg.abs_root_url}oauth2/tokens/">Your access tokens</a>	  	  	  	  
 	  {/if}
 	</div>
 	</li>
