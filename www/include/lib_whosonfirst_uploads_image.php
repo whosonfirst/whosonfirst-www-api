@@ -27,6 +27,8 @@
 		$type = $file["type"];
 		$ext = mime_type_get_extension($type);
 
+		$upload_path = whosonfirst_uploads_id2abspath($upload["id"]);
+
 		if (features_is_enabled("whosonfirst_media_iiif")){
 
 			$source = whosonfirst_uploads_id2relpath($upload["id"]);
@@ -58,15 +60,20 @@
 
 		else {
 
-			$upload_path = whosonfirst_uploads_id2abspath($upload["id"]);
 			$original_processed = $upload_path . ".{$ext}";
 
-			if (! rename($upload_path, $original_processed)){
+			if (! copy($upload_path, $original_processed)){
 				return array("ok" => 0, "error" => "failed to rename media");
 			}
 		}
 
-		return whosonfirst_media_import_media_with_upload($upload, $original_processed, $derivatives_processed);
+		$rsp = whosonfirst_media_import_media_with_upload($upload, $original_processed, $derivatives_processed);
+
+		if ($rsp["ok"]){
+			unlink($upload_path);
+		}
+
+		return $rsp;
 	}
 
 	########################################################################
