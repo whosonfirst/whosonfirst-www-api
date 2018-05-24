@@ -179,7 +179,11 @@
 
 			if ($status_map[$status_id] != "public"){
 
-				# TO DO: PLEASE CHANGE ALL THE SECRETS... (20180515/thisisaaronland)
+				$rsp = whosonfirst_media_refresh_secrets($media);
+
+				if (! $rsp["ok"]){
+					api_output_error(500);
+				}
 			}
 
 			$update = array(

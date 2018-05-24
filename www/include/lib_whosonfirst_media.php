@@ -475,6 +475,51 @@
 
 	########################################################################
 
+	function whosonfirst_media_refresh_secrets(&$media){
+
+		$static = $GLOBALS["cfg"]["whosonfirst_media_root"];
+
+		whosonfirst_media_inflate_media($media);
+
+		$whosonfirst_id = $media["whosonfirst_id"];
+		$media_id = $media["id"];
+
+		$props = $media["properties"];
+		$sizes = $props["sizes"];
+
+		$to_rename = array();
+
+		foreach ($sizes as $sz => $details){
+
+			$rel_path = whosonfirst_media_media_to_relpath($media, $sz);
+			$abs_path = $static . DIRECTORY_SEPARATOR . $rel_path;
+
+			$to_rename[$sz] = $abs_path;
+		}
+
+		$more = array(
+			"refresh_secrets" => 1,
+		);
+
+		$rsp = whosonfirst_media_import_processed($to_rename, $whosonfirst_id, $media_id, $sizes, $more);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$sizes = $rsp["sizes"];
+		$props["sizes"] = $sizes;
+
+		$update = array(
+			"properties" => json_encode($props)
+		);
+
+		$rsp = whosonfirst_media_update_media($media, $update);
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_media_import_processed($processed, $whosonfirst_id, $media_id, $sizes, $more=array()){
 
 		$defaults = array(
@@ -610,6 +655,47 @@
 
 	########################################################################
 
+	function whosonfirst_media_media_to_uri(&$media, $sz="o"){
+
+		$rel_path = whosonfirst_media_media_to_relpath($media, $sz);
+		return "{$GLOBALS["cfg"]["abs_root_url"]}static/{$rel_path}";
+	}
+
+	########################################################################
+
+	function whosonfirst_media_height(&$media, $sz="o"){
+
+		if ($size = whosonfirst_media_size($media, $sz)){
+			return $size["height"];
+		}
+	}
+
+	########################################################################
+
+	function whosonfirst_media_width(&$media, $sz="o"){
+
+		if ($size = whosonfirst_media_size($media, $sz)){
+			return $size["width"];
+		}
+	}
+
+	########################################################################
+
+	function whosonfirst_media_size(&$media, $sz="o"){
+
+		whosonfirst_media_inflate_media($media);
+		$props = $media["properties"];
+		$sizes = $props["sizes"];
+
+		if (! isset($sizes[$sz])){
+			return null;
+		}
+
+		return $sizes[$sz];
+	}
+
+	########################################################################
+
 	function whosonfirst_media_media_to_relpath(&$media, $sz="o"){
 
 		$root = whosonfirst_media_id2tree($media["whosonfirst_id"]);
@@ -714,8 +800,13 @@
 
 	function whosonfirst_media_enpublicify_media_single(&$media){
 
+		whosonfirst_media_inflate_media($media);
+
 		$urls = array(
-			"o" => "",
+			"n" => "",
+			"b" => "",
+			"z" => "",
+			# "o" if admin...
 		);
 
 		foreach ($urls as $sz => $ignore){
@@ -744,7 +835,7 @@
 
 		if ($media["source"] == "flickr"){
 
-			$props = json_decode($media["properties"], "as hash");
+			$props = $media["properties"];
 			$info = $props["photo_info"];
 
 			$GLOBALS["smarty"]->assign_by_ref("info", $info);
