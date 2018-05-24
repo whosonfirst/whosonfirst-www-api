@@ -1,6 +1,6 @@
 <div class="card sfomuseum-photo-card" data-photo-id="{$photo.id|@escape}" id="photo-card-{$photo.id|@escape}">
 
-    <a href="{$cfg.abs_root_url}photos/{$photo.id|@escape}/" class="sfomuseum-photo-link"><img id="media-img-{$photo.id|@escape}" class="card-img-top sfomuseum-photo media-{$photo.status_id|@whosonfirst_media_status_id_to_label}" src="{$cfg.abs_root_url}static/{$photo|@whosonfirst_media_media_to_relpath}" alt="" /></a>
+    <a href="{$cfg.abs_root_url}photos/{$photo.id|@escape}/" class="sfomuseum-photo-link"><img id="media-img-{$photo.id|@escape}" class="card-img-top sfomuseum-photo media-{$photo.status_id|@whosonfirst_media_status_id_to_label}" src="{$cfg.abs_root_url}static/{$photo|@whosonfirst_media_media_to_relpath:$photo_size}" alt="" /></a>
      <div class="card-body">
 
      	  {assign var="properties" value=$photo.properties}

@@ -6,7 +6,7 @@
 
 <div class="card">
      <div class="card-title">This photo is associated with <q><a href="{$cfg.abs_root_url}id/{$wof_id|@escape}/">{$wof_name|@escape}</a></q> (<code>{$wof_id|@escape}</code>)</code>
-     <div class="card-body">{include file="inc_photo_card.txt"}</div>
+     <div class="card-body">{include file="inc_photo_card.txt" photo_size="b"}</div>
 </div>
 
 {if $cfg.user && $cfg.user|@users_roles_has_role:"admin"}
