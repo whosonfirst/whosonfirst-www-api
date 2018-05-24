@@ -771,6 +771,8 @@
 
 	function whosonfirst_media_write_pending_for_media(&$media, $bytes, $fname=null){
 
+		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
+
 		$wofid = $media["whosonfirst_id"];
 		$tree = whosonfirst_media_id2tree($wofid);
 		
