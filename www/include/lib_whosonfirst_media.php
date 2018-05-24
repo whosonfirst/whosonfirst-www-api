@@ -433,6 +433,48 @@
 
 	########################################################################
 
+	function whosonfirst_media_reimport_image_for_media(&$media, $source, $instructions){
+
+		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
+
+		$args = array(
+			"destination" => $pending,
+		);
+
+		whosonfirst_media_inflate_media($media);
+		$props = $media["properties"];
+		$sizes = $props["sizes"];
+
+		$process_rsp = whosonfirst_media_iiif_process_image($source, $instructions, $args);
+
+		if (! $process_rsp){
+			return $process_rsp;
+		}
+
+		$processed = $process_rsp["processed"];
+
+		$whosonfirst_id = $media["whosonfirst_id"];
+		$media_id = $media["id"];
+
+		$import_rsp = whosonfirst_media_import_processed($processed, $whosonfirst_id, $media_id, $sizes);
+
+		if (! $import_rsp["ok"]){
+			return $import_rsp;
+		}
+
+		$props["sizes"] = $import_rsp["sizes"];
+		$str_props = json_encode($props);
+	
+		$update = array(
+			"properties" => $str_props
+		);
+
+		$update_rsp = whosonfirst_media_update_media($media, $update);
+		return $update_rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_media_import_processed($processed, $whosonfirst_id, $media_id, $sizes, $more=array()){
 
 		$defaults = array(
@@ -723,6 +765,50 @@
 		}
 
 		# pass-by-ref
+	}
+
+	########################################################################
+
+	function whosonfirst_media_write_pending_for_media(&$media, $bytes, $fname=null){
+
+		$wofid = $media["whosonfirst_id"];
+		$tree = whosonfirst_media_id2tree($wofid);
+		
+		if (! $fname){
+			$fname = $wof_id;
+		}
+
+		$path = $pending . DIRECTORY_SEPARATOR . $tree . DIRECTORY_SEPARATOR . $fname;
+		$root = dirname($path);
+
+		if (! is_dir($root)){
+
+			$recursive = true;
+
+			if (! mkdir($root, 0755, $recursive)){
+				return array("ok" => 0, "error" => "Failed to create root");
+			}
+		}
+
+		$fh = fopen($path, "wb");
+
+		if (! $fh){
+			return array("ok" => 0, "error" => "Failed to create path");
+		}
+
+		fwrite($fh, $bytes);
+		fclose($fh);
+
+		if (filesize($path) == 0){
+
+			unlink($path);
+
+			return array("ok" => 0, "error" => "Failed to write path");
+		}
+
+		$source = $tree . DIRECTORY_SEPARATOR . $fname;
+
+		return array("ok" => 1, "path" => $path, "source" => $source);
 	}
 
 	########################################################################

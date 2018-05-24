@@ -1,6 +1,6 @@
 <div class="card-deck">
 {foreach from=$photos item="ph"}
-{include file="inc_photo_card.txt" photo=$ph}
+{include file="inc_photo_card.txt" photo=$ph photo_size="n"}
 {/foreach}
 </div>
 
