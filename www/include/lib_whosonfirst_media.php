@@ -199,7 +199,7 @@
 		# hey look... see the way we're not error checking... yeah...
 		# (20180525/thisisaaronland)
 
-		whosonfirst_media_depicts_set_status($media);						
+		whosonfirst_media_depicts_set_status_for_media($media);						
 		
 		$rsp["media"] = $media;
 		return $rsp;

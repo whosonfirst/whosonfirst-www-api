@@ -60,7 +60,7 @@ whosonfirst.media.depicts = (function(){
 
 		button.onclick = function(e){
 
-		    var method = "whosonfirst.media.depictsWhosOnFirstID";
+		    var method = "whosonfirst.media.addDepiction";
 
 		    var args = {
 			"id": media_id,

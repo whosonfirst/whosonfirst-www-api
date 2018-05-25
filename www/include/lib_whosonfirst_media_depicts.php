@@ -2,7 +2,7 @@
 
 	########################################################################
 
-	function whosonfirst_media_depicts(&$media, &$place, &$user){
+	function whosonfirst_media_depicts_add_depiction(&$media, &$place, &$user){
 
 		$now = time();
 

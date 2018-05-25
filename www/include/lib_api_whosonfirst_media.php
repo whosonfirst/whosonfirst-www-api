@@ -4,6 +4,7 @@
 	loadlib("whosonfirst_uploads");
 
 	loadlib("whosonfirst_media");
+	loadlib("whosonfirst_media_depicts");
 	loadlib("whosonfirst_media_flickr");
 	loadlib("whosonfirst_media_permissions");
 
@@ -135,6 +136,59 @@
 
 	########################################################################
 
+	function api_whosonfirst_media_addDepiction(){
+
+		$user = $GLOBALS["cfg"]["user"];
+
+		$id = request_int64("id");
+
+		$media = whosonfirst_media_get_by_id($id);
+
+		if (! $media){
+			api_output_error(400);
+		}
+
+		if (! whosonfirst_media_permissions_can_view_media($media, $user["id"])){
+			api_output_error(403);
+		}
+
+		$wofid = request_int64("whosonfirst_id");
+
+		$place = whosonfirst_places_get_by_id($wofid);
+
+		if (! $place){
+			api_output_error(404);
+		}
+
+		$rsp = whosonfirst_media_depicts_add_depiction($media, $place, $user);
+
+		if (! $rsp["ok"]){
+			api_output_error(500);
+		}
+
+		$depicts = $rsp["depicts"];
+
+		$out = array(
+			"depicts" => $depicts
+		);
+
+		$more = array(
+			"key" => "depicts",
+			"singleton" => 1,
+		);
+
+		api_output_ok($out, $more);
+	}
+
+	########################################################################
+
+	function api_whosonfirst_media_removeDepiction(){
+
+		api_output_error(503);		# please write me
+	}
+
+	########################################################################
+
 	function api_whosonfirst_media_setStatus(){
 
 		api_utils_features_ensure_enabled(array(
@@ -175,29 +229,13 @@
 			api_output_error(403);
 		}
 
-		if ($media["status_id"] != $status_id){
+		$rsp = whosonfirst_media_set_status($media, $status_id);
 
-			if ($status_map[$status_id] != "public"){
-
-				$rsp = whosonfirst_media_refresh_secrets($media);
-
-				if (! $rsp["ok"]){
-					api_output_error(500);
-				}
-			}
-
-			$update = array(
-				"status_id" => $status_id,
-			);
-
-			$rsp = whosonfirst_media_update_media($media, $update);
-
-			if (! $rsp["ok"]){
-				api_output_error(500);
-			}
-			
-			$media = $rsp["media"];
+		if (! $rsp["ok"]){
+			api_output_error(500);
 		}
+			
+		$media = $rsp["media"];
 
 		$public = api_whosonfirst_media_enpublicify($media);
 
