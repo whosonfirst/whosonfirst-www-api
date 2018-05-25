@@ -1,37 +1,22 @@
-<div class="card sfomuseum-photo-card" data-photo-id="{$photo.id|@escape}" id="photo-card-{$photo.id|@escape}">
+{assign var="image_height" value=$photo|@whosonfirst_media_height:$photo_size}
+{assign var="image_width" value=$photo|@whosonfirst_media_width:$photo_size}
 
-    <a href="{$cfg.abs_root_url}photos/{$photo.id|@escape}/" class="sfomuseum-photo-link"><img id="media-img-{$photo.id|@escape}" class="card-img-top sfomuseum-photo media-{$photo.status_id|@whosonfirst_media_status_id_to_label}" src="{$cfg.abs_root_url}static/{$photo|@whosonfirst_media_media_to_relpath:$photo_size}" alt="" /></a>
+<div class="card sfomuseum-photo-card justify-content-center" data-photo-id="{$photo.id|@escape}" id="photo-card-{$photo.id|@escape}" style="max-width:{$image_width|@escape}px; margin: 0 auto;">
+
+    <a href="{$cfg.abs_root_url}photos/{$photo.id|@escape}/" class="sfomuseum-photo-link"><img id="media-img-{$photo.id|@escape}" class="card-img-top sfomuseum-photo media-{$photo.status_id|@whosonfirst_media_status_id_to_label}" src="{$cfg.abs_root_url}static/{$photo|@whosonfirst_media_media_to_relpath:$photo_size}" alt="" style="max-height:{$image_height|@escape}px; max-width:{$image_width|@escape}px;margin-left:.2em;margin-right:.2em;" /></a>
+
      <div class="card-body">
-
-     	  {assign var="properties" value=$photo.properties}
         
 	<div class="card-text sfomuseum-photo-creditline">
-	{if $photo.source == "flickr"}{include file="inc_photo_flickr_attribution.txt" info=$properties.photo_info}{/if}
+	{if $photo.source == "flickr"}{include file="inc_photo_flickr_attribution.txt" info=$photo.properties.photo_info}{/if}
 	</div>
-
-     	{if 0}
-     	<form>
-	  <div class="form-group">
-	      <label for="title">Title</label>
-	      <input type="text" class="form-control" id="title" placeholder="">
-  	      </div>
-	 <div class="form-group">
-    	      <label for="caption">Caption</label>
-    	      <input type="text" class="form-control" id="caption" placeholder="">
-  	 </div>
-	 </form>
-	 {/if}
 
      </div>
 
      <div class="card-footer">
         {if $cfg.user|@users_roles_has_role:"admin"}
      	<div class="admin">
-
-          {if 0}<div class="card-text">This photo (<code>{$photo.id|@escape}</code>) was uploaded on {$photo.created|@date_format|@escape} by <a href="#">[USER ID {$photo.user_id|@escape}]</a>.</div>{/if}
-
 	  {include file="inc_media_controls.txt" media=$photo}
-
        </div>
        {/if}
      </div>
