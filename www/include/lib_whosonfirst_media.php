@@ -173,6 +173,40 @@
 
 	########################################################################
 
+	function whosonfirst_media_set_status(&$media, $status_id){
+
+		if ($status_map[$status_id] != "public"){
+
+			$rsp = whosonfirst_media_refresh_secrets($media);
+
+			if (! $rsp["ok"]){
+				return $rsp;
+			}
+		}
+
+		$update = array(
+			"status_id" => $status_id,
+		);
+
+		$rsp = whosonfirst_media_update_media($media, $update);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+			
+		$media = array_merge($media, $update);
+
+		# hey look... see the way we're not error checking... yeah...
+		# (20180525/thisisaaronland)
+
+		whosonfirst_media_depicts_set_status_for_media($media);						
+		
+		$rsp["media"] = $media;
+		return $rsp;
+	}
+
+	########################################################################
+
 	function whosonfirst_media_update_media(&$media, $update){
 
 		$now = time();
@@ -216,6 +250,11 @@
 
 		$media = $rsp["media"];
 		whosonfirst_media_inflate_media($media);
+
+		# hey look... see the way we're not error checking... yeah...
+		# (20180525/thisisaaronland)
+
+		whosonfirst_media_depicts_delete_for_media($media);
 
 		$props = $media["properties"];
 		$sizes = $props["sizes"];

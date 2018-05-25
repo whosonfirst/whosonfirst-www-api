@@ -1090,6 +1090,64 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
+		'whosonfirst.media.addDepiction' => array(
+			"description" => "...",
+			"documented" => 1,
+			"enabled" => ($GLOBALS['cfg']['enable_feature_whosonfirst_media']) ? 1 : 0,
+			"paginated" => 0,
+			"requires_perms" => 2,	# write
+			"extras" => 0,
+			"library" => "api_whosonfirst_media",
+                        "parameters" => array(
+				array(
+					"name" => "id",
+					"description" => "",
+					"required" => 1,
+					"documented" => 1,
+					"example" => ""
+				),
+				array(
+					"name" => "whosonfirst_id",
+					"description" => "",
+					"required" => 1,
+					"documented" => 1,
+					"example" => ""
+				),
+			), 
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
+		'whosonfirst.media.removeDepiction' => array(
+			"description" => "...",
+			"documented" => 1,
+			"enabled" => ($GLOBALS['cfg']['enable_feature_whosonfirst_media']) ? 1 : 0,
+			"paginated" => 0,
+			"requires_perms" => 3,	# delete
+			"extras" => 0,
+			"library" => "api_whosonfirst_media",
+                        "parameters" => array(
+				array(
+					"name" => "id",
+					"description" => "",
+					"required" => 1,
+					"documented" => 1,
+					"example" => ""
+				),
+				array(
+					"name" => "whosonfirst_id",
+					"description" => "",
+					"required" => 1,
+					"documented" => 1,
+					"example" => ""
+				),
+			), 
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
 		'whosonfirst.media.uploadFile' => array(
 			"description" => "Upload an image for an exhibition",
 			"documented" => (($GLOBALS['cfg']['enable_feature_whosonfirst_uploads']) && ($GLOBALS['cfg']['enable_feature_whosonfirst_media'])) ? 1 : 0,
