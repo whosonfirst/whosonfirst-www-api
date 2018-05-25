@@ -363,6 +363,8 @@
 
 		whosonfirst_media_inflate_media($media);
 
+		$id = $media["id"];
+
 		$props = $media["properties"];
 		$sizes = $props["sizes"];
 
@@ -371,7 +373,8 @@
 
 		$root = dirname($rel_path);
 
-		$tmp_source = $root . DIRECTORY_SEPARATOR . $id;
+		$ext = $sizes["o"]["extension"];
+		$tmp_source = $root . DIRECTORY_SEPARATOR . "{$id}.{$ext}";
 
 		$tmp_file = $pending . DIRECTORY_SEPARATOR . $tmp_source;
 		$tmp_root = dirname($tmp_file);
@@ -390,14 +393,8 @@
 			return array("ok" => 0, "error" => "Unable to copy tmp file");
 		}
 
-		$ext = $sizes["o"]["extension"];
-
-		$instructions = array(
-			"o" => array("size" => "full", "format" => $ext),
-			"n" => array("size" => "!320,320", "format" => "jpg"),
-			"z" => array("size" => "!640,640", "format" => "jpg"),
-			"b" => array("size" => "!1024,1024", "format" => "jpg"),
-		);
+		$instructions = $GLOBALS["cfg"]["iiif_default_instructions"];
+		$instructions["o"]["format"] = $ext;
 
 		$args = array(
 			"destination" => $pending,
@@ -613,6 +610,8 @@
 	########################################################################
 
 	function whosonfirst_media_scrub_unknown_files(&$media){
+
+		return array("ok" => 0, "error" => "This doesn't work properly yet");
 
 		$static = $GLOBALS["cfg"]["whosonfirst_media_root"];
 

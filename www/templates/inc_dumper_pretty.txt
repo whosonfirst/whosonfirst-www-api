@@ -1,6 +1,7 @@
 {if $data|@is_array}
 <div class="table-responsive">
 <table class="table">
+<!-- {$data|@ksort} -->
 {foreach from=$data item="v" key="k"}
 <tr><th scope="col">{$k|@escape}</th><td>{include file="inc_dumper_pretty.txt" data=$v}</td></tr>
 {/foreach}

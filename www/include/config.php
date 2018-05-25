@@ -512,9 +512,12 @@
 
 	$GLOBALS["cfg"]["iiif_default_instructions"] = array(
 		# "o" => array("size" => "full", "format" => ""),
-		# "n" => array("size" => "!320,320", "format" => "jpg"),
-		# "z" => array("size" => "!640,640", "format" => "jpg"),
-		# "b" => array("size" => "!1024,1024", "format" => "jpg"),
+		# "sq" => array("size" => "full", "region" => "-1,-1,320,320", "format" => "jpg"),		# smart crop
+		# "n" => array("size" => "!320,240", "format" => "jpg"),
+		# "z" => array("size" => "!640,480", "format" => "jpg"),
+		# "c" => array("size" => "!800,600", "format" => "jpg"),
+		# "b" => array("size" => "!1024,768", "format" => "jpg"),
+		# "k" => array("size" => "!2048,1536", "format" => "jpg"),
 	);
 	
 	# END OF iiif-media stuff

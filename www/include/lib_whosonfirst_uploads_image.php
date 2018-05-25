@@ -33,12 +33,8 @@
 
 			$source = whosonfirst_uploads_id2relpath($upload["id"]);
 
-			$instructions = array(
-				"o" => array("size" => "full", "format" => $ext),
-				"n" => array("size" => "!320,320", "format" => "jpg"),
-				"z" => array("size" => "!640,640", "format" => "jpg"),
-				"b" => array("size" => "!1024,1024", "format" => "jpg"),
-			);
+			$instructions = $GLOBALS["cfg"]["iiif_default_instructions"];
+			$instructions["o"]["format"] = $ext;
 
 			$args = array(
 				"destination" => $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"],
