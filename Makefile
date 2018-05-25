@@ -42,15 +42,26 @@ defuse:
 	curl -L -s -o www/include/defuse-crypto/defuse-crypto.2.2.0.phar https://github.com/defuse/php-encryption/releases/download/v2.2.0/defuse-crypto.phar
 	curl -L -s -o www/include/defuse-crypto/defuse-crypto.2.2.0.phar.sig https://github.com/defuse/php-encryption/releases/download/v2.2.0/defuse-crypto.phar.sig
 
+# https://github.com/twitter/typeahead.js
+
+js-typeahead:
+	curl -s -o www/javascript/typeahead.bundle.js https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js
+
+# https://mozilla.github.io/pdf.js/getting_started/
+
+js-pdf-js:
+	curl -s -o www/javascript/pdf.min.js https://unpkg.com/pdfjs-dist@2.0.489/build/pdf.min.js
+	curl -s -o www/javascript/pdf.worker.min.js https://unpkg.com/pdfjs-dist@2.0.489/build/pdf.worker.min.js
+
 # https://getbootstrap.com/docs/4.1/getting-started/download/
 
-bootstrap:
+js-bootstrap:
 	curl -s -o www/css/bootstrap.4.1.1.min.css https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css
 	curl -s -o www/javascript/bootstrap.4.1.1.min.js https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js
 	curl -s -o www/javascript/jquery-3.3.1.slim.min.js https://code.jquery.com/jquery-3.3.1.slim.min.js
 	curl -s -o www/javascript/popper.1.14.3.min.js https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js
 
-jquery:
+js-jquery:
 	curl -s -o www/javascript/jquery-3.3.1.min.js https://code.jquery.com/jquery-3.3.1.min.js
 	curl -s -o www/javascript/jquery-3.3.1.js https://code.jquery.com/jquery-3.3.1.js
 
