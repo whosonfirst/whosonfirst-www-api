@@ -1,0 +1,3 @@
+<div class="card-text">
+Photos that depict {$wof_name} have also depicted {foreach from=$also_depicts item="other" name="also_depicts"}<a href="{$cfg.abs_root_url}id/{$other|@whosonfirst_places_property:"wof:id"|@escape}">{$other|@whosonfirst_places_property:"wof:name"|@escape}</a>{if !$smarty.foreach.also_depicts.last} and {/if}{/foreach}
+</div>

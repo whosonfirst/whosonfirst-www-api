@@ -2,7 +2,6 @@
 
 	include("include/init.php");
 	loadlib("whosonfirst_places");
-	loadlib("whosonfirst_placetypes");
 	
 	loadlib("whosonfirst_media");
 	loadlib("whosonfirst_media_depicts");
@@ -20,30 +19,16 @@
 		error_404();
 	}
 
-	if (get_isset("nearby")){
-		$url = whosonfirst_places_nearby_url_for_place($place);
-		header("location: {$url}");
-		exit();
-	}
-
-	$parent_id = $place["wof:parent_id"];
-
-	if ($parent_id > -1){
-		$parent = whosonfirst_places_get_by_id($parent_id);
-		$place["wof:parent"] = $parent;
-	}
-
-	$search_url = whosonfirst_places_search_referer_url($query, $filters, $args);
-	$GLOBALS['smarty']->assign("search_url", $search_url);
-
 	$GLOBALS['smarty']->assign_by_ref("place", $place);
 
 	$photos_more = array(
-		"per_page" => 3,
-		"random" => 1,
 		"medium" => "image"			 
 	);
 
+	if ($page = get_int32("page")){
+		$photos_more["page"] = $page;
+	}
+	
 	$viewer_id = ($GLOBALS["cfg"]["user"]) ? $GLOBALS["cfg"]["user"]["id"] : 0;
 	$rsp = whosonfirst_media_get_media_for_place($place, $viewer_id, $photos_more);
 
@@ -62,6 +47,6 @@
 		$GLOBALS["smarty"]->assign_by_ref("also_depicts", $rsp["rows"]);
 	}
 
-	$GLOBALS['smarty']->display("page_id.txt");
+	$GLOBALS['smarty']->display("page_id_photos.txt");
 	exit();
 ?>

@@ -1,0 +1,28 @@
+{capture assign="wof_id"}{$place|@whosonfirst_places_property:"wof:id"}{/capture}
+{capture assign="wof_name"}{$place|@whosonfirst_places_property:"wof:name"}{/capture}
+{capture assign="page_title"}{$wof_name} ({$wof_id}){/capture}
+{include file="inc_head.txt"}
+
+{assign var="wof_parents" value=$place|@whosonfirst_places_property:"wof:parents"}
+
+<div id="content" class="container">
+	
+	<div class="row">
+		<div class="card">
+			<h2 class="card-header">{$wof_name|@escape} <small><code>{$wof_id|@escape}</code></small></h2>
+			
+			<div class="card-body">
+
+			{if $photos|@count}
+			{include file="inc_photos.txt"}
+			{/if}
+			</div>
+
+			<div class="card-footer">
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+{include file="inc_foot.txt"}
