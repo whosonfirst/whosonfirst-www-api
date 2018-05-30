@@ -33,6 +33,7 @@ flamework.api = function(){
 		return false;
 	    }
 
+	    // console.log("FLAMEWORK", target, handler);
 	    self._handlers[target] = handler;
 	},
 
@@ -72,6 +73,8 @@ flamework.api = function(){
 
 	    endpoint = get_endpoint();
 
+	    console.log("API", endpoint);
+	    
 	    if (! endpoint){
 		dothis_onerror(self.destruct("Endpoint handler returns no endpoint!"));
 		return false
