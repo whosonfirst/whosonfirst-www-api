@@ -84,7 +84,6 @@ CREATE TABLE `Uploads` (
        file JSON NOT NULL,
        properties JSON NOT NULL,
        error JSON,
-       type VARCHAR(128) GENERATED ALWAYS AS (JSON_UNQUOTE(JSON_EXTRACT(file, '$.type'))) VIRTUAL,
        KEY `by_fingerprint` (`fingerprint`, `user_id`),
        KEY `by_user` (`user_id`, `lastmodified`),
        KEY `by_status` (`status_id`, `lastmodified`),
@@ -93,20 +92,39 @@ CREATE TABLE `Uploads` (
 
 DROP TABLE IF EXISTS `Photos`;
 
-CREATE TABLE `Photos` (
+CREATE TABLE `whosonfirst_media` (
        id BIGINT UNSIGNED PRIMARY KEY,       
        user_id BIGINT UNSIGNED NOT NULL,
-       whosonfirst_id BIGINT UNSIGNED NOT NULL,
        upload_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
        status_id TINYINT NOT NULL DEFAULT 0 COMMENT 'NOT UNSIGNED BECAUSE -1 MEANS PENDING',
        fingerprint CHAR(40) NOT NULL,
-       details JSON COMMENT 'THIS IS WHERE WE PUT THINGS LIKE DIMENSIONS AND MIMETYPE AND WHATEVER ELSE',
        created INT UNSIGNED NOT NULL DEFAULT 0,
        lastmodified INT UNSIGNED NOT NULL DEFAULT 0,
        deleted INT UNSIGNED NOT NULL DEFAULT 0,
-       UNIQUE KEY `by_fingerprint` (`whosonfirst_id`, `fingerprint`),
+       properties JSON COMMENT 'THIS IS WHERE WE PUT THINGS LIKE DIMENSIONS AND MIMETYPE AND WHATEVER ELSE',
+       source VARCHAR(128) GENERATED ALWAYS AS (JSON_UNQUOTE(JSON_EXTRACT(properties, '$.source'))) VIRTUAL,
+       medium VARCHAR(128) GENERATED ALWAYS AS (JSON_UNQUOTE(JSON_EXTRACT(properties, '$.medium'))) VIRTUAL,
+       mimetype VARCHAR(128) GENERATED ALWAYS AS (JSON_UNQUOTE(JSON_EXTRACT(properties, '$.mimetype'))) VIRTUAL,
+       KEY `by_fingerprint` (`fingerprint`, `created`),
        KEY `by_status` (`status_id`),
        KEY `by_upload` (`upload_id`),
        KEY `by_user` (`user_id`, `lastmodified`),
        KEY `by_lastmodified` (`lastmodified`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DROP TABLE IF EXISTS `whosonfirst_media_depicts`;
+
+CREATE TABLE `whosonfirst_media_depicts` (
+       media_id BIGINT UNSIGNED NOT NULL,
+       whosonfirst_id BIGINT UNSIGNED NOT NULL,
+       user_id BIGINT UNSIGNED NOT NULL,
+       status_id TINYINT UNSIGNED NOT NULL DEFAULT 0,
+       properties JSON NOT NULL,
+       created INT UNSIGNED NOT NULL,
+       lastmodified INT UNSIGNED NOT NULL,
+       medium VARCHAR(128) GENERATED ALWAYS AS (JSON_UNQUOTE(JSON_EXTRACT(properties, '$.medium'))) VIRTUAL,
+       UNIQUE KEY `unq_depicts` (`media_id`, `whosonfirst_id`, `user_id`),
+       KEY `by_media` (`media_id`, `status_id`, `created`),
+       KEY `by_wof` (`whosonfirst_id`, `status_id`, `created`),
+       KEY `by_user` (`user_id`, `status_id`, `created`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
