@@ -21,17 +21,26 @@
 
 		$user = $GLOBALS["cfg"]["user"];
 
+		error_log("UPLOAD 1");
+		
 		api_whosonfirst_media_ensure_capability($user, "can_upload");
 
+		error_log("UPLOAD 2");
  		$medium = request_str("medium");
 		api_whosonfirst_media_ensure_medium($medium);
 
+		error_log("UPLOAD 3");
+		
 		# this will validate mimetype(s)
 
 		api_whosonfirst_media_ensure_files($_FILES);
 
+		error_log("UPLOAD 4");
+		
 		$depicts = api_whosonfirst_media_ensure_depicts();
 
+		error_log("UPLOAD 5");
+		
 		$props = array(
 			"medium" => $medium,
 			"source" => "user",
