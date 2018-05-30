@@ -2,7 +2,15 @@
 
 	########################################################################
 
-	function users_roles_get_roles(&$user) {
+	function users_roles_has_role(&$user, $role){
+
+		$roles = users_roles_get_roles($user);
+		return in_array($role, $roles);
+	}
+
+	########################################################################
+
+	function users_roles_get_roles(&$user){
 
 		if (! $user['id']){
 			return array();
