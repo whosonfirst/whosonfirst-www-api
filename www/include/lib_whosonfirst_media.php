@@ -2,6 +2,7 @@
 
 	loadlib("whosonfirst_places");
 	loadlib("whosonfirst_uploads");
+	loadlib("whosonfirst_media_depicts");
 	loadlib("whosonfirst_media_permissions");
 	loadlib("random");
 	loadlib("brooklyn_integers");
@@ -72,15 +73,37 @@
 
 	########################################################################
 
-	function whosonfirst_media_get_by_fingerprint_and_whosonfirst_id($fp, $wof_id){
+	function whosonfirst_media_get_by_fingerprint($fp){
 
 		$enc_fp = AddSlashes($fp);
-		$enc_id = AddSlashes($wof_id);
 
-		$sql = "SELECT * FROM whosonfirst_media WHERE fingerprint='{$enc_fp}' AND whosonfirst_id='{$enc_id}'";
+		$sql = "SELECT * FROM whosonfirst_media WHERE fingerprint='{$enc_fp}'";
 		$rsp = db_fetch($sql);
 		$rsp = db_single($rsp);
 
+		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_media_get_media_for_place(&$place, $viewer_id, $more=array()){
+
+		$media = array();
+
+		$rsp = whosonfirst_media_depicts_get_depictions_for_place($place, $viewer_id, $more);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		# just do a SELECT ... IN() query on the grounds that the pagination
+		# limits will make it cheap enough? (20180530/thisisaaronland)
+
+		foreach ($rsp["rows"] as $row){
+			$media[] = whosonfirst_media_get_by_id($row["media_id"]);
+		}
+
+		$rsp["rows"] = $media;
 		return $rsp;
 	}
 
@@ -91,11 +114,6 @@
 		$where = array(
 			"deleted=0",
 		);
-
-		if ($wof_id = $more["whosonfirst_id"]){
-			$enc_wof = AddSlashes($wof_id);
-			$where[] = "whosonfirst_id='{$enc_wof}'";
-		}
 
 		if ($medium = $more["medium"]){		
 			$enc_medium = AddSlashes($medium);
@@ -123,52 +141,6 @@
 		}
 
 		return db_fetch_paginated($sql, $more);
-	}
-
-	########################################################################
-
-	function whosonfirst_media_get_media_for_place($viewer_id, $place, $more=array()){
-
-		$more["whosonfirst_id"] = $place["wof:id"];
-		return whosonfirst_media_get_media($viewer_id, $more);
-	}
-
-	########################################################################
-
-	# PLEASE RENAME ME... (20180515/thisisaaronland)
-
-	function whosonfirst_media_get_photos(&$record, $more=array()){
-
-		$status_map = whosonfirst_media_status_map("string keys");
-
-		$defaults = array(
-			"status_id" => $status_map["public"],
-		);
-
-		$more = array_merge($defaults, $more);
-
-		$enc_id = AddSlashes($record["wof:id"]);
-
-		$sql = "SELECT * FROM whosonfirst_media WHERE whosonfirst_id='{$enc_id}'";
-
-		return db_fetch_paginated($sql, $more);
-	}
-
-	########################################################################
-
-	# PLEASE RENAME ME... (20180515/thisisaaronland)
-
-	function whosonfirst_media_get_photo(&$record, $photo_id, $more=array()){
-
-		$enc_exh = AddSlashes($record["whosonfirst:id"]);
-		$enc_ph = AddSlashes($photo_id);
-
-		$sql = "SELECT * FROM whosonfirst_media WHERE id='{$enc_ph}' AND whosonfirst_id='{$enc_exh}'";
-
-		$rsp = db_fetch($sql);
-		$photo = db_single($rsp);
-
-		return $photo;
 	}
 
 	########################################################################
@@ -261,8 +233,7 @@
 
 		foreach ($sizes as $sz => $ignore){
 
-			$rel_path = whosonfirst_media_media_to_relpath($media, $sz);
-			$abs_path = $GLOBALS["cfg"]["whosonfirst_media_root"] . DIRECTORY_SEPARATOR . $rel_path;
+			$abs_path = whosonfirst_media_media_to_abspath($media, $sz);
 
 			if (file_exists($abs_path)){
 
@@ -316,30 +287,15 @@
 		if (! $props){
 			return array("ok" => 0, "error" => "Unable to parse properties");
 		}
-
-		$whosonfirst_id = $props["whosonfirst_id"];
-
-		if (! $whosonfirst_id){
-			return array("ok" => 0, "Missing whosonfirst ID");
-		}
-
-		$pl = whosonfirst_places_get_by_id($whosonfirst_id);
-
-		if (! $pl){
-			return array("ok" => 0, "Invalid record");
-		}
-
+		
 		$fp = $upload["fingerprint"];
 
-		if (whosonfirst_media_get_by_fingerprint_and_whosonfirst_id($fp, $whosonfirst_id)){
-			return array("ok" => 0, "Media with matching fingerprint already exists");
-		}
+		# FIX ME... TO BE MORE NUANCED... I'M NOT SURE WHAT THAT MEANS YET...
+		# (20180528/thisisaaronland)
 
-		$rsp = whosonfirst_media_mkroot($whosonfirst_id);
-
-		if (! $rsp["ok"]){
-			return $rsp;
-		}
+		# if (whosonfirst_media_get_by_fingerprint($fp)){
+		# 	return array("ok" => 0, "Media with matching fingerprint already exists");
+		# }
 
 		$media_id = whosonfirst_media_generate_id();
 		
@@ -350,9 +306,15 @@
 			return array("ok" => 0, "error" => "Failed to generate media ID");
 		}
 
+		$rsp = whosonfirst_media_mkroot($media_id);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
 		$sizes = array();
 
-		$rsp = whosonfirst_media_import_processed($derivatives, $whosonfirst_id, $media_id, $sizes);
+		$rsp = whosonfirst_media_import_processed($derivatives, $media_id, $sizes);
 
 		if (! $rsp["ok"]){
 			return $rsp;
@@ -367,7 +329,6 @@
 
 		$media_row = array(
 			"id" => $media_id,
-			"whosonfirst_id" => $whosonfirst_id,
 			"user_id" => $upload["user_id"],
 			"upload_id" => $upload["id"],
 			"status_id" => $more["status_id"],
@@ -390,6 +351,27 @@
 		} 
 
 		$rsp["media"] = $media_row;
+
+		# depicts
+		
+		$upload_props = $upload["properties"];
+
+		if ((is_array($upload_props["depicts"])) && (count($upload_props["depicts"]))){
+
+			$user = users_get_by_id($upload["user_id"]);
+
+			foreach ($upload_props["depicts"] as $id){
+
+				$pl = whosonfirst_places_get_by_id($id);
+
+				$depicts_rsp = whosonfirst_media_depicts_add_depiction($media_row, $pl, $user);
+
+				# HOW TO HANDLE ERRORS ?
+			}
+		}
+
+		# end of depicts
+
 		return $rsp;
 	}
 
@@ -447,10 +429,9 @@
 
 		$processed = $rsp["processed"];
 
-		$whosonfirst_id = $media["whosonfirst_id"];
 		$media_id = $media["id"];
 
-		$rsp = whosonfirst_media_import_processed($processed, $whosonfirst_id, $media_id, $sizes);
+		$rsp = whosonfirst_media_import_processed($processed, $media_id, $sizes);
 
 		if (! $rsp["ok"]){
 			return $rsp;
@@ -489,10 +470,9 @@
 
 		$processed = $process_rsp["processed"];
 
-		$whosonfirst_id = $media["whosonfirst_id"];
 		$media_id = $media["id"];
 
-		$import_rsp = whosonfirst_media_import_processed($processed, $whosonfirst_id, $media_id, $sizes);
+		$import_rsp = whosonfirst_media_import_processed($processed, $media_id, $sizes);
 
 		if (! $import_rsp["ok"]){
 			return $import_rsp;
@@ -517,7 +497,6 @@
 
 		whosonfirst_media_inflate_media($media);
 
-		$whosonfirst_id = $media["whosonfirst_id"];
 		$media_id = $media["id"];
 
 		$props = $media["properties"];
@@ -537,7 +516,7 @@
 			"refresh_secrets" => 1,
 		);
 
-		$rsp = whosonfirst_media_import_processed($to_rename, $whosonfirst_id, $media_id, $sizes, $more);
+		$rsp = whosonfirst_media_import_processed($to_rename, $media_id, $sizes, $more);
 
 		if (! $rsp["ok"]){
 			return $rsp;
@@ -556,7 +535,7 @@
 
 	########################################################################
 
-	function whosonfirst_media_import_processed($processed, $whosonfirst_id, $media_id, $sizes, $more=array()){
+	function whosonfirst_media_import_processed($processed, $media_id, $sizes, $more=array()){
 
 		$defaults = array(
 			"refresh_secrets" => 0
@@ -591,13 +570,16 @@
 
 		$to_import = array();
 
+		# PLEASE MOVE THIS IN TO A COMMON FUNCTION FOR ALL THE THINGS
+		# (20180530/thisisaaronland)
+
 		foreach ($processed as $sz => $tmp_path){
 
 			$s = ($sz == "o") ? $secret_o : $secret;
 			$ext = pathinfo($tmp_path, PATHINFO_EXTENSION);
 
-			$fname = "{$whosonfirst_id}_{$media_id}_{$s}_{$sz}.{$ext}";		     
-			$root = whosonfirst_media_id2tree($whosonfirst_id);
+			$fname = "{$media_id}_{$s}_{$sz}.{$ext}";		     
+			$root = whosonfirst_media_id_to_tree($media_id);
 
 			$rel_path = $root . DIRECTORY_SEPARATOR . $fname;
 
@@ -669,7 +651,7 @@
 			$known[] = $abs_path; 
 		}
 
-		$tree = whosonfirst_media_id2tree($media["whosonfirst_id"]);
+		$tree = whosonfirst_media_media_to_tree($media);
 		$root = $static . DIRECTORY_SEPARATOR . $tree;
 
 		if (file_exists($root)){
@@ -734,12 +716,35 @@
 
 	########################################################################
 
+	function whosonfirst_media_media_to_tree(&$media){
+
+		return whosonfirst_media_id_to_tree($media["id"]);
+	}
+
+	########################################################################
+
 	function whosonfirst_media_media_to_relpath(&$media, $sz="o"){
 
-		$root = whosonfirst_media_id2tree($media["whosonfirst_id"]);
+		$root = whosonfirst_media_media_to_tree($media);
 		$fname = whosonfirst_media_fname($media, $sz);
 
 		return $root . DIRECTORY_SEPARATOR . $fname;
+	}
+
+	########################################################################
+
+	function whosonfirst_media_media_to_abspath(&$media, $sz="o"){
+
+		$rel_path = whosonfirst_media_media_to_relpath($media, $sz);
+		$abs_path = $GLOBALS["cfg"]["whosonfirst_media_root"] . DIRECTORY_SEPARATOR . $rel_path;
+
+		return $abs_path;
+	}
+
+	########################################################################
+
+	function whosonfirst_media_media_to_url(&$media, $sz="o"){
+		# PLEASE WRITE ME
 	}
 
 	########################################################################
@@ -759,12 +764,11 @@
 
 		$props = $props["sizes"][$sz];
 
-		$wof_id = $media["whosonfirst_id"];
 		$media_id = $media["id"];
 		$secret = $props["secret"];
 		$ext = $props["extension"];		
 
-		return "{$wof_id}_{$media_id}_{$secret}_{$sz}.{$ext}";
+		return "{$media_id}_{$secret}_{$sz}.{$ext}";
 	}
 
 	########################################################################
@@ -777,7 +781,7 @@
 			return array("ok" => 0, "error" => "whosonfirst_media root misconfigured");
 		}
 
-		$tree = whosonfirst_media_id2tree($id);
+		$tree = whosonfirst_media_id_to_tree($id);
 		$root = $static . DIRECTORY_SEPARATOR . $tree;
 
 		if (! is_dir($root)){
@@ -794,7 +798,7 @@
 
 	########################################################################
 
-	function whosonfirst_media_id2tree($id){
+	function whosonfirst_media_id_to_tree($id){
 
 		$tree = array();
 		$tmp = $id;
@@ -866,7 +870,6 @@
 			"source" => $media["source"],
 			"status" => $status,
 			"mimetype" => $media["mimetype"],
-			# "whosonfirst_id" => $media["whosonfirst_id"],
 			"urls" => $urls,
 			"creditline" => $creditline,
 		);
@@ -902,8 +905,7 @@
 
 		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
 
-		$wofid = $media["whosonfirst_id"];
-		$tree = whosonfirst_media_id2tree($wofid);
+		$tree = whosonfirst_media_media_to_tree($media);
 		
 		if (! $fname){
 			$fname = $wof_id;

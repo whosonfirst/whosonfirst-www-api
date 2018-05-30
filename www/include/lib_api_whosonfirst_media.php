@@ -30,13 +30,13 @@
 
 		api_whosonfirst_media_ensure_files($_FILES);
 
-		$pl = api_whosonfirst_media_ensure_place();
+		$depicts = api_whosonfirst_media_ensure_depicts();
 
 		$props = array(
 			"medium" => $medium,
 			"source" => "user",
+			"depicts" => $depicts,
 			# mimetype is set below in api_whosonfirst_media_upload_files and per-file basis
-			"whosonfirst_id" => $pl["wof:id"],
 		);
 
 		api_whosonfirst_media_upload_files($user, $_FILES, $props);
@@ -122,11 +122,13 @@
 		$files = $rsp["files"];	
 		api_whosonfirst_media_ensure_files($files);	# this will validate mimetype(s)
 
+		$depicts = api_whosonfirst_media_ensure_depicts();
+
 		$props = array(
 			"medium" => $medium,
 			"source" => "flickr",
 			# mimetype is set below in api_whosonfirst_media_upload_files and per-file basis
-			"whosonfirst_id" => $pl["wof:id"],
+			"depicts" => $depicts,
 			"photo_id" => $photo_id,
 			"photo_info" => $rsp["info"],
 		);
@@ -237,7 +239,7 @@
 			
 		$media = $rsp["media"];
 
-		$public = api_whosonfirst_media_enpublicify($media);
+		$public = whosonfirst_media_enpublicify_media_single($media);
 
 		$out = array(
 			"media" => $public,
@@ -310,8 +312,10 @@
 				api_output_error(500);
 			}
 
-			$fname = $f["name"];
-			$uploads[$fname] = $rsp["upload"]["id"];
+			$uploads[] = array(
+				"id" => $rsp["upload"]["id"],
+				"name" => $fname,
+			);
 		}
 
 		$out = array(
@@ -323,25 +327,6 @@
 		);
 
 		api_output_ok($out, $more);
-	}
-
-	########################################################################
-
-	function api_whosonfirst_media_ensure_place(){
-
-		$id = request_int64("whosonfirst_id");
-
-		if (! $id){
-			api_output_error(404);
-		}
-
-		$pl = whosonfirst_places_get_by_id($id);
-		
-		if (! $pl){
-			api_output_error(404);
-		}
-
-		return $pl;
 	}
 
 	########################################################################
@@ -369,7 +354,6 @@
 
 			$type = $f["type"];
 			api_whosonfirst_media_ensure_mimetype($type);
-
 		}
 
 	}
@@ -384,25 +368,6 @@
 		if (! users_acl_has_capability($user, $cap)){
 			api_output_error(403);
 		}
-	}
-
-	########################################################################
-
-	# DEPRECATED - PLEASE USE whosonfirst_media_enpublicify
-	# (20180522/thisisaaronland)
-
-	function api_whosonfirst_media_enpublicify(&$media){
-
-		$public = array(
-			"id" => $media["id"],
-			"whosonfirst_id" => $media["whosonfirst_id"],
-			"status_id" => $media["status_id"],
-			"source" => $media["source"],
-			"medium" => $media["medium"],
-			"mimetype" => $media["mimetype"],
-		);
-
-		return $public;
 	}
 
 	########################################################################
@@ -439,6 +404,31 @@
 		api_output_error(400);
 	}
 
+	########################################################################
+
+	function api_whosonfirst_media_ensure_depicts(){
+
+		$depicts = array();
+
+		if ($str_wofids = request_str("whosonfirst_id")){
+
+			foreach (explode(",", $str_wofids) as $id){
+
+				$pl = whosonfirst_places_get_by_id($id);
+
+				if (! $pl){
+					api_output_error(404);
+				}
+
+				if (! in_array($id, $depicts)){
+					$depicts[] = $id;
+				}
+			}
+		}
+		
+		return $depicts;
+	}
+	
 	########################################################################
 
 	# the end

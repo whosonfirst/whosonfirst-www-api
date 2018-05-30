@@ -462,20 +462,20 @@
 
 	function whosonfirst_uploads_inflate_upload(&$upload){
 
-		$upload["user"] = users_get_by_id($upload["user_id"]);
-
-		$upload["file"] = json_decode($upload["file"], "as hash");
-		$upload["properties"] = json_decode($upload["properties"], "as hash");
-
-		if ($upload["error"]){
-			$upload["error"] = json_decode($upload["error"], "as hash");			
+		if (! is_array($upload["user"])){
+			$upload["user"] = users_get_by_id($upload["user_id"]);
 		}
 
-		$wof_id = $upload["properties"]["whosonfirst_id"];
+		if (! is_array($upload["file"])){
+			$upload["file"] = json_decode($upload["file"], "as hash");
+		}
 
-		if (($wof_id) && ($wof_id > 0)){	
-			$place = whosonfirst_places_get_by_id($wof_id);
-			$upload["relation"] = $place;
+		if (! is_array($upload["properties"])){
+			$upload["properties"] = json_decode($upload["properties"], "as hash");
+		}
+
+		if (($upload["error"]) && (! is_array($upload["error"]))){
+			$upload["error"] = json_decode($upload["error"], "as hash");			
 		}
 
 		# pass-by-ref
@@ -511,12 +511,10 @@
 
  		if (! $rsp["ok"]){
 			whosonfirst_uploads_set_failed($upload, $rsp);
+			return $rsp;
 		}  
 
-		else {
-			whosonfirst_uploads_set_completed($upload);
-		}
-
+		whosonfirst_uploads_set_completed($upload);
 		return $rsp;		
 	}
 

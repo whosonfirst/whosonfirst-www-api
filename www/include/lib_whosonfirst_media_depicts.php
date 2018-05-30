@@ -2,12 +2,17 @@
 
 	########################################################################
 
-	function whosonfirst_media_depicts_add_depiction(&$media, &$place, &$user){
+	function whosonfirst_media_depicts_add_depiction(&$media, &$place, &$user, $props=array()){
 
 		$now = time();
 
-		$props = array();
-		$str_props = json_encode($str_props);
+		whosonfirst_media_inflate_media($media);
+
+		$media_props = $media["properties"];
+
+		$props["medium"] = $media_props["medium"];
+
+		$str_props = json_encode($props);
 
 		$depicts = array(
 			"media_id" => $media["id"],
@@ -18,8 +23,6 @@
 			"created" => $now,
 			"lastmodified" => $now,
 		);
-
-		# return array("ok" => 1, "depicts" => $depicts);
 
 		$insert = array();
 
@@ -38,6 +41,46 @@
 		}
 
 		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_media_depicts_update_depiction(&$depicts, $update){
+
+		$now = time();
+
+		$update["lastmodified"] = $now;
+
+		$insert = array();
+
+		foreach ($update as $k => $v){
+			$insert[$k] = AddSlashes($v);
+		}
+
+		$enc_media = AddSlashes($depicts["media_id"]);
+		$enc_wof = AddSlashes($depicts["whosonfirst_id"]);
+
+		$where = "media_id='{$enc_media}' AND whosonfirst_id='{$enc_wof}'";
+
+		$rsp = db_update("whosonfirst_media_depicts", $insert, $where);
+
+		if ($rsp["ok"]){
+			$depicts = array_merge($depicts, $update);
+			$rsp["depiction"] = $depicts;
+		}
+
+		return $rsp;
+	}
+
+	########################################################################
+
+	function whosonfirst_media_depicts_delete_depiction(&$depicts){
+
+		$enc_media = AddSlashes($depicts["media_id"]);
+		$enc_wof = AddSlashes($depicts["whosonfirst_id"]);
+
+		$sql = "DELETE FROM whosonfirst_media_depicts WHERE media_id='{$enc_media}' AND whosonfirst_id='{$enc_wof}'";
+		return db_write("whosonfirst_media_depicts", $sql);
 	}
 
 	########################################################################
@@ -72,7 +115,7 @@
 
 	########################################################################
 
-	function whosonfirst_media_depicts_for_media(&$media, $viewer_id=0, $more=array()){
+	function whosonfirst_media_depicts_get_depictions_for_media(&$media, $viewer_id=0, $more=array()){
 
 		$enc_id = AddSlashes($media["id"]);
 
@@ -92,7 +135,14 @@
 
 	########################################################################
 
-	function whosonfirst_media_depicts_for_place(&$place, $viewer_id=0, $more=array()){
+	function whosonfirst_media_depicts_get_depictions_for_place(&$place, $viewer_id=0, $more=array()){
+
+		$defaults = array(
+			"medium" => "",
+			"random" => 0
+		);
+
+		$more = array_merge($defaults, $more);
 
 		$enc_id = AddSlashes($place["wof:id"]);
 
@@ -104,10 +154,61 @@
 			$where[] = $extra;
 		}  
 
+		if ($medium = $more["medium"]){
+			$enc_medium = AddSlashes($medium);
+			$where[] = "medium='{$enc_medium}'";
+		}
+
 		$where = implode(" AND ", $where);
 
 		$sql = "SELECT DISTINCT(media_id) FROM whosonfirst_media_depicts WHERE {$where}";
+
+		if ($more["random"]){
+			$sql .= " ORDER BY RAND()";
+		}
+
+		else {
+			$sql .= " ORDER BY media_id DESC";
+		}
+
 		return db_fetch_paginated($sql, $more);
+	}
+
+	########################################################################
+
+	# WIP... (20180530/thisisaaronland)
+
+	function whosonfirst_media_depicts_get_other_depictions_for_place(&$place, $viewer_id, $more=array()){
+
+		$enc_id = AddSlashes($place["wof:id"]);
+
+		# FIX ME... PERMISSIONS... MAYBE?
+
+		$sql = "SELECT DISTINCT(w2.whosonfirst_id) FROM whosonfirst_media_depicts w1, whosonfirst_media_depicts w2 WHERE w1.media_id=w2.media_id AND w1.whosonfirst_id='{$enc_id}' AND w2.whosonfirst_id!='{$enc_id}'";
+
+		$rsp = db_fetch($sql);
+		return $rsp;
+	}
+
+	########################################################################
+
+	# should this function really be in this library... (20180530/thisisaaronland)
+
+	function whosonfirst_media_depicts_get_other_places_for_depicted_place(&$place, $viewer_id, $more=array()){
+
+		$rsp = whosonfirst_media_depicts_get_other_depictions_for_place($place, $viewer_id, $more=array());
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$ids = array();
+
+		foreach ($rsp["rows"] as $row){
+			$ids[] = $row["whosonfirst_id"];
+		}
+
+		return whosonfirst_places_get_by_id_multi($ids);
 	}
 
 	########################################################################
