@@ -1160,8 +1160,8 @@
                         "parameters" => array(
 				array(
 					"name" => "whosonfirst_id",
-					"description" => "",
-					"required" => 1,
+					"description" => "A comma-separated list of Who's On First IDs to signify which places this file depicts",
+					"required" => 0,
 					"documented" => 1,
 					"example" => ""
 				),
@@ -1193,8 +1193,8 @@
                         "parameters" => array(
 				array(
 					"name" => "whosonfirst_id",
-					"description" => "",
-					"required" => 1,
+					"description" => "A comma-separated list of Who's On First IDs to signify which places this photo depicts",
+					"required" => 0,
 					"documented" => 1,
 					"example" => ""
 				),
