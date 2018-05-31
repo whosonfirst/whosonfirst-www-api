@@ -227,4 +227,74 @@
 
 	########################################################################
 
+	function whosonfirst_media_depicts_get_inferences(&$place, $key=null){
+
+		$map = $GLOBALS['cfg']['whosonfirst_media_depicts_inference_map'];
+
+		if (! $key){
+			$key = $GLOBALS['cfg']['whosonfirst_media_depicts_inference_key'];
+		}
+
+		if (! isset($place[$key])){
+			return array();
+		}
+
+		$key = $place[$key];
+
+		if (! isset($map[$key])){
+			return array();
+		}
+
+		$infers = array();
+
+		# please do not let this nest any more than it already does...
+		# (20180531/thisisaaronland)
+
+		foreach ($map[$key] as $k => $details){
+
+			if ($k == "wof:brand_id"){
+
+				$v = $place[$k];
+
+				if (($v) && (! in_array($v, $infers))){
+					$infers[] = $v;
+				}					
+			}
+
+			else if ($k == "wof:coterminous"){
+
+				$v = $place[$k];
+
+				if (($v) && (! in_array($v, $infers))){
+					$infers[] = $v;
+				}
+			}
+
+			else if ($k == "wof:hierarchy"){
+
+				foreach ($place["wof:hierarchy"] as $hier){
+
+					foreach ($details as $k){
+
+						if (! isset($hier[$k])){
+							continue;
+						}
+
+						$v = $hier[$k];
+
+						if (($v) && (! in_array($v, $infers))){
+							$infers[] = $v;
+						}
+					}
+				}
+			}
+
+			else {}
+		}
+
+		return $infers;
+	}
+
+	########################################################################
+
 	# the end

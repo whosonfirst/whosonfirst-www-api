@@ -170,6 +170,24 @@
 
 		$depicts = $rsp["depicts"];
 
+		#
+
+		if (features_is_enabled("whosonfirst_media_depicts_infer_depictions")){
+
+			$infers = whosonfirst_media_depicts_get_inferences($place);
+
+			foreach ($infers as $id){
+
+				# HOW TO HANDLE ERRORS... (20180531/thisisaaronland)
+
+				if ($place = whosonfirst_places_get_by_id($id)){
+					whosonfirst_media_depicts_add_depiction($media, $place, $user);
+				}
+			}
+		}
+
+		#
+
 		$out = array(
 			"depicts" => $depicts
 		);
