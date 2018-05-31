@@ -170,6 +170,24 @@
 
 		$depicts = $rsp["depicts"];
 
+		#
+
+		if (features_is_enabled("whosonfirst_media_depicts_infer_depictions")){
+
+			$infers = whosonfirst_media_depicts_get_inferences($place);
+
+			foreach ($infers as $id){
+
+				# HOW TO HANDLE ERRORS... (20180531/thisisaaronland)
+
+				if ($place = whosonfirst_places_get_by_id($id)){
+					whosonfirst_media_depicts_add_depiction($media, $place, $user);
+				}
+			}
+		}
+
+		#
+
 		$out = array(
 			"depicts" => $depicts
 		);
@@ -330,6 +348,33 @@
 		api_output_ok();
 	}
 
+	########################################################################
+
+	function api_whosonfirst_media_refreshDerivatives(){
+
+		$user = $GLOBALS["cfg"]["user"];
+
+		$id = request_int64("id");
+
+		$media = whosonfirst_media_get_by_id($id);
+
+		if (! $media){
+			api_output_error(400);
+		}
+
+		if ((! users_roles_has_role($user, "admin")) && ($user["id"] != $media["user_id"])){
+			api_output_error(403);
+		}
+
+		$rsp = whosonfirst_media_reprocess_image($media);
+
+		if (! $rsp["ok"]){
+			api_output_error(500);
+		}
+		
+		api_output_ok($rsp);
+	}
+	
 	########################################################################
 
 	# internal / utility functions

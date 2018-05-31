@@ -1211,6 +1211,28 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
+		'whosonfirst.media.refreshDerivatives' => array(
+			"description" => "...",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"requires_perms" => 2,	# write
+			"extras" => 0,
+			"library" => "api_whosonfirst_media",
+                        "parameters" => array(
+				array(
+					"name" => "id",
+					"description" => "",
+					"required" => 1,
+					"documented" => 1,
+					"example" => ""
+				),
+			), 
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
 		'whosonfirst.media.setStatus' => array(
 			"description" => "Set the status for a photo",
 			"documented" => 1,
