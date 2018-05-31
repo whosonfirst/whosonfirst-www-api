@@ -353,19 +353,38 @@
 		$rsp["media"] = $media_row;
 
 		# depicts
-		
+				
 		$upload_props = $upload["properties"];
 
 		if ((is_array($upload_props["depicts"])) && (count($upload_props["depicts"]))){
 
 			$user = users_get_by_id($upload["user_id"]);
 
+			$to_depict = array();
+
 			foreach ($upload_props["depicts"] as $id){
 
 				$pl = whosonfirst_places_get_by_id($id);
+				$to_depict[$id] = $pl;
+				
+				if (features_is_enabled("whosonfirst_media_depicts_infer_depictions")){
 
-				$depicts_rsp = whosonfirst_media_depicts_add_depiction($media_row, $pl, $user);
+					$infers = whosonfirst_media_depicts_get_inferences($pl);
 
+					foreach ($infers as $id){
+
+						if (! isset($to_depict[$id])){
+							continue;
+						}
+
+						$pl = whosonfirst_places_get_by_id($id);
+						$to_depict[$id] = $pl;
+					}
+				}
+			}
+
+			foreach ($to_depict as $ignore => $place){
+				$depicts_rsp = whosonfirst_media_depicts_add_depiction($media_row, $place, $user);
 				# HOW TO HANDLE ERRORS ?
 			}
 		}
