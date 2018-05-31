@@ -80,7 +80,21 @@
 		$enc_wof = AddSlashes($depicts["whosonfirst_id"]);
 
 		$sql = "DELETE FROM whosonfirst_media_depicts WHERE media_id='{$enc_media}' AND whosonfirst_id='{$enc_wof}'";
-		return db_write("whosonfirst_media_depicts", $sql);
+		return db_write($sql);
+	}
+
+	########################################################################
+
+	function whosonfirst_media_depicts_get_for_media_and_place(&$media, &$place){
+
+		$enc_media = AddSlashes($media["id"]);
+		$enc_wof = AddSlashes($place["wof:id"]);
+
+		$sql = "SELECT * FROM whosonfirst_media_depicts WHERE media_id='{$enc_media}' AND whosonfirst_id='{$enc_wof}'";
+		$rsp = db_fetch($sql);
+
+		$row = db_single($rsp);
+		return $row;
 	}
 
 	########################################################################

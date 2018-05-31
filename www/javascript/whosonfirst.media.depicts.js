@@ -5,7 +5,78 @@ whosonfirst.media.depicts = (function(){
 
     var self = {
 
+	'reload_depictions': function(){
+
+	    // PLEASE MAKE ME BETTER, YEAH?
+	    // (20180531/thisisaaronland)
+
+	    location.reload();
+	},
+	
+	'initialize_remove_targets': function(class_name){
+
+	    if (! class_name){
+		class_name = "whosonfirst-media-remove-depiction";
+	    }
+
+	    var els = document.getElementsByClassName(class_name);
+	    var count = els.length;
+	    
+	    for (var i=0; i < count; i++){
+		
+		var el = els[i];
+		
+		el.onclick = function(e){
+		    
+		    var el = e.target;
+		    
+		    var media_id = el.getAttribute("data-whosonfirst-media-id");
+		    var wof_id = el.getAttribute("data-whosonfirst-id");
+		    
+		    if (! media_id){
+			console.log("Missing media_id");
+			return false;
+		    }
+		    
+		    if (! wof_id){
+			console.log("Missing wof_id");
+			return false;
+		    }
+		    
+		    if (! confirm("Are you sure you want to delete this depiction? There is no undo.")){
+			return false;
+		    }
+		    
+		    var method = "whosonfirst.media.removeDepiction";
+		    
+		    var args = {
+			"id": media_id,
+			// "media_id": media_id,
+			"whosonfirst_id": wof_id,
+		    };
+		    
+		    var on_success = function(rsp){
+			console.log("OKAY", rsp);
+			self.reload_depictions();
+		    };
+		    
+		    var on_error = function(rsp){
+			console.log("ERROR", rsp);
+		    };
+		    
+		    whosonfirst.api.call(method, args, on_success, on_error);
+		    return false;
+		};
+
+	    }
+	},
+
 	'attach_typeahead': function(id, name, data) {
+
+	    return self.initialize_typeahead(id, name, data);
+	},
+
+	'initialize_typeahead': function(id, name, data) {
 
 	    // var el = document.getElementById(id);
 	    
@@ -69,6 +140,7 @@ whosonfirst.media.depicts = (function(){
 
 		    var on_success = function(rsp){
 			console.log("OKAY", rsp);
+			self.reload_depictions();
 		    };
 
 		    var on_error = function(rsp){

@@ -1,0 +1,3 @@
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/typeahead.bundle.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.media.depicts.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.media.depicts.init.js"></script>

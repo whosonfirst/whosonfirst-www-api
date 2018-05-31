@@ -1122,7 +1122,7 @@
 		'whosonfirst.media.removeDepiction' => array(
 			"description" => "...",
 			"documented" => 1,
-			"enabled" => ($GLOBALS['cfg']['enable_feature_whosonfirst_media']) ? 1 : 0,
+			"enabled" => 1,
 			"paginated" => 0,
 			"requires_perms" => 3,	# delete
 			"extras" => 0,

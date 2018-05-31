@@ -1,0 +1,3 @@
+{* this assumes that inc_js_depicts.txt has been included already (20180531/thisisaaronland) *}
+
+This photo depicts {foreach from=$depicts item="place" name="depicts"}<a href="{$cfg.abs_root_url}id/{$place|@whosonfirst_places_property:"wof:id"|@escape}/">{$place|@whosonfirst_places_property:"wof:name"|@escape}</a>{if $cfg.user && $cfg.user|@users_roles_has_role:"admin"} <button class="btn btn-sm whosonfirst-media-remove-depiction" data-whosonfirst-media-id="{$photo.id|@escape}" data-whosonfirst-id="{$place|@whosonfirst_places_property:"wof:id"|@escape}">x</button>{/if}{if $smarty.foreach.depicts.last}{else} and {/if}{/foreach}.

@@ -185,8 +185,46 @@
 	########################################################################
 
 	function api_whosonfirst_media_removeDepiction(){
+	
+		$user = $GLOBALS["cfg"]["user"];
 
-		api_output_error(503);		# please write me
+		$id = request_int64("id");
+
+		$media = whosonfirst_media_get_by_id($id);
+
+		if (! $media){
+			api_output_error(400);
+		}
+
+		if (! whosonfirst_media_permissions_can_view_media($media, $user["id"])){
+			api_output_error(403);
+		}
+
+		$wofid = request_int64("whosonfirst_id");
+
+		$place = whosonfirst_places_get_by_id($wofid);
+
+		if (! $place){
+			api_output_error(404);
+		}
+
+		$depicts = whosonfirst_media_depicts_get_for_media_and_place($media, $place);
+
+		if (! $depicts){
+			api_output_error(404);
+		}
+
+		if ((! users_roles_has_role($user, "admin")) && ($user["id"] != $depicts["user_id"])){
+			api_output_error(403);
+		}
+
+		$rsp = whosonfirst_media_depicts_delete_depiction($depicts);
+
+		if (! $rsp["ok"]){
+			api_output_error(500);
+		}
+
+		api_output_ok();
 	}
 
 	########################################################################
@@ -314,7 +352,7 @@
 
 			$uploads[] = array(
 				"id" => $rsp["upload"]["id"],
-				"name" => $fname,
+				"name" => $f["name"],
 			);
 		}
 
