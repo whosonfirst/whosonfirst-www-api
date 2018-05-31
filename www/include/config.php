@@ -505,7 +505,44 @@
 
 	# END OF media stuff
 
+	# START OF media-depicts stuff
+
+	$GLOBALS['cfg']['enable_feature_whosonfirst_media_depicts_infer_depictions'] = 0;
+	$GLOBALS['cfg']['whosonfirst_media_depicts_inference_key'] = "wof:placetype";
+
+	$GLOBALS['cfg']['whosonfirst_media_depicts_inference_map'] = array(
+
+		/*
+
+		"installation" => array(	
+			"wof:hierarchy" => array("enclosure_id", "concourse_id", "wing_id", "building_id")
+		),
+
+		"enclosure" => array(
+			"wof:hierarchy" => array("concourse_id", "wing_id", "building_id")
+		),
+
+		"concourse" => array(
+			"wof:hierarchy" => array("wing_id", "building_id")
+		),
+
+		"wing" => array(
+			"wof:hierarchy" => array("building_id")
+		),
+
+		"neighbourhood" => array(
+			"wof:hierarchy" => array("locality_id", "region_id", "country_id")
+		),
+
+		*/
+	); 
+
+	# END OF media-depicts stuff
+
 	# START OF iiif-media stuff
+
+	# the 'sq' instruction assumes a copy of go-iiif >= commit
+	# e3fa22321befb731d6de4ed4e04da34d3fc6e606 (20180531)
 
 	$GLOBALS['cfg']['enable_feature_whosonfirst_media_iiif'] = 0;
 	$GLOBALS["cfg"]["iiif_api_endpoint"] = 'READ-FROM-SECRETS-OR-CONFIG-LOCAL';
