@@ -54,6 +54,6 @@
 
     {assign var="api_endpoint" value=$cfg.api_abs_root_url|cat:$cfg.api_endpoint}
 
-  <body data-abs-root-url="{$cfg.abs_root_url}" {if $cfg.data_abs_root_url} data-abs-root-url-data="{$cfg.data_abs_root_url}" {/if} {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled}{if ! "places"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if}{/if} data-nextzen-api-key="{$cfg.nextzen.api_key|@escape}">
+  <body data-abs-root-url="{$cfg.abs_root_url}" {if $cfg.data_abs_root_url} data-abs-root-url-data="{$cfg.data_abs_root_url}" {/if} {if "api"|@features_is_enabled}data-api-endpoint="{$api_endpoint}"{if "api_site_tokens"|@features_is_enabled} data-api-access-token="{$site_token|@escape}"{/if}{/if} data-nextzen-api-key="{$cfg.nextzen.api_key|@escape}">
 
     {include file="inc_head_navi.txt"}

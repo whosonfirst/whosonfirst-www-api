@@ -1,13 +1,21 @@
 <div class="card">
-     <h4 class="card-title">Photos
+     <h4 class="card-title">{$slug|@escape}
      {if $photos_pagination.total_count > $photos|@count}
      <small><a href="#">See all {$photos_pagination.total_count|@number_format|@escape} photos</a></small>
      <button class="btn btn-sm" id="random-photos" data-whosonfirst-id="{$wof_id|@escape}">random</button>
      {/if}
      </h4>
+
+	{if $also_depicts|@count}
+	{include file="inc_photos_also_depicts.txt"}
+	{/if}
+
      <div class="card-body">
+
      {include file="inc_photos_deck.txt"}
      </div>
-</div>
 
-<script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.airport.photos.random.init.js"></script>
+     <div class="card-footer">
+     </div>
+
+</div>

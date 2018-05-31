@@ -5,8 +5,32 @@
 <div id="content" class="container">
 
 <div class="card">
-     <div class="card-title">This photo is associated with <q><a href="{$cfg.abs_root_url}id/{$wof_id|@escape}/">{$wof_name|@escape}</a></q> (<code>{$wof_id|@escape}</code>)</code>
+     <div class="card-title">
+     {if $depicts|@count}
+     This photo depicts {foreach from=$depicts item="place" name="depicts"}<a href="{$cfg.abs_root_url}id/{$place|@whosonfirst_places_property:"wof:id"|@escape}/">{$place|@whosonfirst_places_property:"wof:name"|@escape}</a>{if $cfg.user && $cfg.user|@users_roles_has_role:"admin"} <button class="btn btn-sm">x</button>{/if}{if $smarty.foreach.depicts.last}{else} and {/if}{/foreach}.
+     {/if}
+     </div>
+
      <div class="card-body">{include file="inc_photo_card.txt" photo_size="b"}</div>
+
+     <div class="card-footer">
+
+     <h4>Available photo sizes</h4>
+
+     <ul class="list-group">
+     {foreach from=$photo.properties.sizes item="details" key="sz"}
+     {capture assign="photo_uri"}{$photo|@whosonfirst_media_media_to_uri:$sz}{/capture}
+     {assign var="photo_size" value=$photo|@whosonfirst_media_size:$sz}
+     {if $sz=="o"}
+     <li class="list-group-item admin"><a href="{$photo_uri}">{$photo_size.width|@escape} x {$photo_size.height|@escape}</a> <small>{$photo_uri|@escape}</small></li>
+     {else}
+     <li class="list-group-item"><a href="{$photo_uri}">{$photo_size.width|@escape} x {$photo_size.height|@escape}</a> <small>{$photo_uri|@escape}</small></li>
+     {/if}
+     {/foreach}
+     </ul>
+
+     </div>
+
 </div>
 
 {if $cfg.user && $cfg.user|@users_roles_has_role:"admin"}

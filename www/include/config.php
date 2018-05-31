@@ -536,7 +536,7 @@
 
 	$GLOBALS['cfg']['users_acl'] = array(
 		/*
-		'staff' => array(
+		'admin' => array(
 			'can_upload',
 			'can_delete_uploads',
 			'can_process_uploads',

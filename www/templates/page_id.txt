@@ -34,6 +34,10 @@
 			
 			<div class="card-body">
 
+			{if $photos|@count}
+			{include file="inc_photos.txt"}
+			{/if}
+
 			{include file="inc_place_map.txt"}
 			{include file="inc_upload.txt"}
 			</div>

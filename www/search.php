@@ -31,8 +31,6 @@
 
 		$filters = api_whosonfirst_utils_search_filters();
 
-		dumper($filters);
-		
 		$args = array(
 			'per_page' => 36
 		);
