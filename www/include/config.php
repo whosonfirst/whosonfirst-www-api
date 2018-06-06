@@ -547,6 +547,12 @@
 	$GLOBALS['cfg']['enable_feature_whosonfirst_media_iiif'] = 0;
 	$GLOBALS["cfg"]["iiif_api_endpoint"] = 'READ-FROM-SECRETS-OR-CONFIG-LOCAL';
 
+	# the 'iiif_colours' support assumes a copy of go-iiif >= commit
+	# a9b3392591018b36bf16f7a37ee07639bff34b94 in the palette branch (20180605)
+
+	$GLOBALS['cfg']['enable_feature_whosonfirst_media_iiif_colours'] = 0;
+	$GLOBALS["cfg"]["iiif_colours_use_size"] = "n";	# this should match a key in $GLOBALS["cfg"]["iiif_default_instructions"]
+
 	$GLOBALS["cfg"]["iiif_default_instructions"] = array(
 		# "o" => array("size" => "full", "format" => ""),
 		# "sq" => array("size" => "full", "region" => "-1,-1,320,320", "format" => "jpg"),		# smart crop
@@ -578,6 +584,7 @@
 			'can_delete_uploads',
 			'can_process_uploads',
 			'can_edit_media',
+			'can_process_media',
 			'can_delete_media',
 		)
 		*/

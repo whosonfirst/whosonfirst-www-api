@@ -403,7 +403,7 @@
 
 		whosonfirst_media_inflate_media($media);
 
-		$id = $media["id"];
+		$media_id = $media["id"];
 
 		$props = $media["properties"];
 		$sizes = $props["sizes"];
@@ -414,7 +414,7 @@
 		$root = dirname($rel_path);
 
 		$ext = $sizes["o"]["extension"];
-		$tmp_source = $root . DIRECTORY_SEPARATOR . "{$id}.{$ext}";
+		$tmp_source = $root . DIRECTORY_SEPARATOR . "{$media_id}.{$ext}";
 
 		$tmp_file = $pending . DIRECTORY_SEPARATOR . $tmp_source;
 		$tmp_root = dirname($tmp_file);
@@ -428,8 +428,9 @@
 			}
 		}
 
-		if (! copy($abs_path, $tmp_file)){
+		# TO DO: LIB_STORAGE
 
+		if (! copy($abs_path, $tmp_file)){
 			return array("ok" => 0, "error" => "Unable to copy tmp file");
 		}
 
@@ -448,7 +449,33 @@
 
 		$processed = $rsp["processed"];
 
-		$media_id = $media["id"];
+		# do colour extraction
+		
+		if (features_is_enabled("whosonfirst_media_iiif_colours")){
+
+			$sz = $GLOBALS["cfg"]["iiif_colours_use_size"];
+
+			if ($sz){
+				$fname = basename($processed[$sz]);
+				$root = whosonfirst_media_id_to_tree($media_id);
+		
+				$palette_src = $root . DIRECTORY_SEPARATOR . $fname;
+
+				$rsp = whosonfirst_media_iiif_get_palette_service($palette_src);
+
+				if ($rsp["ok"]){
+					$service = $rsp["service"];
+					$palette = $service["palette"];
+					$props["colours"] = $palette;
+				}
+			}
+
+			else {
+				error_log("missing GLOBALS['cfg']['iiif_colours_use_size'] property");
+			}
+		}
+
+		#
 
 		$rsp = whosonfirst_media_import_processed($processed, $media_id, $sizes);
 
@@ -622,7 +649,7 @@
 			$src_path = $paths["source"];
 			$dest_path = $paths["destination"];
 
-			# SOMETHING SOMETHING SOMETHING LIB_STORAGE...
+			# TO DO: LIB_STORAGE
 
 			if (! rename($src_path, $dest_path)){
 				return array("ok" => 0, "error" => "Failed to import media");

@@ -18,6 +18,25 @@ window.addEventListener("load", function load(event){
 
 	whosonfirst.api.call(method, args, on_success, on_error);	
     };
+
+    var refresh_media = function(media_id){
+
+	var method = "whosonfirst.media.refreshDerivatives";
+	
+	var args = {
+	    "id": media_id,
+	};
+	
+	var on_success = function(rsp){
+	    window.location.reload(false); 
+	};
+
+	var on_error = function(rsp){
+	    console.log("ERROR", media_id, rsp);
+	};
+
+	whosonfirst.api.call(method, args, on_success, on_error);	
+    };
     
     var set_status = function(media_id, status_id){
 
@@ -27,19 +46,19 @@ window.addEventListener("load", function load(event){
 	    "id": media_id,
 	    "status_id": status_id,
 	    };
-	
+
 	var on_success = function(rsp){
 
 	    var media = rsp["media"];
 	    var media_id = media["id"];
-	    var status_id = media["status_id"];
+	    var status = media["status"];
 
 	    var img = document.getElementById("media-img-" + media_id);
 
 	    var btn_public = document.getElementById("media-mk-public-" + media_id);
 	    var btn_private = document.getElementById("media-mk-private-" + media_id);
 
-	    if (status_id == 1){
+	    if (status == "public"){
 		
 		btn_public.style.display = "none";
 		btn_private.style.display = "block";
@@ -112,11 +131,28 @@ window.addEventListener("load", function load(event){
 	
 	delete_media(media_id);
     };
+
+    var mk_refresh = function(e){
+
+	var el = e.target;
+	var media_id = el.getAttribute("data-media-id");
+	
+	if (! media_id){
+	    return false;
+	}
+	
+	if (! confirm("Are you sure you want to refresh all the derivatives? This will overwrite any existing files.")){
+	    return false;
+	}
+	
+	refresh_media(media_id);
+    };
     
     var func_map = {
 	"media-mk-public": mk_public,
 	"media-mk-private": mk_private,
 	"media-delete": mk_delete,
+	"media-refresh": mk_refresh,
     };
 
     for (class_name in func_map){

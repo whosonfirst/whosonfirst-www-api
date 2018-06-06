@@ -9,7 +9,11 @@
 
 	  {/if}
 
-	  {if $cfg.user|@users_acl_has_capability:"can_delete_media"}
+	  {if $cfg.user|@users_roles_has_role:"admin" or $cfg.user|@users_acl_has_capability:"can_process_media"}
+	  <button class="btn btn-sm btn-info media-refresh" data-media-id="{$media.id|@escape}">Refresh this {$media.medium|@escape}</button>
+	  {/if}
+
+	  {if $cfg.user|@users_roles_has_role:"admin" or $cfg.user|@users_acl_has_capability:"can_delete_media"}
 	  <button class="btn btn-sm btn-danger media-delete" data-media-id="{$media.id|@escape}">Delete this {$media.medium|@escape}</button>
 	  {/if}
 

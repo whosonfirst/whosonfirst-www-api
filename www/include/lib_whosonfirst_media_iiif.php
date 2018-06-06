@@ -39,4 +39,38 @@
 
 	########################################################################
 
+	function whosonfirst_media_iiif_get_palette_service($source, $more=array()){
+
+		$defaults = array(
+			"profile" => "x-urn:service:palette"
+		);
+
+		$more = array_merge($defaults, $more);
+
+		$rsp = iiif_image_api_info($source, $more);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$profile = $more["profile"];
+		$service = null;
+
+		foreach ($rsp["info"]["service"] as $s){
+
+			if ($s["profile"] == $profile){
+				$service = $s;
+				break;
+			}
+		}
+
+		if (! $service){
+			return array("ok" => 0, "error" => "Missing '{$profile}' profile");
+		}
+
+		return array("ok" => 1, "service" => $service);
+	}
+
+	########################################################################
+
 	# the end	
