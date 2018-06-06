@@ -2,35 +2,119 @@
 {capture assign="wof_name"}{$place|@whosonfirst_places_property:"wof:name"}{/capture}
 {include file="inc_head.txt"}
 
+<style type="text/css">{literal}
+
+.tt-menu {
+	 background-color: #fff !important;
+	 border: solid thin !important;
+	 padding: .5em;
+}
+
+{/literal}</style>
+
 <div id="content" class="container">
 
 <div class="card">
      <div class="card-title">
+
      {if $depicts|@count}
-     This photo depicts {foreach from=$depicts item="place" name="depicts"}<a href="{$cfg.abs_root_url}id/{$place|@whosonfirst_places_property:"wof:id"|@escape}/">{$place|@whosonfirst_places_property:"wof:name"|@escape}</a>{if $cfg.user && $cfg.user|@users_roles_has_role:"admin"} <button class="btn btn-sm">x</button>{/if}{if $smarty.foreach.depicts.last}{else} and {/if}{/foreach}.
+     {include file="inc_photo_depicts.txt"}
      {/if}
+
      </div>
 
-     <div class="card-body">{include file="inc_photo_card.txt" photo_size="b"}</div>
+     <div class="card-body">
+     {include file="inc_photo_card.txt" photo_size="z"}
+
+     {if $cfg.user && $cfg.user|@users_roles_has_role:"admin"}
+     <ul class="list-group">
+
+     	<li class="list-group-item" style="display:none;">
+	    <div id="depicts-airports" data-media-id="{$photo.id|@escape}">
+	      <input class="typeahead" type="text" placeholder="Airport">
+	    </div>
+	</li>
+
+     	<li class="list-group-item" style="display:none;">
+	    <div id="depicts-aircraft" data-media-id="{$photo.id|@escape}">
+	      <input class="typeahead" type="text" placeholder="Aircraft">
+	    </div>
+	</li>
+
+     	<li class="list-group-item" style="display:none;">
+	    <div id="depicts-airline" data-media-id="{$photo.id|@escape}">
+	      <input class="typeahead" type="text" placeholder="Airline">
+	    </div>
+	</li>
+
+     	<li class="list-group-item" style="display:none;">
+	    <div id="depicts-brands" data-media-id="{$photo.id|@escape}">
+	      <input class="typeahead" type="text" placeholder="Brand">
+	    </div>
+	</li>
+
+     	<li class="list-group-item" style="display:none;">
+	    <div id="depicts-terminal" data-media-id="{$photo.id|@escape}">
+	      <input class="typeahead" type="text" placeholder="Terminal">
+	    </div>
+	</li>
+
+     	<li class="list-group-item" style="display:none;">
+	    <div id="depicts-publicart" data-media-id="{$photo.id|@escape}">
+	      <input class="typeahead" type="text" placeholder="Public Art">
+	    </div>
+	</li>
+
+     	<li class="list-group-item" style="display:none;">
+	    <div id="depicts-exhibition" data-media-id="{$photo.id|@escape}">
+	      <input class="typeahead" type="text" placeholder="Exhibition">
+	    </div>
+	</li>
+
+     </ul>
+     {/if}
+
+     </div>
 
      <div class="card-footer">
 
      <h4>Available photo sizes</h4>
 
-     <ul class="list-group">
-     {foreach from=$photo.properties.sizes item="details" key="sz"}
+     <div class="table-wrapper">
+     <table class="table">
+     <tr>
+     <th>Label</th>
+     <th>Width</th>
+     <th>Height</th>
+     <th>URL</th>     
+     </tr>
+
+     {foreach from=$photo.properties.sizes|@whosonfirst_media_utils_sort_sizes item="details"}
+     {assign var="sz" value=$details.label}
      {capture assign="photo_uri"}{$photo|@whosonfirst_media_media_to_uri:$sz}{/capture}
      {assign var="photo_size" value=$photo|@whosonfirst_media_size:$sz}
-     {if $sz=="o"}
-     <li class="list-group-item admin"><a href="{$photo_uri}">{$photo_size.width|@escape} x {$photo_size.height|@escape}</a> <small>{$photo_uri|@escape}</small></li>
-     {else}
-     <li class="list-group-item"><a href="{$photo_uri}">{$photo_size.width|@escape} x {$photo_size.height|@escape}</a> <small>{$photo_uri|@escape}</small></li>
-     {/if}
-     {/foreach}
-     </ul>
 
+     {if $sz=="o" && $cfg.user && $cfg.user|@users_roles_has_role:"admin"}
+     <tr class="admin">
+     <th role="col">{$sz|@escape}</th>
+     <td>{$photo_size.width|@escape}</td>
+     <td>{$photo_size.height|@escape}</td>
+     <td><small><a href="{$photo_uri}">{$photo_uri|@escape}</a></small></td>
+     </tr>
+     {else}
+     <tr>
+     <th role="col">{$sz|@escape}</th>
+     <td>{$photo_size.width|@escape}</td>
+     <td>{$photo_size.height|@escape}</td>
+     <td><small><a href="{$photo_uri}">{$photo_uri|@escape}</a></small></td>
+     </tr>
+     {/if}
+
+     {/foreach}
+     </table>
      </div>
 
+     </div>
 </div>
 
 {if $cfg.user && $cfg.user|@users_roles_has_role:"admin"}
@@ -43,5 +127,20 @@
 {/if}
 
 </div>
+
+{if $cfg.user && $cfg.user|@users_roles_has_role:"admin"}
+{include file="inc_js_media_controls.txt"}
+{/if}
+
+{include file="inc_js_depicts.txt"}
+
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.collection.airlines.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.collection.aircraft.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.collection.airports.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.collection.brands.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.collection.exhibitions.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.collection.publicart.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.collection.terminals.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.collection.photo.init.js"></script>
 
 {include file="inc_foot.txt"}
