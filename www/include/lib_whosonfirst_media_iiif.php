@@ -42,7 +42,7 @@
 	function whosonfirst_media_iiif_get_palette_service($source, $more=array()){
 
 		$defaults = array(
-			"profile" => "x-urn:service:palette"
+			"profile" => "x-urn:service:go-iiif#palette"		// see also: go-iiif/service/palette.go
 		);
 
 		$more = array_merge($defaults, $more);
