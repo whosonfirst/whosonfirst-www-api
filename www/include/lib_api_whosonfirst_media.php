@@ -56,8 +56,6 @@
 
 		api_whosonfirst_media_ensure_capability($user, "can_upload");
 
-		$pl = api_whosonfirst_media_ensure_place();
-
 		$photo_id = request_int64("photo_id");
 
 		if (! $photo_id){
@@ -66,22 +64,27 @@
 
 		if ($upload = whosonfirst_uploads_get_by_flickr_id_pending($photo_id)){
 
-			$file = json_decode($upload["file"], "as hash");
-			$fname = $file["name"];
+			$status_map = whosonfirst_uploads_status_map();
 
-			$uploads = array(
-				$fname => $upload["id"],
-			);
+			if ($status_map[$upload["status_id"]] == "pending"){
+			
+				$file = json_decode($upload["file"], "as hash");
+				$fname = $file["name"];
 
-			$out = array(
-				"uploads" => $uploads,
-			);
+				$uploads = array(
+					$fname => $upload["id"],
+				);
 
-			$more = array(
-				"key" => "uploads",
-			);
+				$out = array(
+					"uploads" => $uploads,
+				);
 
-			api_output_ok($out, $more);
+				$more = array(
+					"key" => "uploads",
+				);
+
+				api_output_ok($out, $more);
+			}
 		}
 
 		# so this bit here lacks a measure of finesse - there are a bunch of
@@ -90,24 +93,27 @@
 
 		if ($media = whosonfirst_media_get_by_flickr_id($photo_id)){
 			
-			$upload = whosonfirst_uploads_get_by_id($media["upload_id"]);
+			if (! $media["deleted"]){
 
-			$file = json_decode($upload["file"], "as hash");
-			$fname = $file["name"];
+				$upload = whosonfirst_uploads_get_by_id($media["upload_id"]);
 
-			$uploads = array(
-				$fname => $upload["id"],
-			);
+				$file = json_decode($upload["file"], "as hash");
+				$fname = $file["name"];
+	
+				$uploads = array(
+					$fname => $upload["id"],
+				);
 
-			$out = array(
-				"uploads" => $uploads,
-			);
+				$out = array(	
+					"uploads" => $uploads,
+				);
 
-			$more = array(
-				"key" => "uploads",
-			);
+				$more = array(
+					"key" => "uploads",
+				);
 
-			api_output_ok($out, $more);
+				api_output_ok($out, $more);
+			}
 		}
 
  		$medium = "image";
