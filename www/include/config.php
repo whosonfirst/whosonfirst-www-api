@@ -6,11 +6,10 @@
 	$GLOBALS['cfg']['site_name'] = 'Who\'s On First API';
 	$GLOBALS['cfg']['environment'] = 'dev';
 
+	$GLOBALS['cfg']['twitter_account'] = 'alloftheplaces';
+
 	$GLOBALS['cfg']['site_disabled'] = 0;
 	$GLOBALS['cfg']['site_disabled_retry_after'] = 0;	# seconds; if set will return HTTP Retry-After header
-
-	# See also init.php customizations for Mapzen Places
-	$GLOBALS['cfg']['enable_feature_places'] = 0;
 
 	# Keeping this around for a day when routing is available again
 	# (20180513/thisisaaronland)
@@ -554,13 +553,13 @@
 	$GLOBALS["cfg"]["iiif_colours_use_size"] = "n";	# this should match a key in $GLOBALS["cfg"]["iiif_default_instructions"]
 
 	$GLOBALS["cfg"]["iiif_default_instructions"] = array(
-		# "o" => array("size" => "full", "format" => ""),
+		# "o" => array("size" => "full", "format" => "", "rotation" => "-1"),						# -1 means "do not autorotate" (which is go-iiif specific)
+		# "k" => array("size" => "!2048,1536", "format" => "jpg"),
+		# "b" => array("size" => "!1024,768", "format" => "jpg"),
+		# "c" => array("size" => "!800,600", "format" => "jpg"),
+		# "z" => array("size" => "!640,480", "format" => "jpg"),
 		# "sq" => array("size" => "full", "region" => "-1,-1,320,320", "format" => "jpg"),		# smart crop
 		# "n" => array("size" => "!320,240", "format" => "jpg"),
-		# "z" => array("size" => "!640,480", "format" => "jpg"),
-		# "c" => array("size" => "!800,600", "format" => "jpg"),
-		# "b" => array("size" => "!1024,768", "format" => "jpg"),
-		# "k" => array("size" => "!2048,1536", "format" => "jpg"),
 	);
 	
 	# END OF iiif-media stuff
