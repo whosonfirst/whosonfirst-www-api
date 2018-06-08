@@ -109,6 +109,25 @@
 
 	########################################################################
 
+	function whosonfirst_media_count_media_for_place(&$place, $viewer_id, $more=array()){
+
+		$more["per_page"] = 1;
+
+		$rsp = whosonfirst_media_depicts_get_depictions_for_place($place, $viewer_id, $more);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$pagination = $rsp["pagination"];
+		$count = $pagination["total_count"];
+
+		return array("ok" => 1, "count" => $count);
+
+	}
+
+	########################################################################
+
 	function whosonfirst_media_get_media($viewer_id, $more=array()){
 
 		$where = array(
@@ -141,6 +160,43 @@
 		}
 
 		return db_fetch_paginated($sql, $more);
+	}
+
+	########################################################################
+
+	function whosonfirst_media_count_media($viewer_id, $more=array()){
+
+		$where = array(
+			"deleted=0",
+		);
+
+		if ($medium = $more["medium"]){		
+			$enc_medium = AddSlashes($medium);
+			$where[] = "medium='{$enc_medium}'";
+		}
+
+		if ($extra = whosonfirst_media_permissions_get_media_where($viewer_id)){
+			$where[] = $extra;
+		}  
+
+		$sql = "SELECT COUNT(media_id) AS count FROM whosonfirst_media";
+
+		if (count($where)){
+
+			$where = implode(" AND ", $where);
+			$sql = "{$sql} WHERE {$where}";
+		}
+
+		if ($more["random"]){
+			$sql .= " ORDER BY RAND()";
+		}
+
+		else {
+			$sql .= " ORDER BY created DESC";
+		}
+
+		$rsp = db_fetch($sql, $more);
+		return db_single($rsp);
 	}
 
 	########################################################################
@@ -263,6 +319,8 @@
 	#
 	# see also: https://github.com/aaronland/go-iiif
 	# (20180509/thisisaaronland)
+	
+	# ... replace_media_with_upload() is defined after this function
 
 	function whosonfirst_media_import_media_with_upload(&$upload, $media_path, $derivatives=array(), $more=array()) {
 
@@ -288,15 +346,6 @@
 			return array("ok" => 0, "error" => "Unable to parse properties");
 		}
 		
-		$fp = $upload["fingerprint"];
-
-		# FIX ME... TO BE MORE NUANCED... I'M NOT SURE WHAT THAT MEANS YET...
-		# (20180528/thisisaaronland)
-
-		# if (whosonfirst_media_get_by_fingerprint($fp)){
-		# 	return array("ok" => 0, "Media with matching fingerprint already exists");
-		# }
-
 		$media_id = whosonfirst_media_generate_id();
 		
 		# because we might be using artisanal integers... no, really
@@ -322,6 +371,10 @@
 
 		$new_props = array_merge($props, $more);		
 		$new_props["sizes"] = $rsp["sizes"];
+
+		if ($more["colours"]){
+			$new_props["colours"] = $more["colours"];
+		}
 			
 		$str_props = json_encode($new_props);
 
@@ -396,6 +449,76 @@
 
 	########################################################################
 
+	function whosonfirst_media_replace_media_with_upload(&$media, &$upload, $media_path, $derivatives=array(), $more=array()) {
+
+		if (whosonfirst_uploads_is_completed($upload)){
+			return array("ok" => 0, "error" => "Upload is already completed");
+		}
+		
+		whosonfirst_media_inflate_media($media);
+
+		$media_props = $media["properties"];
+		$media_sizes = $media_props["sizes"];
+
+		$to_delete = array();
+
+		foreach ($media_sizes as $sz => $ignore){
+
+			$abs_path = whosonfirst_media_media_to_abspath($media, $sz);
+			$to_delete[] = $abs_path;
+		}
+
+		$sizes = array();
+
+		$rsp = whosonfirst_media_import_processed($derivatives, $media["id"], $sizes);
+
+		if (! $rsp["ok"]){
+			return $rsp;
+		}
+
+		$media_props["sizes"] = $rsp["sizes"];
+
+		if ($more["colours"]){
+			$media_props["colours"] = $more["colours"];
+		}
+
+		else if (isset($media_props["colours"])){
+			unset($media_props["colours"]);		  	
+		}
+		
+		else {}
+	
+		$str_props = json_encode($media_props);
+
+		$update = array(
+			"properties" => $str_props,
+		);
+		
+		$rsp = whosonfirst_media_update_media($media, $update);
+
+		if (! $rsp["ok"]){
+			# PLEASE CLEAN UP THE FILES THAT WERE JUST IMPORTED
+			return $rsp;
+		}
+
+		$media = $rsp["media"];
+
+		# PLEASE RECONCILE ME WITH whosonfirst_media_delete_media(&$media)
+		
+		foreach ($to_delete as $path){
+
+			if (file_exists($path)){
+				# unlink($path);
+			}
+		}
+
+		return $rsp;
+	}
+
+	########################################################################
+
+	# THIS NEEDS TO BE UPDATED TO CREATE AN UPLOAD WITH SUITABLE MEDIA/REPLACE FLAGS
+
 	function whosonfirst_media_reprocess_image(&$media){
 
 		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
@@ -448,34 +571,7 @@
 		}
 
 		$processed = $rsp["processed"];
-
-		# do colour extraction
-		
-		if (features_is_enabled("whosonfirst_media_iiif_colours")){
-
-			$sz = $GLOBALS["cfg"]["iiif_colours_use_size"];
-
-			if ($sz){
-				$fname = basename($processed[$sz]);
-				$root = whosonfirst_media_id_to_tree($media_id);
-		
-				$palette_src = $root . DIRECTORY_SEPARATOR . $fname;
-
-				$rsp = whosonfirst_media_iiif_get_palette_service($palette_src);
-
-				if ($rsp["ok"]){
-					$service = $rsp["service"];
-					$palette = $service["palette"];
-					$props["colours"] = $palette;
-				}
-			}
-
-			else {
-				error_log("missing GLOBALS['cfg']['iiif_colours_use_size'] property");
-			}
-		}
-
-		#
+		$colours = $rsp["colours"];
 
 		$rsp = whosonfirst_media_import_processed($processed, $media_id, $sizes);
 
@@ -484,6 +580,8 @@
 		}
 
 		$props["sizes"] = $rsp["sizes"];
+		$props["colours"] = $colours;
+
 		$str_props = json_encode($props);
 	
 		$update = array(
@@ -496,7 +594,7 @@
 
 	########################################################################
 
-	function whosonfirst_media_reimport_image_for_media(&$media, $source, $instructions){
+	function TO_BE_DELETED_whosonfirst_media_reimport_image_for_media(&$media, $source, $instructions){
 
 		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
 

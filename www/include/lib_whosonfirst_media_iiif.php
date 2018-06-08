@@ -7,6 +7,7 @@
 	function whosonfirst_media_iiif_process_image($source, $instructions, $args=array()){
 
 		$processed = array();
+		$colours = array();
 
 		$root = dirname($source);
 		$fname = basename($source);
@@ -34,7 +35,30 @@
 			$processed[$label] = $dest_path;
 		}
 
-		return array("ok" => 1, "processed" => $processed);	
+		if (features_is_enabled("whosonfirst_media_iiif_colours")){
+
+			$sz = $GLOBALS["cfg"]["iiif_colours_use_size"];
+
+			if ($sz){
+		
+				$source = $processed[$sz];	# PLEASE CHECK FOR 'o'
+
+				# DO NOT LIKE HAVING TO DO THIS... NOT SURE WHAT TO DO INSTEAD
+				# (20180608/thisisaaronland)
+
+				$palette_src = str_replace($GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"], "", $source);
+				$palette_src = ltrim($palette_src, "/");
+
+				$rsp = whosonfirst_media_iiif_get_palette_service($palette_src);
+
+				if ($rsp["ok"]){
+					$service = $rsp["service"];
+					$colours = $service["palette"];
+				}
+			}
+		}
+
+		return array("ok" => 1, "processed" => $processed, "colours" => $colours);	
 	}
 
 	########################################################################

@@ -10,6 +10,7 @@
 
 	function whosonfirst_uploads_image_process_upload(&$upload){
 
+		$props = $upload["properties"];
 		$file = $upload["file"];
 
 		if (! is_array($file)){
@@ -21,8 +22,34 @@
 			}
 		}
 
+		if (! is_array($props)){
+
+			$props = json_decode($props, "as hash");
+
+			if (! $file){
+				return array("ok" => 0, "error" => "Unable to parse properties information");
+			}
+		}
+
+		$media = null;
+
+		if ($media_id = $props["media_id"]){
+
+			$media = whosonfirst_media_get_by_id($media_id);
+
+			if (! $media){
+				return array("ok" => 0, "error" => "Invalid media ID associated with upload");
+			}
+
+			if ($media["deleted"]){
+				return array("ok" => 0, "error" => "Media associated with upload has been deleted");
+			}
+		}
+
 		$original_processed = null;
 		$derivatives_processed = array();
+
+		$more = array();
 
 		$type = $file["type"];
 		$ext = mime_type_get_extension($type);
@@ -52,6 +79,8 @@
 			unset($processed["o"]);
 
 			$derivatives_processed = $processed;
+
+			$more["colours"] = $rsp["colours"];
 		}
 
 		else {
@@ -63,7 +92,13 @@
 			}
 		}
 
-		$rsp = whosonfirst_media_import_media_with_upload($upload, $original_processed, $derivatives_processed);
+		if ($media){
+			$rsp = whosonfirst_media_replace_media_with_upload($media, $upload, $original_processed, $derivatives_processed, $more);
+		}
+
+		else {
+			$rsp = whosonfirst_media_import_media_with_upload($upload, $original_processed, $derivatives_processed, $more);
+		}
 
 		if ($rsp["ok"]){
 			unlink($upload_path);

@@ -144,6 +144,102 @@
 
 	########################################################################
 
+	function api_whosonfirst_media_replaceFlickrPhoto() {
+
+		api_utils_features_ensure_enabled(array(
+			"whosonfirst_uploads",
+			"whosonfirst_media",
+			"whosonfirst_media_flickr",
+		));
+
+		$user = $GLOBALS["cfg"]["user"];
+
+		api_whosonfirst_media_ensure_capability($user, "can_upload");
+
+		$media_id = request_int64("media_id");
+
+		if (! $media_id){
+			api_output_error(400);
+		}
+
+		$media = whosonfirst_media_get_by_id($media_id);
+
+		if (! $media){
+			api_output_error(400);
+		}
+
+		if (($media["user_id"] != $user["id"]) && (! users_roles_has_role($user, "admin"))){
+			api_output_error(403);
+		}
+
+		whosonfirst_media_inflate_media($media);
+
+		$props = $media["properties"];
+
+		if ($props["source"] != "flickr"){
+			api_output_error(400);
+		}
+
+		$photo_id = $props["photo_id"];
+
+		if (! $photo_id){
+			api_output_error(400);
+		}
+
+		if ($upload = whosonfirst_uploads_get_by_flickr_id_pending($photo_id)){
+
+			$status_map = whosonfirst_uploads_status_map();
+
+			if ($status_map[$upload["status_id"]] == "pending"){
+			
+				$file = json_decode($upload["file"], "as hash");
+				$fname = $file["name"];
+
+				$uploads = array(
+					$fname => $upload["id"],
+				);
+
+				$out = array(
+					"uploads" => $uploads,
+				);
+
+				$more = array(
+					"key" => "uploads",
+				);
+
+				api_output_ok($out, $more);
+			}
+		}
+
+ 		$medium = "image";
+		api_whosonfirst_media_ensure_medium($medium);
+
+		$rsp = whosonfirst_media_flickr_fetch_photo_id($photo_id);
+
+		if (! $rsp["ok"]){
+			api_output_error(500);
+		}
+		
+		$files = $rsp["files"];	
+		api_whosonfirst_media_ensure_files($files);	# this will validate mimetype(s)
+
+		$depicts = api_whosonfirst_media_ensure_depicts();
+
+		$props = array(
+			"medium" => $medium,
+			"source" => "flickr",
+			# mimetype is set below in api_whosonfirst_media_upload_files and per-file basis
+			"depicts" => $depicts,
+			"photo_id" => $photo_id,
+			"photo_info" => $rsp["info"],
+			"media_id" => $media["id"],
+		);
+
+		api_whosonfirst_media_upload_files($user, $files, $props);
+	}
+	
+	########################################################################
+
 	function api_whosonfirst_media_addDepiction(){
 
 		$user = $GLOBALS["cfg"]["user"];
