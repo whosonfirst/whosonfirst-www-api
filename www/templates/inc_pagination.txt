@@ -8,12 +8,12 @@
 	{if $pagination.page > 1}
 		{if $pagination_page_as_queryarg}
 			{if $pagination_url|strpos:"?" === false}
-				<li class="page-item"><a href="{$pagination_url}?page={$pagination.page-1}" class="page-link">previous page</a></li>
+				<li class="page-item"><a href="{$pagination_url}?page={$pagination.page-1}" class="page-link" id="pagination-previous-page">previous page</a></li>
 			{else}
-				<li class="page-item"><a href="{$pagination_url}&amp;page={$pagination.page-1}" class="page-link">previous page</a></li>
+				<li class="page-item"><a href="{$pagination_url}&amp;page={$pagination.page-1}" class="page-link" id="pagination-previous-page">previous page</a></li>
 			{/if}
 		{else}
-		<li class="page-item"><a href="{$pagination_url}page{$pagination.page-1}" class="page-link">previous page</a></li>
+		<li class="page-item"><a href="{$pagination_url}page{$pagination.page-1}" class="page-link" id="pagination-previous-page">previous page</a></li>
 		{/if}
 	{else}
 		<li class="page-item disabled"><a href="#" class="page-link">you are here</a></li>
@@ -98,12 +98,12 @@
 	{if $pagination.page < $pagination.page_count}
 		{if $pagination_page_as_queryarg}
 			{if $pagination_url|strpos:"?" === false}
-				<li class="page-item"><a href="{$pagination_url}?page={$pagination.page+1}" class="page-link">next page</a></li>
+				<li class="page-item"><a href="{$pagination_url}?page={$pagination.page+1}" class="page-link" id="pagination-next-page">next page</a></li>
 			{else}
-				<li class="page-item"><a href="{$pagination_url}&amp;page={$pagination.page+1}" class="page-link">next page</a></li>
+				<li class="page-item"><a href="{$pagination_url}&amp;page={$pagination.page+1}" class="page-link" id="pagination-next-page">next page</a></li>
 			{/if}
 		{else}
-			<li><a href="{$pagination_url}page{$pagination.page+1}" class="page-link">next page</a></li>
+			<li><a href="{$pagination_url}page{$pagination.page+1}" class="page-link" id="pagination-next-page">next page</a></li>
 		{/if}
 	{else}
 		<li class="page-item disabled"><a href="#" class="page-link">you are here</a></li>
@@ -111,7 +111,7 @@
 
 </ul>
 
-{include file="inc_pagination_shortcuts.txt"}
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/pagination.shortcuts.init.js"></script>
 
 </nav>
 

@@ -42,6 +42,10 @@ defuse:
 	curl -L -s -o www/include/defuse-crypto/defuse-crypto.2.2.0.phar https://github.com/defuse/php-encryption/releases/download/v2.2.0/defuse-crypto.phar
 	curl -L -s -o www/include/defuse-crypto/defuse-crypto.2.2.0.phar.sig https://github.com/defuse/php-encryption/releases/download/v2.2.0/defuse-crypto.phar.sig
 
+# js-paginate                                                                                                                                                                                                                                       
+js-paginate:
+	curl -s -o www/javascript/pagination.shortcuts.init.js https://raw.githubusercontent.com/aaronland/js-paginate/master/src/pagination.shortcuts.init.js
+
 # https://github.com/twitter/typeahead.js
 
 js-typeahead:
