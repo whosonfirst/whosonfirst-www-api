@@ -37,6 +37,25 @@ window.addEventListener("load", function load(event){
 
 	whosonfirst.api.call(method, args, on_success, on_error);	
     };
+
+    var replace_flickr = function(media_id){
+
+	var method = "whosonfirst.media.replaceFlickrPhoto";
+	
+	var args = {
+	    "media_id": media_id,
+	};
+	
+	var on_success = function(rsp){
+	    window.location.reload(false); 
+	};
+
+	var on_error = function(rsp){
+	    console.log("ERROR", media_id, rsp);
+	};
+
+	whosonfirst.api.call(method, args, on_success, on_error);	
+    };
     
     var set_status = function(media_id, status_id){
 
@@ -147,12 +166,29 @@ window.addEventListener("load", function load(event){
 	
 	refresh_media(media_id);
     };
+
+    var mk_replace_flickr = function(e){
+
+	var el = e.target;
+	var media_id = el.getAttribute("data-media-id");
+	
+	if (! media_id){
+	    return false;
+	}
+	
+	if (! confirm("Are you sure you want to re-import this photo from Flickr? This will overwrite any existing files.")){
+	    return false;
+	}
+	
+	replace_flickr(media_id);
+    };
     
     var func_map = {
 	"media-mk-public": mk_public,
 	"media-mk-private": mk_private,
 	"media-delete": mk_delete,
 	"media-refresh": mk_refresh,
+	"media-replace-flickr": mk_replace_flickr,
     };
 
     for (class_name in func_map){

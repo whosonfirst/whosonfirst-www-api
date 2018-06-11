@@ -144,7 +144,54 @@
 
 	########################################################################
 
-	function api_whosonfirst_media_replaceFlickrPhoto() {
+	function api_whosonfirst_media_replaceFile(){
+
+		api_utils_features_ensure_enabled(array(
+			"whosonfirst_uploads",
+			"whosonfirst_media",
+			"whosonfirst_media_flickr",
+		));
+
+		$user = $GLOBALS["cfg"]["user"];
+
+		api_whosonfirst_media_ensure_capability($user, "can_upload");
+
+		$media_id = request_int64("media_id");
+
+		if (! $media_id){
+			api_output_error(400);
+		}
+
+		$media = whosonfirst_media_get_by_id($media_id);
+
+		if (! $media){
+			api_output_error(400);
+		}
+
+		if (($media["user_id"] != $user["id"]) && (! users_roles_has_role($user, "admin"))){
+			api_output_error(403);
+		}
+
+		whosonfirst_media_inflate_media($media);
+
+		# this will validate mimetype(s)
+
+		api_whosonfirst_media_ensure_files($_FILES);
+
+		$depicts = api_whosonfirst_media_ensure_depicts();
+
+		$props = array(
+			"depicts" => $depicts,
+			# mimetype is set below in api_whosonfirst_media_upload_files and per-file basis
+			"media_id" => $media["id"],
+		);
+
+		api_whosonfirst_media_upload_files($user, $_FILES, $props);
+	}
+
+	########################################################################
+
+	function api_whosonfirst_media_replaceFlickrPhoto(){
 
 		api_utils_features_ensure_enabled(array(
 			"whosonfirst_uploads",
@@ -467,6 +514,25 @@
 		if ((! users_roles_has_role($user, "admin")) && ($user["id"] != $media["user_id"])){
 			api_output_error(403);
 		}
+
+		whosonfirst_media_inflate_media($media);
+
+		$post_file = whosonfirst_media_media_to_post_file($media, "o");
+
+		$post_file["isnot_upload"] = 1;
+		$post_file["copy_only"] = 1;
+
+		$files = array(
+			$post_file,
+		);
+
+		$props = array(
+			"medium" => $media["medium"],
+			"media_id" => $media["id"],		# this will signal that we're replacing the files
+		);
+
+		api_whosonfirst_media_upload_files($user, $files, $props);
+		return
 
 		$rsp = whosonfirst_media_reprocess_image($media);
 

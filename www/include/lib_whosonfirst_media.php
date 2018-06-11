@@ -460,6 +460,8 @@
 		$media_props = $media["properties"];
 		$media_sizes = $media_props["sizes"];
 
+		$derivatives["o"] = $media_path;
+
 		$to_delete = array();
 
 		foreach ($media_sizes as $sz => $ignore){
@@ -468,7 +470,7 @@
 			$to_delete[] = $abs_path;
 		}
 
-		$sizes = array();
+		$sizes = $media_props["sizes"];
 
 		$rsp = whosonfirst_media_import_processed($derivatives, $media["id"], $sizes);
 
@@ -517,9 +519,9 @@
 
 	########################################################################
 
-	# THIS NEEDS TO BE UPDATED TO CREATE AN UPLOAD WITH SUITABLE MEDIA/REPLACE FLAGS
+	# MMMMMMMMMAYBE... ? (20180611/thisisaaronland)
 
-	function whosonfirst_media_reprocess_image(&$media){
+	function TO_BE_DELETED_whosonfirst_media_reprocess_image(&$media){
 
 		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
 		$static = $GLOBALS["cfg"]["whosonfirst_media_root"];
@@ -545,6 +547,8 @@
 		if (! is_dir($tmp_root)){
 
 			$recursive = true;
+
+			# TO DO: LIB_STORAGE
 
 			if (! mkdir($tmp_root, 0755, $recursive)){
 				return array("ok" => 0, "error" => "Unable to create tmp dir");
@@ -590,47 +594,6 @@
 
 		$rsp = whosonfirst_media_update_media($media, $update);
 		return $rsp;
-	}
-
-	########################################################################
-
-	function TO_BE_DELETED_whosonfirst_media_reimport_image_for_media(&$media, $source, $instructions){
-
-		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
-
-		$args = array(
-			"destination" => $pending,
-		);
-
-		whosonfirst_media_inflate_media($media);
-		$props = $media["properties"];
-		$sizes = $props["sizes"];
-
-		$process_rsp = whosonfirst_media_iiif_process_image($source, $instructions, $args);
-
-		if (! $process_rsp){
-			return $process_rsp;
-		}
-
-		$processed = $process_rsp["processed"];
-
-		$media_id = $media["id"];
-
-		$import_rsp = whosonfirst_media_import_processed($processed, $media_id, $sizes);
-
-		if (! $import_rsp["ok"]){
-			return $import_rsp;
-		}
-
-		$props["sizes"] = $import_rsp["sizes"];
-		$str_props = json_encode($props);
-	
-		$update = array(
-			"properties" => $str_props
-		);
-
-		$update_rsp = whosonfirst_media_update_media($media, $update);
-		return $update_rsp;
 	}
 
 	########################################################################
@@ -1086,6 +1049,23 @@
 		$source = $tree . DIRECTORY_SEPARATOR . $fname;
 
 		return array("ok" => 1, "path" => $path, "source" => $source);
+	}
+
+	########################################################################
+
+	function whosonfirst_media_media_to_post_file(&$media, $sz="o"){
+
+		$abs_path = whosonfirst_media_media_to_abspath($media, $sz);
+
+		$file = array(
+			"tmp_name" => $abs_path,
+			"name" => basename($abs_path),
+			"size" => filesize($abs_path),
+			"type" => $media["mimetype"],
+			"error" => "",
+		);
+
+		return $file;
 	}
 
 	########################################################################

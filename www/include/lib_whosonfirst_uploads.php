@@ -15,6 +15,7 @@
 			2 => "processing",
 			3 => "completed",
 			4 => "deleted",
+			5 => "queued",		# queued as in some process has grabbed an upload but not started processing it
 		);
 
 		if ($string_keys){
@@ -60,6 +61,33 @@
 		}
 
 		return array("ok" => 1, "stats" => $stats);
+	}
+
+	########################################################################
+
+	function whosonfirst_uploads_claim_pending_upload(){
+
+		$args = array(
+			"per_page" => 1,
+			"status_id" => $status_map["pending"],
+		);
+
+		$rsp = whosonfirst_uploads_get_uploads($args);
+		$upload = db_single($rsp);
+
+		if ($upload){
+
+			$status_map = whosonfirst_uploads_status_map("string keys");
+
+			$update = array(
+				"status_id" => $status_map["queued"],
+			);
+
+			$rsp = whosonfirst_uploads_update_upload($upload, $update);
+			$upload = $rsp["upload"];			     
+		}
+
+		return $upload;
 	}
 
 	########################################################################
@@ -163,6 +191,8 @@
 
 			$recursive = true;
 
+ 			# TO DO: LIB_STORAGE
+
 			if (! mkdir($root, 0700, $recursive)){
 				return array("ok" => 0, "error" => "Failed to create pending (sub) directory");
 			}
@@ -176,12 +206,32 @@
 
 		if ($file["isnot_upload"]){
 
-			if (! rename($tmp_file, $pending_file)){
-				return array("ok" => 0, "error" => "Failed to move pending file FOO");
+			# TO DO: LIB_STORAGE
+
+			if ($file["copy_only"]){
+
+				# For example - if we're rebuilding/refreshing an image we need to
+				# leave the old one in place before the actual refresh happens   
+				# (20180611/thisisaaronland)
+
+				if (! copy($tmp_file, $pending_file)){
+					return array("ok" => 0, "error" => "Failed to move pending file");
+				}
+			}
+
+ 			# TO DO: LIB_STORAGE
+
+			else {
+
+				if (! rename($tmp_file, $pending_file)){
+					return array("ok" => 0, "error" => "Failed to move pending file");
+				}
 			}
 		}
 
 		else {
+
+ 			# TO DO: LIB_STORAGE
 
 			if (! move_uploaded_file($tmp_file, $pending_file)){
 				return array("ok" => 0, "error" => "Failed to move pending file WHAT");
@@ -507,15 +557,7 @@
 			return $rsp;
 		}
 
-		$rsp = call_user_func_array($func, array($upload));
-
- 		if (! $rsp["ok"]){
-			whosonfirst_uploads_set_failed($upload, $rsp);
-			return $rsp;
-		}  
-
-		whosonfirst_uploads_set_completed($upload);
-		return $rsp;		
+		return call_user_func_array($func, array($upload));
 	}
 
 	########################################################################
@@ -525,6 +567,8 @@
 	# (20180517/thisisaaronland)
 
 	function whosonfirst_uploads_process_upload($upload){
+
+		whosonfirst_uploads_inflate_upload($upload);
 
 		$ok_image = array("png", "jpg", "jpeg", "gif");
 
@@ -547,6 +591,32 @@
 
 			$rsp = array("ok" => 0, "error" => "Don't know how to process this type");
 		}
+
+		$status_map = whosonfirst_uploads_status_map("string keys");
+
+		$update = array();
+
+		if (! $rsp["ok"]){
+
+			$str_error = json_encode($rsp["error"]);
+			$status_id = $status_map["failed"];
+
+			$update = array(
+				"error" => $str_error,
+				"status_id" => $status_id,
+			);
+		}
+
+		else {
+
+			$status_id = $status_map["completed"];
+
+			$update = array(
+				"status_id" => $status_id,
+			);
+		}
+
+		whosonfirst_uploads_update_upload($upload, $update);
 
 		return $rsp;
 	}

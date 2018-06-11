@@ -10,7 +10,13 @@
 	  {/if}
 
 	  {if $cfg.user|@users_roles_has_role:"admin" or $cfg.user|@users_acl_has_capability:"can_process_media"}
-	  <button class="btn btn-sm btn-info media-refresh" data-media-id="{$media.id|@escape}">Refresh this {$media.medium|@escape}</button>
+	  <button class="btn btn-sm btn-info media-refresh" data-media-id="{$media.id|@escape}">Rebuild derivatives</button>
+	  {/if}
+
+	  {if $media.source == "flickr"}
+	  {if $cfg.user|@users_roles_has_role:"admin" or $cfg.user|@users_acl_has_capability:"can_process_media"}
+	  <button class="btn btn-sm btn-warning media-replace-flickr" data-media-id="{$media.id|@escape}">Re-importfrom Flickr</button>
+	  {/if}
 	  {/if}
 
 	  {if $cfg.user|@users_roles_has_role:"admin" or $cfg.user|@users_acl_has_capability:"can_delete_media"}

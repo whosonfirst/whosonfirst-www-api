@@ -1237,6 +1237,32 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
+		'whosonfirst.media.replaceFile' => array(
+			"description" => "Replace the content for a given media item",
+			"documented" => (($GLOBALS['cfg']['enable_feature_whosonfirst_uploads']) &&
+					 ($GLOBALS['cfg']['enable_feature_whosonfirst_media']) &&
+					 ($GLOBALS['cfg']['enable_feature_whosonfirst_media_flickr'])) ? 1 : 0,
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"requires_perms" => 3,	# delete, because we are going to overwrite files
+			"requires_capability" => array("can_upload"),
+			"extras" => 0,
+			"library" => "api_whosonfirst_media",
+                        "parameters" => array(
+				array(
+					"name" => "media_id",
+					"description" => "A valid Who's On First media ID",
+					"required" => 0,
+					"documented" => 1,
+					"example" => ""
+				),
+			), 
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
 		'whosonfirst.media.refreshDerivatives' => array(
 			"description" => "...",
 			"documented" => 1,

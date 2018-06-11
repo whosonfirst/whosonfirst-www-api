@@ -1,0 +1,19 @@
+{if $cfg.user && $cfg.user|@users_acl_has_capability:"can_upload"}
+    <div class="card admin">
+    	<h4 class="card-header">Replace</h4>
+
+    	<div class="card-body">
+    	<div class="row" id="dropbox-preview"></div>
+
+	<div class="row">
+		<div class="col" id="whosonfirst-media-replace-target" data-whosonfirst-media-id="{$media.id|@escape}" ondrop="whosonfirst.dropbox.ondrop(event);" ondragover="whosonfirst.dropbox.ondrag(event);" style="border: solid thin;min-height: 50px;">
+			drag file here to replace this MEDIA
+		</div>
+	</div>
+	</div>
+     </div>
+
+     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.dropbox.js"></script>
+     <script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.media.replace.init.js"></script>
+
+{/if}

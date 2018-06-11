@@ -85,12 +85,17 @@
 
 		else {
 
+			# TO DO: LIB_STORAGE
+
 			$original_processed = $upload_path . ".{$ext}";
 
 			if (! copy($upload_path, $original_processed)){
 				return array("ok" => 0, "error" => "failed to rename media");
 			}
 		}
+
+		# error_log("UPLOAD " . $original_processed);
+		# error_log("UPLOAD " . var_export($derivatives_processed, 1));
 
 		if ($media){
 			$rsp = whosonfirst_media_replace_media_with_upload($media, $upload, $original_processed, $derivatives_processed, $more);
