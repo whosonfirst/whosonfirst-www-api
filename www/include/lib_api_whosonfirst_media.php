@@ -39,6 +39,15 @@
 			# mimetype is set below in api_whosonfirst_media_upload_files and per-file basis
 		);
 
+		if ($status_id = request_int32("status_id")){
+
+			if (! whosonfirst_media_is_valid_status_id($status_id)){
+				api_output_error();
+			}
+
+			$props["status_id"] = $status_id;
+		}
+
 		api_whosonfirst_media_upload_files($user, $_FILES, $props);
 	}
 
@@ -136,7 +145,10 @@
 			# mimetype is set below in api_whosonfirst_media_upload_files and per-file basis
 			"depicts" => $depicts,
 			"photo_id" => $photo_id,
-			"photo_info" => $rsp["info"],
+
+			# what happened that this is now returning JSON that PHP can't parse???
+			# (20180613/thisisaaronland)
+			# "photo_info" => $rsp["info"],
 		);
 
 		api_whosonfirst_media_upload_files($user, $files, $props);
@@ -311,29 +323,13 @@
 			api_output_error(404);
 		}
 
-		$rsp = whosonfirst_media_depicts_add_depiction($media, $place, $user);
+		$rsp = whosonfirst_media_depicts_add_depictions_for_place_with_inferences($media, $place, $user);
 
 		if (! $rsp["ok"]){
 			api_output_error(500);
 		}
 
 		$depicts = $rsp["depicts"];
-
-		#
-
-		if (features_is_enabled("whosonfirst_media_depicts_infer_depictions")){
-
-			$infers = whosonfirst_media_depicts_get_inferences($place);
-
-			foreach ($infers as $id){
-
-				# HOW TO HANDLE ERRORS... (20180531/thisisaaronland)
-
-				if ($place = whosonfirst_places_get_by_id($id)){
-					whosonfirst_media_depicts_add_depiction($media, $place, $user);
-				}
-			}
-		}
 
 		#
 

@@ -34,6 +34,14 @@
 
  	########################################################################
 
+	function whosonfirst_media_is_valid_status_id($status_id){
+
+		$status_map = whosonfirst_media_status_map();
+		return isset($status_map[$status_id]);
+	}
+
+ 	########################################################################
+
 	function whosonfirst_media_get_random($viewer_id, $more=array()){
 
 		$more["random"] = 1;
@@ -202,6 +210,8 @@
 	########################################################################
 
 	function whosonfirst_media_set_status(&$media, $status_id){
+
+		$status_map = whosonfirst_media_status_map();
 
 		if ($status_map[$status_id] != "public"){
 
@@ -384,12 +394,19 @@
 			"id" => $media_id,
 			"user_id" => $upload["user_id"],
 			"upload_id" => $upload["id"],
-			"status_id" => $more["status_id"],
+			"status_id" => 0,
 			"fingerprint" => $upload["fingerprint"],
 			"created" => $now,
 			"lastmodified" => $now,
 			"properties" => $str_props,
 		);
+
+		if ($status_id = $props["status_id"]){
+
+			if (whosonfirst_media_is_valid_status_id($status_id)){
+				$media_row["status_id"] = $status_id;
+			}		  
+		}
 
 		$insert = array();
 
@@ -403,7 +420,7 @@
 			return $rsp;
 		} 
 
-		$rsp["media"] = $media_row;
+		$rsp["media"] =	$media_row;
 
 		# depicts
 				
@@ -411,35 +428,11 @@
 
 		if ((is_array($upload_props["depicts"])) && (count($upload_props["depicts"]))){
 
+			$to_depict = $upload_props["depicts"];
 			$user = users_get_by_id($upload["user_id"]);
 
-			$to_depict = array();
-
-			foreach ($upload_props["depicts"] as $id){
-
-				$pl = whosonfirst_places_get_by_id($id);
-				$to_depict[$id] = $pl;
-				
-				if (features_is_enabled("whosonfirst_media_depicts_infer_depictions")){
-
-					$infers = whosonfirst_media_depicts_get_inferences($pl);
-
-					foreach ($infers as $id){
-
-						if (! isset($to_depict[$id])){
-							continue;
-						}
-
-						$pl = whosonfirst_places_get_by_id($id);
-						$to_depict[$id] = $pl;
-					}
-				}
-			}
-
-			foreach ($to_depict as $ignore => $place){
-				$depicts_rsp = whosonfirst_media_depicts_add_depiction($media_row, $place, $user);
-				# HOW TO HANDLE ERRORS ?
-			}
+			# HOW TO HANDLE ERRORS...
+			$r = whosonfirst_media_depicts_add_depictions_with_inferences($media_row, $to_depict, $user);
 		}
 
 		# end of depicts
@@ -514,85 +507,6 @@
 			}
 		}
 
-		return $rsp;
-	}
-
-	########################################################################
-
-	# MMMMMMMMMAYBE... ? (20180611/thisisaaronland)
-
-	function TO_BE_DELETED_whosonfirst_media_reprocess_image(&$media){
-
-		$pending = $GLOBALS["cfg"]["whosonfirst_uploads_pending_dir"];
-		$static = $GLOBALS["cfg"]["whosonfirst_media_root"];
-
-		whosonfirst_media_inflate_media($media);
-
-		$media_id = $media["id"];
-
-		$props = $media["properties"];
-		$sizes = $props["sizes"];
-
-		$rel_path = whosonfirst_media_media_to_relpath($media, "o");
-		$abs_path = $static . DIRECTORY_SEPARATOR . $rel_path;
-
-		$root = dirname($rel_path);
-
-		$ext = $sizes["o"]["extension"];
-		$tmp_source = $root . DIRECTORY_SEPARATOR . "{$media_id}.{$ext}";
-
-		$tmp_file = $pending . DIRECTORY_SEPARATOR . $tmp_source;
-		$tmp_root = dirname($tmp_file);
-
-		if (! is_dir($tmp_root)){
-
-			$recursive = true;
-
-			# TO DO: LIB_STORAGE
-
-			if (! mkdir($tmp_root, 0755, $recursive)){
-				return array("ok" => 0, "error" => "Unable to create tmp dir");
-			}
-		}
-
-		# TO DO: LIB_STORAGE
-
-		if (! copy($abs_path, $tmp_file)){
-			return array("ok" => 0, "error" => "Unable to copy tmp file");
-		}
-
-		$instructions = $GLOBALS["cfg"]["iiif_default_instructions"];
-		$instructions["o"]["format"] = $ext;
-
-		$args = array(
-			"destination" => $pending,
-		);
-
-		$rsp = whosonfirst_media_iiif_process_image($tmp_source, $instructions, $args);
-
-		if (! $rsp["ok"]){
-			return $rsp;
-		}
-
-		$processed = $rsp["processed"];
-		$colours = $rsp["colours"];
-
-		$rsp = whosonfirst_media_import_processed($processed, $media_id, $sizes);
-
-		if (! $rsp["ok"]){
-			return $rsp;
-		}
-
-		$props["sizes"] = $rsp["sizes"];
-		$props["colours"] = $colours;
-
-		$str_props = json_encode($props);
-	
-		$update = array(
-			"properties" => $str_props
-		);
-
-		$rsp = whosonfirst_media_update_media($media, $update);
 		return $rsp;
 	}
 

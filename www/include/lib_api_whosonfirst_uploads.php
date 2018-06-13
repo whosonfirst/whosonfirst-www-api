@@ -47,6 +47,7 @@
 	function api_whosonfirst_uploads_getPending(){
 
 		api_utils_features_ensure_enabled(array(
+			"whosonfirst_media",
 			"whosonfirst_uploads",
 		));
 
@@ -81,6 +82,41 @@
 		);
 
 		api_output_ok($out);
+	}
+
+	########################################################################
+
+	function api_whosonfirst_uploads_claimPendingUpload(){
+
+		api_utils_features_ensure_enabled(array(
+			"whosonfirst_media",
+			"whosonfirst_uploads",
+		));
+
+		$user = $GLOBALS["cfg"]["user"];
+
+		if (! users_acl_has_capability($user, "can_process_uploads")){
+			api_output_error(403);
+		}
+
+		$upload = whosonfirst_uploads_claim_pending_upload();
+
+		if (! $upload){
+			api_output_ok();
+		}
+
+		$public = whosonfirst_uploads_enpublicify_upload($upload);
+
+		$out = array(
+			"upload" => $public
+		);
+
+		$more = array(
+			"singleton" => 1,
+			"key" => "upload",
+		);
+
+		api_output_ok($out);		
 	}
 
 	########################################################################

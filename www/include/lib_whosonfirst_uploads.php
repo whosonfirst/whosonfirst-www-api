@@ -67,6 +67,8 @@
 
 	function whosonfirst_uploads_claim_pending_upload(){
 
+		$status_map = whosonfirst_uploads_status_map("string keys");
+
 		$args = array(
 			"per_page" => 1,
 			"status_id" => $status_map["pending"],
@@ -124,8 +126,8 @@
 		}
 
 		$sql .= " ORDER BY created DESC";
-		$rsp = db_fetch_paginated($sql, $more);
 
+		$rsp = db_fetch_paginated($sql, $more);
 		return $rsp;
 	}
 
@@ -346,6 +348,10 @@
 
 	function whosonfirst_uploads_can_process(&$upload){
 
+		if (whosonfirst_uploads_is_queued($upload)){
+			return 1;
+		}
+
 		if (whosonfirst_uploads_is_processing($upload)){
 			return 0;
 		}
@@ -359,6 +365,16 @@
 		}
 
 		return 1;
+	}
+
+	########################################################################
+
+	function whosonfirst_uploads_is_queued(&$upload){
+
+		$status_map = whosonfirst_uploads_status_map();
+		$status_id = $upload["status_id"];
+
+		return ($status_map[$status_id] == "queued") ? 1 : 0;
 	}
 
 	########################################################################
@@ -556,6 +572,8 @@
 		if (! $rsp["ok"]){
 			return $rsp;
 		}
+
+		$upload = $rsp["upload"];
 
 		return call_user_func_array($func, array($upload));
 	}

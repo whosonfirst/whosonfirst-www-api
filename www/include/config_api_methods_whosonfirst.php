@@ -1412,6 +1412,22 @@
 			"disallow_formats" => array( "geojson", "meta" ),
 		),
 
+		'whosonfirst.uploads.claimPendingUpload' => array(
+			"description" => "Claim a pending upload",
+			"documented" => 1,
+			"enabled" => 1,
+			"paginated" => 0,
+			"requires_perms" => 1,	# write
+			"requires_capability" => array("can_process_uploads"),
+			"extras" => 0,
+			"library" => "api_whosonfirst_uploads",
+                        "parameters" => array(
+			), 
+                        "errors" => array(),
+                        "notes" => array(),
+			"disallow_formats" => array( "geojson", "meta" ),
+		),
+
 	), $GLOBALS['cfg']['api']['methods']);
 
 	########################################################################

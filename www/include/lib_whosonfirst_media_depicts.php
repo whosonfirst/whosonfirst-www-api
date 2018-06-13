@@ -2,6 +2,64 @@
 
 	########################################################################
 
+	function whosonfirst_media_depicts_add_depictions_for_place_with_inferences(&$media, &$place, &$user, $props=array()){
+
+		$to_depict = array(
+			$place["wof:id"]
+		);
+
+		return whosonfirst_media_depicts_add_depictions_with_inferences($media, $to_depict, $user, $props);
+	}
+
+	########################################################################
+
+	function whosonfirst_media_depicts_add_depictions_with_inferences(&$media, &$place_ids, &$user, $props=array()){
+
+		$to_depict = array();
+
+		foreach ($place_ids as $id){
+
+			if (isset($to_depict[$id])){
+				continue;
+			}
+
+			if ($pl = whosonfirst_places_get_by_id($id)){
+				$to_depict[$id] = $pl;
+			}
+		}
+
+		if (features_is_enabled("whosonfirst_media_depicts_infer_depictions")){
+
+			foreach ($to_depict as $ignore => $place){
+
+				$infers = whosonfirst_media_depicts_get_inferences($place);
+
+				foreach ($infers as $id){
+
+						if (isset($to_depict[$id])){
+						continue;
+					}
+
+					$pl = whosonfirst_places_get_by_id($id);
+					$to_depict[$id] = $pl;
+				}
+			}
+		}
+
+		foreach ($to_depict as $id => $pl){
+
+			$rsp = whosonfirst_media_depicts_add_depiction($media, $pl, $user, $props);
+
+			if (! $rsp["ok"]){
+				return $rsp;
+			}
+		}
+
+		return array("ok" => 1, "depicts" => array_keys($to_depict));
+	}
+
+	########################################################################
+
 	function whosonfirst_media_depicts_add_depiction(&$media, &$place, &$user, $props=array()){
 
 		$now = time();
