@@ -452,6 +452,20 @@
 
 	########################################################################
 
+	# return list($lat, $lon)
+
+	function whosonfirst_places_centroid_for_place(&$place){
+
+		$lat = $place["geom:latitude"];
+		$lon = $place["geom:longitude"];
+		
+		# PLEASE CHECK FOR ALL THE OTHER THINGS (20180614/thisisaaronland)
+
+		return array($lat, $lon);
+	}
+
+	########################################################################
+
 	function whosonfirst_places_coordinate($place, $coord){
 
 		$property = null;

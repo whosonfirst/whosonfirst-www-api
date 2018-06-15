@@ -1,0 +1,4 @@
+<link rel="stylesheet" type="text/css" href="{$cfg.abs_root_url}css/leaflet.css" />
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/leaflet.js"></script>
+
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/whosonfirst.photos.map.init.js"></script>

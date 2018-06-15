@@ -1,7 +1,7 @@
 <div class="card">
      <h4 class="card-title">{$slug|@escape}
      {if $photos_pagination.total_count > $photos|@count}
-     <small><a href="#">See all {$photos_pagination.total_count|@number_format|@escape} photos</a></small>
+     <small><a href="{$photos_url}">See all {$photos_pagination.total_count|@number_format|@escape} photos</a></small>
      <button class="btn btn-sm" id="random-photos" data-whosonfirst-id="{$wof_id|@escape}">random</button>
      {/if}
      </h4>
@@ -13,9 +13,12 @@
      <div class="card-body">
 
      {include file="inc_photos_deck.txt"}
+     {include file="inc_js_photo_card_maps.txt"}
      </div>
 
      <div class="card-footer">
      </div>
 
 </div>
+
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.airport.photos.random.init.js"></script>

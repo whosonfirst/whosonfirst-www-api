@@ -117,6 +117,8 @@
      </div>
 </div>
 
+{include file="inc_media_replace.txt" media=$photo}
+
 {if $cfg.user && $cfg.user|@users_roles_has_role:"admin"}
 <div class="card admin">
      <div class="card-title">Details</div>
@@ -133,6 +135,7 @@
 {/if}
 
 {include file="inc_js_depicts.txt"}
+{include file="inc_js_photo_card_maps.txt"}
 
 <script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.collection.airlines.js"></script>
 <script type="text/javascript" src="{$cfg.abs_root_url}javascript/sfomuseum.collection.aircraft.js"></script>

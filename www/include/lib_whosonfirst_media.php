@@ -984,4 +984,86 @@
 
 	########################################################################
 
+	function whosonfirst_media_derive_centroid(&$media, $viewer_id=0){
+
+		whosonfirst_media_inflate_media($media);
+		$props = $media["properties"];
+
+		$source = $props["source"];
+		$centroid = null;
+
+		if ($source == "flickr"){
+
+			$info = $props["photo_info"];
+			
+			if ($loc = $info["location"]){
+
+				$centroid = array(
+					"latitude" => $loc["latitude"],
+					"longitude" => $loc["longitude"],
+					"zoom" => $loc["accuracy"],
+				);
+			}
+		}
+
+		else if ($source == "user"){
+
+			$rsp = whosonfirst_media_depicts_get_depictions_for_media($media, $viewer_id);
+
+			$possible = array();
+			$ids = array();
+
+			if ($rsp["ok"]){
+			
+				foreach($rsp["rows"] as $row){
+
+					foreach ($rsp["rows"] as $row){
+						$ids[] = $row["whosonfirst_id"];
+					}
+				}
+			
+				$rsp = elasticsearch_spelunker_mget($ids);
+			}
+
+			foreach ($rsp["rows"] as $row){
+
+				$placetype = $row["wof:placetype"];
+
+				if ($placetype == "actor"){
+					continue;
+				}
+
+				$centroid = whosonfirst_places_centroid_for_place($row);
+				$possible[$placetype] = $centroid;
+			}
+
+			if (count($possible)){
+
+				loadlib("whosonfirst_placetypes");			
+				$roles = array("common", "common_optional", "optional");
+				$placetypes = whosonfirst_placetypes_ancestors("installation", $roles);
+
+				foreach ($placetypes as $pt){
+
+					if ($c = $possible[$pt]){
+
+						$centroid = array(
+							"latitude" => $c[0],
+							"longitude" => $c[1],
+							"zoom" => 16,
+						);
+
+						break;
+					}
+				}
+			}
+		}
+
+		else {}
+
+		return $centroid;
+	}
+
+	########################################################################
+
 	# the end

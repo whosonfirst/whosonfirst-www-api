@@ -6,8 +6,29 @@
     <a href="{$cfg.abs_root_url}photos/{$photo.id|@escape}/" class="sfomuseum-photo-link"><img id="media-img-{$photo.id|@escape}" class="card-img-top sfomuseum-photo media-{$photo.status_id|@whosonfirst_media_status_id_to_label}" src="{$cfg.abs_root_url}static/{$photo|@whosonfirst_media_media_to_relpath:$photo_size}" alt="" style="max-height:{$image_height|@escape}px; max-width:{$image_width|@escape}px;margin-left:.2em;margin-right:.2em;" /></a>
 
      <div class="card-body">
+
+     {include file="inc_photo_card_map.txt"}
+
+     	{if $photo.properties.colours}
+	<div class="mx-auto" style="width:200px;margin-bottom:2em;">
+	
+	{foreach from=$photo.properties.colours item="row"}
+	<div style="height:20px;width:20px;background-color:{$row.hex|@escape};float:left;border:solid thin;" title="{$row.hex|@escape}{if $row.name != $row.hex}, sometimes called {$row.name|@escape}{/if}">&#160;</div>
+
+	{if 0}
+	{foreach from=$row.closest item="nearby"}
+	<div style="height:20px;width:20px;background-color:{$nearby.hex|@escape};float:left;" title="{$nearby.hex|@escape}{if $nearby.name != $nearby.hex}, sometimes called {$nearby.name|@escape}{/if}">&#160;</div>
+	{/foreach}
+	{/if}
+
+	<div style="height:20px;width:20px;background-color:#fff;float:left;">&#160;</div>
+	{/foreach}
+
+	<br clear="all" />
+	</div>
+     	{/if}
         
-	<div class="card-text sfomuseum-photo-creditline">
+	<div class="card-text sfomuseum-photo-creditline" style="font-size:small;">
 	{if $photo.source == "flickr"}{include file="inc_photo_flickr_attribution.txt" info=$photo.properties.photo_info}{/if}
 	</div>
 

@@ -146,9 +146,18 @@
 			"depicts" => $depicts,
 			"photo_id" => $photo_id,
 
+			# leaving this here (for now) as a note to self in case it happens again
+			# where it's not at all clear what _it_ is since the problem seemingly
+			# fixed itself after a day, as in: we could import photos (and specifically
+			# photo info JSON blobs) from flickr again... no idea, really
+			# (20180614/thisisaaronland)
+			#
 			# what happened that this is now returning JSON that PHP can't parse???
+			# specifically it's JSON that can't be parsed _after_ it's been serialized
+			# stuck in MySQL and then pulled out again... because, why?????
 			# (20180613/thisisaaronland)
-			# "photo_info" => $rsp["info"],
+
+			"photo_info" => $rsp["info"],
 		);
 
 		api_whosonfirst_media_upload_files($user, $files, $props);

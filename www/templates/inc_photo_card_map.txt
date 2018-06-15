@@ -1,0 +1,5 @@
+{assign var="centroid" value=$photo|@whosonfirst_media_derive_centroid}
+{if $centroid}
+<div class="whosonfirst-photo-card-map" id="whosonfirst-photo-card-map-{$photo.id|@escape}" style="width:100%; height:200px; margin-bottom:2em;" data-latitude="{$centroid.latitude|@escape}" data-longitude="{$centroid.longitude|@escape}" data-zoom="{$centroid.zoom|@escape}"></div>
+{/if}
+{* you will still need to include inc_js_photo_card_maps.txt somewhere for this to work *}

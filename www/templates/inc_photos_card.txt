@@ -1,0 +1,20 @@
+{capture assign="wof_name"}{$place|@whosonfirst_places_property:"wof:name"}{/capture}
+<div class="card">
+     <h2 class="card-header">Photos of <a href="{$place|@whosonfirst_places_url_for_place}">{$wof_name|@escape}</a>
+
+     {if $photos_pagination.total_count > $photos|@count}
+     <small>
+     There are {$photos_pagination.total_count|@number_format|@escape} photos
+     {if $photos_pagination.page_count > 1} and this is page {$photos_pagination.page|@number_format|@escape} of {$photos_pagination.page_count|@number_format|@escape}{/if}
+     </small>
+     {/if}
+     </h2>
+     <div class="card-body">
+     {include file="inc_photos_deck.txt"}
+     </div>
+     <div class="card-footer">
+     {include file="inc_pagination.txt" pagination=$photos_pagination}
+     </div>     
+</div>
+
+{include file="inc_js_photo_card_maps.txt"}
