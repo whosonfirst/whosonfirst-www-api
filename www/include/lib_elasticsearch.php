@@ -87,12 +87,28 @@
 			$pre_count = 0;
 		}
 
+		if (preg_match("/.*\.es\.amazonaws\.com$/", $more["host"])){
+		
+			# Because if you don't do this then everything will fail with errors like this:
+			#
+			# When Content-Type:application/x-www-form-urlencoded, URL cannot include query-string parameters
+			# (after \'?\'): \'/collection/_search?size=0&from=0&search_type=query_then_fetch\'"}',
+			#
+			# Computers, amirite... (20180723/thisisaaronland)
+
+			$headers["Content-Type"] = "application/json";
+		}
+
 		if ($pre_count){
 
 			$_args = $get_args;
 			$_args['size'] = 0;
 
-			$_url = implode(":", array($more['host'], $more['port']));
+			$_url = $more['host'];
+
+			if ($more['port']){
+				$_url = implode(":", array($more['host'], $more['port']));
+			}
 
 			if ($more['index']){
 				$_url .= "/{$more['index']}";
@@ -134,7 +150,11 @@
 
 		# End of I hate this... for now 
 
-		$url = implode(":", array($more['host'], $more['port']));
+		$url = $more['host'];
+
+		if ($more['port']){
+			$url = implode(":", array($more['host'], $more['port']));
+		}
 
 		if ($more['index']){
 			$url .= "/{$more['index']}";
@@ -172,14 +192,13 @@
 		else {
 
 			$get_query = http_build_query($get_args);
-
 			$url .= "/_search?{$get_query}";
 		}
 
 		$start = microtime_ms();
 
 		$rsp = http_post($url, $body, $headers, $http_more);
-
+		
 		$end = microtime_ms();
 
 		$GLOBALS['timings']['es_queries_count']	+= 1;
