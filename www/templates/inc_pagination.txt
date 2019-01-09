@@ -1,6 +1,29 @@
 {if $pagination.page_count > 1}
-
 <nav aria-label="Pagination">
+
+{* something something something $pagination.search_after which is an ES thing and not supported yet *}
+
+{if $pagination.cursor}
+{assign var="trigger" value=$cfg.elasticsearch_spelunker_scroll_trigger}
+{assign var="max_page" value=$trigger/$pagination.per_page}
+{assign var="max_page" value=$max_page-1}
+{/if}
+
+{if $smarty.get.cursor && $pagination.cursor && $pagination.page_count >= $max_page}
+
+<ul class="pagination justify-content-center">
+	{if $pagination_url|strpos:"?" === false}
+	<li class="page-item"><a href="{$pagination_url}?cursor={$pagination.cursor|@escape}" class="page-link" id="pagination-previous-page">NEXT</a></li>
+	{else}
+	<li class="page-item"><a href="{$pagination_url}&cursor={$pagination.cursor|@escape}" class="page-link" id="pagination-previous-page">NEXT</a></li>
+	{/if}
+</ul>
+
+<div class="center" style="font-size:small; margin-top:1.5rem;">
+There are so many results (<span class="hey-look">{$pagination.total_count|@number_format|@escape}</span> of them, in fact) that it's not possible to do <code>page1, page2, and so on...</code> style pagination. Every page is the <code>next</code> page because...computers, I guess. Also, you shouldn't try to bookmark the URLs for these results since are they are time-sensitive and will expire.
+</div>
+
+{else}
 
 <ul class="pagination justify-content-center">
 
@@ -8,15 +31,15 @@
 	{if $pagination.page > 1}
 		{if $pagination_page_as_queryarg}
 			{if $pagination_url|strpos:"?" === false}
-				<li class="page-item"><a href="{$pagination_url}?page={$pagination.page-1}" class="page-link" id="pagination-previous-page">previous page</a></li>
+				<li class="page-item"><a href="{$pagination_url}?page={$pagination.page-1}" class="page-link" id="pagination-previous-page">⇠</a></li>
 			{else}
-				<li class="page-item"><a href="{$pagination_url}&amp;page={$pagination.page-1}" class="page-link" id="pagination-previous-page">previous page</a></li>
+				<li class="page-item"><a href="{$pagination_url}&amp;page={$pagination.page-1}" class="page-link" id="pagination-previous-page">⇠</a></li>
 			{/if}
 		{else}
-		<li class="page-item"><a href="{$pagination_url}page{$pagination.page-1}" class="page-link" id="pagination-previous-page">previous page</a></li>
+		<li class="page-item"><a href="{$pagination_url}page{$pagination.page-1}" class="page-link" id="pagination-previous-page">⇠</a></li>
 		{/if}
 	{else}
-		<li class="page-item disabled"><a href="#" class="page-link">you are here</a></li>
+		<li class="page-item disabled"><a href="#" class="page-link">⇢</a></li>
 	{/if}
 
 	{* middle *}
@@ -61,7 +84,11 @@
 						<li class="page-item pagination-numbered"><a href="{$pagination_url}&amp;page={$i}" class="page-link">{$i}</a></li>
 					{/if}
 				{else}
+					{if $pagination.cursor && $i >= $max_page}
+					<li class="page-item disabled pagination-numbered"><a href="#" class="page-link">{$i}</a></li>
+					{else}
 					<li class="page-item pagination-numbered"><a href="{$pagination_url}page{$i}" class="page-link">{$i}</a></li>
+					{/if}
 				{/if}
 			{/if}
 
@@ -77,7 +104,7 @@
 			{assign var=i value=$smarty.section.paglp.index}
 
 			{if $i == $pagination.page}
-				<li class="active pagination-numbered"><a href="#" class="page-link">{$i}</a></li>
+				<li class="page-item pagination-numbered disabled"><a href="#" class="page-link">{$i}</a></li>
 			{else}
 				{if $pagination_page_as_queryarg}
 					{if $pagination_url|strpos:"?" === false}
@@ -95,23 +122,38 @@
 	{/if}
 
 	{* next button *}
+
+	{if $pagination.cursor && $pagination.page+1 >= $max_page}
+
+		{if $pagination_url|strpos:"?" === false}
+		<li class="page-item"><a href="{$pagination_url}?cursor={$pagination.cursor|@escape}" class="page-link">⇢</a></li>
+		{else}
+		<li class="page-item"><a href="{$pagination_url}&cursor={$pagination.cursor|@escape}" class="page-link">⇢</a></li>
+		{/if}
+
+	{else}
+
 	{if $pagination.page < $pagination.page_count}
+
 		{if $pagination_page_as_queryarg}
 			{if $pagination_url|strpos:"?" === false}
-				<li class="page-item"><a href="{$pagination_url}?page={$pagination.page+1}" class="page-link" id="pagination-next-page">next page</a></li>
+				<li class="page-item"><a href="{$pagination_url}?page={$pagination.page+1}" class="page-link" id="pagination-next-page">⇢</a></li>
 			{else}
-				<li class="page-item"><a href="{$pagination_url}&amp;page={$pagination.page+1}" class="page-link" id="pagination-next-page">next page</a></li>
+				<li class="page-item"><a href="{$pagination_url}&amp;page={$pagination.page+1}" class="page-link" id="pagination-next-page">⇢</a></li>
 			{/if}
 		{else}
-			<li><a href="{$pagination_url}page{$pagination.page+1}" class="page-link" id="pagination-next-page">next page</a></li>
+			<li><a href="{$pagination_url}page{$pagination.page+1}" class="page-link" id="pagination-next-page">⇢</a></li>
 		{/if}
 	{else}
-		<li class="page-item disabled"><a href="#" class="page-link">you are here</a></li>
+		<li class="page-item disabled"><a href="#" class="page-link">⇠</a></li>
 	{/if}
 
+	{/if}
 </ul>
 
-<script type="text/javascript" src="{$cfg.abs_root_url}javascript/pagination.shortcuts.init.js"></script>
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/collection/pagination.shortcuts.init.js"></script>
+
+{/if}
 
 </nav>
 
