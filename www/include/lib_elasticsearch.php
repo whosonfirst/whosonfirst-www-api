@@ -35,6 +35,16 @@
 
 		$more = array_merge($defaults, $more);
 
+		# see also: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-search-after.html
+		# which is not available in versions of ES < 5.0, and also:
+		#
+		# "search_after is not a solution to jump freely to a random page but rather to scroll many queries in parallel.
+		# It is very similar to the scroll API but unlike it, the search_after parameter is stateless, it is always resolved
+		# against the latest version of the searcher. For this reason the sort order may change during a walk depending on
+		# the updates and deletes of your index."
+		#
+		# (20190109/thisisaaronland)
+
 		if ((! $more["scroll_id"]) && ($more["cursor"])){
 			$more["scroll_id"] = $more["cursor"];
 		}
@@ -63,7 +73,11 @@
 		$body = json_encode($query);
 
 		$headers = array(
+			# elasticsearch 2.x
 			"Content-Type" => "application/x-www-form-urlencoded",
+
+			# elasticsearch 6.x
+			# "Content-Type" => "application/json",
 		);
 
 		# I hate this... but basically a user shouldn't have to think about
@@ -71,6 +85,18 @@
 		# for them... because, computers... (20170227/thisisaaronland)
 
 		$pre_count = 0;
+
+		# this was an attempt to use page-based pagination up to the point at
+		# which the cursor kicks (after whatever page triggers the ES max
+		# documents flag) and then use the cursor but there is no way to tell
+		# a cursor to start at offset (x) so far as I can tell - basically we
+		# want to be using the ES 5.x "search_after" stuff but we need to update
+		# everything to work with ES 5/6 queries first... leaving this here in
+		# case I come up with something and as a caution to the next person
+		# thinking about the nightmare of pagination in ES...
+		# (20190117/thisisaaronland)
+		
+		$scroll_eventually = 0;
 
 		# Generally we want or need to precount things...
 
@@ -143,8 +169,32 @@
 			# TO DO : remove spelunker-iness and make this a general purpose flag
 			# (20170227/thisisaaronland)
 
-			if ($count > $GLOBALS['cfg']['elasticsearch_spelunker_scroll_trigger']){
+			$trigger = $GLOBALS['cfg']['elasticsearch_spelunker_scroll_trigger'];
+
+			if ($count > $trigger){
+
 				$more['scroll'] = 1;
+
+				# tl;dr - none of this works... I think - leaving it here
+				# for now because I'd like to believe that is does work but
+				# I just haven't figured out how yet...
+				# (20190117/thisisaaronland)
+				#
+				# but wait! don't bother doing scroll based pagination until
+				# we actually need to (20190111/thisisaaronland)
+				#
+				# $per_page = $more["per_page"];
+				# $max_page = floor($trigger / $per_page);
+				#
+				# the problem here is that we still want to generate a cursor is 
+				# for linking to page XXX but we don't want to 
+				#
+				# if ($page >= $max_page){
+				# 	$more['scroll'] = 1;
+				# } else {
+				# 	$scroll_eventually = 1;
+				# }
+
 			}
 		}
 
@@ -235,6 +285,30 @@
 					$rsp["aggregations"][$bucket][$b["key"]] = $b["doc_count"];
 				}
 			}
+		}
+
+		# this depends on code above with doesn't work / is disabled
+		# leaving it here for the time being with the vain hope that
+		# maybe it will work one day... (20190116/thisisaaronland)
+
+		if ((0) && ($scroll_eventually)){
+
+			$get_args["scroll"] = $more["scroll_ttl"];
+			$get_args["size"] = 0;
+
+			$get_query = http_build_query($get_args);
+
+			$url = explode("?", $url, 2);
+			$url = $url[0];
+
+			$url .= "/_search/?{$get_query}"; 
+			$scroll_rsp = http_post($url, $body, $headers, $http_more);
+
+			$data = json_decode($scroll_rsp['body'], 'as hash');
+			$cursor = $data["_scroll_id"];
+
+			$pagination["cursor"] = $cursor;
+			$rsp["pagination"] = $pagination;
 		}
 
 		# log_notice('elasticsearch', $url . ' ' . $body . " HTTP {$rsp['info']['http_code']}", $rsp['info']['total_time']);
@@ -647,7 +721,8 @@
 
 	########################################################################	
 
-	function elasticsearch_add_documents($docs, $index, $type, $more=array()) {
+	function elasticsearch_add_documents($docs, $index, $type, $more=array()){
+
 		$defaults = array(
 			'host' => $GLOBALS['cfg']['elasticsearch_host'],
 			'port' => $GLOBALS['cfg']['elasticsearch_port'],
@@ -703,7 +778,8 @@
 
 	########################################################################
 
-	function elasticsearch_delete_documents($docs, $index, $type, $more=array()) {
+	function elasticsearch_delete_documents($docs, $index, $type, $more=array()){
+
 		$defaults = array(
 			'host' => $GLOBALS['cfg']['elasticsearch_host'],
 			'port' => $GLOBALS['cfg']['elasticsearch_port'],
@@ -750,7 +826,8 @@
 
 	########################################################################
 
-	function elasticsearch_build_empty_query() {
+	function elasticsearch_build_empty_query(){
+
 		return array(
 			"query" => array(
 				"filtered" => array(
@@ -778,7 +855,8 @@
 		since match_all requires an empty object, {}, i use new stdClass below.
 	*/
 
-	function elasticsearch_ensure_complete_query(&$query) {
+	function elasticsearch_ensure_complete_query(&$query){
+
 		//if the and filter is still empty, match all
 		if(count($query['query']['filtered']['filter']['and']) == 0) {
 			$query['query']['filtered']['filter']['and'][] = array(
@@ -798,7 +876,7 @@
 
 	########################################################################
 
-	function elasticsearch_paginate_aggregation_results($results, $more=array()) {
+	function elasticsearch_paginate_aggregation_results($results, $more=array()){
 
 		$page = isset($more['page']) ? max(1, $more['page']) : 1;
 		$per_page = isset($more['per_page']) ? max(1, $more['per_page']) : $GLOBALS['cfg']['pagination_per_page'];
@@ -887,14 +965,14 @@
 				# because concordances so "gp:id" doesn't become "gp{:}id"
 
 				if (! in_array($char, $more['to_allow'])){
-					$char = "\{$char}";
+					$char = "\\" . $char; 
 				}
 			}
 
 			else if (in_array($char, array("&", "|"))){
 
 				if ((($i + 1) < $count) && ($chars[ $i + 1 ] == $char)){
-					$char = "\{$char}";
+					$char = "\\" . $char; 
 				}
 			}
 			
